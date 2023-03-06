@@ -19,7 +19,7 @@ public class TempController {
 	private TempService service;
 
 	@GetMapping("/list")
-	public ModelAndView memberList(ModelAndView mv, TempDto dto) {
+	public ModelAndView memberList(ModelAndView mv) {
 	
 		System.out.println("멤버리스트");
 	
