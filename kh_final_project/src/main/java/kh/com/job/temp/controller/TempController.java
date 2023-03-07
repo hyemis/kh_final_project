@@ -9,13 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.com.job.temp.model.service.TempService;
 
 @Controller
-@RequestMapping("/member")
 public class TempController {
 	
 	@Autowired
 	private TempService service;
 
-	@GetMapping("/list")
+	@GetMapping("/member/list")
 	public ModelAndView memberList(ModelAndView mv) {
 	
 		System.out.println("멤버리스트");
@@ -27,6 +26,14 @@ public class TempController {
 			e.printStackTrace();
 		} 
 	
+		return mv;
+	}
+	
+	@GetMapping("/tempPage")
+	public ModelAndView tempView(ModelAndView mv) {
+		
+		System.out.println("템프 페이지");
+		
 		return mv;
 	}
 }
