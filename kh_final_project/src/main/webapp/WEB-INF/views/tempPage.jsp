@@ -16,7 +16,7 @@
 	<%@ include file="common/header.jsp" %>
 	
 	target 폴더 날리고 git에서도 날리고 fetch 잘되나요?
-	
+	 
 	<%@ include file="common/footer.jsp" %>
 </body>
 </html>
