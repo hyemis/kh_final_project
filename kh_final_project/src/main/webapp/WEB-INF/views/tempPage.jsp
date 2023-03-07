@@ -13,8 +13,10 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <body>
+	<%@ include file="common/header.jsp" %>
 	
-
-
+	
+	
+	<%@ include file="common/footer.jsp" %>
 </body>
 </html>
