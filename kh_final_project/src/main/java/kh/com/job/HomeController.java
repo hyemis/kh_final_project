@@ -37,6 +37,5 @@ public class HomeController {
 		return "ho";
 	}
 	
-	Ä¿¹ÔÈ®ÀÎ
 	
 }
