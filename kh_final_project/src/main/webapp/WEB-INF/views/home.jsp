@@ -10,6 +10,5 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-수정test - 혜미 
 </body>
 </html>
