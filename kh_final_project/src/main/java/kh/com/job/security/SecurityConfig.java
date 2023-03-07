@@ -1,9 +1,9 @@
 package kh.com.job.security;
 
-import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-
-//public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
+//@EnableWebSecurity
 public class SecurityConfig{
+//public class SecurityConfig{
 
 }
