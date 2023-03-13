@@ -6,4 +6,9 @@
   	select * from personal_member
   </select>
   
+  
+  <select id="boardList" resultType="bdto">
+  	select * from test_board
+  </select>
+  
 </mapper>

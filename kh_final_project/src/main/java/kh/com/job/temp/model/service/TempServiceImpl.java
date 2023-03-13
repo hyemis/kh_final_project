@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.temp.model.dao.TempDao;
+import kh.com.job.temp.model.dto.BoardDto;
 import kh.com.job.temp.model.dto.TempDto;
 
 @Service
@@ -16,6 +17,11 @@ public class TempServiceImpl implements TempService{
 	@Override
 	public List<TempDto> memberList() throws Exception {
 		return dao.memberList();
+	}
+
+	@Override
+	public List<BoardDto> boardList() throws Exception {
+		return dao.boardList();
 	}
 
 	
