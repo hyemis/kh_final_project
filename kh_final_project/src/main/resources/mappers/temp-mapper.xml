@@ -11,4 +11,7 @@
   	select * from test_board
   </select>
   
+  <select id="applyProcessList" resultType="apdto">
+  	select * from BUSINESS_APPLY_PROCESS
+  </select>
 </mapper>

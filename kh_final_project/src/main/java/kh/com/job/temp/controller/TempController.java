@@ -43,4 +43,16 @@ public class TempController {
 		return mv;
 	}
 	
+	@GetMapping("/applyprocesslist")
+	public ModelAndView applyProcessList(ModelAndView mv) {
+
+		
+		try {
+			mv.addObject("aplist", service.applyProcessList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
 }

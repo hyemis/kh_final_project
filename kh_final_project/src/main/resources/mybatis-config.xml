@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="kh.com.job.temp.model.dto.TempDto" alias="mdto"/>
 		<typeAlias type="kh.com.job.temp.model.dto.BoardDto" alias="bdto"/>
+		<typeAlias type="kh.com.job.temp.model.dto.ApplyProcessDto" alias="apdto"/>
 	</typeAliases>
 	
 	<mappers>
