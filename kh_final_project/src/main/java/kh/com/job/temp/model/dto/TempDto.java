@@ -2,6 +2,12 @@ package kh.com.job.temp.model.dto;
 
 import org.springframework.stereotype.Component;
 
+/*
+ * Script.sql 에서 personal_member테이블 생성해야 오류 안나요.
+ * kh.com.job.temp.model.dto.TempDto 관련해서 오류가 나면 
+ * 테이블 만들고 서버클린 프로젝트 클린 한번씩 해주세요
+ */
+
 @Component
 public class TempDto {
 	
