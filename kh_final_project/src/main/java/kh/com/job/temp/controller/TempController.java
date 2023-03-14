@@ -56,5 +56,11 @@ public class TempController {
 	}
 	
 	
+	@GetMapping("/index")
+	public ModelAndView viewIndex(ModelAndView mv) {
+
+		return mv;
+	}
+	
 	
 }
