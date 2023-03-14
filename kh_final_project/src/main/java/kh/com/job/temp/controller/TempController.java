@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.com.job.temp.model.service.TempService;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/temp")
 public class TempController {
 	
 	@Autowired
@@ -54,5 +54,7 @@ public class TempController {
 		}
 		return mv;
 	}
+	
+	
 	
 }
