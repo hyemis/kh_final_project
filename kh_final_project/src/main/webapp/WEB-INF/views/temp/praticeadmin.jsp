@@ -98,7 +98,29 @@
         </div>
         <!-- Navbar End -->
 		
-		
+		 <div class="container-xl py-5">
+		 	<table class="table">
+		 		<thead>
+		 			<tr>
+		 				<th scope="col">1</th>
+		 				<th scope="col">2</th>
+		 				<th scope="col">3</th>
+		 			</tr>
+		 		</thead>
+		 		<tbody>
+		 			<tr>
+		 				<td>a</td>
+		 				<td>b</td>
+		 				<td>c</td>
+		 			</tr>
+		 			<tr>
+		 				<td>a1</td>
+		 				<td>b1</td>
+		 				<td>c1</td>
+		 			</tr>
+		 		</tbody>
+		 	</table>
+		 </div>
 
         
 		<%@ include file="../common/footer.jsp" %>
