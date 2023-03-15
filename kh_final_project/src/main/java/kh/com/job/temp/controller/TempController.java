@@ -68,5 +68,11 @@ public class TempController {
 		return mv;
 	}
 	
+	@GetMapping("/praticeadmin")
+	public ModelAndView praticeAdmin(ModelAndView mv) {
+		
+		return mv;
+	}
+	
 	
 }
