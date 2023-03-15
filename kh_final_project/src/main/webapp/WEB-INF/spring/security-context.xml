@@ -9,13 +9,18 @@
 	<security:http pattern="/resources/**" security="none"></security:http>
 	
 	<security:http auto-config="true" use-expressions="false">
+	<security:csrf disabled="true"/>
 <!--         <security:intercept-url pattern="/person/**" access="ROLE_USER"/> -->
         <!-- security:intercept-url pattern="/business/**" access="ROLE_BUSINESS"/-->
         <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+        <security:form-login login-page="/temp/login" />
     </security:http>
+    
+    <!-- 암호화를 위한 Bean -->
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="BCryptPasswordEncoder"></bean>
 
     <security:authentication-manager>
-        <security:authentication-provider>
+        <security:authentication-provider >
             <security:user-service>
                 <security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN" />
                 <security:user name="user" password="{noop}user" authorities="ROLE_USER" />

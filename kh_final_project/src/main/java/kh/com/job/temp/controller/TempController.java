@@ -74,5 +74,11 @@ public class TempController {
 		return mv;
 	}
 	
+	@GetMapping("/login")
+	public ModelAndView login(ModelAndView mv) {
+		
+		return mv;
+	}
+	
 	
 }
