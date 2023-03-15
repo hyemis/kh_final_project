@@ -62,5 +62,11 @@ public class TempController {
 		return mv;
 	}
 	
+	@GetMapping("/praticeindex")
+	public ModelAndView praticeIndex(ModelAndView mv) {
+		
+		return mv;
+	}
+	
 	
 }
