@@ -9,7 +9,7 @@
 	<security:http pattern="/resources/**" security="none"></security:http>
 	
 	<security:http auto-config="true" use-expressions="false">
-        <security:intercept-url pattern="/person/**" access="ROLE_USER"/>
+<!--         <security:intercept-url pattern="/person/**" access="ROLE_USER"/> -->
         <security:intercept-url pattern="/business/**" access="ROLE_BUSINESS"/>
         <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
     </security:http>
