@@ -98,9 +98,17 @@
 		<div>
 			채용절차
 			<c:forEach var="num" begin="1" end="5" step="1">
-				<select class="process" name="raProcess${num }" ${num > 1 ? "disabled" : ""}>
+				<select class="process${num }" name="raProcess${num }" ${num > 1 ? "disabled" : ""}>
 					<option value="">선택안함</option>
-					<option value="서류전형">서류전형</option>
+					<c:choose>
+						<c:when test="${num eq 1}">
+							<option value="서류전형" selected>서류전형</option>
+						</c:when>
+						<c:otherwise>	
+							<option value="서류전형">서류전형</option>
+						</c:otherwise>
+					
+					</c:choose>
 					<option value="인적성검사">인적성검사</option>
 					<option value="1차면접">1차면접</option>
 					<option value="2차면접">2차면접</option>
@@ -129,13 +137,21 @@
 </div>
 
 <script>
-	$(".process").on("click", processHandler);
+	$(".process1").on("click", processHandler);
+	$(".process2").on("click", processHandler);
+	$(".process3").on("click", processHandler);
+	$(".process4").on("click", processHandler);
+	$(".process5").on("click", processHandler);
+
 	
 	function processHandler(element){
-		if($(element).form.process${num}.val != null){
-			$(element).nextElementSibling.removeAttr("disabled");
+		if($(this).val() != ""){
+			$(this).next().removeAttr("disabled");
+		} else if($(this).val() == ""){
+			$(this).next().attr("disabled", true);
 		}
 	};
+	
 </script>
 </body>
 </html>
