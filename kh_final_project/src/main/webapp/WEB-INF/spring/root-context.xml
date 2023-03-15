@@ -11,17 +11,29 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<context:property-placeholder location=""/>
+	<context:property-placeholder location="classpath:properties/joba-info.properties"/>
 	
 	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
+		<!-- 
+		<property name="driverClassName" value="${DB.log4DriverName}"/> 
+		
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+		<property name="username" value="KH"/>
+		<property name="password" value="KH"/>
+		-->
+		
+		<!-- 공용 DB joba
+		 -->
+		<property name="driverClassName" value="${joba.DriverName}"/> 
+		<property name="url" value="${joba.url}"/> 
+		<property name="username" value="${joba.username}"/> 
+		<property name="password" value="${joba.password}"/> 
+		
 	<!-- 
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
 	 -->
-		<property name="username" value="KH"/>
-		<property name="password" value="KH"/>
 	</bean>
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
