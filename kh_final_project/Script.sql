@@ -28,3 +28,4 @@ INSERT into personal_member values('ccc', 'ccc','씨민건','ccc@ccc.com','010',
 commit;
 
 
+
