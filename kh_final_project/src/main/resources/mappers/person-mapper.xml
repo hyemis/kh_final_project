@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="person">
+
+  <select id="selectOne" parameterType="pdto" resultType="pdto">
+  	select USER_ID,USER_PHONE, USER_BIRTH, USER_NAME from USERS where USER_ID=#{USER_ID}
+  </select>
+
+  <select id="selectList" resultType="pdto">
+  	select * from USERS
+  </select>
+  
+  <insert id="insert" parameterType="pdto">
+  	insert into USERS values( #{USER_ID}, #{USER_PW}, #{USER_PHONE}, #{USER_BIRTH}, #{USER_EMAIL}, #{USER_ADDRESS}, #{USER_NAME} )
+  </insert>
+
+  <delete id="delete" parameterType="pdto">
+  	delete from USERS where USER_ID=#{USER_ID};	
+  </delete>
+  	
+  <update id="update" parameterType="pdto">
+  	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID};
+  </update>
+  
+</mapper>

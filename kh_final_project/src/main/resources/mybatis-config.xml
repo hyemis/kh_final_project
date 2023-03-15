@@ -14,10 +14,12 @@
 		<typeAlias type="kh.com.job.temp.model.dto.TempDto" alias="mdto"/>
 		<typeAlias type="kh.com.job.temp.model.dto.BoardDto" alias="bdto"/>
 		<typeAlias type="kh.com.job.temp.model.dto.ApplyProcessDto" alias="apdto"/>
+		<typeAlias type="kh.com.job.person.model.dto.PsDto" alias="pdto"/>
 	</typeAliases>
 	
 	<mappers>
 	 	<mapper resource="mappers/temp-mapper.xml"/>
+	 	<mapper resource="mappers/person-mapper.xml"/>
 	</mappers>
 	
 <!-- 	

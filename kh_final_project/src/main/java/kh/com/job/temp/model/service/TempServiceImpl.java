@@ -12,6 +12,7 @@ import kh.com.job.temp.model.dto.TempDto;
 
 @Service
 public class TempServiceImpl implements TempService{
+	
 	@Autowired
 	private TempDao dao;
 
