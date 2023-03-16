@@ -10,9 +10,9 @@
 	
 	<security:http auto-config="true" use-expressions="false">
 	<security:csrf disabled="true"/>
-<!--         <security:intercept-url pattern="/person/**" access="ROLE_USER"/> -->
-        <!-- security:intercept-url pattern="/business/**" access="ROLE_BUSINESS"/-->
-        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+<!--         <security:intercept-url pattern="/person/**" access="ROLE_P"/> -->
+        <!-- security:intercept-url pattern="/business/**" access="ROLE_B"/-->
+        <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_A', 'ROLE_AM')"/>
         <security:form-login login-page="/temp/login" />
     </security:http>
     
@@ -22,9 +22,10 @@
     <security:authentication-manager>
         <security:authentication-provider >
             <security:user-service>
-                <security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN" />
-                <security:user name="user" password="{noop}user" authorities="ROLE_USER" />
-                <security:user name="buser" password="{noop}buser" authorities="ROLE_BUSINESS" />
+                <security:user name="admin" password="{noop}admin" authorities="ROLE_A" />
+                <security:user name="adminm" password="{noop}adminm" authorities="ROLE_AM" />
+                <security:user name="user" password="{noop}user" authorities="ROLE_P" />
+                <security:user name="buser" password="{noop}buser" authorities="ROLE_B" />
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
