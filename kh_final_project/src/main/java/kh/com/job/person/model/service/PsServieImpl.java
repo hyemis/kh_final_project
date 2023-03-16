@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.person.model.dao.PsDao;
-import kh.com.job.person.model.dto.PsDto;
+import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dao.TempDao;
 
 @Service
@@ -16,22 +16,22 @@ public class PsServieImpl implements PsService {
 	private PsDao dao;
 
 	@Override
-	public PsDto selectOne(String userid) throws Exception {
+	public PsUserDto selectOne(String userid) throws Exception {
 		return dao.selectOne(userid);
 	}
 
 	@Override
-	public List<PsDto> selectList() throws Exception {
+	public List<PsUserDto> selectList() throws Exception {
 		return dao.selectList();
 	}
 
 	@Override
-	public int insert(PsDto dto) throws Exception {
+	public int insert(PsUserDto dto) throws Exception {
 		return dao.insert(dto);
 	}
 
 	@Override
-	public int update(PsDto dto) throws Exception {
+	public int update(PsUserDto dto) throws Exception {
 		return dao.update(dto);
 	}
 
