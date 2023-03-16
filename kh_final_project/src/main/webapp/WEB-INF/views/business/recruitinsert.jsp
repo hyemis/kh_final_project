@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>채용공고등록</title>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
@@ -93,10 +94,10 @@
 			</select>
 		</div>
 		<div>
-			채용내용<input type="text" name="raTitle">
+			채용제목<input type="text" name="raTitle">
 		</div>
 		<div>
-			채용제목<textarea cols="30" rows="20" name="raContent"></textarea>
+			채용내용<textarea class="raContent" cols="30" rows="20" name="raContent"></textarea>
 		</div>
 		<div>
 			채용절차
@@ -215,6 +216,15 @@
             }
         }).open();
     }
+</script>
+<script>
+	// ckeditor textarea name으로 추가
+	CKEDITOR.replace('raContent')
+	  ,{
+		filebrowserUploadUrl:'imageUpload.do'
+		//ckfinder 추가하여 이미지 찾기 가능
+		
+	};
 </script>
 </body>
 </html>
