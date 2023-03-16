@@ -66,7 +66,7 @@ public class TempServiceImpl implements TempService{
 			sb.append("grant_type=authorization_code");
 
 			sb.append("&client_id=77dfb2057fb10018f5dbf8b933cc96dd"); // REST_API키 본인이 발급받은 key 넣어주기
-			sb.append("&redirect_uri=http://localhost:8090/job/temp/kakaologin"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
+			sb.append("&redirect_uri=http://localhost:8090/job/common/login"); // REDIRECT_URI 본인이 설정한 주소 넣어주기
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());

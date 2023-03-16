@@ -31,5 +31,11 @@ public class PsController {
 	}
 	
 	
+	@GetMapping("/singup")
+	public ModelAndView singup(ModelAndView mv) {
+		
+		return mv;
+	}
+	
 
 }

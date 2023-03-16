@@ -19,7 +19,7 @@ public class kakaoController {
 	
 	
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
-		@RequestMapping(value = "/temp/kakaologin", method = RequestMethod.GET)
+		@RequestMapping(value = "/common/login", method = RequestMethod.GET)
 		public ModelAndView kakaoLogin(ModelAndView mv
 				, @RequestParam(value = "code", required = false) String code) throws Throwable {
 

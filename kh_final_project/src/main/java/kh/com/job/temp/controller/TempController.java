@@ -34,19 +34,6 @@ public class TempController {
 		return mv;
 	}
 	
-	@GetMapping("/boardlist")
-	public ModelAndView boardList(ModelAndView mv) {
-		System.out.println("게시글 리스트");
-		
-		try {
-			mv.addObject("blist", service.boardList());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-	
-		return mv;
-	}
-	
 	@GetMapping("/applyprocesslist")
 	public ModelAndView applyProcessList(ModelAndView mv) {
 
@@ -85,10 +72,31 @@ public class TempController {
 	
 	@PostMapping("/login")
 	public ModelAndView loginForm(ModelAndView mv) {
-		
 		return mv;
 	}
 	
+	// 게시판
+	@GetMapping("/boardmain")
+	public ModelAndView boardmain(ModelAndView mv) {
+		return mv;
+	}
 	
+	// 게시판 상세 
+		@GetMapping("/boarddetail")
+		public ModelAndView boarddetail(ModelAndView mv) {
+			return mv;
+	}
 	
+	// 게시글 
+		@GetMapping("/post")
+		public ModelAndView post(ModelAndView mv) {
+			return mv;
+	}
+		
+	// 게시글 등록 
+		@GetMapping("/postinsert")
+		public ModelAndView postinsert(ModelAndView mv) {
+			return mv;
+	}
+
 }
