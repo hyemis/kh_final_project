@@ -12,7 +12,7 @@
 	<security:csrf disabled="true"/>
 <!--         <security:intercept-url pattern="/person/**" access="ROLE_P"/> -->
         <!-- security:intercept-url pattern="/business/**" access="ROLE_B"/-->
-        <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_A', 'ROLE_AM')"/>
+        <!-- security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_A', 'ROLE_AM')"/-->
         <security:form-login login-page="/temp/login" />
     </security:http>
     
