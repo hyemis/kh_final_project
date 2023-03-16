@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>채용공고등록</title>
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<%@ include file="/WEB-INF/views/common/css_import.jsp" %>
 <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -14,6 +16,7 @@
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 <h1>채용공고등록</h1>
+<section>
 <div>
 	<form action="<%=request.getContextPath() %>/bs/recruitinsert" method="post">
 		<div>
@@ -134,7 +137,7 @@
 		<div>
 			<h3>주소검색 API</h3>
 			<input type="text" id="sample6_postcode" placeholder="우편번호">
-			<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
+			<input class="btn btn-outline-secondary btn-sm" type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
 			<input type="text" id="sample6_address" placeholder="주소">
 			<input type="text" id="sample6_extraAddress" placeholder="동"><br>
 			<input type="text" id="sample6_detailAddress" placeholder="상세주소">
@@ -144,6 +147,7 @@
 		</div>
 	</form>
 </div>
+</section>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
