@@ -11,6 +11,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/common/header.jsp"%>
 <h1>채용공고등록</h1>
 <div>
 	<form action="<%=request.getContextPath() %>/bs/recruitinsert" method="post">
@@ -100,7 +101,7 @@
 		<div>
 			채용절차
 			<c:forEach var="num" begin="1" end="5" step="1">
-				<select class="process${num }" name="raProcess${num }" ${num > 1 ? "disabled" : ""}>
+				<select class="process${num }" name="raProcess${num }" ${num > 2 ? "disabled" : ""}>
 					<option value="">선택안함</option>
 					<c:choose>
 						<c:when test="${num eq 1}">
@@ -120,8 +121,9 @@
 		</div>
 		<div>
 			추가제출서류
-			<c:forEach begin="1" end="3" step="1">
-				<select name="raExtraDocument">
+			<c:forEach var="num" begin="1" end="3" step="1">
+				<select class="extra${num }" name="raExtraDocument${num }" ${num > 1 ? "disabled" : ""}>
+					<option value="">선택안함</option>
 					<option value="Job-A인적성검사">Job-A인적성검사</option>
 					<option value="포트폴리오">포트폴리오</option>
 					<option value="사전인터뷰">사전인터뷰</option>
@@ -142,14 +144,19 @@
 	</form>
 </div>
 
+<%@include file="/WEB-INF/views/common/footer.jsp"%>
+
 <script>
 	$(".process1").on("click", processHandler);
 	$(".process2").on("click", processHandler);
 	$(".process3").on("click", processHandler);
 	$(".process4").on("click", processHandler);
 	$(".process5").on("click", processHandler);
-
 	
+	$(".extra1").on("click", processHandler);
+	$(".extra2").on("click", processHandler);
+	$(".extra3").on("click", processHandler);
+
 	function processHandler(element){
 		if($(this).val() != ""){
 			$(this).next().removeAttr("disabled");
