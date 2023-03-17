@@ -58,7 +58,8 @@
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 
  <!-- Category Start -->
-        <div class="container-xxl py-5">
+ <div class="container-xxl py-5">
+ 			<!-- 상단 -->
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <h1 class="mb-3">안녕하세요</h1>
@@ -66,8 +67,70 @@
                     <br>
                     <p>공고 등록부터 합격자 발표까지 쉽고 빠르게,</br> 우리 기업을 위한 맞춤형 인재 찾기 까지 JOB-A가 함께 할게요</p>
                 </div>
-                <div class="row g-3">
-                <div>
+                <div class="container-fluid text-center">
+  					<div class="row ">
+    					 <div class="col col-sm-6 text-center wow fadeInUp" data-wow-delay="0.1s">
+    					 	<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                           	 <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                             </div>
+                         	</a>
+    					 </div>
+    					 <div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
+    					 	<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                           	 <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                             </div>
+                         	</a>
+    					 </div>
+    					<div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
+    					 	<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                           	 <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                             </div>
+                         	</a>
+    					 </div>
+    				</div>
+    				<div class="row">
+    					 <div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
+    					 	<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                           	 <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                             </div>
+                         	</a>
+    					 </div>
+    					 <div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
+    					 	<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                           	 <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                             </div>
+                         	</a>
+    					 </div>
+  					</div>
+				</div>
+                  
+                  
+                  
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                             <div class="rounded p-4">
@@ -79,57 +142,61 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-villa.png" alt="Icon">
-                                </div>
-                                <h6>지원자관리</h6>
-                                <span>123 Properties</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                            <div class="rounded p-4">
-                                <div class="icon mb-3">
-                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-house.png" alt="Icon">
-                                </div>
-                                <h6>인재관리</h6>
-                                <span>123 Properties</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div>  
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
-                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-building.png" alt="Icon">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
                                 </div>
-                                <h6>기업소개</h6>
+                                <h6>공고등록/관리</h6>
                                 <span>123 Properties</span>
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
-                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-neighborhood.png" alt="Icon">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
                                 </div>
-                                <h6>내정보</h6>
+                                <h6>공고등록/관리</h6>
                                 <span>123 Properties</span>
                             </div>
                         </a>
                     </div>
-             	</div>
-                </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-apartment.png" alt="Icon">
+                                </div>
+                                <h6>공고등록/관리</h6>
+                                <span>123 Properties</span>
+                            </div>
+                        </a>
+                    </div>
+                  
+                  
+                  
+                  
+                 
+           
+               
             </div>
-        </div>
-        <!-- Category End -->
+            
+</div>
+<!-- Category End -->
 
 <section>
 <%@include file="/WEB-INF/views/common/footer.jsp"%>

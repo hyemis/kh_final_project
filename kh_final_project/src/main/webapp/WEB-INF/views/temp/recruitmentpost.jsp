@@ -59,31 +59,52 @@
 
 	<!-- Contact Start -->
     <div class="container-xxl py-5">
-    
+    		
+    		
+        	<div class="container row me-0">
+        		<!-- 사진 -->
+        		<div class="w-75">
+        		<img src="https://dummyimage.com/800x400/000/fff&text=공고게시글에+들어갈+사진"  alt="...">
+        		</div>
+        		<!-- nav -->
+        		<div class="w-25 mx-auto text-center" style="background-color: yellow;">
+        			<a>회사명</a>
+        			<a><p>회사명</p>
+        			   <p>근무지역</p>
+        			   <p>급여조건</p>
+        			</a>
+        			<a><p>경력</p>
+        			   <p>학력</p>
+        			</a>
+        			<button>지원하기</button>
+        		</div>
+        	</div>
+    		
+    		
         	<!-- 제목 부분 -->
-        	<div class="container">
+        	<div class="container " style="background-color: orange;">
         		<h1 class="mb-3">백엔드 개발자</h1>
                 <p>회사명/위치</p>
                 <div>태그 넣을 공간</div>
         	</div>
         	
-        	<!-- 소개글 -->
-        	<div class="container">
-        		<div>회사 소개글 내용</div>
+        	<!-- 상세내용 -->
+        	<div class="container"style="background-color: yellow;">
+        		<div>상세내용</div>
         	</div>
         	
         	<!-- 기술스택/툴-->
-        	<div class="container">
+        	<div class="container"style="background-color: orange;">
         		<p>기술스택 * 툴</p>
                 <div>태그 넣을 공간</div>
         	</div>
         	
         	<!-- 정보 -->
-        	<div class="container">
+        	<div class="container"style="background-color: yellow;">
         		<p>마감일</p>
                 <p>근무지역</p>
-                <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                        <iframe class="position-relative rounded w-100 h-100"
+                <div class="col-12">
+                         <iframe class="position-relative rounded w-100 h-100"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
                             frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
                             tabindex="0"></iframe>
@@ -91,20 +112,24 @@
         	</div>
         	
         	<!-- 회사 로고 및 이름 -->
-        	<div class="container">
+        	<div class="container"style="background-color: orange;">
         		<img class="img-fluid" src="${pageContext.request.contextPath}/" alt="Icon" style="width: 40px; height: 40px;">
-        		<p>회사명 직종</p>
+        		<a>회사명 직종</a>
         	</div>
         	
         	
 	</div>      	
 	<!-- Contact End -->
-
-        
-        <section>
+	
+ 	<!-- effect 
+ 		<div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+ 		</div>
+ 	-->	
+ 		
+<!-- footer -->        
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
-</section>
 
+<!-- script -->  
 <script></script>
         
 </body>

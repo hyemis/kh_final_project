@@ -191,44 +191,30 @@
 
               <br>
               <!-- 회사소개  -->
-            <div class="container">
-                <div class="row g-0 gx-5 align-items-end">
-                    <div class="col-lg-6">
-                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <h1 class="mb-3">회사소개</h1>
-                            <p>소개내용</p>
-                        </div>
-                    </div>
+            <div class="container wow fadeInUp">
+            	<h1 class="mb-3">회사 소개</h1>
+            	<div class="row">
+            	<div class="col rounded" data-wow-delay="0.5s">
+             				<img alt="" src="https://dummyimage.com/300x200/000/fff">
                 </div>
-                <div>
-                	<div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="" alt=""></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>
-                                    </div>
-                				</div>
-                			</div>
-                		</div>
-                	</div>
-                	</div>
-                	
-                	
-                	
+                <div class="col rounded" data-wow-delay="0.5s">
+             				<img alt="" src="https://dummyimage.com/300x200/000/fff">
                 </div>
-            </div>
-            
+                <div class="col rounded" data-wow-delay="0.5s">
+             				<img alt="" src="https://dummyimage.com/300x200/000/fff">
+                </div>
+            	</div>
+            	<div class="pt-3">
+            	회사 소개 내용이 나타납니다
+            	</div>
+         	</div>
             <Br>   
            <!-- 오시는길 -->
                <div class="container">
                     <div class="col-12 row g-0 gx-5 align-items-end">
                      	<div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
                             <h1 class="mb-3">오시는길</h1>
-                            <p>소개내용</p>
+                            <p>주소</p>
                         </div>
                     </div>
                     <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
@@ -241,7 +227,7 @@
                
  <!-- newsletter Start -->
             <div class="container">
-                <div class="text-start mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="pt-3 text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" >
                     <h1 class="mb-3">이 회사의 뉴스레터</h1>
                 </div>
                 <div class="row g-4">
