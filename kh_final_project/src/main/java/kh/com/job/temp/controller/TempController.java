@@ -85,13 +85,6 @@ public class TempController {
 		return mv;
 	}
 
-	
-
-	@PostMapping("/login")
-	public ModelAndView loginForm(ModelAndView mv) {
-		return mv;
-	}
-	
 	@GetMapping("/error")
 	public ModelAndView error(ModelAndView mv) {
 		
