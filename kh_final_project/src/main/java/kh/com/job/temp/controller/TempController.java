@@ -97,14 +97,26 @@ public class TempController {
 		return mv;
 	}
 	
-	@GetMapping("/jobposting")
-	public ModelAndView jobPosting(ModelAndView mv) {
+	@GetMapping("/recruitmentpost")
+	public ModelAndView recruitmentPost(ModelAndView mv) {
 		
 		return mv;
 	}
 	
 	@GetMapping("/companyinfo")
 	public ModelAndView companyInfo(ModelAndView mv) {
+	
+		return mv;
+	}
+	
+	@GetMapping("/boardsample")
+	public ModelAndView boardSample(ModelAndView mv) {
+	
+		return mv;
+	}
+	
+	@GetMapping("/boardwrite")
+	public ModelAndView boardWrite(ModelAndView mv) {
 	
 		return mv;
 	}
