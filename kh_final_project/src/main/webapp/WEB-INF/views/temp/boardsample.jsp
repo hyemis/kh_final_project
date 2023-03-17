@@ -64,26 +64,60 @@
 		<h1 class="mb-3">회사소개를 작성해주세요</h1>
 	</div>
 	<hr>
-	<!-- 아이콘 -->
-	<div class="row">
-		<div class="col-3">
+	<!-- 작성창 상단 -->
+	<div class="row P-3">
+		<div class="col-3 M-3">
 		 <a>회사명</a>
 		</div>
-		<div  class="col-9">
+		<div  class="col-9 M-3">
 			<input type="text">
 		</div>
-		<div class="col-3">
+		<div class="col-3 M-3">
 		 <a>태그</a>
 		</div>
-		<div  class="col-9">
-			<input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-			<label class="btn btn-outline-primary" for="btn-check-outlined">Single toggle</label>
-			<input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+		<div  class="col-9 M-3">
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-outlined" autocomplete="off">
+			<label class="btn btn-outline-primary " for="btn-check-outlined">Single toggle</label>
+			
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
 			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			<input type="checkbox" class="btn-check btn-sm col-lg-1" id="btn-check-2" checked autocomplete="off">
+			<label class="btn btn-primary" for="btn-check-2">Checked</label>
+			
 		</div>
 	</div>
+	<!-- 소개글 -->
+	<div>
+	<p>소개글</p>
+	<input type="text">
+	</div>
 	
+	<!-- 하단 -->
+	<div>
+	<a>소개글</a>
+	<button>내 pc</button>
+	<input type="text" placeholder="파일을 넣어주세요.">
+	</div>
 	
+	<div class="text-center">
+		<button>등록</button>
+		<button>삭제</button>
+		<button>취소</button>
+	</div>
 	
 	
 	
