@@ -7,25 +7,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 등록</title>
+<title>샘플 jsp</title>
 </head>
 <body>
+	<!-- haeder : css, js, boostrap, nav-bar, template 등  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-		<div class="container-sm">	
+	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
+	<div class="container-sm">	
 		
-		<h1>게시판 게시글 등록</h1>
-
-		
-		<div class="grid gap-3 border border-secondary">
-		  <div class="p-2 g-col-6 border border-secondary">공간</div>
-		  <div class="p-2 g-col-6 border border-secondary">공간</div>
-		  <div class="p-2 g-col-6 border border-secondary">공간</div>
-		</div>
-		
-	 </div>
+		<h1>페이지 이름 입력해주세요. </h1>
 	
+	</div>
 	
+	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

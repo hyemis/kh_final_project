@@ -5,16 +5,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+	<jsp:include page="/WEB-INF/views/common/cspart.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/jspart.jsp"></jsp:include>
+
 <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+           <%--  <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
                     <h1 class="m-0 text-primary">JOB-A</h1>
                 </a>
-            </nav>
+                
+            </nav> --%>
+            
+            <div>
+            	 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+                    </div>
+                    <h1 class="m-0 text-primary">JOB-A</h1>
+                </a>
+            </div>
             
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
 				  <div class="container-fluid">
@@ -58,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">login</a>
+                    <a class="nav-link me-3" href="#">login</a>
 			</nav>
             
             
