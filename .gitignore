@@ -6,6 +6,9 @@ target/
 properties/
 *.properties
 
+.classpath
+.settings/
+
 # Log file
 *.log
 
