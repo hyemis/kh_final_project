@@ -7,19 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/business")
-public class BsController {
+public class BsMainController {
 	
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
 		
 		return mv;
 	}
-	
-	@GetMapping("/recruitinsert")
-	public ModelAndView recruitInsert(ModelAndView mv) {
 		
-		return mv;
-	}
-
-	
 }
