@@ -35,9 +35,6 @@ public class TempController {
 
 		return mv;
 	}
-<<<<<<< HEAD
-	
-=======
 
 	@GetMapping("/boardlist")
 	public ModelAndView boardList(ModelAndView mv) {
@@ -52,7 +49,7 @@ public class TempController {
 		return mv;
 	}
 
->>>>>>> ae8b272900c7a4f5a01abfe65a6ebe855a86459b
+
 	@GetMapping("/applyprocesslist")
 	public ModelAndView applyProcessList(ModelAndView mv) {
 
@@ -89,13 +86,12 @@ public class TempController {
 	}
 
 	
-<<<<<<< HEAD
+
 	@PostMapping("/login")
 	public ModelAndView loginForm(ModelAndView mv) {
 		return mv;
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("/error")
 	public ModelAndView error(ModelAndView mv) {
 		
@@ -116,12 +112,13 @@ public class TempController {
 	
 	@GetMapping("/companyinfo")
 	public ModelAndView companyInfo(ModelAndView mv) {
-		
-=======
+	
+		return mv;
+	}
+	
 	// 게시판
 	@GetMapping("/boardmain")
 	public ModelAndView boardmain(ModelAndView mv) {
->>>>>>> e1111d52002491b1cdea3b208b0c5894153188a7
 		return mv;
 	}
 	
@@ -142,7 +139,6 @@ public class TempController {
 		public ModelAndView postinsert(ModelAndView mv) {
 			return mv;
 	}
-=======
 	  @PostMapping("/login") 
 	  public ModelAndView loginForm(ModelAndView mv, PsUserDto pdto) {
 
@@ -163,6 +159,5 @@ public class TempController {
 	  return mv; 
 	  }
 
->>>>>>> ae8b272900c7a4f5a01abfe65a6ebe855a86459b
 
 }

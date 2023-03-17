@@ -12,11 +12,7 @@
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-<<<<<<< HEAD
                     <h1 class="m-0 text-primary">JOB-A</h1>
-=======
-                    <h1 class="m-0 text-primary">JOB_A</h1>
->>>>>>> e1111d52002491b1cdea3b208b0c5894153188a7
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
