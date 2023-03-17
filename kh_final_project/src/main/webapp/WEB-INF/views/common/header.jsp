@@ -12,7 +12,11 @@
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Makaan</h1>
+<<<<<<< HEAD
+                    <h1 class="m-0 text-primary">JOB-A</h1>
+=======
+                    <h1 class="m-0 text-primary">JOB_A</h1>
+>>>>>>> e1111d52002491b1cdea3b208b0c5894153188a7
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -38,16 +42,17 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">login</a>
                 </div>
             </nav>
         </div>
         <!-- Navbar End -->
 
 
-        <!-- Header Start -->
+ <!--        
+ <!-- Header Start --
         <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <%-- <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Home</span> To Live With Your Family</h1>
                     <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
@@ -64,7 +69,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --%>
         </div>
         <!-- Header End -->
+ -->
 </html>

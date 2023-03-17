@@ -183,7 +183,7 @@
 			<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 		</div>
 		<div>
-			<button type="submit">채용공고 등록</button>
+			<button class="btn btn-outline-primary" type="submit">채용공고 등록</button>
 		</div>
 	</form>
 </div>

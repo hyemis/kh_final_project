@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.com.job.person.model.dto.PsDto;
+import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsService;
 
 @Controller
@@ -30,6 +30,12 @@ public class PsController {
 		return mv;
 	}
 	
+	
+	@GetMapping("/singup")
+	public ModelAndView singup(ModelAndView mv) {
+		
+		return mv;
+	}
 	
 
 }

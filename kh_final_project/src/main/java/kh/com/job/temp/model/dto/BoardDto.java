@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 public class BoardDto {
 
 	
-//	B_NUM|B_TITLE|B_WRITER|B_CONTENT|B_DATE               |
-//	-----+-------+--------+---------+---------------------+
+//	B_NUM|B_TITLE |B_WRITER |B_CONTENT |B_DATE               |
+//	-----+--------+---------+----------+---------------------+
 //	    1|글제목1   |글작성자1   |글내용1     |2023-03-13 10:50:57.0|
 //	    2|글제목2   |글작성자2   |글내용2     |2023-03-13 10:51:37.0|
 //	    3|글제목3   |글작성자3   |글내용3     |2023-03-13 10:51:38.0|
 //	    4|글제목4   |글작성자4   |글내용4     |2023-03-13 10:51:39.0|
+	
 	private int bNum;
 	private String bTitle;
 	private String bWriter;

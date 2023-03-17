@@ -14,9 +14,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PsDto {
+public class PsUserDto {
 	
-//	USER_ID|USER_PW|USER_PHONE |USER_BIRTH|USER_EMAIL      |USER_ADDRESS|USER_NAME|
+//	USER_ID|USER_PW|USER_PHONE |USER_BIRTH|USER_EMAIL      |USER_ADDRESS|USER_NAME| user_role
 //	-------+-------+-----------+----------+----------------+------------+---------+
 //	user1  |user1  |01012345678|000101    |user1@joba.co.kr|서울특별시 강남구   |사용자1     |
 //	user2  |user2  |01023456789|000102    |user2@joba.co.kr|서울특별시 종로구   |사용자2     |
@@ -24,13 +24,14 @@ public class PsDto {
 
 	
 	
-	private String userId;
-	private String userPw;
+	private String username;
+	private String password;
 	private String userPhone;
 	private String userBirth;
 	private String userEmail;
 	private String userAddress;
 	private String userName;
+	private String userRole;
 	
 	
 	
