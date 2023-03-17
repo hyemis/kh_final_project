@@ -18,14 +18,25 @@
 	
 		<div class="container-sm">	
 		
-		<h1>게시판 게시글 목록 </h1>
-
+		<h1>면접방</h1>
 		
-		<div class="grid gap-3 border border-secondary">
-		  <div class="p-2 g-col-6 border border-secondary">공간</div>
-		  <div class="p-2 g-col-6 border border-secondary">공간</div>
-		  <div class="p-2 g-col-6 border border-secondary">공간</div>
-		</div>
+	
+		   <div class="row">
+	            <div class="col-md-3 col-sm-4 border border-secondary">
+	                <div class="list-group">
+	                    <a href="#" class="list-group-item list-group-item-action">내용</a>
+	                    <a href="#" class="list-group-item list-group-item-action">내용</a>
+	                    <a href="#" class="list-group-item list-group-item-action">내용</a>
+	                </div>
+	            </div>
+	            <div class="col-9  border border-secondary">
+	                <div class="border border-secondary">
+		                <h1>면접방</h1>
+		               <div class="border border-secondary">내용</div>
+		               <div class="border border-secondary">내용</div>
+	           	 	</div>
+	            </div>
+        	</div>
 		
 	 </div>
 	
