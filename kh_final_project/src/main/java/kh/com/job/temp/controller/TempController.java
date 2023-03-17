@@ -109,6 +109,18 @@ public class TempController {
 		return mv;
 	}
 	
+	@GetMapping("/boardsample")
+	public ModelAndView boardSample(ModelAndView mv) {
+	
+		return mv;
+	}
+	
+	@GetMapping("/boardwrite")
+	public ModelAndView boardWrite(ModelAndView mv) {
+	
+		return mv;
+	}
+	
 	  @PostMapping("/login") 
 	  public ModelAndView loginForm(ModelAndView mv, PsUserDto pdto) {
 
