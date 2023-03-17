@@ -116,29 +116,6 @@ public class TempController {
 		return mv;
 	}
 	
-	// 게시판
-	@GetMapping("/boardmain")
-	public ModelAndView boardmain(ModelAndView mv) {
-		return mv;
-	}
-	
-	// 게시판 상세 
-		@GetMapping("/boarddetail")
-		public ModelAndView boarddetail(ModelAndView mv) {
-			return mv;
-	}
-	
-	// 게시글 
-		@GetMapping("/post")
-		public ModelAndView post(ModelAndView mv) {
-			return mv;
-	}
-		
-	// 게시글 등록 
-		@GetMapping("/postinsert")
-		public ModelAndView postinsert(ModelAndView mv) {
-			return mv;
-	}
 	  @PostMapping("/login") 
 	  public ModelAndView loginForm(ModelAndView mv, PsUserDto pdto) {
 
