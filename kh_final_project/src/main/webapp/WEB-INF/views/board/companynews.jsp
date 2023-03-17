@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>home</title>
+<title>뉴스레터</title>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -18,13 +18,24 @@
 	
 		<div class="container-sm">	
 		
-		<h1>home</h1>
-
+		<h1>뉴스레터</h1>
 		
-		<div class="grid gap-3 border border-secondary">
-		  <div class="p-2 g-col-6 border border-secondary">검색 공간</div>
-		  <div class="p-2 g-col-6 border border-secondary">공간1</div>
-		</div>
+	
+		   <div class="row">
+	            <div class="col-md-3 col-sm-4 border border-secondary">
+	                <div class="list-group">
+	                    <a href="#" class="list-group-item list-group-item-action">내용</a>
+	                    <a href="#" class="list-group-item list-group-item-action">내용</a>
+	                    <a href="#" class="list-group-item list-group-item-action">내용</a>
+	                </div>
+	            </div>
+	            <div class="col-9  border border-secondary">
+	                <div class="border border-secondary">
+		                <h1>뉴스레터</h1>
+		                <p>뉴스레터내용</p>
+	           	 	</div>
+	            </div>
+        	</div>
 		
 	 </div>
 	
