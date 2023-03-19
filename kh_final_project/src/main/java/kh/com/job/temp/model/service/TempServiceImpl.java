@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dao.TempDao;
 import kh.com.job.temp.model.dto.ApplyProcessDto;
 import kh.com.job.temp.model.dto.BoardDto;
@@ -163,6 +164,11 @@ public class TempServiceImpl implements TempService{
 			e.printStackTrace();
 		}
 		return userInfo;
+	}
+
+	@Override
+	public PsUserDto loginCheck(String userId) {		
+		return dao.loginCheck(userId);
 	}
 
 	

@@ -124,16 +124,19 @@ public class TempController {
 	  @PostMapping("/login") 
 	  public ModelAndView loginForm(ModelAndView mv, PsUserDto pdto) {
 
-	  String userid = pdto.getUsername(); 
-	  String rawPassword = pdto.getPassword();
+	  String userid = pdto.getUserId(); 
+	  String rawPassword = pdto.getUserPw();
 	  
 	  System.out.println("@@@@@@@ id " + userid);
 	  System.out.println("@@@@@@@ raw " + rawPassword);
 	  
-//	  String encPassword = passwordEncoder.encode(rawPassword);
-	  String encPassword = "$2a$10$y01/1BWURydHOk3M0FMyJuWQ4ykXvUzmZ1xOxF32fIVntOm8UE93G";
+	  System.out.println("@@@@@@@@@@@@@@@@      " + passwordEncoder.encode(rawPassword));
+	  
+	  String encPassword = service.loginCheck(userid).getUserPw(); 
 	  System.out.println("!!!!!!!!!! encode " + encPassword);
 	  
+	  
+  
 	  boolean check = passwordEncoder.matches(rawPassword, encPassword);
 	  
 	  System.out.println("check : " + check);
