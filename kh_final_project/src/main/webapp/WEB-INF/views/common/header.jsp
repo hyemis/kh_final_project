@@ -5,10 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
+
 	<jsp:include page="/WEB-INF/views/common/cspart.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/common/jspart.jsp"></jsp:include>
-=======
+
 
 <!-- css file link part start -->
     <!-- Favicon -->
@@ -16,7 +16,7 @@
 	<%-- ${pageContext.request.contextPath} --%>
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- Icon Font Stylesheet -->
@@ -53,7 +53,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
->>>>>>> 5036f31e817fd94c499576bd582c20ad6232e191
 
 <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
@@ -93,44 +92,46 @@
 				  </div>
 				  
 				  <div class="navbar-nav ms-auto">
-=======
+
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
->>>>>>> 528190364558005d3989b98879f81410149e8bfd
+
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">개인서비스</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
+                                <a href="property-list.html" class="dropdown-item">MY 홈</a>
+                                <a href="property-type.html" class="dropdown-item">회원정보 관리</a>
+                                <a href="property-agent.html" class="dropdown-item">이력서 관리</a>
+                                <a href="property-agent.html" class="dropdown-item">입사지원 현황</a>
+                                <a href="property-agent.html" class="dropdown-item">스크랩한 채용공고</a>
+                                <a href="property-agent.html" class="dropdown-item">관심기업 정보</a>
+                                <hr class="dropdown-divider">
+                                <a href="property-agent.html" class="dropdown-item">회원정보 관리</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업서비스</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
+                                <a href="testimonial.html" class="dropdown-item">기업 홈</a>
+                                <a href="404.html" class="dropdown-item">공고/등록 관리</a>
+                                <a href="404.html" class="dropdown-item">지원자 관리</a>
+                                <a href="404.html" class="dropdown-item">인재 관리</a>
+                                <a href="404.html" class="dropdown-item">기업 소개</a>
+                                <hr class="dropdown-divider">
+                                <a href="404.html" class="dropdown-item">기업회원 정보</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-<<<<<<< HEAD
+
                     <a class="nav-link me-3" href="#">login</a>
+                  </div>
 			</nav>
-            
-            
-            
-         
-=======
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">login</a>
                 </div>
             </nav>
->>>>>>> 528190364558005d3989b98879f81410149e8bfd
         </div>
         <!-- Navbar End -->
 

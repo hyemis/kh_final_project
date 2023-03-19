@@ -16,7 +16,10 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
 		
-		<h1>페이지 이름 입력해주세요. </h1>
+		<div class="grid gap-3 border border-dark-subtle">
+			<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		</div>
 	
 	</div>
 	

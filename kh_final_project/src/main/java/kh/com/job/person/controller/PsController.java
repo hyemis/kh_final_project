@@ -30,9 +30,32 @@ public class PsController {
 		return mv;
 	}
 	
+	@GetMapping("/idpw")
+	public ModelAndView idpw(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+	@GetMapping("/findfail")
+	public ModelAndView findfail(ModelAndView mv) {
+		
+		return mv;
+	}
 	
 	@GetMapping("/singup")
 	public ModelAndView singup(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+	@GetMapping("/mypage")
+	public ModelAndView mypage(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+	@GetMapping("/resume")
+	public ModelAndView resume(ModelAndView mv) {
 		
 		return mv;
 	}

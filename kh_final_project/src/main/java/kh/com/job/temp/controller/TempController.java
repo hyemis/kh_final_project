@@ -144,8 +144,8 @@ public class TempController {
 	  
 	  @GetMapping("/sample")
 		public ModelAndView sample(ModelAndView mv) {
-		
 			return mv;
 		}
+	
 
 }
