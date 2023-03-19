@@ -24,12 +24,12 @@ public class PsUserDto {
 
 	
 	
-	private String username;
-	private String password;
+	private String userId;
+	private String userPw;
 	private String userPhone;
 	private String userBirth;
 	private String userEmail;
-	private String userAddress;
+	private String userAdress;
 	private String userName;
 	private String userRole;
 	

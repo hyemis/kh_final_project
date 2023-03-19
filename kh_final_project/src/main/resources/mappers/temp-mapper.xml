@@ -14,4 +14,10 @@
   <select id="applyProcessList" resultType="apdto">
   	select * from BUSINESS_APPLY_PROCESS
   </select>
+  
+  <select id="logincheck" resultType="pdto">
+  SELECT USER_ID, USER_PW, USER_ROLE
+  FROM USER_TABLE WHERE USER_ID =#{userId}
+  </select>
+  
 </mapper>
