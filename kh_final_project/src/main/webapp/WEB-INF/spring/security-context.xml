@@ -12,7 +12,12 @@
 	<security:csrf disabled="true"/>
 <!--         <security:intercept-url pattern="/person/**" access="hasRole('ROLE_P')"/> -->
         <!-- security:intercept-url pattern="/business/**" access="hasRole('ROLE_B')"/-->
-        <!-- security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_A, ROLE_AM')"/-->
+        
+        
+        <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_AM','ROLE_A')"/>
+        
+        <!-- <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_A, ROLE_AM')"/> -->
+        
         <!-- <security:form-login login-page="/temp/login" /> -->
     </security:http>
     
@@ -25,6 +30,7 @@
         />
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userService">
+        <security:password-encoder ref="BCryptPasswordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
 	
