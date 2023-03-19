@@ -1,6 +1,12 @@
 package kh.com.job.temp.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -149,6 +155,44 @@ public class TempController {
 		public ModelAndView sample(ModelAndView mv) {
 			return mv;
 		}
+	  
+	  
+	  //security-config 로그인 폼 로그인 후 페이지
+	  @GetMapping("/maintest")
+	  public ModelAndView maintest(ModelAndView mv) {
+		  
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		  
+		  
+		  Object principal = auth.getPrincipal();
+		  
+		  String id = "";
+		  
+		  if(principal != null) {
+			id = auth.getName();
+			System.out.println("role @@@@@ : " +  auth.getAuthorities());
+			if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM"))) {
+				mv.addObject("role", "ROLE_AM");
+			}else if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_A"))) {
+				mv.addObject("role", "ROLE_A");
+			}else if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_B"))) {
+				mv.addObject("role", "ROLE_B");
+			}else if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_P"))) {
+				mv.addObject("role", "ROLE_P");
+			}
+				
+		  }
+		  
+		  
+		  System.out.println("@@@@@@@@@@@@####  principal :" +  principal);
+		  System.out.println("@@@@@@@@@@@@####  detail" +  auth.getDetails());
+		  
+		  mv.addObject("id",id);
+		  
+		  return mv;
+	  }
 	
+	  
+	  
 
 }
