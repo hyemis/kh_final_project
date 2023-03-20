@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 비밀번호 찾기</title>
+<title>JOB-A 회원가입</title>
 </head>
 <body>
 	<!-- haeder : css, js, boostrap, nav-bar, template 등  -->
@@ -19,7 +19,7 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 			 
-		        <form class="col-6" name=form action="" method="post" onsubmit="return checkAll()">
+		        <form class="col-6" name=singUpForm action="" method="post" onsubmit="return checkAll()">
 			        	<div class="m-4"><h3>JOB-A 회원가입</h3></div>
 			        	
 				          <div class="row">
@@ -93,17 +93,17 @@
 	<script>
 			
 			function checkAll() {
-		        if (!checkUserId(form.userId.value)) {
+		        if (!checkUserId(singUpForm.userId.value)) {
 		            return false;
-		        } else if (!checkPassword(form.userId.value, form.password1.value, form.password2.value)) {
+		        } else if (!checkPassword(singUpForm.userId.value, singUpForm.password1.value, singUpForm.password2.value)) {
 		            return false;
-		        } else if (!checkName(form.name.value)) {
+		        } else if (!checkName(singUpForm.name.value)) {
 		            return false;
-		        } else if (!checkBirth(form.birth.value)) {
+		        } else if (!checkBirth(singUpForm.birth.value)) {
 		            return false;
-		        } else if (!checkPhone(form.phone.value)) {
+		        } else if (!checkPhone(singUpForm.phone.value)) {
 		            return false;
-		        } else if (!checkEmail(form.email.value)) {
+		        } else if (!checkEmail(singUpForm.email.value)) {
 		            return false;
 		        }  
 		        return true;
@@ -128,8 +128,8 @@
 		        var idRegExp = /^[a-zA-z0-9]{4,20}$/; //아이디 유효성 검사
 		        if (!idRegExp.test(id)) {
 		            alert("아이디는 영문 대소문자와 숫자 4~20자리로 입력해야합니다!");
-		            form.userId.value = "";
-		            form.userId.focus();
+		            singUpForm.userId.value = "";
+		            singUpForm.userId.focus();
 		            return false;
 		        }
 		        return true; //확인이 완료되었을 때
@@ -147,25 +147,25 @@
         var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
         if (!password1RegExp.test(password1)) {
             alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
-            form.password1.value = "";
-            form.password1.focus();
+            singUpForm.password1.value = "";
+            singUpForm.password1.focus();
             return false;
         }
         //비밀번호와 비밀번호 확인이 맞지 않다면..
         if (password1 != password2) {
             alert("두 비밀번호가 맞지 않습니다.");
-            form.password1.value = "";
-            form.password2.value = "";
-            form.password2.focus();
+            singUpForm.password1.value = "";
+            singUpForm.password2.value = "";
+            singUpForm.password2.focus();
             return false;
         }
  
         //아이디와 비밀번호가 같을 때..
         if (id == password1) {
             alert("아이디와 비밀번호는 같을 수 없습니다!");
-            form.password1.value = "";
-            form.password2.value = "";
-            form.password2.focus();
+            singUpForm.password1.value = "";
+            singUpForm.password2.value = "";
+            singUpForm.password2.focus();
             return false;
         }
         return true; //확인이 완료되었을 때
@@ -215,12 +215,18 @@
         var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
         if (!emailRegExp.test(email)) {
             alert("이메일 형식이 올바르지 않습니다!");
-            form.email.value = "";
-            form.email.focus();
+            singUpForm.email.value = "";
+            singUpForm.email.focus();
             return false;
         }
         return true; //확인이 완료되었을 때
    		}
+		
+		// 회원가입 성공, 실패 alret
+		var msg = "${msg}";
+		if(msg) {
+			alert(msg);
+		}
 			
 	</script>
 
