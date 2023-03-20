@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import lombok.Getter;
@@ -24,6 +25,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		HttpSession session = request.getSession();
+		
+		session.setAttribute("userid", authentication.getName());
+		
+		if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM"))
+				|| authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_A")) ) {
+			
+			response.sendRedirect("admin/main");
+			
+		};
 		
 	}
 	
