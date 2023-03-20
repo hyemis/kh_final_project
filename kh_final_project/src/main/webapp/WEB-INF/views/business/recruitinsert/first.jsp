@@ -55,127 +55,35 @@
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>채용공고등록</h1>
+<h1>Step01. 담당자 정보</h1>
 <section>
 <div>
-	<form action="<%=request.getContextPath() %>/bs/recruitinsert" method="post">
+	<form action="<%=request.getContextPath() %>/business/recruitinsert/first" method="post">
 		<div>
-			모집분야<input type="text" name="recruitType">
+			담당자 성함
+			<input type="text" name="recruitName">
 		</div>
 		<div>
-			경력여부
-			<select name="careerType">
-				<option value="begin">신입</option>
-				<option value="career">경력</option>
-				<option value="not">경력무관</option>
-			</select>
+			전화번호 
+			<input type="text" name="" placeholder="02">-<input type="text" name="">-<input type="text" name="">
 		</div>
 		<div>
-			담당업무<input type="text" name="inChargeType">
+			이메일
+			<input type="email" name="">
 		</div>
 		<div>
-			근무부서<input type="text" name="department">
+			업종
+			<input type="text" name="">
 		</div>
 		<div>
-			직급(직책)<input type="text" name="position">
+			대표 근무지역
+			<input type="checkbox" id="chk1">
+			<label for="chk1">해외지역</label>
+			<input type="checkbox" id="chk2">
+			<label for="chk2">재택근무 가능</label>
 		</div>
 		<div>
-			필수/우대조건<input type="text" name="coditionType" placeholder="정보처리기사자격증">
-		</div>
-		<div>
-			지원자_학력 <input type="text" name="applicant_education" placeholder="4년제 대학교 졸업 이상">
-		</div>
-		<div>
-			지원자_성별
-			<select name="applicant_gender">
-				<option value="male">남자</option>
-				<option value="female">여자</option>
-				<option value="not">성별무관</option>
-			</select>
-		</div>
-		<div>
-			지원자_나이<input type="text" name="applicant_age" placeholder="30세 이상">
-		</div>
-		<div>
-			연봉<input type="text" name="salary" placeholder="회사내규에 따름">		
-		</div>
-		<div>
-			근무형태<input type="text" name="work_type" placeholder="정규직">
-		</div>
-		<div>
-			근무요일<input type="text" name="work_day" placeholder="월~금">
-		</div>
-		<div>
-			근무시간<input type="text" name="work_time" placeholder="오전 9시 ~ 오후 6시">
-		</div>
-		<div>
-			공고대표직무<input type="text" name="raRepresentativeJob" placeholder="경영·사무 ▶ 기획·전략·경영 ▶  기획">
-		</div>
-		<div>
-			지원접수기간<input type="text" name="application_period" placeholder="2023-03-15 ~ 2023-04-30">
-		</div>
-		<div>
-			공고방식
-			<select name="raType">
-				<option value="normal">일반양식</option>
-				<option value="company">자사양식</option>
-				<option value="blind">블라인드양식</option>
-			</select>
-		</div>
-		<div>
-			지원서접수방법
-			<select name="applyType">
-				<option value="joba">Job-A접수</option>
-				<option value="homepage">홈페이지</option>
-			</select>
-		</div>
-		<div>
-			지원서양식
-			<select name="applyFormType">
-				<option value="jobaForm">Job-A이력서</option>
-				<option value="companyForm">자사이력서</option>
-			</select>
-		</div>
-		<div>
-			채용제목<input type="text" name="raTitle">
-		</div>
-		<div>
-			채용내용<textarea class="raContent" cols="30" rows="20" name="raContent"></textarea>
-		</div>
-		<div>
-			채용절차
-			<c:forEach var="num" begin="1" end="5" step="1">
-				<select class="process${num }" name="raProcess${num }" ${num > 2 ? "disabled" : ""}>
-					<option value="">선택안함</option>
-					<c:choose>
-						<c:when test="${num eq 1}">
-							<option value="서류전형" selected>서류전형</option>
-						</c:when>
-						<c:otherwise>	
-							<option value="서류전형">서류전형</option>
-						</c:otherwise>
-					
-					</c:choose>
-					<option value="인적성검사">인적성검사</option>
-					<option value="1차면접">1차면접</option>
-					<option value="2차면접">2차면접</option>
-					<option value="최종합격">최종합격</option>
-				</select>
-			</c:forEach>
-		</div>
-		<div>
-			추가제출서류
-			<c:forEach var="num" begin="1" end="3" step="1">
-				<select class="extra${num }" name="raExtraDocument${num }" ${num > 1 ? "disabled" : ""}>
-					<option value="">선택안함</option>
-					<option value="Job-A인적성검사">Job-A인적성검사</option>
-					<option value="포트폴리오">포트폴리오</option>
-					<option value="사전인터뷰">사전인터뷰</option>
-				</select>
-			</c:forEach>
-		</div>
-		<div>
-			<h3>주소검색 API</h3>
+			<h3>주소검색 API 구역</h3>
 			<input type="text" id="sample6_postcode" placeholder="우편번호">
 			<input class="btn btn-outline-secondary btn-sm" type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
 			<input type="text" id="sample6_address" placeholder="주소">
@@ -183,7 +91,11 @@
 			<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 		</div>
 		<div>
-			<button class="btn btn-outline-primary" type="submit">채용공고 등록</button>
+			<button class="btn btn-outline-primary" type="submit">next</button>
+		</div>
+		
+		<div>
+			<h3>지도 API 구역</h3>
 		</div>
 	</form>
 </div>
