@@ -56,18 +56,21 @@
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step01. 공고등록</h1>
 <section>
-<div>
+<div class="container-sm">
+	<h1>Step05. 공고등록</h1>
 	<form action="<%=request.getContextPath() %>/business/recruitinsert/fifth" method="post">
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			채용제목<input type="text" name="raTitle">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			채용내용<textarea class="raContent" cols="30" rows="20" name="raContent"></textarea>
 		</div>
-		<div>
-			
+		<div class="p-2 g-col-6 border border-secondary">
+			<button class="btn btn-outline-primary btn-prev" type="button">prev</button>
+		</div>
+		<div class="p-2 g-col-6 border border-secondary">
+			<button class="btn btn-outline-success" type="submit">공고 등록 완료</button>
 		</div>
 	</form>
 </div>
@@ -83,6 +86,12 @@
 		//ckfinder 추가하여 이미지 찾기 가능
 		
 	};
+</script>
+
+<script>
+	$(".btn-prev").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/fourth";
+	});
 </script>
 </body>
 </body>

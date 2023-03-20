@@ -27,5 +27,12 @@
 	<hr>
 	</c:forEach>
 	
+	<div class="logouttest">
+		<form action="/job/logout" method="post">
+		<button class="btn btn-dark border-0 w-100 py-3" type="submit">로그 아웃</button>
+		</form>
+		
+	</div>
+	
 </body>
 </html>

@@ -25,6 +25,7 @@ public class TempController {
 
 	@Autowired
 	private TempService service;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -142,7 +143,6 @@ public class TempController {
 	  System.out.println("!!!!!!!!!! encode " + encPassword);
 	  
 	  
-  
 	  boolean check = passwordEncoder.matches(rawPassword, encPassword);
 	  
 	  System.out.println("check : " + check);

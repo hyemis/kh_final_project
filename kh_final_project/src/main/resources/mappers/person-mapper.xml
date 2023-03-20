@@ -7,7 +7,7 @@
   </select>
 
   <select id="selectList" resultType="pdto">
-  	select * from USERS
+  	select * from USER_TABLE
   </select>
   
   <insert id="insert" parameterType="pdto">

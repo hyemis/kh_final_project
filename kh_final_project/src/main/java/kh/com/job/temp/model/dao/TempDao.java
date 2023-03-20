@@ -17,15 +17,15 @@ public class TempDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<TempDto> memberList() throws Exception{
+	public List<TempDto> memberList() {
 		return sqlSession.selectList("temp.memberList");
 	}
 	
-	public List<BoardDto> boardList() throws Exception{
+	public List<BoardDto> boardList() {
 		return sqlSession.selectList("temp.boardList");
 	}
 	
-	public List<ApplyProcessDto> applyProcessList() throws Exception{
+	public List<ApplyProcessDto> applyProcessList() {
 		return sqlSession.selectList("temp.applyProcessList");
 	}
 	
