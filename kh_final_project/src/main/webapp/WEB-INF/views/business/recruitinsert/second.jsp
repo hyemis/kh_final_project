@@ -101,16 +101,6 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-
-<script>
-	$(".btn-prev").click(function(){
-		location.href="<%=request.getContextPath() %>/business/recruitinsert/first";
-	});
-	
-	$(".btn-next").click(function(){
-		location.href="<%=request.getContextPath() %>/business/recruitinsert/third";
-	});
-</script>
 </body>
 </body>
 </html>

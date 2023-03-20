@@ -125,38 +125,6 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-
-<script>
-	$(".process1").on("click", processHandler);
-	$(".process2").on("click", processHandler);
-	$(".process3").on("click", processHandler);
-	$(".process4").on("click", processHandler);
-	$(".process5").on("click", processHandler);
-	
-	$(".extra1").on("click", processHandler);
-	$(".extra2").on("click", processHandler);
-	$(".extra3").on("click", processHandler);
-
-	function processHandler(element){
-		if($(this).val() != ""){
-			console.log(this.val());
-			$(this).next().removeAttr("disabled");
-		} else if($(this).val() == ""){
-			$(this).next().attr("disabled", true);
-		}
-	};
-	
-</script>
-
-<script>
-	$(".btn-prev").click(function(){
-		location.href="<%=request.getContextPath() %>/business/recruitinsert/third";
-	});
-	
-	$(".btn-next").click(function(){
-		location.href="<%=request.getContextPath() %>/business/recruitinsert/fifth";
-	});
-</script>
 </body>
 </body>
 </html>

@@ -46,8 +46,6 @@
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
     
-    <!-- CKeditor -->
-    <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
     
     <!-- js part end -->
 	
@@ -78,21 +76,6 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-<script>
-	// ckeditor textarea name으로 추가
-	CKEDITOR.replace('raContent')
-	  ,{
-		filebrowserUploadUrl:'imageUpload.do'
-		//ckfinder 추가하여 이미지 찾기 가능
-		
-	};
-</script>
-
-<script>
-	$(".btn-prev").click(function(){
-		location.href="<%=request.getContextPath() %>/business/recruitinsert/fourth";
-	});
-</script>
 </body>
 </body>
 </html>
