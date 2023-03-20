@@ -52,14 +52,14 @@
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step03. 자격조건 및 근무조건</h1>
 <section>
-<div>
+<div class="container-sm">
+	<h1 class="p-2 g-col-6 border border-secondary">Step03. 자격조건 및 근무조건</h1>
 	<form action="<%=request.getContextPath() %>/business/recruitinsert/third" method="post">
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원자_학력 <input type="text" name="applicant_education" placeholder="4년제 대학교 졸업 이상">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원자_성별
 			<select name="applicant_gender">
 				<option value="male">남자</option>
@@ -67,24 +67,24 @@
 				<option value="not">성별무관</option>
 			</select>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원자_나이<input type="text" name="applicant_age" placeholder="30세 이상">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			연봉<input type="text" name="salary" placeholder="회사내규에 따름">		
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			근무형태<input type="text" name="work_type" placeholder="정규직">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			근무요일<input type="text" name="work_day" placeholder="월~금">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			근무시간<input type="text" name="work_time" placeholder="오전 9시 ~ 오후 6시">
 		</div>
-		<div>
-			<button class="btn btn-outline-primary" type="submit">prev</button>
-			<button class="btn btn-outline-primary" type="submit">next</button>
+		<div class="p-2 g-col-6 border border-secondary">
+			<button class="btn btn-outline-primary btn-prev" type="button">prev</button>
+			<button class="btn btn-outline-primary btn-next" type="button">next</button>
 		</div>
 	</form>
 </div>
@@ -92,6 +92,16 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
+
+<script>
+	$(".btn-prev").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/second";
+	});
+	
+	$(".btn-next").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/fourth";
+	});
+</script>
 </body>
 </body>
 </html>

@@ -51,17 +51,17 @@
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step04. 채용절차</h1>
 <section>
-<div>
+<div class="container-sm">
+	<h1 class="p-2 g-col-6 border border-secondary">Step04. 채용절차</h1>
 	<form action="<%=request.getContextPath() %>/business/recruitinsert/fourth" method="post">
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			공고대표직무<input type="text" name="raRepresentativeJob" placeholder="경영·사무 ▶ 기획·전략·경영 ▶  기획">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원접수기간<input type="text" name="application_period" placeholder="2023-03-15 ~ 2023-04-30">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			공고방식
 			<select name="raType">
 				<option value="normal">일반양식</option>
@@ -69,21 +69,21 @@
 				<option value="blind">블라인드양식</option>
 			</select>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원서접수방법
 			<select name="applyType">
 				<option value="joba">Job-A접수</option>
 				<option value="homepage">홈페이지</option>
 			</select>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원서양식
 			<select name="applyFormType">
 				<option value="jobaForm">Job-A이력서</option>
 				<option value="companyForm">자사이력서</option>
 			</select>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			채용절차
 			<c:forEach var="num" begin="1" end="5" step="1">
 				<select class="process${num }" name="raProcess${num }" ${num > 2 ? "disabled" : ""}>
@@ -104,7 +104,7 @@
 				</select>
 			</c:forEach>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			추가제출서류
 			<c:forEach var="num" begin="1" end="3" step="1">
 				<select class="extra${num }" name="raExtraDocument${num }" ${num > 1 ? "disabled" : ""}>
@@ -114,6 +114,10 @@
 					<option value="사전인터뷰">사전인터뷰</option>
 				</select>
 			</c:forEach>
+		</div>
+		<div class="p-2 g-col-6 border border-secondary">
+			<button class="btn btn-outline-primary btn-prev" type="button">prev</button>
+			<button class="btn btn-outline-primary btn-next" type="button">next</button>
 		</div>
 	</form>
 </div>
@@ -135,12 +139,23 @@
 
 	function processHandler(element){
 		if($(this).val() != ""){
+			console.log(this.val());
 			$(this).next().removeAttr("disabled");
 		} else if($(this).val() == ""){
 			$(this).next().attr("disabled", true);
 		}
 	};
 	
+</script>
+
+<script>
+	$(".btn-prev").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/third";
+	});
+	
+	$(".btn-next").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/fifth";
+	});
 </script>
 </body>
 </body>

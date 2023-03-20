@@ -52,14 +52,15 @@
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step02. 모집분야</h1>
+
 <section>
-<div>
+<div class="container-sm">
+	<h1 class="p-2 g-col-6 border border-secondary">Step02. 모집분야</h1>
 	<form action="<%=request.getContextPath() %>/business/recruitinsert/second" method="post">
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			모집분야<input type="text" name="recruitType">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			경력여부
 			<select name="careerType">
 				<option value="begin">신입</option>
@@ -67,19 +68,19 @@
 				<option value="not">경력무관</option>
 			</select>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			담당업무<input type="text" name="inChargeType">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			근무부서<input type="text" name="department">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			직급(직책)<input type="text" name="position">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			필수/우대조건<input type="text" name="coditionType" placeholder="정보처리기사자격증">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			지원자_학력 
 			<input type="text" name="applicant_education" placeholder="4년제 대학교 졸업 이상">
 			<input type="checkbox" id="chk1">
@@ -87,12 +88,12 @@
 			<input type="checkbox" id="chk2">
 			<label for="chk2">필수</label>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			<button class="btn btn-outline-secondary" type="button">모집분야 추가</button>
 		</div>
-		<div>
-			<button class="btn btn-outline-primary" type="submit">prev</button>
-			<button class="btn btn-outline-primary" type="submit">next</button>
+		<div class="p-2 g-col-6 border border-secondary">
+			<button class="btn btn-outline-primary btn-prev" type="button">prev</button>
+			<button class="btn btn-outline-primary btn-next" type="button">next</button>
 		</div>
 	</form>
 </div>
@@ -100,6 +101,16 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
+
+<script>
+	$(".btn-prev").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/first";
+	});
+	
+	$(".btn-next").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/third";
+	});
+</script>
 </body>
 </body>
 </html>
