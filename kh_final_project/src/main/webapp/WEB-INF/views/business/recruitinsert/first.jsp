@@ -59,34 +59,35 @@
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step01. 담당자 정보</h1>
+
 <section>
-<div>
+<div class="container-sm">
+	<h1 class="p-2 g-col-6 border border-secondary">Step01. 담당자 정보</h1>
 	<form action="<%=request.getContextPath() %>/business/recruitinsert/first" method="post">
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			담당자 성함
 			<input type="text" name="recruitName">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			전화번호 
 			<input type="text" name="" placeholder="02">-<input type="text" name="">-<input type="text" name="">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			이메일
 			<input type="email" name="">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			업종
 			<input type="text" name="">
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			대표 근무지역
 			<input type="checkbox" id="chk1">
 			<label for="chk1">해외지역</label>
 			<input type="checkbox" id="chk2">
 			<label for="chk2">재택근무 가능</label>
 		</div>
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			<h3>주소검색 API 구역</h3>
 			<input type="text" id="sample6_postcode" placeholder="우편번호">
 			<input class="btn btn-outline-secondary btn-sm" type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
@@ -94,11 +95,11 @@
 			<input type="text" id="sample6_extraAddress" placeholder="동"><br>
 			<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 		</div>
-		<div>
-			<button class="btn btn-outline-primary" type="submit">next</button>
+		<div class="p-2 g-col-6 border border-secondary">
+			<button class="btn btn-outline-primary btn-next" type="button">next</button>
 		</div>
 		
-		<div>
+		<div class="p-2 g-col-6 border border-secondary">
 			<h3>지도 API 구역</h3>
 			
 		</div>
@@ -107,6 +108,12 @@
 </section>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
+
+<script>
+	$(".btn-next").click(function(){
+		location.href="<%=request.getContextPath() %>/business/recruitinsert/second";
+	});
+</script>
 
 <script>
     function sample6_execDaumPostcode() {
