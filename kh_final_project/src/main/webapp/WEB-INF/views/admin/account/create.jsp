@@ -101,6 +101,15 @@
 		            <input type="text" class="form-control" id="email" name="userEmail" required>
 		            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 		          </div>			
+		          <div class="mb-3">
+		            <label for="email">관리자 권한</label>
+		            <select class="form-select" id="role" name="userRole" required>
+		            	<option selected="selected" value="ROLE_A">일반관리자</option>
+		            	<option value="ROLE_AM">마스터관리자</option>
+		            </select>
+		            
+		            <div class="invalid-feedback">이메일을 입력해주세요.</div>
+		          </div>			
 		 	<div class="mx-5 mt-6 text-lg-end text-center">
 		 		<button type="submit" class="btn btn-dark border-0 w-15 py-2">계정생성</button>
 		 	</div>
