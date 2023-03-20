@@ -303,3 +303,92 @@ CREATE SEQUENCE R_HSCHOOL_SEQ
        NOCYCLE
        NOCACHE
        ORDER;
+       
+--R_UNIVERSITY 시퀀스 생성
+DROP SEQUENCE R_UNIVERSITY_SEQ;
+       
+CREATE SEQUENCE R_UNIVERSITY_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;
+       
+--R_GSCHOOL 시퀀스 생성
+
+DROP SEQUENCE R_GSCHOOL_SEQ;
+       
+CREATE SEQUENCE R_GSCHOOL_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;
+
+
+--R_CAREER 시퀀스 생성
+
+DROP SEQUENCE R_CAREER_SEQ;
+       
+CREATE SEQUENCE R_CAREER_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;       
+    
+--R_CERTI 시퀀스 생성
+
+DROP SEQUENCE R_CERTI_SEQ;
+       
+CREATE SEQUENCE R_CERTI_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;
+       
+       
+    
+--R_CL 시퀀스 생성
+
+DROP SEQUENCE R_CL_SEQ;
+       
+CREATE SEQUENCE R_CL_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;
+
+
+--BOARD 시퀀스 생성
+
+DROP SEQUENCE BOARD_SEQ;
+       
+CREATE SEQUENCE BOARD_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;
+              
+              
+--REPLY 시퀀스 생성
+
+DROP SEQUENCE REPLY_SEQ;
+       
+CREATE SEQUENCE REPLY_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       NOCYCLE
+       NOCACHE
+       ORDER;
+              
