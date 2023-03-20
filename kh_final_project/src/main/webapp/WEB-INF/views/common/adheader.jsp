@@ -33,8 +33,15 @@
                             </div>
                         </div>
 						<sec:authorize access="hasRole('ROLE_AM')">
-                        	<a href="${pageContext.request.contextPath}/admin/accountmgr" class="nav-item nav-link">관리자 계정 관리</a>
+                        	<a href="${pageContext.request.contextPath}/admin/account/manage" class="nav-item nav-link">관리자 계정 관리</a>
 						</sec:authorize>
+						<div class="logouttest mt-3 text-lg-end text-center">
+							<form action="/job/logout" method="post">
+							<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
+							</form>
+						</div>
+						
+						
                     </div>
                 </div>
             </nav>

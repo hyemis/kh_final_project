@@ -46,11 +46,11 @@
     <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/admin.account.js"></script>
     
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
-    
+    <!-- Custom Javascript -->
+    <script src="${pageContext.request.contextPath}/resources/js/admin.account.js"></script>
     <!-- js part end -->
 
 </head>
@@ -69,7 +69,7 @@
     	 
 		<div class="logouttest mt-3 mx-5 text-lg-end text-center">
 			<form action="/job/logout" method="post">
-			<button class="btn btn-info border-0 w-15 py-2" type="button">계정 추가</button>
+			<a class="btn btn-info border-0 w-15 py-2" href="create" >계정 추가</a>
 			<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
 			</form>
 		</div>
