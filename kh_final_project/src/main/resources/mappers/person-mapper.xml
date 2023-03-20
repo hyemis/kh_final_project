@@ -7,7 +7,7 @@
   </select>
 
   <select id="selectList" resultType="pdto">
-  	select * from USER_TABLE
+  	select * from USER_TABLE  
   </select>
   
   <insert id="insert" parameterType="pdto">
@@ -21,5 +21,9 @@
   <update id="update" parameterType="pdto">
   	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID};
   </update>
-  
+	
+  <select id="accountmgr" resultType="pdto">
+  	select * from USER_TABLE
+  	WHERE USER_ROLE IN ('ROLE_A', 'ROLE_AM')
+  </select>  
 </mapper>

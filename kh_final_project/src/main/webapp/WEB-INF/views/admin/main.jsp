@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,16 +61,15 @@
         <!-- Spinner End -->
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-    	
-    			 
-		<div class="logouttest text-lg-end text-center">
+    		 
+		<div class="logouttest mt-3 mx-5 text-lg-end text-center">
 			<form action="/job/logout" method="post">
 			<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
 			</form>
 		</div>
 	    	
 		
-		 <div class="container-xl py-5">
+		 <div class="container-xl px-5">
 		 	<table class="table">
 		 		<thead>
 		 			<tr>

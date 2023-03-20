@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <!-- css file link part start -->
@@ -30,7 +32,7 @@
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     <!-- css file link part end -->
     
-    <title>admin - 로그인</title>
+    <title>관리자 계정 관리</title>
     
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
@@ -63,31 +65,46 @@
         <!-- Spinner End -->
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-		
-		 <div class="container-xl py-5">
-		 	<form action="${pageContext.request.contextPath}/admin/loginform" method="post">
-				<input type="text" name="userId" placeholder="아이디"/><br>
-				<input type="password" name="userPw" placeholder="비밀번호"/><br>
-				<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-		<button type="submit">로그인</button>	
+    	 
+		<div class="logouttest mt-3 mx-5 text-lg-end text-center">
+			<form action="/job/logout" method="post">
+			<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
 			</form>
+		</div>
+	    	
+		
+		 <div class="container-xl px-5">
+		 	<table class="table">
+		 		<thead>
+		 			<tr>
+		 				<th scope="col">no</th>
+		 				<th scope="col">아이디</th>
+		 				<th scope="col">이름</th>
+		 				<th scope="col">email</th>
+		 				<th scope="col">삭제버튼</th>
+		 			</tr>
+		 		</thead>
+		 		<tbody>
+		 		<c:forEach var="list" items="${accdto }" varStatus="status">
+		 		<tr>
+		 				<td>${status.count}</td>
+		 				<td>${list.userId }</td>
+		 				<td>${list.userName }</td>
+		 				<td>${list.userEmail }</td>
+		 				<td>
+		 					<button type="button" class="btn delete btn-primary border-0 w-10 py-0">삭제</button>
+		 				</td>
+		 			</tr>
+		 		</c:forEach>
+		 		</tbody>
+		 	</table>
 		 </div>
-		 
-	<div class="logouttest">
-		<form action="/job/admin/logout" method="post">
-		<button class="btn btn-dark border-0 w-100 py-3" type="submit">로그 아웃</button>
-		</form>
-	</div>
-		 
 
-        
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
 
 </body>
 
