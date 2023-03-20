@@ -11,17 +11,17 @@
 	<security:http auto-config="true" use-expressions="true">
 	<security:csrf disabled="true"/>
 	<security:intercept-url pattern="/person/**" access="permitAll"/>
-<!--         <security:intercept-url pattern="/person/mapage/**" access="hasRole('ROLE_P')"/> -->
-        <!-- security:intercept-url pattern="/business/**" access="hasRole('ROLE_B')"/-->
-        <!-- security:intercept-url pattern="/business/newletter/**" access="permitAll"/-->
+		<!-- <security:intercept-url pattern="/person/mapage/**" access="hasRole('ROLE_P')"/> -->
+		<!-- <security:intercept-url pattern="/business/**" access="hasRole('ROLE_B')"/> -->
+        <!-- <security:intercept-url pattern="/business/newletter/**" access="permitAll"/>-->
         <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_AM','ROLE_A')"/>       
         
         <security:form-login login-page="/temp/login" 
         					 username-parameter="userId"
         					 password-parameter="userPw"
         					 login-processing-url="/login"
-        					 default-target-url="/person/main"					
-		/>
+        					 default-target-url="/person/main"
+        					 authentication-success-handler-ref=""	/>
     </security:http>
     
     <!-- 암호화를 위한 Bean -->

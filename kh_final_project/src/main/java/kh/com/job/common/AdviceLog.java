@@ -15,18 +15,6 @@ public class AdviceLog {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdviceLog.class);
 	
-	// * 1개이상이 존재함. 
-	// .. 0개이상이 존재
-	@Pointcut("execution(public * kh.spring.s02..*Controller.*(..))")
-	public void controllerPointCut() {}
-	// 위 pointcut의 이름은  "controllerPointCut()"
-	
-	@Pointcut("execution(public * kh.spring.s02..*Dao.*(..))")
-	public void daoPointCut() {}
-	
-	@Pointcut("execution(public * kh.spring.s02..*ServiceImpl.*(..))")
-	public void serviceImplPointCut() {}
-	
 	@Around("controllerPointCut()")
 	public Object aroundControllerPointCut(ProceedingJoinPoint pjp) throws Throwable{
 		Object returnObj = null;

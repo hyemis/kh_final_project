@@ -15,7 +15,7 @@
 	
 	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
 		<!-- 공용 DB joba -->
-		<property name="driverClassName" value="${joba.DriverName}"/> 
+		<property name="driverClassName" value="${DB.log4DriverName}"/> 
 		<property name="url" value="${joba.url}"/> 
 		<property name="username" value="${joba.username}"/> 
 		<property name="password" value="${joba.password}"/> 
