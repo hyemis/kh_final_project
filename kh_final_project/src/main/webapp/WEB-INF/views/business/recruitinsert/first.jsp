@@ -54,7 +54,7 @@
  
  </head>
 <body>
-<%--@include file="/WEB-INF/views/common/header.jsp"--%>
+<%@include file="/WEB-INF/views/common/header.jsp"%>
 <h1>Step01. 담당자 정보</h1>
 <section>
 <div>
