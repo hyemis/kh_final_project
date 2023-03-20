@@ -28,7 +28,9 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     <!-- css file link part end -->
-    <title>Makaan - Real Estate HTML Template</title>
+    
+    <title>admin - 로그인</title>
+    
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -60,39 +62,21 @@
         <!-- Spinner End -->
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-    	
-    			 
-		<div class="logouttest text-lg-end text-center">
-			<form action="/job/logout" method="post">
-			<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
-			</form>
-		</div>
-	    	
 		
 		 <div class="container-xl py-5">
-		 	<table class="table">
-		 		<thead>
-		 			<tr>
-		 				<th scope="col">1</th>
-		 				<th scope="col">2</th>
-		 				<th scope="col">3</th>
-		 			</tr>
-		 		</thead>
-		 		<tbody>
-		 			<tr>
-		 				<td>a</td>
-		 				<td>b</td>
-		 				<td>c</td>
-		 			</tr>
-		 			<tr>
-		 				<td>a1</td>
-		 				<td>b1</td>
-		 				<td>c1</td>
-		 			</tr>
-		 		</tbody>
-		 	</table>
+		 	<form action="${pageContext.request.contextPath}/admin/loginform" method="post">
+				<input type="text" name="userId" placeholder="아이디"/><br>
+				<input type="password" name="userPw" placeholder="비밀번호"/><br>
+				<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+		<button type="submit">로그인</button>	
+			</form>
 		 </div>
-
+		 
+	<div class="logouttest">
+		<form action="/job/admin/logout" method="post">
+		<button class="btn btn-dark border-0 w-100 py-3" type="submit">로그 아웃</button>
+		</form>
+	</div>
 		 
 
         
