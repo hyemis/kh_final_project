@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component
-@PropertySource("classpath:properties/repository.properties")
+@PropertySource("classpath:properties/joba-info.properties")
 public class FileUtil {
 	
 //	@Value("${local.repository}")
