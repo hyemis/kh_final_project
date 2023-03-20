@@ -1,5 +1,8 @@
 package kh.com.job.person.model.dto;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -15,15 +18,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class PsUserDto {
+//USER_TABLE
+	
 	
 //	USER_ID|USER_PW|USER_PHONE |USER_BIRTH|USER_EMAIL      |USER_ADDRESS|USER_NAME| user_role
 //	-------+-------+-----------+----------+----------------+------------+---------+
 //	user1  |user1  |01012345678|000101    |user1@joba.co.kr|서울특별시 강남구   |사용자1     |
 //	user2  |user2  |01023456789|000102    |user2@joba.co.kr|서울특별시 종로구   |사용자2     |
 //	user3  |user3  |01034567890|000103    |user3@joba.co.kr|서울특별시 마포구   |사용자3     |	
-
-	
-	
 	private String userId;
 	private String userPw;
 	private String userPhone;
@@ -31,8 +33,15 @@ public class PsUserDto {
 	private String userEmail;
 	private String userAdress;
 	private String userName;
+	private String userBsType;
+	private String userBsLicense;
+	private Timestamp userCreatedAt;
+	private Timestamp userLastLogin;
+	private String userCount;
+	private String userAct;
 	private String userRole;
-	
-	
+	private String termsAct;
+	private Timestamp termsDate;
+	private String termsPeriod;
 	
 }
