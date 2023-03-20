@@ -54,7 +54,7 @@
  
  </head>
 <body>
-<%@include file="/WEB-INF/views/common/header.jsp"%>
+<%--@include file="/WEB-INF/views/common/header.jsp"--%>
 <h1>Step03. 자격조건 및 근무조건</h1>
 <section>
 <div>
@@ -84,6 +84,10 @@
 		</div>
 		<div>
 			근무시간<input type="text" name="work_time" placeholder="오전 9시 ~ 오후 6시">
+		</div>
+		<div>
+			<button class="btn btn-outline-primary" type="submit">prev</button>
+			<button class="btn btn-outline-primary" type="submit">next</button>
 		</div>
 	</form>
 </div>

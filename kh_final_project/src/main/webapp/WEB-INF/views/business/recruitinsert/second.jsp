@@ -54,7 +54,7 @@
  
  </head>
 <body>
-<%@include file="/WEB-INF/views/common/header.jsp"%>
+<%--@include file="/WEB-INF/views/common/header.jsp"--%>
 <h1>Step02. 모집분야</h1>
 <section>
 <div>
