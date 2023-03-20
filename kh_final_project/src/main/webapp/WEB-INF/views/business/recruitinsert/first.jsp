@@ -46,11 +46,15 @@
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
     
-    <!-- js part end -->
-
-<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    
+	
+	<!-- 주소검색 API -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- 지도검색 API -->
+	
+	<!-- js part end -->
  
  </head>
 <body>
@@ -96,33 +100,13 @@
 		
 		<div>
 			<h3>지도 API 구역</h3>
+			
 		</div>
 	</form>
 </div>
 </section>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
-
-<script>
-	$(".process1").on("click", processHandler);
-	$(".process2").on("click", processHandler);
-	$(".process3").on("click", processHandler);
-	$(".process4").on("click", processHandler);
-	$(".process5").on("click", processHandler);
-	
-	$(".extra1").on("click", processHandler);
-	$(".extra2").on("click", processHandler);
-	$(".extra3").on("click", processHandler);
-
-	function processHandler(element){
-		if($(this).val() != ""){
-			$(this).next().removeAttr("disabled");
-		} else if($(this).val() == ""){
-			$(this).next().attr("disabled", true);
-		}
-	};
-	
-</script>
 
 <script>
     function sample6_execDaumPostcode() {
@@ -172,15 +156,6 @@
             }
         }).open();
     }
-</script>
-<script>
-	// ckeditor textarea name으로 추가
-	CKEDITOR.replace('raContent')
-	  ,{
-		filebrowserUploadUrl:'imageUpload.do'
-		//ckfinder 추가하여 이미지 찾기 가능
-		
-	};
 </script>
 </body>
 </body>

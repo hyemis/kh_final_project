@@ -46,45 +46,28 @@
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
     
+    <!-- CKeditor -->
+    <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
+    
     <!-- js part end -->
-
+	
+	
  
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step03. 자격조건 및 근무조건</h1>
+<h1>Step01. 공고등록</h1>
 <section>
 <div>
-	<form action="<%=request.getContextPath() %>/business/recruitinsert/third" method="post">
+	<form action="<%=request.getContextPath() %>/business/recruitinsert/fifth" method="post">
 		<div>
-			지원자_학력 <input type="text" name="applicant_education" placeholder="4년제 대학교 졸업 이상">
+			채용제목<input type="text" name="raTitle">
 		</div>
 		<div>
-			지원자_성별
-			<select name="applicant_gender">
-				<option value="male">남자</option>
-				<option value="female">여자</option>
-				<option value="not">성별무관</option>
-			</select>
+			채용내용<textarea class="raContent" cols="30" rows="20" name="raContent"></textarea>
 		</div>
 		<div>
-			지원자_나이<input type="text" name="applicant_age" placeholder="30세 이상">
-		</div>
-		<div>
-			연봉<input type="text" name="salary" placeholder="회사내규에 따름">		
-		</div>
-		<div>
-			근무형태<input type="text" name="work_type" placeholder="정규직">
-		</div>
-		<div>
-			근무요일<input type="text" name="work_day" placeholder="월~금">
-		</div>
-		<div>
-			근무시간<input type="text" name="work_time" placeholder="오전 9시 ~ 오후 6시">
-		</div>
-		<div>
-			<button class="btn btn-outline-primary" type="submit">prev</button>
-			<button class="btn btn-outline-primary" type="submit">next</button>
+			
 		</div>
 	</form>
 </div>
@@ -92,6 +75,15 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
+<script>
+	// ckeditor textarea name으로 추가
+	CKEDITOR.replace('raContent')
+	  ,{
+		filebrowserUploadUrl:'imageUpload.do'
+		//ckfinder 추가하여 이미지 찾기 가능
+		
+	};
+</script>
 </body>
 </body>
 </html>

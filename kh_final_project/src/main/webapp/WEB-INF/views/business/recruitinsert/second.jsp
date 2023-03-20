@@ -48,10 +48,7 @@
     
     <!-- js part end -->
 
-<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
- 
+	 
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>

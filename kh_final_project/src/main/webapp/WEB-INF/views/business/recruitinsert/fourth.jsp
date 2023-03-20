@@ -47,67 +47,14 @@
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
     
     <!-- js part end -->
-
-<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
  
  </head>
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<h1>Step01. 담당자 정보</h1>
+<h1>Step04. 채용절차</h1>
 <section>
 <div>
-	<form action="<%=request.getContextPath() %>/bs/recruitinsert" method="post">
-		<div>
-			모집분야<input type="text" name="recruitType">
-		</div>
-		<div>
-			경력여부
-			<select name="careerType">
-				<option value="begin">신입</option>
-				<option value="career">경력</option>
-				<option value="not">경력무관</option>
-			</select>
-		</div>
-		<div>
-			담당업무<input type="text" name="inChargeType">
-		</div>
-		<div>
-			근무부서<input type="text" name="department">
-		</div>
-		<div>
-			직급(직책)<input type="text" name="position">
-		</div>
-		<div>
-			필수/우대조건<input type="text" name="coditionType" placeholder="정보처리기사자격증">
-		</div>
-		<div>
-			지원자_학력 <input type="text" name="applicant_education" placeholder="4년제 대학교 졸업 이상">
-		</div>
-		<div>
-			지원자_성별
-			<select name="applicant_gender">
-				<option value="male">남자</option>
-				<option value="female">여자</option>
-				<option value="not">성별무관</option>
-			</select>
-		</div>
-		<div>
-			지원자_나이<input type="text" name="applicant_age" placeholder="30세 이상">
-		</div>
-		<div>
-			연봉<input type="text" name="salary" placeholder="회사내규에 따름">		
-		</div>
-		<div>
-			근무형태<input type="text" name="work_type" placeholder="정규직">
-		</div>
-		<div>
-			근무요일<input type="text" name="work_day" placeholder="월~금">
-		</div>
-		<div>
-			근무시간<input type="text" name="work_time" placeholder="오전 9시 ~ 오후 6시">
-		</div>
+	<form action="<%=request.getContextPath() %>/business/recruitinsert/fourth" method="post">
 		<div>
 			공고대표직무<input type="text" name="raRepresentativeJob" placeholder="경영·사무 ▶ 기획·전략·경영 ▶  기획">
 		</div>
@@ -135,12 +82,6 @@
 				<option value="jobaForm">Job-A이력서</option>
 				<option value="companyForm">자사이력서</option>
 			</select>
-		</div>
-		<div>
-			채용제목<input type="text" name="raTitle">
-		</div>
-		<div>
-			채용내용<textarea class="raContent" cols="30" rows="20" name="raContent"></textarea>
 		</div>
 		<div>
 			채용절차
@@ -180,6 +121,27 @@
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
+
+<script>
+	$(".process1").on("click", processHandler);
+	$(".process2").on("click", processHandler);
+	$(".process3").on("click", processHandler);
+	$(".process4").on("click", processHandler);
+	$(".process5").on("click", processHandler);
+	
+	$(".extra1").on("click", processHandler);
+	$(".extra2").on("click", processHandler);
+	$(".extra3").on("click", processHandler);
+
+	function processHandler(element){
+		if($(this).val() != ""){
+			$(this).next().removeAttr("disabled");
+		} else if($(this).val() == ""){
+			$(this).next().attr("disabled", true);
+		}
+	};
+	
+</script>
 </body>
 </body>
 </html>

@@ -28,4 +28,15 @@ public class BsRecruitInsertController {
 		return mv;
 	}
 
+	@GetMapping("/fourth")
+	public ModelAndView recruitInsertFourth(ModelAndView mv) {
+		
+		return mv;
+	}
+
+	@GetMapping("/fifth")
+	public ModelAndView recruitInsertFifth(ModelAndView mv) {
+		
+		return mv;
+	}
 }
