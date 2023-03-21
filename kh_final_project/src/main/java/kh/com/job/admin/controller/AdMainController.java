@@ -25,16 +25,5 @@ public class AdMainController {
 	public ModelAndView main(ModelAndView mv) {
 		return mv;
 	}
-	
-	@GetMapping("/login")
-	public ModelAndView login(ModelAndView mv) {
-		return mv;
-	}
-	
-	@GetMapping("/logout")
-	public ModelAndView logout(ModelAndView mv) {
-		return mv;
-	}
-
 
 }
