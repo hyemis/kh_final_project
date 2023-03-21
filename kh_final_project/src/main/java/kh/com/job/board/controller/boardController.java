@@ -54,12 +54,14 @@ public class boardController {
 				return mv;
 		}
 		
+		//이거 매핑 주소 post 말고 다른걸로 해주실 수 있나요???
 		// 게시글 
 			@GetMapping("/post")
 			public ModelAndView post(ModelAndView mv) {
 				return mv;
 		}
 			
+		// 이거 매핑 주소 post 말고 다른걸로 해주실 수 있나요???	
 		// 게시글 등록 
 			@GetMapping("/postinsert")
 			public ModelAndView postinsert(ModelAndView mv) {
