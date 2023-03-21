@@ -16,10 +16,14 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 
 		
-			<div id="pagetitle">
-				<h2>회원정보관리</h2>
-				<span>회원님의 개인정보를 관리하는 곳입니다.</span>
-			</div>
+		
+		<div class="container-sm">	
+		
+		<div class="grid gap-3 m-4">
+			<h2>회원정보관리</h2>
+		  	<span>회원님의 개인정보를 관리하는 곳입니다.</span>
+		</div>
+	
 			
 			<div class="container-sm py-5">	
 				<div class="grid gap-3 border border-dark-subtle">	
