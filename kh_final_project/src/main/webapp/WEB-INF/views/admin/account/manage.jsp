@@ -68,10 +68,7 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
     	 
 		<div class="logouttest mt-3 mx-5 text-lg-end text-center">
-			<form action="/job/logout" method="post">
 			<a class="btn btn-info border-0 w-15 py-2" href="create" >계정 추가</a>
-			<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
-			</form>
 		</div>
 	    	
 		

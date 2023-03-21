@@ -42,9 +42,17 @@ public class AdAccountController {
 	@PostMapping("/create")
 	public ModelAndView createAccount(ModelAndView mv, PsUserDto dto){
 		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(dto.getUserId());
+		System.out.println(dto.getUserPw());
+		System.out.println(dto.getUserName());
+		System.out.println(dto.getUserPhone());
+		System.out.println(dto.getUserRole());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		
-		mv.setViewName("admin/account/manage");
+		
+		mv.setViewName("redirect:/admin/account/manage");
 		return mv;
 	}
 
