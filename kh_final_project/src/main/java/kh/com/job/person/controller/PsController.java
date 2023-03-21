@@ -128,9 +128,9 @@ public class PsController {
 		return mv;
 	}
 	
-	@GetMapping("/myPage")
-	public ModelAndView mypage(ModelAndView mv) {
-		
+	@GetMapping("/mypage")
+	public ModelAndView myPage(ModelAndView mv) {
+		mv.setViewName("person/myPage");
 		return mv;
 	}
 	
