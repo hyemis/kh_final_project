@@ -9,7 +9,7 @@ import kh.com.job.admin.model.dao.AdDao;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Service
-public class AdServiceImp implements AdService{
+public class AdServiceImpl implements AdService{
 	
 	@Autowired
 	private AdDao dao;
