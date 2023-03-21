@@ -14,8 +14,8 @@ public class PsDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public PsUserDto selectOne(String userid) throws Exception {
-		return sqlSession.selectOne("person.selectOne", userid);
+	public PsUserDto selectOne(String userId) throws Exception {
+		return sqlSession.selectOne("person.selectOne", userId);
 	}
 	
 	public List<PsUserDto> selectList() throws Exception {
@@ -28,8 +28,8 @@ public class PsDao {
 		return result;
 	}
 	
-	public int delete(String userid)  throws Exception {
-		return sqlSession.delete("person.delete", userid);
+	public int delete(String userId)  throws Exception {
+		return sqlSession.delete("person.delete", userId);
 	}
 	
 	public int update(PsUserDto dto)  throws Exception {

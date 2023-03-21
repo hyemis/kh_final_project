@@ -16,8 +16,8 @@ public class PsServieImpl implements PsService {
 	private PsDao dao;
 
 	@Override
-	public PsUserDto selectOne(String userid) throws Exception {
-		return dao.selectOne(userid);
+	public PsUserDto selectOne(String userId) throws Exception {
+		return dao.selectOne(userId);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class PsServieImpl implements PsService {
 	}
 
 	@Override
-	public int delete(String userid) throws Exception {
-		return dao.delete(userid);
+	public int delete(String userId) throws Exception {
+		return dao.delete(userId);
 	}
 	
 	
