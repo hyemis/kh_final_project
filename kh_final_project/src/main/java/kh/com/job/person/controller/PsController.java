@@ -35,14 +35,14 @@ public class PsController {
 		return mv;
 	}
 	
-	@GetMapping("/idpw")
+	@GetMapping("/idPw")
 	public ModelAndView idpw(ModelAndView mv) {
 		
 		return mv;
 	}
 	
-	@GetMapping("/findfail")
-	public ModelAndView findfail(ModelAndView mv) {
+	@GetMapping("/findFail")
+	public ModelAndView findFail(ModelAndView mv) {
 		
 		return mv;
 	}
@@ -80,7 +80,7 @@ public class PsController {
 		return mv;
 	}
 	
-	@GetMapping("/mypage")
+	@GetMapping("/myPage")
 	public ModelAndView mypage(ModelAndView mv) {
 		
 		return mv;

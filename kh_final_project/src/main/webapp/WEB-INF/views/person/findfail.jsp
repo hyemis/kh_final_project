@@ -27,10 +27,10 @@
 			        	<p> 정확한 정보 확인 후 다시 입력하세요. </p>
 		        	</div>
 		        	<div class="d-grid gap-2 mb-3">
-				   		<a class="btn btn-primary" href="#" role="button">정확한 정보 확인 후 다시 아이디 찾기</a>
+				   		<a class="btn btn-primary" href="<%=request.getContextPath()%>/person/idPw" role="button">정확한 정보 확인 후 다시 아이디 찾기</a>
 				   	</div>
 				   	<div class="d-grid gap-2 mb-3">
-				   	 	<a class="btn btn-primary" href="#" role="button">아직 job-a 회원이 아니세요? 회원가입</a>
+				   	 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/person/signUp" role="button">아직 job-a 회원이 아니세요? 회원가입</a>
 				   	</div>
 		        </div>
 		    </div>
