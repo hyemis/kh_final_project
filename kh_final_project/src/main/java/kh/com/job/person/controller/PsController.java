@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,10 @@ public class PsController {
 	
 	@Autowired
 	private PsService service;
+	
+	//암호화 기능 가지고 있는 클래스 자동주입
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
@@ -58,8 +63,17 @@ public class PsController {
 	@PostMapping("/signUp")
 	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr ) {
 		int result = -1;
-		
+		System.out.println("암호화전");
+		System.out.println(dto.getUserPw());
 		System.out.println(dto);
+		
+		//입력 받은 비밀번호 가 담겨져 있는 dto 에서 비밀번호 값 꺼내서 인코딩 시킨후 다시 넣어줬어요
+		//passwordEncoder.encode() 쓰시면 비밀번호 인코딩 되요
+		//한번 확인 하시고 sysout 지우시면 될거같아요
+		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
+		
+		System.out.println("암호화후");
+		System.out.println(dto.getUserPw());
 		
 		
 		try {
