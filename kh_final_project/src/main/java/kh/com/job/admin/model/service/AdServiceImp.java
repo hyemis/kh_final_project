@@ -20,4 +20,14 @@ public class AdServiceImp implements AdService{
 		return dao.accountmgr();
 	}
 
+	@Override
+	public int idCheck(String userId) {
+		return dao.idCheck(userId);
+	}
+
+	@Override
+	public int insertAccount(PsUserDto dto) {
+		return dao.insertAccount(dto);
+	}
+
 }

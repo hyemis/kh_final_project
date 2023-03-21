@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.admin.model.service.AdService;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -40,19 +41,24 @@ public class AdAccountController {
 	}
 	
 	@PostMapping("/create")
-	public ModelAndView createAccount(ModelAndView mv, PsUserDto dto){
+	public ModelAndView createAccount(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr){
 		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(dto.getUserId());
-		System.out.println(dto.getUserPw());
-		System.out.println(dto.getUserName());
-		System.out.println(dto.getUserPhone());
-		System.out.println(dto.getUserRole());
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		int result = -1;
+		int idCheck = 1;
 		
+		idCheck = service.idCheck(dto.getUserId());
 		
+		if(idCheck > 0) {
+			System.out.println("아이디 중복    " + idCheck);
+			rttr.addFlashAttribute("masage", "중복된 아이디 입니다.");
+			rttr.addFlashAttribute("admdto", dto);
+			mv.setViewName("redirect:/admin/account/create");
+		}else {
+			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
+			result = service.insertAccount(dto);
+			mv.setViewName("redirect:/admin/account/manage");
+		}
 		
-		mv.setViewName("redirect:/admin/account/manage");
 		return mv;
 	}
 

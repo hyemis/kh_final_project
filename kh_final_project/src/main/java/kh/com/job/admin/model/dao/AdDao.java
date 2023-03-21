@@ -16,7 +16,15 @@ public class AdDao {
 
 	public List<PsUserDto> accountmgr() {
 		
-		return sqlsession.selectList("person.accountmgr");
+		return sqlsession.selectList("admin.accountmgr");
+	}
+
+	public int idCheck(String userId) {
+		return sqlsession.selectOne("admin.idCheck", userId);
+	}
+
+	public int insertAccount(PsUserDto dto) {
+		return sqlsession.insert("admin.insertAccount", dto);
 	}
 
 }
