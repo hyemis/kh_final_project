@@ -1,11 +1,14 @@
 package kh.com.job.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,8 +28,7 @@ public class AdAccountController {
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mv, PsUserDto dto) {
-		
-		
+	
 		mv.addObject("accdto", service.accountmgr());
 		
 		return mv;
@@ -60,6 +62,26 @@ public class AdAccountController {
 		}
 		
 		return mv;
+	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public int deleteAccount(ModelAndView mv, String userId) {
+		int result = -1;
+		
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		if(!userId.equals(auth.getName())) {
+			if(!(userId.isEmpty() || userId.equals(""))) {
+				result = service.deleteAccount(userId);
+			}			
+		}else {
+			result = 3;
+			return result;
+		}
+		
+		
+		return result;
 	}
 
 }

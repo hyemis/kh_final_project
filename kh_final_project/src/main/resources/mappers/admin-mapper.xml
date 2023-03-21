@@ -5,6 +5,7 @@
 	<select id="accountmgr" resultType="pdto">
 		select * from USER_TABLE
 		WHERE USER_ROLE IN ('ROLE_A', 'ROLE_AM')
+		ORDER BY USER_BIRTH DESC
 	</select>  
 	
 	<select id="idCheck" resultType="_int">
@@ -16,6 +17,14 @@
 		INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_NAME, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
 		VALUES (#{userId}, #{userPw}, #{userPhone}, CURRENT_TIMESTAMP, #{userEmail}, #{userName}, #{userRole}, 'Y', CURRENT_TIMESTAMP, 60)
 	</insert>
+		
+	<delete id="deleteAccount">
+		DELETE FROM USER_TABLE WHERE USER_ID = #{userId}
+	</delete>
 	
+	<!-- 직접 삭제 할지 계정 비활성화 시킬지 고민 -->
+	<update id="deleteAccoint2">
+		UPDATE USER_TABLE SET USER_ACT WHERE USER_ID = #{userId}
+	</update>
   
 </mapper>

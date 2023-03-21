@@ -27,4 +27,9 @@ public class AdDao {
 		return sqlsession.insert("admin.insertAccount", dto);
 	}
 
+	//admin.deleteAccount 는 삭제 admin.deleteAccount2 는 user_act 활성화 비활성화
+	public int deleteAccount(String userId) {
+		return sqlsession.delete("admin.deleteAccount", userId);
+	}
+
 }

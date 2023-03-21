@@ -30,4 +30,9 @@ public class AdServiceImp implements AdService{
 		return dao.insertAccount(dto);
 	}
 
+	@Override
+	public int deleteAccount(String userId) {
+		return dao.deleteAccount(userId);
+	}
+
 }

@@ -9,5 +9,6 @@ public interface AdService {
 	public List<PsUserDto> accountmgr();
 	public int idCheck(String userId);
 	public int insertAccount(PsUserDto dto);
+	public int deleteAccount(String userId);
 
 }
