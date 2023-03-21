@@ -26,43 +26,43 @@
 				          
 				            <div class="mb-3">
 				              <label for="userId">아이디</label>
-				              <input type="text" class="form-control" id="userId" placeholder="영문,숫자,'_' 사용가능" required>
+				              <input type="text" class="form-control" name="userId" placeholder="영문,숫자,'_' 사용가능" required>
 				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
 				            </div>
 				            
 				            <div class="mb-3">
 				              <label for="userPw">비밀번호</label>
-				              <input type="password" class="form-control" id="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
+				              <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
 				              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 				            </div>
 				
 							<div class="mb-3">
 				              <label for="userPw2">비밀번호재확인</label>
-				              <input type="password" class="form-control" id="userPw2" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
+				              <input type="password" class="form-control" name="userPw2" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
 				              <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
 				            </div>
 					
 				          <div class="mb-3">
 				            <label for="userName">이름</label>
-				            <input type="text" class="form-control" id="userName" placeholder="이름 입력" required>
+				            <input type="text" class="form-control" name="userName" placeholder="이름 입력" required>
 				            <div class="invalid-feedback">이름을 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
 				            <label for="userBirth">생년월일</label>
-				            <input type="text" class="form-control" id="userBirth" placeholder="YYYYMMDD" required>
+				            <input type="text" class="form-control" name="userBirth" placeholder="YYYYMMDD" required>
 				            <div class="invalid-feedback">생년월일을 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
 				            <label for="userPhone">휴대폰</label>
-				            <input type="text" class="form-control" id="userPhone" placeholder="'-' 빼고 숫자만 입력" required>
+				            <input type="text" class="form-control" name="userPhone" placeholder="'-' 빼고 숫자만 입력" required>
 				            <div class="invalid-feedback">휴대폰번호를 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" id="userEmail" placeholder="email@joba.co.kr" required>
+				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" required>
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				

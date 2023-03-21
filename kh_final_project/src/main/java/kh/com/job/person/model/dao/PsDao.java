@@ -24,7 +24,7 @@ public class PsDao {
 	
 	public int insert(PsUserDto dto) throws Exception {
 		int result = -1;
-		result = sqlSession.insert("person.insert");
+		result = sqlSession.insert("person.insert", dto);
 		return result;
 	}
 	

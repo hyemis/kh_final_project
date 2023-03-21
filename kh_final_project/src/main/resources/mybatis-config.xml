@@ -18,7 +18,7 @@
 	</typeAliases>
 
 	
-	<!-- <mappers>
+<!-- 	 <mappers>
 	 	<mapper resource="mappers/temp-mapper.xml"/>
 	 	<mapper resource="mappers/person-mapper.xml"/>
 	</mappers> -->

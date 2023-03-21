@@ -59,6 +59,9 @@ public class PsController {
 	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr ) {
 		int result = -1;
 		
+		System.out.println(dto);
+		
+		
 		try {
 			result = service.insert(dto);
 		} catch (Exception e) {
@@ -72,6 +75,8 @@ public class PsController {
 			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
 			mv.setViewName("redirect:/person/signUp");
 		}
+		
+		
 		return mv;
 	}
 	
