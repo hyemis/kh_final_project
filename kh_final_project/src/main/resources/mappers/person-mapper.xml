@@ -11,16 +11,16 @@
   </select>
   
   <insert id="insert" parameterType="pdto">
-  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_ACT, USER_ROLE, TERMS_ACT)
-VALUES ('#{userId}', '#{userPw}', '#{userPhone}', '#{userBirth}', '#{userEmail}', '#{userAdress}', '#{userName}','true', 'ROLE_P', 'Y' );
+  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
+VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{userAdress}, #{userName}, 'true', 'ROLE_P', 'Y', sysdate, default)
   </insert>
 
   <delete id="delete" parameterType="pdto">
-  	delete from USERS where USER_ID=#{USER_ID};	
+  	delete from USERS where USER_ID=#{USER_ID}
   </delete>
   	
   <update id="update" parameterType="pdto">
-  	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID};
+  	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID}
   </update>
 	
   <select id="accountmgr" resultType="pdto">

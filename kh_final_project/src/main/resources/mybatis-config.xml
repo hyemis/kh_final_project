@@ -17,12 +17,12 @@
 		<typeAlias type="kh.com.job.person.model.dto.PsUserDto" alias="pdto"/>
 	</typeAliases>
 
-<!-- 	
-	<mappers>
+	
+	<!-- <mappers>
 	 	<mapper resource="mappers/temp-mapper.xml"/>
 	 	<mapper resource="mappers/person-mapper.xml"/>
-	</mappers>
-	 -->
+	</mappers> -->
+
 	 
 <!-- 	
 	<environments default="development">

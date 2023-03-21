@@ -19,7 +19,7 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 			 
-		        <form class="col-6" name=singUpForm action="" method="post" onsubmit="return checkAll()">
+		        <form class="col-6" name=singUpForm action="signUp" method="post" onsubmit="return checkAll()">
 			        	<div class="m-4"><h3>JOB-A 회원가입</h3></div>
 			        	
 				          <div class="row">
@@ -31,8 +31,8 @@
 				            </div>
 				            
 				            <div class="mb-3">
-				              <label for="userPw1">비밀번호</label>
-				              <input type="password" class="form-control" id="userPw1" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
+				              <label for="userPw">비밀번호</label>
+				              <input type="password" class="form-control" id="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
 				              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 				            </div>
 				
@@ -69,10 +69,10 @@
 				          
 				          <hr class="mb-4">
 				          
-				          <div class="custom-control custom-checkbox">
+				          <!-- <div class="custom-control custom-checkbox">
 				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
 				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
-				          </div>
+				          </div> -->
 				          
 				         <div class="d-grid m-3">
 						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
@@ -95,7 +95,7 @@
 			function checkAll() {
 		        if (!checkUserId(singUpForm.userId.value)) {
 		            return false;
-		        } else if (!checkPassword(singUpForm.userId.value, singUpForm.userPw1.value, singUpForm.userPw2.value)) {
+		        } else if (!checkPassword(singUpForm.userId.value, singUpForm.userPw.value, singUpForm.userPw2.value)) {
 		            return false;
 		        } else if (!checkName(singUpForm.userName.value)) {
 		            return false;
@@ -136,34 +136,34 @@
 		    }
 
 		// 비밀번호1, 비밀번호2 체크 
-		function checkPassword(id, userPw1, userPw2) {
+		function checkPassword(id, userPw, userPw2) {
         //비밀번호가 입력되었는지 확인하기
-        if (!checkExistData(userPw1, "비밀번호를"))
+        if (!checkExistData(userPw, "비밀번호를"))
             return false;
         //비밀번호 확인이 입력되었는지 확인하기
         if (!checkExistData(userPw2, "비밀번호 확인을"))
             return false;
  
         var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
-        if (!password1RegExp.test(userPw1)) {
+        if (!password1RegExp.test(userPw)) {
             alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
-            singUpForm.userPw1.value = "";
-            singUpForm.userPw1.focus();
+            singUpForm.userPw.value = "";
+            singUpForm.userPw.focus();
             return false;
         }
         //비밀번호와 비밀번호 확인이 맞지 않다면..
-        if (password1 != password2) {
+        if (userPw != userPw2) {
             alert("두 비밀번호가 맞지 않습니다.");
-            singUpForm.password1.value = "";
-            singUpForm.password2.value = "";
-            singUpForm.password2.focus();
+            singUpForm.userPw.value = "";
+            singUpForm.userPw2.value = "";
+            singUpForm.userPw2.focus();
             return false;
         }
  
         //아이디와 비밀번호가 같을 때..
-        if (id == userPw1) {
+        if (id == userPw) {
             alert("아이디와 비밀번호는 같을 수 없습니다!");
-            singUpForm.userPw1.value = "";
+            singUpForm.userPw.value = "";
             singUpForm.userPw2.value = "";
             singUpForm.userPw2.focus();
             return false;
