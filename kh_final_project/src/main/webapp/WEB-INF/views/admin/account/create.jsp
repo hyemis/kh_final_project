@@ -64,12 +64,10 @@
             </div>
         </div>
         <!-- Spinner End -->
-     
+    	
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-    	 
-
-
-		 <div class="container-xl px-5 min-vh-100">
+		
+		 <div class="container-xl mt-5 px-5 min-vh-100">
 		 	<form action="create" method="post">
 		 		 <div class="mb-3">
 		              <label for="userId">아이디</label>
