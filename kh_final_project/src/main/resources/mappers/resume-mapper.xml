@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="resume">
+
+  <select id="selectOne" parameterType="rdto" resultType="rdto">
+  	select USER_ID,USER_PHONE, USER_BIRTH, USER_NAME from USERS where USER_ID=#{USER_ID}
+  </select>
+
+  <select id="selectList" resultType="rdto">
+  	select * from USER_TABLE  
+  </select>
+
+  <insert id="insert" parameterType="rdto">
+  	INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) 
+	VALUES(USER_RESUME_SEQ.NEXTVAL, #{RESUME_TITLE}, #{RESUME_PHOTO}, sysdate, #{PORTF_FILE}, #{USER_ID} )
+  </insert>
+
+  <delete id="delete" parameterType="rdto">
+  	delete from USERS where USER_ID=#{USER_ID}
+  </delete>
+  	
+  <update id="update" parameterType="rdto">
+  	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID}
+  </update>
+	
+
+</mapper>
