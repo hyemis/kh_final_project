@@ -31,38 +31,38 @@
 				            </div>
 				            
 				            <div class="mb-3">
-				              <label for="password1">비밀번호</label>
-				              <input type="password" class="form-control" id="password1" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
+				              <label for="userPw1">비밀번호</label>
+				              <input type="password" class="form-control" id="userPw1" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
 				              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 				            </div>
 				
 							<div class="mb-3">
-				              <label for="password2">비밀번호재확인</label>
-				              <input type="password" class="form-control" id="password2" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
+				              <label for="userPw2">비밀번호재확인</label>
+				              <input type="password" class="form-control" id="userPw2" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
 				              <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
 				            </div>
 					
 				          <div class="mb-3">
-				            <label for="name">이름</label>
-				            <input type="text" class="form-control" id="name" placeholder="이름 입력" required>
+				            <label for="userName">이름</label>
+				            <input type="text" class="form-control" id="userName" placeholder="이름 입력" required>
 				            <div class="invalid-feedback">이름을 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
-				            <label for="birth">생년월일</label>
-				            <input type="text" class="form-control" id="birth" placeholder="YYYYMMDD" required>
+				            <label for="userBirth">생년월일</label>
+				            <input type="text" class="form-control" id="userBirth" placeholder="YYYYMMDD" required>
 				            <div class="invalid-feedback">생년월일을 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
-				            <label for="phone">휴대폰</label>
-				            <input type="text" class="form-control" id="phone" placeholder="'-' 빼고 숫자만 입력" required>
+				            <label for="userPhone">휴대폰</label>
+				            <input type="text" class="form-control" id="userPhone" placeholder="'-' 빼고 숫자만 입력" required>
 				            <div class="invalid-feedback">휴대폰번호를 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
-				            <label for="email">이메일</label>
-				            <input type="text" class="form-control" id="email" placeholder="email@joba.co.kr" required>
+				            <label for="userEmail">이메일</label>
+				            <input type="text" class="form-control" id="userEmail" placeholder="email@joba.co.kr" required>
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				
@@ -70,8 +70,8 @@
 				          <hr class="mb-4">
 				          
 				          <div class="custom-control custom-checkbox">
-				            <input type="checkbox" class="custom-control-input" id="aggrement" required>
-				            <label class="custom-control-label" for="aggrement">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
+				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
+				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
 				          </div>
 				          
 				         <div class="d-grid m-3">
@@ -95,15 +95,15 @@
 			function checkAll() {
 		        if (!checkUserId(singUpForm.userId.value)) {
 		            return false;
-		        } else if (!checkPassword(singUpForm.userId.value, singUpForm.password1.value, singUpForm.password2.value)) {
+		        } else if (!checkPassword(singUpForm.userId.value, singUpForm.userPw1.value, singUpForm.userPw2.value)) {
 		            return false;
-		        } else if (!checkName(singUpForm.name.value)) {
+		        } else if (!checkName(singUpForm.userName.value)) {
 		            return false;
-		        } else if (!checkBirth(singUpForm.birth.value)) {
+		        } else if (!checkBirth(singUpForm.userBirth.value)) {
 		            return false;
-		        } else if (!checkPhone(singUpForm.phone.value)) {
+		        } else if (!checkPhone(singUpForm.userPhone.value)) {
 		            return false;
-		        } else if (!checkEmail(singUpForm.email.value)) {
+		        } else if (!checkEmail(singUpForm.userEmail.value)) {
 		            return false;
 		        }  
 		        return true;
@@ -136,19 +136,19 @@
 		    }
 
 		// 비밀번호1, 비밀번호2 체크 
-		function checkPassword(id, password1, password2) {
+		function checkPassword(id, userPw1, userPw2) {
         //비밀번호가 입력되었는지 확인하기
-        if (!checkExistData(password1, "비밀번호를"))
+        if (!checkExistData(userPw1, "비밀번호를"))
             return false;
         //비밀번호 확인이 입력되었는지 확인하기
-        if (!checkExistData(password2, "비밀번호 확인을"))
+        if (!checkExistData(userPw2, "비밀번호 확인을"))
             return false;
  
         var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
-        if (!password1RegExp.test(password1)) {
+        if (!password1RegExp.test(userPw1)) {
             alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
-            singUpForm.password1.value = "";
-            singUpForm.password1.focus();
+            singUpForm.userPw1.value = "";
+            singUpForm.userPw1.focus();
             return false;
         }
         //비밀번호와 비밀번호 확인이 맞지 않다면..
@@ -161,23 +161,23 @@
         }
  
         //아이디와 비밀번호가 같을 때..
-        if (id == password1) {
+        if (id == userPw1) {
             alert("아이디와 비밀번호는 같을 수 없습니다!");
-            singUpForm.password1.value = "";
-            singUpForm.password2.value = "";
-            singUpForm.password2.focus();
+            singUpForm.userPw1.value = "";
+            singUpForm.userPw2.value = "";
+            singUpForm.userPw2.focus();
             return false;
         }
         return true; //확인이 완료되었을 때
    		} 
 		
 		// 이름 체크 
-		function checkName(name) {
-        if (!checkExistData(name, "이름을"))
+		function checkName(userName) {
+        if (!checkExistData(userName, "이름을"))
             return false;
  
         var nameRegExp = /^[가-힣]{2,4}$/;
-        if (!nameRegExp.test(name)) {
+        if (!nameRegExp.test(userName)) {
             alert("이름이 올바르지 않습니다.");
             return false;
         }
@@ -186,7 +186,7 @@
 		
 		// 생년월일 체크 
 		function checkBirth() {
-        var text = document.getElementById("birth");
+        var text = document.getElementById("userBirth");
         if (!checkExistData(text.value, "생년월일을")) {
             alert("생년월일을 입력해 주세요!");
             return false;
@@ -197,7 +197,7 @@
 		
 		// 휴대폰번호 체크 
 		function checkPhone() {
-        var text = document.getElementById("phone");
+        var text = document.getElementById("userPhone");
         if (!checkExistData(text.value, "휴대폰번호를")) {
             alert("휴대폰번호를 입력해 주세요!");
             return false;
@@ -207,16 +207,16 @@
 		
 		
 		// 이메일 확인 
-		function checkEmail(email) {
+		function checkEmail(userEmail) {
         //mail이 입력되었는지 확인하기
-        if (!checkExistData(email, "이메일을"))
+        if (!checkExistData(userEmail, "이메일을"))
             return false;
  
         var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-        if (!emailRegExp.test(email)) {
+        if (!emailRegExp.test(userEmail)) {
             alert("이메일 형식이 올바르지 않습니다!");
-            singUpForm.email.value = "";
-            singUpForm.email.focus();
+            singUpForm.userEmail.value = "";
+            singUpForm.userEmail.focus();
             return false;
         }
         return true; //확인이 완료되었을 때

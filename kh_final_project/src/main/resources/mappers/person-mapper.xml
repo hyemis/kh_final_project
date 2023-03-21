@@ -11,7 +11,8 @@
   </select>
   
   <insert id="insert" parameterType="pdto">
-  	insert into USERS values( #{USER_ID}, #{USER_PW}, #{USER_PHONE}, #{USER_BIRTH}, #{USER_EMAIL}, #{USER_ADDRESS}, #{USER_NAME} )
+  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_ACT, USER_ROLE, TERMS_ACT)
+VALUES ('#{userId}', '#{userPw}', '#{userPhone}', '#{userBirth}', '#{userEmail}', '#{userAdress}', '#{userName}','true', 'ROLE_P', 'Y' );
   </insert>
 
   <delete id="delete" parameterType="pdto">
