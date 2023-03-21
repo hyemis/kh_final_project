@@ -14,6 +14,7 @@
 	<div class="container-sm py-5">	
 		<div class="grid gap-3 border border-dark-subtle">
 		
+		 	<form name="resumeForm" action="wrtie" method="post"> 
 			<div class="form-floating">
 			  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
 			  <label for="floatingTextarea">이력서 제목을 입력하세요.</label>
@@ -28,7 +29,14 @@
 								<div class="col-2 border border-dark-subtle">                      				  
 									<img class="object-fit-sm-contain border rounded" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
 								</div>
-								<div class="col-10 border border-dark-subtle">dd</div>
+								<div class="col-10 border border-dark-subtle">
+									<form id="frmInfo" method="get">
+										<input name="userId" value="${PsUserDto.userId }" type="text" readonly="readonly"><br>
+									</form>
+								
+								
+								
+								<div>
 							</div>
 						</div>
 					</div>
@@ -96,7 +104,7 @@
 			  <button class="btn btn-primary" type="button">cancle</button>
 			</div>
 			
-			
+			</form>
 		</div>
 	</div>
 	

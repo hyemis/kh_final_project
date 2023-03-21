@@ -88,3 +88,6 @@ VALUES ('buser11', '$2a$10$gohBEP3hvlo7j8B9vas49ucjYH9YLxrc1myDyerYG2aeu/hHrfn.a
 -- 개인 회원
 INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_BS_TYPE, USER_BS_LICENSE, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
 VALUES ('user11', '$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu', '01099995555', '1960-11-07', 'user11@example.com', '어디에있긴함, 대한민국', '최민건', '되는거같음', '88888', 'ROLE_P', 'Y', CURRENT_TIMESTAMP, 3);
+
+
+/* #이력서 테이블 */

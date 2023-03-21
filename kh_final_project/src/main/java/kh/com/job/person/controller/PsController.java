@@ -94,17 +94,13 @@ public class PsController {
 		return mv;
 	}
 	
-	@GetMapping("/myPage")
-	public ModelAndView mypage(ModelAndView mv) {
-		
+	@GetMapping("/mypage")
+	public ModelAndView myPage(ModelAndView mv) {
+		mv.setViewName("person/myPage");
 		return mv;
 	}
 	
-	@GetMapping("/resume")
-	public ModelAndView resume(ModelAndView mv) {
-		
-		return mv;
-	}
+	
 	
 	// 예외처리는 프로젝트 후반에 작성 
 	
