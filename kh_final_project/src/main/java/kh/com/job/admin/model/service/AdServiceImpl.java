@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.admin.model.dao.AdDao;
+import kh.com.job.admin.model.dto.AdUserDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Service
@@ -33,6 +34,21 @@ public class AdServiceImpl implements AdService{
 	@Override
 	public int deleteAccount(String userId) {
 		return dao.deleteAccount(userId);
+	}
+
+	@Override
+	public AdUserDto checkUser(String userId) {
+		return dao.checkUser(userId);
+	}
+
+	@Override
+	public AdUserDto selectUser(String name) {
+		return dao.selectUser(name);
+	}
+
+	@Override
+	public int updateManager(AdUserDto dto) {
+		return dao.updateManager(dto);
 	}
 
 }

@@ -11,11 +11,11 @@
 	
 	<!-- typeAlias setting  -->
 	<typeAliases>
- 	<typeAlias type="kh.com.job.temp.model.dto.TempDto" alias="mdto"/>
-		<typeAlias type="kh.com.job.temp.model.dto.BoardDto" alias="bdto"/>
+ 		<typeAlias type="kh.com.job.temp.model.dto.TempDto" alias="mdto"/>
 		<typeAlias type="kh.com.job.temp.model.dto.ApplyProcessDto" alias="apdto"/>
 		<typeAlias type="kh.com.job.person.model.dto.PsUserDto" alias="pdto"/>
 		<typeAlias type="kh.com.job.person.model.dto.PsResumeDto" alias="rdto"/>
+		<typeAlias type="kh.com.job.board.model.dto.BoardDto" alias="bdto"/>
 	</typeAliases>
 
 	

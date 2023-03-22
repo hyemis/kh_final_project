@@ -106,7 +106,6 @@
 		            	<option value="ROLE_A"  ${admdto.userRole == "ROLE_A" ? 'selected' : ""}>일반관리자</option>
 		            	<option value="ROLE_AM" ${admdto.userRole == "ROLE_AM" ? 'selected' : ""}>마스터관리자</option>
 		            </select>
-		            
 		          </div>			
 		 	<div class="mx-5 mt-6 text-lg-end text-center">
 		 		<button type="submit" class="btn btn-dark border-0 w-15 py-2">계정생성</button>

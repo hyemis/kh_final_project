@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.com.job.admin.model.dto.AdUserDto;
 import kh.com.job.admin.model.service.AdService;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -86,10 +87,9 @@ public class AdAccountController {
 		return result;
 	}
 	
+	// 이건 관리자 마이페이지로 뺄꺼
 	@GetMapping("/usercheck")
 	public ModelAndView userCheck(ModelAndView mv, String userId) {
-		
-		System.out.println(userId);
 		
 		mv.addObject("userId", userId);
 
@@ -97,17 +97,52 @@ public class AdAccountController {
 	}
 	
 	@PostMapping("/usercheck")
-	public ModelAndView userCheckForm(ModelAndView mv, String userPw, String updatepw) {
+	public ModelAndView userCheckForm(ModelAndView mv, String userPw) {
 		
-		System.out.println("@@@@@@@@@@@@@");
-		System.out.println(userPw);
-		System.out.println(updatepw);
-		System.out.println("@@@@@@@@@@@@@");
-		System.out.println(userPw.equals(updatepw));
-
-		mv.setViewName("redirect:/admin/account/manage");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		AdUserDto adto = service.checkUser(auth.getName());
+		
+		
+		if(passwordEncoder.matches(userPw, adto.getUserPw())) {
+			mv.setViewName("redirect:/admin/account/update");
+		}else {
+			mv.setViewName("redirect:/admin/account/manage");
+		}
 		
 		return mv;
+	}
+	
+	@GetMapping("/adminmanager")
+	public ModelAndView accountUpdate(ModelAndView mv, String userId) {;
+		
+		AdUserDto dto = service.selectUser(userId);
+		
+		mv.addObject("addto", dto);
+		
+		return mv;
+	}
+	
+	@PostMapping("/adminmanager")
+	public ModelAndView accountConfirm(ModelAndView mv, AdUserDto dto) {;
+	
+	int result = -1;
+	
+	if(dto != null) {
+		if(dto.getUserPw().isEmpty() && dto.getUserPw().equals("")) {
+			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
+		}
+		result = service.updateManager(dto);
+	}else {
+		mv.addObject("addto", dto);
+		mv.addObject("masage", "실패 햿습니다 다시 시도해 주세요");
+		mv.setViewName("redirect:/admin/account/update");
+		
+	}
+	
+	
+	
+	return mv;
 	}
 
 

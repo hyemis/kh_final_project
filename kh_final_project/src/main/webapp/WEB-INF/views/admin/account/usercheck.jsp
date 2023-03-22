@@ -75,18 +75,13 @@
 		              <input type="password" class="form-control" id="password" name="userPw" required>
 		              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 		            </div>
-		            <div class="mb-3">
-		              <label for="updatepw">비밀번호</label>
-		              <input type="password" class="form-control" id="updatepw" name="updatepw" required>
-		              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-		            </div>
 					<div class="mb-3">
 		              <label for="passwordcheck">비밀번호재확인</label>
 		              <input type="password" class="form-control" id="passwordcheck" required>
 		              <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
 		            </div>
 		            <div class="mx-5 mt-6 text-lg-end text-center">
-		 			  <button type="submit" class="btn btn-dark border-0 w-15 py-2">계정 정보 수정</button>
+		 			  <button type="submit" class="btn btn-dark border-0 w-15 py-2">비밀번호 확인</button>
 		 			</div>
 		 			
 		 	</form>

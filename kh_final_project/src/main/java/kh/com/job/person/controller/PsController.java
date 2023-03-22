@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,17 +26,19 @@ public class PsController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+<<<<<<< HEAD
 	// 
+=======
+>>>>>>> 82ff8b1f508a983729c04ab6cbd06d3389e4c69c
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
-		mv.setViewName("person/main");
-		return mv;
-	}
-	
-	//
-	@PostMapping("/logout")
-	public ModelAndView logout(ModelAndView mv) {
-		mv.setViewName("person/main");
+		
+		try {
+			mv.addObject("plist", service.selectList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
 		return mv;
 	}
 	
@@ -112,17 +115,15 @@ public class PsController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		try {
 		if(!userId.equals(auth.getName())) {
-			if(!(userId.isEmpty() || userId.equals(""))) {
-				
+			if(!(userId.isEmpty() || userId.equals(""))) {		
 					PsUserDto result = service.selectOne(userId);
 					mv.addObject("PsUserDto", result);
-				mv.setViewName("person/myPage");
+					mv.setViewName("redirect:/person/myPage");
 			}else {
 				mv.setViewName("redirect:/");
 			}
 		}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -132,28 +133,31 @@ public class PsController {
 	
 	// 회원정보 업데이트 화면
 	@GetMapping("/update")
-	public ModelAndView viewUpdate(ModelAndView mv
-			, String userId
-			, PsUserDto dto
-			) {
+	public ModelAndView viewUpdate(ModelAndView mv, String userId) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		try {
-			dto = service.selectOne(userId);
+		if(!userId.equals(auth.getName())) {
+			if(!(userId.isEmpty() || userId.equals(""))) {		
+				PsUserDto result = service.selectOne(userId);
+				mv.addObject("PsUserDto", result);
+				mv.setViewName("redirect:/person/update");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-		mv.addObject("PsUserDto", dto);
-		mv.setViewName("/person/update");
 		return mv;
 	}
 	
 	
 	// 회원정보 업데이트
 	@PostMapping("/update")
-	public ModelAndView update(ModelAndView mv
-			,PsUserDto dto) {
+	public ModelAndView update(ModelAndView mv,PsUserDto dto) {
 
 		try {
 			service.update(dto);

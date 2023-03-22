@@ -8,6 +8,18 @@
 		ORDER BY USER_BIRTH DESC
 	</select>  
 	
+	<select id="selectUser" resultType="kh.com.job.admin.model.dto.AdUserDto">
+	  	select USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_NAME, USER_ROLE from USER_TABLE
+	  	WHERE USER_ID = #{userId}
+	</select>
+	
+		<select id="checkUser" resultType="kh.com.job.admin.model.dto.AdUserDto">
+	  	select USER_PW from USER_TABLE
+	  	WHERE USER_ID = #{userId}
+	</select>
+	
+	
+	
 	<select id="idCheck" resultType="_int">
 	  	select count(USER_ID) from USER_TABLE
 	  	WHERE USER_ID = #{userId}
@@ -25,6 +37,16 @@
 	<!-- 직접 삭제 할지 계정 비활성화 시킬지 고민 -->
 	<update id="deleteAccoint2">
 		UPDATE USER_TABLE SET USER_ACT WHERE USER_ID = #{userId}
+	</update>
+	
+	<update id="updateManager">
+		UPDATE USER_TABLE
+		<set>
+			<if test="userPw != null">
+			USER_PW = #{userPW},
+			</if>
+		</set>
+		WHERE USER_ID = #{userId}
 	</update>
   
 </mapper>
