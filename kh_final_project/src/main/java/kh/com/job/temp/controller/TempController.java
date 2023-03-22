@@ -133,6 +133,7 @@ public class TempController {
 
 	  String userid = pdto.getUserId(); 
 	  String rawPassword = pdto.getUserPw();
+//	  String username = pdto.getUserName();	  
 	  
 	  System.out.println("@@@@@@@ id " + userid);
 	  System.out.println("@@@@@@@ raw " + rawPassword);

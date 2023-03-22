@@ -14,13 +14,7 @@
 	
 		<div class="container-sm">	
 		
-		<h1>home</h1>
-
-		
-		<div class="grid gap-3 border border-secondary">
-		  <div class="p-2 g-col-6 border border-secondary">검색 공간</div>
-		  <div class="p-2 g-col-6 border border-secondary">공간1</div>
-		</div>
+			home
 		
 	 </div>
 	

@@ -13,25 +13,21 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <body>
-	<c:forEach items="${plist }" var="person">
-	<div>
-	<span>아이디 : </span>
-	<span>${person.userId }</span><br>
-	<span>전화번호 : </span>
-	<span>${person.userPhone }</span><br>
-	<span>생년월일 : </span>
-	<span>${person.userBirth }</span><br>
-	<span>이름 : </span>
-	<span>${person.userName }</span><br>
-	</div>
-	<hr>
-	</c:forEach>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-	<div class="logouttest">
-		<form action="/job/logout" method="post">
-		<button class="btn btn-dark border-0 w-100 py-3" type="submit">로그 아웃</button>
-		</form>
-	</div>
+		<div class="container-sm">	
+		
+		<h1>home</h1>
+
+		
+		<div class="grid gap-3 border border-secondary">
+		  <div class="p-2 g-col-6 border border-secondary">검색 공간</div>
+		  <div class="p-2 g-col-6 border border-secondary">공간1</div>
+		</div>
+		
+	 </div>
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 </body>
 </html>

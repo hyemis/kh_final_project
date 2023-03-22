@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,15 +30,17 @@ public class PsController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	// 삭제 해도 될 듯 
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
-		
-		try {
-			mv.addObject("plist", service.selectList());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
+		mv.setViewName("person/main");
+		return mv;
+	}
+	
+	//
+	@PostMapping("/logout")
+	public ModelAndView logout(ModelAndView mv) {
+		mv.setViewName("person/main");
 		return mv;
 	}
 	
