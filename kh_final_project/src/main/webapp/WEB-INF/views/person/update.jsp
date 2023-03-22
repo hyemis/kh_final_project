@@ -21,7 +21,6 @@
 		
 		<div class="grid gap-3 m-4">
 			<h2>회원정보수정</h2>
-		  	<span>회원님의 개인정보를 관리하는 곳입니다.</span>
 		</div>
 	
 			
