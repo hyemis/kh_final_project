@@ -43,18 +43,7 @@ public class TempController {
 		return mv;
 	}
 
-	@GetMapping("/boardlist")
-	public ModelAndView boardList(ModelAndView mv) {
-		System.out.println("게시글 리스트");
-
-		try {
-			mv.addObject("blist", service.boardList());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return mv;
-	}
+	
 
 
 	@GetMapping("/applyprocesslist")

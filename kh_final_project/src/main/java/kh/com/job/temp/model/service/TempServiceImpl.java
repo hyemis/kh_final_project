@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dao.TempDao;
 import kh.com.job.temp.model.dto.ApplyProcessDto;
-import kh.com.job.temp.model.dto.BoardDto;
 import kh.com.job.temp.model.dto.TempDto;
 
 @Service
@@ -33,11 +32,6 @@ public class TempServiceImpl implements TempService{
 	@Override
 	public List<TempDto> memberList() throws Exception {
 		return dao.memberList();
-	}
-
-	@Override
-	public List<BoardDto> boardList() throws Exception {
-		return dao.boardList();
 	}
 
 	@Override

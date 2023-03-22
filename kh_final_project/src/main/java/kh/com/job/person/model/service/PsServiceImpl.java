@@ -40,8 +40,8 @@ public class PsServiceImpl implements PsService {
 	}
 
 	@Override
-	public int idChk(String userId) throws Exception {
-		return dao.idChk(userId);
+	public int idChk(PsUserDto dto) throws Exception {
+		return dao.idChk(dto);
 	}
 
 

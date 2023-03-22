@@ -28,6 +28,8 @@
 				              <label for="userId">아이디</label>
 				              <input type="text" class="form-control" name="userId" placeholder="영문,숫자,'_' 사용가능" required>
 				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
+				              <button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">회원가입 완료</button>
+				              
 				            </div>
 				            
 				            <div class="mb-3">
@@ -91,6 +93,25 @@
 	
 	
 	<script>
+			// id 중복확인
+			function fn_idChk() {
+				$.ajax({
+					url:"/person/idChk",
+					type : "post",
+					dateType : "json",
+					date : {"userId" : $(#userId).val()},
+					success : function(data) {
+						if(data == 1) {
+							alert("중복된 아이디 입니다. 다시 입력해주세요.");
+						} else if (date == 0) {
+							$("#idChk").attr("value", "Y");
+							alert("사용가능한 아이디입니다.");
+						}
+					}
+				})
+			}
+		
+	
 			
 			function checkAll() {
 		        if (!checkUserId(singUpForm.userId.value)) {

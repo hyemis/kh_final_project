@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,11 +24,7 @@ public class PsController {
 	//암호화 기능 가지고 있는 클래스 자동주입
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
-<<<<<<< HEAD
-	// 
-=======
->>>>>>> 82ff8b1f508a983729c04ab6cbd06d3389e4c69c
+
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
 		
@@ -65,47 +60,62 @@ public class PsController {
 	@PostMapping("/signUp")
 	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr ) {
 		int result = -1;
-		System.out.println("암호화전");
-		System.out.println(dto.getUserPw());
-		System.out.println(dto);
-		
-		//입력 받은 비밀번호 가 담겨져 있는 dto 에서 비밀번호 값 꺼내서 인코딩 시킨후 다시 넣어줬어요
-		//passwordEncoder.encode() 쓰시면 비밀번호 인코딩 되요
-		//한번 확인 하시고 sysout 지우시면 될거같아요
 		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 		
-		System.out.println("암호화후");
-		System.out.println(dto.getUserPw());
-		
-		
 		try {
-			result = service.insert(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
+			int idChk = service.idChk(dto);
+			if(idChk == 1) {
+				mv.setViewName("redirect:/person/signUp");
+			} else if(result == 0) {
+				try {
+					result = service.insert(dto);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if(result > 0 ) {
+					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
+					mv.setViewName("redirect:/");
+				} else {
+					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
+					mv.setViewName("redirect:/person/signUp");
+				}
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 		
-		if(result > 0 ) {
-			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
-			mv.setViewName("redirect:/");
-		} else {
-			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
-			mv.setViewName("redirect:/person/signUp");
-		}
+		
+		
+//		try {
+//			result = service.insert(dto);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		if(result > 0 ) {
+//			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
+//			mv.setViewName("redirect:/");
+//		} else {
+//			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
+//			mv.setViewName("redirect:/person/signUp");
+//		}
 		
 		
 		return mv;
 	}
 	
-//	// 회원가입 아이디 중복 체크 
-//	@PostMapping()
-//	public int idChk(String userId) {
-//		try {
-//			int result = service.idChk(userId);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
+	// 아이디 중복 체크 
+	@PostMapping("/signUp")
+	public int idChk(PsUserDto dto) {
+		int result = 0;
+		try {
+			result = service.idChk(dto);
+			System.out.println("아이디중복체크 controller" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")

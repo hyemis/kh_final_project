@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dto.ApplyProcessDto;
-import kh.com.job.temp.model.dto.BoardDto;
 import kh.com.job.temp.model.dto.TempDto;
 
 @Repository
@@ -21,9 +20,6 @@ public class TempDao {
 		return sqlSession.selectList("temp.memberList");
 	}
 	
-	public List<BoardDto> boardList() {
-		return sqlSession.selectList("temp.boardList");
-	}
 	
 	public List<ApplyProcessDto> applyProcessList() {
 		return sqlSession.selectList("temp.applyProcessList");
