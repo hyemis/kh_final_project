@@ -16,8 +16,9 @@ public class PsServieImpl implements PsService {
 	private PsDao dao;
 
 	@Override
-	public PsUserDto selectOne(String userid) throws Exception {
-		return dao.selectOne(userid);
+	public PsUserDto selectOne(String userId) throws Exception {
+		System.out.println("psServiceImpl userId: " + userId);
+		return dao.selectOne(userId);
 	}
 
 	@Override
