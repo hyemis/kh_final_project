@@ -14,14 +14,23 @@ public class PsDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	// 회원 정보 읽어오기 
 	public PsUserDto selectOne(String userId) throws Exception {
 		return sqlSession.selectOne("person.selectOne", userId);
+	}
+	
+	// 아이디 중복 체크 
+	public int idChk(String userId) throws Exception {
+		int result = -1;
+		result = sqlSession.selectOne("person.idChk", userId);
+		return result;
 	}
 	
 	public List<PsUserDto> selectList() throws Exception {
 		return sqlSession.selectList("person.selectList");
 	}
 	
+	// 회원 가입 
 	public int insert(PsUserDto dto) throws Exception {
 		int result = -1;
 		result = sqlSession.insert("person.insert", dto);

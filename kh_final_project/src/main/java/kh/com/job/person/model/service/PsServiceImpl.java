@@ -38,6 +38,14 @@ public class PsServiceImpl implements PsService {
 	public int delete(String userId) throws Exception {
 		return dao.delete(userId);
 	}
+
+	@Override
+	public int idChk(String userId) throws Exception {
+		return dao.idChk(userId);
+	}
+
+
+	
 	
 	
 	

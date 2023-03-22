@@ -25,7 +25,7 @@ public class PsController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
-	// 삭제 해도 될 듯 
+	// 
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
 		mv.setViewName("person/main");
@@ -93,6 +93,16 @@ public class PsController {
 		return mv;
 	}
 	
+//	// 회원가입 아이디 중복 체크 
+//	@PostMapping()
+//	public int idChk(String userId) {
+//		try {
+//			int result = service.idChk(userId);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
 	
 	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")
