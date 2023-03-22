@@ -32,24 +32,21 @@ public class PsResumeController {
 		
 		System.out.println(userId);
 		
-//		if(userId==null) {
-//			mv.setViewName("redirect:/");
-//			return mv;
-//		}
 		
 		try {
 			PsUserDto result = pservice.selectOne(userId);
+			
 			if(result!=null) {
+				System.out.println("@@@@@@@@@@@@@@@@");
 				mv.addObject("userinfo", result);
+				mv.setViewName("person/resume/write");
 			} else {
 				mv.setViewName("redirect:/");
-				return mv;
 			}
 		} 
 			catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("person/resume/write");
 		return mv;
 	}
 	

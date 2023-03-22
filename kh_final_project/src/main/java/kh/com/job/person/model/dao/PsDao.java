@@ -15,7 +15,10 @@ public class PsDao {
 	private SqlSession sqlSession;
 
 	public PsUserDto selectOne(String userId) throws Exception {
+<<<<<<< Updated upstream
 		System.out.println("psServiceImpl userId: " + userId);
+=======
+>>>>>>> Stashed changes
 		return sqlSession.selectOne("person.selectOne", userId);
 	}
 	
