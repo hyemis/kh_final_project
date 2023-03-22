@@ -14,7 +14,7 @@
 	
 		<div class="container-sm">	
 		
-		<h1>내정보</h1>
+		<h1>회사소개</h1>
 		
 	
 		   <div class="row">
