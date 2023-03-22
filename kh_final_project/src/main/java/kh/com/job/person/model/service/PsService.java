@@ -11,5 +11,5 @@ public interface PsService {
 	public List<PsUserDto> selectList() throws Exception;
 	public int insert(PsUserDto dto) throws Exception;
 	public int update(PsUserDto dto) throws Exception;
-	public int delete(String userid) throws Exception;
+	public int delete(String userId) throws Exception;
 }

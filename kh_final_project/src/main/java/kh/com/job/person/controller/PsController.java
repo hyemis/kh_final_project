@@ -94,13 +94,51 @@ public class PsController {
 		return mv;
 	}
 	
+	
+	// 회원정보 업데이트 화면
+	@GetMapping("/update")
+	public ModelAndView viewUpdate(ModelAndView mv
+			, String userId
+			, PsUserDto dto
+			) {
+		
+		try {
+			dto = service.selectOne(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		mv.addObject("PsUserDto", dto);
+		mv.setViewName("/person/update");
+		return mv;
+	}
+	
+	
+	// 회원정보 업데이트
+	@PostMapping("/update")
+	public ModelAndView update(ModelAndView mv
+			,PsUserDto dto) {
+
+		try {
+			service.update(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
 	@GetMapping("/mypage")
 	public ModelAndView myPage(ModelAndView mv) {
 		mv.setViewName("person/myPage");
 		return mv;
 	}
 	
-	
+	@GetMapping("/resume")
+	public ModelAndView resume(ModelAndView mv) {
+		
+		return mv;
+	}
 	
 	// 예외처리는 프로젝트 후반에 작성 
 	

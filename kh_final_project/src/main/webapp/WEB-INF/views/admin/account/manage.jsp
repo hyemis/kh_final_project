@@ -73,10 +73,9 @@
 	    	
 		
 		 <div class="container-xl px-5">
-		 	<table class="table">
+		 	<table class="table container-lg ">
 		 		<thead>
 		 			<tr>
-		 				<th scope="col">no</th>
 		 				<th scope="col">아이디</th>
 		 				<th scope="col">이름</th>
 		 				<th scope="col">email</th>
@@ -85,11 +84,10 @@
 		 		</thead>
 		 		<tbody>
 		 		<c:forEach var="list" items="${accdto }" varStatus="status">
-		 		<tr>
-		 				<td>${status.count}</td>
-		 				<td>${list.userId }</td>
-		 				<td>${list.userName }</td>
-		 				<td>${list.userEmail }</td>
+		 			<tr>
+		 				<td class="userId">${list.userId }</td>
+		 				<td class="userName">${list.userName }</td>
+		 				<td class="userEmail">${list.userEmail }</td>
 		 				<td>
 		 					<button type="button" class="btn delete btn-primary border-0 w-10 py-0">삭제</button>
 		 				</td>
@@ -100,6 +98,34 @@
 		 </div>
 
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
+		
+		<script type="text/javascript">
+		  $('.delete').click(function() {
+			  
+			  var conf = confirm("정말로 삭제하시겠습니까?");
+			  
+			  if(conf){
+				  $.ajax({
+				    	type : "POST"
+				    	, url : "${pageContext.request.contextPath}/admin/account/delete"
+				    	, data : {userId :  $(this).closest("tr").find(".userId").text()}
+				    	, success : function(result){ 
+				                if(result == 1){
+				                	location.reload();	
+				                }else if(result == 3){
+				                	alert("자기 자신은 삭제 할 수 없습니다.");	
+				                }else if(result != 1){
+				                	alert("계정 삭제에 실패했습니다.");	
+				                }
+			                }
+						, error : function(request, status, error){
+			                    alert("삭제 실패.");
+				            }
+				    });
+			  }
+ 			   
+			  });
+		</script>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
