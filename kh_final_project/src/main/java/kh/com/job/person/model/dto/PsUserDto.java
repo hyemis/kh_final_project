@@ -1,13 +1,8 @@
 package kh.com.job.person.model.dto;
 
 import java.sql.Date;
-
 import java.sql.Timestamp;
-
-import java.sql.Timestamp;
-
 import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +17,6 @@ import lombok.ToString;
 @ToString
 public class PsUserDto {
 //USER_TABLE
-	
 /*
  * SER_ID|USER_PW                                                     |USER_PHONE 
  * |USER_BIRTH         |USER_EMAIL         |USER_ADRESS             
@@ -34,9 +28,6 @@ dmin  |$2a$10$t27GWA4xK07TrCqxVF.ouuvIZJW1ldcgivH5yHr2W8hmyp1x5/nbi|01012345678|
 user11|$2a$10$gohBEP3hvlo7j8B9vas49ucjYH9YLxrc1myDyerYG2aeu/hHrfn.a|01012345678|1990-07-07 00:00:00|buser@example.com  |123 Main St, 대한민국       |최민건      |모름          |12345          |               |               |          |true    |ROLE_B   |Y        |2023-03-19 18:08:07.823|           3|
 ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|1960-11-07 00:00:00|user11@example.com |어디에있긴함, 대한민국            |최민건      |되는거같음       |88888          |               |               |          |true    |ROLE_P   |Y        |2023-03-19 18:11:35.468|           3|
  */
-
-	
-	
 
 	private String userId;
 	private String userPw;
