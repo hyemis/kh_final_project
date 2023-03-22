@@ -95,6 +95,14 @@ public class PsController {
 	}
 	
 	
+	// 회원정보 확인 화면
+	@GetMapping("/mypage")
+	public ModelAndView selectOne(ModelAndView mv, String id) {
+		mv.setViewName("person/myPage");
+		return mv;
+	}
+	
+	
 	// 회원정보 업데이트 화면
 	@GetMapping("/update")
 	public ModelAndView viewUpdate(ModelAndView mv
@@ -128,12 +136,7 @@ public class PsController {
 		return mv;
 	}
 	
-	@GetMapping("/mypage")
-	public ModelAndView myPage(ModelAndView mv) {
-		mv.setViewName("person/myPage");
-		return mv;
-	}
-	
+
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {
 		

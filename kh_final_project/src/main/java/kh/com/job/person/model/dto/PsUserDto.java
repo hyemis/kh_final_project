@@ -1,10 +1,9 @@
 package kh.com.job.person.model.dto;
 
 import java.sql.Date;
-<<<<<<< Updated upstream
+
 import java.sql.Timestamp;
-=======
->>>>>>> Stashed changes
+
 
 import org.springframework.stereotype.Component;
 
@@ -23,9 +22,7 @@ import lombok.ToString;
 public class PsUserDto {
 //USER_TABLE
 	
-<<<<<<< Updated upstream
-		
-=======
+
 /*
  * SER_ID|USER_PW                                                     |USER_PHONE 
  * |USER_BIRTH         |USER_EMAIL         |USER_ADRESS             
@@ -40,7 +37,7 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 
 	
 	
->>>>>>> Stashed changes
+
 	private String userId;
 	private String userPw;
 	private String userPhone;
@@ -49,7 +46,6 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 	private String userAdress;
 	private String userName;
 	private String userBsType;
-<<<<<<< Updated upstream
 	private String userBsLicense;
 	private Timestamp userCreatedAt;
 	private Timestamp userLastLogin;
@@ -59,18 +55,9 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 	private String termsAct;
 	private Timestamp termsDate;
 	private String termsPeriod;
-=======
-	private String userBsLicens;
-	private Date userCreateAt;
-	private Date userLastLogin;
-	private int userCount;
-	private String userAct;
-	private String userRole;
-	private String termsAct;
-	private Date termsDate;
-	private int termsperiod;
+
 	
 	
->>>>>>> Stashed changes
+
 	
 }
