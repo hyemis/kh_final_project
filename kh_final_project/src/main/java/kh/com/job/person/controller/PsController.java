@@ -1,13 +1,10 @@
 package kh.com.job.person.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,10 +92,28 @@ public class PsController {
 	}
 	
 	
-	// 회원정보 확인 화면
+	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")
-	public ModelAndView selectOne(ModelAndView mv, String id) {
-		mv.setViewName("person/myPage");
+	public ModelAndView viewMyPage(ModelAndView mv, String userId){
+		
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		try {
+		if(!userId.equals(auth.getName())) {
+			if(!(userId.isEmpty() || userId.equals(""))) {
+				
+					PsUserDto result = service.selectOne(userId);
+					mv.addObject("PsUserDto", result);
+				mv.setViewName("person/myPage");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return mv;
 	}
 	
