@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원 mypage</title>
+<title>JOB-A 마이페이지</title>
 </head>
 <body>
 	<!-- haeder : css, js, boostrap, nav-bar, template 등  -->
@@ -35,67 +35,52 @@
 				</div>
 			</nav>			
 		</div>
-		<div class="row">
-			<!-- 좌측 프로필 영역 -->
-			<div class="col-3">
-				<div class="container-sm py-5">
-					<div class="container">
-						<div class="bg-light rounded p-3">
-							<div class="bg-white rounded p-4"
-								style="border: 1px dashed rgba(0, 185, 142, .3)">
-								<div class="p-2 me-2">
-								<!-- 유저프로필 -->
-                      				  <img class="img-fluid" src="https://dummyimage.com/600x800/d6d6d6/000000&text=600x800" alt="">
-                   			 	</div>
-								<p>이름</p>
-								<p>휴대폰</p>
-								<p>이메일</p>
-								<a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>페이지이동</a> 
-								<a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>페이지이동</a> 
-								<a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>페이지이동</a> 
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 우측 조회 영역 -->
-			<div class="col-9">
-				<div class="container-xxl py-5">
-					<div class="container">
-						<div class="bg-light rounded p-3">
-							<div class="bg-white rounded p-4"
-								style="border: 1px dashed rgba(0, 185, 142, .3)">
-								<div class="row g-5 align-items-center">
-									<div class="mb-4">
-										<h1 class="mb-3">게시판 제목</h1>
-										<p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor
-											lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="container-xxl py-5">
-					<div class="container">
-						<div class="bg-light rounded p-3">
-							<div class="bg-white rounded p-4"
-								style="border: 1px dashed rgba(0, 185, 142, .3)">
-								<div class="row g-5 align-items-center">
-									<div class="mb-4">
-										<h1 class="mb-3">게시판 제목</h1>
-										<p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor
-											lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		
+		<div class="container-sm">	
 	
+		<div class="grid gap-4 m-4">
+			<h2>회원정보관리</h2>
+		  	<span>회원님의 개인정보를 관리하는 곳입니다.</span>
+		</div>
+	
+			<div class="container-sm py-5">	
+				<div class="grid gap-3 border border-dark-subtle">	
+			
+			<div class="bg-light rounded p-3">
+				<div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+					<div class="row g-5 align-items-center">
+						<div class="mb-4">
+							<h3 class="mb-3">회원정보수정</h3>
+							<button type="button" class="btn btn-outline-danger" onclick="location.href='/update'">바로가기</button>
+							
+							<div class="pi-1">
+								<label for="userName"/>이름 : </label>
+								<input name="userId" value="${PsUserDto.userId}" type="text" readonly="readonly"><br>
+								
+								<label for="userPhone"/>핸드폰 : </label>
+								<input value="${PsUserDto.userPhone }"  type="text" readonly="readonly"><br>
+								
+								<label for="userEmail"/>이메일 : </label>
+								<input value="${PsUserDto.userEmail }" type="text" readonly="readonly"><br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="bg-light rounded p-3">
+				<div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+					<div class="row g-5 align-items-center">
+						<div class="mb-4">
+							<h3 class="mb-3">이용현황</h3>
+							<div class="">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
 	</div>
 	
 	<!-- footer -->

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>임시** JOB-A 회원정보수정</title>
+<title>JOB-A 회원정보 수정</title>
 </head>
 <body>
 	<!-- header : css, js, boostrap, nav-bar, template 등  -->
@@ -20,7 +20,7 @@
 		<div class="container-sm">	
 		
 		<div class="grid gap-3 m-4">
-			<h2>회원정보관리</h2>
+			<h2>회원정보수정</h2>
 		  	<span>회원님의 개인정보를 관리하는 곳입니다.</span>
 		</div>
 	
@@ -73,6 +73,3 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>
-<!--  
->
--->
