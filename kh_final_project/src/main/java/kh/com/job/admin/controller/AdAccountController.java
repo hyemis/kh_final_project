@@ -56,6 +56,8 @@ public class AdAccountController {
 			rttr.addFlashAttribute("admdto", dto);
 			mv.setViewName("redirect:/admin/account/create");
 		}else {
+			
+//			passwordEncoder.matches(rawPassword, encodedPassword);
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 			result = service.insertAccount(dto);
 			mv.setViewName("redirect:/admin/account/manage");
