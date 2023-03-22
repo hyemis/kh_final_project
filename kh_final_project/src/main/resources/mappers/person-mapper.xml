@@ -30,8 +30,5 @@ VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{userA
   	where USER_ID = #{USER_ID}
   </update>
 	
-  <select id="accountmgr" resultType="pdto">
-  	select * from USER_TABLE
-  	WHERE USER_ROLE IN ('ROLE_A', 'ROLE_AM')
-  </select>  
+
 </mapper>
