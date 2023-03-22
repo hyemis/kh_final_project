@@ -50,12 +50,18 @@
 				<div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
+							
+							<div class="d-grid gap-2 d-md-flex mb-3">
 							<h3 class="mb-3">회원정보수정</h3>
-							<button type="button" class="btn btn-outline-danger" onclick="location.href='/update'">바로가기</button>
+							
+							 <a class="btn btn-primary mx-1 mt-2" data-toggle="modal" href="#editModal">모달띄우기</a> 
+							 
+						<!--  	<button type="button" class="btn btn-outline-danger" onclick="location.href='/update'">바로가기</button>-->
+							</div>
 							
 							<div class="pi-1">
 								<label for="userName"/>이름 : </label>
-								<input name="userId" value="${PsUserDto.userId}" type="text" readonly="readonly"><br>
+								<input name="userId" value="${PsUserDto.userId}" type="text" border="none" readonly="readonly"><br>
 								
 								<label for="userPhone"/>핸드폰 : </label>
 								<input value="${PsUserDto.userPhone }"  type="text" readonly="readonly"><br>
@@ -85,5 +91,15 @@
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+
+	<script>
+		$(document).ready(function(){
+		    $("#myBtn").click(function(){
+		        $("#editModal").modal();
+		    });
+		});
+	</script>
+
 </body>
 </html>

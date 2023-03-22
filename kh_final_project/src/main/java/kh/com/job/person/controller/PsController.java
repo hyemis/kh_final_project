@@ -26,10 +26,6 @@ public class PsController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
-<<<<<<< HEAD
-	// 
-=======
->>>>>>> 82ff8b1f508a983729c04ab6cbd06d3389e4c69c
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
 		
