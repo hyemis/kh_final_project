@@ -17,13 +17,6 @@ public class PsServiceImpl implements PsService {
 
 	@Override
 	public PsUserDto selectOne(String userId) throws Exception {
-<<<<<<< Updated upstream:kh_final_project/src/main/java/kh/com/job/person/model/service/PsServiceImpl.java
-
-		System.out.println("psServiceImpl userId: " + userId);
-
-=======
-		System.out.println("!@!@!@!@!@!@!@");
->>>>>>> Stashed changes:kh_final_project/src/main/java/kh/com/job/person/model/service/PsServieImpl.java
 		return dao.selectOne(userId);
 	}
 

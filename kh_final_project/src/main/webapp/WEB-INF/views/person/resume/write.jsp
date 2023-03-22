@@ -31,11 +31,16 @@
 									<img class="object-fit-sm-contain border rounded" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
 								</div>
 								<div class="col-10 border border-dark-subtle">
-									${userinfo }
-								
-
-								
-								
+										<span>이름 : </span>
+										<span>${userinfo.userName }</span><br>
+										<span>전화번호 : </span>
+										<span>${userinfo.userPhone }</span><br>
+										<span>생년월일 : </span>
+										<span>${userinfo.userBirth }</span><br>
+										<span>이메일 : </span>
+										<span>${userinfo.userEmail }</span><br>
+										<span>주소 : </span>
+										<span>${userinfo.userAdress }</span><br>
 								
 								</div>
 							</div>

@@ -24,20 +24,15 @@ import kh.com.job.person.model.service.PsService;
 public class PsResumeController {
 	
 	@Autowired
-	private PsResumeService rservice;
 	private PsService pservice;
 	
 	@GetMapping("/write")
 	public ModelAndView doresume(ModelAndView mv, String userId){
 		
-		System.out.println(userId);
-		
-		
 		try {
 			PsUserDto result = pservice.selectOne(userId);
 			
 			if(result!=null) {
-				System.out.println("@@@@@@@@@@@@@@@@");
 				mv.addObject("userinfo", result);
 				mv.setViewName("person/resume/write");
 			} else {
