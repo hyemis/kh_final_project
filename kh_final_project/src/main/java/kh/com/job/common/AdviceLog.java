@@ -21,7 +21,7 @@ public class AdviceLog {
 	@Pointcut("execution(public * kh.com.job..*Dao.*(..))")
 	public void daoPointCut() {}
 	
-	@Pointcut("execution(public *kh.com.job..*ServiceImpl.*(..))")
+	@Pointcut("execution(public * kh.com.job..*ServiceImpl.*(..))")
 	public void serviceImplPointCut() {}
 	
 	@Around("controllerPointCut()")
