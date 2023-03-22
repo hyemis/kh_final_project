@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <body>
-	<%@ include file="common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 	<div class="container-xxl py-5">
 	
@@ -39,7 +39,7 @@
 	
 	
 	</div>
-	<%@ include file="common/footer.jsp" %>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script type="text/javascript">
 	
