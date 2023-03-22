@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="person">
 
-  <select id="selectOne" parameterType="pdto" resultType="pdto">
-  	select USER_NAME, USER_PASSWORD, USER_BIRTH, USER_PHONE, USER_EMAIL, USER_ADRESS, TERMS_DATE from USER_TABLE where USER_ID=#{USER_ID}
+  <select id="selectOne" parameterType="string" resultType="pdto">
+  	select * from USER_TABLE where USER_ID=#{USER_ID}
   </select>
 
   <select id="selectList" resultType="pdto">
@@ -12,8 +12,12 @@
   
   <!-- 개인회원 insert -->
   <insert id="insert" parameterType="pdto">
+<<<<<<< Updated upstream
   	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
 VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{userAdress}, #{userName}, 'true', 'ROLE_P', 'Y', sysdate, default)
+=======
+  	insert into USER_TABLE  values( #{USER_ID}, #{USER_PW}, #{USER_PHONE}, #{USER_BIRTH}, #{USER_EMAIL}, #{USER_ADDRESS}, #{USER_NAME} )
+>>>>>>> Stashed changes
   </insert>
 
   <delete id="delete" parameterType="pdto">

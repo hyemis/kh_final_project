@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsResumeService;
 import kh.com.job.person.model.service.PsService;
@@ -23,14 +24,31 @@ import kh.com.job.person.model.service.PsService;
 public class PsResumeController {
 	
 	@Autowired
-	private PsResumeService service;
-	
-	//암호화 기능 가지고 있는 클래스 자동주입
-	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+	private PsResumeService rservice;
+	private PsService pservice;
 	
 	@GetMapping("/write")
-	public ModelAndView doresume(ModelAndView mv) {
+	public ModelAndView doresume(ModelAndView mv, String userId){
+		
+		System.out.println(userId);
+		
+//		if(userId==null) {
+//			mv.setViewName("redirect:/");
+//			return mv;
+//		}
+		
+		try {
+			PsUserDto result = pservice.selectOne(userId);
+			if(result!=null) {
+				mv.addObject("userinfo", result);
+			} else {
+				mv.setViewName("redirect:/");
+				return mv;
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
+		}
 		mv.setViewName("person/resume/write");
 		return mv;
 	}
