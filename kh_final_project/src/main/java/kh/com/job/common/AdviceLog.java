@@ -15,13 +15,13 @@ public class AdviceLog {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdviceLog.class);
 	
-	@Pointcut("execution(public * kh.com.job..*Controller.*(..))")
+	@Pointcut("execution(public * spring.com.job..*Controller.*(..))")
 	public void controllerPointCut() {}
 	
-	@Pointcut("execution(public * kh.com.job..*Dao.*(..))")
+	@Pointcut("execution(public * spring.com.job..*Dao.*(..))")
 	public void daoPointCut() {}
 	
-	@Pointcut("execution(public *kh.com.job..*ServiceImpl.*(..))")
+	@Pointcut("execution(public * spring.com.job..*ServiceImpl.*(..))")
 	public void serviceImplPointCut() {}
 	
 	@Around("controllerPointCut()")

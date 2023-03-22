@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 
 import kh.com.job.person.model.dao.PsDao;
 import kh.com.job.person.model.dto.PsUserDto;
-import kh.com.job.temp.model.dao.TempDao;
 
 @Service
-public class PsServieImpl implements PsService {
+public class PsServiceImpl implements PsService {
 	
 	@Autowired
 	private PsDao dao;
