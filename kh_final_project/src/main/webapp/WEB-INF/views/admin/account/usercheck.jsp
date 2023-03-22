@@ -32,7 +32,7 @@
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     <!-- css file link part end -->
     
-    <title>관리자 계정 관리</title>
+    <title>계정 확인 </title>
     
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
@@ -66,43 +66,33 @@
         <!-- Spinner End -->
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-    	 
-		<div class="logouttest mt-3 mx-5 text-lg-end text-center">
-			<a class="btn btn-info border-0 w-15 py-2" href="create" >계정 추가</a>
-		</div>
-	    	
 		
 		 <div class="container-xl px-5">
-		 	<table class="table container-lg ">
-		 		<thead>
-		 			<tr>
-		 				<th scope="col">아이디</th>
-		 				<th scope="col">이름</th>
-		 				<th scope="col">email</th>
-		 				<th scope="col">삭제버튼</th>
-		 			</tr>
-		 		</thead>
-		 		<tbody>
-		 		<c:forEach var="list" items="${accdto }" varStatus="status">
-		 			<tr>
-		 				<td class="userId"><a href="${pageContext.request.contextPath}/admin/account/usercheck?userId=${list.userId }">${list.userId }</a></td>
-		 				<td class="userName">${list.userName }</td>
-		 				<td class="userEmail">${list.userEmail }</td>
-		 				<td>
-		 					<button type="button" class="btn delete btn-primary border-0 w-10 py-0">삭제</button>
-		 				</td>
-		 			</tr>
-		 		</c:forEach>
-		 		</tbody>
-		 	</table>
+		 	<form action="usercheck" method="post">
+		 			<input type="hidden" class="form-control" id="userId" name="userId" value="${userId}" required>
+		 			<div class="mb-3">
+		              <label for="password">비밀번호</label>
+		              <input type="password" class="form-control" id="password" name="userPw" required>
+		              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+		            </div>
+		            <div class="mb-3">
+		              <label for="updatepw">비밀번호</label>
+		              <input type="password" class="form-control" id="updatepw" name="updatepw" required>
+		              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+		            </div>
+					<div class="mb-3">
+		              <label for="passwordcheck">비밀번호재확인</label>
+		              <input type="password" class="form-control" id="passwordcheck" required>
+		              <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
+		            </div>
+		            <div class="mx-5 mt-6 text-lg-end text-center">
+		 			  <button type="submit" class="btn btn-dark border-0 w-15 py-2">계정 정보 수정</button>
+		 			</div>
+		 			
+		 	</form>
 		 </div>
 
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
-		
-		<script type="text/javascript">
-		 
-		</script>
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>

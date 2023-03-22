@@ -83,5 +83,30 @@ public class AdAccountController {
 		
 		return result;
 	}
+	
+	@GetMapping("/usercheck")
+	public ModelAndView userCheck(ModelAndView mv, String userId) {
+		
+		System.out.println(userId);
+		
+		mv.addObject("userId", userId);
+
+		return mv;
+	}
+	
+	@PostMapping("/usercheck")
+	public ModelAndView userCheckForm(ModelAndView mv, String userPw, String updatepw) {
+		
+		System.out.println("@@@@@@@@@@@@@");
+		System.out.println(userPw);
+		System.out.println(updatepw);
+		System.out.println("@@@@@@@@@@@@@");
+		System.out.println(userPw.equals(updatepw));
+
+		mv.setViewName("redirect:/admin/account/manage");
+		
+		return mv;
+	}
+
 
 }
