@@ -8,7 +8,7 @@
 		  if(conf){
 			  $.ajax({
 			    	type : "POST"
-			    	, url : "${pageContext.request.contextPath}/admin/account/delete"
+			    	, url : "delete"
 			    	, data : {userId :  $(this).closest("tr").find(".userId").text()}
 			    	, success : function(result){ 
 			                if(result == 1){
