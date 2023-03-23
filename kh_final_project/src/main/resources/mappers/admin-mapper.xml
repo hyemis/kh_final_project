@@ -2,29 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
 
+	<!-- 관리자 계정 리스트  -->
 	<select id="accountmgr" resultType="pdto">
 		select * from USER_TABLE
 		WHERE USER_ROLE IN ('ROLE_A', 'ROLE_AM')
 		ORDER BY USER_BIRTH DESC
 	</select>  
-	
+	<!-- 관리자 계정 선택 -->
 	<select id="selectUser" resultType="kh.com.job.admin.model.dto.AdUserDto">
 	  	select USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_NAME, USER_ROLE from USER_TABLE
 	  	WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 관리자 계정 정보 수정을 위한 암호체크 -->
 	<select id="checkUser" resultType="kh.com.job.admin.model.dto.AdUserDto">
 	  	select USER_PW from USER_TABLE
 	  	WHERE USER_ID = #{userId}
 	</select>
 	
 	
-	
+	<!-- 관리자 아이디 중복 체크 -->
 	<select id="idCheck" resultType="_int">
 	  	select count(USER_ID) from USER_TABLE
 	  	WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 관리자 계정 생성 -->
 	<insert id="insertAccount">
 		INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_NAME, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
 		VALUES (#{userId}, #{userPw}, #{userPhone}, CURRENT_TIMESTAMP, #{userEmail}, #{userName}, #{userRole}, 'Y', CURRENT_TIMESTAMP, 60)
@@ -39,6 +42,7 @@
 		UPDATE USER_TABLE SET USER_ACT WHERE USER_ID = #{userId}
 	</update>
 	
+	<!-- 관리자 계정 정보 수정 -->
 	<update id="updateManager">
 		UPDATE USER_TABLE
 		<set>
@@ -60,5 +64,11 @@
 		</set>
 		WHERE USER_ID = #{userId}
 	</update>
+	
+	<!-- 카테고리 1단계 리스트 -->
+	<select id="cateFdeptList" resultType="kh.com.job.admin.model.dto.AdCategoryDto">
+		SELECT * FROM JA_CATEGORY
+		WHERE CATEGORY_DEPT = '1'
+	</select>
   
 </mapper>

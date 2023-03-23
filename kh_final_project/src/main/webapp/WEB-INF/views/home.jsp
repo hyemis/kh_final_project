@@ -12,11 +12,12 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-		<div class="container-sm">	
+	<div class="container-sm" style="background-color: yellow;">	
 		
-			home
+	이만큼 페이지별 레이아웃 영역입니다.
 		
-	 </div>
+	</div>
+
 	
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
