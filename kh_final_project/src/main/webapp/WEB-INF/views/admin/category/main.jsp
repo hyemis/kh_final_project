@@ -60,8 +60,25 @@
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 
-		 <div class="container-xl px-5">
-
+		 <div class="min-vh-100 d-flex justify-content-center align-items-center">
+			 <div class="dept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
+			 	<div class="m-2 bg-white">
+			 		<div class="m-2 text-lg-end">
+			 			<button class="m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
+			 		</div>
+			 		<c:forEach var="fdeptList" items="${fdeptList}" >
+			 			<div class="mx-2 mt-2">
+			 				${fdeptList.categoryId} : ${fdeptList.categoryName}
+			 			</div> 
+			 		</c:forEach>
+			 	</div>
+			 </div>
+			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
+			 
+			 </div>
+			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
+			 
+			 </div>
 		 </div>
 
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
