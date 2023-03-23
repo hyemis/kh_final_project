@@ -1,7 +1,6 @@
 package kh.com.job.person.model.dto;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;

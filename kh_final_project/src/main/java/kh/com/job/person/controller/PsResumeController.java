@@ -23,7 +23,7 @@ public class PsResumeController {
 	// 이력서 작성 
 	@GetMapping("/write")
 	public ModelAndView doresume(ModelAndView mv, String userId){
-		
+			System.out.println(userId);
 		try {
 			
 			PsUserDto result = pservice.selectOne(userId);
@@ -32,7 +32,7 @@ public class PsResumeController {
 				mv.addObject("userinfo", result);
 				mv.setViewName("person/resume/write");
 			} else {
-				mv.setViewName("redirect:/");
+//				mv.setViewName("redirect:/");
 			}
 		} 
 			catch (Exception e) {

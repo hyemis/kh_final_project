@@ -3,10 +3,9 @@ package kh.com.job.person.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,14 +82,16 @@ public class PsController {
 	
 	// 회원가입 작성 
 	@PostMapping("/signUp")
-	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr
+	public ModelAndView dosignUp(ModelAndView mv
+			, PsUserDto dto
+			, RedirectAttributes rttr
 			,@RequestParam(name="report", required = false) MultipartFile multi
-			, HttpServletRequest request, String userBirth2) {
+			, HttpServletRequest request
+			, String userBirth) {
 
 		  int result = -1;
-		  System.out.println(userBirth2);
-		 
-		  // 파일 첨부 
+		  System.out.println("string 으로 받은 값 " + userBirth);
+		  
 		  Map<String, String> filePath;
 
 		  try {
@@ -103,7 +104,15 @@ public class PsController {
 		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 		
 		try {
-			dto.setUserBirth(Timestamp.valueOf(userBirth2));
+				
+			// text 로 받은 날짜 timestamp 로 변환해서 dto 에 저장 
+			 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			 Date date = dateFormat.parse(userBirth);
+			 Timestamp timestamp = new Timestamp(date.getTime());
+			 
+			 System.out.println("변환 했지 >" + timestamp);
+			 dto.setUserBirth(timestamp);
+			 
 			result = service.insert(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
