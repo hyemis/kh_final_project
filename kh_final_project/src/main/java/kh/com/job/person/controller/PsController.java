@@ -105,7 +105,8 @@ public class PsController {
 	}
 	
 	// 아이디 중복 체크 
-	@PostMapping("/signUp")
+	// 이거 맵핑 주소 곂치니 수정 해야되요
+	@PostMapping("/signUp1")
 	public int idChk(PsUserDto dto) {
 		int result = 0;
 		try {
