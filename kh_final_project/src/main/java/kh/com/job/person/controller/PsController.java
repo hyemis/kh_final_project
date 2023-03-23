@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -63,60 +65,41 @@ public class PsController {
 		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 		
 		try {
-			int idChk = service.idChk(dto);
-			if(idChk == 1) {
-				mv.setViewName("redirect:/person/signUp");
-			} else if(result == 0) {
-				try {
-					result = service.insert(dto);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				if(result > 0 ) {
-					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
-					mv.setViewName("redirect:/");
-				} else {
-					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
-					mv.setViewName("redirect:/person/signUp");
-				}
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
+			result = service.insert(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		
-		
-//		try {
-//			result = service.insert(dto);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		if(result > 0 ) {
-//			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
-//			mv.setViewName("redirect:/");
-//		} else {
-//			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
-//			mv.setViewName("redirect:/person/signUp");
-//		}
+		if(result > 0 ) {
+			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
+			mv.setViewName("redirect:/");
+		} else {
+			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
+			mv.setViewName("redirect:/person/signUp");
+		}
 		
 		
 		return mv;
 	}
-	
+
 	// 아이디 중복 체크 
-	// 이거 맵핑 주소 곂치니 수정 해야되요
-	@PostMapping("/signUp1")
-	public int idChk(PsUserDto dto) {
-		int result = 0;
+	@PostMapping("/idChk") 
+	@ResponseBody
+	public String idChk(@RequestParam(value="userId", required=false) String id) {
+		String result = "N";
+		
 		try {
-			result = service.idChk(dto);
-			System.out.println("아이디중복체크 controller" + result);
+			int idChk = service.idChk(id);
+			if(idChk == 1) {
+				result = "Y";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
+	
 	
 	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")
