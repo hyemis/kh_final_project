@@ -71,7 +71,7 @@
 							
 							<div class="pi-1">
 								<label for="userName"/>이름 : </label>
-								<input name="userName" value="${PsUserDto.userName}" type="text" border="none" readonly="readonly"><br>
+								<input name="userName" value="${PsUserDto.userName}" type="text" readonly="readonly"><br>
 								
 								<label for="userPhone"/>핸드폰 : </label>
 								<input value="${PsUserDto.userPhone }"  type="text" readonly="readonly"><br>

@@ -26,7 +26,7 @@
 				          
 				            <div class="mb-3">
 				            <label for="userName"/>이름 </label>
-				            <input name="userName" value="${PsUserDto.userName}" type="text" border="none" readonly="readonly"><br>
+				            <input value="${PsUserDto.userName}" class="form-control" type="text" name="userName" readonly="readonly" >
 				            </div>
 				            
 				            <div class="mb-3">
@@ -43,13 +43,13 @@
 						          
 				          <div class="mb-3">
 				            <label for="userPhone">휴대폰</label>
-				            <input type="text" class="form-control" name="userPhone" >
+				            <input value="${PsUserDto.userPhone}" class="form-control" type="text" name="userPhone">
 				            <div class="invalid-feedback">변경할 휴대폰번호를 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" name="userEmail">
+				            <input value="${PsUserDto.userEmail}" class="form-control" type="text" name="userEmail">
 				            <div class="invalid-feedback">변경할 이메일을 입력해주세요.</div>
 				          </div>
 				          

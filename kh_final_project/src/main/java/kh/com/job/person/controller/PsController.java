@@ -153,6 +153,7 @@ public class PsController {
 	@GetMapping("/mypage")
 	public ModelAndView viewMyPage(ModelAndView mv, Principal principal) throws Exception{
 		System.out.println("로그인정보: "+principal.getName());
+		
 		if(principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
 		}else {
@@ -164,24 +165,14 @@ public class PsController {
 	
 	// 회원정보 업데이트 화면
 	@GetMapping("/update")
-	public ModelAndView viewUpdate(ModelAndView mv, String userId) {
+	public ModelAndView viewUpdate(ModelAndView mv, Principal principal) throws Exception {
+		System.out.println("로그인정보: "+principal.getName());
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		try {
-		if(!userId.equals(auth.getName())) {
-			if(!(userId.isEmpty() || userId.equals(""))) {		
-				PsUserDto result = service.selectOne(userId);
-				mv.addObject("PsUserDto", result);
-				mv.setViewName("redirect:/person/update");
-			}else {
-				mv.setViewName("redirect:/");
-			}
-		}	
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(principal.getName() != null) {
+			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+		}else {
+			mv.setViewName("redirect:/");
 		}
-		
 		return mv;
 	}
 	
