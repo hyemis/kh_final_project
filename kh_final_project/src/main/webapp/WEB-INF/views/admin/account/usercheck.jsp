@@ -57,28 +57,17 @@
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 <div class="container-xl px-5">
+		 	<h3>계정 정보 수정을 위해서는 비밀번확인이 필요합니다.</h3>
 		 	<form action="usercheck" method="post">
 		 			<input type="hidden" class="form-control" id="userId" name="userId" value="${userId}" required>
 		 			<div class="mb-3">
 		              <label for="password">비밀번호</label>
 		              <input type="password" class="form-control" id="password" name="userPw" required>
 		              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-		            </div>
-					<div class="mb-3">
-		              <label for="passwordcheck">비밀번호재확인</label>
-		              <input type="password" class="form-control" id="passwordcheck" required>
-		              <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
 		            </div>
 		            <div class="mx-5 mt-6 text-lg-end text-center">
 		 			  <button type="submit" class="btn btn-dark border-0 w-15 py-2">비밀번호 확인</button>

@@ -32,6 +32,7 @@
                                 <a href="404.html" class="dropdown-item">404 Error</a>
                             </div>
                         </div>
+                        <a href="${pageContext.request.contextPath}/admin/account/usercheck" class="nav-item nav-link">내 계정 관리</a>
 						<sec:authorize access="hasRole('ROLE_AM')">
                         	<a href="${pageContext.request.contextPath}/admin/account/manage" class="nav-item nav-link">관리자 계정 관리</a>
 						</sec:authorize>
