@@ -74,7 +74,7 @@
 			 	<p>${addto.userId}의 계정 입니다.</p>
 			 	<p>${masage }</p>
 			 </div>
-		 	<form action="adminmanager" method="post">
+		 	<form action="update" method="post" name="Account" onsubmit="return checkUpdate()">
 		 			<input type="hidden" class="form-control" id="userId" name="userId" value="${addto.userId}">
 		 			<div class="mb-3">
 		              <label for="password">비밀번호</label>
@@ -117,6 +117,58 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+    
+    <script type="text/javascript">
+	
+		function checkUpdate() {
+	       if (!checkPassword(Account.userId.value, Account.userPw.value, Account.passwordcheck.value)) {
+	            return false;
+	        } else if (!checkName(Account.userName.value)) {
+	            return false;
+	        } else if (!checkEmail(Account.userEmail.value)) {
+	            return false;
+	        }  
+	        return true;
+	    }
+
+		// 비밀번호1, 비밀번호2 체크 
+		function checkPassword(id, userPw, passwordcheck) {
+
+		//비밀번호와 비밀번호 확인이 맞지 않다면..
+		if (userPw != passwordcheck) {
+		    alert("두 비밀번호가 맞지 않습니다.");
+		    Account.userPw.value ="";
+		    Account.passwordcheck.value ="";
+		    Account.userPw2.focus();
+		    return false;
+		}
+		return true; //확인이 완료되었을 때
+			} 
+		
+		// 이름 체크 
+		function checkName(userName) {
+
+		var nameRegExp = /^[가-힣]{2,4}$/;
+		if (!nameRegExp.test(userName)) {
+		    alert("이름이 올바르지 않습니다.");
+		    return false;
+		}
+		return true; //확인이 완료되었을 때
+		}
+
+		// 이메일 확인 
+		function checkEmail(userEmail) {
+		var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+		if (!emailRegExp.test(userEmail)) {
+		    alert("이메일 형식이 올바르지 않습니다!");
+		    Account.userEmail.value = "";
+		    Account.userEmail.focus();
+		    return false;
+		}
+		return true; //확인이 완료되었을 때
+		}
+	
+    </script>
 
 </body>
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,14 +55,23 @@
 							<div class="d-grid gap-2 d-md-flex mb-3">
 							<h3 class="mb-3">회원정보수정</h3>
 							
-							 <a class="btn btn-primary mx-1 mt-2" data-toggle="modal" href="#editModal">모달띄우기</a> 
+							<!-- 모달창 -->
+							<input type="button" value="바로가기" id="btnOpen">
+
+							<div id="modal">
+								<div id="content">
+									<input type="button" value="X" class="close" id="btnClose"/>
+									<label>비밀번호를 입력하세요</label><br/>
+									<input type="password" id="confirmPw" name="confirmPw" />
+									<input type="button" value="확인" id="btnCheck" onclick="checkPassword();"/>
+								</div>
+							</div>
 							 
-						<!--  	<button type="button" class="btn btn-outline-danger" onclick="location.href='/update'">바로가기</button>-->
 							</div>
 							
 							<div class="pi-1">
 								<label for="userName"/>이름 : </label>
-								<input name="userId" value="${PsUserDto.userId}" type="text" border="none" readonly="readonly"><br>
+								<input name="userName" value="${PsUserDto.userName}" type="text" border="none" readonly="readonly"><br>
 								
 								<label for="userPhone"/>핸드폰 : </label>
 								<input value="${PsUserDto.userPhone }"  type="text" readonly="readonly"><br>
@@ -92,13 +102,80 @@
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+	<style>
+		#modal{
+			display : none;
+			z-index : 1;
+			background-color: rgba(0,0,0,.3);
+			position:fixed;
+			left:0;
+			top: 0;
+			width:100%;
+			height:100%;
+			
+		}
+		#modal>#content{
+			width:300px;
+			margin:100px auto;
+			padding:20px;
+			position: relative;
+			background-color:#fff;
+		}
+		
+		#modal .close{
+			position:absolute;
+			top:4px;
+			right:4px;	
+			font-size:20px;
+			border:0;
+			background-color: #fff;
+		}
+		
+		#modal .close:hover,
+		#modal .close:focus {
+		  color : #000;
+		  text-decoration: none;
+		  cursor :pointer;
+		}
+	</style>
 
 	<script>
-		$(document).ready(function(){
-		    $("#myBtn").click(function(){
-		        $("#editModal").modal();
-		    });
-		});
+	
+		// modal창
+		var btnOpen  = document.getElementById('btnOpen');
+		var btnCheck = document.getElementById('btnCheck');
+		var btnClose = document.getElementById('btnClose');
+		
+		// modal창 감춤
+		var closeRtn = function(){
+		  var modal = document.getElementById('modal');
+		  modal.style.display = 'none';
+		}
+		
+		// modal창 보여줌
+		btnOpen.onclick = function(){
+		  var modal = document.getElementById('modal');
+		  modal.style.display = 'block';
+		}
+		
+		btnCheck.onclick = closeRtn;
+		btnClose.onclick = closeRtn;
+		
+		
+		// 입력 비밀번호 체크 - 일치하면 회원정보수정 페이지로 이동
+		function checkPassword() {
+			var userPw = document.getElementById("userPw").value;
+			var confirmPw = document.getElementById("confirmPw").value;
+			if(userPw != confirmPassword){ 
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}else{	
+				location.href="update.jsp";
+				return true;
+				}
+			}
+		
+		
 	</script>
 
 </body>

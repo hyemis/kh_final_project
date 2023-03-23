@@ -20,8 +20,8 @@ public class PsDao {
 	}
 	
 	// 아이디 중복 체크 
-	public int idChk(PsUserDto dto) throws Exception {
-		int result = sqlSession.selectOne("person.idChk", dto);
+	public int idChk(String userId) throws Exception {
+		int result = sqlSession.selectOne("person.idChk", userId);
 		return result;
 	}
 	

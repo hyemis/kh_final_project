@@ -7,8 +7,8 @@
   </select>
   
   <!-- 아이디 중복 체크 -->
-    <select id="idChk" resultType="_int">
-  	select count(*) from USER_TABLE where USER_ID=#{userId}
+    <select id="idChk" parameterType="string" resultType="_int">
+  	select count(USER_ID) from USER_TABLE WHERE USER_ID = #{userId}
   </select>
 
   <select id="selectList" resultType="pdto">

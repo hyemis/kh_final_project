@@ -13,7 +13,7 @@
 	  	WHERE USER_ID = #{userId}
 	</select>
 	
-		<select id="checkUser" resultType="kh.com.job.admin.model.dto.AdUserDto">
+	<select id="checkUser" resultType="kh.com.job.admin.model.dto.AdUserDto">
 	  	select USER_PW from USER_TABLE
 	  	WHERE USER_ID = #{userId}
 	</select>
