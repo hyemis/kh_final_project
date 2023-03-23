@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.com.job.admin.model.dao.AdDao;
+import kh.com.job.admin.model.dao.AdAccountDao;
 import kh.com.job.admin.model.dto.AdUserDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -13,7 +13,7 @@ import kh.com.job.person.model.dto.PsUserDto;
 public class AdAccountServiceImpl implements AdAccountService{
 	
 	@Autowired
-	private AdDao dao;
+	private AdAccountDao dao;
 
 	@Override
 	public List<PsUserDto> accountmgr() {
