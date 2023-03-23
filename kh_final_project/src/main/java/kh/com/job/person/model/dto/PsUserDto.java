@@ -46,5 +46,6 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 	private String termsAct;
 	private Timestamp termsDate;
 	private String termsPeriod;
+	private String userPic;
 
 }

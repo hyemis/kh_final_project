@@ -28,7 +28,7 @@
 							<h3 class="mb-3">기본 정보 </h3>
 							<div class="row">
 								<div class="col-2 border border-dark-subtle">                      				  
-									<img class="object-fit-sm-contain border rounded" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
+									<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
 								</div>
 								<div class="col-10 border border-dark-subtle">
 										<span>이름 : </span>

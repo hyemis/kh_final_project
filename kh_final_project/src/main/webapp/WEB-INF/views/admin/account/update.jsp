@@ -68,14 +68,15 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 
-		 <div class="container-lg mt-5 px-5">
-			 <div class="text-center mx-auto mb-5">
-			 	<h3>계정 정보 관리</h3>
-			 	<p>${addto.userId}의 계정 입니다.</p>
-			 	<p>${masage }</p>
-			 </div>
-		 	<form action="update" method="post" name="Account" onsubmit="return checkUpdate()">
+		 <div class="container-lg mt-5 px-5 d-flex justify-content-center">
+
+		 	<form class="col-6 mb-5" action="update" method="post" name="Account" onsubmit="return checkUpdate()">
 		 			<input type="hidden" class="form-control" id="userId" name="userId" value="${addto.userId}">
+		 			<div class="mb-3">
+			 			<h3>계정 정보 관리</h3>
+				 		<p>${addto.userId}의 계정 입니다.</p>
+				 		<p>${masage }</p>
+		 			</div>
 		 			<div class="mb-3">
 		              <label for="password">비밀번호</label>
 		              <input type="password" class="form-control" id="password" name="userPw" >
