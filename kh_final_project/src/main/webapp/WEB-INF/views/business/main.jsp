@@ -90,104 +90,76 @@
 			<h1 class="mb-3">안녕하세요</h1>
 			<h3 class="mb-3">님 반갑습니다</h3>
 			<br>
-			<p>
-				공고 등록부터 합격자 발표까지 쉽고 빠르게,</br> 우리 기업을 위한 맞춤형 인재 찾기 까지 JOB-A가 함께 할게요
-			</p>
+			<p>공고 등록부터 합격자 발표까지 쉽고 빠르게,</br> 우리 기업을 위한 맞춤형 인재 찾기 까지 JOB-A가 함께 할게요</p>
 		</div>
 		<!-- 상단 end -->
 		<!-- menu button start -->
-		<div class="container-fluid text-center">
-			<div class="row" style="Height: 250px;">
-				<div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
-					<a class="h-100 cat-item d-block bg-light text-center rounded p-3">
-						<div class="h-100 rounded p-4">
-							<h6 class="rounded p-4">공고등록/관리</h6>
-							<span class="text-center">
-								<p>
-									<button>채용 공고 등록</button>
-								</p>
-								<p>
-									<button>공고 관리</button>
-								</p>
-							</span>
-						</div>
-					</a>
-				</div>
-				<div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
-					<a class="h-100 cat-item d-block bg-light text-center rounded p-3">
-						<div class="h-100 rounded p-4">
-							<h6 class="rounded p-4">공고등록/관리</h6>
-							<span class="text-center">
-								<p>
-									<button>지원자관리</button>
-								</p>
-								<p>
-									<button></button>
-									<button></button>
-								</p>
-							</span>
-						</div>
-					</a>
-				</div>
-				<div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
-					<a class="h-100 cat-item d-block bg-light text-center rounded p-3">
-						<div class="h-100 rounded p-4">
-							<h6 class="rounded p-4">공고등록/관리</h6>
-							<span class="text-center">
-								<p>
-									<button></button>
-								</p>
-								<p>
-									<button></button>
-								</p>
-							</span>
-						</div>
-					</a>
-				</div>
+		<div class="row g-4 ">
+			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
+				data-wow-delay="0.1s"
+				style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+					<div class="rounded p-4">
+						<h5>공고등록/관리</h5>
+						<span href="">채용 공고 등록</span>
+					</div>
+				</a>
 			</div>
-			<div class="row" style="Height: 250px;">
-				<div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
-					<a class="h-100 cat-item d-block bg-light text-center rounded p-3">
-						<div class="h-100 rounded p-4">
-							<h6 class="rounded p-4">기업 소개</h6>
-							<span class="text-center">
-								<p>
-									<button> 회사소개 </button>
-								</p>
-								<p>
-									<button> 뉴스레터 </button>
-								</p>
-								<p>
-									<button> Q & A </button>
-								</p>
-							</span>
-						</div>
-					</a>
-				</div>
-				<div class="col text-center wow fadeInUp" data-wow-delay="0.1s">
-					<a class="h-100 cat-item d-block bg-light text-center rounded p-3">
-						<div class="h-100 rounded p-4">
-							<h6 class="rounded p-4">내 정보</h6>
-							<span class="text-center">
-								<p>
-									<button></button>
-								</p>
-								<p>
-									<button></button>
-								</p>
-							</span>
-						</div>
-					</a>
-				</div>
+			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
+				data-wow-delay="0.3s"
+				style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+					<div class="rounded p-4">
+						<h5>지원자관리</h5>
+						<span href=""></span>
+					</div>
+				</a>
 			</div>
-			<!-- menu button end -->
+			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
+				data-wow-delay="0.5s"
+				style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+					<div class="rounded p-4">
+						<h5>인재 관리</h5>
+						<span href=""></span>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
+				data-wow-delay="0.7s"
+				style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+					<div class="rounded p-4">
+						<h5>기업 소개</h5>
+						<span href="/business/info">회사소개</span>
+						<span href="/business/info">뉴스레터</span>
+						<span href="/business/info">Q & A</span>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
+				data-wow-delay="0.1s"
+				style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+					<div class="rounded p-4">
+						<h5>내 정보</h5>
+						<p></p>
+					</div>
+				</a>
+			</div>
+
 		</div>
-		<!-- Category End -->
+		<!-- menu button end -->
 
-		<section>
-			<%@include file="/WEB-INF/views/common/footer.jsp"%>
-		</section>
 
-		<script></script>
+
+	</div>
+	<!-- Category End -->
+
+	<section>
+		<%@include file="/WEB-INF/views/common/footer.jsp"%>
+	</section>
+
+	<script></script>
 </body>
 </html>
