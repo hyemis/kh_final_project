@@ -51,6 +51,14 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<style>
+	.userId {
+		position: absolute;
+       	
+       	top: 20px;
+       	right: 210px;
+	}
+</style>
 
 
 <!-- Navbar Start -->
@@ -86,21 +94,20 @@
 	                
 	                <div class="collapse navbar-collapse" id="navbarCollapse">
 	                    <div class="navbar-nav ms-auto">
-	                        <a href="index.html" class="nav-item nav-link active">Home</a>
+	                        <a href="index.html" class="nav-item nav-link active me-5">Home</a>
 	                        
+	                        <div class="userId">
 	                        <sec:authorize access="isAuthenticated()">
-	                        	<div>
 									<sec:authentication property="principal.username" var="user_id"/>
-									<div id="user_id"> ${user_id }</div>
-	                        	</div> 
+									   <a href="#" id="user_id" style="text-decoration:none">${user_id }</a>
 							</sec:authorize>
+							</div>
 							
 							<sec:authorize access="hasRole('ROLE_P')">
 		                        <div class="nav-item dropdown">
 		                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">개인서비스</a>
 		                            <div class="dropdown-menu rounded-0 m-0">
 		                                <a href="property-list.html" class="dropdown-item">MY 홈</a>
-		                                <a href="property-type.html" class="dropdown-item">회원정보 관리</a>
 		                                <a href="property-agent.html" class="dropdown-item">이력서 관리</a>
 		                                <a href="property-agent.html" class="dropdown-item">입사지원 현황</a>
 		                                <a href="property-agent.html" class="dropdown-item">스크랩한 채용공고</a>
