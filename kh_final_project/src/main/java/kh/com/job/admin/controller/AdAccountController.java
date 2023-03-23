@@ -2,6 +2,7 @@ package kh.com.job.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -105,15 +106,15 @@ public class AdAccountController {
 		
 		
 		if(passwordEncoder.matches(userPw, adto.getUserPw())) {
-			mv.setViewName("redirect:/admin/account/update");
+			mv.setViewName("redirect:/admin/account/update?userId="+auth.getName());
 		}else {
-			mv.setViewName("redirect:/admin/account/manage");
+			mv.setViewName("redirect:/admin/main");
 		}
 		
 		return mv;
 	}
 	
-	@GetMapping("/adminmanager")
+	@GetMapping("/update")
 	public ModelAndView accountUpdate(ModelAndView mv, String userId) {;
 		
 		AdUserDto dto = service.selectUser(userId);
@@ -123,8 +124,10 @@ public class AdAccountController {
 		return mv;
 	}
 	
-	@PostMapping("/adminmanager")
+	@PostMapping("/update")
 	public ModelAndView accountConfirm(ModelAndView mv,RedirectAttributes rttr, AdUserDto dto) {;
+	
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	
 	int result = -1;
 	
@@ -137,9 +140,13 @@ public class AdAccountController {
 	if(result != 1) {
 		rttr.addFlashAttribute("addto", dto);
 		rttr.addFlashAttribute("masage", "실패 했습니다.관리자 계정 관리 페이지부터 다시해 주세요");
-		mv.setViewName("redirect:/admin/account/adminmanager?userId="+dto.getUserId());
+		mv.setViewName("redirect:/admin/account/update?userId="+dto.getUserId());
 	}else {
-		mv.setViewName("redirect:/admin/account/manage");
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM"))) {
+			mv.setViewName("redirect:/admin/account/manage");			
+		}else {
+			mv.setViewName("redirect:/admin/main");
+		}
 	}
 	
 
