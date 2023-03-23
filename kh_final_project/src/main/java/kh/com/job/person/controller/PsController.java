@@ -110,7 +110,6 @@ public class PsController {
 		System.out.println("로그인정보: "+principal.getName());
 		if(principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
-//			mv.setViewName("redirect:/person/mypage");
 		}else {
 			mv.setViewName("redirect:/");
 		}
