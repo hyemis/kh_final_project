@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/business/myinfo")
 public class BsMyinfoController {
 		
-	@GetMapping("/info")
+	@GetMapping("/companyinfo")
 	public ModelAndView info(ModelAndView mv) {
 			
 		return mv;
