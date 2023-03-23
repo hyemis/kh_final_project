@@ -5,22 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 @Controller
-@RequestMapping("/business")
-public class BsMainController {
-	
-	//메인창
-	@GetMapping("/main")
-	public ModelAndView main(ModelAndView mv) {
+@RequestMapping("/business/myinfo")
+public class BsMyinfoController {
 		
-		return mv;
-	}
-	
-	@GetMapping("/myinfo")
-	public ModelAndView myInfo(ModelAndView mv) {
-		
+	@GetMapping("/info")
+	public ModelAndView info(ModelAndView mv) {
+			
 		return mv;
 	}
 		
-	
+	@GetMapping("/infowrite")
+	public ModelAndView infoWrite(ModelAndView mv) {
+			
+		return mv;
+	}
 }

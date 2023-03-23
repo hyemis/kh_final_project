@@ -16,29 +16,27 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
 	<div class="container-xxl py-5">
+		<h1 class="mb-3 text-primary">회사소개를 작성해 주세요</h1>
+			
+		<!-- 입력창 start -->
+		<div class="container">
+        	<div class="row">
+        		<p>해당하는 태그를 클릭해주세요</p>
+				<div class="col-2"><h3>태그</h3></div>
+				<div class="col-10">
+				<form action="" method="post" >
+					   
+				<input type="checkbox" name="item" value="신발>"신발
+		
 	
-			<!-- 회사로고, 회사명, 태그 -->
-            <div class="container">
-                <div class="row">
-                	<div class="col-1">
-               			<div class="icon p-2 me-2">
-                        <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
-                    	</div>
-                    </div>
-                    <div class="col-11 ">
-                     <h1 class="mb-3 text-primary">백엔드개발자</h1>
-                    </div>
-                </div>
-                <div>태그 위치</div>
-            </div>	
-	
-	
-	
-	
-	
-	
-	
+				</form>
+				</div>
+            </div>
+		</div>
+		<!-- 입력창 end-->
+		
 	</div>
+	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script type="text/javascript">
