@@ -62,13 +62,13 @@
 
 		 <div class="min-vh-100 d-flex justify-content-center align-items-center">
 			 <div class="dept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
-			 	<div class="m-2 bg-white" style="min-height: 300px;">
-			 		<div class="m-2 text-lg-end">
-			 			<button class="addCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
-			 		</div>
-			 		<c:forEach var="fdeptList" items="${fdeptList}" >
+		 		<div class="m-2 text-lg-end">
+		 			<button class="addFdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
+		 		</div>
+			 	<div class="m-3 bg-white fdeptList" style="min-height: 300px;">
+			 		<c:forEach var="fList" items="${fdeptList}" >
 			 			<div class="mx-2">
-			 				${fdeptList.categoryId} : ${fdeptList.categoryName}
+			 				${fList.categoryId} : ${fList.categoryName}
 			 			</div> 
 			 		</c:forEach>
 			 	</div>
@@ -84,7 +84,21 @@
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
 		
 		<script type="text/javascript">
-		 
+		$(".addFdeptCate").click(function() {
+		    if($(".fdeptList input").length == 0){
+		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
+		        inputCate += '<button type="button" class="closeInput">X</button>';
+		        inputCate += '<form action="" method="post">'
+		        inputCate += '<div class="mx-2 col-6"><label for="categoryId">아이디</label><input type="text" class="categoryId form-control form-control-sm" name="categoryId" id="categoryId"></div>';
+		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
+		        inputCate += '</div>';
+		        $(".fdeptList").append(inputCate);        		
+		    }
+		});
+        
+        $(document).on('click', '.closeInput', function() {
+        	$(this).closest('#inputCate').first().remove();
+		});
 		</script>
 
         <!-- Back to Top -->

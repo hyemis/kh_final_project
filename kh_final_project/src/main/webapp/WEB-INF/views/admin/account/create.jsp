@@ -65,7 +65,7 @@
 				<div class="mb-3">
 			         <label for="userId">아이디</label>
 			         <input type="text" class="form-control" id="userId" name="userId" value="${admdto.userId}" required>
-				  <div class="invalid-feedback">아이디를  입력해주세요.</div>
+				  	 <div class="invalid-feedback">아이디를  입력해주세요.</div>
 				 	 <p style="color: red;">${masage }</p>
 		          </div>
 				  <div class="mb-3">
