@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.admin.model.dto.AdUserDto;
-import kh.com.job.admin.model.service.AdService;
+import kh.com.job.admin.model.service.AdAccountService;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Controller
@@ -26,7 +26,7 @@ public class AdAccountController {
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private AdService service;
+	private AdAccountService service;
 	
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mv, PsUserDto dto) {
