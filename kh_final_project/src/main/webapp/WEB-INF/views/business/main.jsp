@@ -132,8 +132,8 @@
 					<div class="rounded p-4">
 						<h5>기업 소개</h5>
 						<span href="/business/info">회사소개</span>
-						<span href="/business/info">뉴스레터</span>
-						<span href="/business/info">Q & A</span>
+						<span href="/">뉴스레터</span>
+						<span href="/">Q & A</span>
 					</div>
 				</a>
 			</div>
@@ -143,7 +143,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
 					<div class="rounded p-4">
 						<h5>내 정보</h5>
-						<p></p>
+						<span href="/">기업 정보 관리</span>
 					</div>
 				</a>
 			</div>

@@ -1,10 +1,13 @@
 package kh.com.job.person.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,24 +106,13 @@ public class PsController {
 	
 	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")
-	public ModelAndView viewMyPage(ModelAndView mv, String userId){
-		
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		try {
-		if(!userId.equals(auth.getName())) {
-			if(!(userId.isEmpty() || userId.equals(""))) {		
-					PsUserDto result = service.selectOne(userId);
-					mv.addObject("PsUserDto", result);
-					mv.setViewName("redirect:/person/myPage");
-			}else {
-				mv.setViewName("redirect:/");
-			}
+	public ModelAndView viewMyPage(ModelAndView mv, Principal principal) throws Exception{
+		System.out.println("로그인정보: "+principal.getName());
+		if(principal.getName() != null) {
+			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+		}else {
+			mv.setViewName("redirect:/");
 		}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		return mv;
 	}
 	
@@ -169,6 +161,11 @@ public class PsController {
 	}
 	
 	// 예외처리는 프로젝트 후반에 작성 
-	
+	@ExceptionHandler
+	public void exception(Exception e) {
+		e.printStackTrace();
+//		ModelAndView mv = new ModelAndView();
+//		return mv;
+	}
 
 }

@@ -19,50 +19,53 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 			 
-		        <form class="col-6" name=singUpForm action="signUp" method="post" onsubmit="return checkAll()">
-			        	<div class="m-4"><h3>JOB-A 회원정보수정</h3></div>
+		        <form class="col-6" name=updateForm action="update" method="post">
+			        	<div class="m-4" style="text-align: center;"><h3>회원정보수정</h3></div>
 			        	
 				          <div class="row">
 				          
 				            <div class="mb-3">
 				            <label for="userName"/>이름 </label>
-				              <input type="text" class="form-control" name="userId" value="${PsUserDto.userId}" readonly="readonly">
+				            <input name="userName" value="${PsUserDto.userName}" type="text" border="none" readonly="readonly"><br>
 				            </div>
 				            
 				            <div class="mb-3">
 				              <label for="userPw">새 비밀번호</label>
-				              <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
-				              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+				              <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합">
+				              <div class="invalid-feedback">변경할 비밀번호를 입력해주세요.</div>
 				            </div>
 				            
 				            <div class="mb-3">
-				              <label for="userPw">새 비밀번호 확인</label>
-				              <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
-				              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+				              <label for="userPw2">새 비밀번호 확인</label>
+				              <input type="password" class="form-control" name="userPw2" placeholder="8~16자리/ 영문 대소문자, 숫자 조합">
+				              <div class="invalid-feedback">변경할 비밀번호를 입력해주세요.</div>
 				            </div>
 						          
 				          <div class="mb-3">
 				            <label for="userPhone">휴대폰</label>
-				            <input type="text" class="form-control" name="userPhone" placeholder="'-' 빼고 숫자만 입력" required>
-				            <div class="invalid-feedback">휴대폰번호를 입력해주세요.</div>
+				            <input type="text" class="form-control" name="userPhone" >
+				            <div class="invalid-feedback">변경할 휴대폰번호를 입력해주세요.</div>
 				          </div>
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" required>
-				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
+				            <input type="text" class="form-control" name="userEmail">
+				            <div class="invalid-feedback">변경할 이메일을 입력해주세요.</div>
 				          </div>
+				          
+				          <div class="mb-3">
+				            <label for="termsPeriod">개인정보유효기간</label>
+				            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+							  <option selected>3개월</option>
+							  <option value="1">6개월</option>
+							  <option value="2">1년</option>
+							  <option value="3">5년</option>
+							</select>
 				
-				          
-				          <hr class="mb-4">
-				          
-				          <!-- <div class="custom-control custom-checkbox">
-				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
-				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
-				          </div> -->
+				         <hr class="mb-4"> 
 				          
 				         <div class="d-grid m-3">
-						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
+						  <button class="btn btn-primary" type="submit">회원정보 수정 완료</button>
 						</div>
 						
 						</div>
@@ -72,5 +75,18 @@
 		    </div>
 		</div>
 	</div>
+	
+	<!-- footer -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+	<style>
+	
+		$('.selectpicker').selectpicker({
+	      style: 'btn-info',
+	      size: 4
+	  });
+	  
+	</style>
+	
 </body>
 </html>
