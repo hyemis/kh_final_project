@@ -124,24 +124,25 @@ public class AdAccountController {
 	}
 	
 	@PostMapping("/adminmanager")
-	public ModelAndView accountConfirm(ModelAndView mv, AdUserDto dto) {;
+	public ModelAndView accountConfirm(ModelAndView mv,RedirectAttributes rttr, AdUserDto dto) {;
 	
 	int result = -1;
 	
-	if(dto != null) {
-		if(dto.getUserPw().isEmpty() && dto.getUserPw().equals("")) {
-			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
-		}
-		result = service.updateManager(dto);
-	}else {
-		mv.addObject("addto", dto);
-		mv.addObject("masage", "실패 햿습니다 다시 시도해 주세요");
-		mv.setViewName("redirect:/admin/account/update");
-		
+	if(!(dto.getUserPw().isEmpty() || dto.getUserPw().equals(""))) {
+		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 	}
 	
+	result = service.updateManager(dto);
 	
+	if(result != 1) {
+		rttr.addFlashAttribute("addto", dto);
+		rttr.addFlashAttribute("masage", "실패 했습니다.관리자 계정 관리 페이지부터 다시해 주세요");
+		mv.setViewName("redirect:/admin/account/adminmanager?userId="+dto.getUserId());
+	}else {
+		mv.setViewName("redirect:/admin/account/manage");
+	}
 	
+
 	return mv;
 	}
 
