@@ -42,8 +42,20 @@
 	<update id="updateManager">
 		UPDATE USER_TABLE
 		<set>
-			<if test="userPw != null">
-			USER_PW = #{userPW},
+			<if test= 'userPw != null and userPw != ""'>
+			USER_PW = #{userPw},
+			</if>
+			<if test= 'userName != null and userName != ""'>
+			USER_NAME = #{userName},
+			</if>
+			<if test= 'userPhone != null and userPhone != ""'>
+			USER_PHONE = #{userPhone},
+			</if>
+			<if test= 'userEmail != null and userEmail != ""'>
+			USER_EMAIL = #{userEmail},
+			</if>
+			<if test= 'userRole != null and userRole != ""'>
+			USER_ROLE = #{userRole},
 			</if>
 		</set>
 		WHERE USER_ID = #{userId}

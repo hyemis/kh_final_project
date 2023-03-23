@@ -70,8 +70,6 @@
 		<div class="logouttest mt-3 mx-5 text-lg-end text-center">
 			<a class="btn btn-info border-0 w-15 py-2" href="create" >계정 추가</a>
 		</div>
-	    	
-		
 		 <div class="container-xl px-5">
 		 	<table class="table container-lg ">
 		 		<thead>
