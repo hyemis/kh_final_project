@@ -60,7 +60,7 @@
     	
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
-		 <div class="container-xl mt-5 px-5 min-vh-100">
+		 <div class="container-xl mt-5 px-5 min-vh-100 d-flex justify-content-center">
 		 	<form class="col-6" action="create" method="post" name="Account" onsubmit="return checkAll()">
 				<div class="mb-3">
 			         <label for="userId">아이디</label>
