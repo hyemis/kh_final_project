@@ -64,7 +64,7 @@
 			 <div class="dept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
 			 	<div class="m-2 bg-white" style="min-height: 300px;">
 			 		<div class="m-2 text-lg-end">
-			 			<button class="m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
+			 			<button class="addCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
 			 		</div>
 			 		<c:forEach var="fdeptList" items="${fdeptList}" >
 			 			<div class="mx-2">
