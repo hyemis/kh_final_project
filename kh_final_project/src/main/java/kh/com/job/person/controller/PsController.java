@@ -1,8 +1,18 @@
 package kh.com.job.person.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,9 +23,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.com.job.common.file.FileUtil;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsService;
 
@@ -26,9 +38,17 @@ public class PsController {
 	@Autowired
 	private PsService service;
 	
+	@Autowired
+	@Qualifier("fileUtil")
+	private FileUtil fileUtil;
+	
+	private final static String UPLOAD_FOLDER = "\\resources\\uploadfiles";
+	
 	//암호화 기능 가지고 있는 클래스 자동주입
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+
 
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
@@ -63,11 +83,27 @@ public class PsController {
 	
 	// 회원가입 작성 
 	@PostMapping("/signUp")
-	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr ) {
-		int result = -1;
+	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr
+			,@RequestParam(name="report", required = false) MultipartFile multi
+			, HttpServletRequest request, String userBirth2) {
+
+		  int result = -1;
+		  System.out.println(userBirth2);
+		 
+		  // 파일 첨부 
+		  Map<String, String> filePath;
+
+		  try {
+		         filePath = fileUtil.saveFile(multi, request, null);
+		         dto.setUserPic(filePath.get("rename"));
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      }
+		  // 패스워드 암호화 
 		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 		
 		try {
+			dto.setUserBirth(Timestamp.valueOf(userBirth2));
 			result = service.insert(dto);
 		} catch (Exception e) {
 			e.printStackTrace();

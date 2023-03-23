@@ -1,7 +1,9 @@
 package kh.com.job.person.model.dto;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +34,7 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 	private String userId;
 	private String userPw;
 	private String userPhone;
-	private Date userBirth;
+	private Timestamp userBirth;
 	private String userEmail;
 	private String userAdress;
 	private String userName;

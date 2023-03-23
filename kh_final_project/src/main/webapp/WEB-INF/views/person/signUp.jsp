@@ -52,7 +52,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="userBirth">생년월일</label>
-				            <input type="text" class="form-control" name="userBirth" placeholder="YYYYMMDD" required>
+				            <input type="date" class="form-control" name="userBirth2" placeholder="YYYYMMDD" required>
 				            <div class="invalid-feedback">생년월일을 입력해주세요.</div>
 				          </div>
 				          
