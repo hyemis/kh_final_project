@@ -52,7 +52,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="userBirth">생년월일</label>
-				            <input type="text" class="form-control" name="userBirth" placeholder="YYYYMMDD" required>
+				            <input type="text" class="form-control" name="userBirth2" placeholder="YYYYMMDD" required>
 				            <div class="invalid-feedback">생년월일을 입력해주세요.</div>
 				          </div>
 				          
@@ -66,6 +66,12 @@
 				            <label for="userEmail">이메일</label>
 				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" required>
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
+				          </div>
+				          
+				          <div class="mb-3">
+				            <label for="userAdress">주소</label>
+				            <input type="text" class="form-control" name="userAdress" placeholder="서울시 자바구 자바동" required>
+				            <div class="invalid-feedback">주소를 입력해주세요.</div>
 				          </div>
 				
 							<div class="mb-3">
@@ -129,6 +135,8 @@
 		        } else if (!checkPhone(singUpForm.userPhone.value)) {
 		            return false;
 		        } else if (!checkEmail(singUpForm.userEmail.value)) {
+		            return false;
+		        }  else if (!checkAdress(singUpForm.userAdress.value)) {
 		            return false;
 		        }  
 		        return true;
@@ -247,7 +255,19 @@
         return true; //확인이 완료되었을 때
    		}
 		
-		// 회원가입 성공, 실패 alret
+		// 주소 체크 
+		function checkAdress() {
+        var text = document.getElementById("userAdress");
+        if (!checkExistData(text.value, "주소를")) {
+            alert("주소를 입력해 주세요!");
+            return false;
+        } else
+            return true;
+    	}
+		
+		
+		
+		// 회원가입 실패 alret
 		var msg = "${msg}";
 		if(msg) {
 			alert(msg);

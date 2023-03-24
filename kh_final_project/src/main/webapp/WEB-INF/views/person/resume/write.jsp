@@ -16,6 +16,7 @@
 		<div class="grid gap-3 border border-dark-subtle">
 		
 		 <form name="resumeForm" action="wrtie" method="post"> 
+		 
 			<div class="form-floating">
 			  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
 			  <label for="floatingTextarea">이력서 제목을 입력하세요.</label>
