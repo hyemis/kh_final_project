@@ -21,15 +21,29 @@ public class PsResumeController {
 	private PsService pservice;
 	
 	
-	//
+	//이력서관리 페이지 열기
 	@GetMapping("/list")
-	public ModelAndView doList(ModelAndView mv) {
+	public ModelAndView doList(ModelAndView mv, String userId) {
+		try {
+			
+			PsUserDto result = pservice.selectOne(userId);
+			
+			if(result!=null) {
+				mv.addObject("userinfo", result);
+				mv.setViewName("person/resume/list");
+			} else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
 	
 	
 	
-	// 이력서 페이지 열기 
+	// 이력서 작성 페이지 열기 
 	@GetMapping("/write")
 	public ModelAndView doResume(ModelAndView mv, String userId){
 			System.out.println(userId);
