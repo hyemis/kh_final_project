@@ -26,18 +26,12 @@ public class BsMyinfoController {
 		return mv;
 	}
 	
-	@PostMapping("/infowrite")
-    public String save(
-            @RequestParam(value = "text") String text,
-            @RequestParam(value = "tag", required = false) String checkbox,
-            @RequestParam(value = "file", required = false) MultipartFile file) {
-        // 텍스트, 체크박스, 파일을 저장하는 로직을 작성
-        // text 변수에는 텍스트 필드의 값이, tag 변수에는 체크박스의 값이,
-        // file 변수에는 업로드한 파일이 저장됩니다.
-
-        return "result";
-    }
+	//회사소개 정보 저장 - 태그, 소개내용, 기업사진
+	//@PostMapping("/infowrite")
+    //todo
+            
+    
 }
-
-
-​
+	
+	
+	

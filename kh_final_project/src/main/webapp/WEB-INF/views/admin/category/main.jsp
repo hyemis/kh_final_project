@@ -67,8 +67,11 @@
 		 		</div>
 			 	<div class="m-3 bg-white fdeptList" style="min-height: 300px;">
 			 		<c:forEach var="fList" items="${fdeptList}" >
-			 			<div class="mx-2">
+			 			<div class="mx-2 fcateinfo">
+			 				<input type="hidden" class="categoryId" name="categoryId" value="${fList.categoryId}">
+			 				<input type="hidden" class="categoryName" name="categoryName" value="${fList.categoryName}">
 			 				${fList.categoryId} : ${fList.categoryName}
+			 				<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>
 			 			</div> 
 			 		</c:forEach>
 			 	</div>
@@ -87,18 +90,58 @@
 		$(".addFdeptCate").click(function() {
 		    if($(".fdeptList input").length == 0){
 		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
-		        inputCate += '<button type="button" class="closeInput">X</button>';
+		        inputCate += '<button type="button" class="closeInput btn btn-dark btn-sm border-0">X</button>';
 		        inputCate += '<form action="" method="post">'
 		        inputCate += '<div class="mx-2 col-6"><label for="categoryId">아이디</label><input type="text" class="categoryId form-control form-control-sm" name="categoryId" id="categoryId"></div>';
 		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
+		        inputCate += '<button type="button" class="addFcate btn btn-dark btn-sm border-0 my-1">추가</button>'
 		        inputCate += '</div>';
 		        $(".fdeptList").append(inputCate);        		
 		    }
 		});
         
+		//클릭시 inputCate 안에 내용 삭제
         $(document).on('click', '.closeInput', function() {
         	$(this).closest('#inputCate').first().remove();
 		});
+        
+		//addFcate 1단계 카테고리 추가 (inputCate 안에 input태그의 정보)
+        $(document).on('click', '.addFcate', function() {
+        	let categoryId = $(this).closest('.inputCate').find('.categoryId').val();
+        	let categoryName = $(this).closest('.inputCate').find('.categoryName').val();
+        	let inputCate = $(this).closest('.inputCate');
+        	
+        	if(categoryId ===''){
+        		alert("아이디 입력해주세요");
+        	}else if(categoryId.match(/\s/g)){
+        		alert("공백 제거 해주세요");
+        	}else{
+	    		$.ajax({ 
+	    			url: "${pageContext.request.contextPath}/admin/category/addfcate"
+	    			, type: "post"
+	    			, data:  {categoryId : categoryId, categoryName : categoryName}
+	    			, success: function(result){
+	    				if(result == 1){
+	    					location.reload();
+	    				}else if(result == -1){
+	    					alert("아이디가 중복 되었습니다.");
+	    					inputCate.find('.categoryId').val('');
+	    				}else{
+	    					alert("등록에 실패 했습니다.");
+	    				}
+	    			}
+	    			, error: function(e){
+	    				alert(e +" : 오류")
+	    			}
+	    		});        		
+        	}
+        	
+		});
+		
+        $('.fcateinfo').on('click', function() {
+        	$(this).find('button').toggle();
+            $('.fcateinfo').not(this).find('button').hide();
+        });
 		</script>
 
         <!-- Back to Top -->

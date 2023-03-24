@@ -70,5 +70,15 @@
 		SELECT * FROM JA_CATEGORY
 		WHERE CATEGORY_DEPT = '1'
 	</select>
+	<!-- 카테고리 1단계 추가 -->
+	<insert id="addFirstCategory">
+		INSERT INTO JA_CATEGORY (CATEGORY_ID, CATEGORY_NAME, CATEGORY_DEPT, CATEGORY_TYPE) 
+		VALUES (#{categoryId}, #{categoryName}, '1', #{categoryId}) 
+	</insert>
+	<!-- 카테고리 아이디 중복 확인 -->
+	<select id="categoryCheck" resultType="_int">
+		SELECT COUNT(CATEGORY_ID) FROM JA_CATEGORY
+		WHERE CATEGORY_ID = #{categoryId} 
+	</select>
   
 </mapper>

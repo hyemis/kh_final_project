@@ -18,4 +18,12 @@ public class AdCategoryDao {
 		return sqlsession.selectList("admin.cateFdeptList");
 	}
 
+	public int addFirstCategory(AdCategoryDto dto) {
+		return sqlsession.insert("admin.addFirstCategory", dto);
+	}
+
+	public int categoryCheck(String categoryId) {
+		return sqlsession.selectOne("admin.categoryCheck", categoryId);
+	}
+
 }
