@@ -19,7 +19,7 @@
 		<h1 class="m-5 text-primary">회사소개를 작성해 주세요</h1>
 		
 		<div class="">
-		<form action="/companyinfo" method="post" > 
+		<form action="/save" method="post" enctype="multipart/form-data"> 
         	<div class="row ">
 				<div class="col-2 text-center"><h3>태그</h3></div>
 				<div class="col-10 text-start">
@@ -89,12 +89,12 @@
 				<div class="col-10 was-validated">
 				 	<div class="mb-3">
     					<label for="validationTextarea" class="form-label">내용작성</label>
-    					<textarea class="form-control is-invalid" id="validationTextarea" style="height: 300px;"
+    					<textarea class="form-control is-invalid" name="text" id="validationTextarea" style="height: 300px;"
     					placeholder="회사소개 내용을 입력하세요." required></textarea>
     					<div class="invalid-feedback">회사소개를 작성해주세요</div>
    					 </div>
    					 <div class="mb-3">
-   					 	<input type="file" class="form-control" aria-label="file example" required>
+   					 	<input type="file" name="file" class="form-control" aria-label="file example" required>
    					 	<div class="invalid-feedback">Example invalid form file feedback</div>
   					 </div>
 				</div>
