@@ -78,10 +78,11 @@
 
 <style>
 .userId {
-	position: absolute;
+	position: fixed;;
 	top: 20px;
 	right: 210px;
 }
+
 </style>
 
 

@@ -19,6 +19,23 @@
 		<div class="grid gap-3 border border-dark-subtle">
 			<div class="p-2 g-col-6 border border-secondary">공간</div>
 		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	v
+		  	<div class="p-2 g-col-6 border border-secondary">공간</div>
+		  	v
+		  	
+		  	v
+		  	
+		  	
 		</div>
 	
 	</div>

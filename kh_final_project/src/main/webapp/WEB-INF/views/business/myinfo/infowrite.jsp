@@ -78,11 +78,19 @@
 				<input type="checkbox" name="tag" value="어학교육">어학교육
 				<input type="checkbox" name="tag" value="해외연수">해외연수
 				</p>
-				</div>
+				<hr></div>
             </div>
             <div class="row ">
-				<div class="col-2 text-center"><h3></h3></div>
-				<div class="col-10 "><hr></div>
+				<div class="col-2 text-center"><h3>직원수</h3></div>
+				<div class="col-10 ">
+				<input type="text">
+				<hr></div>
+			</div>
+			<div class="row ">
+				<div class="col-2 text-center"><h4>평균연봉</h4></div>
+				<div class="col-10 ">
+				<input type="text">
+				<hr></div>
 			</div>
 			 <div class="row ">
 				<div class="col-2 text-center"><h3>소개글</h3></div>
