@@ -58,27 +58,24 @@
 									<div class="d-grid gap-2 d-md-flex mb-3">
 										<h3 class="mb-3">회원정보수정</h3>
 
-										<!-- 모달창 -->
-										<input type="button" value="바로가기" id="btnOpen">
+										<!-- 모달창 바로가기버튼 -->
+										<button class="btn btn-primary" type="button" id="btnOpen">바로가기</button>
 
 
 
 									</div>
 
 									<div class="pi-1">
-										<label for="userName" />이름 : </label> <input name="userName"
-											value="${PsUserDto.userName}" type="text" readonly="readonly"><br>
-
-										<label for="userPhone" />핸드폰 : </label> <input
-											value="${PsUserDto.userPhone }" type="text"
-											readonly="readonly"><br> <label for="userEmail" />이메일
-										: </label> <input value="${PsUserDto.userEmail }" type="text"
-											readonly="readonly"><br>
-									</div>
-								</div>
+								<div id="userName"/>이름 : ${PsUserDto.userName}</div>
+								
+								<div id="userPhone"/>핸드폰 : ${PsUserDto.userPhone }</div>
+								
+								<div id="userEmail"/>이메일 : ${PsUserDto.userEmail }</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
 
 					<div class="bg-light rounded p-3">
 						<div class="bg-white rounded p-4"
@@ -93,61 +90,60 @@
 					</div>
 				</div>
 			</div>
-			<!-- 모달 -->
-			<div id="modal">
-				<div id="content">
-					<input type="button" value="X" class="close" id="btnClose" /> <label>비밀번호를
-						입력하세요</label><br /> <input type="password" id="confirmPw"
-						name="confirmPw" /> <input type="button" value="확인" id="btnCheck"
-						onclick="checkPassword();" />
-				</div>
-			</div>
+			
 
-		</div>
+				<form id="modal" name="modal" method="post" action="pwChk">
+					<div id="content">
+						<input type="button" value="X" class="close" id="btnClose"/>
+						<label>비밀번호를 입력하세요</label><br/>
+						<input type="password" id="confirmPw" name="confirmPw" />
+						<button class="btn btn-primary" type="submit">확인</button>
+					</div>
+				</form>
+			
 
 
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 		<style>
-#modal {
-	display: none;
-	z-index: 1;
-	position:fixed;
-	left: 50%;
-	top: 50%;
-	width: 100%;
-	height: 100%;
-}
-
-#modal>#content {
-	width: 300px;
-	position: absolute;
-	margin: auto;
-	padding: 20px;
-	background-color: #fff;
-}
-
-#modal .close {
-	position: absolute;
-	top: 4px;
-	right: 4px;
-	font-size: 20px;
-	border: 0;
-	background-color: #fff;
-}
-
-#modal .close:hover, #modal .close:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
-}
-</style>
+			#modal {
+				display: none;
+				z-index: 1;
+				position:fixed;
+				left: 50%;
+				top: 50%;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#modal>#content {
+				width: 300px;
+				position: absolute;
+				margin: auto;
+				padding: 20px;
+				background-color: #fff;
+			}
+			
+			#modal .close {
+				position: absolute;
+				top: 4px;
+				right: 4px;
+				font-size: 20px;
+				border: 0;
+				background-color: #fff;
+			}
+			
+			#modal .close:hover, #modal .close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		</style>
 
 		<script>
 			// modal창
 			var btnOpen = document.getElementById('btnOpen');
-			var btnCheck = document.getElementById('btnCheck');
 			var btnClose = document.getElementById('btnClose');
 
 			// modal창 감춤
@@ -162,21 +158,8 @@
 				modal.style.display = 'block';
 			}
 
-			btnCheck.onclick = closeRtn;
 			btnClose.onclick = closeRtn;
 
-			// 입력 비밀번호 체크 - 일치하면 회원정보수정 페이지로 이동
-			function checkPassword() {
-				var userPw = document.getElementById("userPw").value;
-				var confirmPw = document.getElementById("confirmPw").value;
-				if (userPw != confirmPassword) {
-					alert("비밀번호가 일치하지 않습니다.");
-					return false;
-				} else {
-					location.href = "update.jsp";
-					return true;
-				}
-			}
 		</script>
 </body>
 </html>

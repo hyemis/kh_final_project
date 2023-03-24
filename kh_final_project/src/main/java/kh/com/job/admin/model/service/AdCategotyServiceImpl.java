@@ -28,6 +28,21 @@ public class AdCategotyServiceImpl implements AdCategotyService{
 	public int categoryCheck(String categoryId) {
 		return dao.categoryCheck(categoryId);
 	}
+
+	@Override
+	public int reqCheck(AdCategoryDto dto) {
+		return dao.reqCheck(dto);
+	}
+
+	@Override
+	public int delFirstCategory(AdCategoryDto dto) {
+		return dao.delFirstCategory(dto);
+	}
+
+	@Override
+	public List<AdCategoryDto> cateMdeptList(String categoryId) {
+		return dao.cateMdeptList(categoryId);
+	}
 	
 
 }

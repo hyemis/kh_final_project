@@ -12,4 +12,10 @@ public interface AdCategotyService {
 
 	public int categoryCheck(String categoryId);
 
+	public int reqCheck(AdCategoryDto dto);
+
+	public int delFirstCategory(AdCategoryDto dto);
+
+	public List<AdCategoryDto> cateMdeptList(String categoryId);
+
 }
