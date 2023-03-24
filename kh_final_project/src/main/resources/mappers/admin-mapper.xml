@@ -80,5 +80,15 @@
 		SELECT COUNT(CATEGORY_ID) FROM JA_CATEGORY
 		WHERE CATEGORY_ID = #{categoryId} 
 	</select>
+	
+	<select id="reqCheck" resultType="_int">
+		SELECT COUNT(CATEGORY_ID) FROM JA_CATEGORY
+		WHERE REQ_CATEGORY_ID = #{categoryId} 
+	</select>
+	
+	<delete id="delFirstCategory">
+		DELETE FROM JA_CATEGORY
+		WHERE CATEGORY_ID = #{categoryId}
+	</delete>
   
 </mapper>

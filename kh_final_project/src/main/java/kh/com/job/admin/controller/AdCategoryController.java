@@ -46,5 +46,26 @@ public class AdCategoryController {
 		
 		return result;
 	}
+	
+	@PostMapping("/delfcate")
+	@ResponseBody
+	public int delFirstCategory(ModelAndView mv, AdCategoryDto dto){
+		
+		int result = -1;
+		int reqCheck = 1;
+
+		reqCheck = service.reqCheck(dto);
+		
+		System.out.println(reqCheck);
+		
+		if(reqCheck < 1) {
+			result = service.delFirstCategory(dto);
+		}else if (reqCheck > 1) {
+			result = 3;
+		}
+		
+		
+		return result;
+	}
 
 }
