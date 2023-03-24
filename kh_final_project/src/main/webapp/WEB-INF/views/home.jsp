@@ -21,5 +21,13 @@
 	
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<script>
+		// 회원가입 성공, 실패 alret
+		var msg = "${msg}";
+		if(msg) {
+			alert(msg);
+		}
+	</script>
 </body>
 </html>

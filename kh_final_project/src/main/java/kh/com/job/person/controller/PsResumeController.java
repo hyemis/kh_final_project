@@ -20,9 +20,9 @@ public class PsResumeController {
 	@Autowired
 	private PsService pservice;
 	
-	// 이력서 작성 
+	// 이력서 페이지 열기 
 	@GetMapping("/write")
-	public ModelAndView doresume(ModelAndView mv, String userId){
+	public ModelAndView doResume(ModelAndView mv, String userId){
 			System.out.println(userId);
 		try {
 			
@@ -41,7 +41,11 @@ public class PsResumeController {
 		return mv;
 	}
 	
-
+	// 이력서 작성
+	@PostMapping("/write")
+	public ModelAndView writeResume(ModelAndView mv) {
+		return mv;
+	}
 	
 	// 예외처리는 프로젝트 후반에 작성 
 	

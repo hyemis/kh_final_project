@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
 
@@ -25,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -86,34 +91,26 @@ public class PsController {
 			, PsUserDto dto
 			, RedirectAttributes rttr
 			,@RequestParam(name="report", required = false) MultipartFile multi
-			, HttpServletRequest request
-			, String userBirth) {
-
+			, HttpServletRequest request) {
+		
+	
 		  int result = -1;
-		  System.out.println("string 으로 받은 값 " + userBirth);
-		  
+		  // 파일 첨부
 		  Map<String, String> filePath;
-
 		  try {
-		         filePath = fileUtil.saveFile(multi, request, null);
-		         dto.setUserPic(filePath.get("rename"));
-		      } catch (Exception e) {
-		         e.printStackTrace();
-		      }
-		  // 패스워드 암호화 
-		dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
+			filePath = fileUtil.saveFile(multi, request, null);
+			dto.setUserPic(filePath.get("rename"));
+		  } catch (Exception e1) {
+			e1.printStackTrace();
+		  }
+		  
+		// 패스워드 암호화 
 		
 		try {
-				
-			// text 로 받은 날짜 timestamp 로 변환해서 dto 에 저장 
-			 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			 Date date = dateFormat.parse(userBirth);
-			 Timestamp timestamp = new Timestamp(date.getTime());
-			 
-			 System.out.println("변환 했지 >" + timestamp);
-			 dto.setUserBirth(timestamp);
-			 
+			
+			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 			result = service.insert(dto);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,13 +118,13 @@ public class PsController {
 		if(result > 0 ) {
 			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
 			mv.setViewName("redirect:/");
+			return mv;
 		} else {
 			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
 			mv.setViewName("redirect:/person/signUp");
+			return mv;
 		}
 		
-		
-		return mv;
 	}
 
 	// 아이디 중복 체크 
@@ -137,6 +134,7 @@ public class PsController {
 		String result = "N";
 		
 		try {
+			
 			int idChk = service.idChk(id);
 			if(idChk == 1) {
 				result = "Y";

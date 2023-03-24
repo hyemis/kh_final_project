@@ -57,24 +57,16 @@ public class boardController {
 			
 		// 게시판 - 회사소개 
 			@PostMapping("/companyinfo")
-			public String tagList(@RequestParam(required = false) List<String> tag){
-				 for (String : tag) {
-			            service.insert();
-			        }
-			        return "selectPage";
-			    }
+			public ModelAndView companyinfo(ModelAndView mv) {
+				return mv;		        
+			        
+		}
 		
 			
 	
 			
 			
-//		    @GetMapping("/multi")
-//		    public String multi(@RequestParam List<String> checkedValue){
-//		        for (String c : checkedValue) {
-//		            service.insert(c);
-//		        }
-//		        return "selectPage";
-//		    }
+
 		
 		//이거 매핑 주소 post 말고 다른걸로 해주실 수 있나요???
 		// 게시글 
