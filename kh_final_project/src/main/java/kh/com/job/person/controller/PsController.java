@@ -161,6 +161,23 @@ public class PsController {
 	}
 	
 	
+	// 마이페이지에서 회원 비밀번호 확인
+	@PostMapping("/pwChk") 
+	public ModelAndView pwChk(String confirmPw, ModelAndView mv) throws Exception{
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		PsUserDto pdto = service.selectOne(auth.getName());
+				
+		if(passwordEncoder.matches(confirmPw, pdto.getUserPw())) {
+			mv.setViewName("redirect:/person/update?userId="+auth.getName());
+		}else {
+			mv.setViewName("redirect:/");
+		}
+			
+		return mv;
+		}
+	
+	
 	// 회원정보 업데이트 화면
 	@GetMapping("/update")
 	public ModelAndView viewUpdate(ModelAndView mv, Principal principal) throws Exception {
