@@ -1,7 +1,5 @@
 package kh.com.job.business.model.dto;
 
-
-
 import java.sql.Clob;
 
 import org.springframework.stereotype.Component;

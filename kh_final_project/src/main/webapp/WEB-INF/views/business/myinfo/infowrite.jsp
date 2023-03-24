@@ -11,17 +11,18 @@
 <title>회사소개작성</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
-	<div class="container m-5">
+	
+	<div class="container-fluid m-5">
 		<h1 class="m-5 text-primary">회사소개를 작성해 주세요</h1>
 		
 		<div class="">
 		<form action="/save" method="post" enctype="multipart/form-data"> 
         	<div class="row ">
-				<div class="col-2 text-center"><h3>태그</h3></div>
+				<div class="col-2 text-center"><h4>태그</h4></div>
 				<div class="col-10 text-start">
 				<p><a class="fw-bold">근무/휴가</a>
 				<input type="checkbox" name="tag" value="유연근무">유연근무
@@ -81,30 +82,35 @@
 				<hr></div>
             </div>
             <div class="row ">
-				<div class="col-2 text-center"><h3>직원수</h3></div>
+				<div class="col-2 text-center font-monospace"><h4>직원수</h4></div>
 				<div class="col-10 ">
-				<input type="text">
+				<a>직원수를 숫자로 입력해주세요</a>
+				<input type="text" name="employee" style="width: 30%;" placeholder="예시)300">명
+				
 				<hr></div>
 			</div>
 			<div class="row ">
-				<div class="col-2 text-center"><h4>평균연봉</h4></div>
+				<div class="col-2 text-center font-monospace"><h4>평균연봉</h4></div>
 				<div class="col-10 ">
-				<input type="text">
+				<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a>
+				<input type="text" name="salaryAvg"style="width: 30%;" placeholder="예시)3500">만원
 				<hr></div>
 			</div>
 			 <div class="row ">
-				<div class="col-2 text-center"><h3>소개글</h3></div>
+				<div class="col-2 text-center font-monospace"><h4>소개글</h4></div>
 				<div class="col-10 was-validated">
 				 	<div class="mb-3">
     					<label for="validationTextarea" class="form-label">내용작성</label>
-    					<textarea class="form-control is-invalid" name="text" id="validationTextarea" style="height: 300px;"
+    					<textarea class="form-control is-invalid" name="boardContent" id="validationTextarea" style="height: 300px;"
     					placeholder="회사소개 내용을 입력하세요." required></textarea>
     					<div class="invalid-feedback">회사소개를 작성해주세요</div>
    					 </div>
+   					 <!-- TODO : file 첨부 
    					 <div class="mb-3">
    					 	<input type="file" name="file" class="form-control" aria-label="file example" required>
    					 	<div class="invalid-feedback">Example invalid form file feedback</div>
   					 </div>
+  					  -->
 				</div>
 			</div>
 			<div class="container mb-3 mx-auto">
@@ -117,8 +123,7 @@
 		
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-	
-	<script type="text/javascript">
+
 	
 	</script>
 </body>

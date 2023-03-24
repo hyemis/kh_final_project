@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="business">
 
+	<select id="selectOne" parameterType="string" resultType="budto">
+  	select * from USER_TABLE where USER_ID=#{userId}
+	</select>
+	
+	<!-- BOARD에서 회사소개 코드번호 UDB06 인 게시물 꺼내옴  -->
+	<select id="selectList" resultType="bidto">
+	select * from BOARD where CATEGORY_ID='UDB06'
+	</select>
+
 </mapper>

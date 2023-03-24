@@ -61,7 +61,7 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 
 		 <div class="min-vh-100 d-flex justify-content-center align-items-center">
-			 <div class="dept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
+			 <div class="fdept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
 		 		<div class="m-2 text-lg-end">
 		 			<button class="addFdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
 		 		</div>
@@ -76,10 +76,10 @@
 			 		</c:forEach>
 			 	</div>
 			 </div>
-			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
+			 <div class="mdept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
 			 
 			 </div>
-			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
+			 <div class="ldept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
 			 
 			 </div>
 		 </div>
@@ -87,8 +87,9 @@
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
 		
 		<script type="text/javascript">
+		
 		$(".addFdeptCate").click(function() {
-		    if($(".fdeptList input").length == 0){
+		    if($(".fdeptList input[type='text']").length == 0){
 		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
 		        inputCate += '<button type="button" class="closeInput btn btn-dark btn-sm border-0">X</button>';
 		        inputCate += '<form action="" method="post">'
@@ -96,6 +97,7 @@
 		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
 		        inputCate += '<button type="button" class="addFcate btn btn-dark btn-sm border-0 my-1">추가</button>'
 		        inputCate += '</div>';
+		        //inputCate 를  클래스명 fdeptList 아래 추가
 		        $(".fdeptList").append(inputCate);        		
 		    }
 		});
@@ -139,9 +141,82 @@
 		});
 		
         $('.fcateinfo').on('click', function() {
+        	//삭제 버튼 나오기
         	$(this).find('button').toggle();
             $('.fcateinfo').not(this).find('button').hide();
+            
+            let id = $(this).find('.categoryId').val(); 
+            //다음 단계나오게
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/category/listmcate"
+    			, type: "post"
+    			, data:  {categoryId : id}
+    			, dataType:"json"
+    			, success: function(result){
+    				
+    				let htmlVal = '<div class="m-2 text-lg-end">';
+    				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+    				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
+    				
+    				for(i = 0; i< result.length; i++){
+    					let list = result[i];
+    					htmlVal += '<div class="mx-2 mcateinfo">';
+    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
+    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
+    					htmlVal += list.categoryId +' : '+list.categoryName;
+    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
+    					htmlVal += '</div>';
+    				}
+    				htmlVal += '</div>';
+    				$(".mdept").html(htmlVal);
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
         });
+        
+        //카테고리 지우기 버튼
+        $('.cateDelete').on('click', function() {
+        	let id = $(this).prevAll('.categoryId').val();
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/category/delfcate"
+    			, type: "post"
+    			, data:  {categoryId : id}
+    			, success: function(result){
+    				if(result == 1){
+    					location.reload();
+    				}else if(result == 3){
+    					alert("해당 카테고리를 참조하고 있는 하위 카테고리가 존재 합니다.");
+    				}else{
+    					alert("삭제에 실패 했습니다.");
+    				}
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+        	
+        });
+        
+        $(document).on('click', '.addMdeptCate', function() {
+		    if($(".mdeptList input[type='text']").length == 0){
+		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
+		        inputCate += '<button type="button" class="closeInput btn btn-dark btn-sm border-0">X</button>';
+		        inputCate += '<form action="" method="post">'
+		        inputCate += '<div class="mx-2 col-6"><label for="categoryId">아이디</label><input type="text" class="categoryId form-control form-control-sm" name="categoryId" id="categoryId"></div>';
+		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
+		        inputCate += '<button type="button" class="addMcate btn btn-dark btn-sm border-0 my-1">추가</button>'
+		        inputCate += '</div>';
+		        $(".mdeptList").append(inputCate);        		
+		    }
+		});
+        
+        $(document).on('click', '.mcateinfo', function() {
+        	$(this).find('button').toggle();
+            $('.mcateinfo').not(this).find('button').hide();
+        });
+        
 		</script>
 
         <!-- Back to Top -->

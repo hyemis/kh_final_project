@@ -58,10 +58,8 @@
 									<div class="d-grid gap-2 d-md-flex mb-3">
 										<h3 class="mb-3">회원정보수정</h3>
 
-										<!-- 모달창 -->
+										<!-- 모달창 바로가기버튼 -->
 										<button class="btn btn-primary" type="button" id="btnOpen">바로가기</button>
-
-
 
 									</div>
 
@@ -90,8 +88,9 @@
 					</div>
 				</div>
 			</div>
-			<!-- 모달창 -->	
-				<form id="modal" method="post">
+			
+
+				<form id="modal" name="modal" method="post" action="pwChk">
 					<div id="content">
 						<input type="button" value="X" class="close" id="btnClose"/>
 						<label>비밀번호를 입력하세요</label><br/>
@@ -99,52 +98,50 @@
 						<button class="btn btn-primary" type="submit">확인</button>
 					</div>
 				</form>
-
-	
+			
 
 
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 		<style>
-#modal {
-	display: none;
-	z-index: 1;
-	position:fixed;
-	left: 50%;
-	top: 50%;
-	width: 100%;
-	height: 100%;
-}
-
-#modal>#content {
-	width: 300px;
-	position: absolute;
-	margin: auto;
-	padding: 20px;
-	background-color: #fff;
-}
-
-#modal .close {
-	position: absolute;
-	top: 4px;
-	right: 4px;
-	font-size: 20px;
-	border: 0;
-	background-color: #fff;
-}
-
-#modal .close:hover, #modal .close:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
-}
-</style>
+			#modal {
+				display: none;
+				z-index: 1;
+				position:fixed;
+				left: 50%;
+				top: 50%;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#modal>#content {
+				width: 300px;
+				position: absolute;
+				margin: auto;
+				padding: 20px;
+				background-color: #e5e5e5 ;
+			}
+			
+			#modal .close {
+				position: absolute;
+				top: 4px;
+				right: 4px;
+				font-size: 20px;
+				border: 0;
+				background-color: #e5e5e5 ;
+			}
+			
+			#modal .close:hover, #modal .close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		</style>
 
 		<script>
 			// modal창
 			var btnOpen = document.getElementById('btnOpen');
-			var btnCheck = document.getElementById('btnCheck');
 			var btnClose = document.getElementById('btnClose');
 
 			// modal창 감춤
@@ -159,8 +156,14 @@
 				modal.style.display = 'block';
 			}
 
-			btnCheck.onclick = closeRtn;
 			btnClose.onclick = closeRtn;
+			
+			
+			// 회원가입 실패 alret
+			var msg = "${msg}";
+			if(msg) {
+				alert(msg);
+			}
 
 		</script>
 </body>
