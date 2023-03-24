@@ -15,7 +15,7 @@
 	<div class="container-sm py-5">	
 		<div class="grid gap-3 border border-dark-subtle">
 		
-		 <form name="resumeForm" action="wrtie" method="post"> 
+		<!--  <form name="resumeForm" action="wrtie" method="post">  -->
 		 
 			<div class="form-floating">
 			  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
@@ -55,10 +55,193 @@
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
 							<h3 class="mb-3">학력사항</h3>
-							<div class="">
-								<div class="border border-dark-subtle">dd</div>
-								<div class="border border-dark-subtle">dd</div>
-							</div>
+								<!--  아코디언 -->
+								<div class="accordion accordion-flush" id="accordionFlushExample">
+								  <div class="accordion-item">
+								    <h2 class="accordion-header" id="flush-headingOne">
+								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+								        고등학교 졸업
+								      </button>
+								    </h2>
+								    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+								      <div class="accordion-body">
+								      	<!--  고등학교 학력사항 Form  -->
+								      		<form name="rHSchool" action="rHSchool" method="post">
+											 	 <div class="row mb-3">
+												    <label for="ged" class="col-sm-2 col-form-label">대입 검정고시</label>
+												    <div class="col-sm-10">
+														<div class="row mb-3">
+														    <div class="col-sm-10 offset-sm-2">
+														        <input class="form-check-input" type="checkbox" name="ged">
+														        <label class="form-check-label" for="ged">
+														         대입 검정고시
+														        </label>
+														    </div>
+												 		 </div>
+												    </div>
+												  </div>
+											 	
+												  <div class="row mb-3">
+												    <label for="hName" class="col-sm-2 col-form-label">고등학교명</label>
+												    <div class="col-sm-10">
+												      <input type="text" class="form-control" name="hName">
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="hDate" class="col-sm-2 col-form-label">고등학교 졸업일자</label>
+												    <div class="col-sm-10">
+												      <input type="Date" class="form-control" name="hDate">
+												    </div>
+												  </div>
+												   <div class="row mb-3">
+												    <label for="hMajor" class="col-sm-2 col-form-label">고등학교 전공계열</label>
+												    <div class="col-sm-10">
+												      <select class="form-select" name="hMajor">
+														  <option selected>전공계열</option>
+														  <option value="이과">이과</option>
+														  <option value="문과">문과</option>
+														  <option value="예체능">예체능</option>
+														</select>
+												    </div>
+												  </div>
+												  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+													  <button type="submit" class="btn btn-primary">save</button>
+												  </div>
+											</form>
+								      
+								      </div>
+								    </div>
+								  </div>
+								  
+								  <div class="accordion-item">
+								    <h2 class="accordion-header" id="flush-headingTwo">
+								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+								        대학교 졸업
+								      </button>
+								    </h2>
+								    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+								      <div class="accordion-body">
+								      	<!-- 대학교 졸업 form -->
+								      	<form name="rUniversity" action="rUniversity" method="post">
+											 	  <div class="row mb-3">
+												    <label for="uAct" class="col-sm-2 col-form-label">대학졸업유무</label>
+												    <div class="col-sm-10">
+												      <select class="form-select" name="uAct">
+														  <option selected>대학졸업유무선택</option>
+														  <option value="N">재학중</option>
+														  <option value="R">휴학</option>
+														  <option value="Y">졸업</option>
+														</select>
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="uCategory" class="col-sm-2 col-form-label">대학카테고리</label>
+												    <div class="col-sm-10">
+												      <select class="form-select" name="uCategory">
+														  <option selected>대학카테고리</option>
+														  <option value="T">2,3년제</option>
+														  <option value="F">4년제</option>
+														</select>
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="uName" class="col-sm-2 col-form-label">대학교명</label>
+												    <div class="col-sm-10">
+												      <input type="text" class="form-control" name="uName">
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="uDate" class="col-sm-2 col-form-label">대학재학기간</label>
+												    <div class="col-sm-10">
+												      <input type="Date" class="form-control" name="uDate">
+												    </div>
+												  </div>
+												   <div class="row mb-3">
+												    <label for="uMajor" class="col-sm-2 col-form-label">대학전공</label>
+												    <div class="col-sm-10">
+												      <input type="text" class="form-control" name="uMajor">
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="uPoint" class="col-sm-2 col-form-label">대학학점</label>
+												    <div class="col-sm-10">
+												      <input type="number" class="form-control" name="uPoint" placeholder="소수점 두번째 자리까지만 입력">
+												    </div>
+												  </div>
+												  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+													  <button type="submit" class="btn btn-primary">save</button>
+												  </div>
+											</form>
+								      </div>
+								    </div>
+								  </div>
+								  <div class="accordion-item">
+								    <h2 class="accordion-header" id="flush-headingThree">
+								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+								        대학원 졸업
+								      </button>
+								    </h2>
+								    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+								      <div class="accordion-body">
+								       <!-- 대학원 졸업 form -->
+								      	<form name="rGSchool" action="rGSchool" method="post">
+											 	  <div class="row mb-3">
+												    <label for="gAct" class="col-sm-2 col-form-label">대학원졸업유무</label>
+												    <div class="col-sm-10">
+												      <select class="form-select" name="gAct">
+														  <option selected>대학졸업유무선택</option>
+														  <option value="N">재학중</option>
+														  <option value="R">휴학</option>
+														  <option value="Y">졸업</option>
+														</select>
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="gCategory" class="col-sm-2 col-form-label">대학원카테고리</label>
+												    <div class="col-sm-10">
+												      <select class="form-select" name="gCategory">
+														  <option selected>대학원카테고리</option>
+														  <option value="M">석사</option>
+														  <option value="D">박사</option>
+														</select>
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="gName" class="col-sm-2 col-form-label">대학원명</label>
+												    <div class="col-sm-10">
+												      <input type="text" class="form-control" name="gName">
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="gDate" class="col-sm-2 col-form-label">대학원재학기간</label>
+												    <div class="col-sm-10">
+												      <input type="Date" class="form-control" name="gDate">
+												    </div>
+												  </div>
+												   <div class="row mb-3">
+												    <label for="gMajor" class="col-sm-2 col-form-label">대학원전공</label>
+												    <div class="col-sm-10">
+												      <input type="text" class="form-control" name="gMajor">
+												    </div>
+												  </div>
+												  <div class="row mb-3">
+												    <label for="gPoint" class="col-sm-2 col-form-label">대학원학점</label>
+												    <div class="col-sm-10">
+												      <input type="number" class="form-control" name="gPoint" placeholder="소수점 두번째 자리까지만 입력">
+												    </div>
+												  </div>
+												  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+													  <button type="submit" class="btn btn-primary">save</button>
+												  </div>
+											</form>
+								      
+								      
+								      
+								      </div>
+								    </div>
+								  </div>
+								</div>
+								
 						</div>
 					</div>
 				</div>
@@ -111,7 +294,7 @@
 			  <button class="btn btn-primary" type="button">cancle</button>
 			</div>
 			
-			</form>
+<!-- 			</form> -->
 		</div>
 	</div>
 	
