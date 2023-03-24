@@ -1,5 +1,9 @@
 package kh.com.job.temp.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +35,29 @@ public class TempController {
 
 	@GetMapping("/list")
 	public ModelAndView memberList(ModelAndView mv) {
-
-		System.out.println("멤버리스트");
-
-		try {
-			mv.addObject("mlist", service.memberList());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		
 
 		return mv;
+	}
+	
+	@PostMapping("/list")
+	public void testshow(ModelAndView mv, String userBirth2) {
+		
+		Timestamp timestamp = null;
+
+		// 문자열 값을 java.sql.Timestamp로 변환
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date parsedDate = dateFormat.parse(userBirth2);
+			timestamp = new java.sql.Timestamp(parsedDate.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(timestamp);
+		
+
 	}
 
 	
