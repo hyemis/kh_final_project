@@ -67,11 +67,13 @@
 		 		</div>
 			 	<div class="m-3 bg-white fdeptList" style="min-height: 300px;">
 			 		<c:forEach var="fList" items="${fdeptList}" >
-			 			<div class="mx-2">
+			 			<div class="mx-2 fcateinfo">
+			 				<input type="hidden" class="categoryId" name="categoryId" value="${fList.categoryId}">
+			 				<input type="hidden" class="categoryName" name="categoryName" value="${fList.categoryName}">
 			 				${fList.categoryId} : ${fList.categoryName}
+			 				<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>
 			 			</div> 
 			 		</c:forEach>
-			 		
 			 	</div>
 			 </div>
 			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
@@ -135,6 +137,11 @@
         	}
         	
 		});
+		
+        $('.fcateinfo').on('click', function() {
+        	$(this).find('button').toggle();
+            $('.fcateinfo').not(this).find('button').hide();
+        });
 		</script>
 
         <!-- Back to Top -->
