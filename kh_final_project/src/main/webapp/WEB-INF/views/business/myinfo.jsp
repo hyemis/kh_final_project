@@ -28,6 +28,8 @@
 	            <div class="col-9  border border-secondary">
 	                <div class="border border-secondary">
 		                <h1>회사소개</h1>
+		                <button class="text-end" type="button"
+		                href="<%=request.getContextPath()%>business/myinfo/infowrite">소개글 작성</button>
 		                <p>소개 해주세요.</p>
 	           	 	</div>
 	           	 	<div class="border border-secondary">
