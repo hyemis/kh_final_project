@@ -14,13 +14,23 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm py-5">	
 		<div class="grid gap-3 border border-dark-subtle">
-		
-		<!--  <form name="resumeForm" action="wrtie" method="post">  -->
-		 
-			<div class="form-floating">
-			  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-			  <label for="floatingTextarea">이력서 제목을 입력하세요.</label>
+			<div class="input-group has-validation row d-grid gap-2 col-10 mx-auto">
+			  <div class="form-floating is-invalid">
+			    <input type="text" class="form-control is-invalid" id="resumeTitle" placeholder="resumeTitle" required>
+			    <label for="resumeTitle">이력서 제목을 입력하세요.</label>
+			  </div>
+			  <div class="invalid-feedback">
+			    이력서 제목을 입력하세요.
+			  </div>
+			  <div class="form-check ms-3">
+				  <input class="form-check-input" type="checkbox" value="Y" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    	이력서 공개여부 
+				  </label>
+			 </div>
 			</div>
+			
+			
 						
 			<div class="bg-light rounded p-3">
 				<div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
@@ -234,14 +244,10 @@
 													  <button type="submit" class="btn btn-primary">save</button>
 												  </div>
 											</form>
-								      
-								      
-								      
 								      </div>
 								    </div>
 								  </div>
 								</div>
-								
 						</div>
 					</div>
 				</div>
@@ -252,9 +258,49 @@
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
 							<h3 class="mb-3">경력사항</h3>
-							<div class="">
-								<div class="border border-dark-subtle">dd</div>
-								<div class="border border-dark-subtle">dd</div>
+							<div >
+								<form name="rCareer" action="rCareer" method="post">
+									<div class="row mb-3">
+									<label for="carName" class="col-sm-2 col-form-label">회사명</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="carName">
+										</div>
+									</div>
+									
+									<div class="row mb-3">
+									<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
+										<div class="col-sm-10">
+											<input type="Date" class="form-control" name="carDate">
+										</div>
+									</div>
+									<div class="row mb-3">
+									<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="carPosition">
+										</div>
+									</div>
+									<div class="row mb-3">
+									<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="carDept">
+										</div>
+									</div>
+									<div class="row mb-3">
+									<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="carResp">
+										</div>
+									</div>
+									<div class="row mb-3">
+									<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
+										<div class="col-sm-10">
+											<input type="number" class="form-control" name="carSalary">
+										</div>
+									</div>
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+										<button type="submit" class="btn btn-primary">save</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -266,9 +312,30 @@
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
 							<h3 class="mb-3">자격증</h3>
-							<div class="">
-								<div class="border border-dark-subtle">dd</div>
-								<div class="border border-dark-subtle">dd</div>
+							<div >
+								<form name="rCerti" action="rCerti" method="post">
+									<div class="row mb-3">
+									<label for="certiName" class="col-sm-2 col-form-label">자격증명</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="certiName">
+										</div>
+									</div>
+									<div class="row mb-3">
+									<label for="certiPub" class="col-sm-2 col-form-label">자격증발행처</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="certiPub">
+										</div>
+									</div>
+									<div class="row mb-3">
+									<label for="certiDate" class="col-sm-2 col-form-label">자격증취득일자</label>
+										<div class="col-sm-10">
+											<input type="Date" class="form-control" name="certiDate">
+										</div>
+									</div>
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+										<button type="submit" class="btn btn-primary">save</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -279,10 +346,11 @@
 				<div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
-							<h3 class="mb-3">포트폴리오</h3>
-							<div class="">
-								<div class="border border-dark-subtle">dd</div>
-								<div class="border border-dark-subtle">dd</div>
+							<h3 class="mb-3">포트폴리오</h3> 
+							<span>직무와 연관되는 포트폴리오, 기획서, 자격증 사본 등을 업데이트 하세요.</span>
+							<div class="input-group m-3">
+							  <input type="file" class="form-control" id="portfFile">
+							  <label class="input-group-text" for="portfFile">Upload</label>
 							</div>
 						</div>
 					</div>
@@ -290,15 +358,25 @@
 			</div>
 			
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-			  <button class="btn btn-primary me-md-2" type="button">save</button>
+			  <button class="btn btn-primary me-md-2" type="button" id="rWrite" onclick="fn_rWrite();">save</button>
 			  <button class="btn btn-primary" type="button">cancel</button>
 			</div>
-			
-<!-- 			</form> -->
 		</div>
 	</div>
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<script>
+		function fn_rWrite(){
+			let resumeTitle = $("#resumeTitle").val();
+			let flexCheckChecked = $("#flexCheckChecked").val();
+			let portfFile = $("#portfFile").val();
+			
+		}	
+	
+	
+	</script>
+
 </body>
 </html>
