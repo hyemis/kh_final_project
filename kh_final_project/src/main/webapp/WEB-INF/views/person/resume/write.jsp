@@ -368,11 +368,24 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
+		// 이력서 등록
 		function fn_rWrite(){
 			let resumeTitle = $("#resumeTitle").val();
 			let flexCheckChecked = $("#flexCheckChecked").val();
 			let portfFile = $("#portfFile").val();
 			
+			$.ajax({
+				type :'post',
+				url  : "write",
+				data : {"#resumeTitle" : resumeTitle }, {"#flexCheckChecked" : flexCheckChecked }, {"#portfFile" : #portfFile},
+				sucess : function(result) {
+					if(result==1) {
+					alert("이력서가 등록되었습니다.");
+					} else {
+						alert("이력서 등록에 실패했습니다.");
+					}
+				}
+			})
 		}	
 	
 	

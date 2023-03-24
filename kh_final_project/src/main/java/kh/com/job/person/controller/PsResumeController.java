@@ -20,6 +20,15 @@ public class PsResumeController {
 	@Autowired
 	private PsService pservice;
 	
+	
+	//
+	@GetMapping("/list")
+	public ModelAndView doList(ModelAndView mv) {
+		return mv;
+	}
+	
+	
+	
 	// 이력서 페이지 열기 
 	@GetMapping("/write")
 	public ModelAndView doResume(ModelAndView mv, String userId){
@@ -32,7 +41,7 @@ public class PsResumeController {
 				mv.addObject("userinfo", result);
 				mv.setViewName("person/resume/write");
 			} else {
-//				mv.setViewName("redirect:/");
+				mv.setViewName("redirect:/");
 			}
 		} 
 			catch (Exception e) {
