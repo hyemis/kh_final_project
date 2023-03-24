@@ -8,4 +8,8 @@ public interface AdCategotyService {
 
 	public List<AdCategoryDto> cateFdeptList();
 
+	public int addFirstCategory(AdCategoryDto dto);
+
+	public int categoryCheck(String categoryId);
+
 }

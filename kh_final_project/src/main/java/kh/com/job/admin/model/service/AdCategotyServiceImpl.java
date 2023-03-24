@@ -18,6 +18,16 @@ public class AdCategotyServiceImpl implements AdCategotyService{
 	public List<AdCategoryDto> cateFdeptList() {
 		return dao.cateFdeptList();
 	}
+
+	@Override
+	public int addFirstCategory(AdCategoryDto dto) {
+		return dao.addFirstCategory(dto);
+	}
+
+	@Override
+	public int categoryCheck(String categoryId) {
+		return dao.categoryCheck(categoryId);
+	}
 	
 
 }
