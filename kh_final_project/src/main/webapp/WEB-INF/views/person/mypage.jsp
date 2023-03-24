@@ -59,26 +59,23 @@
 										<h3 class="mb-3">회원정보수정</h3>
 
 										<!-- 모달창 -->
-										<input type="button" value="바로가기" id="btnOpen">
+										<button class="btn btn-primary" type="button" id="btnOpen">바로가기</button>
 
 
 
 									</div>
 
 									<div class="pi-1">
-										<label for="userName" />이름 : </label> <input name="userName"
-											value="${PsUserDto.userName}" type="text" readonly="readonly"><br>
-
-										<label for="userPhone" />핸드폰 : </label> <input
-											value="${PsUserDto.userPhone }" type="text"
-											readonly="readonly"><br> <label for="userEmail" />이메일
-										: </label> <input value="${PsUserDto.userEmail }" type="text"
-											readonly="readonly"><br>
-									</div>
-								</div>
+								<div id="userName"/>이름 : ${PsUserDto.userName}</div>
+								
+								<div id="userPhone"/>핸드폰 : ${PsUserDto.userPhone }</div>
+								
+								<div id="userEmail"/>이메일 : ${PsUserDto.userEmail }</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
 
 					<div class="bg-light rounded p-3">
 						<div class="bg-white rounded p-4"
@@ -93,17 +90,17 @@
 					</div>
 				</div>
 			</div>
-			<!-- 모달 -->
-			<div id="modal">
-				<div id="content">
-					<input type="button" value="X" class="close" id="btnClose" /> <label>비밀번호를
-						입력하세요</label><br /> <input type="password" id="confirmPw"
-						name="confirmPw" /> <input type="button" value="확인" id="btnCheck"
-						onclick="checkPassword();" />
-				</div>
-			</div>
+			<!-- 모달창 -->	
+				<form id="modal" method="post">
+					<div id="content">
+						<input type="button" value="X" class="close" id="btnClose"/>
+						<label>비밀번호를 입력하세요</label><br/>
+						<input type="password" id="confirmPw" name="confirmPw" />
+						<button class="btn btn-primary" type="submit">확인</button>
+					</div>
+				</form>
 
-		</div>
+	
 
 
 		<!-- footer -->
@@ -165,18 +162,6 @@
 			btnCheck.onclick = closeRtn;
 			btnClose.onclick = closeRtn;
 
-			// 입력 비밀번호 체크 - 일치하면 회원정보수정 페이지로 이동
-			function checkPassword() {
-				var userPw = document.getElementById("userPw").value;
-				var confirmPw = document.getElementById("confirmPw").value;
-				if (userPw != confirmPassword) {
-					alert("비밀번호가 일치하지 않습니다.");
-					return false;
-				} else {
-					location.href = "update.jsp";
-					return true;
-				}
-			}
 		</script>
 </body>
 </html>

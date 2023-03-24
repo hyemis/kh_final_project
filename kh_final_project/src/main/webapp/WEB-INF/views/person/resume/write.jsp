@@ -108,7 +108,7 @@
 			
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 			  <button class="btn btn-primary me-md-2" type="button">save</button>
-			  <button class="btn btn-primary" type="button">cancle</button>
+			  <button class="btn btn-primary" type="button">cancel</button>
 			</div>
 			
 			</form>
