@@ -16,11 +16,41 @@ public class BsMainController {
 		return mv;
 	}
 	
+	//공고관리
+		@GetMapping("/recruit")
+		public ModelAndView recruitdls(ModelAndView mv) {
+			
+			return mv;
+		}
+	
+	//지원자관리
+	@GetMapping("/applicant")
+	public ModelAndView applicant(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+	//인재관리	
+	@GetMapping("/search")
+	public ModelAndView search(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+		
+	//회사소개
 	@GetMapping("/myinfo")
 	public ModelAndView myInfo(ModelAndView mv) {
 		
 		return mv;
 	}
+	
+	//내정보	
+		@GetMapping("/user")
+		public ModelAndView user(ModelAndView mv) {
+			
+			return mv;
+		}
 		
 	
 }
