@@ -19,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class BsInfoDto {
-	//Board
+//Board
 	
 		private Number boardNum;
 		private String userId;
