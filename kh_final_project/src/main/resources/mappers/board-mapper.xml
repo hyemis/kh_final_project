@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boards">
 
-<!-- bdto 명칭이 정해지지 않아서 오류가 발생해서 주석 처리 했어요 -->
+<!-- bdto 명칭이 정해지지 않아서 오류가 발생해서 주석 처리 했어요/네 -->
 
 <!--   <select id="selectOne" parameterType="string" resultType="bdto">
   	select * from BORAD where USER_ID=#{userId}

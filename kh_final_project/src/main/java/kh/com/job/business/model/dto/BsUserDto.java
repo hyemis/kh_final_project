@@ -8,7 +8,6 @@ public class BsUserDto {
 	private String userId;
 	private String userPw;
 	private String userPhone;
-	private String userBirth;
 	private String userEmail;
 	private String userAdress;
 	private String userName;
