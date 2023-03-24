@@ -61,7 +61,7 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 
 		 <div class="min-vh-100 d-flex justify-content-center align-items-center">
-			 <div class="dept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
+			 <div class="fdept flex-grow-1 mx-3 bg-info" style="min-height: 500px;">
 		 		<div class="m-2 text-lg-end">
 		 			<button class="addFdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button>
 		 		</div>
@@ -76,10 +76,10 @@
 			 		</c:forEach>
 			 	</div>
 			 </div>
-			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
+			 <div class="mdept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
 			 
 			 </div>
-			 <div class="dept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
+			 <div class="ldept flex-grow-1 mx-3 bg-primary" style="min-height: 500px;">
 			 
 			 </div>
 		 </div>
@@ -88,7 +88,7 @@
 		
 		<script type="text/javascript">
 		$(".addFdeptCate").click(function() {
-		    if($(".fdeptList input").length == 0){
+		    if($(".fdeptList input[type='text']").length == 0){
 		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
 		        inputCate += '<button type="button" class="closeInput btn btn-dark btn-sm border-0">X</button>';
 		        inputCate += '<form action="" method="post">'
@@ -139,8 +139,45 @@
 		});
 		
         $('.fcateinfo').on('click', function() {
+        	//삭제 버튼 나오기
         	$(this).find('button').toggle();
             $('.fcateinfo').not(this).find('button').hide();
+            
+            let id = $(this).find('.categoryId').val(); 
+            
+            alert(id);
+            //다음 단계나오게
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/category/listmcate"
+    			, type: "post"
+    			, data:  {categoryId : id}
+    			, dataType:"json"
+    			, success: function(result){
+    				
+    				let htmlVal = '<div class="m-2 text-lg-end">';
+    				htmlVal += '<button class="addFdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+    				htmlVal += '<div class="m-3 bg-white fdeptList" style="min-height: 300px;">';
+    				
+    				for(i = 0; i< result.length; i++){
+    					let list = result[i];
+    					htmlVal += '<div class="mx-2 fcateinfo">';
+    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
+    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
+    					htmlVal += list.categoryId +' : '+list.categoryName;
+    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
+    					htmlVal += '</div>';
+    				}
+    				
+    				htmlVal += '</div>';
+    				
+    				$(".mdept").html(htmlVal);
+    				
+    				
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
         });
         
         $('.cateDelete').on('click', function() {

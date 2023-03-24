@@ -16,4 +16,6 @@ public interface AdCategotyService {
 
 	public int delFirstCategory(AdCategoryDto dto);
 
+	public List<AdCategoryDto> cateMdeptList(String categoryId);
+
 }

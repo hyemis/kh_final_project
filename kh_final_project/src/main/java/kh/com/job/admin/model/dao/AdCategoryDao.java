@@ -34,4 +34,8 @@ public class AdCategoryDao {
 		return sqlsession.delete("admin.delFirstCategory", dto);
 	}
 
+	public List<AdCategoryDto> cateMdeptList(String categoryId) {
+		return sqlsession.selectList("admin.cateMdeptList", categoryId);
+	}
+
 }
