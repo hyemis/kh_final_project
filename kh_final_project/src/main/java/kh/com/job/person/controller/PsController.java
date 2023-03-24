@@ -163,7 +163,7 @@ public class PsController {
 	
 	// 마이페이지에서 회원 비밀번호 확인
 	@PostMapping("/pwChk") 
-	public ModelAndView pwChk(String confirmPw, ModelAndView mv) throws Exception{
+	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) throws Exception{
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PsUserDto pdto = service.selectOne(auth.getName());
@@ -171,7 +171,8 @@ public class PsController {
 		if(passwordEncoder.matches(confirmPw, pdto.getUserPw())) {
 			mv.setViewName("redirect:/person/update?userId="+auth.getName());
 		}else {
-			mv.setViewName("redirect:/");
+			rttr.addFlashAttribute("msg", "비밀번호가 틀렸습니다. 다시 확인해주세요.");
+			mv.setViewName("redirect:/person/mypage");
 		}
 			
 		return mv;
@@ -194,13 +195,13 @@ public class PsController {
 	
 	// 회원정보 업데이트
 	@PostMapping("/update")
-	public ModelAndView update(ModelAndView mv,PsUserDto dto) {
+	public ModelAndView update(ModelAndView mv,PsUserDto dto, Principal principal) throws Exception {
 
-		try {
-			service.update(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(principal.getName()!= null) {
+			dto.setUserId(principal.getName());
 		}
+		dto.setUserPw(passwordEncoder.encode(dto.getUserPw())); // 패스워드 암호화
+		service.update(dto);
 		return mv;
 	}
 	
