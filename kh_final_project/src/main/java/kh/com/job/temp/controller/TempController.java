@@ -50,7 +50,7 @@ public class TempController {
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			java.util.Date parsedDate = dateFormat.parse(userBirth2);
-			timestamp = new java.sql.Timestamp(parsedDate.getTime());
+			timestamp = new Timestamp(parsedDate.getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
