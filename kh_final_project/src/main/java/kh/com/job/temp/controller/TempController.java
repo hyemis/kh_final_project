@@ -45,7 +45,7 @@ public class TempController {
 	public void testshow(ModelAndView mv, String userBirth2) {
 		
 		Timestamp timestamp = null;
-
+		
 		// 문자열 값을 java.sql.Timestamp로 변환
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

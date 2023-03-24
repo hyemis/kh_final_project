@@ -142,6 +142,29 @@
         	$(this).find('button').toggle();
             $('.fcateinfo').not(this).find('button').hide();
         });
+        
+        $('.cateDelete').on('click', function() {
+        	let id = $(this).prevAll('.categoryId').val();
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/category/delfcate"
+    			, type: "post"
+    			, data:  {categoryId : id}
+    			, success: function(result){
+    				if(result == 1){
+    					location.reload();
+    				}else if(result == 3){
+    					alert("해당 카테고리를 참조하고 있는 하위 카테고리가 존재 합니다.");
+    				}else{
+    					alert("삭제에 실패 했습니다.");
+    				}
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+        	
+        });
+        
 		</script>
 
         <!-- Back to Top -->

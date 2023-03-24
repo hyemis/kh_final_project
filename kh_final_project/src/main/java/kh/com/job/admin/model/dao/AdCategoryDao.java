@@ -26,4 +26,12 @@ public class AdCategoryDao {
 		return sqlsession.selectOne("admin.categoryCheck", categoryId);
 	}
 
+	public int reqCheck(AdCategoryDto dto) {
+		return sqlsession.selectOne("admin.reqCheck", dto);
+	}
+
+	public int delFirstCategory(AdCategoryDto dto) {
+		return sqlsession.delete("admin.delFirstCategory", dto);
+	}
+
 }
