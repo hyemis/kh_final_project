@@ -24,10 +24,11 @@
   <delete id="delete" parameterType="pdto">
   	delete from USER_TABLE where USER_ID=#{USER_ID}
   </delete>
-  	
+  
+  <!-- 개인회원 update -->	
   <update id="update" parameterType="pdto">
   	update USER_TABLE set 
-  	USER_PW=#{userPw} ,
+  	  	USER_PW=#{userPw} ,
   	USER_PHONE=#{userPhone} ,
   	USER_EMAIL=#{userEmail} ,
   	<if test="termsPeriod != 0">

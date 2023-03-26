@@ -64,7 +64,6 @@
 				          <div class="mb-3">
 				            <label for="termsPeriod">개인정보유효기간</label>
 				            <select name="termsPeriod" class="form-select form-select-sm" aria-label=".form-select-sm example">
-							  <option value="0" selected>x</option>
 							  <option value="3" selected>3개월</option>
 							  <option value="6">6개월</option>
 							  <option value="12">1년</option>
@@ -92,6 +91,21 @@
 	
 	<script>
 	
+	
+	function checkAll() {
+        if (!checkPassword(updateForm.userPw.value, updateForm.userPw2.value)) {
+            return false;
+        } else if (!checkPhone(updateForm.userPhone.value)) {
+            return false;
+        } else if (!checkEmail(updateForm.userEmail.value)) {
+            return false;
+        } else if (!checkPeriod(updateForm.termsPeriod.value)) {
+            return false; 
+        return true;
+    }
+
+	
+	
 	// 공백 확인
 	 function checkExistData(value, dataName) {
 	        if (value == "") {
@@ -103,7 +117,7 @@
 	
 	
 	// 비밀번호1, 비밀번호2 체크 
-		function checkPassword(id, userPw, userPw2) {
+		function checkPassword(userPw, userPw2) {
      //비밀번호가 입력되었는지 확인하기
      if (!checkExistData(userPw, "비밀번호를"))
          return false;
@@ -114,20 +128,27 @@
      var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
      if (!password1RegExp.test(userPw)) {
          alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
-         singUpForm.userPw.value = "";
-         singUpForm.userPw.focus();
+         updateForm.userPw.value = "";
+         updateForm.userPw.focus();
          return false;
      }
      //비밀번호와 비밀번호 확인이 맞지 않다면..
      if (userPw != userPw2) {
          alert("두 비밀번호가 맞지 않습니다.");
-         singUpForm.userPw.value = "";
-         singUpForm.userPw2.value = "";
-         singUpForm.userPw2.focus();
+         updateForm.userPw.value = "";
+         updateForm.userPw2.value = "";
+         updateForm.userPw2.focus();
          return false;
      }
 	
 	
+	}
+	
+	
+	// 회원가입 실패 alret
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
 	}
 	
 	
