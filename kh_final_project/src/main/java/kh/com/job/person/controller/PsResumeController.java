@@ -1,12 +1,16 @@
 package kh.com.job.person.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsResumeService;
 import kh.com.job.person.model.service.PsService;
@@ -23,13 +27,15 @@ public class PsResumeController {
 	
 	//이력서관리 페이지 열기
 	@GetMapping("/list")
-	public ModelAndView doList(ModelAndView mv, String userId) {
+	public ModelAndView doList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
 		try {
 			
 			PsUserDto result = pservice.selectOne(userId);
+			List<PsResumeDto> resume = rservice.selectList(userId);
 			
 			if(result!=null) {
 				mv.addObject("userinfo", result);
+				mv.addObject("resumelist", resume);
 				mv.setViewName("person/resume/list");
 			} else {
 				mv.setViewName("redirect:/");
@@ -45,7 +51,7 @@ public class PsResumeController {
 	
 	// 이력서 작성 페이지 열기 
 	@GetMapping("/write")
-	public ModelAndView doResume(ModelAndView mv, String userId){
+	public ModelAndView doResume(ModelAndView mv, @RequestParam(name = "userId") String userId){
 			System.out.println(userId);
 		try {
 			

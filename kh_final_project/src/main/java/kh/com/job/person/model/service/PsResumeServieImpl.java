@@ -15,13 +15,13 @@ public class PsResumeServieImpl implements PsResumeService {
 	private PsResumeDao dao;
 
 	@Override
-	public PsResumeDto selectOne(String userid) throws Exception {
-		return dao.selectOne(userid);
+	public PsResumeDto selectOne(String userId) throws Exception {
+		return dao.selectOne(userId);
 	}
 
 	@Override
-	public List<PsResumeDto> selectList() throws Exception {
-		return dao.selectList();
+	public List<PsResumeDto> selectList(String userId) throws Exception {
+		return dao.selectList(userId);
 	}
 
 	@Override

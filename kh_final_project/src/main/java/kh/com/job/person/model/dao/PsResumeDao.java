@@ -15,12 +15,12 @@ public class PsResumeDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public PsResumeDto selectOne(String userid) throws Exception {
-		return sqlSession.selectOne("resume.selectOne", userid);
+	public PsResumeDto selectOne(String userId) throws Exception {
+		return sqlSession.selectOne("resume.selectOne", userId);
 	}
 	
-	public List<PsResumeDto> selectList() throws Exception {
-		return sqlSession.selectList("resume.selectList");
+	public List<PsResumeDto> selectList(String userId) throws Exception {
+		return sqlSession.selectList("resume.selectList", userId);
 	}
 	
 	public int insert(PsResumeDto dto) throws Exception {
