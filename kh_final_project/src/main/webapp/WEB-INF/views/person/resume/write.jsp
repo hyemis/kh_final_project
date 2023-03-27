@@ -42,6 +42,7 @@
 									<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
 								</div>
 								<div class="col-10 border border-dark-subtle">
+										<input type="hidden" id="userId" placeholder="userId" value="${userinfo.userId }" required>
 										<span>이름 : </span>
 										<span>${userinfo.userName }</span><br>
 										<span>전화번호 : </span>
@@ -358,7 +359,7 @@
 			</div>
 			
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-			  <button class="btn btn-primary me-md-2" type="button" id="rWrite" onclick="fn_rWrite();">save</button>
+			  <button class="btn btn-primary me-md-2" type="button" id="rWrite" onclick="fn_rWrite(); return false;">save</button>
 			  <button class="btn btn-primary" type="button">cancel</button>
 			</div>
 		</div>
@@ -375,18 +376,20 @@
 			let portfFile = $("#portfFile").val();
 			
 			$.ajax({
-				type :'post',
-				url  : "write",
-				data : {"#resumeTitle" : resumeTitle }, {"#flexCheckChecked" : flexCheckChecked }, {"#portfFile" : #portfFile},
-				sucess : function(result) {
-					if(result==1) {
-					alert("이력서가 등록되었습니다.");
+				type : "post",
+				url  : "${pageContext.request.contextPath}/person/resume/write",
+				data : {resumeTitle : resumeTitle , flexCheckChecked : flexCheckChecked, portfFile : portfFile},
+				success : function(result) {
+					if(result === 1) {
+						alert("이력서가 등록되었습니다.");
+						var userId = $("#userId").val();
+						location.href="/job/person/resume/list?userId="+userId;
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}
 				}
 			})
-		}	
+		}
 	
 	
 	</script>

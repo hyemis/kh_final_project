@@ -7,12 +7,12 @@
   </select>
 
   <select id="selectList" resultType="rdto">
-  	select RESUME_NO, RESUME_TITLE, RESUME_DATE, PORTF_FILE FROM USER_RESUME where USER_ID=#{USER_ID} 
+  	select RESUME_NO, RESUME_TITLE, RESUME_DATE, PORTF_FILE FROM USER_RESUME where USER_ID=#{USER_ID} order by RESUME_DATE desc 
   </select>
 
   <insert id="insert" parameterType="rdto">
-  	INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) 
-	VALUES(USER_RESUME_SEQ.NEXTVAL, #{RESUME_TITLE}, #{RESUME_PHOTO}, sysdate, #{PORTF_FILE}, #{USER_ID} )
+  	INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_DATE, PORTF_FILE, USER_ID) 
+	VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, sysdate, #{portfFile}, #{userId})
   </insert>
 
   <delete id="delete" parameterType="rdto">

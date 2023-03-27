@@ -29,8 +29,8 @@ public class PsResumeDao {
 		return result;
 	}
 	
-	public int delete(String userid)  throws Exception {
-		return sqlSession.delete("resume.delete", userid);
+	public int delete(String userId)  throws Exception {
+		return sqlSession.delete("resume.delete", userId);
 	}
 	
 	public int update(PsResumeDto dto)  throws Exception {

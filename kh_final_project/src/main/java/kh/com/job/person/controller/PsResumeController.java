@@ -1,5 +1,6 @@
 package kh.com.job.person.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -72,8 +74,19 @@ public class PsResumeController {
 	
 	// 이력서 작성
 	@PostMapping("/write")
-	public ModelAndView writeResume(ModelAndView mv) {
-		return mv;
+	@ResponseBody
+	public int writeResume(ModelAndView mv, Principal principal, PsResumeDto dto) {
+		System.out.println("로그인정보: "+principal.getName());
+		dto.setUserId(principal.getName());
+		int result = -1;
+		try {
+			result = rservice.insert(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return result;
 	}
 	
 	// 예외처리는 프로젝트 후반에 작성 
