@@ -139,7 +139,7 @@ public class AdAccountController {
 	
 	if(result != 1) {
 		rttr.addFlashAttribute("addto", dto);
-		rttr.addFlashAttribute("masage", "실패 했습니다.관리자 계정 관리 페이지부터 다시해 주세요");
+		rttr.addFlashAttribute("masage", "실패 했습니다.처음 부터 다시해 주세요");
 		mv.setViewName("redirect:/admin/account/update?userId="+dto.getUserId());
 	}else {
 		if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM"))) {

@@ -84,5 +84,25 @@ public class AdCategoryController {
 
 		return new Gson().toJson(mlist);
 	}
+	
+	// 성공 1 실패 -1
+		@PostMapping("/addmcate")
+		@ResponseBody
+		public int addMiddleCategory(ModelAndView mv, AdCategoryDto dto){
+			
+			int result = -1;
+			int idCheck = 1;
+			
+			dto.setCategoryId(dto.getCategoryId().toUpperCase());
+			
+			idCheck = service.categoryCheck(dto.getCategoryId());
+			
+			if(idCheck < 1) {
+				result = service.addMiddleCategory(dto);
+			}
+			
+			
+			return result;
+		}
 
 }
