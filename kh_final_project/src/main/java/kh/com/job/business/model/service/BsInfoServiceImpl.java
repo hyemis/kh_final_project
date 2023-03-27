@@ -14,58 +14,21 @@ public class BsInfoServiceImpl implements BsInfoService{
 	@Autowired
 	private BsInfoDao dao;
 
+
 	@Override
 	public int insert(BsInfoDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.insert(dto);
 	}
 
 	@Override
-	public int update(BsInfoDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delete(BsInfoDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public BsInfoDto selectOne(int boardNum, String writer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int selectOneCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int selectOneCount(String searchWord) {
-		// TODO Auto-generated method stub
-		return 0;
+	public BsInfoDto selectOne(int boardnum) {
+		return dao.selectOne(boardnum);
 	}
 
 	@Override
 	public List<BsInfoDto> selectList() {
 		return dao.selectList();
 	}
-
-	@Override
-	public List<BsInfoDto> selectList(int currentPage, int limit) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<BsInfoDto> selectList(int currentPage, int limit, String searchWord) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	
 }

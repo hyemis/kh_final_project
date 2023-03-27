@@ -22,6 +22,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
+	<br>
 	<div class="container-sm">	
 		
 		<div class="grid gap-3 border border-primary">
@@ -30,10 +31,10 @@
 		        <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll()">
 			        	<div class="m-4" style="text-align: center;"><h3>회원정보수정</h3></div>
 			        	
-				          <div class="row">
+		
 				          
 				            <div class="mb-3">
-				            <label for="userName"/>이름 </label>
+				            <label for="userName">이름 </label>
 				            <input value="${PsUserDto.userName}" class="form-control" type="text" name="userName" readonly="readonly" >
 				            </div>
 				            
@@ -92,69 +93,70 @@
 	<script>
 	
 	
-	function checkAll() {
-        if (!checkPassword(updateForm.userPw.value, updateForm.userPw2.value)) {
-            return false;
-        } else if (!checkPhone(updateForm.userPhone.value)) {
-            return false;
-        } else if (!checkEmail(updateForm.userEmail.value)) {
-            return false;
-        } else if (!checkPeriod(updateForm.termsPeriod.value)) {
-            return false; 
-        return true;
-    }
-
-	
-	
-	// 공백 확인
-	 function checkExistData(value, dataName) {
-	        if (value == "") {
-	            alert(dataName + " 입력해주세요!");
+		function checkAll() {
+	        if (!checkPassword(updateForm.userPw.value, updateForm.userPw2.value)) {
 	            return false;
-	        }
+	        } else if (!checkPhone(updateForm.userPhone.value)) {
+	            return false;
+	        } else if (!checkEmail(updateForm.userEmail.value)) {
+	            return false;
+	        } else if (!checkPeriod(updateForm.termsPeriod.value)) {
+	            return false; 
 	        return true;
-	    }
+	  	  }
+		}
+	
+		
+		
+		// 공백 확인
+		 function checkExistData(value, dataName) {
+		        if (value == "") {
+		            alert(dataName + " 입력해주세요!");
+		            return false;
+		        }
+		        return true;
+		    }
+		
+		
+		// 비밀번호1, 비밀번호2 체크 
+			function checkPassword(userPw, userPw2) {
+	     //비밀번호가 입력되었는지 확인하기
+	     if (!checkExistData(userPw, "비밀번호를"))
+	         return false;
+	     //비밀번호 확인이 입력되었는지 확인하기
+	     if (!checkExistData(userPw2, "비밀번호 확인을"))
+	         return false;
+		
+	     var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
+	     if (!password1RegExp.test(userPw)) {
+	         alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
+	         updateForm.userPw.value = "";
+	         updateForm.userPw.focus();
+	         return false;
+	     }
+	     //비밀번호와 비밀번호 확인이 맞지 않다면..
+	     if (userPw != userPw2) {
+	         alert("두 비밀번호가 맞지 않습니다.");
+	         updateForm.userPw.value = "";
+	         updateForm.userPw2.value = "";
+	         updateForm.userPw2.focus();
+	         return false;
+	     }
+		
+		
+		}
+		
+		
+		// alret
+		var msg = "${msg}";
+		if(msg) {
+			alert(msg);
+		}
+		
 	
 	
-	// 비밀번호1, 비밀번호2 체크 
-		function checkPassword(userPw, userPw2) {
-     //비밀번호가 입력되었는지 확인하기
-     if (!checkExistData(userPw, "비밀번호를"))
-         return false;
-     //비밀번호 확인이 입력되었는지 확인하기
-     if (!checkExistData(userPw2, "비밀번호 확인을"))
-         return false;
 	
-     var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
-     if (!password1RegExp.test(userPw)) {
-         alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
-         updateForm.userPw.value = "";
-         updateForm.userPw.focus();
-         return false;
-     }
-     //비밀번호와 비밀번호 확인이 맞지 않다면..
-     if (userPw != userPw2) {
-         alert("두 비밀번호가 맞지 않습니다.");
-         updateForm.userPw.value = "";
-         updateForm.userPw2.value = "";
-         updateForm.userPw2.focus();
-         return false;
-     }
-	
-	
-	}
-	
-	
-	// 회원가입 실패 alret
-	var msg = "${msg}";
-	if(msg) {
-		alert(msg);
-	}
-	
-	
-     
 	
 	</script>
-	
 </body>
 </html>
