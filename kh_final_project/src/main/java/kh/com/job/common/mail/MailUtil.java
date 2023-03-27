@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class MailUtil {
 	
 	private static JavaMailSender mailSender;
-	
+	/*
 	@Autowired
 	public MailUtil(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
@@ -43,4 +43,5 @@ public class MailUtil {
 		}
 		return 1;
 	}
+	*/
 }
