@@ -4,7 +4,8 @@
 
 
 /* #개인회원 테이블 */
-
+INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE)
+VALUES ('user22', 'user22', '01012345678', '000101', 'user22@example.com', '서울시 관악구', '사용자2','true', 'ROLE_P', 'Y', sysdate );
 
 
 /* JA_CATEGORY TABLE 	*/
@@ -64,5 +65,5 @@ VALUES ('user11', '$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu'
 
 
 /* #이력서 테이블 */
-
+INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) VALUES(USER_RESUME_SEQ.NEXTVAL, '최선을 다하는 계발자가 되겠습니다.', '', sysdate, '', 'user11' );
 
