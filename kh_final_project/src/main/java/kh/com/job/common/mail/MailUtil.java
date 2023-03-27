@@ -8,20 +8,20 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
 @Component
 public class MailUtil {
 	
 	private static JavaMailSender mailSender;
 	
 	@Autowired
-	public void MailUtil(JavaMailSender mailSender) {
-		
+	public MailUtil(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 	
 	public static int mailSend(String title, String from, String text, String to, String cc) {
 		if(from == null || from.equals("")) {
-			return -1;
+			from = "tkdtlrdl07@gmail.com";
 		}
 		
 		try {
