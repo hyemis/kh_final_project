@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ public class kakaoController {
 	public TempService service;
 	
 	
-	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
+		// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 		@RequestMapping(value = "/common/login", method = RequestMethod.GET)
 		public ModelAndView kakaoLogin(ModelAndView mv
 				, @RequestParam(value = "code", required = false) String code) throws Throwable {
@@ -37,6 +38,12 @@ public class kakaoController {
 			
 			return mv;	
 
+		}
+		
+		// kakao map API
+		@RequestMapping(value = "/common/map", method = RequestMethod.GET)
+		public ModelAndView kakaoMap(ModelAndView mv) {
+			return mv;
 		}
 
 }
