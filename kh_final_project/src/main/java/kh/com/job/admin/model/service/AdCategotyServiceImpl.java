@@ -43,6 +43,11 @@ public class AdCategotyServiceImpl implements AdCategotyService{
 	public List<AdCategoryDto> cateMdeptList(String categoryId) {
 		return dao.cateMdeptList(categoryId);
 	}
+
+	@Override
+	public int addMiddleCategory(AdCategoryDto dto) {
+		return dao.addMiddleCategory(dto);
+	}
 	
 
 }

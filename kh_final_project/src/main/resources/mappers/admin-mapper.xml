@@ -75,6 +75,11 @@
 		INSERT INTO JA_CATEGORY (CATEGORY_ID, CATEGORY_NAME, CATEGORY_DEPT, CATEGORY_TYPE) 
 		VALUES (#{categoryId}, #{categoryName}, '1', #{categoryId}) 
 	</insert>
+	<!-- 카테고리 2단계 추가 -->
+	<insert id="addMiddleCategory">
+		INSERT INTO JA_CATEGORY (CATEGORY_ID, CATEGORY_NAME, CATEGORY_DEPT, CATEGORY_TYPE, REQ_CATEGORY_ID) 
+		VALUES (#{categoryId}, #{categoryName}, '2', #{categoryId}, #{reqCategoryId}) 
+	</insert>
 	<!-- 카테고리 아이디 중복 확인 -->
 	<select id="categoryCheck" resultType="_int">
 		SELECT COUNT(CATEGORY_ID) FROM JA_CATEGORY
@@ -96,5 +101,6 @@
 		SELECT * FROM JA_CATEGORY
 		WHERE CATEGORY_DEPT = '2'
 		AND REQ_CATEGORY_ID = #{categoryId}
+		ORDER BY CATEGORY_ID DESC
 	</select>
 </mapper>

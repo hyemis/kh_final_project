@@ -35,8 +35,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 
 	@Override
-	public int delete(String userid) throws Exception {
-		return dao.delete(userid);
+	public int delete(int resumeNo) throws Exception {
+		return dao.delete(resumeNo);
 	}
 
 	

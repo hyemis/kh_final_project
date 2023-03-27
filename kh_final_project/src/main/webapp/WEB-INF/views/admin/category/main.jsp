@@ -157,7 +157,7 @@
     				let htmlVal = '<div class="m-2 text-lg-end">';
     				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
     				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
-    				
+    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
     				for(i = 0; i< result.length; i++){
     					let list = result[i];
     					htmlVal += '<div class="mx-2 mcateinfo">';
@@ -177,7 +177,7 @@
         });
         
         //카테고리 지우기 버튼
-        $('.cateDelete').on('click', function() {
+        $(document).on('click','.cateDelete', function() {
         	let id = $(this).prevAll('.categoryId').val();
     		$.ajax({ 
     			url: "${pageContext.request.contextPath}/admin/category/delfcate"
@@ -203,10 +203,10 @@
 		    if($(".mdeptList input[type='text']").length == 0){
 		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
 		        inputCate += '<button type="button" class="closeInput btn btn-dark btn-sm border-0">X</button>';
-		        inputCate += '<form action="" method="post">'
+		        inputCate += '<form action="" method="post">';
 		        inputCate += '<div class="mx-2 col-6"><label for="categoryId">아이디</label><input type="text" class="categoryId form-control form-control-sm" name="categoryId" id="categoryId"></div>';
 		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
-		        inputCate += '<button type="button" class="addMcate btn btn-dark btn-sm border-0 my-1">추가</button>'
+		        inputCate += '<button type="button" class="addMcate btn btn-dark btn-sm border-0 my-1">추가</button>';
 		        inputCate += '</div>';
 		        $(".mdeptList").append(inputCate);        		
 		    }
@@ -216,6 +216,43 @@
         	$(this).find('button').toggle();
             $('.mcateinfo').not(this).find('button').hide();
         });
+        
+        $(document).on('click', '.addMcate', function() {
+        	let categoryId = $(this).closest('.inputCate').find('.categoryId').val();
+        	let categoryName = $(this).closest('.inputCate').find('.categoryName').val();
+        	let inputCate = $(this).closest('.inputCate');
+        	let reqCategoryId = $(this).closest('.mdeptList').find('.reqCategoryId').val();
+        	
+        	if(categoryId ===''){
+        		alert("아이디 입력해주세요");
+        	}else if(categoryId.match(/\s/g)){
+        		alert("공백 제거 해주세요");
+        	}else{
+	    		$.ajax({ 
+	    			url: "${pageContext.request.contextPath}/admin/category/addmcate"
+	    			, type: "post"
+	    			, data:  {categoryId : categoryId
+	    						, categoryName : categoryName
+	    						, reqCategoryId : reqCategoryId
+	    					 }
+	    			, success: function(result){
+	    				if(result == 1){
+	    					location.reload();
+	    				}else if(result == -1){
+	    					alert("아이디가 중복 되었습니다.");
+	    					inputCate.find('.categoryId').val('');
+	    				}else{
+	    					alert("등록에 실패 했습니다.");
+	    				}
+	    			}
+	    			, error: function(e){
+	    				alert(e +" : 오류")
+	    			}
+	    		});        		
+        	}
+        	
+		});
+        
         
 		</script>
 

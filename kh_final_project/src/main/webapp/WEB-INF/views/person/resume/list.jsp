@@ -68,6 +68,7 @@
 										<table class="table table-hover">
 										  <thead>
 										    <tr>
+										   	  <th scope="col">이력서고유번호 출력용</th>
 										      <th scope="col">이력서 제목</th>
 										      <th scope="col">최종 수정일</th>
 										      <th scope="col">포트폴리오 파일</th>
@@ -77,11 +78,17 @@
 										  <tbody class="table-group-divider">
 										  <c:forEach items="${resumelist }" var="resume">
 										    <tr>
+										      <td>${resume.resumeNo }</td>
 										      <td>${resume.resumeTitle }</td>
 										      <td>${resume.resumeDate }</td>
 										      <td>${resume.portfFile }</td>
-										      <td><button type="button" class="btn btn-outline-dark">수정</button>
-										      <button type="button" class="btn btn-outline-dark">삭제</button></td>
+										      <td>
+											      <button type="button" class="btn btn-outline-dark">수정</button>
+											      <form method="post" action="delete">
+											      	<input type="hidden" name="resumeNo" value="${resume.resumeNo }" required>
+											      	<button type="submit" class="btn btn-outline-dark">삭제</button>
+										      	  </form>
+										      </td>
 										    </tr>
 										  </c:forEach>
 										  </tbody>
@@ -102,5 +109,14 @@
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<script>
+	
+	// 이력서 alret
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	</script>
 </body>
 </html>
