@@ -24,7 +24,6 @@
 			 password-parameter="userPw"
 			 default-target-url="/person/main"
 			 authentication-success-handler-ref="loginSuccessHandler"	
-			 authentication-failure-forward-url="/person/main"
 		/>        					 
     </security:http>
         

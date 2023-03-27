@@ -16,6 +16,12 @@
 		<input type="text" name="userId" placeholder="Username"/><br>
 		<input type="password" name="userPw" placeholder="Password"/><br>
 		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+		<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+	    	<font color="red">
+		        <p>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+		        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+	    	</font>
+		</c:if>
 		<button type="submit">로그인</button>	
 	</form>
 </body>
