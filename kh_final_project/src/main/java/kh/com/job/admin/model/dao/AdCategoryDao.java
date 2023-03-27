@@ -38,4 +38,8 @@ public class AdCategoryDao {
 		return sqlsession.selectList("admin.cateMdeptList", categoryId);
 	}
 
+	public int addMiddleCategory(AdCategoryDto dto) {
+		return sqlsession.insert("admin.addMiddleCategory", dto);
+	}
+
 }

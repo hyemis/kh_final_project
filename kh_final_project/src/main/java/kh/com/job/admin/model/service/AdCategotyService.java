@@ -18,4 +18,6 @@ public interface AdCategotyService {
 
 	public List<AdCategoryDto> cateMdeptList(String categoryId);
 
+	public int addMiddleCategory(AdCategoryDto dto);
+
 }
