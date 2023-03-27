@@ -144,6 +144,9 @@
         	//삭제 버튼 나오기
         	$(this).find('button').toggle();
             $('.fcateinfo').not(this).find('button').hide();
+/*             
+            alert($(this).parent().parent().attr('class'));
+            alert($(this).parent().parent().next().attr('class')); */
             
             let id = $(this).find('.categoryId').val(); 
             //다음 단계나오게
@@ -153,22 +156,31 @@
     			, data:  {categoryId : id}
     			, dataType:"json"
     			, success: function(result){
-    				
-    				let htmlVal = '<div class="m-2 text-lg-end">';
-    				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
-    				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
-    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
-    				for(i = 0; i< result.length; i++){
-    					let list = result[i];
-    					htmlVal += '<div class="mx-2 mcateinfo">';
-    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
-    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
-    					htmlVal += list.categoryId +' : '+list.categoryName;
-    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
+    				if(result != null){
+	    				let htmlVal = '<div class="m-2 text-lg-end">';
+	    				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+	    				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
+	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
+	    				for(i = 0; i< result.length; i++){
+	    					let list = result[i];
+	    					htmlVal += '<div class="mx-2 mcateinfo">';
+	    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
+	    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
+	    					htmlVal += list.categoryId +' : '+list.categoryName;
+	    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
+	    					htmlVal += '</div>';
+	    				}
+	    				htmlVal += '</div>';
+	    				$(".mdept").html(htmlVal);    					
+    				}else{
+    					let htmlVal = '<div class="m-2 text-lg-end">';
+	    				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+	    				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
+	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
     					htmlVal += '</div>';
+    					htmlVal += '</div>';
+    					$(".mdept").html(htmlVal);
     				}
-    				htmlVal += '</div>';
-    				$(".mdept").html(htmlVal);
     			}
     			, error: function(e){
     				alert(e +" : 오류")
@@ -215,6 +227,46 @@
         $(document).on('click', '.mcateinfo', function() {
         	$(this).find('button').toggle();
             $('.mcateinfo').not(this).find('button').hide();
+            
+            let id = $(this).find('.categoryId').val(); 
+            //다음 단계나오게
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/category/listmcate"
+    			, type: "post"
+    			, data:  {categoryId : id}
+    			, dataType:"json"
+    			, success: function(result){
+    				if(result != null){
+	    				let htmlVal = '<div class="m-2 text-lg-end">';
+	    				htmlVal += '<button class="addLdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+	    				htmlVal += '<div class="m-3 bg-white ldeptList" style="min-height: 300px;">';
+	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
+	    				for(i = 0; i< result.length; i++){
+	    					let list = result[i];
+	    					htmlVal += '<div class="mx-2 lcateinfo">';
+	    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
+	    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
+	    					htmlVal += list.categoryId +' : '+list.categoryName;
+	    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
+	    					htmlVal += '</div>';
+	    				}
+	    				htmlVal += '</div>';
+	    				$(".ldept").html(htmlVal);
+    				}else{
+    					let htmlVal = '<div class="m-2 text-lg-end">';
+	    				htmlVal += '<button class="addLdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+	    				htmlVal += '<div class="m-3 bg-white ldeptList" style="min-height: 300px;">';
+	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
+    					htmlVal += '</div>';
+    					htmlVal += '</div>';
+    					$(".ldept").html(htmlVal);
+    				}
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+            
         });
         
         $(document).on('click', '.addMcate', function() {
