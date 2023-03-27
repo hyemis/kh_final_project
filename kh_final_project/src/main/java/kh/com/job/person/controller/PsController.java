@@ -212,6 +212,58 @@ public class PsController {
 		return mv;
 	}
 	
+	// 회원탈퇴 화면
+	@GetMapping("/delete")
+	public ModelAndView viewDelete(ModelAndView mv, Principal principal) throws Exception {
+		System.out.println("로그인정보: "+principal.getName());
+		
+		if(principal.getName() != null) {
+			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+		}else {
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
+	
+	// 회원탈퇴 화면 - 비밀번호 확인 화면
+	@GetMapping("/deletepw")
+	public ModelAndView viewDeletepw(ModelAndView mv, Principal principal) throws Exception {
+		System.out.println("로그인정보: "+principal.getName());
+		
+		if(principal.getName() != null) {
+			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+		}else {
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
+	
+	
+	// 회원탈퇴--하는중******
+	@PostMapping("/deletepw")
+	public ModelAndView delete(ModelAndView mv, 
+								String userId, 
+								String userPw,
+								Principal principal, 
+								RedirectAttributes rttr) throws Exception {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		PsUserDto pdto = service.selectOne(auth.getName());
+
+		if(passwordEncoder.matches(userPw, pdto.getUserPw())) {
+			service.delete(userId);
+			mv.setViewName("redirect:/person/main");
+			rttr.addFlashAttribute("msg", "회원탈퇴가 완료되었습니다.");
+		}else {
+			mv.setViewName("redirect:/");
+			rttr.addFlashAttribute("msg", "회원탈퇴에 실패하였습니다. 비밀번호를 다시 확인해주세요");
+		}
+		
+
+		return mv;
+	}
+	
+	
 
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {

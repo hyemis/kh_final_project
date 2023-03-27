@@ -86,8 +86,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+					
+					<div style="text-align: right">
+						<a href="delete"><u>탈퇴안내</u></a>
+					</div>
+				
 			
 
 				<form id="modal" name="modal" method="post" action="pwChk">
@@ -98,7 +101,7 @@
 						<button class="btn btn-primary" type="submit">확인</button>
 					</div>
 				</form>
-			
+			</div>
 
 
 		<!-- footer -->

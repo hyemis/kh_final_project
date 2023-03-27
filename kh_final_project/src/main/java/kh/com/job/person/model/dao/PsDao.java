@@ -36,10 +36,12 @@ public class PsDao {
 		return result;
 	}
 	
+	// 회원 탈퇴
 	public int delete(String userId)  throws Exception {
 		return sqlSession.delete("person.delete", userId);
 	}
 	
+	// 회원 정보 수정
 	public int update(PsUserDto dto)  throws Exception {
 		return sqlSession.update("person.update", dto);
 	}
