@@ -61,8 +61,6 @@
 										<!-- 모달창 바로가기버튼 -->
 										<button class="btn btn-primary" type="button" id="btnOpen">바로가기</button>
 
-
-
 									</div>
 
 									<div class="pi-1">
@@ -122,7 +120,7 @@
 				position: absolute;
 				margin: auto;
 				padding: 20px;
-				background-color: #fff;
+				background-color: #e5e5e5 ;
 			}
 			
 			#modal .close {
@@ -131,7 +129,7 @@
 				right: 4px;
 				font-size: 20px;
 				border: 0;
-				background-color: #fff;
+				background-color: #e5e5e5 ;
 			}
 			
 			#modal .close:hover, #modal .close:focus {
@@ -159,6 +157,13 @@
 			}
 
 			btnClose.onclick = closeRtn;
+			
+			
+			// 회원가입 실패 alret
+			var msg = "${msg}";
+			if(msg) {
+				alert(msg);
+			}
 
 		</script>
 </body>

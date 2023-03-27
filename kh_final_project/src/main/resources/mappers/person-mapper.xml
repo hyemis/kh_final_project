@@ -24,15 +24,17 @@
   <delete id="delete" parameterType="pdto">
   	delete from USER_TABLE where USER_ID=#{USER_ID}
   </delete>
-  	
+  
+  <!-- 개인회원 update -->	
   <update id="update" parameterType="pdto">
   	update USER_TABLE set 
-  	USER_PASSWORD=#{USER_PASSWORD} 
-  	USER_PHONE=#{USER_PHONE} 
-  	USER_EMAIL=#{USER_EMAIL} 
-  	USER_ADRESS=#{USER_ADRESS} 
-  	TERMS_DATE=#{TERMS_DATE} 
-  	where USER_ID = #{USER_ID}
+  	  	USER_PW=#{userPw} ,
+  	USER_PHONE=#{userPhone} ,
+  	USER_EMAIL=#{userEmail} ,
+  	<if test="termsPeriod != 0">
+  	 TERMS_DATE= ADD_MONTHS(SYSTIMESTAMP, #{termsPeriod}) 
+  	</if>
+  	where USER_ID = #{userId}
   </update>
 	
 

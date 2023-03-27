@@ -8,6 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>JOB-A 회원정보 수정</title>
+	<style>
+	
+		$('.selectpicker').selectpicker({
+	      style: 'btn-info',
+	      size: 4
+	  });
+	  
+	</style>
 </head>
 <body>
 	<!-- header : css, js, boostrap, nav-bar, template 등  -->
@@ -19,7 +27,7 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 			 
-		        <form class="col-6" name=updateForm action="update" method="post">
+		        <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll()">
 			        	<div class="m-4" style="text-align: center;"><h3>회원정보수정</h3></div>
 			        	
 				          <div class="row">
@@ -55,11 +63,11 @@
 				          
 				          <div class="mb-3">
 				            <label for="termsPeriod">개인정보유효기간</label>
-				            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-							  <option selected>3개월</option>
-							  <option value="1">6개월</option>
-							  <option value="2">1년</option>
-							  <option value="3">5년</option>
+				            <select name="termsPeriod" class="form-select form-select-sm" aria-label=".form-select-sm example">
+							  <option value="3" selected>3개월</option>
+							  <option value="6">6개월</option>
+							  <option value="12">1년</option>
+							  <option value="60">5년</option>
 							</select>
 				
 				         <hr class="mb-4"> 
@@ -79,14 +87,74 @@
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-	<style>
+
 	
-		$('.selectpicker').selectpicker({
-	      style: 'btn-info',
-	      size: 4
-	  });
-	  
-	</style>
+	<script>
+	
+	
+	function checkAll() {
+        if (!checkPassword(updateForm.userPw.value, updateForm.userPw2.value)) {
+            return false;
+        } else if (!checkPhone(updateForm.userPhone.value)) {
+            return false;
+        } else if (!checkEmail(updateForm.userEmail.value)) {
+            return false;
+        } else if (!checkPeriod(updateForm.termsPeriod.value)) {
+            return false; 
+        return true;
+    }
+
+	
+	
+	// 공백 확인
+	 function checkExistData(value, dataName) {
+	        if (value == "") {
+	            alert(dataName + " 입력해주세요!");
+	            return false;
+	        }
+	        return true;
+	    }
+	
+	
+	// 비밀번호1, 비밀번호2 체크 
+		function checkPassword(userPw, userPw2) {
+     //비밀번호가 입력되었는지 확인하기
+     if (!checkExistData(userPw, "비밀번호를"))
+         return false;
+     //비밀번호 확인이 입력되었는지 확인하기
+     if (!checkExistData(userPw2, "비밀번호 확인을"))
+         return false;
+	
+     var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
+     if (!password1RegExp.test(userPw)) {
+         alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
+         updateForm.userPw.value = "";
+         updateForm.userPw.focus();
+         return false;
+     }
+     //비밀번호와 비밀번호 확인이 맞지 않다면..
+     if (userPw != userPw2) {
+         alert("두 비밀번호가 맞지 않습니다.");
+         updateForm.userPw.value = "";
+         updateForm.userPw2.value = "";
+         updateForm.userPw2.focus();
+         return false;
+     }
+	
+	
+	}
+	
+	
+	// 회원가입 실패 alret
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	
+	
+     
+	
+	</script>
 	
 </body>
 </html>

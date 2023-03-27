@@ -97,6 +97,7 @@
 		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
 		        inputCate += '<button type="button" class="addFcate btn btn-dark btn-sm border-0 my-1">추가</button>'
 		        inputCate += '</div>';
+		        //inputCate 를  클래스명 fdeptList 아래 추가
 		        $(".fdeptList").append(inputCate);        		
 		    }
 		});
