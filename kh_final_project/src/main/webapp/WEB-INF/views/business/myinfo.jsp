@@ -46,9 +46,9 @@
 			<div class="col-md-8 col-sm-8 border border-secondary">
 				<div class="border border-secondary">
 					<a>회사소개</a>
-					<button class="text-end" type="button"
-						href="<%=request.getContextPath()%>business/myinfo/infowrite">
+					<button class="text-end" type="button" id="infowrite" >
 						소개글작성</button>
+					<!-- 이미지 -->	
 					<div id="carouselExampleIndicators" class="carousel slide w-75 p-3 h-auto "
 						data-bs-ride="carousel">
 						<div class="carousel-indicators">
@@ -97,10 +97,12 @@
 
 	</div>
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	<script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-	</script>
+<script>
+
+
+</script>
 	
 </body>
 </html>

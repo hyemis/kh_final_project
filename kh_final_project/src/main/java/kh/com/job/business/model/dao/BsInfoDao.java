@@ -15,6 +15,19 @@ public class BsInfoDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public int insert(BsInfoDto dto) {
+		return sqlSession.insert("business.insert", dto);		
+	}
+	
+	public BsInfoDto selectOne(int boardnum /* PK */) {          
+		return sqlSession.selectOne("business.selectOne", boardnum); 
+	}
+	
+	public List<BsInfoDto> selectList() {
+		return sqlSession.selectList("business.selectList");
+	}
+
+/*
 	public List<BsInfoDto> tag() {
 		return sqlSession.selectList("boards.tag");
 	}
@@ -29,11 +42,9 @@ public class BsInfoDao {
 	
 	public int delete(BsInfoDto dto) {
 		return sqlSession.delete("boardns.delete", dto);		
-	}
-
-	public List<BsInfoDto> selectList() {
-		return sqlSession.selectList("business.selectList");
-	}
-
-
+	} 
+ 
+  
+  
+ */
 }
