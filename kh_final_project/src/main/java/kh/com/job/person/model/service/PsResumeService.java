@@ -12,5 +12,5 @@ public interface PsResumeService {
 	public List<PsResumeDto> selectList(String userId) throws Exception;
 	public int insert(PsResumeDto dto) throws Exception;
 	public int update(PsResumeDto dto) throws Exception;
-	public int delete(String userId) throws Exception;
+	public int delete(int resumeNo) throws Exception;
 }

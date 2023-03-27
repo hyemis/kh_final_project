@@ -15,8 +15,8 @@
 	VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, sysdate, #{portfFile}, #{userId})
   </insert>
 
-  <delete id="delete" parameterType="rdto">
-  	delete from USERS where USER_ID=#{USER_ID}
+  <delete id="delete" parameterType="_int">
+  	delete from USER_RESUME where RESUME_NO=#{RESUME_NO}
   </delete>
   	
   <update id="update" parameterType="rdto">
