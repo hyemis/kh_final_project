@@ -12,7 +12,7 @@
 <body>
 
 <!-- Modal Dialog -->
-<div id="dialog-form" title="회사소개를 작성해주세요">
+<div id="dialog-form" title="회사소개를 작성해주세요" style="">
   <form>
     <fieldset>
       <label for="name">Name</label>

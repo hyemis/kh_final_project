@@ -99,8 +99,7 @@
 	<!-- 2단계 카테고리 리스트 -->
   	<select id="cateMdeptList" resultType="kh.com.job.admin.model.dto.AdCategoryDto">
 		SELECT * FROM JA_CATEGORY
-		WHERE CATEGORY_DEPT = '2'
-		AND REQ_CATEGORY_ID = #{categoryId}
+		WHERE REQ_CATEGORY_ID = #{categoryId}
 		ORDER BY CATEGORY_ID DESC
 	</select>
 </mapper>
