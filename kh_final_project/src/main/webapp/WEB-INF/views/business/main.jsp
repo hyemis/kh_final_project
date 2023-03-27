@@ -128,10 +128,10 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.7s"
 				style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/myinfo"">
 					<div class="rounded p-4">
-						<h5>기업 소개</h5>
-						<span href="/business/info">회사소개</span>
+						<h5>내 기업 관리</h5>
+						<span href="/">회사소개</span>
 						<span href="/">뉴스레터</span>
 						<span href="/">Q & A</span>
 					</div>

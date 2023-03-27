@@ -1,6 +1,7 @@
 package kh.com.job.business.model.dto;
 
 import java.sql.Clob;
+import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,9 @@ public class BsInfoDto {
 		private Number boardNum;
 		private String userId;
 		private String categoryId;
+		private String boardTitle;
 		private Clob   boardContent;
+		private Timestamp boardDate;
 		private String boardOriginalFilename;
 		private String boardRenameFilename;
 		private Number boardRead;
