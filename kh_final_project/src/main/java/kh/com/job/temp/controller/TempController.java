@@ -1,10 +1,14 @@
 package kh.com.job.temp.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +22,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.service.TempService;
@@ -198,8 +209,32 @@ public class TempController {
 		  
 		  return mv;
 	  }
-	
 	  
+	  @GetMapping("/fileupload")
+	  public ModelAndView viewfileupload(ModelAndView mv) {
+		  return mv;
+	  }
+	
+	  @PostMapping("/fileupload")
+	  public String fileupload(@RequestParam(name = "report", required = false) MultipartFile file) throws IOException  {
+		  
+		  // Google Cloud Storage에 업로드할 파일 이름 생성
+		    String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+
+
+		    // Google Cloud Storage 연결 설정
+		    InputStream serviceAccount = getClass().getResourceAsStream("/resources/khfinal5joba-efa3ba3dbf4e.json");
+		    Storage storage = (Storage) StorageOptions.newBuilder().setProjectId("khfinal5joba").setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+		    
+		    // Google Cloud Storage 버킷 가져오기
+		    Bucket bucket = storage.get("khfinal5joba");
+		  
+		    // Google Cloud Storage에 파일 업로드
+		    Blob blob = bucket.create(fileName, file.getBytes(), file.getContentType());
+		    
+		    // 업로드한 파일의 URL 반환
+		    return blob.getMediaLink();
+	  }
 	  
 
 }
