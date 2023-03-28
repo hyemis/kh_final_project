@@ -43,7 +43,7 @@ public class TempController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
+	
 	@GetMapping("/list")
 	public ModelAndView memberList(ModelAndView mv) {
 		
@@ -216,28 +216,9 @@ public class TempController {
 	  }
 	
 	  @PostMapping("/fileupload")
-	  public void fileupload(@RequestParam(name = "report", required = false) MultipartFile file) {
-		  
-		  // Google Cloud Storage에 업로드할 파일 이름 생성
-		    String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-
-
-		    // Google Cloud Storage 연결 설정
-		    InputStream serviceAccount = getClass().getResourceAsStream("/resources/khfinal5joba-efa3ba3dbf4e.json");
-		    Storage storage;
-		    Blob blob;
-		    
-			try {
-				storage = (Storage) StorageOptions.newBuilder().setProjectId("khfinal5joba").setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
-				// Google Cloud Storage 버킷 가져오기
-				Bucket bucket = storage.get("khfinal5joba");
-				blob = bucket.create(fileName, file.getBytes(), file.getContentType());
-					 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		    
-			
+	  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file) {
+		  mv.addObject("url", service.upload(file));
+		  return mv;
 		 
 	  }
 	  

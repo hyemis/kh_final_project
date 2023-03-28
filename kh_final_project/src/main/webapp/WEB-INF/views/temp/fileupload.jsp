@@ -18,12 +18,14 @@
 		
 		<div class="grid gap-3 border border-dark-subtle">
 			<form action="fileupload" method="post" enctype="multipart/form-data" >
-				<input type="text" name="boardTitle" placeholder="제목"><br>
-				<textarea name="boardContent" placeholder="내용"></textarea><br>
 				<!-- file upload : multiple 하지 않음-->
 				<input type="file" name="report" placeholder="첨부파일"><br>
 				<button type="submit">게시글 등록</button>
 			</form>
+			
+			
+			
+			<img src="${url}" alt="">
 		</div>
 	
 	</div>
