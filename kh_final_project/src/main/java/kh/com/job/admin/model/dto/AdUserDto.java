@@ -22,7 +22,7 @@ public class AdUserDto {
 	private String userId;
 	private String userPw;
 	private String userPhone;
-	private Date   userBirth;
+	private Timestamp userBirth;
 	private String userEmail;
 	private String userName;
 	private String userCount;

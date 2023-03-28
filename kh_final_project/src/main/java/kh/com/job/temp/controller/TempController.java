@@ -1,10 +1,14 @@
 package kh.com.job.temp.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +22,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.service.TempService;
@@ -32,7 +43,7 @@ public class TempController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
+	
 	@GetMapping("/list")
 	public ModelAndView memberList(ModelAndView mv) {
 		
@@ -198,8 +209,18 @@ public class TempController {
 		  
 		  return mv;
 	  }
-	
 	  
+	  @GetMapping("/fileupload")
+	  public ModelAndView viewfileupload(ModelAndView mv) {
+		  return mv;
+	  }
+	
+	  @PostMapping("/fileupload")
+	  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file) {
+		  mv.addObject("url", service.upload(file));
+		  return mv;
+		 
+	  }
 	  
 
 }

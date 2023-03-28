@@ -10,12 +10,18 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dao.TempDao;
@@ -27,6 +33,12 @@ public class TempServiceImpl implements TempService{
 	
 	@Autowired
 	private TempDao dao;
+	
+	@Value("${gcs.projectId}")
+    private String projectId;
+	
+	@Value("${gcs.bucketName}")
+	private String bucketName;
 	
 
 	@Override
@@ -163,6 +175,21 @@ public class TempServiceImpl implements TempService{
 	@Override
 	public PsUserDto loginCheck(String userId) {		
 		return dao.loginCheck(userId);
+	}
+
+	// google cloud
+	@Override
+	public String upload(MultipartFile file) {
+		try {
+			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+			String fileName = UUID.randomUUID().toString();
+			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fileName).build();
+			storage.create(blobInfo, file.getBytes());
+			return "https://storage.googleapis.com/" + bucketName + "/" + fileName;
+			
+		} catch (IOException e) {
+			 throw new RuntimeException(e);
+		}
 	}
 
 	

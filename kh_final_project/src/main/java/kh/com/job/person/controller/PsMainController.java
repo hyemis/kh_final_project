@@ -37,7 +37,7 @@ import kh.com.job.person.model.service.PsService;
 
 @Controller
 @RequestMapping("/person")
-public class PsController {
+public class PsMainController {
 	
 	@Autowired
 	private PsService service;
@@ -260,6 +260,20 @@ public class PsController {
 		}
 		
 
+		return mv;
+	}
+	
+	
+	// 입사지원현황 화면
+	@GetMapping("/applylist")
+	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) throws Exception {
+		System.out.println("로그인정보: "+principal.getName());
+		
+		if(principal.getName() != null) {
+			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+		}else {
+			mv.setViewName("redirect:/");
+		}
 		return mv;
 	}
 	
