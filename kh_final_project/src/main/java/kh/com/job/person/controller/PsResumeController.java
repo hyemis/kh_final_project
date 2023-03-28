@@ -79,21 +79,21 @@ public class PsResumeController {
 	}
 	
 	// 파일 업로드 
-	@PostMapping("/fileupload")
-	@ResponseBody
-	  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file, PsResumeDto dto) {
-		int result = -1;
-//		String back = "person/resume/write?userId=" + ;
-		
-		if(!file.isEmpty()) {
-			mv.addObject("url", rservice.upload(file));
+		@PostMapping("/fileupload")
+		@ResponseBody
+		  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,Principal principal) throws Exception {
+			
+			if(!file.isEmpty()) {
+				PsUserDto result = pservice.selectOne(principal.getName());
+				if(result!=null) {
+					mv.addObject("url", rservice.upload(file));
+					mv.addObject("userinfo", result);
+				}
+			}  
 			mv.setViewName("person/resume/write");
-			return mv;
-		}  
-		mv.setViewName("person/resume/write");
-		  return mv;
-	  }
-	
+			  return mv;
+		  }
+
 	
 	// 이력서 작성
 	@PostMapping("/write")
