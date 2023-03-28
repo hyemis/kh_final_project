@@ -25,10 +25,12 @@
 			        	정말로 회원탈퇴를 하시겠습니까?<br>
 			        	 아래 창에 비밀번호를 입력해주세요.<br>
 			        	 
+			        	 <!-- 
 				            <div class="mb-3">
 				          	  <label for="userId">아이디 </label>
 				          	  <input value="${PsUserDto.userId}" class="form-control" type="text" name="userId" readonly="readonly" >
 				            </div>
+				             -->
 				      			            
 				            <div class="mb-3">
 				              <label for="userPw">비밀번호</label>

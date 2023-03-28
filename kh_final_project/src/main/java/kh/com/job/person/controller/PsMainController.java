@@ -264,6 +264,20 @@ public class PsMainController {
 	}
 	
 	
+	// 입사지원현황 화면
+	@GetMapping("/applylist")
+	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) throws Exception {
+		System.out.println("로그인정보: "+principal.getName());
+		
+		if(principal.getName() != null) {
+			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+		}else {
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
+	
+	
 
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {
