@@ -24,8 +24,9 @@ public class BsUserDto {
 	private String userEmail;
 	private String userAdress;
 	private String userName;
-	private String userBsType;
-	private String userBsLicense;
+	private String BsType;
+	private String BsLicense;
+	private String BsMainPhone;
 	private Timestamp userCreatedAt;
 	private Timestamp userLastLogin;
 	private String userCount;
