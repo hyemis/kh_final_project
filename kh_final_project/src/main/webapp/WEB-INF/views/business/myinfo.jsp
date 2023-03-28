@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-	<div class="container-xxl mt-3">
+		<div class="container-xxl py-5">
 
 		<h1>회사소개</h1>
 

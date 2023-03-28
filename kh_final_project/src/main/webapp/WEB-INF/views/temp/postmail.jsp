@@ -1,71 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>map</title>
- 
-
-
+<title>우편번호 테스트</title>
 </head>
 <body>
-
-<!-- 우편번호 -->
 <input type="text" id="sample5_address" placeholder="주소">
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
-
-
-
-
+<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
 
     //지도를 미리 생성
-    var map = new kakao.maps.Map(mapContainer, mapOption);
- 	// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
-    function setMapType(maptype) { 
-        var roadmapControl = document.getElementById('btnRoadmap');
-        var skyviewControl = document.getElementById('btnSkyview'); 
-        if (maptype === 'roadmap') {
-            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
-            roadmapControl.className = 'selected_btn';
-            skyviewControl.className = 'btn';
-        } else {
-            map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
-            skyviewControl.className = 'selected_btn';
-            roadmapControl.className = 'btn';
-        }
-    }
-
-    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-    function zoomIn() {
-        map.setLevel(map.getLevel() - 1);
-    }
-
-    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-    function zoomOut() {
-        map.setLevel(map.getLevel() + 1);
-    }
-    
-    
+    var map = new daum.maps.Map(mapContainer, mapOption);
     //주소-좌표 변환 객체를 생성
-    var geocoder = new kakao.maps.services.Geocoder();
-    
+    var geocoder = new daum.maps.services.Geocoder();
     //마커를 미리 생성
-    var marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(37.537187, 127.005476),
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
         map: map
     });
- 	
 
 
     function sample5_execDaumPostcode() {
@@ -92,11 +55,6 @@
                         map.setCenter(coords);
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords)
-                     	// 인포윈도우로 장소에 대한 설명을 표시합니다
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-                        });
-                        infowindow.open(map, marker);
                     }
                 });
             }
@@ -104,8 +62,6 @@
     }
 </script>
 
-
-<!-- 지도 -->
 
 </body>
 </html>

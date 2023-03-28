@@ -40,10 +40,21 @@ public class kakaoController {
 
 		}
 		
-		// kakao map API
-		@RequestMapping(value = "/common/map", method = RequestMethod.GET)
+		// 카카오지도
+		@RequestMapping(value = "/temp/map", method = RequestMethod.GET)
 		public ModelAndView kakaoMap(ModelAndView mv) {
 			return mv;
 		}
-
+		
+		// 다음 주소검색
+		@RequestMapping(value = "/temp/postmail", method = RequestMethod.GET)
+		public ModelAndView postmail(ModelAndView mv) {
+			return mv;
+		}
+		
+		// 주소검색후 지도변환
+		@RequestMapping(value = "/common/map", method = RequestMethod.GET)
+		public ModelAndView map(ModelAndView mv) {
+			return mv;
+		}
 }

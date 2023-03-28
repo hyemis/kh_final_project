@@ -50,6 +50,14 @@
 				            <div class="invalid-feedback">이름을 입력해주세요.</div>
 				          </div>
 				          
+				          <!-- //TODO 기업일 경우, 이름 >기업명으로 기입 
+				           <div class="mb-3">
+				            <label for="userName">기업명</label>
+				            <input type="text" class="form-control" name="userName" placeholder="이름 입력" required>
+				            <div class="invalid-feedback">기업명을 입력해주세요.</div>
+				          </div>
+				          -->
+				          
 				          <div class="mb-3">
 				            <label for="userBirth">생년월일</label>
 				            <input type="text" class="form-control" name="userBirth" placeholder="YYYYMMDD" required>
