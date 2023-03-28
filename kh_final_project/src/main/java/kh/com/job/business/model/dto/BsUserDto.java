@@ -22,7 +22,10 @@ public class BsUserDto {
 	private String userPw;
 	private String userPhone;
 	private String userEmail;
-	private String userAdress;
+	private String AdressRoad;
+	private String AdressJibun;
+	private String AdressDetail;
+	private String AdressPostcode;
 	private String userName;
 	private String BsType;
 	private String BsLicense;
