@@ -42,4 +42,8 @@ public class AdCategoryDao {
 		return sqlsession.insert("admin.addMiddleCategory", dto);
 	}
 
+	public List<AdCategoryDto> listLastCate(String categoryId) {
+		return sqlsession.selectList("admin.listLastCate", categoryId);
+	}
+
 }

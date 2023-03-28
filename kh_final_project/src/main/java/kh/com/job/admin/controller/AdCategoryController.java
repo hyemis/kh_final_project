@@ -104,6 +104,18 @@ public class AdCategoryController {
 		
 		return result;
 	}
+	//3단계 (마지막 리스트)
+	@PostMapping("/listlcate")
+	@ResponseBody
+	public String listLastCate(ModelAndView mv, String categoryId){
 		
+		List<AdCategoryDto> llist = null;
+		
+		if(!categoryId.isEmpty() && !categoryId.equals("")){
+			llist = service.cateMdeptList(categoryId);
+		}
+
+		return new Gson().toJson(llist);
+	}
 
 }

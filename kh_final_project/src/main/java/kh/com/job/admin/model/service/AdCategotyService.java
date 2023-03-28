@@ -20,4 +20,6 @@ public interface AdCategotyService {
 
 	public int addMiddleCategory(AdCategoryDto dto);
 
+	public List<AdCategoryDto> listLastCate(String categoryId);
+
 }
