@@ -11,8 +11,8 @@
   </select>
 
   <insert id="insert" parameterType="rdto">
-  	INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_DATE, PORTF_FILE, USER_ID) 
-	VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, sysdate, #{portfFile}, #{userId})
+  	INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) 
+	VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId})
   </insert>
 
   <delete id="delete" parameterType="_int">

@@ -81,13 +81,17 @@ public class PsResumeController {
 	// 파일 업로드 
 	@PostMapping("/fileupload")
 	@ResponseBody
-	  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file) {
+	  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file, PsResumeDto dto) {
+		int result = -1;
+//		String back = "person/resume/write?userId=" + ;
+		
 		if(!file.isEmpty()) {
 			mv.addObject("url", rservice.upload(file));
+			mv.setViewName("person/resume/write");
+			return mv;
 		}  
-		  mv.setViewName("person/resume/write");
+		mv.setViewName("person/resume/write");
 		  return mv;
-		 
 	  }
 	
 	
@@ -99,6 +103,8 @@ public class PsResumeController {
 			, PsResumeDto dto) {
 		
 		System.out.println("로그인정보: "+principal.getName());
+		System.out.println("파일 url "+ dto.getResumePhoto());
+		
 		dto.setUserId(principal.getName());
 		int result = -1;
 		try {

@@ -38,34 +38,42 @@
 						<div class="mb-4">
 							<h3 class="mb-3">기본 정보 </h3>
 							<div class="row">
-								<div class="col-2 border border-dark-subtle">                      				  
-									<img class="object-fit-sm-contain border" src="${url }" alt="">
-									<!-- 모달 버튼 -->
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">파일 업로드</button>
+								<div class="col-2 border border-dark-subtle">
+								                      				  
 									
 									<!-- 모달 창 -->
 									<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-									  <div class="modal-dialog" role="document">
+									  <div class="modal-dialog modal-dialog-centered" role="document">
 									    <div class="modal-content">
 									      <div class="modal-header">
 									        <h5 class="modal-title" id="uploadModalLabel">파일 업로드</h5>
-									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 									          <span aria-hidden="true">&times;</span>
 									        </button>
 									      </div>
 									      <div class="modal-body">
-									        <form action="${pageContext.request.contextPath}/person/resume/fileupload" method="post" enctype="multipart/form-data">
-									          <div class="form-group">
-									            <label for="file">파일 선택</label>
-									            <input type="file" class="form-control-file" id="file" name="report">
-									          </div>
-									          <button type="submit" class="btn btn-primary">업로드</button>
-									        </form>
+									        <form action="fileupload" method="post" enctype="multipart/form-data" >
+												<!-- file upload : multiple 하지 않음-->
+												<input type="file" name="report" placeholder="첨부파일"><br>
+												<button class="btn btn-outline-dark m-2" type="submit">게시글 등록</button>
+											</form>
 									      </div>
 									    </div>
 									  </div>
 									</div>
 									
+									<c:choose>
+									  <c:when test="${not empty url}">
+									    <img src="${url}" width="150" height="200" alt="resume photo">
+									    <input type="hidden" id="url" placeholder="url" value="${url }" required>
+									  </c:when>
+									  <c:otherwise>
+									    <img src="https://dummyimage.com/150x200/000000/ffffff.png&text=No+Image" width="150" height="200" alt="no image">
+									  </c:otherwise>
+									</c:choose>
+									
+									<!-- 모달 버튼 -->
+									<button type="button" class="btn btn-outline-dark m-2" data-bs-toggle="modal" data-bs-target="#uploadModal">사진 등록</button>
 								</div>
 								<div class="col-10 border border-dark-subtle">
 										<input type="hidden" id="userId" placeholder="userId" value="${userinfo.userId }" required>
@@ -429,11 +437,12 @@
 			let resumeTitle = $("#resumeTitle").val();
 			let flexCheckChecked = $("#flexCheckChecked").val();
 			let portfFile = $("#portfFile").val();
+			let resumePhoto = $("#url").val();
 			
 			$.ajax({
 				type : "post",
 				url  : "${pageContext.request.contextPath}/person/resume/write",
-				data : {resumeTitle : resumeTitle , flexCheckChecked : flexCheckChecked, portfFile : portfFile},
+				data : {resumeTitle : resumeTitle , flexCheckChecked : flexCheckChecked, portfFile : portfFile, resumePhoto: resumePhoto},
 				success : function(result) {
 					if(result === 1) {
 						alert("이력서가 등록되었습니다.");
