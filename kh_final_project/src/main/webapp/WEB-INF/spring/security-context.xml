@@ -19,7 +19,7 @@
         <!-- <security:intercept-url pattern="/business/newletter/**" access="permitAll"/>-->
         
         <security:form-login 
-        	login-page="/temp/login" 
+        	login-page="/person/login" 
 			 username-parameter="userId"
 			 password-parameter="userPw"
 			 default-target-url="/person/main"
