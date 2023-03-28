@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 public class MailUtil {
 	
 	private static JavaMailSender mailSender;
-	/*
+	
 	@Autowired
-	public MailUtil(JavaMailSender mailSender) {
+	public void MailUtil(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 	
-	public static int mailSend(String title, String from, String text, String to, String cc) {
+	public static int mailSend(String title, String from, String text, String to, String[] cc, int ccNum) {
 		if(from == null || from.equals("")) {
 			from = "tkdtlrdl07@gmail.com";
 		}
@@ -30,12 +30,16 @@ public class MailUtil {
 			message.setFrom(new InternetAddress(from));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			
-			if(cc != null && !cc.equals("")) {
-				message.setRecipient(Message.RecipientType.CC, new InternetAddress(cc));
+			if(cc != null) {
+				InternetAddress[] toAddr = new InternetAddress[ccNum];
+				for(int i = 0; i<ccNum; i++ ) {
+					toAddr[i] = new InternetAddress(cc[i]); 
+				}
+				message.setRecipients(Message.RecipientType.CC, toAddr);
 			}
 			
 			message.setSubject(title);
-			message.setText(text);
+			message.setContent(text,"text/html; charset=UTF-8");
 			
 			mailSender.send(message);
 		} catch (MessagingException e) {
@@ -43,5 +47,5 @@ public class MailUtil {
 		}
 		return 1;
 	}
-	*/
+
 }

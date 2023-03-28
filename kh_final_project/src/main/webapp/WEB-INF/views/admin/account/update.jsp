@@ -100,14 +100,16 @@
 			            <label for="email">이메일</label>
 			            <input type="text" class="form-control" id="email" name="userEmail" value="${addto.userEmail}" required>
 			            <div class="invalid-feedback">이메일을 입력해주세요.</div>
-		          </div>			
+		          </div>
+		          <sec:authorize access="hasRole('ROLE_AM')">			
 		          <div class="mb-3">
 			            <label for="email">관리자 권한</label>
 			            <select class="form-select" id="role" name="userRole" required>
 			            	<option value="ROLE_A"  ${addto.userRole == "ROLE_A" ? 'selected' : ""}>일반관리자</option>
 			            	<option value="ROLE_AM" ${addto.userRole == "ROLE_AM" ? 'selected' : ""}>마스터관리자</option>
 			            </select>
-	         	 </div>	
+	         	 </div>
+	         	 </sec:authorize>	
 	         	<div class="mx-5 mt-6 text-lg-end text-center">
 		 			  <button type="submit" class="btn btn-dark border-0 w-15 py-2">계정 정보 수정</button>
 		 		</div>
@@ -122,7 +124,7 @@
     <script type="text/javascript">
 	
 		function checkUpdate() {
-	       if (!checkPassword(Account.userId.value, Account.userPw.value, Account.passwordcheck.value)) {
+	       if (!checkPassword(Account.userPw.value, Account.passwordcheck.value)) {
 	            return false;
 	        } else if (!checkName(Account.userName.value)) {
 	            return false;
@@ -133,14 +135,13 @@
 	    }
 
 		// 비밀번호1, 비밀번호2 체크 
-		function checkPassword(id, userPw, passwordcheck) {
+		function checkPassword(userPw, passwordcheck) {
 
 		//비밀번호와 비밀번호 확인이 맞지 않다면..
 		if (userPw != passwordcheck) {
 		    alert("두 비밀번호가 맞지 않습니다.");
 		    Account.userPw.value ="";
 		    Account.passwordcheck.value ="";
-		    Account.userPw2.focus();
 		    return false;
 		}
 		return true; //확인이 완료되었을 때
