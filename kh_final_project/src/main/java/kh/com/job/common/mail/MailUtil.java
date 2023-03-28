@@ -39,7 +39,7 @@ public class MailUtil {
 			}
 			
 			message.setSubject(title);
-			message.setText(text);
+			message.setContent(text,"text/html; charset=UTF-8");
 			
 			mailSender.send(message);
 		} catch (MessagingException e) {
