@@ -2,37 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boards">
 
-<!-- bdto 명칭이 정해지지 않아서 오류가 발생해서 주석 처리 했어요/네 -->
-
-<!--   <select id="selectOne" parameterType="string" resultType="bdto">
-  	select * from BORAD where USER_ID=#{userId}
-  </select>
-
-  <select id="selectList" resultType="bdto">
-  	select * from BORAD 
-  </select>
-  
-  insert
-  <insert id="insert" parameterType="bdto">
-  	INSERT INTO BORAD (USER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, TAG, SALARY_AVG, EMPLOYEE, LATITUDE, LONGITUDE )
-	VALUES ( #{userId}, #{boardTitle}, #{boardTitle}, SYSDATE, #{tag}, #{salaryAvg}, #{employee}, #{latitude}, #{longitude} )
-  </insert>
-
-  <delete id="delete" parameterType="bdto">
-  	delete from BORAD where USER_ID=#{USER_ID}
-  </delete>
-  	
-  <update id="update" parameterType="bdto">
-  	update BORAD set 
-  	BOARD_TITLE=#{boardTitle}
-  	BOARD_CONTENT=#{boardTitle}
-  	BOARD_DATE=#{SYSDATE}
-  	TAG=#{tag}
-  	SALARY_AVG=#{salaryAvg}
-  	EMPLOYEE=#{employee}
-  	LATITUDE=#{latitude}
-  	LONGITUDE=#{longitude}
-  	where USER_ID = #{USER_ID}
-  </update> -->
 
 </mapper>
