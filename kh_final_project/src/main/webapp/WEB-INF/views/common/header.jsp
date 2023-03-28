@@ -169,7 +169,7 @@
 			<div class="nav-item nav-link active">
 				<sec:authorize access="isAnonymous()">
 					<a class="nav-link me-3"
-						href="${pageContext.request.contextPath}/temp/login">login</a>
+						href="${pageContext.request.contextPath}/person/login">login</a>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">

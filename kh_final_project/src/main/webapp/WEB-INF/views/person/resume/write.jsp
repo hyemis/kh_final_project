@@ -39,7 +39,33 @@
 							<h3 class="mb-3">기본 정보 </h3>
 							<div class="row">
 								<div class="col-2 border border-dark-subtle">                      				  
-									<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
+									<img class="object-fit-sm-contain border" src="${url }" alt="">
+									<!-- 모달 버튼 -->
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">파일 업로드</button>
+									
+									<!-- 모달 창 -->
+									<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="uploadModalLabel">파일 업로드</h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        <form action="${pageContext.request.contextPath}/person/resume/fileupload" method="post" enctype="multipart/form-data">
+									          <div class="form-group">
+									            <label for="file">파일 선택</label>
+									            <input type="file" class="form-control-file" id="file" name="report">
+									          </div>
+									          <button type="submit" class="btn btn-primary">업로드</button>
+									        </form>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+									
 								</div>
 								<div class="col-10 border border-dark-subtle">
 										<input type="hidden" id="userId" placeholder="userId" value="${userinfo.userId }" required>
@@ -369,6 +395,35 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
+		/* // 파일 업로드 
+		function uploadFile() {
+	    var form = document.getElementById('fileUploadForm');
+	    var formData = new FormData(form);
+	
+		    $.ajax({
+		        url: "${pageContext.request.contextPath}/person/resume/fileupload",
+		        type: "post",
+		        data: formData,
+		        processData: false,
+		        contentType: false,
+		        success: function(data) {
+		        	var result = JSON.parse(date);
+		        	if(result.success){
+			            alert('파일이 업로드되었습니다.');
+			            $('#myModal').modal('hide');
+		        	} else {
+		        		console.error("파일 업로드가 실패하였습니다.");
+		        	}
+		        },
+		        error: function(jqXHR, textStatus, errorThrown) {
+		            console.error("파일 업로드 중 오류가 발생하였습니다.");
+		            console.error("HTTP 상태 코드: " + jqXHR.status);
+		            console.error("오류 메시지: " + textStatus);
+		            console.error("에러Thrown: " + errorThrown);
+		        }
+		    });
+		} */
+		
 		// 이력서 등록
 		function fn_rWrite(){
 			let resumeTitle = $("#resumeTitle").val();
@@ -391,6 +446,9 @@
 			})
 		}
 	
+	
+		
+		
 	
 	</script>
 

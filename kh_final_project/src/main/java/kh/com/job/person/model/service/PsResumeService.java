@@ -2,6 +2,8 @@ package kh.com.job.person.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kh.com.job.person.model.dto.PsResumeDto;
 
 
@@ -13,4 +15,7 @@ public interface PsResumeService {
 	public int insert(PsResumeDto dto) throws Exception;
 	public int update(PsResumeDto dto) throws Exception;
 	public int delete(int resumeNo) throws Exception;
+	
+	// 파일 업로드 
+	public String upload(MultipartFile file);
 }

@@ -90,19 +90,10 @@ public class PsMainController {
 	public ModelAndView dosignUp(ModelAndView mv
 			, PsUserDto dto
 			, RedirectAttributes rttr
-			,@RequestParam(name="report", required = false) MultipartFile multi
 			, HttpServletRequest request) {
 		
 	
 		  int result = -1;
-		  // 파일 첨부
-		  Map<String, String> filePath;
-		  try {
-			filePath = fileUtil.saveFile(multi, request, null);
-			dto.setUserPic(filePath.get("rename"));
-		  } catch (Exception e1) {
-			e1.printStackTrace();
-		  }
 		  
 		// 패스워드 암호화 
 		
@@ -255,8 +246,8 @@ public class PsMainController {
 
 		if(passwordEncoder.matches(userPw, pdto.getUserPw())) {
 			service.delete(userId);
-			rttr.addFlashAttribute("msg", "회원탈퇴가 완료되었습니다.");
-			mv.setViewName("redirect:/logout");
+			SecurityContextHolder.clearContext();
+			mv.setViewName("redirect:/person/main");
 			
 		}else {
 			mv.setViewName("redirect:/person/deletepw");
@@ -282,9 +273,12 @@ public class PsMainController {
 	}
 	
 	
-	
-	
-	
+	//로그인 페이지
+	@GetMapping("/login")
+	public ModelAndView login(ModelAndView mv) {
+		
+		return mv;
+	}
 
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {
