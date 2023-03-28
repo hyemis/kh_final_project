@@ -74,11 +74,6 @@
 				            <div class="invalid-feedback">주소를 입력해주세요.</div>
 				          </div>
 				
-							<div class="mb-3">
-					            <label for="userPic">사진</label>
-								<input type="file" name="report" placeholder="첨부파일">
-				          	</div>
-				          
 				          <hr class="mb-4">
 				          
 				          <!-- <div class="custom-control custom-checkbox">
