@@ -8,14 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
-	public ModelAndView CustumExceptionHandler(ModelAndView mv, Exception ex) {
+	public String CustumExceptionHandler(Exception ex) {
 		System.out.println("에러 코드 " + ex);
 		System.out.println(ex.getMessage());
 		System.out.println("@@@@@@@@@@@@@@");
-		mv.addObject("msg", ex.getMessage());
 		
 		
-		return mv;
+		return ex.getMessage();
 	}
 
 }
