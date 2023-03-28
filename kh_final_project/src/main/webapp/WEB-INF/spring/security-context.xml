@@ -24,6 +24,9 @@
 			 password-parameter="userPw"
 			 default-target-url="/person/main"
 			 authentication-success-handler-ref="loginSuccessHandler"	
+		/>
+		<security:logout
+			logout-success-url="/person/main"
 		/>        					 
     </security:http>
         
