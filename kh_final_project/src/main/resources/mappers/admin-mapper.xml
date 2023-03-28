@@ -78,7 +78,7 @@
 	<!-- 카테고리 2단계 추가 -->
 	<insert id="addMiddleCategory">
 		INSERT INTO JA_CATEGORY (CATEGORY_ID, CATEGORY_NAME, CATEGORY_DEPT, CATEGORY_TYPE, REQ_CATEGORY_ID) 
-		VALUES (#{categoryId}, #{categoryName}, '2', #{categoryId}, #{reqCategoryId}) 
+		VALUES (#{categoryId}, #{categoryName}, '2', #{categoryType}, #{reqCategoryId}) 
 	</insert>
 	<!-- 카테고리 아이디 중복 확인 -->
 	<select id="categoryCheck" resultType="_int">

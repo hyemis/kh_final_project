@@ -70,6 +70,8 @@
 			 			<div class="mx-2 fcateinfo">
 			 				<input type="hidden" class="categoryId" name="categoryId" value="${fList.categoryId}">
 			 				<input type="hidden" class="categoryName" name="categoryName" value="${fList.categoryName}">
+			 				<input type="hidden" class="categoryType" name="categoryType" value="${fList.categoryType}">
+			 				<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="${fList.categoryId}">
 			 				${fList.categoryId} : ${fList.categoryName}
 			 				<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>
 			 			</div> 
@@ -149,6 +151,8 @@
             alert($(this).parent().parent().next().attr('class')); */
             
             let id = $(this).find('.categoryId').val(); 
+            let type = $(this).find('.categoryType').val(); 
+            let reqid = $(this).find('.reqCategoryId').val(); 
             //다음 단계나오게
     		$.ajax({ 
     			url: "${pageContext.request.contextPath}/admin/category/listmcate"
@@ -156,11 +160,12 @@
     			, data:  {categoryId : id}
     			, dataType:"json"
     			, success: function(result){
-    				if(result != null){
+
 	    				let htmlVal = '<div class="m-2 text-lg-end">';
 	    				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
 	    				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
-	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
+    					htmlVal += '<input type="hidden" class="categoryType" name="categoryType" value="'+type+'">';
+    					htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+reqid+'">';
 	    				for(i = 0; i< result.length; i++){
 	    					let list = result[i];
 	    					htmlVal += '<div class="mx-2 mcateinfo">';
@@ -172,19 +177,11 @@
 	    				}
 	    				htmlVal += '</div>';
 	    				$(".mdept").html(htmlVal);    					
-    				}else{
-    					let htmlVal = '<div class="m-2 text-lg-end">';
-	    				htmlVal += '<button class="addMdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
-	    				htmlVal += '<div class="m-3 bg-white mdeptList" style="min-height: 300px;">';
-	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
-    					htmlVal += '</div>';
-    					htmlVal += '</div>';
-    					$(".mdept").html(htmlVal);
-    				}
     			}
     			, error: function(e){
     				alert(e +" : 오류")
     			}
+
     		}); 
         });
         
@@ -273,6 +270,7 @@
         	let categoryId = $(this).closest('.inputCate').find('.categoryId').val();
         	let categoryName = $(this).closest('.inputCate').find('.categoryName').val();
         	let inputCate = $(this).closest('.inputCate');
+        	let categoryType = $(this).closest('.mdeptList').find('.categoryType').val();
         	let reqCategoryId = $(this).closest('.mdeptList').find('.reqCategoryId').val();
         	
         	if(categoryId ===''){
@@ -285,6 +283,7 @@
 	    			, type: "post"
 	    			, data:  {categoryId : categoryId
 	    						, categoryName : categoryName
+	    						, categoryType : categoryType
 	    						, reqCategoryId : reqCategoryId
 	    					 }
 	    			, success: function(result){
