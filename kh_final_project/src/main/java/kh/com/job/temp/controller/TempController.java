@@ -216,7 +216,7 @@ public class TempController {
 	  }
 	
 	  @PostMapping("/fileupload")
-	  public String fileupload(@RequestParam(name = "report", required = false) MultipartFile file) throws IOException  {
+	  public void fileupload(@RequestParam(name = "report", required = false) MultipartFile file) {
 		  
 		  // Google Cloud Storage에 업로드할 파일 이름 생성
 		    String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
@@ -224,16 +224,21 @@ public class TempController {
 
 		    // Google Cloud Storage 연결 설정
 		    InputStream serviceAccount = getClass().getResourceAsStream("/resources/khfinal5joba-efa3ba3dbf4e.json");
-		    Storage storage = (Storage) StorageOptions.newBuilder().setProjectId("khfinal5joba").setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+		    Storage storage;
+		    Blob blob;
 		    
-		    // Google Cloud Storage 버킷 가져오기
-		    Bucket bucket = storage.get("khfinal5joba");
-		  
-		    // Google Cloud Storage에 파일 업로드
-		    Blob blob = bucket.create(fileName, file.getBytes(), file.getContentType());
+			try {
+				storage = (Storage) StorageOptions.newBuilder().setProjectId("khfinal5joba").setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+				// Google Cloud Storage 버킷 가져오기
+				Bucket bucket = storage.get("khfinal5joba");
+				blob = bucket.create(fileName, file.getBytes(), file.getContentType());
+					 
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		    
-		    // 업로드한 파일의 URL 반환
-		    return blob.getMediaLink();
+			
+		 
 	  }
 	  
 

@@ -37,7 +37,7 @@ import kh.com.job.person.model.service.PsService;
 
 @Controller
 @RequestMapping("/person")
-public class PsController {
+public class PsMainController {
 	
 	@Autowired
 	private PsService service;
