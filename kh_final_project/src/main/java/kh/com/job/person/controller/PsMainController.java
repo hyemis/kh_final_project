@@ -154,6 +154,7 @@ public class PsMainController {
 		
 		if(principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+			mv.setViewName("person/mypage");
 		}else {
 			mv.setViewName("redirect:/");
 		}
@@ -186,6 +187,7 @@ public class PsMainController {
 		
 		if(principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+			mv.setViewName("person/update");
 		}else {
 			mv.setViewName("redirect:/");
 		}
@@ -219,6 +221,7 @@ public class PsMainController {
 		
 		if(principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+			mv.setViewName("person/delete");
 		}else {
 			mv.setViewName("redirect:/");
 		}
@@ -232,6 +235,7 @@ public class PsMainController {
 		
 		if(principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+			mv.setViewName("person/deletepw");
 		}else {
 			mv.setViewName("redirect:/");
 		}
@@ -239,12 +243,11 @@ public class PsMainController {
 	}
 	
 	
-	// 회원탈퇴--하는중******
+	// 회원탈퇴
 	@PostMapping("/deletepw")
 	public ModelAndView delete(ModelAndView mv, 
 								String userId, 
 								String userPw,
-								Principal principal, 
 								RedirectAttributes rttr) throws Exception {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -252,10 +255,11 @@ public class PsMainController {
 
 		if(passwordEncoder.matches(userPw, pdto.getUserPw())) {
 			service.delete(userId);
-			mv.setViewName("redirect:/person/main");
 			rttr.addFlashAttribute("msg", "회원탈퇴가 완료되었습니다.");
+			mv.setViewName("redirect:/logout");
+			
 		}else {
-			mv.setViewName("redirect:/");
+			mv.setViewName("redirect:/person/deletepw");
 			rttr.addFlashAttribute("msg", "회원탈퇴에 실패하였습니다. 비밀번호를 다시 확인해주세요");
 		}
 		
@@ -276,6 +280,9 @@ public class PsMainController {
 		}
 		return mv;
 	}
+	
+	
+	
 	
 	
 
