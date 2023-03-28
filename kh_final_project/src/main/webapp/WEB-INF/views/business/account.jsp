@@ -1,65 +1,191 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>jQuery UI Dialog - Modal form</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="//code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<meta charset="UTF-8">
+<title>내정보</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	
+	<div class="container-xxl py-5">
 
-<!-- Modal Dialog -->
-<div id="dialog-form" title="회사소개를 작성해주세요" style="">
-  <form>
-    <fieldset>
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
-    </fieldset>
-  </form>
-</div>
+		<h1 class="text-center m-3">회사명</h1>
+		<div class="container-xxl py-5">
+			<div class="row">
+				<div class="col-md-3 col-sm-4  border border-secondary">
+					<div class="team-item rounded overflow-hidden">
+					<div class="position-relative">
+						<img class="img-fluid"
+							src="${pageContext.request.contextPath}/resources/template/makaan/img/team-1.jpg" alt="">
+						<div
+							class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+							<a class="btn btn-square mx-1" href=""><i
+								class="fab fa-facebook-f"></i></a> <a class="btn btn-square mx-1"
+								href=""><i class="fab fa-twitter"></i></a> <a
+								class="btn btn-square mx-1" href=""><i
+								class="fab fa-instagram"></i></a>
+						</div>
+					</div>
+					<div class="text-center p-4 mt-3">
+						<h5 class="fw-bold mb-0">${userName}</h5>
+						<small>${userEmail}</small>
+					</div>
+					
+				</div>
+				</div>
+				<div class="col-md-8 col-sm-8 border border-secondary">
+					<!-- 내정보확인/수정 -->
+					<div class="container border border-secondary">
+						<div>내정보</div>
+						<div class="row">
+							<div class="col">
+								<form action="" method="post">
+								<p>이메일 
+								<input type="text" id="" placeholder="${userEmail}">
+								</p>
+								<p>사업자 번호
+								<input type="text" id="" placeholder="${userBsLicense}">
+								</p>
+								<p>대표전화
+								<input type="text" id="" placeholder="">
+								</p>
+								<p class="text-center">
+								<button type="submit">수정하기</button>
+								<button type="reset">취소</button>
+								</p>
+								<p>주소
+								</p>
+								<input type="text" id="sample5_address" placeholder="${userAdress}">
+								<input type="button" onclick="sample5_execDaumPostcode()" value="수정하기"><br>
+								</form>
+							</div>
+							<div class="col border border-secondary">
+							<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 비밀번호 -->
+					<div class="container border border-secondary">
+						<div>비밀번호 변경</div>
+						<div>
+							<div> 
+							<p>비밀번호
+							<input type="text" id="" placeholder="비밀번호 입력">
+							</p>
+							<p>비빌번호 확인
+							<input type="text" id="" placeholder="비밀번호 재확인">
+							<button>변경</button>
+							</p>
+							</div>
+							<div>
+							<button>기업회원 탈퇴하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-<!-- Button to Open Modal Dialog -->
-<button id="create-user">Create User</button>
+	</div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 <script>
-  $(function() {
-    // Initialize Modal Dialog
-    $("#dialog-form").dialog({
-      autoOpen: false,
-      height: 400,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Create User": function() {
-          // TODO: Handle Form Submit
-        },
-        Cancel: function() {
-          $(this).dialog("close");
-        }
-      },
-      close: function() {
-        // TODO: Reset Form
-      }
-    });
-    
-    // Open Modal Dialog Button Click Handler
-    $("#create-user").on("click", function() {
-      $("#dialog-form").dialog("open");
-    });
-  });
+
+
 </script>
 
-</body>
-</html>
+<!-- map start -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+ 	// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+    function setMapType(maptype) { 
+        var roadmapControl = document.getElementById('btnRoadmap');
+        var skyviewControl = document.getElementById('btnSkyview'); 
+        if (maptype === 'roadmap') {
+            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+            roadmapControl.className = 'selected_btn';
+            skyviewControl.className = 'btn';
+        } else {
+            map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+            skyviewControl.className = 'selected_btn';
+            roadmapControl.className = 'btn';
+        }
+    }
+
+    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+    function zoomIn() {
+        map.setLevel(map.getLevel() - 1);
+    }
+
+    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+    function zoomOut() {
+        map.setLevel(map.getLevel() + 1);
+    }
+    
+    
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new kakao.maps.services.Geocoder();
+    
+    //마커를 미리 생성
+    var marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+ 	
 
 
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
 
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                console.log(addr);
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                     	// 인포윈도우로 장소에 대한 설명을 표시합니다
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                        });
+                        infowindow.open(map, marker);
+                    }
+                });
+            }
+        }).open();
+    }
+</script>
+<!-- map end -->
+
+	
 </body>
 </html>
