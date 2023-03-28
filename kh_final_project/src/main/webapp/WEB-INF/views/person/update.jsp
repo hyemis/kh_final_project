@@ -29,7 +29,7 @@
 			 <div class="row justify-content-center">
 			 
 		        <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll()">
-			        	<div class="m-4" style="text-align: center;"><h3>회원정보수정</h3></div>
+			        	<div class="m-4" style="text-align: center"><h3>회원정보수정</h3></div>
 			        	
 		
 				          

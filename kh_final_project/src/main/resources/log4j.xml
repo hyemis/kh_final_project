@@ -10,7 +10,7 @@
 		</layout>
 	</appender>
 	
-		<appender name="console2"
+	<appender name="console2"
 		class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -24,11 +24,6 @@
 		<level value="info" />
 	</logger>
 
-	<logger name="kh.com.job.common.AdviceLog">
-		<level value="info" />
-		<appender-ref ref="console2" />
-	</logger>
-	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
@@ -49,7 +44,7 @@
 	
 	<!-- SQL Logger -->
 	<logger name="jdbc.sqltiming" additivity="false">
-		<level value="warn" />
+		<level value="info" />
 		<appender-ref ref="console" />
 	</logger>
 

@@ -34,7 +34,7 @@
 	
 	<!-- 트랜젝션 적용을 위한 빈 -->
 	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<tx:annotation-driven/>
@@ -50,7 +50,7 @@
 		<property name="cacheSeconds" value="5"/>
 	</bean>
 	
-	<!-- 이메일 관련 -->
+	<!-- 이메일 관련   -->
 	
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
@@ -66,5 +66,5 @@
             </props>
         </property>
     </bean>
-    
+   
 </beans>

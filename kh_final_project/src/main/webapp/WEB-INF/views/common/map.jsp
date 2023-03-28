@@ -6,22 +6,7 @@
 <meta charset="UTF-8">
 <title>map</title>
  
- <style>
-html, body 
-.map_wrap {position:relative;overflow:hidden;width:100%;height:350px;}
-.radius_border{border:1px solid #919191;border-radius:5px;}     
-.custom_typecontrol {position:absolute;top:10px;right:10px;overflow:hidden;width:130px;height:30px;margin:0;padding:0;z-index:1;font-size:12px;font-family:'Malgun Gothic', '맑은 고딕', sans-serif;}
-.custom_typecontrol span {display:block;width:65px;height:30px;float:left;text-align:center;line-height:30px;cursor:pointer;}
-.custom_typecontrol .btn {background:#fff;background:linear-gradient(#fff,  #e6e6e6);}       
-.custom_typecontrol .btn:hover {background:#f5f5f5;background:linear-gradient(#f5f5f5,#e3e3e3);}
-.custom_typecontrol .btn:active {background:#e6e6e6;background:linear-gradient(#e6e6e6, #fff);}    
-.custom_typecontrol .selected_btn {color:#fff;background:#425470;background:linear-gradient(#425470, #5b6d8a);}
-.custom_typecontrol .selected_btn:hover {color:#fff;}   
-.custom_zoomcontrol {position:absolute;top:50px;right:10px;width:36px;height:80px;overflow:hidden;z-index:1;background-color:#f5f5f5;} 
-.custom_zoomcontrol span {display:block;width:36px;height:40px;text-align:center;cursor:pointer;}     
-.custom_zoomcontrol span img {width:15px;height:15px;padding:12px 0;border:none;}             
-.custom_zoomcontrol span:first-child{border-bottom:1px solid #bfbfbf;}            
-</style>
+
 
 </head>
 <body>
@@ -29,18 +14,7 @@ html, body
 <!-- 우편번호 -->
 <input type="text" id="sample5_address" placeholder="주소">
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-<div id="map" style="width:800px;height:400px;margin-top:10px;display:none">
-	<!-- 지도타입 컨트롤 div 입니다 -->
-    <div class="custom_typecontrol radius_border">
-        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
-        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-    </div>
-    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-    <div class="custom_zoomcontrol radius_border"> 
-        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
-        <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
-    </div>
-</div>
+<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 
 
 
