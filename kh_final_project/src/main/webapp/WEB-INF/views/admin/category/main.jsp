@@ -146,9 +146,7 @@
         	//삭제 버튼 나오기
         	$(this).find('button').toggle();
             $('.fcateinfo').not(this).find('button').hide();
-/*             
-            alert($(this).parent().parent().attr('class'));
-            alert($(this).parent().parent().next().attr('class')); */
+            $('.ldept').empty();
             
             let id = $(this).find('.categoryId').val(); 
             let type = $(this).find('.categoryType').val(); 
@@ -207,7 +205,7 @@
     		}); 
         	
         });
-        
+        //2단계 +버튼 클릭시 카테고리 생성 정보 입력 칸 노출
         $(document).on('click', '.addMdeptCate', function() {
 		    if($(".mdeptList input[type='text']").length == 0){
 		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
@@ -221,51 +219,7 @@
 		    }
 		});
         
-        $(document).on('click', '.mcateinfo', function() {
-        	$(this).find('button').toggle();
-            $('.mcateinfo').not(this).find('button').hide();
-            
-            let id = $(this).find('.categoryId').val(); 
-            //다음 단계나오게
-    		$.ajax({ 
-    			url: "${pageContext.request.contextPath}/admin/category/listmcate"
-    			, type: "post"
-    			, data:  {categoryId : id}
-    			, dataType:"json"
-    			, success: function(result){
-    				if(result != null){
-	    				let htmlVal = '<div class="m-2 text-lg-end">';
-	    				htmlVal += '<button class="addLdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
-	    				htmlVal += '<div class="m-3 bg-white ldeptList" style="min-height: 300px;">';
-	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
-	    				for(i = 0; i< result.length; i++){
-	    					let list = result[i];
-	    					htmlVal += '<div class="mx-2 lcateinfo">';
-	    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
-	    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
-	    					htmlVal += list.categoryId +' : '+list.categoryName;
-	    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
-	    					htmlVal += '</div>';
-	    				}
-	    				htmlVal += '</div>';
-	    				$(".ldept").html(htmlVal);
-    				}else{
-    					let htmlVal = '<div class="m-2 text-lg-end">';
-	    				htmlVal += '<button class="addLdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
-	    				htmlVal += '<div class="m-3 bg-white ldeptList" style="min-height: 300px;">';
-	    				htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+result[0].reqCategoryId+'">';
-    					htmlVal += '</div>';
-    					htmlVal += '</div>';
-    					$(".ldept").html(htmlVal);
-    				}
-    			}
-    			, error: function(e){
-    				alert(e +" : 오류")
-    			}
-    		}); 
-            
-        });
-        
+        //2단계 카테고리 추가
         $(document).on('click', '.addMcate', function() {
         	let categoryId = $(this).closest('.inputCate').find('.categoryId').val();
         	let categoryName = $(this).closest('.inputCate').find('.categoryName').val();
@@ -304,7 +258,100 @@
         	
 		});
         
-        
+        $(document).on('click', '.mcateinfo', function() {
+        	$(this).find('button').toggle();
+            $('.mcateinfo').not(this).find('button').hide();
+            
+            let id = $(this).find('.categoryId').val(); 
+            let type = $(this).closest('.mdeptList').find('.categoryType').val(); 
+            //다음 단계나오게
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/category/listlcate"
+    			, type: "post"
+    			, data:  {categoryId : id}
+    			, dataType:"json"
+    			, success: function(result){
+	    				let htmlVal = '<div class="m-2 text-lg-end">';
+	    				htmlVal += '<button class="addLdeptCate m-1" type="button"><img src="${pageContext.request.contextPath}/resources/template/makaan/img/plusbutton.png" width="20"></button></div>';
+	    				htmlVal += '<div class="m-3 bg-white ldeptList" style="min-height: 300px;">';
+    					htmlVal += '<input type="hidden" class="categoryType" name="categoryType" value="'+type+'">';
+    					htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+id+'">';
+	    				for(i = 0; i< result.length; i++){
+	    					let list = result[i];
+	    					htmlVal += '<div class="mx-2 lcateinfo">';
+	    					htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="'+list.categoryId+'">';
+	    					htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="'+list.categoryName+'">';
+	    					htmlVal += list.categoryId +' : '+list.categoryName;
+	    					htmlVal += '<button type="button" class="btn cateDelete" style=" display: none;">삭제</button>';
+	    					htmlVal += '</div>';
+	    				}
+	    				htmlVal += '</div>';
+	    				$(".ldept").html(htmlVal);
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+            
+        });
+      //3단계 +버튼 클릭시 카테고리 생성 정보 입력 칸 노출
+        $(document).on('click', '.addLdeptCate', function() {
+		    if($(".ldeptList input[type='text']").length == 0){
+		        let inputCate = '<div class="container mx-2 inputCate" id="inputCate">';
+		        inputCate += '<button type="button" class="closeInput btn btn-dark btn-sm border-0">X</button>';
+		        inputCate += '<form action="" method="post">';
+		        inputCate += '<div class="mx-2 col-6"><label for="categoryId">아이디</label><input type="text" class="categoryId form-control form-control-sm" name="categoryId" id="categoryId"></div>';
+		        inputCate += '<div class="mx-2 col-6"><label for="categoryName">이름</label><input type="text" class="categoryName form-control form-control-sm" name="categoryName" id = "categoryName"></div>';
+		        inputCate += '<button type="button" class="addLcate btn btn-dark btn-sm border-0 my-1">추가</button>';
+		        inputCate += '</div>';
+		        $(".ldeptList").append(inputCate);        		
+		    }
+		});
+      
+      //3단계 카테고리 추가
+        $(document).on('click', '.addLcate', function() {
+        	let categoryId = $(this).closest('.inputCate').find('.categoryId').val();
+        	let categoryName = $(this).closest('.inputCate').find('.categoryName').val();
+        	let inputCate = $(this).closest('.inputCate');
+        	let categoryType = $(this).closest('.ldeptList').find('.categoryType').val();
+        	let reqCategoryId = $(this).closest('.ldeptList').find('.reqCategoryId').val();
+        	
+        	if(categoryId ===''){
+        		alert("아이디 입력해주세요");
+        	}else if(categoryId.match(/\s/g)){
+        		alert("공백 제거 해주세요");
+        	}else{
+	    		$.ajax({ 
+	    			url: "${pageContext.request.contextPath}/admin/category/addmcate"
+	    			, type: "post"
+	    			, data:  {categoryId : categoryId
+	    						, categoryName : categoryName
+	    						, categoryType : categoryType
+	    						, reqCategoryId : reqCategoryId
+	    					 }
+	    			, success: function(result){
+	    				if(result == 1){
+	    					location.reload();
+	    				}else if(result == -1){
+	    					alert("아이디가 중복 되었습니다.");
+	    					inputCate.find('.categoryId').val('');
+	    				}else{
+	    					alert("등록에 실패 했습니다.");
+	    				}
+	    			}
+	    			, error: function(e){
+	    				alert(e +" : 오류")
+	    			}
+	    		});        		
+        	}
+        	
+		});
+      //3단계 삭제 버튼 토글
+        $(document).on('click', '.lcateinfo', function() {
+        	$(this).find('button').toggle();
+            $('.lcateinfo').not(this).find('button').hide();
+        });
+
 		</script>
 
         <!-- Back to Top -->
