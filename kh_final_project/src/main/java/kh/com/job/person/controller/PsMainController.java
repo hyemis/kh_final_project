@@ -255,8 +255,8 @@ public class PsMainController {
 
 		if(passwordEncoder.matches(userPw, pdto.getUserPw())) {
 			service.delete(userId);
-			rttr.addFlashAttribute("msg", "회원탈퇴가 완료되었습니다.");
-			mv.setViewName("redirect:/logout");
+			SecurityContextHolder.clearContext();
+			mv.setViewName("redirect:/person/main");
 			
 		}else {
 			mv.setViewName("redirect:/person/deletepw");
