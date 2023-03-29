@@ -4,7 +4,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 
-<%-- <!-- cs -->
+<%-- 각각의 페이지에 복붙해주세요 
+
+<!-- cs -->
 <link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +27,9 @@
 <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script> --%>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script> 
+
+--%>
 
 <style>
 .user_id {

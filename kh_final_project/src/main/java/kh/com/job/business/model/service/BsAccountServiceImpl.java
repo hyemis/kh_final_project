@@ -8,7 +8,6 @@ import kh.com.job.business.model.dao.BsAccountDao;
 @Service
 public class BsAccountServiceImpl implements BsAccountService{
 	
-	@Autowired
 	private BsAccountDao dao;
 
 }
