@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 
+<%-- 각각의 페이지에 복붙해주세요 
 
 <!-- cs -->
 <link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">

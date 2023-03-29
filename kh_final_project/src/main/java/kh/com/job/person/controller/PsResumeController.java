@@ -120,8 +120,7 @@ public class PsResumeController {
 		// 이력서 작성
 		@PostMapping("/write")
 		@ResponseBody
-		public int writeResume(ModelAndView mv
-				, Principal principal
+		public int writeResume( Principal principal
 				, PsResumeDto dto
 				, @RequestParam(name = "portfFile", required = false) MultipartFile portfFile) {
 			
@@ -131,7 +130,8 @@ public class PsResumeController {
 			dto.setUserId(principal.getName());
 			
 			if(!portfFile.isEmpty()) {
-				rservice.upload(portfFile);
+				String portfUrl = rservice.upload(portfFile);
+			    dto.setPortfFile(portfUrl);
 			}
 			
 			int result = -1;
