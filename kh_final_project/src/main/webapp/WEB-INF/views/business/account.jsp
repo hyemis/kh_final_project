@@ -8,6 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <title>내정보</title>
+	<!-- cs -->
+	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
+
+	<!— js —>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -17,6 +40,7 @@
 		<h1 class="text-center m-3">회사명</h1>
 		<div class="container-xxl py-5">
 			<div class="row">
+				<!-- profile area start -->
 				<div class="col-md-3 col-sm-4  border border-secondary">
 					<div class="team-item rounded overflow-hidden">
 					<div class="position-relative">
@@ -37,64 +61,55 @@
 					</div>
 					
 				</div>
-				</div>
+				</div><!-- profile area end -->
+				<!-- info area start -->
 				<div class="col-md-8 col-sm-8 border border-secondary">
-					<!-- 내정보확인/수정 -->
-					<div class="container border border-secondary">
-						<div>내정보</div>
-						<div class="row">
-							<div class="col">
-								<form action="" method="post">
+					<!-- update -->
+					<div class="container border border-secondary" style="height: 800px;">
+						<h5 class="text-center m-2">내정보</h5>
+						<div>
+							<form action="" method="post">
 								<p>이메일 
 								<input type="text" id="" placeholder="${userEmail}">
 								</p>
 								<p>사업자 번호
-								<input type="text" id="" placeholder="${userBsLicense}">
+								<input type="text" id="" placeholder="${bsLicense}">
 								</p>
 								<p>대표전화
-								<input type="text" id="" placeholder="">
-								</p>
-								<p class="text-center">
-								<button type="submit">수정하기</button>
-								<button type="reset">취소</button>
-								</form>
+								<input type="text" id="" placeholder="${bsMainPhone}">
 								</p>
 								<p>주소
 								</p>
 								<p>
-								<input type="text" id="sample4_postcode" placeholder="우편번호">
-								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-								<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-								<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-								<input type="text" id="sample4_detailAddress" placeholder="상세주소">
+								<input type="text" id="postcode" placeholder="${adressPostcode}">
+								<input type="button" onclick="execDaumPostcode()" value="주소찾기"><br>
+								<input type="text" id="roadAddress" placeholder="${adressRoad}">
+								<input type="text" id="jibunAddress" placeholder="${adressJibun}">
+								<input type="text" id="detailAddress" placeholder="${adressDetail}">
 								<span id="guide" style="color:#999;display:none"></span>
 								</p>	
-							</div>
-							<div class="col border border-secondary">
 								<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
-							</div>
+								<p class="text-center">
+								<button type="submit">수정하기</button>
+								<button type="reset">취소</button>
+								</p>
+							</form>
 						</div>
-					</div>
+					</div><!-- update end -->
 					
-					<!-- 비밀번호 -->
-					<div class="container border border-secondary">
+					<!-- check password -->
+					<div class="container border border-secondary" style="height: 300px;">
 						<div>비밀번호 변경</div>
 						<div>
-							<div> 
-							<p>비밀번호
-							<input type="text" id="" placeholder="비밀번호 입력">
-							</p>
-							<p>비빌번호 확인
-							<input type="text" id="" placeholder="비밀번호 재확인">
-							<button>변경</button>
-							</p>
-							</div>
-							<div>
-							<button>기업회원 탈퇴하기</button>
-							</div>
+							 <form action="/" method="post" >
+						        <label for="password">비밀번호</label>
+						        <input type="password" id="password" name="password" required>
+						        <br>
+						        <button type="submit">확인</button>
+    						</form>
 						</div>
-					</div>
-				</div>
+					</div><!-- check password end -->
+				</div><!-- info area end -->
 			</div>
 		</div>
 
@@ -105,7 +120,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
 <script>
-    function sample4_execDaumPostcode() {
+    function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
 
@@ -129,18 +144,18 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("roadAddress").value = roadAddr;
+                document.getElementById("jibunAddress").value = data.jibunAddress;
                 
                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
+                    if (status === kakao.maps.services.Status.OK) {
 
                         var result = results[0]; //첫번째 결과의 값을 활용
 
                         // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        var coords = new kakao.maps.LatLng(result.y, result.x);
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";
                         map.relayout();
