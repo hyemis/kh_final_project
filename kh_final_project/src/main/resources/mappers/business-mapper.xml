@@ -46,5 +46,15 @@
         FROM USER_TABLE
         WHERE user_email = #{userEmail}
     </select>
+    
+    
+    <!-- 워크넷API data insert -->
+	<insert id="apiInsert" parameterType="brdto">
+	INSERT INTO RECRUIT_REGIST(RECRUIT_TYPE, COMPANY_NAME, USER_EDUCATION, SALARY, MIN_SALARY, MAX_SALARY, 
+							REGIST_DATE, CLOSE_DATE, RA_TITLE, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE) 
+ 			   VALUES(#{recruitType}, #{companyName}, #{userEducation}, #{salary}, #{minSalary}, #{maxSalary},
+ 			          #{registDate}, #{closeDate}, #{raTitle}, #{career}, #{holidayType}, #{empTypeCode})
+	</insert>
 
+	    
 </mapper>
