@@ -19,6 +19,11 @@ public class PsResumeDao {
 		return sqlSession.selectOne("resume.selectOne", userId);
 	}
 	
+	// 이력서 상세보기 
+	public PsResumeDto rselectOne(Object[] params) throws Exception {
+		return sqlSession.selectOne("resume.rselectOne", params);
+	}
+	
 	// 이력서 출력
 	public List<PsResumeDto> selectList(String userId) throws Exception {
 		return sqlSession.selectList("resume.selectList", userId);

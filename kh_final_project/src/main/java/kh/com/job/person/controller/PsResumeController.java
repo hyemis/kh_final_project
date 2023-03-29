@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,28 +95,6 @@ public class PsResumeController {
 			  return mv;
 		  }
 
-	
-//	// 이력서 작성
-//	@PostMapping("/write")
-//	@ResponseBody
-//	public int writeResume(ModelAndView mv
-//			, Principal principal
-//			, PsResumeDto dto) {
-//		
-//		System.out.println("로그인정보: "+principal.getName());
-//		System.out.println("파일 url "+ dto.getResumePhoto());
-//		
-//		dto.setUserId(principal.getName());
-//		int result = -1;
-//		try {
-//			result = rservice.insert(dto);
-//			return result;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	
-//		return result;
-//	}
 		
 		// 이력서 작성
 		@PostMapping("/write")
@@ -161,6 +140,19 @@ public class PsResumeController {
 			rttr.addFlashAttribute("msg", "이력서 삭제에 실패했습니다.");
 		}
 		mv.setViewName("redirect:"+ url);
+		return mv;
+	}
+	
+	// 이력서 상세보기 화면 
+	@GetMapping("/read/{resumeNo}")
+	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo ) throws Exception {
+		System.out.println(resumeNo);
+		
+		PsUserDto result = pservice.selectOne(principal.getName());
+		mv.addObject("userinfo", result);
+		
+		PsResumeDto dto = rservice.rselectOne(new Object[] { principal.getName(), resumeNo });
+		mv.addObject("resume", dto);
 		return mv;
 	}
 		
