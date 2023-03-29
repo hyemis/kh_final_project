@@ -122,15 +122,15 @@ public class PsResumeController {
 		@ResponseBody
 		public int writeResume( Principal principal
 				, PsResumeDto dto
-				, @RequestParam(name = "portfFile", required = false) MultipartFile portfFile) {
+				, @RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) {
 			
 			System.out.println("로그인정보: "+principal.getName());
 			System.out.println("파일 url "+ dto.getResumePhoto());
 			
 			dto.setUserId(principal.getName());
 			
-			if(!portfFile.isEmpty()) {
-				String portfUrl = rservice.upload(portfFile);
+			if(!uploadPortf.isEmpty()) {
+				String portfUrl = rservice.upload(uploadPortf);
 			    dto.setPortfFile(portfUrl);
 			}
 			

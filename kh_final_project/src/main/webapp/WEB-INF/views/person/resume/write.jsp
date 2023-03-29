@@ -407,7 +407,7 @@
 							<span>직무와 연관되는 포트폴리오, 기획서, 자격증 사본 등을 업데이트 하세요.</span>
 							<div class="input-group m-3">
 								<form  enctype="multipart/form-data">
-								<input type="file" class="form-control" name="portfFile" id="portfFile" placeholder="포트폴리오첨부파일"><br>
+								<input type="file" class="form-control" name="uploadPortf" id="uploadPortf" placeholder="포트폴리오첨부파일"><br>
 								</form>
 							</div>
 						</div>
@@ -455,7 +455,7 @@
 			let formdata = new FormData();
 			formdata.append("resumeTitle", $("#resumeTitle").val());
 			formdata.append("flexCheckChecked", $("#flexCheckChecked").val());
-			formdata.append("portfFile", $("#portfFile")[0].files[0]);
+			formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]);
 			formdata.append("resumePhoto", $("#url").val());
 			
 			
