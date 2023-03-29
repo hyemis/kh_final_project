@@ -98,7 +98,7 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.1s"
 				style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/recruit">
 					<div class="rounded p-4">
 						<h5>공고등록/관리</h5>
 						<span href="">채용 공고 등록</span>
@@ -128,7 +128,7 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.7s"
 				style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/myinfo"">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/myinfo">
 					<div class="rounded p-4">
 						<h5>내 기업 관리</h5>
 						<span href="/">회사소개</span>
@@ -140,7 +140,7 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.1s"
 				style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/account">
 					<div class="rounded p-4">
 						<h5>내 정보</h5>
 						<span href="/">기업 정보 관리</span>
