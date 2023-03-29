@@ -276,7 +276,6 @@ public class PsMainController {
 	//로그인 페이지
 	@GetMapping("/login")
 	public ModelAndView login(ModelAndView mv) {
-		
 		return mv;
 	}
 

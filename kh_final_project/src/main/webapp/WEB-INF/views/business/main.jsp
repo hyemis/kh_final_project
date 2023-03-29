@@ -88,7 +88,15 @@
 		<div class="text-center mx-auto mb-5 wow fadeInUp"
 			data-wow-delay="0.1s" style="max-width: 600px;">
 			<h1 class="mb-3">안녕하세요</h1>
-			<h3 class="mb-3">님 반갑습니다</h3>
+			<div class="mb-3">
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal.username" var="user_id" />
+						<span class="fs-3" id="user_id">${user_id } 님 반갑습니다</span>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+						<span class="fs-3" id="user_id">반갑습니다.<br> 로그인하시면 더 많은 정보를 볼 수 있습니다.</span>
+				</sec:authorize>
+			</div>
 			<br>
 			<p>공고 등록부터 합격자 발표까지 쉽고 빠르게,</br> 우리 기업을 위한 맞춤형 인재 찾기 까지 JOB-A가 함께 할게요</p>
 		</div>

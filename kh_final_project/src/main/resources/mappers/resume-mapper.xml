@@ -3,7 +3,7 @@
 <mapper namespace="resume">
 
   <select id="selectOne" resultType="rdto">
-  	select RESUME_NO, RESUME_TITLE, RESUME_DATE, PORTF_FILE FROM USER_RESUME where USER_ID=#{USER_ID}
+  	select RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM USER_RESUME where USER_ID=#{USER_ID}
   </select>
 
   <select id="selectList" resultType="rdto">
