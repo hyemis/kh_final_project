@@ -1,5 +1,7 @@
 package kh.com.job.business.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class BsRecruitController {
 	
 	@GetMapping("/main")
-	public ModelAndView main(ModelAndView mv) {
+	public ModelAndView main(ModelAndView mv, Principal principal) {
+		
+		if(principal == null) {
+			mv.setViewName("redirect:/person/login");
+			return mv;
+		}
+		
+		
+		
 		
 		return mv;
 	}
