@@ -8,6 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/business/recruit")
 public class BsRecruitController {
+	
+	@GetMapping("/main")
+	public ModelAndView main(ModelAndView mv) {
+		
+		return mv;
+	}
+	
+	
 
 	@GetMapping("/first")
 	public ModelAndView recruitInsertFirst(ModelAndView mv) {
