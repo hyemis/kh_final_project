@@ -78,7 +78,7 @@ public class PsResumeController {
 		return mv;
 	}
 	
-	// 파일 업로드 
+	// 이력서 파일 업로드 
 		@PostMapping("/fileupload")
 		@ResponseBody
 		  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,Principal principal) throws Exception {
@@ -95,27 +95,55 @@ public class PsResumeController {
 		  }
 
 	
-	// 이력서 작성
-	@PostMapping("/write")
-	@ResponseBody
-	public int writeResume(ModelAndView mv
-			, Principal principal
-			, PsResumeDto dto) {
+//	// 이력서 작성
+//	@PostMapping("/write")
+//	@ResponseBody
+//	public int writeResume(ModelAndView mv
+//			, Principal principal
+//			, PsResumeDto dto) {
+//		
+//		System.out.println("로그인정보: "+principal.getName());
+//		System.out.println("파일 url "+ dto.getResumePhoto());
+//		
+//		dto.setUserId(principal.getName());
+//		int result = -1;
+//		try {
+//			result = rservice.insert(dto);
+//			return result;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	
+//		return result;
+//	}
 		
-		System.out.println("로그인정보: "+principal.getName());
-		System.out.println("파일 url "+ dto.getResumePhoto());
+		// 이력서 작성
+		@PostMapping("/write")
+		@ResponseBody
+		public int writeResume(ModelAndView mv
+				, Principal principal
+				, PsResumeDto dto
+				, @RequestParam(name = "portfFile", required = false) MultipartFile portfFile) {
+			
+			System.out.println("로그인정보: "+principal.getName());
+			System.out.println("파일 url "+ dto.getResumePhoto());
+			
+			dto.setUserId(principal.getName());
+			
+			if(!portfFile.isEmpty()) {
+				rservice.upload(portfFile);
+			}
+			
+			int result = -1;
+			try {
+				result = rservice.insert(dto);
+				return result;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
-		dto.setUserId(principal.getName());
-		int result = -1;
-		try {
-			result = rservice.insert(dto);
 			return result;
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-	
-		return result;
-	}
 	
 	// 이력서 삭제 
 	@PostMapping("/delete")

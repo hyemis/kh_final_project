@@ -108,9 +108,8 @@
 										<span>${userinfo.userBirth }</span><br>
 										<span>이메일 : </span>
 										<span>${userinfo.userEmail }</span><br>
-										<span>주소 : </span>
-										<span>${userinfo.userAdress }</span><br>
-								
+										<%-- <span>주소 : </span>
+										<span>${userinfo.AdressRoad }, ${userinfo.AdressRoad }, ${userinfo.AdressJibun },  ${userinfo.AdressDetail }, ${userinfo.AdressPostcode }</span><br> --%>
 								</div>
 							</div>
 						</div>
@@ -407,13 +406,13 @@
 							<h3 class="mb-3">포트폴리오</h3> 
 							<span>직무와 연관되는 포트폴리오, 기획서, 자격증 사본 등을 업데이트 하세요.</span>
 							<div class="input-group m-3">
-							  <input type="file" class="form-control" id="portfFile">
-							  <label class="input-group-text" for="portfFile">Upload</label>
+								<input type="file" class="form-control" name="portfFile" id="portfFile" placeholder="포트폴리오첨부파일"><br>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
 			
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 			  <button class="btn btn-primary me-md-2" type="button" id="rWrite" onclick="fn_rWrite(); return false;">save</button>
@@ -426,40 +425,11 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
-		/* // 파일 업로드 
-		function uploadFile() {
-	    var form = document.getElementById('fileUploadForm');
-	    var formData = new FormData(form);
-	
-		    $.ajax({
-		        url: "${pageContext.request.contextPath}/person/resume/fileupload",
-		        type: "post",
-		        data: formData,
-		        processData: false,
-		        contentType: false,
-		        success: function(data) {
-		        	var result = JSON.parse(date);
-		        	if(result.success){
-			            alert('파일이 업로드되었습니다.');
-			            $('#myModal').modal('hide');
-		        	} else {
-		        		console.error("파일 업로드가 실패하였습니다.");
-		        	}
-		        },
-		        error: function(jqXHR, textStatus, errorThrown) {
-		            console.error("파일 업로드 중 오류가 발생하였습니다.");
-		            console.error("HTTP 상태 코드: " + jqXHR.status);
-		            console.error("오류 메시지: " + textStatus);
-		            console.error("에러Thrown: " + errorThrown);
-		        }
-		    });
-		} */
-		
-		// 이력서 등록
+/* 		// 이력서 등록
 		function fn_rWrite(){
 			let resumeTitle = $("#resumeTitle").val();
 			let flexCheckChecked = $("#flexCheckChecked").val();
-			let portfFile = $("#portfFile").val();
+			let portfFile = $("#portfFile").val(); 
 			let resumePhoto = $("#url").val();
 			
 			$.ajax({
@@ -476,8 +446,34 @@
 					}
 				}
 			})
-		}
+		} */
 	
+		// 이력서 등록
+		function fn_rWrite(){
+			let formdata = new FormData();
+			formdata.append("resumeTitle", $("#resumeTitle").val());
+			formdata.append("flexCheckChecked", $("#flexCheckChecked").val());
+			formdata.append("portfFile", $("#portfFile").val());
+			formdata.append("resumePhoto", $("#url").val());
+			
+			
+			$.ajax({
+				url  : "${pageContext.request.contextPath}/person/resume/write",
+				type : "post",
+				contentType: false, 
+				processData: false,
+				data: formdata, 
+				success : function(result) {
+					if(result === 1) {
+						alert("이력서가 등록되었습니다.");
+						var userId = $("#userId").val();
+						location.href="/job/person/resume/list?userId="+userId;
+					} else {
+						alert("이력서 등록에 실패했습니다.");
+					}
+				}
+			})
+		}
 	
 		
 		
