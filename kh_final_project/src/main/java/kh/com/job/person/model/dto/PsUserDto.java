@@ -39,10 +39,10 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 	private String userPhone;
 	private String userBirth;
 	private String userEmail;
-	private String adressRoad;
-	private String adressJibun;
-	private String adressDetail;
-	private String adressPostcode;
+	private String addressRoad;
+	private String addressJibun;
+	private String addressDetail;
+	private String addressPostcode;
 	private String userName;
 	private String bsType;
 	private String bsLicense;

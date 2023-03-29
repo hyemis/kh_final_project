@@ -18,7 +18,7 @@
   <!-- 개인회원 insert -->
   <insert id="insert" parameterType="pdto">
   	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, ADRESS_ROAD, ADRESS_JIBUN, ADRESS_DETAIL, ADRESS_POSTCODE, USER_NAME, USER_CREATED_AT, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD, USER_PIC)
-	VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{adressRoad},#{adressJibun},#{adressDetail}, #{adressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default, #{userPic})
+	VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{addressRoad},#{addressJibun},#{addressDetail}, #{addressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default, #{userPic})
   </insert>
 
 	<!-- 개인회원 delete -->
