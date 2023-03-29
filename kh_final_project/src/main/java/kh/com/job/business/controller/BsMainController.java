@@ -13,6 +13,8 @@ public class BsMainController {
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
 		
+		
+		
 		return mv;
 	}
 	
@@ -52,7 +54,7 @@ public class BsMainController {
 			return mv;
 		}
 		
-	//내정보	
+	//테스트	
 		@GetMapping("/test")
 		public ModelAndView test(ModelAndView mv) {
 					
