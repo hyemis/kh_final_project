@@ -41,6 +41,7 @@ public class BsRecruitDto {
 	private String raExtraDocument;
 	private String career;
 	private String holidayType;
+	private String empTypeCode;
 	
 	
 	
