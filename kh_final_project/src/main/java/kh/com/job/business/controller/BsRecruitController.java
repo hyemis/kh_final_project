@@ -18,10 +18,7 @@ public class BsRecruitController {
 			mv.setViewName("redirect:/person/login");
 			return mv;
 		}
-		
-		
-		
-		
+
 		return mv;
 	}
 	
