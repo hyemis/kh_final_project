@@ -6,17 +6,18 @@
 <!-- myinfo -->
 
 	<!-- USER_TABLE에서 id가 일치하는 게시물 꺼내옴  -->
-	<select id="selectOne" parameterType="string" resultType="budto">
+	<select id="selectOne1" parameterType="string" resultType="budto">
   	select * from USER_TABLE where USER_ID=#{userId}
 	</select>
 	
 	<!-- BOARD에서 회사소개 코드번호 UDB06 인 게시물 꺼내옴  -->
-	<select id="selectList" resultType="bidto">
+	<select id="selectList1" resultType="bidto">
 	select * from BOARD where CATEGORY_ID='UDB06'
 	</select>
 	
 	<!-- 회사소개작성 -->
-	<insert id="insert"  >
+	
+	<insert id="insert123">
 	INSERT INTO BOARD(USER_ID,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,
 					  BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
  			   VALUES(#{userId},#{boardContent},#{boardDate},#{boardOriginalFilename},
@@ -24,23 +25,23 @@
 	</insert>
 	
 <!-- account -->
-	<insert id="insert" parameterType="">
-        INSERT INTO users (user_email, bs_license, bs_main_phone, adress_postcode, adress_road, adress_jibun, adress_detail)
-        VALUES (#{userEmail}, #{bsLicense}, #{bsMainPhone}, #{addressPostcode}, #{addressRoad}, #{addressJibun}, #{addressDetail})
+	<insert id="insert1">
+        INSERT INTO USER_TABLE (user_email, bs_license, bs_main_phone, address_postcode, address_road, address_jibun, address_detail)
+        				VALUES (#{userEmail}, #{bsLicense}, #{bsMainPhone}, #{addressPostcode}, #{addressRoad}, #{addressJibun}, #{addressDetail})
     </insert>
 
-    <update id="update" parameterType="">
-        UPDATE users SET
+    <update id="update1">
+        UPDATE USER_TABLE SET
         bs_license = #{bsLicense},
         bs_main_phone = #{bsMainPhone},
-        adress_postcode = #{addressPostcode},
-        adress_road = #{addressRoad},
-        adress_jibun = #{addressJibun},
-        adress_detail = #{addressDetail}
+        address_postcode = #{addressPostcode},
+        address_road = #{addressRoad},
+        address_jibun = #{addressJibun},
+        address_detail = #{addressDetail}
         WHERE user_email = #{userEmail}
     </update>
 
-    <select id="select" parameterType="string" resultType="budto">
+    <select id="select2" parameterType="string" resultType="budto">
         SELECT *
         FROM USER_TABLE
         WHERE user_email = #{userEmail}
