@@ -1,6 +1,7 @@
 package kh.com.job.person.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,7 @@ public interface PsResumeService {
 	public PsResumeDto selectOne(String userId) throws Exception;
 	
 	// 이력서 상세보기 
-	public PsResumeDto rselectOne(Object[] params) throws Exception;
+	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception;
 	
 	// 이력서 리스트 
 	public List<PsResumeDto> selectList(String userId) throws Exception;

@@ -1,6 +1,7 @@
 package kh.com.job.person.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class PsResumeDao {
 	}
 	
 	// 이력서 상세보기 
-	public PsResumeDto rselectOne(Object[] params) throws Exception {
-		return sqlSession.selectOne("resume.rselectOne", params);
+	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectOne("resume.rselectOne", infoMap);
 	}
 	
 	// 이력서 출력

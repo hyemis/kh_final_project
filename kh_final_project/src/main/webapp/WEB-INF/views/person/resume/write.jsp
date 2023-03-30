@@ -18,14 +18,7 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	
-	 <style>
-		.user_id {
-			position: fixed;;
-			top: 20px;
-			right: 210px;
-		}
-	</style>
+	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -435,29 +428,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
-/* 		// 이력서 등록
-		function fn_rWrite(){
-			let resumeTitle = $("#resumeTitle").val();
-			let flexCheckChecked = $("#flexCheckChecked").val();
-			let portfFile = $("#portfFile").val(); 
-			let resumePhoto = $("#url").val();
-			
-			$.ajax({
-				type : "post",
-				url  : "${pageContext.request.contextPath}/person/resume/write",
-				data : {resumeTitle : resumeTitle , flexCheckChecked : flexCheckChecked, portfFile : portfFile, resumePhoto: resumePhoto},
-				success : function(result) {
-					if(result === 1) {
-						alert("이력서가 등록되었습니다.");
-						var userId = $("#userId").val();
-						location.href="/job/person/resume/list?userId="+userId;
-					} else {
-						alert("이력서 등록에 실패했습니다.");
-					}
-				}
-			})
-		} */
-	
+
 		// 이력서 등록
 		function fn_rWrite(){
 			let formdata = new FormData();

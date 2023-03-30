@@ -78,18 +78,20 @@
 									<div class="mb-4">
 										<h1 class="mb-3">이력서 상세보기</h1>
 										
-										<h3>${resume.resumeTitle }</h3>
+										<h5>${resume.resumeTitle }</h5>
 										
-										<div>
-											${resume.resumePhoto }
-										</div>
-										<div>
-											${resume.resumeDate }
-										</div>
-										<div>
-											${resume.portfFile }
-										</div>
 										
+										<div class="bg-light-subtle">
+											<div class="row g-5 align-items-center">
+												<div class="mb-4">
+													<h5> class="mb-3">포트폴리오</h5> 
+													<span>업데이트한 포트폴리오를 확인하세요.</span>
+													<div class="input-group m-3">
+														${resume.portfFile }
+													</div>
+												</div>
+											</div>
+										</div>		
 										
 									</div>
 								</div>

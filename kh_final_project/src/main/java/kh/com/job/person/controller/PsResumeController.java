@@ -1,7 +1,9 @@
 package kh.com.job.person.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -143,16 +145,34 @@ public class PsResumeController {
 		return mv;
 	}
 	
+//	// 이력서 상세보기 화면 
+//	@GetMapping("/read/{resumeNo}")
+//	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo ) throws Exception {
+//		String userId = principal.getName();
+//		
+//		PsUserDto result = pservice.selectOne(principal.getName());
+//		mv.addObject("userinfo", result);
+//		
+//		PsResumeDto dto = rservice.rselectOne(new Object[] { principal.getName(), resumeNo });
+//		mv.addObject("resume", dto);
+//		return mv;
+//	}
+	
 	// 이력서 상세보기 화면 
 	@GetMapping("/read/{resumeNo}")
 	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo ) throws Exception {
-		System.out.println(resumeNo);
+		String userId = principal.getName();
+	
+		Map<String, Object> infoMap = new HashMap<>();
+		infoMap.put("userId", userId);
+		infoMap.put("resumeNo", resumeNo);
 		
-		PsUserDto result = pservice.selectOne(principal.getName());
+		PsUserDto result = pservice.selectOne(userId);
 		mv.addObject("userinfo", result);
 		
-		PsResumeDto dto = rservice.rselectOne(new Object[] { principal.getName(), resumeNo });
+		PsResumeDto dto = rservice.rselectOne(infoMap);
 		mv.addObject("resume", dto);
+		mv.setViewName("person/resume/read");
 		return mv;
 	}
 		
