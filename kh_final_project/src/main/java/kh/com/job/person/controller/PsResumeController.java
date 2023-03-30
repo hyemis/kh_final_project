@@ -172,7 +172,7 @@ public class PsResumeController {
 		
 		PsResumeDto dto = rservice.rselectOne(infoMap);
 		mv.addObject("resume", dto);
-		
+		mv.setViewName("person/resume/read");
 		return mv;
 	}
 		
