@@ -45,12 +45,7 @@ public class BsMainController {
 		return mv;
 	}
 	
-	//내정보	
-		@GetMapping("/account")
-		public ModelAndView account(ModelAndView mv) {
-			
-			return mv;
-		}
+
 		
 		
 		

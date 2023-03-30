@@ -9,42 +9,52 @@
 	<select id="selectOne1" parameterType="string" resultType="budto">
   	select * from USER_TABLE where USER_ID=#{userId}
 	</select>
-	
-	<!-- BOARD에서 회사소개 코드번호 UDB06 인 게시물 꺼내옴  -->
-	<select id="selectList1" resultType="bidto">
-	select * from BOARD where CATEGORY_ID='UDB06'
+
+<!-- todo/ 04.05 -->	
+	<!-- BOARD에서 Qna (코드번호 UDB04)인 게시물 꺼내옴  -->
+	<select id="selectQna" resultType="bidto">
+	select * from BOARD where CATEGORY_ID='UDB04'
 	</select>
 	
+	<!-- BOARD에서 뉴스레터 (코드번호 UDB05) 인 게시물 꺼내옴  -->
+	<select id="selectNews" resultType="bidto">
+	select * from BOARD where CATEGORY_ID='UDB05'
+	</select>
+	
+	<!-- BOARD에서 회사소개 (코드번호 UDB06) 인 게시물 꺼내옴  -->
+	<select id="selectInfo" resultType="bidto">
+	select * from BOARD where CATEGORY_ID='UDB06'
+	</select>
 	<!-- 회사소개작성 -->
 	
-	<insert id="insert123">
+	<insert id="insertInfo">
 	INSERT INTO BOARD(USER_ID,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,
 					  BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
  			   VALUES(#{userId},#{boardContent},#{boardDate},#{boardOriginalFilename},
  			          #{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
 	</insert>
-	
+
 <!-- account -->
-	<insert id="insert1">
+	<insert id="insertAccount">
         INSERT INTO USER_TABLE (user_email, bs_license, bs_main_phone, address_postcode, address_road, address_jibun, address_detail)
         				VALUES (#{userEmail}, #{bsLicense}, #{bsMainPhone}, #{addressPostcode}, #{addressRoad}, #{addressJibun}, #{addressDetail})
     </insert>
 
-    <update id="update1">
+    <update id="updateAccount">
         UPDATE USER_TABLE SET
-        bs_license = #{bsLicense},
-        bs_main_phone = #{bsMainPhone},
-        address_postcode = #{addressPostcode},
-        address_road = #{addressRoad},
-        address_jibun = #{addressJibun},
-        address_detail = #{addressDetail}
-        WHERE user_email = #{userEmail}
+        BS_LICENSE = #{bsLicense},
+        BS_MAIN_PHONE = #{bsMainPhone},
+        ADDRESS_POSTCODE = #{addressPostcode},
+        ADDRESS_ROAD = #{addressRoad},
+        ADDRESS_JIBUN = #{addressJibun},
+        ADDRESS_DETAIL = #{addressDetail}
+        WHERE USER_ID = #{userId}
     </update>
 
-    <select id="select2" parameterType="string" resultType="budto">
+    <select id="viewAccount" resultType="budto">
         SELECT *
         FROM USER_TABLE
-        WHERE user_email = #{userEmail}
+        WHERE USER_ID = #{userId}
     </select>
 
 </mapper>

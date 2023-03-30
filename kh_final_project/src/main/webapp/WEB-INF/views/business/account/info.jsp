@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.bind.annotation.RequestMapping"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -56,8 +57,8 @@
 						</div>
 					</div>
 					<div class="text-center p-4 mt-3">
-						<h5 class="fw-bold mb-0">${userName}</h5>
-						<small>${userEmail}</small>
+						<h5 class="fw-bold mb-0">${bsinfo.userName}</h5>
+						<small>${bsinfo.userEmail}</small>
 					</div>
 					
 				</div>
@@ -68,29 +69,29 @@
 					<div class="container border border-secondary" style="height: 800px;">
 						<h5 class="text-center m-2">내정보</h5>
 						<div>
-							<form action="" method="post">
+							<form action="<%=request.getContextPath() %>/business/account/info" method="post">
 								<p>이메일 
-								<input type="text" id="" placeholder="${userEmail}">
+								<input type="text" id="" name="userEmail" value="${bsinfo.userEmail}">
 								</p>
 								<p>사업자 번호
-								<input type="text" id="" placeholder="${bsLicense}">
+								<input type="text" id="" name="bsLicense" value="${bsinfo.bsLicense}">
 								</p>
 								<p>대표전화
-								<input type="text" id="" placeholder="${bsMainPhone}">
+								<input type="text" id="" name="bsMainPhone" value="${bsinfo.bsMainPhone}">
 								</p>
 								<p>주소
 								</p>
 								<p>
-								<input type="text" id="postcode" placeholder="${adressPostcode}">
+								<input type="text" id="postcode" name="addressPostcode" value="${bsinfo.addressPostcode}">
 								<input type="button" onclick="execDaumPostcode()" value="주소찾기"><br>
-								<input type="text" id="roadAddress" placeholder="${adressRoad}">
-								<input type="text" id="jibunAddress" placeholder="${adressJibun}">
-								<input type="text" id="detailAddress" placeholder="${adressDetail}">
+								<input type="text" id="roadAddress" name="addressRoad" value="${bsinfo.addressRoad}">
+								<input type="text" id="jibunAddress" name="addressJibun" value="${bsinfo.addressJibun}">
+								<input type="text" id="detailAddress" name="addressDetail" value="${bsinfo.addressDetail}">
 								<span id="guide" style="color:#999;display:none"></span>
 								</p>	
 								<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 								<p class="text-center">
-								<button type="submit">수정하기</button>
+								<button type="submit" value="수정하기">수정하기</button>
 								<button type="reset">취소</button>
 								</p>
 							</form>
