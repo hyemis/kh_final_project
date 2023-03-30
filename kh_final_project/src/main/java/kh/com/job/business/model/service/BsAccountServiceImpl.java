@@ -22,10 +22,12 @@ public class BsAccountServiceImpl implements BsAccountService{
 		return dao.updateAccount(dto);
 	}
 
+	
 	@Override
 	public BsUserDto viewAccount(String userId) {
 		return dao.viewAccount(userId);
 	}
+
 
 	
 
