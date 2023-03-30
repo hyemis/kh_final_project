@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-
-
 <header>
 <div class="container-fluid nav-bar bg-transparent">
 	<!-- 로고/사이트명 -->
@@ -16,12 +14,9 @@
 		<sec:authorize access="hasRole('ROLE_B')">
 			<a href="${pageContext.request.contextPath}/business/main" class="navbar-brand d-flex align-items-center text-center"></a>
 		</sec:authorize>
-				<div class="icon p-2 me-2">
-					<img class="img-fluid"
-						src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
-						alt="Icon" style="width: 30px; height: 30px;">
-				</div>
-				<h1 class="m-0 text-primary">JOB-A</h1>
+		<div class="mb-3">
+			<h1 class="text-primary"><a href="${pageContext.request.contextPath}/">JOB-A</a></h1>
+		</div>
 
 	<!-- Navbar Start -->
 	<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
@@ -94,10 +89,8 @@
 			<div class="nav-item nav-link active">
 				<sec:authorize access="isAnonymous()">
 				<div class="collapse navbar-collapse">
-					<div class="navbar-nav">
-						<a class="nav-link me-3" href="${pageContext.request.contextPath}/person/login">login</a> 
-						<a class="nav-link me-3" href="${pageContext.request.contextPath}/person/signUp">signUp</a> 
-					</div>
+						<a class="nav-link me-2" href="${pageContext.request.contextPath}/person/login">login</a> 
+						<a class="nav-link me-2" href="${pageContext.request.contextPath}/person/signUp">signUp</a> 
 				</div>
 				</sec:authorize>
 
