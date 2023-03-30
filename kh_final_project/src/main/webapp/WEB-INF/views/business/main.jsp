@@ -148,7 +148,7 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.1s"
 				style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/account">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/account/info">
 					<div class="rounded p-4">
 						<h5>내 정보</h5>
 						<span href="/">기업 정보 관리</span>
