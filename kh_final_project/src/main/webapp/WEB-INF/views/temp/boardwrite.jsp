@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>404 error</title>
 
 <!-- css file link part start -->
     <!-- Favicon -->
@@ -30,11 +31,8 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-    <!-- css file link part end -->
-
-<title>404 error</title>
-
-    <!-- js part start -->
+<!-- css file link part end -->
+<!-- js part start -->
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -46,16 +44,18 @@
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
     
-    <!-- js part end -->
+<!-- js part end -->
 
 <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
- 
  </head>
 
 <body>
+<section>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
+</section>
+<section>
 
 	<!-- 404 Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -88,12 +88,13 @@
             </div>
         </div>
         <!-- 500 End -->
-        
-        <section>
+</section>       
+<section>
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 </section>
 
-<script></script>
+<script>
+</script>
         
 </body>
 </html>
