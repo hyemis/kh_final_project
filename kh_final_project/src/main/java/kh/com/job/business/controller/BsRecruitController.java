@@ -36,9 +36,17 @@ public class BsRecruitController {
 		
 		return mv;
 	}
-	
-	
 
+	@GetMapping("/insert")
+	public ModelAndView recruitInsertRecruit(ModelAndView mv) {
+		
+		
+		return mv;
+	}
+	
+	
+	
+	//나중에
 	@GetMapping("/first")
 	public ModelAndView recruitInsertFirst(ModelAndView mv) {
 		
