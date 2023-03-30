@@ -1,8 +1,3 @@
-/* # 채용공고등록 테이블
-
-*/
-
-
 /* #개인회원 테이블 */
 INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_ADRESS, USER_NAME, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE)
 VALUES ('user22', 'user22', '01012345678', '000101', 'user22@example.com', '서울시 관악구', '사용자2','true', 'ROLE_P', 'Y', sysdate );
