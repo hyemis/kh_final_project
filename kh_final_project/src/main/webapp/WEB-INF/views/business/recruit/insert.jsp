@@ -52,7 +52,34 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <section>
-<div class="container-sm">
+
+	<div class="container-sm">
+		<!-- 탭 -->
+		<nav>
+			<div class="nav nav-tabs" id="nav-tab" role="tablist">
+				<button class="nav-link active" id="nav-tab-1" data-bs-toggle="tab" data-bs-target="#tab-1" type="button" role="tab" aria-controls="tab-1" aria-selected="true">Tab 1</button>
+				<button class="nav-link" id="nav-tab-2" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab" aria-controls="tab-2" aria-selected="false">Tab 2</button>
+				<button class="nav-link" id="nav-tab-3" data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab" aria-controls="tab-3" aria-selected="false">Tab 3</button>
+			</div>
+		</nav>
+	
+		<!-- 탭 내용 -->
+		<div class="tab-content" id="nav-tabContent">
+			<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="nav-tab-1">
+				<h3>Tab 1 Content</h3>
+				<p>This is the content for Tab 1.</p>
+			</div>
+			<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="nav-tab-2">
+				<h3>Tab 2 Content</h3>
+				<p>This is the content for Tab 2.</p>
+			</div>
+			<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="nav-tab-3">
+				<h3>Tab 3 Content</h3>
+				<p>This is the content for Tab 3.</p>
+			</div>
+		</div>
+
+	</div>
 	
 </section>
 
