@@ -72,17 +72,34 @@
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
 				
 				<div>
-					귀찮아
+				<!-- 1번에서 8번 -->
+					<h3>회사 정보</h3>
+					<form id="formdata1">
+					
+					</form>
+					<button type="button" class="nextbtn">다음</button>
 				</div>
 				
 			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="nav-tab-2">
-				<h3>Tab 2 Content</h3>
-				<p>This is the content for Tab 2.</p>
+				<div>
+					<!-- 9번에서 16번 -->
+					<h3>채용 정보</h3>
+					<form id="formdata2">
+					
+					</form>
+					<button type="button" class="prevbtn">이전</button>
+					<button type="button" class="nextbtn">다음</button>
+				</div>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="nav-tab-3">
-				<h3>Tab 3 Content</h3>
-				<p>This is the content for Tab 3.</p>
+				<!-- 15번에서 20번 -->
+					<h3>채용 기간 및 기타 내용</h3>
+					<form id="formdata3">
+					
+					</form>
+					<button type="button" class="prevbtn">이전</button>
+					
 			</div>
 		</div>
 
@@ -91,6 +108,38 @@
 </section>
 
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+
+	<script type="text/javascript">
+	  $(document).ready(function() {
+		  // 다음 버튼 클릭 시 다음 탭으로 이동
+		  $('.nextbtn').click(function() {
+		    var activeTab = $('.tab-pane.active');
+		    var nextTab = activeTab.next('.tab-pane');
+		    var activeNav = $('.nav-link.active');
+		    var nextNav = activeNav.parent().next().children('.nav-link');
+		    if (nextTab.length) {
+		      activeTab.removeClass('active show');
+		      nextTab.addClass('active show');
+		      activeNav.removeClass('active');
+		      nextNav.addClass('active');
+		    }
+		  });
+
+		  // 이전 버튼 클릭 시 이전 탭으로 이동
+		  $('.prevbtn').click(function() {
+		    var activeTab = $('.tab-pane.active');
+		    var prevTab = activeTab.prev('.tab-pane');
+		    var activeNav = $('.nav-link.active');
+		    var prevNav = activeNav.parent().prev().children('.nav-link');
+		    if (prevTab.length) {
+		      activeTab.removeClass('active show');
+		      prevTab.addClass('active show');
+		      activeNav.removeClass('active');
+		      prevNav.addClass('active');
+		    }
+		  });
+		  });
+	</script>
 
 </body>
 

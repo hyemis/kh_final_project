@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>account</title>
 <!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 	
 	<div class="container-xxl py-5">
 
-		<h1 class="text-center m-3">회사명</h1>
+		<h1 class="text-center m-3">${bsinfo.userName}님 마이페이지</h1>
 		<div class="container-xxl py-5">
 			<div class="row">
 				<!-- profile area start -->
@@ -66,7 +66,7 @@
 				<!-- info area start -->
 				<div class="col-md-8 col-sm-8 border border-secondary">
 					<!-- update -->
-					<div class="container border border-secondary" style="height: 800px;">
+					<div class="container border border-secondary" style="height: 700px;">
 						<h5 class="text-center m-2">내정보</h5>
 						<div>
 							<form action="<%=request.getContextPath() %>/business/account/info" method="post">
@@ -91,6 +91,7 @@
 								</p>	
 								<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 								<p class="text-center">
+								<br>
 								<button type="submit" value="수정하기">수정하기</button>
 								<button type="reset">취소</button>
 								</p>
@@ -98,23 +99,50 @@
 						</div>
 					</div><!-- update end -->
 					
-					<!-- check password -->
+					<!-- password / secede -->
 					<div class="container border border-secondary" style="height: 300px;">
-						<div>비밀번호 변경</div>
-						<div>
-							 <form action="/" method="post" >
-						        <label for="password">비밀번호</label>
-						        <input type="password" id="password" name="password" required>
-						        <br>
-						        <button type="submit">확인</button>
-    						</form>
-						</div>
+						<!-- password -->
+						<button class="btn btn-primary" type="button" id="pwModal">비밀번호 변경</button>
+						
+						<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+						
+						
+						
+						
+						<!-- secede -->
+						<button class="btn btn-primary" type="button" id="secede">기업회원 탈퇴</button>
+
+						
+						
 					</div><!-- check password end -->
+					
 				</div><!-- info area end -->
 			</div>
 		</div>
 
-	</div>
+	</div><!-- 전체컨테이너 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 <!-- map start -->
@@ -196,7 +224,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
+            level: 3 // 지도의 확대 레벨
         };
 
     //지도를 미리 생성
@@ -237,8 +265,12 @@
     });
     
  </script>
-
 <!-- map end -->
+
+<!-- modal -->
+<script>
+
+</script>
 
 	
 </body>

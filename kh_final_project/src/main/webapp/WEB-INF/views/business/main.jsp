@@ -123,6 +123,32 @@
 </section>
 
 	
+<button id="modal">showmodal</button>
+		<dialog>모달창
+		</dialog>	
+	
+	
+			<form action="<%=request.getContextPath() %>/business/account/info" method="post">
+			<button value="close">취소</button>
+			<button value="confirm">변경</button>
+			</form>
+			button.addEventListener("close",() {
+	console.log(dialog.returnValue);
+});
+
+<script>
+const button = document.querySelector("button");
+const dialog = document.querySelector("dialog");
+
+button.addEventListener("click",() {
+	dialog.showModal();
+});
+
+
+</script>
+
+	
+	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </div>	

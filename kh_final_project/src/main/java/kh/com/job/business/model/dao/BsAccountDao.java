@@ -17,10 +17,12 @@ public class BsAccountDao {
 		return sqlSession.insert("business.insertAccount", dto);
 	}
 	
-	//수정하기
+	//정보 수정하기
 	public int updateAccount(BsUserDto dto) {
 		return sqlSession.update("business.updateAccount", dto);
 	}
+	
+	
 	
 	//정보불러오기
 	public BsUserDto viewAccount(String userId) {
