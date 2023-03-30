@@ -110,7 +110,7 @@ public class PsResumeController {
 			
 			dto.setUserId(principal.getName());
 			
-			if(!uploadPortf.isEmpty()) {
+			if(uploadPortf != null && !uploadPortf.isEmpty()) {
 				String portfUrl = rservice.upload(uploadPortf);
 			    dto.setPortfFile(portfUrl);
 			}
@@ -145,18 +145,6 @@ public class PsResumeController {
 		return mv;
 	}
 	
-//	// 이력서 상세보기 화면 
-//	@GetMapping("/read/{resumeNo}")
-//	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo ) throws Exception {
-//		String userId = principal.getName();
-//		
-//		PsUserDto result = pservice.selectOne(principal.getName());
-//		mv.addObject("userinfo", result);
-//		
-//		PsResumeDto dto = rservice.rselectOne(new Object[] { principal.getName(), resumeNo });
-//		mv.addObject("resume", dto);
-//		return mv;
-//	}
 	
 	// 이력서 상세보기 화면 
 	@GetMapping("/read/{resumeNo}")

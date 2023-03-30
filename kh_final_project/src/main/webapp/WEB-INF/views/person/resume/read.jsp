@@ -1,5 +1,7 @@
+<%@page import="java.io.FileInputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -15,14 +17,8 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	
-	 <style>
-		.user_id {
-			position: fixed;;
-			top: 20px;
-			right: 210px;
-		}
-	</style>
+	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
+	 
 	
 </head>
 <body>
@@ -41,7 +37,7 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
           <div class="text-start mx-5 mt-5">
-            <h1>이력서 관리</h1>
+            <h1>나의 이력서</h1>
           </div>
 		  <div class="row">
 			<!-- 좌측 프로필 영역 -->
@@ -76,22 +72,45 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
-										<h1 class="mb-3">이력서 상세보기</h1>
-										
-										<h5>${resume.resumeTitle }</h5>
-										
-										
-										<div class="bg-light-subtle">
-											<div class="row g-5 align-items-center">
+										<h1 class="mb-3">${resume.resumeTitle }</h1>
+										작성일시 : ${resume.resumeDate }
+											<div class="row g-5 mt-2 align-items-center">
 												<div class="mb-4">
-													<h5> class="mb-3">포트폴리오</h5> 
-													<span>업데이트한 포트폴리오를 확인하세요.</span>
-													<div class="input-group m-3">
-														${resume.portfFile }
+													<div class="h3 pb-2 border-bottom">
+													 	이력서 사진 
+													</div>
+													<div>
+														 <c:choose>
+															 <c:when test="${resume.resumePhoto == 'undefined'}">
+															  	<img src="https://dummyimage.com/150x200/000000/ffffff.png&text=No+Image" width="150" height="200" alt="no image">
+															 </c:when>
+															 <c:otherwise>
+															     <img src="${resume.resumePhoto}" width="150" height="200" alt="resumePhoto">
+															  </c:otherwise>
+														</c:choose>
 													</div>
 												</div>
 											</div>
-										</div>		
+										
+										
+											<div class="row g-5 mt-2 align-items-center">
+												<div class="mb-4">
+													<div class="h3 pb-2 border-bottom">
+														포트폴리오
+													</div>
+													<div>
+														 <c:choose>
+															 <c:when test="${resume.portfFile == null}">
+															  	<span>해당 파일이 존재하지 않습니다.</span>
+															 </c:when>
+															 <c:otherwise>
+															 	<span>다운로드된 포트폴리오 파일을 확인하실 수 있습니다.</span>
+															 	<embed src="${resume.portfFile}" type="application/pdf" width="100%" height="100%">
+															  </c:otherwise>
+														</c:choose> 
+													</div>
+												</div>
+											</div>
 										
 									</div>
 								</div>
