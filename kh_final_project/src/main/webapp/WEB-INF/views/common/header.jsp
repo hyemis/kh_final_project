@@ -123,7 +123,7 @@
 			</div>
 		</nav>
 	</div>
-	<div class="container-fluid header bg-white p-5" style="height: 150px;"></div>
+	<div class="container-fluid header p-5" style="height: 150px;"></div>
 	<!-- Navbar End -->
 
 </header>
