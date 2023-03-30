@@ -21,7 +21,11 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
 	
-
+	<style>
+	  th.center {
+	    text-align: center;
+	  }
+	</style>
 	
 </head>
 <body>
