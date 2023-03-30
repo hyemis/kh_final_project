@@ -8,7 +8,6 @@
     <!-- css file link part start -->
     <!-- Favicon -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
-	<%-- ${pageContext.request.contextPath} --%>
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
