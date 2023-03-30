@@ -104,8 +104,8 @@
 															  	<span>해당 파일이 존재하지 않습니다.</span>
 															 </c:when>
 															 <c:otherwise>
-															 	<span>다운로드된 포트폴리오 파일을 확인하실 수 있습니다.</span>
-															 	<embed src="${resume.portfFile}" type="application/pdf" width="100%" height="100%">
+															 	<button class="btn btn-primary" onclick="portfFileCheck()">포트폴리오 확인하기</button>
+															 	<button class="btn btn-primary"  onclick="portfFileDown()">포트폴리오 다운하기</button>
 															  </c:otherwise>
 														</c:choose> 
 													</div>
@@ -122,10 +122,21 @@
 		</div>
 	</div>
 	
-	
-	
-	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<script>
+		function portfFileCheck() {
+		  window.open("https://drive.google.com/viewerng/viewer?embedded=true&url=${resume.portfFile}");
+		}
+		
+		function portfFileDown() {
+			 window.location.href = "${resume.portfFile}";
+		}
+		
+	</script>
+	
+	
+	
 </body>
 </html>
