@@ -78,6 +78,8 @@ public class OpenApiUtils {
         	dto.setRecruitType(getTextContentByTagName(ele,"jobsCd"));
         	// 회사명
         	dto.setCompanyName(getTextContentByTagName(ele,"company"));
+        	// 사업자번호
+        	dto.setBusino(getTextContentByTagName(ele,"busino"));
         	//지원자학력
         	dto.setUserEducation(getTextContentByTagName(ele,"maxEdubg"));
         	//연봉
