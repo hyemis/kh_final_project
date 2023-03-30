@@ -42,44 +42,22 @@
 
 <div class="container-fluid nav-bar bg-transparent">
 	<!-- 로고/사이트명 -->
-			<sec:authorize access="isAnonymous()">
-				<a href="${pageContext.request.contextPath}/person/main" class="navbar-brand d-flex align-items-center text-center">
-					<div class="icon p-2 me-2">
-						<img class="img-fluid"
-							src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
-							alt="Icon" style="width: 30px; height: 30px;">
-					</div>
-					<h1 class="m-0 text-primary">JOB-A</h1>
-				</a>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_P')">
-				<a href="${pageContext.request.contextPath}/person/main" class="navbar-brand d-flex align-items-center text-center">
-					<div class="icon p-2 me-2">
-						<img class="img-fluid"
-							src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
-							alt="Icon" style="width: 30px; height: 30px;">
-					</div>
-					<h1 class="m-0 text-primary">JOB-A</h1>
-				</a>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_B')">
-				<a href="${pageContext.request.contextPath}/business/main" class="navbar-brand d-flex align-items-center text-center">
-					<div class="icon p-2 me-2">
-						<img class="img-fluid"
-							src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
-							alt="Icon" style="width: 30px; height: 30px;">
-					</div>
-					<h1 class="m-0 text-primary">JOB-A</h1>
-				</a>
-			</sec:authorize>
-<%-- 	<a href="${pageContext.request.contextPath}/" class="navbar-brand d-flex align-items-center text-center">
-		<div class="icon p-2 me-2">
-			<img class="img-fluid"
-				src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
-				alt="Icon" style="width: 30px; height: 30px;">
-		</div>
-		<h1 class="m-0 text-primary">JOB-A</h1>
-	</a> --%>
+		<sec:authorize access="isAnonymous()">
+			<a href="${pageContext.request.contextPath}/person/main" class="navbar-brand d-flex align-items-center text-center">
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_P')">
+			<a href="${pageContext.request.contextPath}/person/main" class="navbar-brand d-flex align-items-center text-center">
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_B')">
+			<a href="${pageContext.request.contextPath}/business/main" class="navbar-brand d-flex align-items-center text-center">
+		</sec:authorize>
+				<div class="icon p-2 me-2">
+					<img class="img-fluid"
+						src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
+						alt="Icon" style="width: 30px; height: 30px;">
+				</div>
+				<h1 class="m-0 text-primary">JOB-A</h1>
+			</a>
 
 	<!-- Navbar Start -->
 	<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">

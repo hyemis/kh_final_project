@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이력서 관리 </title>
+<title>이력서 상세보기</title>
 </head>
 <body>
 	<!-- cs -->
@@ -71,49 +71,20 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
-										<h1 class="mb-3">이력서 목록</h1>
-										<p>
-										1. 이력서 생성한 뒤 작성해주세요.<br>
-										2. 이력서는 최대 5개까지 생성하실 수 있습니다. <br>
-										3. 생성된 이력서로 채용공고마다 다른 이력서로 입사지원이 가능합니다. 
-										(단, 입사 지원 후 이력서 수정 내용은 반영되지 않습니다.) <br>
-										4. 인재정보에는 작성하신 이력서 중 대표 이력서 1개만 공개 가능합니다. 
-										</p>
-										<br>	
-											<sec:authorize access="isAuthenticated()">
-												<sec:authentication property="principal.username" var="user_id" />
-												<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-													<a href="${pageContext.request.contextPath}/person/resume/write?userId=${user_id}">이력서 생성</a>
-												</div>
-											</sec:authorize>
-										<br>
-										<br>
-										<table class="table table-hover">
-										  <thead>
-										    <tr>
-										      <th scope="col">이력서 제목</th>
-										      <th scope="col">최종 수정일</th>
-										      <th scope="col">포트폴리오 파일</th>
-										      <th scope="col"></th>
-										    </tr>
-										  </thead>
-										  <tbody class="table-group-divider">
-										  <c:forEach items="${resumelist }" var="resume">
-										    <tr>
-										      <td><a href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}">${resume.resumeTitle }</a></td>
-										      <td>${resume.resumeDate }</td>
-										      <td>${resume.portfFile }</td>
-										      <td>
-											      <button type="button" class="btn btn-outline-dark">수정</button>
-											      <form method="post" action="delete">
-											      	<input type="hidden" name="resumeNo" value="${resume.resumeNo }" required>
-											      	<button type="submit" class="btn btn-outline-dark">삭제</button>
-										      	  </form>
-										      </td>
-										    </tr>
-										  </c:forEach>
-										  </tbody>
-										</table>
+										<h1 class="mb-3">이력서 상세보기</h1>
+										
+										<h3>${resume.resumeTitle }</h3>
+										
+										<div>
+											${resume.resumePhoto }
+										</div>
+										<div>
+											${resume.resumeDate }
+										</div>
+										<div>
+											${resume.portfFile }
+										</div>
+										
 										
 									</div>
 								</div>
@@ -130,14 +101,5 @@
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	
-	<script>
-	
-	// 이력서 alret
-	var msg = "${msg}";
-	if(msg) {
-		alert(msg);
-	}
-	</script>
 </body>
 </html>

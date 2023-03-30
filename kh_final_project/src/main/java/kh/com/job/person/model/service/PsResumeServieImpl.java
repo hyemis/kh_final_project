@@ -68,6 +68,12 @@ public class PsResumeServieImpl implements PsResumeService {
 			}
 		}
 
+	@Override
+	public PsResumeDto rselectOne(Object[] params) throws Exception {
+		return dao.rselectOne(params);
+	}
+
+
 	
 	
 	
