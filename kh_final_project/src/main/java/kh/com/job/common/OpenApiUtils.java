@@ -33,12 +33,12 @@ public class OpenApiUtils {
         urlBuilder.append("?" + URLEncoder.encode("authKey","UTF-8") + "=WNLBET6R0WPQK95R8VLU02VR1HJ"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("returnType","UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); /*결과형식(xml)*/
         urlBuilder.append("&" + URLEncoder.encode("callTp","UTF-8") + "=" + URLEncoder.encode("L", "UTF-8")); /*L(목록), D(상세)*/
-        urlBuilder.append("&" + URLEncoder.encode("startPage","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("startPage","UTF-8") + "=" + URLEncoder.encode("3", "UTF-8")); /*페이지번호 - 수정4!!*/
         urlBuilder.append("&" + URLEncoder.encode("display","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
-        urlBuilder.append("&" + URLEncoder.encode("region","UTF-8") + "=" + URLEncoder.encode("11000", "UTF-8")); /*지역-서울*/
-//        urlBuilder.append("&" + URLEncoder.encode("region","UTF-8") + "=" + URLEncoder.encode("41000", "UTF-8")); /*지역-경기*/
-        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("024", "UTF-8")); /*직종-소프트웨어*/
-//        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("025", "UTF-8")); /*직종-데이터&네트워크*/
+//        urlBuilder.append("&" + URLEncoder.encode("region","UTF-8") + "=" + URLEncoder.encode("11000", "UTF-8")); /*지역-서울*/
+        urlBuilder.append("&" + URLEncoder.encode("region","UTF-8") + "=" + URLEncoder.encode("41000", "UTF-8")); /*지역-경기*/
+//        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("024", "UTF-8")); /*직종-소프트웨어*/
+        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("025", "UTF-8")); /*직종-데이터&네트워크*/
 //        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("017", "UTF-8")); /*직종-경영지원*/
 //        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("018", "UTF-8")); /*직종-회계,경리*/
 //        urlBuilder.append("&" + URLEncoder.encode("occupation","UTF-8") + "=" + URLEncoder.encode("026201", "UTF-8")); /*직종-인사*/
@@ -55,13 +55,6 @@ public class OpenApiUtils {
         } else {
             rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
         }
-        
-//        StringBuilder sb = new StringBuilder();
-//        String line;
-//        while ((line = rd.readLine()) != null) {
-//            sb.append(line+"\n");
-//            System.out.println(line);
-//        }
         
         Document doc = parseXML(conn.getInputStream());
         doc.getDocumentElement().normalize();
@@ -90,7 +83,7 @@ public class OpenApiUtils {
         	dto.setMaxSalary(getTextContentByTagName(ele,"maxSal"));
         	//지원등록기간
         	dto.setRegistDate(getTextContentByTagName(ele,"regDt"));
-        	//지원마감일
+        	//지원마감일 - '채용시까지 23-05-28' 에서 띄워쓰리로 분리하지 않고 d-day표기시 분리하기
         	dto.setCloseDate(getTextContentByTagName(ele,"closeDt"));
         	//채용제목
         	dto.setRaTitle(getTextContentByTagName(ele,"title"));

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -60,9 +61,12 @@ public class PsResumeServieImpl implements PsResumeService {
 		try {
 			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 			String fileName = UUID.randomUUID().toString();
-			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fileName).build();
+			String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+			String fullName = fileName + "." + extension;
+			
+			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fullName).build();
 			storage.create(blobInfo, file.getBytes());
-			return "https://storage.googleapis.com/" + bucketName + "/" + fileName;
+			return "https://storage.googleapis.com/" + bucketName + "/" + fullName;
 				
 			} catch (IOException e) {
 				 throw new RuntimeException(e);

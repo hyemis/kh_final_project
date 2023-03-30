@@ -1,19 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <header>
-	<!-- Spinner Start 
-	<div id="spinner"
-		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-		<div class="spinner-border text-primary"
-			style="width: 3rem; height: 3rem;" role="status">
-			<span class="sr-only">Loading...</span>
-		</div>
-	</div>
-	<!-- Spinner End -->
-
 
 	<!-- Navbar Start -->
 	<div class="container-fluid nav-bar ">
@@ -21,11 +10,9 @@
 			<a href="index.html"
 				class="navbar-brand d-flex align-items-center text-center">
 				<div class="icon p-2 me-2">
-					<img class="img-fluid"
-						src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png"
-						alt="Icon" style="width: 30px; height: 30px;">
+					<img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
 				</div>
-				<h1 class="m-0 text-primary">Makaan</h1>
+				<h1 class="m-0 text-primary">JOB-A</h1>
 			</a>
 			<!-- 좌측 메뉴 -->
 			<div class="container-fluid ms-auto">

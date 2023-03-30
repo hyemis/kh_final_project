@@ -1,5 +1,7 @@
 package kh.com.job.business.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,8 @@ public class BsServiceImpl implements BsService{
 	private BsRecruitDao dao;
 
 	@Override
-	public int apiInsert(BsRecruitDto dto) throws Exception {
-		return dao.apiInsert(dto);
+	public int apiInsert(List<BsRecruitDto> bsList) throws Exception {
+		return dao.apiInsert(bsList);
 	}
 
 }
