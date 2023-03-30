@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원</title>
+<title>JOB-A 개인회원 메인</title>
 	<!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,11 +20,6 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
 	
-
-</head>
-<body>
-
-
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -34,7 +29,11 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 	
-	<!-- haeder  -->
+
+</head>
+<body>
+
+	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	<!-- Category Start -->

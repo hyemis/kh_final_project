@@ -261,7 +261,7 @@ public class PsMainController {
 	}
 	
 	
-	// 입사지원현황 화면
+	// 마이페이지 - 입사지원현황 화면
 	@GetMapping("/applylist")
 	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) throws Exception {
 		System.out.println("로그인정보: "+principal.getName());
@@ -275,6 +275,7 @@ public class PsMainController {
 	}
 	
 	
+
 	//로그인 페이지
 //	@GetMapping("/login")
 //	public ModelAndView login(ModelAndView mv) {

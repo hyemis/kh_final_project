@@ -34,7 +34,7 @@
 	
 </head>
 <body>
-<!-- haeder  -->
+<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <!-- page section -->	

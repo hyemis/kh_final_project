@@ -45,14 +45,17 @@ public class BsAccountController {
 	}
 	
 	
-	//회원정보 수정
+	//정보 수정
 	@PostMapping("/info")
 	public ModelAndView update(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
 		dto.setUserId(principal.getName()); 
 		service.updateAccount(dto);
-		mv.setViewName("redirect:info");
+		mv.setViewName("redirect:/business/account/info");
+		rttr.addFlashAttribute("msg", "회원정보 수정에 성공했습니다.");
 		return mv;
 	}
+	
+
 	
 
 	

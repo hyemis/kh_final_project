@@ -163,7 +163,15 @@ public class PsResumeController {
 		mv.setViewName("person/resume/read");
 		return mv;
 	}
-		
+	
+	
+	// 자격증 입력
+//	@PostMapping("rCerti")
+	
+	
+	
+	
+	
 	// 예외처리는 프로젝트 후반에 작성 
 	
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이력서 관리 </title>
+<title>JOB-A 이력서 관리 </title>
 	<!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,15 +17,6 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	
-	 <style>
-		.user_id {
-			position: fixed;;
-			top: 20px;
-			right: 210px;
-		}
-	</style>
-</head>
-<body>
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -35,7 +26,19 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 	
-	<!-- haeder  -->
+	 <style>
+		.user_id {
+			position: fixed;;
+			top: 20px;
+			right: 210px;
+		}
+	</style>
+</head>
+
+<body>
+
+	
+	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
