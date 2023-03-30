@@ -72,8 +72,8 @@
 					</div>
 				</div>
 				<div>
-					<button type="button" class="btn " >등록 공고 조회</button>
-					<button type="button" class="btn ">채용 공고 등록</button>
+					<button type="button" class="btn ">asdasfasf</button>
+					<button type="button" class="btn " onclick="location.href='${pageContext.request.contextPath}/business/recruit/insert'" >채용 공고 등록</button>
 				</div>
 			</div>
 			<div class="recruitlist p-2 col-9">
