@@ -23,8 +23,6 @@ public class BsApiController {
 	
 	@GetMapping("/workApi")
 	public ModelAndView viewWorkApi(ModelAndView mv) throws Exception{
-		List<BsRecruitDto> bsList = util.worknetApi();
-		System.out.println(bsList);
 		mv.setViewName("business/api/workApi");
 		return mv;
     }
@@ -32,7 +30,9 @@ public class BsApiController {
 	// 워크넷API - DB저장
 	@PostMapping("/workApi")
 	public ModelAndView workApi(ModelAndView mv, BsRecruitDto dto) throws Exception{
-		service.apiInsert(dto);
+		List<BsRecruitDto> bsList = util.worknetApi();
+		int result = service.apiInsert(bsList);
+		System.out.println("workApi result : " +result);
 		return mv;
 	}
 	

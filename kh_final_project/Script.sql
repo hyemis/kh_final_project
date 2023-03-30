@@ -12,20 +12,16 @@ ALTER TABLE personal_member ADD CONSTRAINT PK_PERSONAL_MEMBER PRIMARY KEY (
 	USER_ID
 );
 
-
-
-
-
-
 select * from personal_member;
-
 
 INSERT into personal_member values('aaa', 'aaa','최민건','aaa@aaa.com','010','0000','1111');
 INSERT into personal_member values('bbb', 'bbb','김민건','bbb@bbb.com','010','2222','3333');
 INSERT into personal_member values('ccc', 'ccc','씨민건','ccc@ccc.com','010','4444','5555');
 
-
 commit;
 
+/* # 채용공고등록 테이블*/
+alter table RECRUIT_REGIST modify CLOSE_DATE varchar2(30);
+alter table RECRUIT_REGIST modify REGIST_DATE varchar2(30);
 
 
