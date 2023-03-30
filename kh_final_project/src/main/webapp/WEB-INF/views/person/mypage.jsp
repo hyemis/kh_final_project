@@ -20,9 +20,6 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
 	
-
-</head>
-<body>
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -31,8 +28,48 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+
+
+	<style>
+	#modal {
+		display: none;
+		z-index: 1;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		width: 100%;
+		height: 100%;
+	}
 	
-	<!-- haeder  -->
+	#modal>#content {
+		width: 300px;
+		position: absolute;
+		margin: auto;
+		padding: 20px;
+		background-color: #e5e5e5;
+	}
+	
+	#modal .close {
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		font-size: 20px;
+		border: 0;
+		background-color: #e5e5e5;
+	}
+	
+	#modal .close:hover, #modal .close:focus {
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	</style>
+
+
+</head>
+<body>
+	
+	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
@@ -61,6 +98,7 @@
 				</div>
 			</nav>
 		</div>
+	</div>
 
 		<div class="container-sm">
 
@@ -125,45 +163,14 @@
 					</div>
 				</form>
 			</div>
+		</div>
+	</div>
 
 
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-		<style>
-			#modal {
-				display: none;
-				z-index: 1;
-				position:fixed;
-				left: 50%;
-				top: 50%;
-				width: 100%;
-				height: 100%;
-			}
-			
-			#modal>#content {
-				width: 300px;
-				position: absolute;
-				margin: auto;
-				padding: 20px;
-				background-color: #e5e5e5 ;
-			}
-			
-			#modal .close {
-				position: absolute;
-				top: 4px;
-				right: 4px;
-				font-size: 20px;
-				border: 0;
-				background-color: #e5e5e5 ;
-			}
-			
-			#modal .close:hover, #modal .close:focus {
-				color: #000;
-				text-decoration: none;
-				cursor: pointer;
-			}
-		</style>
+
 
 		<script>
 			// modal창

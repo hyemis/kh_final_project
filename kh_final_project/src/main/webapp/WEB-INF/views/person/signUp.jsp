@@ -32,7 +32,7 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 	
-	<!-- haeder  -->
+	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
