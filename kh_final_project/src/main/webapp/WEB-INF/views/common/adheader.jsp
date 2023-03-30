@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-    
-<!DOCTYPE html>
+
 <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
@@ -42,8 +41,6 @@
 							<button class="btn btn-dark border-0 w-15 py-2" type="submit">로그 아웃</button>
 							</form>
 						</div>
-						
-						
                     </div>
                 </div>
             </nav>
