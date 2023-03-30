@@ -19,27 +19,6 @@ public class kakaoController {
 	@Autowired
 	public PsService service;
 	
-	
-//		// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
-//		@RequestMapping(value = "/person/login", method = RequestMethod.GET)
-//		public ModelAndView kakaoLogin(ModelAndView mv
-//				, @RequestParam(value = "code", required = false) String code) throws Throwable {
-//
-//			// 1번
-//			System.out.println("code : " + code);
-//			
-//			// 2번 
-//			String access_Token = service.getAccessToken(code);
-//			System.out.println("###access_Token#### : " + access_Token);
-//			
-//			// 3번 
-//			HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
-//			System.out.println("###nickname#### : " + userInfo.get("nickname"));
-//			System.out.println("###email#### : " + userInfo.get("email"));
-//			
-//			return mv;	
-//
-//		}
 		
 		// 카카오지도
 		@RequestMapping(value = "/temp/map", method = RequestMethod.GET)

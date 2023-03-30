@@ -19,6 +19,11 @@ public class PsDao {
 		return sqlSession.selectOne("person.selectOne", userId);
 	}
 	
+	// 카카오 로그인 
+	public PsUserDto selectUserEmail(String userEmail) throws Exception {
+		return sqlSession.selectOne("person.selectUserEmail", userEmail);
+	}
+	
 	// 아이디 중복 체크 
 	public int idChk(String userId) throws Exception {
 		int result = sqlSession.selectOne("person.idChk", userId);

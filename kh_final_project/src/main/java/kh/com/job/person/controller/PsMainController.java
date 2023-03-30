@@ -274,34 +274,40 @@ public class PsMainController {
 		return mv;
 	}
 	
-	
 
-	//로그인 페이지
-//	@GetMapping("/login")
-//	public ModelAndView login(ModelAndView mv) {
-//		return mv;
-//	}
 	
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
-	@GetMapping("/login")
-	public ModelAndView kakaoLogin(ModelAndView mv
-					, @RequestParam(value = "code", required = false) String code) throws Throwable {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code, RedirectAttributes rttr) throws Throwable {
 
-				// 1번
-				System.out.println("code : " + code);
+		// 1번
+		System.out.println("code : " + code);
 				
-				// 2번 
-				String access_Token = service.getAccessToken(code);
-				System.out.println("###access_Token#### : " + access_Token);
+		// 2번 
+		String access_Token = service.getAccessToken(code);
+		System.out.println("###access_Token#### : " + access_Token);
 				
-				// 3번 
-				HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
-				System.out.println("###nickname#### : " + userInfo.get("nickname"));
-				System.out.println("###email#### : " + userInfo.get("email"));
-				
-				return mv;	
-
-			}
+		// 3번 
+		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+		System.out.println("###nickname#### : " + userInfo.get("nickname"));
+		System.out.println("###email#### : " + userInfo.get("email"));
+		
+		// 사용자 이메일 정보 조회
+		String userEmail = (String)userInfo.get("email");
+		PsUserDto user = service.selectUserEmail(userEmail);
+		
+		
+		// 이메일 정보가 일치하는 사용자가 존재할 경우 로그인 처리
+		if(user!=null && user.getUserEmail().equals(userEmail)) {
+			// 로그인 
+			mv.setViewName("redirect:/");
+		} else {
+			 // 이메일 정보가 일치하지 않는 경우 로그인 실패 처리
+			rttr.addFlashAttribute("msg", "이메일 정보가 일치하지 않습니다.");
+	        mv.setViewName("person/login");
+		}
+		return mv;	
+	}
 
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {

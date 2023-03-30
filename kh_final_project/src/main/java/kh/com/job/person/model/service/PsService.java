@@ -18,4 +18,5 @@ public interface PsService {
 	// 카카오 로그인 
 	String getAccessToken(String authorize_code) throws Throwable;
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
+	public PsUserDto selectUserEmail(String userEmail) throws Throwable;
 }

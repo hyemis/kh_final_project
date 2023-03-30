@@ -177,6 +177,12 @@ public class PsServiceImpl implements PsService {
 			return userInfo;
 		}
 
+		// 카카오 로그인 
+		@Override
+		public PsUserDto selectUserEmail(String userEmail) throws Throwable {
+			return dao.selectUserEmail(userEmail);
+		}
+
 
 	
 	

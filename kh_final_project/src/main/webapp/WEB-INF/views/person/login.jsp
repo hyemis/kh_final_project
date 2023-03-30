@@ -21,10 +21,6 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
 	
-
-</head>
-<body>
-	
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -33,6 +29,8 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+</head>
+<body>
 	
 	<!-- haeder  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -66,8 +64,8 @@
 							</div>
 							<div class="d-grid">
 							 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
-								      <div class="kakao_i"></div>
-								      <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
+								    <div class="kakao_i"></div>
+								    <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
 							  </a>
 							</div>
 				</form>
@@ -79,5 +77,12 @@
 	<!-- footer -->
  	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> 
 	
+	<script type="text/javascript">
+		// 카카오 로그인 실패 
+		var msg = "${msg}";
+		if(msg) {
+			alert(msg);
+		}
+	</script>
 </body>
 </html>
