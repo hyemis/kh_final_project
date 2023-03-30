@@ -1,5 +1,6 @@
 package kh.com.job.person.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kh.com.job.person.model.dto.PsUserDto;
@@ -13,4 +14,8 @@ public interface PsService {
 	public int insert(PsUserDto dto) throws Exception;
 	public int update(PsUserDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
+	
+	// 카카오 로그인 
+	String getAccessToken(String authorize_code) throws Throwable;
+	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
 }

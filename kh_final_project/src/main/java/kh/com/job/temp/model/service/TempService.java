@@ -16,8 +16,8 @@ public interface TempService {
 	
 	public List<ApplyProcessDto> applyProcessList() throws Exception;
 	
-	// 카카오 로그인 
-	String getAccessToken(String authorize_code) throws Throwable;
+//	// 카카오 로그인 
+//	String getAccessToken(String authorize_code) throws Throwable;
 
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
 	

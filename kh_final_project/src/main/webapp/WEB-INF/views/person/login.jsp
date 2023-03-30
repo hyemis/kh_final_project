@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>JOB-A 로그인</title>
-	<!-- cs -->
+	<!-- css -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,9 +17,9 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/person.kakao.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.kakao.css" rel="stylesheet">
 	
 
 </head>
@@ -61,11 +61,13 @@
 							        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
 						    	</font>
 							</c:if>
-					        <div class="d-grid m-3">
+					        <div class="d-grid">
 							  <button class="btn btn-primary" type="submit">로그인</button>
-							  <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=REST_API키&redirect_uri=REDIRECT_URI&response_type=code">
+							</div>
+							<div class="d-grid">
+							 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
 								      <div class="kakao_i"></div>
-								      <div class="kakao_txt">카카오톡으로 간편로그인 </div>
+								      <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
 							  </a>
 							</div>
 				</form>

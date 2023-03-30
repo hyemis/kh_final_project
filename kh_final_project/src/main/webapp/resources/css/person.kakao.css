@@ -23,6 +23,7 @@
 	    background-size: 240px auto;
 	    margin-bottom: 20px;
 	}
+	
 	.kakao{
 	   margin-top: 15px;
 	   height: 60px;
@@ -33,11 +34,12 @@
 	   box-sizing: border-box;
 	   border-radius: 5px;
 	   cursor: pointer;
-	   width: 450px;
+	   /* width: 450px; */
 	   display: flex;
 	}
-	.kakao_i{
-	/*    background: url(/resources/icons/kakao_login_medium_narrow.png) no-repeat; */
+	
+ 	.kakao_i{
+	   background: url(/resources/icons/kakao_login_medium_narrow.png) no-repeat;
 	   width: 40px;
 	   height: 90%;
 	   background-size: 100%;
