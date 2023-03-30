@@ -2,6 +2,7 @@ package kh.com.job.person.model.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,8 +70,8 @@ public class PsResumeServieImpl implements PsResumeService {
 		}
 
 	@Override
-	public PsResumeDto rselectOne(Object[] params) throws Exception {
-		return dao.rselectOne(params);
+	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {
+		return dao.rselectOne(infoMap);
 	}
 
 

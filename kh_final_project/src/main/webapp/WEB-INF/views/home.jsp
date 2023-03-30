@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>home</title>
+
 	<!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,16 +40,17 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 	
-	<!-- haeder  -->
+	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	
 
 	
-	
+	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
+	
 		// 회원가입 성공, 실패 alret
 		var msg = "${msg}";
 		if(msg) {
