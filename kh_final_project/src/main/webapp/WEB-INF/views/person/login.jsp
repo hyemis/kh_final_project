@@ -34,10 +34,10 @@
 	
 	<!-- haeder  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-	
+	<section>
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm d-flex justify-content-center">	
-		<div class="grid gap-3 w-75 mt-5 border border-primary ">
+		<div class="grid gap-3 w-75 my-5 border border-primary ">
 			 <div class="row justify-content-center">
 			 
 		        <form class="col-6" name=singUpForm action="${pageContext.request.contextPath}/login" method="post">
@@ -62,7 +62,7 @@
 					        <div class="d-grid">
 							  <button class="btn btn-primary" type="submit">로그인</button>
 							</div>
-							<div class="d-grid">
+							<div class="d-grid mb-5">
 							 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
 								    <div class="kakao_i"></div>
 								    <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
@@ -73,7 +73,7 @@
 		    </div>
 		</div>
 	</div>
-	
+	</section>
 	<!-- footer -->
  	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> 
 	
