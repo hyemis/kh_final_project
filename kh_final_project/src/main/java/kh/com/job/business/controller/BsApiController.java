@@ -25,15 +25,16 @@ public class BsApiController {
 	public ModelAndView viewWorkApi(ModelAndView mv) throws Exception{
 		List<BsRecruitDto> bsList = util.worknetApi();
 		System.out.println(bsList);
+		mv.setViewName("business/api/workApi");
 		return mv;
     }
 	
+	// 워크넷API - DB저장
 	@PostMapping("/workApi")
 	public ModelAndView workApi(ModelAndView mv, BsRecruitDto dto) throws Exception{
 		service.apiInsert(dto);
 		return mv;
 	}
-	
 	
 	
 	
