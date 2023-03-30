@@ -55,25 +55,32 @@
 
 	<div class="container-sm">
 		<!-- 탭 -->
-		<nav>
-			<div class="nav nav-tabs" id="nav-tab" role="tablist">
-				<button class="nav-link active" id="nav-tab-1" data-bs-toggle="tab" data-bs-target="#tab-1" type="button" role="tab" aria-controls="tab-1" aria-selected="true">Tab 1</button>
-				<button class="nav-link" id="nav-tab-2" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab" aria-controls="tab-2" aria-selected="false">Tab 2</button>
-				<button class="nav-link" id="nav-tab-3" data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab" aria-controls="tab-3" aria-selected="false">Tab 3</button>
-			</div>
-		</nav>
+		<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link me-4 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link me-4" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link me-4" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+			</li>
+		</ul>
 	
 		<!-- 탭 내용 -->
 		<div class="tab-content" id="nav-tabContent">
-			<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="nav-tab-1">
-				<h3>Tab 1 Content</h3>
-				<p>This is the content for Tab 1.</p>
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
+				
+				<div>
+					귀찮아
+				</div>
+				
 			</div>
-			<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="nav-tab-2">
+			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="nav-tab-2">
 				<h3>Tab 2 Content</h3>
 				<p>This is the content for Tab 2.</p>
 			</div>
-			<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="nav-tab-3">
+			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="nav-tab-3">
 				<h3>Tab 3 Content</h3>
 				<p>This is the content for Tab 3.</p>
 			</div>
