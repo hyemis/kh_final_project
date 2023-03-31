@@ -5,8 +5,12 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 
 
 public interface PsResumeService {
@@ -33,6 +37,20 @@ public interface PsResumeService {
 	// 파일 업로드 
 	public String upload(MultipartFile file);
 	
+	// 이력서 - 고등학교입력
+	public int insertHschool(PsHschoolDto dto) throws Exception;
+	
+	// 이력서 - 대학교입력
+	public int insertUniv(PsUnivDto dto) throws Exception;
+	
+	// 이력서-대학원 입력
+	public int insertGschool(PsGschoolDto dto) throws Exception;
+	
+	// 이력서-경력사항 입력
+	public int insertCareer(PsCareerDto dto) throws Exception;
+	
 	// 이력서-자격증 입력
 	public int insertCerti(PsCertiDto dto) throws Exception;
+
+
 }
