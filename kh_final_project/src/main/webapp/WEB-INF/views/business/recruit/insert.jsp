@@ -95,7 +95,7 @@
 									<td><input type="text" id="companyName" class="companyName" name="companyName"></td>
 								</tr>
 								<tr class="mb-3">
-									<td><label for="recruitType">모집 분야</label></td>
+									<td><label for="category2dept">모집 분야</label></td>
 									<td>
 										<select id="category2dept" class="category2dept">
 											<option value="0">선택안함</option>
@@ -111,29 +111,7 @@
 									</td>
 								</tr>
 								<tr class="mb-3">
-									<td></td>
-									<td><input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td>
-								</tr>
-								<tr class="mb-3">
-									<td><label for="companyName">우편번호</label></td>
-									<td>
-										<input type="text" id="sample4_postcode" placeholder="우편번호">
-									</td>
-								</tr>
-								<tr class="mb-3">
-									<td><label for="companyName">도로명 주소</label></td>
-									<td><input type="text" id="sample4_roadAddress" placeholder="도로명주소" disabled></td>
-								</tr>
-								<tr class="mb-3">
-									<td><label for="companyName">지번 주소</label></td>
-									<td><input type="text" id="sample4_jibunAddress" placeholder="지번주소" disabled></td>
-								</tr>
-								<tr class="mb-3">
-									<td><label for="companyName">상세 주소</label></td>
-									<td><input type="text" id="sample4_detailAddress" placeholder="상세주소"></td>
-								</tr>
-								<tr class="mb-3">
-									<td>경력 선택</td>
+									<td><label for="career">경력 선택</label></td>
 									<td>
 									<select id="career" class="career">
 										<c:forEach items="${CAlist}" var="categoryCA">
@@ -141,7 +119,22 @@
 										</c:forEach>
 									</select>
 									</td>
- 									
+								</tr>
+								<tr class="mb-3">
+									<td><label for="userEducation">학력 선택</label></td>
+									<td>
+									<select id="userEducation" class="userEducation">
+										<c:forEach items="${EDlist}" var="categoryED">
+											<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
+										</c:forEach>
+									</select>
+									</td>
+								</tr>
+								<tr class="mb-3">
+									<td><label for=minSalary>급여</label></td>
+									<td><input type="text" id="minSalary" class="minSalary" name="minSalary"></td>
+									<td>~</td>
+									<td><input type="text" id="maxSalary" class="maxSalary" name="maxSalary"></td>
 								</tr>
 							</tbody>
 						</table>					
