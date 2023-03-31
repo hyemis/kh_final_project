@@ -34,5 +34,5 @@ public class PsUnivDto {
 	private String uNmae;
 	private Date uDate;
 	private String uMajor;
-	private int uPoint;
+	private double uPoint;
 }

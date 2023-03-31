@@ -27,11 +27,29 @@
   	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID}
   </update>
   
-  <insert id="insertCerti" parameterType="certidto">
-  	INSERT INTO R_CERTI (CERTI_NO, CERTI_NAME, CERTI_PUB, CERTI_DATE)
-  	VALUES (#{certiNo}, #{certiName}, ${certiPub}, #{certiDate})
+  	<insert id="insertHschool" parameterType="hdto">
+		insert into R_HSCHOOL(H_EDU_NO, GED, H_NAME, H_DATE, H_MAJOR)
+		values (R_HSCHOOL_SEQ.NEXTVAL, ${ged}, #{hName}, #{hDate}, #{hMajor})
+	</insert>
   
-  </insert>
-	
+  	<insert id="insertUniv" parameterType="udto">
+		insert into R_UNIVERSITY(U_EDU_NO, U_ACT, U_CATEGORY, U_NAME, U_DATE, U_MAJOR,	U_POINT)
+		values (R_UNIVERSITY_SEQ.NEXTVAL, #{uAct}, #{uCategory}, #{uNmae}, #{uDate}, #{uMajor}, #{uPoint})
+	</insert>
+
+	<insert id="insertGschool" parameterType="gdto">
+		insert into R_GSCHOOL(G_EDU_NO, G_ACT, G_NAME, G_CATEGORY, G_DATE, G_MAJOR,	G_POINT)
+		values (R_GSCHOOL_SEQ.NEXTVAL, #{gAct}, #{gName}, #{gCategory}, #{gDate}, #{gMajor}, #{gPoint})
+	</insert>
+  
+  	<insert id="insertCareer" parameterType="careerdto">
+		insert into R_CAREER (CAR_NO, CAR_NAME, CAR_DATE, CAR_POSITION, CAR_DEPT, CAR_RESP, CAR_SALARY)
+		values (R_CAREER_SEQ.NEXTVAL, #{carName}, #{carDate}, #{carPosition}, #{carDept}, #{carResp}, #{carSalary})
+	</insert>
+
+	<insert id="insertCerti" parameterType="certidto">
+		insert into R_CERTI (CERTI_NO, CERTI_NAME, CERTI_PUB, CERTI_DATE)
+		values (R_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
+	</insert>
 
 </mapper>

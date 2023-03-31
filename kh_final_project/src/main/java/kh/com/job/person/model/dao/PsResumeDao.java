@@ -7,9 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
-import kh.com.job.person.model.dto.PsUserDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 
 @Repository
 public class PsResumeDao {
@@ -45,6 +48,26 @@ public class PsResumeDao {
 	
 	public int update(PsResumeDto dto)  throws Exception {
 		return sqlSession.update("resume.update", dto);
+	}
+	
+	// 이력서-고등학교입력
+	public int insertHschool(PsHschoolDto dto) throws Exception{
+		return sqlSession.insert("resume.insertHschool",dto);
+	}
+	
+	// 이력서-대학교입력
+	public int insertUniv(PsUnivDto dto) throws Exception{
+		return sqlSession.insert("resume.insertUniv",dto);
+	}
+	
+	// 이력서-대학원입력
+	public int insertGschool(PsGschoolDto dto) throws Exception{
+		return sqlSession.insert("resume.insertGschool",dto);
+	}
+	
+	// 이력서-경력사항입력
+	public int insertCareer(PsCareerDto dto) throws Exception{
+		return sqlSession.insert("resume.insertCareer",dto);
 	}
 	
 	// 이력서-자격증입력

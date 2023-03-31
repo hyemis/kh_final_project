@@ -193,7 +193,7 @@
 								      	<!-- 대학교 졸업 form -->
 								      	<form name="rUniversity" action="rUniversity" method="post">
 											 	  <div class="row mb-3">
-												    <label for="uAct" class="col-sm-2 col-form-label">대학졸업유무</label>
+												    <label for="uAct" class="col-sm-2 col-form-label">대학 졸업유무</label>
 												    <div class="col-sm-10">
 												      <select class="form-select" name="uAct">
 														  <option selected>대학졸업유무선택</option>
@@ -204,7 +204,7 @@
 												    </div>
 												  </div>
 												  <div class="row mb-3">
-												    <label for="uCategory" class="col-sm-2 col-form-label">대학카테고리</label>
+												    <label for="uCategory" class="col-sm-2 col-form-label">대학 카테고리</label>
 												    <div class="col-sm-10">
 												      <select class="form-select" name="uCategory">
 														  <option selected>대학카테고리</option>
@@ -220,21 +220,21 @@
 												    </div>
 												  </div>
 												  <div class="row mb-3">
-												    <label for="uDate" class="col-sm-2 col-form-label">대학재학기간</label>
+												    <label for="uDate" class="col-sm-2 col-form-label">대학 졸업일자</label>
 												    <div class="col-sm-10">
 												      <input type="Date" class="form-control" name="uDate">
 												    </div>
 												  </div>
 												   <div class="row mb-3">
-												    <label for="uMajor" class="col-sm-2 col-form-label">대학전공</label>
+												    <label for="uMajor" class="col-sm-2 col-form-label">대학 전공</label>
 												    <div class="col-sm-10">
 												      <input type="text" class="form-control" name="uMajor">
 												    </div>
 												  </div>
 												  <div class="row mb-3">
-												    <label for="uPoint" class="col-sm-2 col-form-label">대학학점</label>
+												    <label for="uPoint" class="col-sm-2 col-form-label">대학 학점</label>
 												    <div class="col-sm-10">
-												      <input type="number" class="form-control" name="uPoint" placeholder="소수점 두번째 자리까지만 입력">
+												      <input type="number"  step="0.01" class="form-control" name="uPoint" placeholder="소수점 두번째 자리까지만 입력">
 												    </div>
 												  </div>
 												  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
@@ -255,7 +255,7 @@
 								       <!-- 대학원 졸업 form -->
 								      	<form name="rGSchool" action="rGSchool" method="post">
 											 	  <div class="row mb-3">
-												    <label for="gAct" class="col-sm-2 col-form-label">대학원졸업유무</label>
+												    <label for="gAct" class="col-sm-2 col-form-label">대학원 졸업유무</label>
 												    <div class="col-sm-10">
 												      <select class="form-select" name="gAct">
 														  <option selected>대학졸업유무선택</option>
@@ -266,7 +266,7 @@
 												    </div>
 												  </div>
 												  <div class="row mb-3">
-												    <label for="gCategory" class="col-sm-2 col-form-label">대학원카테고리</label>
+												    <label for="gCategory" class="col-sm-2 col-form-label">대학원 카테고리</label>
 												    <div class="col-sm-10">
 												      <select class="form-select" name="gCategory">
 														  <option selected>대학원카테고리</option>
@@ -282,21 +282,21 @@
 												    </div>
 												  </div>
 												  <div class="row mb-3">
-												    <label for="gDate" class="col-sm-2 col-form-label">대학원재학기간</label>
+												    <label for="gDate" class="col-sm-2 col-form-label">대학원 졸업일자</label>
 												    <div class="col-sm-10">
 												      <input type="Date" class="form-control" name="gDate">
 												    </div>
 												  </div>
 												   <div class="row mb-3">
-												    <label for="gMajor" class="col-sm-2 col-form-label">대학원전공</label>
+												    <label for="gMajor" class="col-sm-2 col-form-label">대학원 전공</label>
 												    <div class="col-sm-10">
 												      <input type="text" class="form-control" name="gMajor">
 												    </div>
 												  </div>
 												  <div class="row mb-3">
-												    <label for="gPoint" class="col-sm-2 col-form-label">대학원학점</label>
+												    <label for="gPoint" class="col-sm-2 col-form-label">대학원 학점</label>
 												    <div class="col-sm-10">
-												      <input type="number" class="form-control" name="gPoint" placeholder="소수점 두번째 자리까지만 입력">
+												      <input type="number"  step="0.01" class="form-control" name="gPoint" placeholder="소수점 두번째 자리까지만 입력">
 												    </div>
 												  </div>
 												  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">

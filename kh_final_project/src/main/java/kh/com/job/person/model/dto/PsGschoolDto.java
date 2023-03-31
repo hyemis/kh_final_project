@@ -34,5 +34,5 @@ public class PsGschoolDto {
 	private String gCategory;
 	private Date gDate;
 	private String gMajor;
-	private int gPoint;
+	private double gPoint;
 }

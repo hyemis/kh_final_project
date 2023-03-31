@@ -16,8 +16,12 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.person.model.dao.PsResumeDao;
+import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 
 @Service
 public class PsResumeServieImpl implements PsResumeService {
@@ -78,6 +82,26 @@ public class PsResumeServieImpl implements PsResumeService {
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {
 		return dao.rselectOne(infoMap);
 	}
+	
+	@Override
+	public int insertHschool(PsHschoolDto dto) throws Exception {
+		return dao.insertHschool(dto);
+	}
+
+	@Override
+	public int insertUniv(PsUnivDto dto) throws Exception {
+		return dao.insertUniv(dto);
+	}
+
+	@Override
+	public int insertGschool(PsGschoolDto dto) throws Exception {
+		return dao.insertGschool(dto);
+	}
+
+	@Override
+	public int insertCareer(PsCareerDto dto) throws Exception {
+		return dao.insertCareer(dto);
+	}
 
 	@Override
 	public int insertCerti(PsCertiDto dto) throws Exception {
@@ -86,9 +110,10 @@ public class PsResumeServieImpl implements PsResumeService {
 
 
 	
-	
-	
-	
-	
+
 
 }
+
+
+
+

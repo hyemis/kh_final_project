@@ -17,8 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsResumeService;
 import kh.com.job.person.model.service.PsService;
@@ -164,7 +168,69 @@ public class PsResumeController {
 	}
 	
 	
-	// TODO 자격증 입력-- 하는중****
+	
+	
+	//TODO 이력서- 학력사항,자격증,경력사항 INSERT
+	
+	//고등학교입력
+	@PostMapping("rHSchool")
+	@ResponseBody
+	public int rHschool(PsHschoolDto dto) {
+		int result = -1;
+		try {
+			result = rservice.insertHschool(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 대학교 입력
+	@PostMapping("rUniversity")
+	@ResponseBody
+	public int rUniversity(PsUnivDto dto) {
+		int result = -1;
+		try {
+			result = rservice.insertUniv(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 대학원 입력
+	@PostMapping("rGSchool")
+	@ResponseBody
+	public int rGSchool(PsGschoolDto dto) {
+		int result = -1;
+		try {
+			result = rservice.insertGschool(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	// 경력사항 입력
+	@PostMapping("rCareer")
+	@ResponseBody
+	public int rCareer(PsCareerDto dto) {
+		int result = -1;
+		try {
+			result = rservice.insertCareer(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	// 자격증 입력
 	@PostMapping("rCerti")
 	@ResponseBody
 	public int rCerti(PsCertiDto dto) {
