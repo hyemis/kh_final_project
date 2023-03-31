@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.com.job.person.model.dto.PsCertiDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsResumeService;
@@ -165,11 +164,23 @@ public class PsResumeController {
 	}
 	
 	
-	// 자격증 입력
-//	@PostMapping("rCerti")
+	// TODO 자격증 입력-- 하는중****
+	@PostMapping("rCerti")
+	@ResponseBody
+	public int rCerti(PsCertiDto dto) {
+		
+		int result = -1;
+		try {
+			result = rservice.insertCerti(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
-	
+
 	
 	
 	// 예외처리는 프로젝트 후반에 작성 
