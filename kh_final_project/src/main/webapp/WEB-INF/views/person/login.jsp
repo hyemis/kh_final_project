@@ -18,7 +18,7 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/person.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.kakao.css" rel="stylesheet">
 	
 	<!-- js -->
@@ -33,7 +33,7 @@
 	
 	<style>
 	#links a {
-	  font-size: 12px;
+	  font-size: 14px;
 	}
 	
 	</style>
@@ -70,7 +70,7 @@
 					        <div class="d-grid">
 							  <button class="btn btn-primary" type="submit">로그인</button>
 							</div>
-							<div class="d-grid mb-5">
+							<div class="d-grid mb-2">
 							 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
 								   <!--  <div class="kakao_i"></div> -->
 								    <img src="${pageContext.request.contextPath}/resources/kakao_login_medium_narrow.png">
@@ -79,12 +79,12 @@
 							</div>
 							<div class="d-grid">
 								<div class="row" id="links"> 
-									<a href="${pageContext.request.contextPath}/person/findid" class="col-4"><p>아이디 찾기</p></a> 
-									<a href="${pageContext.request.contextPath}/person/findpw" class="col-4 text-center">비밀번호 찾기</a> 
+									<a href="${pageContext.request.contextPath}/person/findid" class="col-4"><p>아이디 찾기</p></a>
+									<a href="${pageContext.request.contextPath}/person/findpw" class="col-4 text-center">비밀번호 찾기</a>
 									<a href="${pageContext.request.contextPath}/person/signUp" class="col-4 text-end">회원 가입</a>
 								</div>
 							</div>
-				</form>
+				</form> 
     
     	
 				

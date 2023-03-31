@@ -75,6 +75,14 @@ public class PsMainController {
 		return mv;
 	}
 	
+	// 아이디 찾기 
+	@PostMapping("/findid")
+	@ResponseBody
+	public ModelAndView dofindId(ModelAndView mv, PsUserDto dto) {
+		System.out.println("dto 잘 가져옴 ?" + dto );
+		return mv;
+	}
+	
 	// 비밀번호 찾기
 		@GetMapping("/findpw")
 		public ModelAndView viewfindPw(ModelAndView mv) {

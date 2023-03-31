@@ -61,11 +61,11 @@
 			       		</div>
 			       		
 						<form id="personal-email-form" class="hidden m-5" method="post" action="">
-						   <input class="form-control" type="text" placeholder="이름">
-			      		   <input class="form-control" type="text" placeholder="생년월일(19990101)">
-			        	   <input class="form-control" type="text" placeholder="이메일(job-a@joba.com)">
+						   <input class="form-control" type="text" id="personal-name" placeholder="이름">
+			      		   <input class="form-control" type="text" id="personal-birth" placeholder="생년월일(19990101)">
+			        	   <input class="form-control" type="text" id="personal-email" placeholder="이메일(job-a@joba.com)">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
-							  <button class="btn btn-outline-dark" type="button" onclick="fn_findIdEamil(); return false;">아이디 찾기</button>
+							  <button class="btn btn-outline-dark" type="button" onclick="findIdEamil();">아이디 찾기</button>
 							</div>
 						</form>
 						
@@ -101,6 +101,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
+	// 토글
 	 function toggleForm(type) {
 	      var personalEmailForm = document.getElementById('personal-email-form');
 	      var personalPhoneForm = document.getElementById('personal-phone-form');
@@ -125,11 +126,40 @@
 	    	    corporateForm.classList.remove('hidden');
 	    	}
 	      
-	    
-	      
-	      
-	      
 	    } 
+	
+	// email로 id 찾기
+ 	 function findIdEamil() {
+		let formdata = new FormData();
+		formdata.append("name", $('#personal-name').val());
+		formdata.append("birth", $('#personal-birth').val());
+		formdata.append("email", $('#personal-email').val());
+		
+		if(!name || !birth || !email) {
+			alert("입력값을 모두 입력해주세요.");
+			return;
+		}
+	
+	
+		$.ajax({
+		url : "${pageContext.request.contextPath}/person/findid",
+		type : "post",
+		contentType: false, 
+		processData: false,
+		data: formdata, 
+		sucess : function(result)
+			if (result === 1) {
+			alert("회원님의 아이디는" + "입니다.");
+			location.href="/job/person/login";
+		}	else {
+			alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
+			location.href="/job/person/signUp";
+		}
+		
+		
+		
+		})
+	} 
 	
  	 </script>
 </body>
