@@ -17,9 +17,9 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.kakao.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/person.kakao.css" rel="stylesheet">
 	
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -29,6 +29,14 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+	
+	
+	<style>
+	#links a {
+	  font-size: 12px;
+	}
+	
+	</style>
 </head>
 <body>
 	
@@ -64,12 +72,22 @@
 							</div>
 							<div class="d-grid">
 							 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
-								    <div class="kakao_i"></div>
+								   <!--  <div class="kakao_i"></div> -->
+								    <img src="${pageContext.request.contextPath}/resources/kakao_login_medium_narrow.png">
 								    <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
 							  </a>
 							</div>
+							<div class="d-grid mt-2">
+								<div class="row" id="links"> 
+									<a href="${pageContext.request.contextPath}/person/idpw" class="col-4"><p>아이디 찾기</p></a> 
+									<a href="${pageContext.request.contextPath}/person/idpw" class="col-4 text-end">비밀번호 찾기</a> 
+									<a href="${pageContext.request.contextPath}/person/signUp" class="col-4 text-end">회원 가입</a>
+								</div>
+							</div>
 				</form>
     
+    	
+				
 		    </div>
 		</div>
 	</div>

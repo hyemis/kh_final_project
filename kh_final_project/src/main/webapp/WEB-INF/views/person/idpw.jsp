@@ -28,6 +28,11 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 	
+	<style>
+	  .hidden {
+	    display: none;
+	  }
+	</style>
 </head>
 <body>
 	
@@ -39,12 +44,58 @@
 		
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
-		        <form class="col-6 border border-primary">
-		        	<div>
-		        		<span>아이디/ 비밀번호 찾기</span>
+		        	<div class="col-6 border border-primary">
+		        		<div class="row m-3 text-center">
+			        	<h3>아이디 찾기</h3>
+			       		</div>
+			       		<hr>
+			       		
+			        	<div class="row" id="member">
+			        	<button class="col-6 btn btn-outline-dark" onclick="toggleForm('personal')">Personal Member</button>
+	  					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">Corporate Member</button>
+			       		</div>
+			       		
+			       		<div class="row hidden" id="findType">
+			        	<button class="col-6 btn btn-link" onclick="toggleForm('email')">email 로 찾기</button>
+	  					<button class="col-6 btn btn-link" onclick="toggleForm('phone')">Phone 로 찾기</button>
+			       		</div>
+			       		
+		       			
+		       			
+						<form id="personal-email-form" class="hidden" method="post" action="personal_login.jsp">
+						    <label for="personal-id">ID:</label>
+						    <input type="text" id="personal-id" name="id"><br>
+						    <label for="personal-pw">Password:</label>
+						    <input type="password" id="personal-pw" name="pw"><br>
+						    <label for="personal-email">EMAIL:</label>
+						    <input type="text" id="personal-email" name="email"><br>
+						    <input type="submit" value="Login">
+						</form>
+						
+						<form id="personal-phone-form" class="hidden" method="post" action="personal_login.jsp">
+						    <label for="personal-id">ID:</label>
+						    <input type="text" id="personal-id" name="id"><br>
+						    <label for="personal-pw">Password:</label>
+						    <input type="password" id="personal-pw" name="pw"><br>
+						    <label for="personal-phone">PHONE:</label>
+						    <input type="text" id="personal-phone" name="phone"><br>
+						    <input type="submit" value="Login">
+						</form>
+						 
+						 <form id="corporate-form" class="hidden" method="post" action="corporate_login.jsp">
+						 	기업회원
+						    <label for="corporate-id">ID:</label>
+						    <input type="text" id="corporate-id" name="id"><br>
+						    <label for="corporate-pw">Password:</label>
+						    <input type="password" id="corporate-pw" name="pw"><br>
+						    <input type="submit" value="Login">
+						 </form>
+					 
 		        	</div>
 		        	
-			        <div class="form-check form-check-inline">
+		       		
+		        	
+			     <!--    <div class="form-check form-check-inline">
 					  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
 					  <label class="form-check-label" for="inlineRadio1">이메일</label>
 					</div>
@@ -58,9 +109,11 @@
 			        <input class="form-control" type="text" placeholder="이메일(job-a@joba.com)">
 			        
 				    <div class="d-grid gap-2">
-				   	 <button type="submit" class="btn btn-primary">Submit</button>
+				   	 <button type="submit" class="btn btn-primary">Submit</button> -->
 				   	</div>
 		        </form>
+		        
+		        
 		    </div>
 		</div>
 	
@@ -68,5 +121,49 @@
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<script>
+	 function toggleForm(type) {
+	      var personalEmailForm = document.getElementById('personal-email-form');
+	      var personalPhoneForm = document.getElementById('personal-phone-form');
+	      var corporateForm = document.getElementById('corporate-form');
+	      var findType = document.getElementById('findType');
+	      
+	      if (type === 'personal') {
+	    	    findType.classList.remove('hidden');
+	    	    if(findType.value === 'email') {
+	    	        personalEmailForm.classList.remove('hidden');
+	    	        personalPhoneForm.classList.add('hidden');
+	    	    } else if(findType.value === 'phone') {
+	    	        personalPhoneForm.classList.remove('hidden');
+	    	        personalEmailForm.classList.add('hidden');
+	    	    }
+	    	} else if(type === 'corporate'){
+	    	    personalForm.classList.add('hidden');
+	    	    corporateForm.classList.remove('hidden');
+	    	}
+	      
+	    
+	      
+	      
+	      
+	    } 
+	
+    /*  function toggleForm(type) {
+	      var personalForm = document.getElementById('personal-form');
+	      var corporateForm = document.getElementById('corporate-form');
+	      var findType = document.getElementById('findType');
+	      
+	      if (type === 'personal') {
+	        findType.classList.remove('hidden');
+	        personalForm.classList.remove('hidden');
+	        corporateForm.classList.add('hidden');
+	      } else if (type === 'corporate') {
+	    	findType.classList.remove('hidden');
+	        personalForm.classList.add('hidden');
+	        corporateForm.classList.remove('hidden');
+	      }
+	    }  */
+ 	 </script>
 </body>
 </html>

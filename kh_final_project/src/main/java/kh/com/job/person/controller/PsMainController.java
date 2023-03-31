@@ -68,9 +68,10 @@ public class PsMainController {
 		return mv;
 	}
 	
-	@GetMapping("/idPw")
-	public ModelAndView idpw(ModelAndView mv) {
-		
+	// 아이디 비밀번호 찾기 
+	@GetMapping("/idpw")
+	public ModelAndView viewidpw(ModelAndView mv) {
+		mv.setViewName("person/idpw");
 		return mv;
 	}
 	
