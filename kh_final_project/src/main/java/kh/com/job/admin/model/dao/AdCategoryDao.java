@@ -46,4 +46,9 @@ public class AdCategoryDao {
 		return sqlsession.selectList("admin.listLastCate", categoryId);
 	}
 
+	public int addLastCategory(AdCategoryDto dto) {
+		// TODO Auto-generated method stub
+		return sqlsession.insert("admin.addLastCategory", dto);
+	}
+
 }

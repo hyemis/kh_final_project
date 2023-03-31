@@ -70,4 +70,10 @@
  			        , #{registDate}, #{closeDate}, #{raTitle}
  			        , #{career}, #{holidayType}, #{empTypeCode})
 	</insert>
+	
+	<!-- 직업 카테고리 항목 가져오기 -->
+	<select id="getCateList" parameterType="string" resultType="kh.com.job.admin.model.dto.AdCategoryDto">
+		SELECT * FROM JA_CATEGORY where CATEGORY_TYPE = #{categoryType} AND CATEGORY_DEPT ='2'
+	</select>
+	
 </mapper>

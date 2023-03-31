@@ -36,7 +36,7 @@
     <!-- js part start -->
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
@@ -44,6 +44,11 @@
 
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+    
+    <!-- kakao map -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/kakaomap.script.js"></script> --%>
 	
 	<!-- js part end -->
  
@@ -71,13 +76,78 @@
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
 				
-				<div>
+				<div class="justify-content-center">
 				<!-- 1번에서 8번 -->
 					<h3>회사 정보</h3>
-					<form id="formdata1">
-					
+					<form id="formdata1" class="form-control">
+						<!-- princple get.name으로 가져올 거 -->
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<th scope="col" class="col-3"></th>
+									<th scope="col" class="col-3"></th>
+									<th scope="col" class="col-6"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<h5>회사 정보</h5>
+								<tr class="mb-3 ">
+									<td><label for="companyName">회사 이름</label></td>
+									<td><input type="text" id="companyName" class="companyName" name="companyName"></td>
+								</tr>
+								<tr class="mb-3">
+									<td><label for="recruitType">모집 분야</label></td>
+									<td>
+										<select id="category2dept" class="category2dept">
+											<option value="0">선택안함</option>
+										<c:forEach items="${category}" var="categoryJN">
+											<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
+										</c:forEach>			
+										</select>			
+									</td>
+									<td>
+										<select id="recruitType" class="recruitType" style="text-overflow: ellipsis;">
+											<option value="0">선택안함</option>
+										</select>
+									</td>
+								</tr>
+								<tr class="mb-3">
+									<td></td>
+									<td><input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td>
+								</tr>
+								<tr class="mb-3">
+									<td><label for="companyName">우편번호</label></td>
+									<td>
+										<input type="text" id="sample4_postcode" placeholder="우편번호">
+									</td>
+								</tr>
+								<tr class="mb-3">
+									<td><label for="companyName">도로명 주소</label></td>
+									<td><input type="text" id="sample4_roadAddress" placeholder="도로명주소" disabled></td>
+								</tr>
+								<tr class="mb-3">
+									<td><label for="companyName">지번 주소</label></td>
+									<td><input type="text" id="sample4_jibunAddress" placeholder="지번주소" disabled></td>
+								</tr>
+								<tr class="mb-3">
+									<td><label for="companyName">상세 주소</label></td>
+									<td><input type="text" id="sample4_detailAddress" placeholder="상세주소"></td>
+								</tr>
+								<tr class="mb-3">
+									<td>경력 선택</td>
+									<td>
+									<select id="career" class="career">
+										<option value="0">선택안함</option>
+									</select>
+									</td>
+ 									
+								</tr>
+							</tbody>
+						</table>					
+						
+								
 					</form>
-					<button type="button" class="nextbtn">다음</button>
+					<button type="button" class="btn nextbtn">다음</button>
 				</div>
 				
 			</div>
@@ -85,20 +155,22 @@
 				<div>
 					<!-- 9번에서 16번 -->
 					<h3>채용 정보</h3>
-					<form id="formdata2">
-					
+					<form id="formdata2" class="form-control">
+						
 					</form>
-					<button type="button" class="prevbtn">이전</button>
-					<button type="button" class="nextbtn">다음</button>
+					<div>
+						<button type="button" class="btn prevbtn">이전</button>
+						<button type="button" class="btn nextbtn">다음</button>
+					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="nav-tab-3">
 				<!-- 15번에서 20번 -->
 					<h3>채용 기간 및 기타 내용</h3>
-					<form id="formdata3">
+					<form id="formdata3" class="form-control">
 					
 					</form>
-					<button type="button" class="prevbtn">이전</button>
+					<button type="button" class="btn prevbtn">이전</button>
 					
 			</div>
 		</div>
@@ -110,36 +182,134 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 	<script type="text/javascript">
-	  $(document).ready(function() {
-		  // 다음 버튼 클릭 시 다음 탭으로 이동
-		  $('.nextbtn').click(function() {
-		    var activeTab = $('.tab-pane.active');
-		    var nextTab = activeTab.next('.tab-pane');
-		    var activeNav = $('.nav-link.active');
-		    var nextNav = activeNav.parent().next().children('.nav-link');
-		    if (nextTab.length) {
-		      activeTab.removeClass('active show');
-		      nextTab.addClass('active show');
-		      activeNav.removeClass('active');
-		      nextNav.addClass('active');
-		    }
-		  });
+		$(document).ready(function() {
+			// 다음 버튼 클릭 시 다음 탭으로 이동
+			$('.nextbtn').click(function() {
+				var activeTab = $('.tab-pane.active');
+				var nextTab = activeTab.next('.tab-pane');
+				var activeNav = $('.nav-link.active');
+				var nextNav = activeNav.parent().next().children('.nav-link');
+				if (nextTab.length) {
+					activeTab.removeClass('active show');
+					nextTab.addClass('active show');
+					activeNav.removeClass('active');
+					nextNav.addClass('active');
+				}
+			});
+			// 이전 버튼 클릭 시 이전 탭으로 이동
+			$('.prevbtn').click(function() {
+				var activeTab = $('.tab-pane.active');
+				var prevTab = activeTab.prev('.tab-pane');
+				var activeNav = $('.nav-link.active');
+				var prevNav = activeNav.parent().prev().children('.nav-link');
+				if (prevTab.length) {
+					activeTab.removeClass('active show');
+					prevTab.addClass('active show');
+					activeNav.removeClass('active');
+					prevNav.addClass('active');
+				}
+			});
+			
+			//category2dept 셀렉트 박스 클릭시 값 확인
+			$('.category2dept').on('change', function(){
+				let reqcategory = $(this).val();
+	    		$.ajax({ 
+	    			url: "${pageContext.request.contextPath}/business/recruit/catelist"
+	    			, type: "post"
+	    			, data:  {categoryId : reqcategory}
+	    			, dataType:"json"
+	    			, success: function(result){
 
-		  // 이전 버튼 클릭 시 이전 탭으로 이동
-		  $('.prevbtn').click(function() {
-		    var activeTab = $('.tab-pane.active');
-		    var prevTab = activeTab.prev('.tab-pane');
-		    var activeNav = $('.nav-link.active');
-		    var prevNav = activeNav.parent().prev().children('.nav-link');
-		    if (prevTab.length) {
-		      activeTab.removeClass('active show');
-		      prevTab.addClass('active show');
-		      activeNav.removeClass('active');
-		      prevNav.addClass('active');
-		    }
-		  });
-		  });
+		    				let htmlVal = '<option value="0">선택안함</option>';
+		    				for(i = 0; i< result.length; i++){
+		    					let list = result[i];
+		    					'+list.categoryId+'
+		    					htmlVal += '<option value="'+list.categoryId+'">'+list.categoryName+'</option>';
+		    				}
+		    				$(".recruitType").html(htmlVal);
+	    			}
+	    			, error: function(e){
+	    				alert(e +" : 오류")
+	    			}
+	    		});
+				
+			});
+		});
+
 	</script>
+	
+	<script>
+		    //도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		    function sample4_execDaumPostcode() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		
+		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var roadAddr = data.roadAddress; // 도로명 주소 변수
+		                var extraRoadAddr = ''; // 참고 항목 변수
+		
+		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                    extraRoadAddr += data.bname;
+		                }
+		                // 건물명이 있고, 공동주택일 경우 추가한다.
+		                if(data.buildingName !== '' && data.apartment === 'Y'){
+		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                }
+		                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                if(extraRoadAddr !== ''){
+		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+		                }
+		
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                document.getElementById('sample4_postcode').value = data.zonecode;
+		                document.getElementById("sample4_roadAddress").value = roadAddr;
+		                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+		                
+		                geocoder.addressSearch(data.address, function(results, status) {
+		                    // 정상적으로 검색이 완료됐으면
+		                    if (status === daum.maps.services.Status.OK) {
+		
+		                        var result = results[0]; //첫번째 결과의 값을 활용
+		
+		                        // 해당 주소에 대한 좌표를 받아서
+		                        var coords = new daum.maps.LatLng(result.y, result.x);
+		                        // 지도를 보여준다.
+		                        mapContainer.style.display = "block";
+		                        map.relayout();
+		                        // 지도 중심을 변경한다.
+		                        map.setCenter(coords);
+		                        // 마커를 결과값으로 받은 위치로 옮긴다.
+		                        marker.setPosition(coords)
+		                     	// 인포윈도우로 장소에 대한 설명을 표시합니다
+// 		                        var infowindow = new kakao.maps.InfoWindow({
+// 		                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+// 		                        });
+		                        infowindow.open(map, marker);
+		                    }
+		                });
+		
+		                var guideTextBox = document.getElementById("guide");
+		                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+		                if(data.autoRoadAddress) {
+		                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+		                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+		                    guideTextBox.style.display = 'block';
+		
+		                } else if(data.autoJibunAddress) {
+		                    var expJibunAddr = data.autoJibunAddress;
+		                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+		                    guideTextBox.style.display = 'block';
+		                } else {
+		                    guideTextBox.innerHTML = '';
+		                    guideTextBox.style.display = 'none';
+		                }
+		            }
+		        }).open();
+		    }
+		</script>
 
 </body>
 

@@ -4,6 +4,6 @@ import kh.com.job.business.model.dto.BsUserDto;
 
 public interface BsRecruitService {
 
-	public BsUserDto viewAccount(String userId);
+	public Object getCateList(String categoryType);
 
 }
