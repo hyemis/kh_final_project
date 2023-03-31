@@ -289,7 +289,7 @@ public class PsMainController {
 	}
 	
 	
-	// 마이페이지 - 관심기업정보
+	// 마이페이지 - 관심기업정보 화면
 	@GetMapping("/scrapcompany")
 	public ModelAndView viewScrapCompany(ModelAndView mv, @RequestParam(name = "userId") String userId) {
 		try {
@@ -298,6 +298,25 @@ public class PsMainController {
 			if(result != null) {
 				mv.addObject("userinfo",result);
 				mv.setViewName("person/scrapcompany");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	// 마이페이지 - 스크랩한 채용공고 화면
+	@GetMapping("/scrapjob")
+	public ModelAndView viewScrapJob(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+		try {
+			PsUserDto result = service.selectOne(userId);
+		
+			if(result != null) {
+				mv.addObject("userinfo",result);
+				mv.setViewName("person/scrapjob");
 			}else {
 				mv.setViewName("redirect:/");
 			}

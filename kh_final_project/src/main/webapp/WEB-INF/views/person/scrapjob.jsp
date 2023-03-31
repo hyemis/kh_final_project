@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JOB-A 관심기업정보</title>
+<title>JOB-A 스크랩한 채용공고</title>
 
 	<!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
@@ -51,7 +51,7 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
           <div class="text-start mx-5 mt-5">
-            <h1>관심기업 정보</h1>
+            <h1>스크랩한 채용공고</h1>
           </div>
 		  <div class="row">
 			<!-- 좌측 프로필 영역 -->
@@ -86,9 +86,8 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
-										<h1 class="mb-3">관심기업정보</h1>
-										<p>1. 관심기업 목록은 최대 500개까지 등록할 수 있습니다.<br>
-										2. 회사명을 클릭하면 회사소개 페이지로 이동합니다.</p>
+										<h1 class="mb-3">스크랩 정보</h1>
+										<p>스크랩한 채용공고는 공고 마감과 상관없이 스크랩일로부터 90일 동안 보관됩니다.</p>	
 										<br>	
 										<br>
 										<br>
@@ -96,7 +95,9 @@
 										  <thead>
 										    <tr>
 											 <th scope="col" class="center">회사명</th>
-										     <th scope="col" class="center">채용현황</th>										   </tr>
+										     <th scope="col" class="center">공고명</th>
+										     <th scope="col" class="center">마감일</th>	
+										     <th scope="col" class="center">입사지원</th>											   </tr>
 										  </thead>
 										  <tbody class="table-group-divider">
 <%-- 			수정예정							  <c:forEach items="${resumelist }" var="resume">
