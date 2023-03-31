@@ -33,12 +33,11 @@
 
 	
 </head>
-<body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	<div class="container-xxl py-5">
 
-		<h1 class="text-center m-3">${bsinfo.userName}님 마이페이지</h1>
+		<h1 class="text-center m-3">${bsinfo.userName}님 회원정보</h1>
 		<div class="container-xxl py-5">
 			<div class="row">
 				<!-- profile area start -->
@@ -66,77 +65,106 @@
 				<!-- info area start -->
 				<div class="col-md-8 col-sm-8 border border-secondary">
 					<!-- update -->
-					<div class="container border border-secondary" style="height: 700px;">
-						<h5 class="text-center m-2">내정보</h5>
+					<div class="container border border-secondary" style="height: 900px;">
+						<h4 class="text-center m-2 p-3">내정보</h4>
 						<div>
 							<form action="<%=request.getContextPath() %>/business/account/info" method="post">
-								<p>이메일 
-								<input type="text" id="" name="userEmail" value="${bsinfo.userEmail}">
-								</p>
-								<p>사업자 번호
-								<input type="text" id="" name="bsLicense" value="${bsinfo.bsLicense}">
-								</p>
-								<p>대표전화
-								<input type="text" id="" name="bsMainPhone" value="${bsinfo.bsMainPhone}">
-								</p>
-								<p>주소
-								</p>
-								<p>
-								<input type="text" id="postcode" name="addressPostcode" value="${bsinfo.addressPostcode}">
-								<input type="button" onclick="execDaumPostcode()" value="주소찾기"><br>
-								<input type="text" id="roadAddress" name="addressRoad" value="${bsinfo.addressRoad}">
-								<input type="text" id="jibunAddress" name="addressJibun" value="${bsinfo.addressJibun}">
-								<input type="text" id="detailAddress" name="addressDetail" value="${bsinfo.addressDetail}">
-								<span id="guide" style="color:#999;display:none"></span>
-								</p>	
-								<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
-								<p class="text-center">
+							<div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">이메일</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="userEmail" name ="userEmail" value="${bsinfo.userEmail}">
+							    </div>
+							 </div>
+							<div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">사업자번호</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="bsLicense" name ="bsLicense" value="${bsinfo.bsLicense}">
+							    </div>
+							 </div>
+							<div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">대표전화</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="bsMainPhone" name ="bsMainPhone" value="${bsinfo.bsMainPhone}">
+							    </div>
+							 </div>
+							<div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">주소</label>
+							    <div class="col-sm-6">
+									<input type="text" class="form-control" id="postcode" name="addressPostcode" value="${bsinfo.addressPostcode}">
+								</div>
+								<div class="col-sm-2">
+									<input type="button" class="form-control" onclick="execDaumPostcode()" value="주소찾기"><br>
+								</div>	
+							</div>		
+							<div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">도로명주소</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="roadAddress" name ="addressRoad" value="${bsinfo.addressRoad}">
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">지번주소</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="jibunAddress" name ="addressJibun" value="${bsinfo.addressJibun}">
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">상세주소</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="detailAddress" name ="addressDetail" value="${bsinfo.addressDetail}">
+							    </div>
+							 </div>
+							<span id="guide" style="color:#999;display:none"></span>
+									<div id="map" class="text-center" style="width:600px;height:300px;margin-top:10px; "></div>
+							<p class="text-center">
 								<br>
-								<button type="submit" value="수정하기">수정하기</button>
-								<button type="reset">취소</button>
-								</p>
+								<button class="btn btn-primary" type="submit" value="수정하기">수정하기</button>
+								<button class="btn btn-primary" type="reset">취소</button>
+							</p>
 							</form>
 						</div>
 					</div><!-- update end -->
 					
 					<!-- password / secede -->
-					<div class="container border border-secondary" style="height: 300px;">
+					<div class="container border border-secondary " style="height: 500px;">
+					<h4 class="text-center m-2 ">비밀번호 변경</h4>
 						<!-- password -->
-						<button class="btn btn-primary" type="button" id="pwModal">비밀번호 변경</button>
+						<form class="m-5" action="password" method="post" >
+							 <div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-3 col-form-label">현재 비밀번호</label>
+							    <div class="col-sm-8">
+							      <input type="password" class="form-control" id="userPw">
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="newPw" class="col-sm-3 col-form-label">새 비밀번호</label>
+							    <div class="col-sm-8">
+							      <input type="password" class="form-control" id="newPw">
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="newPw2" class="col-sm-3 col-form-label">새 비밀번호 확인</label>
+							    <div class="col-sm-8">
+							      <input type="password" class="form-control" id="newPw2">
+							    </div>
+							 </div>	<br>	
+							 <p class="text-center">
+							 <button class="btn btn-primary" type="submit">비밀번호 변경</button>
+							 <button class="btn btn-primary" type="reset">취소</button>
+							 </p>
+							 <p href="#" class="link-primary text-center">비밀번호를 잊으셨나요?</p>
+						</form>
 						
-						<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
+						
+						<!-- secede --><br>
+						<p class="text-end">
+						<button class="btn btn-primary" type="button" id="secede"
+						href="<%=request.getContextPath() %>/person/delete">기업회원 탈퇴</button> 
+						</p>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 						
 						
-						
-						
-						<!-- secede -->
-						<button class="btn btn-primary" type="button" id="secede">기업회원 탈퇴</button>
-
-						
-						
-					</div><!-- check password end -->
+					</div><!-- password / secede end -->
 					
 				</div><!-- info area end -->
 			</div>
@@ -221,6 +249,12 @@
 </script>
 
 <script>
+
+	//회원정보의 주소로 페이지 로딩하기
+	var roadAddress = "${bsinfo.addressRoad}";
+	var jibunAddress = "${bsinfo.addressJibun}";
+	var bsAddress = (roadAddress) ? roadAddress : jibunAddress;
+	   
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
@@ -229,6 +263,34 @@
 
     //지도를 미리 생성
     var map = new kakao.maps.Map(mapContainer, mapOption);
+    
+ 	// 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(bsAddress, function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면 
+         if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+            });
+            infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        } 
+    });    
  	// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
     function setMapType(maptype) { 
         var roadmapControl = document.getElementById('btnRoadmap');
@@ -255,17 +317,28 @@
     }
     
     
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new kakao.maps.services.Geocoder();
-    
-    //마커를 미리 생성
-    var marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
+ 
     
  </script>
 <!-- map end -->
+
+
+
+
+
+
+
+
+<!-- updatePassword -->
+
+<script>
+
+
+
+</script>
+
+
+
 
 <!-- modal -->
 <script>

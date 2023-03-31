@@ -10,7 +10,7 @@
   	select * from USER_TABLE where USER_ID=#{userId}
 	</select>
 
-<!-- todo/ 04.05 -->	
+	<!-- todo/ 04.05 -->	
 	<!-- BOARD에서 Qna (코드번호 UDB04)인 게시물 꺼내옴  -->
 	<select id="selectQna" resultType="bidto">
 	select * from BOARD where CATEGORY_ID='UDB04'
@@ -34,12 +34,15 @@
  			          #{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
 	</insert>
 
+
+
 <!-- account -->
 	<insert id="insertAccount">
-        INSERT INTO USER_TABLE (user_email, bs_license, bs_main_phone, address_postcode, address_road, address_jibun, address_detail)
-        				VALUES (#{userEmail}, #{bsLicense}, #{bsMainPhone}, #{addressPostcode}, #{addressRoad}, #{addressJibun}, #{addressDetail})
+        INSERT INTO USER_TABLE (USER_PIC, USER_EMAIL, BS_LICENSE, BS_MAIN_PHONE, ADDRESS_POSTCODE, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL)
+        				VALUES (#{userPic}, #{userEmail}, #{bsLicense}, #{bsMainPhone}, #{addressPostcode}, #{addressRoad}, #{addressJibun}, #{addressDetail})
     </insert>
-
+    
+	<!-- 회원정보 수정하기 -->
     <update id="updateAccount">
         UPDATE USER_TABLE SET
         BS_LICENSE = #{bsLicense},
@@ -50,15 +53,38 @@
         ADDRESS_DETAIL = #{addressDetail}
         WHERE USER_ID = #{userId}
     </update>
-
+    
+    <!-- 비밀번호 수정하기-->
+    <update id="updatePassword">
+        UPDATE USER_TABLE SET
+        USER_PW = #{userPw}
+        WHERE USER_ID = #{userId}
+    </update>    
+    
+    <!-- 회원 프로필 이미지 수정하기 -->
+    <update id="updateUimage" >
+        UPDATE tb_user SET
+        USER_PIC = #{userPic}
+        WHERE user_id = #{userId}
+    </update>
+	
+	<!-- 회원정보 불러오기 -->
     <select id="viewAccount" resultType="budto">
         SELECT *
         FROM USER_TABLE
         WHERE USER_ID = #{userId}
     </select>
     
+    <!-- 회원비밀번호  불러오기-->
+    <select id="getUserPw" resultType="budto">
+        SELECT *
+        FROM USER_TABLE
+        WHERE USER_ID = #{userId}
+    </select>
     
-    <!-- 워크넷API data insert -->
+    
+    
+ <!-- 워크넷API data insert -->
    	<insert id="apiInsert" parameterType="brdto">
 			insert INTO RECRUIT_REGIST
 			(RA_NUM, RECRUIT_TYPE, COMPANY_NAME, BUSINO, USER_EDUCATION
