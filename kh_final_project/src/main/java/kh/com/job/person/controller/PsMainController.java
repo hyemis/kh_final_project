@@ -264,18 +264,22 @@ public class PsMainController {
 	
 	// 마이페이지 - 입사지원현황 화면
 	@GetMapping("/applylist")
-	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) throws Exception {
-		System.out.println("로그인정보: "+principal.getName());
+	public ModelAndView viewApplyList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+		try {
+			PsUserDto result = service.selectOne(userId);
 		
-		if(principal.getName() != null) {
-			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
-		}else {
-			mv.setViewName("redirect:/");
+			if(result != null) {
+				mv.addObject("userinfo",result);
+				mv.setViewName("person/applylist");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
 		}
 		return mv;
 	}
-	
-
 	
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

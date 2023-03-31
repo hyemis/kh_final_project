@@ -81,7 +81,7 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.5s"
 				style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/applylist?userId=${user_id}">
 					<div class="rounded p-4">
 						<h5>입사지원현황</h5>
 						<span></span>
