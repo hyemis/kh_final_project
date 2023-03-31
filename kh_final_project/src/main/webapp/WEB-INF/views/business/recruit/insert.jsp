@@ -62,7 +62,7 @@
 		<!-- 탭 -->
 		<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<button class="nav-link me-4 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+				<button class="nav-link me-4 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">회사 정보</button>
 			</li>
 			<li class="nav-item" role="presentation">
 				<button class="nav-link me-4" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
@@ -90,7 +90,6 @@
 								</tr>
 							</thead>
 							<tbody>
-								<h5>회사 정보</h5>
 								<tr class="mb-3 ">
 									<td><label for="companyName">회사 이름</label></td>
 									<td><input type="text" id="companyName" class="companyName" name="companyName"></td>
@@ -100,7 +99,7 @@
 									<td>
 										<select id="category2dept" class="category2dept">
 											<option value="0">선택안함</option>
-										<c:forEach items="${category}" var="categoryJN">
+										<c:forEach items="${JNlist}" var="categoryJN">
 											<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
 										</c:forEach>			
 										</select>			
@@ -137,7 +136,9 @@
 									<td>경력 선택</td>
 									<td>
 									<select id="career" class="career">
-										<option value="0">선택안함</option>
+										<c:forEach items="${CAlist}" var="categoryCA">
+											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+										</c:forEach>
 									</select>
 									</td>
  									

@@ -55,7 +55,8 @@ public class BsRecruitController {
 	public ModelAndView recruitInsertRecruit(ModelAndView mv) {
 		
 		//직업 코드 타입 ('JN')가져오기
-		mv.addObject("category", service.getCateList("JN"));
+		mv.addObject("JNlist", service.getCateList("JN"));
+		mv.addObject("CAlist", service.getCateList("CA"));
 		
 		
 		return mv;
