@@ -281,6 +281,26 @@ public class PsMainController {
 		return mv;
 	}
 	
+	
+	// 마이페이지 - 관심기업정보
+	@GetMapping("/scrapcompany")
+	public ModelAndView viewScrapCompany(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+		try {
+			PsUserDto result = service.selectOne(userId);
+		
+			if(result != null) {
+				mv.addObject("userinfo",result);
+				mv.setViewName("person/scrapcompany");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code, RedirectAttributes rttr) throws Throwable {

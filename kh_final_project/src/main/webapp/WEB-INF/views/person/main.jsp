@@ -101,7 +101,7 @@
 			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 				data-wow-delay="0.9s"
 				style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-				<a class="cat-item d-block bg-light text-center rounded p-3" href="">
+				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapcompany?userId=${user_id}">
 					<div class="rounded p-4">
 						<h5>관심기업정보</h5>
 						<span href="/"></span>
