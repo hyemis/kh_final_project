@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.com.job.person.model.dto.PsCertiDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 
 
@@ -31,4 +32,7 @@ public interface PsResumeService {
 	
 	// 파일 업로드 
 	public String upload(MultipartFile file);
+	
+	// 이력서-자격증 입력
+	public int insertCerti(PsCertiDto dto) throws Exception;
 }

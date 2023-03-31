@@ -22,4 +22,6 @@ public interface AdCategotyService {
 
 	public List<AdCategoryDto> listLastCate(String categoryId);
 
+	public int addLastCategory(AdCategoryDto dto);
+
 }

@@ -322,7 +322,7 @@
         		alert("공백 제거 해주세요");
         	}else{
 	    		$.ajax({ 
-	    			url: "${pageContext.request.contextPath}/admin/category/addmcate"
+	    			url: "${pageContext.request.contextPath}/admin/category/addlcate"
 	    			, type: "post"
 	    			, data:  {categoryId : categoryId
 	    						, categoryName : categoryName

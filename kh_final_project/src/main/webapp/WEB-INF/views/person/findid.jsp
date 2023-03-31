@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JOB-A 아이디 비밀번호 찾기</title>
+<title>JOB-A 아이디찾기</title>
 	<!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/person.css" rel="stylesheet">
 	
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -45,7 +45,7 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 		        	<div class="col-6 border border-primary">
-		        		<div class="row m-3 text-center">
+		        		<div class="row mt-5 m-3 text-center">
 			        	<h3>아이디 찾기</h3>
 			       		</div>
 			       		<hr>
@@ -60,110 +60,106 @@
 	  					<button class="col-6 btn btn-link" onclick="toggleForm('phone')">Phone 로 찾기</button>
 			       		</div>
 			       		
-		       			
-		       			
-						<form id="personal-email-form" class="hidden" method="post" action="personal_login.jsp">
-						    <label for="personal-id">ID:</label>
-						    <input type="text" id="personal-id" name="id"><br>
-						    <label for="personal-pw">Password:</label>
-						    <input type="password" id="personal-pw" name="pw"><br>
-						    <label for="personal-email">EMAIL:</label>
-						    <input type="text" id="personal-email" name="email"><br>
-						    <input type="submit" value="Login">
+						<form id="personal-email-form" class="hidden m-5" method="post" action="">
+						   <input class="form-control" type="text" id="personal-name" placeholder="이름">
+			      		   <input class="form-control" type="text" id="personal-birth" placeholder="생년월일(19990101)">
+			        	   <input class="form-control" type="text" id="personal-email" placeholder="이메일(job-a@joba.com)">
+			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
+							  <button class="btn btn-outline-dark" type="button" onclick="findIdEamil();">아이디 찾기</button>
+							</div>
 						</form>
 						
-						<form id="personal-phone-form" class="hidden" method="post" action="personal_login.jsp">
-						    <label for="personal-id">ID:</label>
-						    <input type="text" id="personal-id" name="id"><br>
-						    <label for="personal-pw">Password:</label>
-						    <input type="password" id="personal-pw" name="pw"><br>
-						    <label for="personal-phone">PHONE:</label>
-						    <input type="text" id="personal-phone" name="phone"><br>
-						    <input type="submit" value="Login">
+						<form id="personal-phone-form" class="hidden m-5" method="post" action="">
+						   <input class="form-control" type="text" placeholder="이름">
+			      		   <input class="form-control" type="text" placeholder="생년월일(19990101)">
+			        	   <input class="form-control" type="text" placeholder="'-' 빼고 숫자만 입력">
+			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
+							  <button class="btn btn-outline-dark" type="button" onclick="fn_findIdPhone(); return false;">아이디 찾기</button>
+							</div>
 						</form>
 						 
-						 <form id="corporate-form" class="hidden" method="post" action="corporate_login.jsp">
+						 <form id="corporate-form" class="hidden m-5" method="post" action="">
 						 	기업회원
 						    <label for="corporate-id">ID:</label>
 						    <input type="text" id="corporate-id" name="id"><br>
 						    <label for="corporate-pw">Password:</label>
 						    <input type="password" id="corporate-pw" name="pw"><br>
-						    <input type="submit" value="Login">
+						    <div class="d-grid gap-2 col-6 mx-auto m-2">
+							  <button class="btn btn-outline-dark" type="button" onclick="fn_findIdCorporate(); return false;">아이디 찾기</button>
+							</div>
 						 </form>
-					 
 		        	</div>
 		        	
-		       		
-		        	
-			     <!--    <div class="form-check form-check-inline">
-					  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-					  <label class="form-check-label" for="inlineRadio1">이메일</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-					  <label class="form-check-label" for="inlineRadio2">휴대폰</label>
-					</div>
-					
-			        <input class="form-control" type="text" placeholder="이름">
-			        <input class="form-control" type="text" placeholder="생년월일(19990101)">
-			        <input class="form-control" type="text" placeholder="이메일(job-a@joba.com)">
-			        
-				    <div class="d-grid gap-2">
-				   	 <button type="submit" class="btn btn-primary">Submit</button> -->
-				   	</div>
-		        </form>
+				 </div>
 		        
 		        
 		    </div>
 		</div>
 	
-	</div>
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	<script>
+	// 토글
 	 function toggleForm(type) {
 	      var personalEmailForm = document.getElementById('personal-email-form');
 	      var personalPhoneForm = document.getElementById('personal-phone-form');
 	      var corporateForm = document.getElementById('corporate-form');
 	      var findType = document.getElementById('findType');
 	      
-	      if (type === 'personal') {
-	    	    findType.classList.remove('hidden');
-	    	    if(findType.value === 'email') {
-	    	        personalEmailForm.classList.remove('hidden');
-	    	        personalPhoneForm.classList.add('hidden');
-	    	    } else if(findType.value === 'phone') {
-	    	        personalPhoneForm.classList.remove('hidden');
-	    	        personalEmailForm.classList.add('hidden');
-	    	    }
+	         if (type === 'personal') {
+		    	  corporateForm.classList.add('hidden');
+		    	  findType.classList.remove('hidden');
+	         } else if(type === 'email') {
+	    		 personalEmailForm.classList.remove('hidden');
+	    		 personalPhoneForm.classList.add('hidden');
+	    		 corporateForm.classList.add('hidden');
+	    	 } else if (type === 'phone') {
+	    		 personalEmailForm.classList.add('hidden');
+	    		 personalPhoneForm.classList.remove('hidden');
+	    		 corporateForm.classList.add('hidden');
+	    		 
 	    	} else if(type === 'corporate'){
-	    	    personalForm.classList.add('hidden');
+	    		personalEmailForm.classList.add('hidden');
+	    		personalPhoneForm.classList.add('hidden');
 	    	    corporateForm.classList.remove('hidden');
 	    	}
 	      
-	    
-	      
-	      
-	      
 	    } 
 	
-    /*  function toggleForm(type) {
-	      var personalForm = document.getElementById('personal-form');
-	      var corporateForm = document.getElementById('corporate-form');
-	      var findType = document.getElementById('findType');
-	      
-	      if (type === 'personal') {
-	        findType.classList.remove('hidden');
-	        personalForm.classList.remove('hidden');
-	        corporateForm.classList.add('hidden');
-	      } else if (type === 'corporate') {
-	    	findType.classList.remove('hidden');
-	        personalForm.classList.add('hidden');
-	        corporateForm.classList.remove('hidden');
-	      }
-	    }  */
+	// email로 id 찾기
+ 	 function findIdEamil() {
+		let formdata = new FormData();
+		formdata.append("name", $('#personal-name').val());
+		formdata.append("birth", $('#personal-birth').val());
+		formdata.append("email", $('#personal-email').val());
+		
+		if(!name || !birth || !email) {
+			alert("입력값을 모두 입력해주세요.");
+			return;
+		}
+	
+	
+		$.ajax({
+		url : "${pageContext.request.contextPath}/person/findid",
+		type : "post",
+		contentType: false, 
+		processData: false,
+		data: formdata, 
+		success: function(result){
+				if (result == 1) {
+				alert("회원님의 아이디는" + "입니다.");
+				location.href="/job/person/login";
+			}	else {
+				alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
+				location.href="/job/person/signUp";
+			}
+		}
+
+		});
+	} 
+	
  	 </script>
 </body>
 </html>

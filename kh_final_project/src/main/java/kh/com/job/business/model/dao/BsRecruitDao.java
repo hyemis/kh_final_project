@@ -24,4 +24,8 @@ public class BsRecruitDao {
 		return result;
 	}
 
+	public Object getCateList(String categoryType) {
+		return sqlSession.selectList("business.getCateList", categoryType);
+	}
+
 }

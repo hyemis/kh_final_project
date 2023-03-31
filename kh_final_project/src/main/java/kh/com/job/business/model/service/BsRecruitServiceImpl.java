@@ -17,8 +17,8 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	private BsRecruitDao dao;
 
 	@Override
-	public BsUserDto viewAccount(String userId) {
-		return account.viewAccount(userId);
+	public Object getCateList(String categoryType) {
+		return dao.getCateList(categoryType);
 	}
 
 }

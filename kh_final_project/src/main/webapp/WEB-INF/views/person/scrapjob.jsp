@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JOB-A 입사지원현황</title>
+<title>JOB-A 스크랩한 채용공고</title>
 
 	<!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
@@ -23,7 +23,7 @@
 	
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
@@ -51,7 +51,7 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
           <div class="text-start mx-5 mt-5">
-            <h1>입사지원 현황</h1>
+            <h1>스크랩한 채용공고</h1>
           </div>
 		  <div class="row">
 			<!-- 좌측 프로필 영역 -->
@@ -86,19 +86,18 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
-										<h1 class="mb-3">입사지원 목록</h1>
-										<p>열람한 이력서는 입사지원 취소가 불가능합니다.</p>
+										<h1 class="mb-3">스크랩 정보</h1>
+										<p>스크랩한 채용공고는 공고 마감과 상관없이 스크랩일로부터 90일 동안 보관됩니다.</p>	
 										<br>	
 										<br>
 										<br>
 										<table class="table table-hover">
 										  <thead>
 										    <tr>
-											 <th scope="col" class="center">지원일</th>
-										     <th scope="col" class="center">회사명</th>
+											 <th scope="col" class="center">회사명</th>
 										     <th scope="col" class="center">공고명</th>
-										     <th scope="col" class="center">열람상태</th>
-										   </tr>
+										     <th scope="col" class="center">마감일</th>	
+										     <th scope="col" class="center">입사지원</th>											   </tr>
 										  </thead>
 										  <tbody class="table-group-divider">
 <%-- 			수정예정							  <c:forEach items="${resumelist }" var="resume">

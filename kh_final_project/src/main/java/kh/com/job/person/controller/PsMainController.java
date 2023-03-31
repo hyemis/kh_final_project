@@ -68,12 +68,27 @@ public class PsMainController {
 		return mv;
 	}
 	
-	// 아이디 비밀번호 찾기 
-	@GetMapping("/idpw")
-	public ModelAndView viewidpw(ModelAndView mv) {
-		mv.setViewName("person/idpw");
+	// 아이디 찾기 
+	@GetMapping("/findid")
+	public ModelAndView viewfindId(ModelAndView mv) {
+		mv.setViewName("person/findid");
 		return mv;
 	}
+	
+	// 아이디 찾기 
+	@PostMapping("/findid")
+	@ResponseBody
+	public ModelAndView dofindId(ModelAndView mv, PsUserDto dto) {
+		System.out.println("dto 잘 가져옴 ?" + dto );
+		return mv;
+	}
+	
+	// 비밀번호 찾기
+		@GetMapping("/findpw")
+		public ModelAndView viewfindPw(ModelAndView mv) {
+			mv.setViewName("person/findpw");
+			return mv;
+		}
 	
 	@GetMapping("/findFail")
 	public ModelAndView findFail(ModelAndView mv) {
@@ -264,18 +279,61 @@ public class PsMainController {
 	
 	// 마이페이지 - 입사지원현황 화면
 	@GetMapping("/applylist")
-	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) throws Exception {
-		System.out.println("로그인정보: "+principal.getName());
+	public ModelAndView viewApplyList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+		try {
+			PsUserDto result = service.selectOne(userId);
 		
-		if(principal.getName() != null) {
-			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
-		}else {
-			mv.setViewName("redirect:/");
+			if(result != null) {
+				mv.addObject("userinfo",result);
+				mv.setViewName("person/applylist");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
 		}
 		return mv;
 	}
 	
-
+	
+	// 마이페이지 - 관심기업정보 화면
+	@GetMapping("/scrapcompany")
+	public ModelAndView viewScrapCompany(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+		try {
+			PsUserDto result = service.selectOne(userId);
+		
+			if(result != null) {
+				mv.addObject("userinfo",result);
+				mv.setViewName("person/scrapcompany");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	// 마이페이지 - 스크랩한 채용공고 화면
+	@GetMapping("/scrapjob")
+	public ModelAndView viewScrapJob(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+		try {
+			PsUserDto result = service.selectOne(userId);
+		
+			if(result != null) {
+				mv.addObject("userinfo",result);
+				mv.setViewName("person/scrapjob");
+			}else {
+				mv.setViewName("redirect:/");
+			}
+		} 
+			catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
 	
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

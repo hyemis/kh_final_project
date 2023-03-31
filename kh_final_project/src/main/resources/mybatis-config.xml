@@ -17,6 +17,15 @@
 		<typeAlias type="kh.com.job.business.model.dto.BsUserDto" alias="budto"/>
 		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto" alias="brdto"/>
 		<typeAlias type="kh.com.job.business.model.dto.BsInfoDto" alias="bidto"/>
+		
+		<typeAlias type="kh.com.job.person.model.dto.PsCareerDto" alias="careerdto"/>
+		<typeAlias type="kh.com.job.person.model.dto.PsCertiDto" alias="certidto"/>
+		<typeAlias type="kh.com.job.person.model.dto.PsClDto" alias="cldto"/>
+		<typeAlias type="kh.com.job.person.model.dto.PsGschoolDto" alias="gdto"/>
+		<typeAlias type="kh.com.job.person.model.dto.PsHschoolDto" alias="hdto"/>
+		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto" alias="udto"/>
+		
+		
 	</typeAliases>
 
 	
