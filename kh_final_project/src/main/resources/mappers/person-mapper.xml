@@ -15,6 +15,11 @@
     <select id="idChk" parameterType="string" resultType="_int">
   	select count(USER_ID) from USER_TABLE WHERE USER_ID = #{userId}
   </select>
+  
+   <!-- email로 아이디 찾기 -->
+    <select id="findIdEmail" parameterType="string" resultType="pdto">
+  	select USER_ID from USER_TABLE WHERE USER_NAME = #{userName} AND USER_BIRTH = #{userBirth} AND USER_EMAIL = #{userEmail}
+  	</select>
 
   <select id="selectList" resultType="pdto">
   	select * from USER_TABLE  

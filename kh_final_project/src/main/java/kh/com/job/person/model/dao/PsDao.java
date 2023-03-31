@@ -1,6 +1,7 @@
 package kh.com.job.person.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,11 @@ public class PsDao {
 	public int update(PsUserDto dto)  throws Exception {
 		return sqlSession.update("person.update", dto);
 	}
+	
+	// Email로 아이디 찾기
+	public PsUserDto findIdEmail(Map<String, Object> findId)  throws Exception {
+			return sqlSession.selectOne("person.findIdEmail", findId);
+	}
+
 
 }

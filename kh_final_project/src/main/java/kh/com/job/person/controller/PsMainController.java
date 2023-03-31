@@ -78,9 +78,16 @@ public class PsMainController {
 	// 아이디 찾기 
 	@PostMapping("/findid")
 	@ResponseBody
-	public ModelAndView dofindId(ModelAndView mv, PsUserDto dto) {
-		System.out.println("dto 잘 가져옴 ?" + dto );
-		return mv;
+	public String dofindId(ModelAndView mv, @RequestParam("name") String name, @RequestParam("birth") String birth, @RequestParam("email") String email) throws Exception
+			{
+		Map<String,Object> findId = new HashMap<>();
+		findId.put("userName", name);
+		findId.put("userBirth", birth);
+		findId.put("userEmail", email);
+		
+		PsUserDto userId = service.findIdEmail(findId);
+		String findUserId = userId.getUserId();
+		return findUserId;
 	}
 	
 	// 비밀번호 찾기

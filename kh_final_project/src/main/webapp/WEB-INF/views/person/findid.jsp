@@ -135,7 +135,7 @@
 		formdata.append("birth", $('#personal-birth').val());
 		formdata.append("email", $('#personal-email').val());
 		
-		if(!name || !birth || !email) {
+		if(!formdata) {
 			alert("입력값을 모두 입력해주세요.");
 			return;
 		}
@@ -147,9 +147,9 @@
 		contentType: false, 
 		processData: false,
 		data: formdata, 
-		success: function(result){
-				if (result == 1) {
-				alert("회원님의 아이디는" + "입니다.");
+		success: function(data){
+				if (data != null) {
+				alert("회원님의 아이디는"+ data + "입니다.");
 				location.href="/job/person/login";
 			}	else {
 				alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
