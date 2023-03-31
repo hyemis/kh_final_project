@@ -26,6 +26,12 @@
   <update id="update" parameterType="rdto">
   	update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID}
   </update>
+  
+  <insert id="insertCerti" parameterType="certidto">
+  	INSERT INTO R_CERTI (CERTI_NO, CERTI_NAME, CERTI_PUB, CERTI_DATE)
+  	VALUES (#{certiNo}, #{certiName}, ${certiPub}, #{certiDate})
+  
+  </insert>
 	
 
 </mapper>

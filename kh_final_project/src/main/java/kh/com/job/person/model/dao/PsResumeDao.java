@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.person.model.dto.PsCertiDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -44,6 +45,11 @@ public class PsResumeDao {
 	
 	public int update(PsResumeDto dto)  throws Exception {
 		return sqlSession.update("resume.update", dto);
+	}
+	
+	// 이력서-자격증입력
+	public int insertCerti(PsCertiDto dto) throws Exception{
+		return sqlSession.insert("resume.insertCerti",dto);
 	}
 
 }

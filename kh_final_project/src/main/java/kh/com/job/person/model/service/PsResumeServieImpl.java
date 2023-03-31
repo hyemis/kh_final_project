@@ -16,6 +16,7 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.person.model.dao.PsResumeDao;
+import kh.com.job.person.model.dto.PsCertiDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 
 @Service
@@ -76,6 +77,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	@Override
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {
 		return dao.rselectOne(infoMap);
+	}
+
+	@Override
+	public int insertCerti(PsCertiDto dto) throws Exception {
+		return dao.insertCerti(dto);
 	}
 
 
