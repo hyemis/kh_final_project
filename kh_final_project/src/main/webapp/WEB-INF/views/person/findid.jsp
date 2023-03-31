@@ -147,18 +147,17 @@
 		contentType: false, 
 		processData: false,
 		data: formdata, 
-		sucess : function(result)
-			if (result === 1) {
-			alert("회원님의 아이디는" + "입니다.");
-			location.href="/job/person/login";
-		}	else {
-			alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
-			location.href="/job/person/signUp";
+		success: function(result){
+				if (result == 1) {
+				alert("회원님의 아이디는" + "입니다.");
+				location.href="/job/person/login";
+			}	else {
+				alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
+				location.href="/job/person/signUp";
+			}
 		}
-		
-		
-		
-		})
+
+		});
 	} 
 	
  	 </script>
