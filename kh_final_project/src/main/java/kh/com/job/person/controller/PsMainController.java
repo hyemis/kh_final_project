@@ -68,12 +68,19 @@ public class PsMainController {
 		return mv;
 	}
 	
-	// 아이디 비밀번호 찾기 
-	@GetMapping("/idpw")
-	public ModelAndView viewidpw(ModelAndView mv) {
-		mv.setViewName("person/idpw");
+	// 아이디 찾기 
+	@GetMapping("/findid")
+	public ModelAndView viewfindId(ModelAndView mv) {
+		mv.setViewName("person/findid");
 		return mv;
 	}
+	
+	// 비밀번호 찾기
+		@GetMapping("/findpw")
+		public ModelAndView viewfindPw(ModelAndView mv) {
+			mv.setViewName("person/findpw");
+			return mv;
+		}
 	
 	@GetMapping("/findFail")
 	public ModelAndView findFail(ModelAndView mv) {

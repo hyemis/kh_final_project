@@ -77,10 +77,10 @@
 								    <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
 							  </a>
 							</div>
-							<div class="d-grid mt-2">
+							<div class="d-grid">
 								<div class="row" id="links"> 
-									<a href="${pageContext.request.contextPath}/person/idpw" class="col-4"><p>아이디 찾기</p></a> 
-									<a href="${pageContext.request.contextPath}/person/idpw" class="col-4 text-end">비밀번호 찾기</a> 
+									<a href="${pageContext.request.contextPath}/person/findid" class="col-4"><p>아이디 찾기</p></a> 
+									<a href="${pageContext.request.contextPath}/person/findpw" class="col-4 text-center">비밀번호 찾기</a> 
 									<a href="${pageContext.request.contextPath}/person/signUp" class="col-4 text-end">회원 가입</a>
 								</div>
 							</div>
