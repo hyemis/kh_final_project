@@ -57,16 +57,21 @@ public class PsMainController {
 
 
 	@GetMapping("/main")
-	public ModelAndView main(ModelAndView mv) {
-		
-		try {
-			mv.addObject("plist", service.selectList());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
+	public ModelAndView viewmain(ModelAndView mv) {
 		return mv;
 	}
+	
+//	@GetMapping("/main")
+//	public ModelAndView main(ModelAndView mv) {
+//		
+//		try {
+//			mv.addObject("plist", service.selectList());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+//		
+//		return mv;
+//	}
 	
 	// 아이디 찾기 
 	@GetMapping("/findid")
@@ -355,6 +360,11 @@ public class PsMainController {
 
 		// 1번
 		System.out.println("code : " + code);
+		
+		// code Null 인 경우 실행하지 않음
+		if(code == null) {
+			return mv;
+		}
 				
 		// 2번 
 		String access_Token = service.getAccessToken(code);
