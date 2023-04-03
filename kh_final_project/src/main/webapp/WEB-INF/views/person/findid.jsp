@@ -61,20 +61,20 @@
 			       		</div>
 			       		
 						<form id="personal-email-form" class="hidden m-5" method="post" action="">
-						   <input class="form-control" type="text" id="personal-name" placeholder="이름">
-			      		   <input class="form-control" type="text" id="personal-birth" placeholder="생년월일(19990101)">
+						   <input class="form-control" type="text" id="personal-e-name" placeholder="이름">
+			      		   <input class="form-control" type="text" id="personal-e-birth" placeholder="생년월일(19990101)">
 			        	   <input class="form-control" type="text" id="personal-email" placeholder="이메일(job-a@joba.com)">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
-							  <button class="btn btn-outline-dark" type="button" onclick="findIdEamil();">아이디 찾기</button>
+							  <button class="btn btn-outline-dark" type="button" onclick="findId();">가입한 Email로 아이디 찾기</button>
 							</div>
 						</form>
 						
 						<form id="personal-phone-form" class="hidden m-5" method="post" action="">
-						   <input class="form-control" type="text" placeholder="이름">
-			      		   <input class="form-control" type="text" placeholder="생년월일(19990101)">
-			        	   <input class="form-control" type="text" placeholder="'-' 빼고 숫자만 입력">
+						   <input class="form-control" type="text" id="personal-p-name" placeholder="이름">
+			      		   <input class="form-control" type="text" id="personal-p-birth" placeholder="생년월일(19990101)">
+			        	   <input class="form-control" type="text" id="personal-phone" placeholder="'-' 빼고 숫자만 입력">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
-							  <button class="btn btn-outline-dark" type="button" onclick="fn_findIdPhone(); return false;">아이디 찾기</button>
+							  <button class="btn btn-outline-dark" type="button" onclick="findId();">가입한 휴대폰으로 아이디 찾기</button>
 							</div>
 						</form>
 						 
@@ -129,11 +129,48 @@
 	    } 
 	
 	// email로 id 찾기
- 	 function findIdEamil() {
+ 	 function findId() {
 		let formdata = new FormData();
-		formdata.append("name", $('#personal-name').val());
-		formdata.append("birth", $('#personal-birth').val());
+		formdata.append("name", $('#personal-e-name').val());
+		formdata.append("birth", $('#personal-e-birth').val());
+		formdata.append("name", $('#personal-p-name').val());
+		formdata.append("birth", $('#personal-p-birth').val());
 		formdata.append("email", $('#personal-email').val());
+		formdata.append("phone", $('#personal-phone').val());
+
+		
+		/* if(!formdata) {
+			alert("입력값을 모두 입력해주세요.");
+			return;
+		} */
+	
+	
+		$.ajax({
+		url : "${pageContext.request.contextPath}/person/findid",
+		type : "post",
+		contentType: false, 
+		processData: false,
+		data: formdata, 
+		success: function(data){
+				if (data != null) {
+				alert("회원님의 아이디는"+ data + "입니다.");
+				location.href="/job/person/login";
+			}	else {
+				alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
+				location.href="/job/person/signUp";
+			}
+		}
+
+		});
+	} 
+	
+	
+	/* // phone 으로 id 찾기
+	function findIdEamil() {
+		let formdata = new FormData();
+		formdata.append("name", $('#personal-p-name').val());
+		formdata.append("birth", $('#personal-p-birth').val());
+		formdata.append("email", $('#personal-phone').val());
 		
 		if(!formdata) {
 			alert("입력값을 모두 입력해주세요.");
@@ -158,7 +195,9 @@
 		}
 
 		});
-	} 
+	} */
+	
+	
 	
  	 </script>
 </body>

@@ -16,9 +16,20 @@
   	select count(USER_ID) from USER_TABLE WHERE USER_ID = #{userId}
   </select>
   
-   <!-- email로 아이디 찾기 -->
+   <!-- 아이디 찾기 -->
     <select id="findIdEmail" parameterType="string" resultType="pdto">
-  	select USER_ID from USER_TABLE WHERE USER_NAME = #{userName} AND USER_BIRTH = #{userBirth} AND USER_EMAIL = #{userEmail}
+  	select USER_ID 
+  	from USER_TABLE 
+  	WHERE USER_NAME = #{userName} AND USER_BIRTH = #{userBirth}
+  	<choose>
+  		<when test="userEmail != null and userEmail != ''">
+  			AND USER_EMAIL = #{userEmail}
+  		</when>
+  		<when test="userPhone != null and userPhone != ''">
+  			AND USER_PHONE = #{userPhone}
+  		</when>
+  	</choose> 
+  	
   	</select>
 
   <select id="selectList" resultType="pdto">
