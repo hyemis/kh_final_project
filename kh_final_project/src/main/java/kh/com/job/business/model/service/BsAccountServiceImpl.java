@@ -42,7 +42,6 @@ public class BsAccountServiceImpl implements BsAccountService{
 		return dao.getUserPw(userId);
 	}
 
-
 	
 
 }
