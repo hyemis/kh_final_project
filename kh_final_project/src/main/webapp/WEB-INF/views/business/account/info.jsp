@@ -28,7 +28,6 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
-
 <!-- style -->	
 
 	
@@ -129,23 +128,26 @@
 					<div class="container border border-secondary " style="height: 500px;">
 					<h4 class="text-center m-2 ">비밀번호 변경</h4>
 						<!-- password -->
-						<form class="m-5" action="password" method="post" >
+						<form class="m-5" action="pwChk" name="pwChk" method="post" >
 							 <div class="mb-3 row">
 							    <label for="inputPassword" class="col-sm-3 col-form-label">현재 비밀번호</label>
-							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="userPw">
+							    <div class="col-sm-6">
+							      <input type="password" class="form-control" id="userPw" name="userPw">
 							    </div>
+							    <button class=" col-sm-2 btn btn-primary" type="submit" id="btnPwChk">확인</button>
 							 </div>
+						</form>	 
+						<form class="m-5" action="/newPw" method="post">
 							 <div class="mb-3 row">
 							    <label for="newPw" class="col-sm-3 col-form-label">새 비밀번호</label>
 							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="newPw">
+							      <input type="password" class="form-control" id="newPw" name="newPw">
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
 							    <label for="newPw2" class="col-sm-3 col-form-label">새 비밀번호 확인</label>
 							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="newPw2">
+							      <input type="password" class="form-control" id="newPw2" name="newPw2">
 							    </div>
 							 </div>	<br>	
 							 <p class="text-center">
@@ -176,6 +178,34 @@
 <!-- map start -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
+<script>
+function changePassword() {
+	console.log("Tq")
+	const obj = {
+			userPw : document.getElementById("userPw").value,
+			newPw : document.getElementById("newPw").value,
+			newPw2 : document.getElementById("newPw2").value
+		}
+	
+	console.log(obj)
+
+		$.ajax({
+			type : "POST",
+			dataType: json,
+			contentType : "application/json",
+			url : "/business/account/password", //요청 할 URL
+			data : JSON.stringify(data), //넘길 파라미터
+			success : function(data) {
+				//통신이 정상적으로 되었을때 실행 할 내용
+				console.log(data)
+			},
+			error : function(data) {
+				console.log("접속 도중 오류가 발생했습니다."); //에러시 실행 할 내용
+			}
+		});
+
+}
+</script>
 <script>
     function execDaumPostcode() {
         new daum.Postcode({
@@ -222,7 +252,7 @@
                         marker.setPosition(coords)
                      	// 인포윈도우로 장소에 대한 설명을 표시합니다
                         var infowindow = new kakao.maps.InfoWindow({
-                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                            content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
                         });
                         infowindow.open(map, marker);
                     }
@@ -283,7 +313,7 @@
 
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
             });
             infowindow.open(map, marker);
 
@@ -316,33 +346,26 @@
         map.setLevel(map.getLevel() + 1);
     }
     
-    
- 
-    
- </script>
+    //마커를 미리 생성
+    var marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+</script>
 <!-- map end -->
-
-
-
-
-
-
-
 
 <!-- updatePassword -->
 
+
+
+
+
+<!-- alter -->
 <script>
-
-
-
-</script>
-
-
-
-
-<!-- modal -->
-<script>
-
+var msg = "${msg}";
+if(msg) {
+	alert(msg);
+}
 </script>
 
 	

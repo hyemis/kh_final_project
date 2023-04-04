@@ -54,14 +54,14 @@
         WHERE USER_ID = #{userId}
     </update>
     
-    <!-- 비밀번호 수정하기-->
+    <!-- //todo비밀번호 수정하기-->
     <update id="updatePassword">
         UPDATE USER_TABLE SET
         USER_PW = #{userPw}
         WHERE USER_ID = #{userId}
     </update>    
     
-    <!-- 회원 프로필 이미지 수정하기 -->
+    <!-- //todo 회원 프로필 이미지 수정하기 -->
     <update id="updateUimage" >
         UPDATE tb_user SET
         USER_PIC = #{userPic}
@@ -75,9 +75,9 @@
         WHERE USER_ID = #{userId}
     </select>
     
-    <!-- 회원비밀번호  불러오기-->
+    <!-- //todo회원비밀번호  불러오기-->
     <select id="getUserPw" resultType="budto">
-        SELECT *
+        SELECT USER_ID, USER_PW
         FROM USER_TABLE
         WHERE USER_ID = #{userId}
     </select>
