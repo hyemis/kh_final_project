@@ -7,7 +7,7 @@
 	<!-- Navbar Start -->
 	<div class="container-fluid nav-bar ">
 		<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-			<a href="index.html"
+			<a href="${pageContext.request.contextPath}/person/main"
 				class="navbar-brand d-flex align-items-center text-center">
 				<div class="icon p-2 me-2">
 					<img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
