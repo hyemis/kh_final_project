@@ -136,6 +136,47 @@
 									<td>~</td>
 									<td><input type="text" id="maxSalary" class="maxSalary" name="maxSalary"></td>
 								</tr>
+								<!-- 체크박스로 처리 해야할 듯 (자리 배치) -->
+								<tr class="mb-3">
+									<td><label for=conditionType>우대조건</label></td>
+									<td><input type="text" id="conditionType" class="conditionType" name="conditionType"></td>
+								</tr>
+								<!-- 이거는 변수명 바꿔서 리퀘스트 파람으로 컨트롤러에서
+								받은 다음에 string 값으로 변환 -->
+								<tr class="mb-3">
+									<td><label for=registDate>지원등록 시작일</label></td>
+									<td><input type="date" id="registDate" class="registDate" name="registDate"></td>
+									<td><label for=closeDate>지원등록 마감일</label></td>
+									<td><input type="date" id="closeDate" class="closeDate" name="closeDate"></td>
+								</tr>
+								<!-- 10 11 20 21 카테고리 추가 필요 -->
+								<tr class="mb-3">
+									<td><label for="empTypeCode">계약 형태</label></td>
+									<td>
+									<select id="empTypeCode" class="empTypeCode">
+										<c:forEach items="${CAlist}" var="categoryCA">
+											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+										</c:forEach>
+									</select>
+									</td>
+								</tr>
+								<!-- 주 5일 주 6일 등등 카테고리 추가 해야됨-->
+								<tr class="mb-3">
+									<td><label for="holidayType">상세 근무 형태</label></td>
+									<td>
+									<select id="holidayType" class="holidayType">
+										<c:forEach items="${CAlist}" var="categoryCA">
+											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+										</c:forEach>
+									</select>
+									</td>
+								</tr>
+								
+								<!--셀렉트 카테고리 추가 해야됨 고졸 대졸(2~3) 대졸(4년제) 석사 박사 등등-->
+								<tr class="mb-3">
+									<td><label for=userEducation>학력</label></td>
+									<td><input type="text" id="userEducation" class="userEducation" name="userEducation"></td>
+								</tr>
 							</tbody>
 						</table>					
 						
@@ -150,7 +191,28 @@
 					<!-- 9번에서 16번 -->
 					<h3>채용 정보</h3>
 					<form id="formdata2" class="form-control">
-						
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<th scope="col" class="col-3"></th>
+									<th scope="col" class="col-3"></th>
+									<th scope="col" class="col-6"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><label for="raTitle">채용 공고 제목</label></td>
+									<td><input type="text" id="raTitle" class="raTitle" name="raTitle"></td>
+								</tr>
+								<tr>
+									<td><textarea class="form-control"></textarea></td>
+								</tr>
+								<tr>
+									<td><label for="raExtraDocument">채용 공고 제목</label></td>
+									<td><input type="file" id="raExtraDocument" class="raExtraDocument" name="raExtraDocument"></td>
+								</tr>
+							</tbody>
+						</table>
 					</form>
 					<div>
 						<button type="button" class="btn prevbtn">이전</button>
