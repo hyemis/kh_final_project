@@ -25,11 +25,11 @@ public class MailController {
 		String text = "<h1>테스트 메일 진행중입니다.</h1>테스트 메일 진행중입니다.테스트 메일 진행중입니다.테스트 메일 진행중입니다.테스트 메일 진행중입니다."
 				+ "테스트 메일 진행중입니다.테스트 메일 진행중입니다.테스트 메일 진행중입니다.테스트 메일 진행중입니다.";
 		String to = "tkdtlrdl07@gmail.com";
-		int ccNum = 3;
+		int ccNum = 0;
 		String[] cc = new String[ccNum]; 
-		cc[0] ="hanwxxl@gmail.com"; 		
-		cc[1] ="chanhui9797@gmail.com"; 		
-		cc[2] ="hyem.is.1220@gmail.com"; 		
+//		cc[0] ="hanwxxl@gmail.com"; 		
+//		cc[1] ="chanhui9797@gmail.com"; 		
+//		cc[2] ="hyem.is.1220@gmail.com"; 		
 		 // "hanwxxl@gmail.com, chanhui9797@gmail.com, hyem.is.1220@gmail.com";
 		MailUtil.mailSend(title, from, text, to, cc, ccNum);
 		
