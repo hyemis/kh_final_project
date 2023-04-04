@@ -65,10 +65,7 @@
 				<button class="nav-link me-4 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">회사 정보</button>
 			</li>
 			<li class="nav-item" role="presentation">
-				<button class="nav-link me-4" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link me-4" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+				<button class="nav-link me-4" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">상세 내용 정보</button>
 			</li>
 		</ul>
 	
@@ -216,18 +213,8 @@
 					</form>
 					<div>
 						<button type="button" class="btn prevbtn">이전</button>
-						<button type="button" class="btn nextbtn">다음</button>
 					</div>
 				</div>
-			</div>
-			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="nav-tab-3">
-				<!-- 15번에서 20번 -->
-					<h3>채용 기간 및 기타 내용</h3>
-					<form id="formdata3" class="form-control">
-					
-					</form>
-					<button type="button" class="btn prevbtn">이전</button>
-					
 			</div>
 		</div>
 
