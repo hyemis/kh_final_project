@@ -56,11 +56,16 @@ public class BsRecruitController {
 		
 		//직업 코드 타입 ('JN')가져오기
 		mv.addObject("JNlist", service.getCateList("JN"));
+		//경력선택
 		mv.addObject("CAlist", service.getCateList("CA"));
+		//학력선택
 		mv.addObject("EDlist", service.getCateList("ED"));
+		//우대조건
 		mv.addObject("SClist", service.getCateList("SC"));
-		mv.addObject("SClist", service.getCateList("SC"));
+		//고용형태
 		mv.addObject("ETlist", service.getCateList("ET"));
+		
+		mv.addObject("SClist", service.getCateList("SC"));
 		
 		
 		return mv;
