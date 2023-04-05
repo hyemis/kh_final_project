@@ -31,4 +31,12 @@ public class PsHschoolDto {
 	private String hName;
 	private Date hDate;
 	private String hMajor;
+
+
+	public void setHdate(Object hDate) {
+		if(hDate.equals(""))
+			this.hDate = null;
+		this.hDate = (Date)hDate;
+	}
+	
 }
