@@ -19,16 +19,16 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">개인</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
+                                <a href="property-list.html" class="dropdown-item">개인 회원 관리</a>
+                                <a href="property-type.html" class="dropdown-item">게시판 관리</a>
                                 <a href="property-agent.html" class="dropdown-item">Property Agent</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
+                                <a href="testimonial.html" class="dropdown-item">기업 회원 관리</a>
+                                <a href="404.html" class="dropdown-item">채용 공고 관리</a>
                             </div>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/account/usercheck" class="nav-item nav-link">내 계정 관리</a>
