@@ -175,8 +175,7 @@
 								</tr>
 							</tbody>
 						</table>					
-						
-								
+		
 					</form>
 					<button type="button" class="btn nextbtn">다음</button>
 				</div>
@@ -204,7 +203,7 @@
 									<td><textarea class="form-control"></textarea></td>
 								</tr>
 								<tr>
-									<td><label for="raExtraDocument">채용 공고 제목</label></td>
+									<td><label for="raExtraDocument">이력서 샘플</label></td>
 									<td><input type="file" id="raExtraDocument" class="raExtraDocument" name="raExtraDocument"></td>
 								</tr>
 							</tbody>
@@ -212,6 +211,7 @@
 					</form>
 					<div>
 						<button type="button" class="btn prevbtn">이전</button>
+						<button type="button" class="btn insertbtn">작성</button>
 					</div>
 				</div>
 			</div>
