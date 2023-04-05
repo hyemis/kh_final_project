@@ -181,8 +181,6 @@
 															<div class="col-sm-10 offset-sm-2">
 																<input type="hidden" id="checkN" name="ged"> 
 																<input type="checkbox" id="checkY" name="checkY" value="Y"> 대입 검정고시
-																<!-- <input type="checkbox" name="ged" value="Y" id="ged"> 
-																<label class="form-check-label"	for="ged"> 대입 검정고시 </label> -->
 															</div>
 														</div>
 													</div>
@@ -267,10 +265,11 @@
 												</div>
 												<div class="row mb-3">
 													<label for="uDate" class="col-sm-2 col-form-label">대학
-														졸업일자</label>
+														졸업일자</label><br>
 													<div class="col-sm-10">
 														<input type="Date" class="form-control" name="uDate">
-													</div>
+													</div><br>
+													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
 													<label for="uMajor" class="col-sm-2 col-form-label">대학
