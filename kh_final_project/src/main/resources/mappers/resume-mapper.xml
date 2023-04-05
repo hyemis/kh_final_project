@@ -29,7 +29,7 @@
   
   	<insert id="insertHschool" parameterType="hdto">
 		insert into R_HSCHOOL(H_EDU_NO, GED, H_NAME, H_DATE, H_MAJOR)
-		values (R_HSCHOOL_SEQ.NEXTVAL, ${ged}, #{hName}, #{hDate}, #{hMajor})
+		values (R_HSCHOOL_SEQ.NEXTVAL, #{ged}, #{hName}, #{hDate}, #{hMajor})
 	</insert>
   
   	<insert id="insertUniv" parameterType="udto">

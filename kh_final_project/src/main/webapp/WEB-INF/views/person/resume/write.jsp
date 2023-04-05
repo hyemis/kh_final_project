@@ -35,7 +35,7 @@
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/resources/css/person.userId.css"
+	href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -524,8 +524,6 @@
 		}
 		
 		
-	/* 	<input type="hidden" id="checkN" name="ged"> 
-		<input type="checkbox" id="checkY" name="checkY" value="Y"> 대입 검정고시 */
 
  		// 대입검정고시 체크박스 Y/N 체크
 		 var ged = $("#checkY").prop("checked")? "Y" :"N";
@@ -535,6 +533,7 @@
  		
 		
 		
+			
 	</script>
 
 </body>

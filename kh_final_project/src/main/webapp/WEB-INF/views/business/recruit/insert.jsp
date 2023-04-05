@@ -109,7 +109,7 @@
 									</td>
 								</tr>
 								<tr class="mb-3">
-									<td><label for="career">경력 선택</label></td>
+									<td><label for="career">경력선택</label></td>
 									<td>
 									<select id="career" class="career">
 										<c:forEach items="${CAlist}" var="categoryCA">
@@ -119,7 +119,7 @@
 									</td>
 								</tr>
 								<tr class="mb-3">
-									<td><label for="userEducation">학력 선택</label></td>
+									<td><label for="userEducation">학력선택</label></td>
 									<td>
 									<select id="userEducation" class="userEducation">
 										<c:forEach items="${EDlist}" var="categoryED">
@@ -153,7 +153,7 @@
 								</tr>
 								<!-- 10 11 20 21 카테고리 추가 필요 -->
 								<tr class="mb-3">
-									<td><label for="empTypeCode">고용 형태</label></td>
+									<td><label for="empTypeCode">고용형태</label></td>
 									<td>
 									<select id="empTypeCode" class="empTypeCode">
 										<c:forEach items="${ETlist}" var="categoryET">
