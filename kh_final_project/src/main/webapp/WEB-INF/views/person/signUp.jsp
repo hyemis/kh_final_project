@@ -28,6 +28,11 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 	
+	<style>
+	  .hidden {
+	    display: none;
+	  }
+	</style>
 </head>
 <body>
 	<!-- header  -->
@@ -39,7 +44,14 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 			 
-		        <form class="col-6" name=singUpForm action="signUp" method="post" onsubmit="return checkAll()">
+			 	<div class="row">
+					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('personal')">개인회원</button>
+					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">기업회원</button>
+				</div>
+
+			 
+			 
+		        <form class="hidden" name=signUpForm id="personal-sign-form" action="signUp" method="post" onsubmit="return checkAll()">
 			        	<div class="m-4"><h3>JOB-A 회원가입</h3></div>
 			        	
 				          <div class="row">
@@ -109,12 +121,25 @@
 				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
 				          </div> -->
 				          
+						
+						</div>
 				         <div class="d-grid m-3">
 						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
 						</div>
-						
-						</div>
 				</form>
+				
+				  <form class="hidden" id="corporate-sign-form" action="" method="post" >
+				  	기업 회원가입 form 
+				  	
+				  	<div class="d-grid m-3">
+						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
+					</div>
+						
+				  
+				  </form>
+				  
+				  
+				  
 			       
 				    
 		    </div>
@@ -126,6 +151,21 @@
 	
 	
 	<script>
+	function toggleForm(type) {
+	    var personalForm = document.getElementById('personal-sign-form');
+	    var corporateForm = document.getElementById('corporate-sign-form');
+
+	    if (type === 'personal') {
+	        personalForm.classList.remove('hidden');
+	        corporateForm.classList.add('hidden');
+	      } else if (type === 'corporate') {
+	        personalForm.classList.add('hidden');
+	        corporateForm.classList.remove('hidden');
+	      }
+	  }
+	
+	
+	
 			// id 중복확인
 			function fn_idChk() {
 				let userId = $("#userId").val();
@@ -295,6 +335,9 @@
 		if(msg) {
 			alert(msg);
 		}
+		
+		
+	
 			
 	</script>
 </body>
