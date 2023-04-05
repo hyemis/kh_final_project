@@ -17,7 +17,7 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/person.css" rel="stylesheet">
 
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
