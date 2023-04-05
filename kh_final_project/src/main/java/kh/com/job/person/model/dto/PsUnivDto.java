@@ -35,4 +35,14 @@ public class PsUnivDto {
 	private Date uDate;
 	private String uMajor;
 	private double uPoint;
+	public Date getuDate() {
+		return uDate;
+	}
+	public void setuDate(Object uDate) {
+		if(uDate.equals(""))
+			this.uDate = null;
+		this.uDate = (Date)uDate;
+	}
+	
+	
 }

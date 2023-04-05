@@ -63,8 +63,8 @@
 					</div>
 				</div>
 			</div>
+			
 			<!-- 우측 조회 영역 -->
-
 			<div class="col-9">
 				<div class="container-xxl py-5">
 					<div class="container">
