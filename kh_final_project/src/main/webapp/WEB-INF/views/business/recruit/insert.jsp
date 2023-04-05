@@ -83,7 +83,8 @@
 								<tr>
 									<th scope="col" class="col-3"></th>
 									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-6"></th>
+									<th scope="col" class="col-3"></th>
+									<th scope="col" class="col-3"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -129,14 +130,18 @@
 								</tr>
 								<tr class="mb-3">
 									<td><label for=minSalary>급여</label></td>
-									<td><input type="text" id="minSalary" class="minSalary" name="minSalary"></td>
-									<td>~</td>
-									<td><input type="text" id="maxSalary" class="maxSalary" name="maxSalary"></td>
+									<td colspan="2"><input type="text" id="minSalary" class="minSalary" name="minSalary" placeholder="최소 연봉">
+									 ~ <input type="text" id="maxSalary" class="maxSalary" name="maxSalary" placeholder="최대 연봉"></td>
 								</tr>
-								<!-- 체크박스로 처리 해야할 듯 (자리 배치) -->
+								<!-- 체크박스로 처리한거 값들 배열로 받아서 xxx, xxx 순으로 넣기 -->
 								<tr class="mb-3">
-									<td><label for=conditionType>우대조건</label></td>
-									<td><input type="text" id="conditionType" class="conditionType" name="conditionType"></td>
+									<td>우대조건</td>
+									<td colspan="2">
+										<c:forEach items="${SClist}" var="categorySC">
+											<label><input type="checkbox" id="conditionTypeList" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }">
+											${categorySC.categoryName }</label>
+										</c:forEach>
+									</td>
 								</tr>
 								<!-- 이거는 변수명 바꿔서 리퀘스트 파람으로 컨트롤러에서
 								받은 다음에 string 값으로 변환 -->
@@ -148,11 +153,11 @@
 								</tr>
 								<!-- 10 11 20 21 카테고리 추가 필요 -->
 								<tr class="mb-3">
-									<td><label for="empTypeCode">계약 형태</label></td>
+									<td><label for="empTypeCode">고용 형태</label></td>
 									<td>
 									<select id="empTypeCode" class="empTypeCode">
-										<c:forEach items="${CAlist}" var="categoryCA">
-											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+										<c:forEach items="${ETlist}" var="categoryET">
+											<option value="${categoryET.categoryId }">${categoryET.categoryName}</option>
 										</c:forEach>
 									</select>
 									</td>
@@ -167,12 +172,6 @@
 										</c:forEach>
 									</select>
 									</td>
-								</tr>
-								
-								<!--셀렉트 카테고리 추가 해야됨 고졸 대졸(2~3) 대졸(4년제) 석사 박사 등등-->
-								<tr class="mb-3">
-									<td><label for=userEducation>학력</label></td>
-									<td><input type="text" id="userEducation" class="userEducation" name="userEducation"></td>
 								</tr>
 							</tbody>
 						</table>					

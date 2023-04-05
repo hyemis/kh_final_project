@@ -58,6 +58,9 @@ public class BsRecruitController {
 		mv.addObject("JNlist", service.getCateList("JN"));
 		mv.addObject("CAlist", service.getCateList("CA"));
 		mv.addObject("EDlist", service.getCateList("ED"));
+		mv.addObject("SClist", service.getCateList("SC"));
+		mv.addObject("SClist", service.getCateList("SC"));
+		mv.addObject("ETlist", service.getCateList("ET"));
 		
 		
 		return mv;
