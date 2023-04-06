@@ -8,6 +8,6 @@ public interface BsRecruitService {
 
 	public Object getCateList(String categoryType);
 
-	public String uploadDocument(MultipartFile uploadReport);
+	public String uploadDocument(MultipartFile uploadReport, String userId);
 
 }
