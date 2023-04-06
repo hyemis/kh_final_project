@@ -54,9 +54,9 @@
 
 
 <style>
-  .hidden {
-    display: none;
-  }
+.hidden {
+	display: none;
+}
 </style>
 
 </head>
@@ -163,7 +163,48 @@
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
-							<h3 class="mb-3">학력사항</h3>
+							<div class="row align-items-center">
+								<div class="col">
+									<h3 class="mb-3">학력사항</h3>
+								</div>
+								<!-- 모달 버튼 -->
+								<div class="col-auto">
+									<button type="button" class="btn btn-outline-dark m-2 btn-sm"
+										data-bs-toggle="modal" data-bs-target="#viewRHSchool">저장된
+										정보 불러오기</button>
+								</div>
+							</div>
+
+							<!-- 모달 창 -->
+							<div class="modal fade" id="viewRHSchool" tabindex="-1"
+								role="dialog" aria-labelledby="uploadModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="uploadModalLabel">학력사항 불러오기</h5>
+											<button type="button" class="close" data-bs-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											최종 학력 선택 후 불러올 학력을 체크하세요.
+											<!-- 버튼 그룹 -->
+											<div class="btn-group mb-3" role="group" aria-label="학력사항 선택">
+												<button type="button" class="btn btn-outline-secondary"
+													onclick="showList('highSchool')">고등학교 졸업</button>
+												<button type="button" class="btn btn-outline-secondary"
+													onclick="showList('university')">대학교 졸업</button>
+												<button type="button" class="btn btn-outline-secondary"
+													onclick="showList('graduate')">대학원 졸업</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
 							<!--  아코디언 -->
 							<div class="accordion accordion-flush" id="accordionFlushExample">
 								<div class="accordion-item">
@@ -177,6 +218,8 @@
 										aria-labelledby="flush-headingOne"
 										data-bs-parent="#accordionFlushExample">
 										<div class="accordion-body">
+											<!-- 보유중인 고등학교 학력사항 출력 -->
+
 											<!--  고등학교 학력사항 Form  -->
 											<form name="rHSchool" action="rHSchool" method="post">
 												<div class="row mb-3">
@@ -220,7 +263,8 @@
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary" onclick="fn_checkY();">save</button>
+													<button type="submit" class="btn btn-primary"
+														onclick="fn_checkY();">save</button>
 												</div>
 											</form>
 
@@ -390,9 +434,10 @@
 						<div class="mb-4">
 							<h3 class="mb-3">경력사항</h3>
 							<div>
-							<input type="radio" id="radio-box" name="radio-group">
-							<label for="radio-box">경력없음(신입)</label>
-							</div><br>
+								<input type="radio" id="radio-box" name="radio-group"> <label
+									for="radio-box">경력없음(신입)</label>
+							</div>
+							<br>
 							<div id="hidden-content">
 								<form name="rCareer" action="rCareer" method="post">
 									<div class="row mb-3">
@@ -405,7 +450,8 @@
 									<div class="row mb-3">
 										<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carDate" placeholder="ex) 2020-01-01 ~ 2022-12-31">
+											<input type="text" class="form-control" name="carDate"
+												placeholder="ex) 2020-01-01 ~ 2022-12-31">
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -514,7 +560,7 @@
 		if (msg) {
 			alert(msg);
 		}
-		
+
 		// 이력서 등록
 		function fn_rWrite() {
 			let formdata = new FormData();
@@ -542,14 +588,11 @@
 		}
 
 		//  대입검정고시 체크박스 Y/N 체크
-		function fn_checkY(){
-		var ged = $("#checkY").prop("checked") ? "Y" : "N";
-		$("#ged").val(ged);
+		function fn_checkY() {
+			var ged = $("#checkY").prop("checked") ? "Y" : "N";
+			$("#ged").val(ged);
 		}
-		
-		
-		
-		
+
 		// 신입 라디오박스 체크확인
 
 		const radioBox = document.getElementById("radio-box");
