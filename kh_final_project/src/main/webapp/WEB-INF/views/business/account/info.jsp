@@ -125,19 +125,18 @@
 					</div><!-- update end -->
 					
 					<!-- password / secede -->
-					<div class="container border border-secondary " style="height: 500px;">
-					<h4 class="text-center m-2 ">비밀번호 변경</h4>
+					<div class="container border border-secondary " style="height: 550px;">
+					<h4 class="text-center m-2 ">비밀번호 변경 및 탈퇴</h4>
+					<p class="text-center">비밀번호 확인 후 변경과 탈퇴가 가능합니다.</p>
 						<!-- password -->
-						<form class="m-5" action="pwChk" name="pwChk" method="post" >
+						<form class="m-5" action="updatePw" name="updatePw" method="post">
 							 <div class="mb-3 row">
 							    <label for="inputPassword" class="col-sm-3 col-form-label">현재 비밀번호</label>
 							    <div class="col-sm-6">
 							      <input type="password" class="form-control" id="userPw" name="userPw">
 							    </div>
-							    <button class=" col-sm-2 btn btn-primary" type="submit" id="btnPwChk">확인</button>
+							    <input type="button" class="col-sm-2 btn btn-primary" onclick="checkPassword()" value="확인">
 							 </div>
-						</form>	 
-						<form class="m-5" action="/newPw" method="post">
 							 <div class="mb-3 row">
 							    <label for="newPw" class="col-sm-3 col-form-label">새 비밀번호</label>
 							    <div class="col-sm-8">
@@ -151,7 +150,7 @@
 							    </div>
 							 </div>	<br>	
 							 <p class="text-center">
-							 <button class="btn btn-primary" type="submit">비밀번호 변경</button>
+							 <button class="btn btn-primary" id="btnChangePw" disabled="disabled" type="submit" onclick='btnActive()'>비밀번호 변경</button>
 							 <button class="btn btn-primary" type="reset">취소</button>
 							 </p>
 							 <p href="#" class="link-primary text-center">비밀번호를 잊으셨나요?</p>
@@ -160,7 +159,7 @@
 						
 						<!-- secede --><br>
 						<p class="text-end">
-						<button class="btn btn-primary" type="button" id="secede"
+						<button class="btn btn-primary" id="btnSecede" disabled="disabled" type="button"  onclick='btnActive()'
 						href="<%=request.getContextPath() %>/person/delete">기업회원 탈퇴</button> 
 						</p>
 
@@ -178,34 +177,7 @@
 <!-- map start -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
-<script>
-function changePassword() {
-	console.log("Tq")
-	const obj = {
-			userPw : document.getElementById("userPw").value,
-			newPw : document.getElementById("newPw").value,
-			newPw2 : document.getElementById("newPw2").value
-		}
-	
-	console.log(obj)
 
-		$.ajax({
-			type : "POST",
-			dataType: json,
-			contentType : "application/json",
-			url : "/business/account/password", //요청 할 URL
-			data : JSON.stringify(data), //넘길 파라미터
-			success : function(data) {
-				//통신이 정상적으로 되었을때 실행 할 내용
-				console.log(data)
-			},
-			error : function(data) {
-				console.log("접속 도중 오류가 발생했습니다."); //에러시 실행 할 내용
-			}
-		});
-
-}
-</script>
 <script>
     function execDaumPostcode() {
         new daum.Postcode({
@@ -355,11 +327,49 @@ function changePassword() {
 <!-- map end -->
 
 <!-- updatePassword -->
+<script>
+function checkPassword(){	
+	var password = $('input[name=userPw]').val();
+
+	$.ajax({
+		type: 'POST',
+		url: '/business/account/info',
+		data : {userPw:"password"},
+		success: function(result) {
+			if(result.password == password){
+				$('#btnChangePw').attr('disabled',false);
+				$('#btnSecede').attr('disabled',false);
+			}
+			else{
+				alert("비밀번호가 일치하지않습니다");
+			}
+		}
+		,
+		error: function(result) {
+		},
+		complete: function() {
+		}
+
+	})
+}
+</script>
 
 
 
 
-
+<!-- button 
+<script>
+	function btnActive()  {
+  	const target = document.getElementById('btnChangePw');
+  	target.disabled = false;
+	}
+	
+	function btnActive()  {
+	 const target = document.getElementById('btnSecede');
+	 target.disabled = false;
+	}
+</script>
+-->
 <!-- alter -->
 <script>
 var msg = "${msg}";
