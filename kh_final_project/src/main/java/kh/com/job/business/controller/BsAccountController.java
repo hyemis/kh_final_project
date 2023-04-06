@@ -75,8 +75,8 @@ public class BsAccountController {
 		return mv;
 	}
 	
-	//회원 비밀번호 확인
-	@PostMapping("/pwChk") 
+	//회원 비밀번호 확인  -- 임시삭제
+	@PostMapping("/checkPassword") 
 	public ModelAndView pwChk(String userPw, ModelAndView mv, RedirectAttributes rttr) throws Exception{
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -91,50 +91,22 @@ public class BsAccountController {
 		return mv;
 		}
 	
+	//비밀번호 변경
+	@PostMapping("/updatePw")
+	public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr)  {
+		dto.setUserId(principal.getName()); 
+		service.updatePassword(dto);
+		mv.setViewName("redirect:/business/account/info");
+		rttr.addFlashAttribute("msg", "비밀번호변경에 성공했습니다.");
+		
+		return mv;
+	}
 	
 	
 	// 회원 프로필 이미지 수정처리
-//	@PostMapping(value = "/info")
     
-	//비밀번호 일치 확인
 	
-/*	
- 	//회원 비밀번호 수정처리
-	@PostMapping("/password")
-	public ModelAndView updatePw(ModelAndView mv, @RequestParam("userPw") String userPw, @RequestParam("newPw") String newPw,@RequestParam("newPw2") String newPw2, Principal principal, RedirectAttributes rttr)  {
-		if (principal.getName() != null) {
-			BsUserDto dto = new BsUserDto();
-			dto.setUserId(principal.getName());
-			try {
-				BsUserDto rtnDto = service.getUserPw(principal.getName());
-				System.out.println("--------------입력한 비번 " + userPw);
-				System.out.println("--------------DB 비번 " + rtnDto.getUserPw());
-				System.out.println("---------------------------------------------------------------------------db user pw : " + rtnDto.getUserPw());
-				System.out.println("---------------------------------------------------------------------------encode pw : " + passwordEncoder.matches(userPw, rtnDto.getUserPw()));
-				if (passwordEncoder.matches(userPw, rtnDto.getUserPw())) {
-					try {
-						dto.setUserPw(passwordEncoder.encode(userPw));
-						int updatePassword = service.updatePassword(dto);
-						mv.setViewName("redirect:/business/account/info");
-						rttr.addFlashAttribute("msg", "비밀번호변경에 성공했습니다.");
-					} catch (Exception e) {
-						System.out.println("update 실패" + e);
-					}
-				} else {
-//					mv.setViewName("redirect:/");
-					rttr.addFlashAttribute("msg", "비밀번호변경에 실패했습니다.");
-				}
-			} catch (Exception e) {
-				System.out.println("select 실패" + e);
-			}
-			
-		} else {
-//			mv.setViewName("redirect:/");
-			rttr.addFlashAttribute("msg", "아이디를 확인해주세요");
-		}
-		return mv;
-	}	
-*/
+
 	
 	
 	

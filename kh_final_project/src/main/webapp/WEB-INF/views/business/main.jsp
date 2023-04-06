@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>기업회원 홈</title>
 <!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +68,7 @@
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/recruit/main">
 						<div class="rounded p-4">
 							<h5>공고등록/관리</h5>
-							<span href="">채용 공고 등록</span>
+							<p>채용 공고 등록</br>등록된 공고 관리</p>
 						</div>
 					</a>
 				</div>
@@ -78,7 +78,7 @@
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="">
 						<div class="rounded p-4">
 							<h5>지원자관리</h5>
-							<span href=""></span>
+							<p>합격자 관리</br>면접일정 관리</p>
 						</div>
 					</a>
 				</div>
@@ -87,8 +87,8 @@
 					style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="">
 						<div class="rounded p-4">
-							<h5>인재 관리</h5>
-							<span href=""></span>
+							<h5>인재 찾기</h5>
+							<p>맞춤형 인재 추천</br>면접 제의</p>
 						</div>
 					</a>
 				</div>
@@ -98,9 +98,7 @@
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/myinfo">
 						<div class="rounded p-4">
 							<h5>내 기업 관리</h5>
-							<span href="/">회사소개</span>
-							<span href="/">뉴스레터</span>
-							<span href="/">Q & A</span>
+							<p>회사소개</br>뉴스레터</br>Q&A</p>
 						</div>
 					</a>
 				</div>
@@ -109,8 +107,10 @@
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/account/info">
 						<div class="rounded p-4">
-							<h5>내 정보</h5>
-							<span href="/">기업 정보 관리</span>
+							<h5>내 계정</h5>
+							</br>
+							<p>내 정보 관리</p>
+							</br>
 						</div>
 					</a>
 				</div>
@@ -123,31 +123,7 @@
 </section>
 
 	
-<button id="modal">showmodal</button>
-		<dialog>모달창
-		</dialog>	
-	
-	
-			<form action="<%=request.getContextPath() %>/business/account/info" method="post">
-			<button value="close">취소</button>
-			<button value="confirm">변경</button>
-			</form>
-			button.addEventListener("close",() {
-	console.log(dialog.returnValue);
-});
 
-<script>
-const button = document.querySelector("button");
-const dialog = document.querySelector("dialog");
-
-button.addEventListener("click",() {
-	dialog.showModal();
-});
-
-
-</script>
-
-	
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
