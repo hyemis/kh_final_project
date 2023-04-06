@@ -79,7 +79,8 @@ public class BsRecruitController {
 	@PostMapping("/insert")
 	public ModelAndView insertRecruit(ModelAndView mv, BsRecruitDto dto
 								,@RequestParam(value = "conditionTypeList", required = false) List<String> conditionTypeList
-								,@RequestParam(name = "report", required = false) MultipartFile uploadReport){
+								,@RequestParam(name = "report", required = false) MultipartFile uploadReport
+								,Principal principal){
 		
 		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
 			String conditionType = String.join(",", conditionTypeList);
@@ -88,8 +89,9 @@ public class BsRecruitController {
 			String[] conditionType2 = conditionType.split(",");
 			List<String> list = Arrays.asList(conditionType2);			
 		}
+		//이력서 파일 업로드
 		if(uploadReport != null && !uploadReport.isEmpty()) {
-			String reportUrl = service.uploadDocument(uploadReport);
+			String reportUrl = service.uploadDocument(uploadReport, principal.getName());
 		    dto.setRaExtraDocument(reportUrl);
 		}
 		

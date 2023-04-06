@@ -38,7 +38,7 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	}
 
 	@Override
-	public String uploadDocument(MultipartFile uploadReport) {
+	public String uploadDocument(MultipartFile uploadReport, String userId) {
 		//버켓 폴더 작업 추가해야됨
 		try {
 			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
