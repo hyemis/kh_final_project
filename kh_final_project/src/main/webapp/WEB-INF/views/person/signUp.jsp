@@ -50,9 +50,9 @@
 				</div>
 
 			 
-			 
+			 	<!-- 개인회원가입 -->
 		        <form class="hidden" name=signUpForm id="personal-sign-form" action="signUp" method="post" onsubmit="return checkAll()">
-			        	<div class="m-4"><h3>JOB-A 회원가입</h3></div>
+			        	<div class="m-4"><h3>개인회원 회원가입</h3></div>
 			        	
 				          <div class="row">
 				          
@@ -82,14 +82,6 @@
 				            <div class="invalid-feedback">이름을 입력해주세요.</div>
 				          </div>
 				          
-				          <!-- //TODO 기업일 경우, 이름 >기업명으로 기입 
-				           <div class="mb-3">
-				            <label for="userName">기업명</label>
-				            <input type="text" class="form-control" name="userName" placeholder="이름 입력" required>
-				            <div class="invalid-feedback">기업명을 입력해주세요.</div>
-				          </div>
-				          -->
-				          
 				          <div class="mb-3">
 				            <label for="userBirth">생년월일</label>
 				            <input type="text" class="form-control" name="userBirth" placeholder="YYYYMMDD" required>
@@ -108,13 +100,120 @@
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				          
-				          <div class="mb-3">
-				            <label for="userAdress">주소</label>
-				            <input type="text" class="form-control" name="userAdress" placeholder="서울시 자바구 자바동" required>
-				            <div class="invalid-feedback">주소를 입력해주세요.</div>
-				          </div>
+				          <div class="row">
+							    <label for="addressPostcode">주소</label>
+							    <div class="col-sm-6">
+									<input type="text" class="form-control" id="postcode" name="addressPostcode" required>
+								</div>
+								<div class="col-sm-2">
+									<input type="button" class="form-control" onclick="execDaumPostcode()" value="주소찾기"><br>
+								</div>	
+							</div>		
+							<div class="mb-3 ">
+							    <label for="addressRoad" >도로명주소</label>
+							      <input type="text" class="form-control" id="roadAddress" name ="addressRoad" >
+							 </div>
+							 <div class="mb-3 ">
+							    <label for="addressJibun" >지번주소</label>
+							      <input type="text" class="form-control" id="jibunAddress" name ="addressJibun" >
+							 </div>
+							 <div class="mb-3 ">
+							    <label for="addressDetail" >상세주소</label>
+							      <input type="text" class="form-control" id="detailAddress" name ="addressDetail">
+								  <span id="guide" style="color:#999;display:none"></span>
+							 </div>
+				          
+				  
+				          <!-- <div class="custom-control custom-checkbox">
+				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
+				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
+				          </div> -->
+						
+						</div>
+				         <div class="d-grid m-3">
+						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
+						</div>
+				</form>
 				
-				          <hr class="mb-4">
+				<!-- 기업회원가입 -->
+				<form class="hidden" name=signUpForm id="corporate-sign-form" action="signUp" method="post" onsubmit="return checkAll()">	
+					<h3 class="mt-5 text-center" style="height: 100px;">기업회원 회원가입</h3>
+ 		            	<div class="row text-center">
+				        	<div class="mb-3 row">
+							    <label for="userId" class="col-sm-2 col-form-label text-center">아이디</label>
+							    <div class="col-sm-6">
+									<input type="text" class="form-control" id="userId" name="userId" placeholder="영문,숫자,'_' 사용가능" required>
+								</div>
+								<div class="col-sm-2">
+									<button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">아이디 중복 체크</button>
+								</div>	
+							</div>		
+							<div class="mb-3 row">
+							    <label for="userPw" class="col-sm-2 col-form-label text-center">비밀번호</label>
+							    <div class="col-sm-8">
+							        <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
+							    	<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="userPw2" class="col-sm-2 col-form-label text-center">비밀번호재확인</label>
+							    <div class="col-sm-8">
+							    	<input type="password" class="form-control" name="userPw2" placeholder="비밀번호확인을 위해 한번 더 입력해주세요" required>
+				              	    <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
+							    </div>
+							 </div>  	
+							 <div class="mb-3 row">
+							    <label for="userName" class="col-sm-2 col-form-label text-center">기업명</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="userName" name ="userName" placeholder="기업명" required>
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="userEmail" class="col-sm-2 col-form-label text-center">이메일</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="userEmail" name ="userEmail" placeholder="email@joba.co.kr" required>
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="bsMainPhone" class="col-sm-2 col-form-label text-center">대표번호</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="bsMainPhone" name ="bsMainPhone" placeholder="기업대표전화번호" required>
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="bsLicense" class="col-sm-2 col-form-label text-center">사업자번호</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="bsLicense" name ="bsLicense" placeholder="'-'를 제외한 사업자번호" required>
+							    </div>
+							 </div>
+							<div class="row">
+							    <label for="addressPostcode" class="col-sm-2 col-form-label text-center">주소</label>
+							    <div class="col-sm-6">
+									<input type="text" class="form-control" id="postcode" name="addressPostcode" required>
+								</div>
+								<div class="col-sm-2">
+									<input type="button" class="form-control" onclick="execDaumPostcode()" value="주소찾기"><br>
+								</div>	
+							</div>		
+							<div class="mb-3 row">
+							    <label for="addressRoad" class="col-sm-2 col-form-label text-center">도로명주소</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="roadAddress" name ="addressRoad" >
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="addressJibun" class="col-sm-2 col-form-label text-center">지번주소</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="jibunAddress" name ="addressJibun" >
+							    </div>
+							 </div>
+							 <div class="mb-3 row">
+							    <label for="addressDetail" class="col-sm-2 col-form-label text-center">상세주소</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="detailAddress" name ="addressDetail">
+								  <span id="guide" style="color:#999;display:none"></span>
+							    </div>
+							 </div>
 				          
 				          <!-- <div class="custom-control custom-checkbox">
 				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
@@ -123,16 +222,9 @@
 				          
 						
 						</div>
-				         <div class="d-grid m-3">
-						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
-						</div>
-				</form>
-				
-				  <form class="hidden" id="corporate-sign-form" action="" method="post" >
-				  	기업 회원가입 form 
 				  	
-				  	<div class="d-grid m-3">
-						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
+				  	<div class="d-grid m-4">
+						 <button class="btn btn-primary" type="submit">회원가입 완료</button>
 					</div>
 						
 				  
@@ -301,6 +393,26 @@
             return true;
     	}
 		
+		// 대표전화 체크 
+		function checkMainPhone() {
+        var text = document.getElementById("bsMainPhone");
+        if (!checkExistData(text.value, "대표전화를")) {
+            alert("대표전화번호를 입력해 주세요!");
+            return false;
+        } else
+            return true;
+    	}
+		
+		// 사업자번호 체크 
+		function checkLicense() {
+        var text = document.getElementById("bsLicense");
+        if (!checkExistData(text.value, "사업자번호를")) {
+            alert("사업자번호를 입력해 주세요!");
+            return false;
+        } else
+            return true;
+    	}
+		
 		
 		// 이메일 확인 
 		function checkEmail(userEmail) {
@@ -320,7 +432,7 @@
 		
 		// 주소 체크 
 		function checkAdress() {
-        var text = document.getElementById("userAdress");
+        var text = document.getElementById("postcode");
         if (!checkExistData(text.value, "주소를")) {
             alert("주소를 입력해 주세요!");
             return false;
@@ -340,5 +452,55 @@
 	
 			
 	</script>
+	
+	<!-- map -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("roadAddress").value = roadAddr;
+                document.getElementById("jibunAddress").value = data.jibunAddress;
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+</script>
+
+	
 </body>
 </html>
