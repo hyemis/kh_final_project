@@ -160,25 +160,39 @@ public class PsMainController {
 	// 비밀번호 찾기 	
 	@PostMapping("/findpw")
 	@ResponseBody
-	public int dofindPw(ModelAndView mv,  HttpServletRequest request) throws Exception {
+	public int dofindPw(ModelAndView mv, 
+			@RequestParam("id") String id,
+			@RequestParam("pid") String pid,
+			@RequestParam("name") String name,
+			@RequestParam("pname") String pname,
+			@RequestParam("birth") String birth,
+			@RequestParam("pbirth") String pbirth,
+			@RequestParam("email") String email,
+			@RequestParam("phone") String phone
+			) throws Exception {
+		
 		
 		Map<String,Object> findPw = new HashMap<>();
-		
-		if (request.getParameter("id") != null) {
-		    findPw.put("userId", request.getParameter("id"));
-		} else if (request.getParameter("pid") != null) {
-		    findPw.put("userId", request.getParameter("pid"));
+		if (!id.isEmpty()) {
+		    findPw.put("userId", id);
+		} else if (!pid.isEmpty()) {
+		    findPw.put("userId", pid);
 		}
 		
-		if (request.getParameter("name") != null) {
-		    findPw.put("userName", request.getParameter("name"));
-		} else if (request.getParameter("pname") != null) {
-		    findPw.put("userName", request.getParameter("pname"));
+		if (!name.isEmpty()) {
+		    findPw.put("userName", name);
+		} else if (!pname.isEmpty()) {
+		    findPw.put("userName", pname);
 		}
-		
-		findPw.put("userBirth", request.getParameter("pbirth"));
-		findPw.put("userEmail", request.getParameter("email"));
-		findPw.put("userPhone", request.getParameter("phone"));
+
+		if (!birth.isEmpty()) {
+		    findPw.put("userBirth", birth);
+		} else if (!pbirth.isEmpty()) {
+		    findPw.put("userBirth", pbirth);
+		}
+
+		findPw.put("userEmail", email);
+		findPw.put("userPhone", phone);
 		
 		System.out.println("map 저장 값" + findPw);
 		
@@ -194,14 +208,12 @@ public class PsMainController {
             sb.append(chars.charAt(index));
         }
 	    String newpassword = sb.toString();
-	    dto.setUserPw(newpassword);
-	    
+	    dto.setUserPw(passwordEncoder.encode(newpassword)); //패스워드암호화 
 	    
 	    // TODO:비밀번호 update 
 	    int update = service.update(dto);
 	    System.out.println(dto);
 	    dto.getUserEmail();
-	    
 	    
 	    // TODO: 찾은 이메일로 메일 발송 
 	    String title = "job-a 임시 비밀번호입니다.";
@@ -214,10 +226,6 @@ public class PsMainController {
 		
 		return update;
 	}
-	
-
-		
-		
 	
 	@GetMapping("/findFail")
 	public ModelAndView findFail(ModelAndView mv) {
