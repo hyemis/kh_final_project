@@ -200,6 +200,23 @@ public class PsResumeController {
 		return result;
 	}
 	
+	// 대학교 입력
+//	@PostMapping("rUniversity")
+//	public ModelAndView rUniversity(ModelAndView mv, PsUnivDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
+//		
+//		String url = "/person/resume/write?userId=" + principal.getName();
+//		int result = rservice.insertUniv(dto);
+//		
+//		if(result > 0 ) {
+//			rttr.addFlashAttribute("msg", "대학교 학력사항이 저장되었습니다.");
+//		} else {
+//			rttr.addFlashAttribute("msg", "다시 입력해주세요.");
+//		}
+//		mv.setViewName("redirect:"+ url);
+//		return mv;
+//	}
+	
+	
 	// 대학원 입력
 	@PostMapping("rGSchool")
 	@ResponseBody

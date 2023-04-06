@@ -34,8 +34,7 @@
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/person.css"
+<link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -179,8 +178,9 @@
 													<div class="col-sm-10">
 														<div class="row mb-3">
 															<div class="col-sm-10 offset-sm-2">
-																<input type="hidden" id="checkN" name="ged"> 
-																<input type="checkbox" id="checkY" name="checkY" value="Y"> 대입 검정고시
+																<input type="hidden" id="ged" name="ged"> <input
+																	type="checkbox" id="checkY" name="checkY" value="Y">대입
+																검정고시
 															</div>
 														</div>
 													</div>
@@ -213,7 +213,7 @@
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">save</button>
+													<button type="submit" class="btn btn-primary" onclick="fn_checkY();">save</button>
 												</div>
 											</form>
 
@@ -268,7 +268,8 @@
 														졸업일자</label><br>
 													<div class="col-sm-10">
 														<input type="Date" class="form-control" name="uDate">
-													</div><br>
+													</div>
+													<br>
 													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
@@ -339,10 +340,12 @@
 												</div>
 												<div class="row mb-3">
 													<label for="gDate" class="col-sm-2 col-form-label">대학원
-														졸업일자</label>
+														졸업일자</label><br>
 													<div class="col-sm-10">
 														<input type="Date" class="form-control" name="gDate">
 													</div>
+													<br>
+													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
 													<label for="gMajor" class="col-sm-2 col-form-label">대학원
@@ -394,6 +397,15 @@
 											<input type="Date" class="form-control" name="carDate">
 										</div>
 									</div>
+
+									<div class="row mb-3">
+										<label for="carDate" class="col-sm-2 col-form-label">*재직기간*</label>
+										<div class="col-sm-10">
+											<input type="Date" class="form-control" name="carDate">
+										</div>
+									</div>
+
+
 									<div class="row mb-3">
 										<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
 										<div class="col-sm-10">
@@ -495,6 +507,11 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<script>
+		// alret
+		var msg = "${msg}";
+		if (msg) {
+			alert(msg);
+		}
 		// 이력서 등록
 		function fn_rWrite() {
 			let formdata = new FormData();
@@ -521,18 +538,12 @@
 				}
 			})
 		}
-		
-		
 
- 		// 대입검정고시 체크박스 Y/N 체크
-		 var ged = $("#checkY").prop("checked")? "Y" :"N";
-			$("#checkN").val(ged);
-
- 		
- 		
-		
-		
-			
+		//  대입검정고시 체크박스 Y/N 체크
+		function fn_checkY(){
+		var ged = $("#checkY").prop("checked") ? "Y" : "N";
+		$("#ged").val(ged);
+		}
 	</script>
 
 </body>
