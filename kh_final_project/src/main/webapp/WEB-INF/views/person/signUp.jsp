@@ -33,6 +33,7 @@
 	    display: none;
 	  }
 	</style>
+	
 </head>
 <body>
 	<!-- header  -->
@@ -51,8 +52,8 @@
 
 			 
 			 
-		        <form class="hidden" name=signUpForm id="personal-sign-form" action="signUp" method="post" onsubmit="return checkAll()">
-			        	<div class="m-4"><h3>JOB-A 회원가입</h3></div>
+		        <form class="" name=signUpForm id="personal-sign-form" action="signUp" method="post" onsubmit="return checkAll()">
+			        	<div class="m-4 text-center"><h2>JOB-A 회원가입</h2></div>
 			        	
 				          <div class="row">
 				          
@@ -110,16 +111,19 @@
 				          
 				          <div class="mb-3">
 				            <label for="userAdress">주소</label>
-				            <input type="text" class="form-control" name="userAdress" placeholder="서울시 자바구 자바동" required>
+				            <input type="text" class="form-control" name="addressRoad" placeholder="addressRoad" required>
+				            <input type="text" class="form-control" name="addressJibun" placeholder="addressJibun" required>
+				            <input type="text" class="form-control" name="addressDetail" placeholder="addressDetail" required>
+				            <input type="text" class="form-control" name="addressPostcode" placeholder="addressPostcode" required>
 				            <div class="invalid-feedback">주소를 입력해주세요.</div>
 				          </div>
 				
 				          <hr class="mb-4">
 				          
-				          <!-- <div class="custom-control custom-checkbox">
+				           <div class="custom-control custom-checkbox">
 				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
 				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
-				          </div> -->
+				          </div> 
 				          
 						
 						</div>

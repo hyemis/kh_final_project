@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,6 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import kh.com.job.common.file.FileUtil;
+import kh.com.job.common.mail.MailUtil;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsService;
 
@@ -85,17 +87,137 @@ public class PsMainController {
 		
 		System.out.println("map 저장 값 "+findId);
 		
-		PsUserDto userId = service.findIdEmail(findId);
+		PsUserDto userId = service.findId(findId);
 		String findUserId = userId.getUserId();
 		return findUserId;
 	}
 	
 	// 비밀번호 찾기
-		@GetMapping("/findpw")
-		public ModelAndView viewfindPw(ModelAndView mv) {
-			mv.setViewName("person/findpw");
-			return mv;
+	@GetMapping("/findpw")
+	public ModelAndView viewfindPw(ModelAndView mv) {
+		mv.setViewName("person/findpw");
+		return mv;
+	}
+	
+//	// 비밀번호 찾기 	
+//	@PostMapping("/findpw")
+//	@ResponseBody
+//	public int dofindPw(ModelAndView mv,  HttpServletRequest request) throws Exception {
+//		
+//		Map<String,Object> findPw = new HashMap<>();
+//		
+//		if (request.getParameter("id") != null) {
+//		    findPw.put("userId", request.getParameter("id"));
+//		} else if (request.getParameter("p-id") != null) {
+//		    findPw.put("userId", request.getParameter("p-id"));
+//		}
+//		
+//		if (request.getParameter("name") != null) {
+//		    findPw.put("userId", request.getParameter("name"));
+//		} else if (request.getParameter("p-name") != null) {
+//		    findPw.put("userName", request.getParameter("p-name"));
+//		}
+//		findPw.put("userName", request.getParameter("name"));
+//		findPw.put("userBirth", request.getParameter("birth"));
+//		findPw.put("userEmail", request.getParameter("email"));
+//		findPw.put("userPhone", request.getParameter("phone"));
+//		
+//		System.out.println("map 저장 값" + findPw);
+//		
+//		PsUserDto dto = service.findPw(findPw);
+//		
+//		// TODO: 임시 비밀번호 만들기
+//		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//		Random random = new Random();
+//	    int length = random.nextInt(9) + 8; // 8~16 사이의 길이
+//	    StringBuilder sb = new StringBuilder();
+//	    for (int i = 0; i < length; i++) {
+//            int index = random.nextInt(chars.length());
+//            sb.append(chars.charAt(index));
+//        }
+//	    String newpassword = sb.toString();
+//	    dto.setUserPw(newpassword);
+//	    
+//	    
+//	    // TODO:비밀번호 update 
+//	    int update = service.update(dto);
+//	    System.out.println(dto);
+//	    dto.getUserEmail();
+//	    
+//	    
+//	    // TODO: 찾은 이메일로 메일 발송 
+//	    String title = "job-a 임시 비밀번호입니다.";
+//		String from = "tkdtlrdl07@gmail.com";
+//		String text = "<h1>job-a 임시 비밀번호입니다.</h1><br>회원님의 임시 비밀번호는 " + newpassword + " 입니다. <br>해당 비밀번호로 로그인 후 회원정보 수정 페이지에서 새로운 비밀번호로 변경하세요.";
+//		String to = dto.getUserEmail(); 
+//		String[]  cc = new String[0];
+//		int ccNum = cc.length;
+//		MailUtil.mailSend(title, from, text, to, cc, ccNum);
+//		
+//		return update;
+//	}
+		
+	// 비밀번호 찾기 	
+	@PostMapping("/findpw")
+	@ResponseBody
+	public int dofindPw(ModelAndView mv,  HttpServletRequest request) throws Exception {
+		
+		Map<String,Object> findPw = new HashMap<>();
+		
+		if (request.getParameter("id") != null) {
+		    findPw.put("userId", request.getParameter("id"));
+		} else if (request.getParameter("pid") != null) {
+		    findPw.put("userId", request.getParameter("pid"));
 		}
+		
+		if (request.getParameter("name") != null) {
+		    findPw.put("userName", request.getParameter("name"));
+		} else if (request.getParameter("pname") != null) {
+		    findPw.put("userName", request.getParameter("pname"));
+		}
+		
+		findPw.put("userBirth", request.getParameter("pbirth"));
+		findPw.put("userEmail", request.getParameter("email"));
+		findPw.put("userPhone", request.getParameter("phone"));
+		
+		System.out.println("map 저장 값" + findPw);
+		
+		PsUserDto dto = service.findPw(findPw);
+		
+		// TODO: 임시 비밀번호 만들기
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		Random random = new Random();
+	    int length = random.nextInt(9) + 8; // 8~16 사이의 길이
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            sb.append(chars.charAt(index));
+        }
+	    String newpassword = sb.toString();
+	    dto.setUserPw(newpassword);
+	    
+	    
+	    // TODO:비밀번호 update 
+	    int update = service.update(dto);
+	    System.out.println(dto);
+	    dto.getUserEmail();
+	    
+	    
+	    // TODO: 찾은 이메일로 메일 발송 
+	    String title = "job-a 임시 비밀번호입니다.";
+		String from = "tkdtlrdl07@gmail.com";
+		String text = "<h1>job-a 임시 비밀번호입니다.</h1><br>회원님의 임시 비밀번호는 " + newpassword + " 입니다. <br>해당 비밀번호로 로그인 후 회원정보 수정 페이지에서 새로운 비밀번호로 변경하세요.";
+		String to = dto.getUserEmail(); 
+		String[]  cc = new String[0];
+		int ccNum = cc.length;
+		MailUtil.mailSend(title, from, text, to, cc, ccNum);
+		
+		return update;
+	}
+	
+
+		
+		
 	
 	@GetMapping("/findFail")
 	public ModelAndView findFail(ModelAndView mv) {

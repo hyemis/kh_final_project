@@ -52,9 +52,14 @@ public class PsDao {
 		return sqlSession.update("person.update", dto);
 	}
 	
-	// Email로 아이디 찾기
-	public PsUserDto findIdEmail(Map<String, Object> findId)  throws Exception {
-			return sqlSession.selectOne("person.findIdEmail", findId);
+	// 아이디 찾기
+	public PsUserDto findId(Map<String, Object> findId)  throws Exception {
+			return sqlSession.selectOne("person.findId", findId);
+	}
+	
+	// 비밀번호 찾기 
+	public PsUserDto findPw(Map<String, Object> findPw) throws Exception {
+		return sqlSession.selectOne("person.findPw", findPw);
 	}
 
 
