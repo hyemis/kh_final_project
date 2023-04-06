@@ -441,7 +441,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="bg-light rounded p-3">
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
@@ -469,7 +468,7 @@
 										</div>
 									</div>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-										<button type="submit" class="btn btn-primary">save</button>
+										<button type="submit" class="btn btn-primary" onclick="inputCerti()";>save</button>
 									</div>
 								</form>
 							</div>
@@ -550,8 +549,7 @@
 		
 		
 		
-		// 신입 라디오박스 체크확인
-
+		// 경력사항 '신입' 라디오박스 체크 안 하면 hidden
 		const radioBox = document.getElementById("radio-box");
 		const hiddenContent = document.getElementById("hidden-content");
 
@@ -569,6 +567,33 @@
 				hiddenContent.classList.remove("hidden");
 			}
 		});
+		
+		
+		// 공백 확인
+		function checkExistData(value, dataName) {
+		        if (value == "") {
+		            alert(dataName + " 입력해주세요!");
+		            return false;
+		        }
+		        return true;
+		    } 
+		
+		// 자격증입력 확인
+		function checkCerti(certiName, certiPub, certiDate) {
+			if (!checkExistData(certiName, "자격증명을")) {
+				alert("자격증명을 입력하세요!");
+				return false;
+			}
+			if (!checkExistData(certiPub, "자격증 발행처를")) {
+				alert("자격증 발행처를 입력하세요!");
+				return false;
+			}
+			if (!checkExistData(certiDate, "자격증 취득일자를")) {
+				alert("자격증 취득일자를 입력하세요!");
+				return false;
+			}
+			return true;
+		}
 	</script>
 
 </body>
