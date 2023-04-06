@@ -52,6 +52,13 @@
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
+
 </head>
 <body>
 
@@ -383,6 +390,10 @@
 						<div class="mb-4">
 							<h3 class="mb-3">경력사항</h3>
 							<div>
+							<input type="radio" id="radio-box" name="radio-group">
+							<label for="radio-box">경력없음(신입)</label>
+							</div><br>
+							<div id="hidden-content">
 								<form name="rCareer" action="rCareer" method="post">
 									<div class="row mb-3">
 										<label for="carName" class="col-sm-2 col-form-label">회사명</label>
@@ -394,18 +405,9 @@
 									<div class="row mb-3">
 										<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
 										<div class="col-sm-10">
-											<input type="Date" class="form-control" name="carDate">
+											<input type="text" class="form-control" name="carDate" placeholder="ex) 2020-01-01 ~ 2022-12-31">
 										</div>
 									</div>
-
-									<div class="row mb-3">
-										<label for="carDate" class="col-sm-2 col-form-label">*재직기간*</label>
-										<div class="col-sm-10">
-											<input type="Date" class="form-control" name="carDate">
-										</div>
-									</div>
-
-
 									<div class="row mb-3">
 										<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
 										<div class="col-sm-10">
@@ -512,6 +514,7 @@
 		if (msg) {
 			alert(msg);
 		}
+		
 		// 이력서 등록
 		function fn_rWrite() {
 			let formdata = new FormData();
@@ -544,6 +547,29 @@
 		var ged = $("#checkY").prop("checked") ? "Y" : "N";
 		$("#ged").val(ged);
 		}
+		
+		
+		
+		
+		// 신입 라디오박스 체크확인
+
+		const radioBox = document.getElementById("radio-box");
+		const hiddenContent = document.getElementById("hidden-content");
+
+		let clickCount = 0;
+
+		radioBox.addEventListener("click", function() {
+			clickCount++;
+			if (radioBox.checked) {
+				hiddenContent.classList.add("hidden");
+			} else {
+				hiddenContent.classList.remove("hidden");
+			}
+			if (clickCount % 2 === 1) {
+				radioBox.checked = false;
+				hiddenContent.classList.remove("hidden");
+			}
+		});
 	</script>
 
 </body>
