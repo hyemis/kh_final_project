@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,11 +41,11 @@ public class PsResumeController {
 	
 	//이력서관리 페이지 열기
 	@GetMapping("/list")
-	public ModelAndView doList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+	public ModelAndView doList(ModelAndView mv, Principal principal) {
 		try {
 			
-			PsUserDto result = pservice.selectOne(userId);
-			List<PsResumeDto> resume = rservice.selectList(userId);
+			PsUserDto result = pservice.selectOne(principal.getName());
+			List<PsResumeDto> resume = rservice.selectList(principal.getName());
 			
 			if(result!=null) {
 				mv.addObject("userinfo", result);
@@ -64,12 +66,10 @@ public class PsResumeController {
 	// 이력서 작성 페이지 열기 
 	@GetMapping("/write")
 	public ModelAndView doResume(ModelAndView mv
-			, @RequestParam(name = "userId") String userId){
-		
-			System.out.println(userId);
+			, Principal principal) {
 		try {
 			
-			PsUserDto result = pservice.selectOne(userId);
+			PsUserDto result = pservice.selectOne(principal.getName());
 			
 			if(result!=null) {
 				mv.addObject("userinfo", result);
@@ -85,9 +85,9 @@ public class PsResumeController {
 	}
 	
 	// 이력서 파일 업로드 
-		@PostMapping("/fileupload")
-		@ResponseBody
-		  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,Principal principal) throws Exception {
+	@PostMapping("/fileupload")
+	@ResponseBody
+	public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,Principal principal) throws Exception {
 			
 			if(!file.isEmpty()) {
 				PsUserDto result = pservice.selectOne(principal.getName());
@@ -98,36 +98,36 @@ public class PsResumeController {
 			}  
 			mv.setViewName("person/resume/write");
 			  return mv;
-		  }
+	}
 
 		
-		// 이력서 작성
-		@PostMapping("/write")
-		@ResponseBody
-		public int writeResume( Principal principal
+	// 이력서 작성
+	@PostMapping("/write")
+	@ResponseBody
+	public int writeResume( Principal principal
 				, PsResumeDto dto
 				, @RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) {
 			
-			System.out.println("로그인정보: "+principal.getName());
-			System.out.println("파일 url "+ dto.getResumePhoto());
+		System.out.println("로그인정보: "+principal.getName());
+		System.out.println("파일 url "+ dto.getResumePhoto());
 			
-			dto.setUserId(principal.getName());
+		dto.setUserId(principal.getName());
 			
-			if(uploadPortf != null && !uploadPortf.isEmpty()) {
-				String portfUrl = rservice.upload(uploadPortf);
-			    dto.setPortfFile(portfUrl);
-			}
+		if(uploadPortf != null && !uploadPortf.isEmpty()) {
+			String portfUrl = rservice.upload(uploadPortf);
+			dto.setPortfFile(portfUrl);
+		}
 			
-			int result = -1;
-			try {
+		int result = -1;
+		try {
 				result = rservice.insert(dto);
 				return result;
-			} catch (Exception e) {
+		} catch (Exception e) {
 				e.printStackTrace();
-			}
-		
-			return result;
 		}
+		
+		return result;
+	}
 	
 	// 이력서 삭제 
 	@PostMapping("/delete")
@@ -175,15 +175,23 @@ public class PsResumeController {
 	//고등학교입력
 	@PostMapping("rHSchool")
 	@ResponseBody
-	public int rHschool(PsHschoolDto dto) {
+	public ModelAndView rHschool(ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertHschool(dto);
-			return result;
+			
+			if(result > 0 ) {
+				rttr.addFlashAttribute("msg", "성공");
+			} else {
+				rttr.addFlashAttribute("msg", "실패");
+			}
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 	}
 	
 	// 대학교 입력

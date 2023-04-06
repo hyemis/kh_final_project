@@ -530,8 +530,7 @@
 					if (result === 1) {
 						alert("이력서가 등록되었습니다.");
 						var userId = $("#userId").val();
-						location.href = "/job/person/resume/list?userId="
-								+ userId;
+						location.href = "/job/person/resume/list";
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}
