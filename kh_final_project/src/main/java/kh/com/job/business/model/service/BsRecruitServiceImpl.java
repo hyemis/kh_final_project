@@ -1,7 +1,17 @@
 package kh.com.job.business.model.service;
 
+import java.io.IOException;
+import java.util.UUID;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.business.model.dao.BsAccountDao;
 import kh.com.job.business.model.dao.BsRecruitDao;
@@ -15,10 +25,35 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	
 	@Autowired
 	private BsRecruitDao dao;
+	
+	@Value("${gcs.projectId}")
+    private String projectId;
+	
+	@Value("${gcs.bucketName}")
+	private String bucketName;
 
 	@Override
 	public Object getCateList(String categoryType) {
 		return dao.getCateList(categoryType);
+	}
+
+	@Override
+	public String uploadDocument(MultipartFile uploadReport) {
+		//버켓 폴더 작업 추가해야됨
+		try {
+			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+			String fileName = UUID.randomUUID().toString();
+			String extension = FilenameUtils.getExtension(uploadReport.getOriginalFilename());
+			String fullName = fileName + "." + extension;
+			
+			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fullName).build();
+			storage.create(blobInfo, uploadReport.getBytes());
+			return "https://storage.googleapis.com/" + bucketName + "/" + fullName;
+				
+			} catch (IOException e) {
+				 throw new RuntimeException(e);
+			}
+		
 	}
 
 }

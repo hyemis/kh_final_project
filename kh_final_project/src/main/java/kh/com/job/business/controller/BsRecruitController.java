@@ -23,6 +23,7 @@ import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsRecruitService;
+import kh.com.job.person.model.dto.PsUserDto;
 
 @Controller
 @RequestMapping("/business/recruit")
@@ -78,15 +79,18 @@ public class BsRecruitController {
 	@PostMapping("/insert")
 	public ModelAndView insertRecruit(ModelAndView mv, BsRecruitDto dto
 								,@RequestParam(value = "conditionTypeList", required = false) List<String> conditionTypeList
-								,@RequestParam(name = "report", required = false) MultipartFile multi){
+								,@RequestParam(name = "report", required = false) MultipartFile uploadReport){
 		
 		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
 			String conditionType = String.join(",", conditionTypeList);
 			dto.setConditionType(conditionType);
-			
 			//join으로 합친거 자르기위한 거
 			String[] conditionType2 = conditionType.split(",");
 			List<String> list = Arrays.asList(conditionType2);			
+		}
+		if(uploadReport != null && !uploadReport.isEmpty()) {
+			String reportUrl = service.uploadDocument(uploadReport);
+		    dto.setRaExtraDocument(reportUrl);
 		}
 		
 		System.out.println(dto);
