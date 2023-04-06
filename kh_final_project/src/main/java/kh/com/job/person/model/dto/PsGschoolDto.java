@@ -35,4 +35,12 @@ public class PsGschoolDto {
 	private Date gDate;
 	private String gMajor;
 	private double gPoint;
-}
+
+
+	// 졸업일자 입력 안 하면 null로 받기
+	public void setGdate(Object gDate) {
+		if(gDate.equals(""))
+			this.gDate = null;
+		this.gDate = (Date)gDate;
+		}
+	}

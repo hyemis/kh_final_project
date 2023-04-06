@@ -55,23 +55,11 @@ public class PsMainController {
 	BCryptPasswordEncoder passwordEncoder;
 	
 
-
+	// 메인화면
 	@GetMapping("/main")
 	public ModelAndView viewmain(ModelAndView mv) {
 		return mv;
 	}
-	
-//	@GetMapping("/main")
-//	public ModelAndView main(ModelAndView mv) {
-//		
-//		try {
-//			mv.addObject("plist", service.selectList());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} 
-//		
-//		return mv;
-//	}
 	
 	// 아이디 찾기 
 	@GetMapping("/findid")

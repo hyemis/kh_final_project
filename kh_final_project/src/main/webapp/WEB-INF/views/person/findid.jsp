@@ -165,40 +165,6 @@
 	} 
 	
 	
-	/* // phone 으로 id 찾기
-	function findIdEamil() {
-		let formdata = new FormData();
-		formdata.append("name", $('#personal-p-name').val());
-		formdata.append("birth", $('#personal-p-birth').val());
-		formdata.append("email", $('#personal-phone').val());
-		
-		if(!formdata) {
-			alert("입력값을 모두 입력해주세요.");
-			return;
-		}
-	
-	
-		$.ajax({
-		url : "${pageContext.request.contextPath}/person/findid",
-		type : "post",
-		contentType: false, 
-		processData: false,
-		data: formdata, 
-		success: function(data){
-				if (data != null) {
-				alert("회원님의 아이디는"+ data + "입니다.");
-				location.href="/job/person/login";
-			}	else {
-				alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
-				location.href="/job/person/signUp";
-			}
-		}
-
-		});
-	} */
-	
-	
-	
  	 </script>
 </body>
 </html>

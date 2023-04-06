@@ -31,4 +31,15 @@ public class PsHschoolDto {
 	private String hName;
 	private Date hDate;
 	private String hMajor;
+	
+	
+	
+	// 졸업일자 미입력시 null값으로 들어가게 하기
+	public void setHdate(Object hDate) {
+		if(hDate.equals(""))
+			this.hDate = null;
+		this.hDate = (Date)hDate;
+	}
+	
+
 }

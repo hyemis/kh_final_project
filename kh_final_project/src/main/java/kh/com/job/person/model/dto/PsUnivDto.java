@@ -31,8 +31,18 @@ public class PsUnivDto {
 	private int uEduNo;
 	private String uAct;
 	private String uCategory;
-	private String uNmae;
+	private String uName;
 	private Date uDate;
 	private String uMajor;
 	private double uPoint;
+	public Date getuDate() {
+		return uDate;
+	}
+	public void setUdte(Object uDate) {
+		if(uDate.equals(""))
+			this.uDate = null;
+		this.uDate = (Date)uDate;
+	}
+	
+	
 }
