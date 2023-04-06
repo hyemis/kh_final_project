@@ -1,6 +1,7 @@
 package kh.com.job.business.controller;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdCategotyService;
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsRecruitService;
@@ -71,6 +75,27 @@ public class BsRecruitController {
 		return mv;
 	}
 	
+	@PostMapping("/insert")
+	public ModelAndView insertRecruit(ModelAndView mv, BsRecruitDto dto
+								,@RequestParam(value = "conditionTypeList", required = false) List<String> conditionTypeList
+								,@RequestParam(name = "report", required = false) MultipartFile multi){
+		
+		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
+			String conditionType = String.join(",", conditionTypeList);
+			dto.setConditionType(conditionType);
+			
+			//join으로 합친거 자르기위한 거
+			String[] conditionType2 = conditionType.split(",");
+			List<String> list = Arrays.asList(conditionType2);			
+		}
+		
+		System.out.println(dto);
+		mv.setViewName("redirect:/business/recruit/main");
+		return mv;
+	}
+
+	
+	
 	@PostMapping("/catelist")
 	@ResponseBody
 	public String listMiddleCate(ModelAndView mv, String categoryId){
@@ -84,37 +109,6 @@ public class BsRecruitController {
 		return new Gson().toJson(mlist);
 	}
 	
-	
-	
-	//나중에
-	@GetMapping("/first")
-	public ModelAndView recruitInsertFirst(ModelAndView mv) {
-		
-		return mv;
-	}
-	
-	
-	@GetMapping("/second")
-	public ModelAndView recruitInsertSecond(ModelAndView mv) {
-		
-		return mv;
-	}
-	
-	@GetMapping("/third")
-	public ModelAndView recruitInsertThird(ModelAndView mv) {
-		
-		return mv;
-	}
 
-	@GetMapping("/fourth")
-	public ModelAndView recruitInsertFourth(ModelAndView mv) {
-		
-		return mv;
-	}
 
-	@GetMapping("/fifth")
-	public ModelAndView recruitInsertFifth(ModelAndView mv) {
-		
-		return mv;
-	}
 }

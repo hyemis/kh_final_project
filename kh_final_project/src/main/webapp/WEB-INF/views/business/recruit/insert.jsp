@@ -69,14 +69,13 @@
 			</li>
 		</ul>
 	
+		<form action="insert" method="post" id="formdata1" enctype="multipart/form-data">
 		<!-- 탭 내용 -->
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
-				
 				<div class="justify-content-center">
 				<!-- 1번에서 8번 -->
 					<h3>회사 정보</h3>
-					<form id="formdata1" class="form-control">
 						<!-- princple get.name으로 가져올 거 -->
 						<table class="table table-borderless">
 							<thead>
@@ -103,7 +102,7 @@
 										</select>			
 									</td>
 									<td>
-										<select id="recruitType" class="recruitType" style="text-overflow: ellipsis;">
+										<select id="recruitType" class="recruitType" name="recruitType" style="text-overflow: ellipsis;">
 											<option value="0">선택안함</option>
 										</select>
 									</td>
@@ -111,7 +110,8 @@
 								<tr class="mb-3">
 									<td><label for="career">경력선택</label></td>
 									<td>
-									<select id="career" class="career">
+									<select id="careerType" class="careerType">
+											<option value="0">선택안함</option>
 										<c:forEach items="${CAlist}" var="categoryCA">
 											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
 										</c:forEach>
@@ -122,6 +122,7 @@
 									<td><label for="userEducation">학력선택</label></td>
 									<td>
 									<select id="userEducation" class="userEducation">
+										<option value="0">선택안함</option>
 										<c:forEach items="${EDlist}" var="categoryED">
 											<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
 										</c:forEach>
@@ -138,7 +139,7 @@
 									<td>우대조건</td>
 									<td colspan="2">
 										<c:forEach items="${SClist}" var="categorySC">
-											<label><input type="checkbox" id="conditionTypeList" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }">
+											<label><input type="checkbox" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }" checked="checked">
 											${categorySC.categoryName }</label>
 										</c:forEach>
 									</td>
@@ -156,6 +157,7 @@
 									<td><label for="empTypeCode">고용형태</label></td>
 									<td>
 									<select id="empTypeCode" class="empTypeCode">
+											<option value="0">선택안함</option>
 										<c:forEach items="${ETlist}" var="categoryET">
 											<option value="${categoryET.categoryId }">${categoryET.categoryName}</option>
 										</c:forEach>
@@ -167,6 +169,7 @@
 									<td><label for="holidayType">상세 근무 형태</label></td>
 									<td>
 									<select id="holidayType" class="holidayType">
+											<option value="0">선택안함</option>
 										<c:forEach items="${CAlist}" var="categoryCA">
 											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
 										</c:forEach>
@@ -176,7 +179,6 @@
 							</tbody>
 						</table>					
 		
-					</form>
 					<button type="button" class="btn nextbtn">다음</button>
 				</div>
 				
@@ -185,37 +187,36 @@
 				<div>
 					<!-- 9번에서 16번 -->
 					<h3>채용 정보</h3>
-					<form id="formdata2" class="form-control">
-						<table class="table table-borderless">
-							<thead>
-								<tr>
-									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-6"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label for="raTitle">채용 공고 제목</label></td>
-									<td><input type="text" id="raTitle" class="raTitle" name="raTitle"></td>
-								</tr>
-								<tr>
-									<td><textarea class="form-control"></textarea></td>
-								</tr>
-								<tr>
-									<td><label for="raExtraDocument">이력서 샘플</label></td>
-									<td><input type="file" id="raExtraDocument" class="raExtraDocument" name="raExtraDocument"></td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th scope="col" class="col-3"></th>
+								<th scope="col" class="col-3"></th>
+								<th scope="col" class="col-6"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><label for="raTitle">채용 공고 제목</label></td>
+								<td><input type="text" id="raTitle" class="raTitle" name="raTitle"></td>
+							</tr>
+							<tr>
+								<td><textarea class="raContent"></textarea></td>
+							</tr>
+							<tr>
+								<td><label for="report">이력서 샘플</label></td>
+								<td><input type="file" id="report" class="report" name="report"></td>
+							</tr>
+						</tbody>
+					</table>
 					<div>
 						<button type="button" class="btn prevbtn">이전</button>
-						<button type="button" class="btn insertbtn">작성</button>
+						<button type="submit" class="btn insertbtn">작성</button>
 					</div>
 				</div>
 			</div>
 		</div>
+	</form>
 
 	</div>
 	
@@ -224,6 +225,7 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
 			// 다음 버튼 클릭 시 다음 탭으로 이동
 			$('.nextbtn').click(function() {
