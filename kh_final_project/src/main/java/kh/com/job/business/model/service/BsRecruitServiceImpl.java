@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
@@ -44,8 +46,17 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 			String fileName = UUID.randomUUID().toString();
 			String extension = FilenameUtils.getExtension(uploadReport.getOriginalFilename());
-			String fullName = fileName + "." + extension;
+			String fullName = userId + "/"+ fileName + "." + extension;
 			
+			System.out.println("storage 변수 설정 : " + storage);
+			System.out.println("fullName 변수 설정 : " + fullName);
+			System.out.println("extension 변수 설정 : " + extension);
+			
+		     // userId 폴더가 없으면 새로 생성
+
+			
+	        System.out.println("아이디 폴더 진행되면 이쪽으로");
+	        
 			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fullName).build();
 			storage.create(blobInfo, uploadReport.getBytes());
 			return "https://storage.googleapis.com/" + bucketName + "/" + fullName;

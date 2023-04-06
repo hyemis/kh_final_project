@@ -69,8 +69,8 @@ public class BsRecruitController {
 		mv.addObject("SClist", service.getCateList("SC"));
 		//고용형태
 		mv.addObject("ETlist", service.getCateList("ET"));
-		
-		mv.addObject("SClist", service.getCateList("SC"));
+		//상세근무형태
+		mv.addObject("HTlist", service.getCateList("HT"));
 		
 		
 		return mv;
@@ -89,6 +89,17 @@ public class BsRecruitController {
 			String[] conditionType2 = conditionType.split(",");
 			List<String> list = Arrays.asList(conditionType2);			
 		}
+		
+		//salary데이터 관리
+		if(dto.getMinSalary() == null || dto.getMinSalary().isEmpty()){
+			dto.setMinSalary("0");
+		}
+		if(dto.getMaxSalary() == null || dto.getMaxSalary().isEmpty()){
+			dto.setMaxSalary("0");
+		}
+		
+		
+		dto.setSalary(dto.getMinSalary()+" ~ "+dto.getMaxSalary());
 		//이력서 파일 업로드
 		if(uploadReport != null && !uploadReport.isEmpty()) {
 			String reportUrl = service.uploadDocument(uploadReport, principal.getName());
