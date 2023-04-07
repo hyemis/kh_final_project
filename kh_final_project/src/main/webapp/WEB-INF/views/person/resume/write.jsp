@@ -264,7 +264,7 @@
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 													<button type="submit" class="btn btn-primary"
-														onclick="fn_checkY();">save</button>
+														onclick="fn_checkY();">저장</button>
 												</div>
 											</form>
 
@@ -340,7 +340,7 @@
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">save</button>
+													<button type="submit" class="btn btn-primary">저장</button>
 												</div>
 											</form>
 										</div>
@@ -415,7 +415,7 @@
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">save</button>
+													<button type="submit" class="btn btn-primary">저장</button>
 												</div>
 											</form>
 										</div>
@@ -479,7 +479,7 @@
 										</div>
 									</div>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-										<button type="submit" class="btn btn-primary">save</button>
+										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
 									</div>
 								</form>
 							</div>
@@ -515,7 +515,7 @@
 										</div>
 									</div>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-										<button type="submit" class="btn btn-primary">save</button>
+										<button type="submit" class="btn btn-primary" id="saveCerti">저장</button>
 									</div>
 								</form>
 							</div>
@@ -634,6 +634,56 @@
 				hiddenContent.classList.remove("hidden");
 			}
 		});
+		
+		
+		// 경력사항 입력확인
+		const rCareer = document.querySelector('form[name="rCareer"]');
+		const saveCareer = document.querySelector('#saveCareer');
+
+		function checkInputs(event) {
+			let inputs = rCareer.querySelectorAll('input[type=text]');
+			let isAllFilled = true;
+
+			for (let i = 0; i < inputs.length; i++) {
+				if (inputs[i].value.trim() === '') {
+					isAllFilled = false;
+					break;
+				}
+			}
+
+			if (!isAllFilled) {
+				alert('모든 칸을 입력하세요!');
+				event.preventDefault(); // 저장 취소
+			}
+		}
+
+		saveCareer.addEventListener('click', checkInputs);
+		rCareer.addEventListener('submit', checkInputs);
+
+		// 자격증 입력 확인
+		const rCerti = document.querySelector('form[name="rCerti"]');
+		const saveCerti = document.querySelector('#saveCerti');
+
+		function checkInputs(event) {
+			let inputs = rCerti
+					.querySelectorAll('input[type=text], input[type=date]');
+			let isAllFilled = true;
+
+			for (let i = 0; i < inputs.length; i++) {
+				if (inputs[i].value.trim() === '') {
+					isAllFilled = false;
+					break;
+				}
+			}
+
+			if (!isAllFilled) {
+				alert('모든 칸을 입력하세요!');
+				event.preventDefault(); // 저장 취소
+			}
+		}
+
+		saveCerti.addEventListener('click', checkInputs);
+		rCerti.addEventListener('submit', checkInputs);
 	</script>
 
 </body>
