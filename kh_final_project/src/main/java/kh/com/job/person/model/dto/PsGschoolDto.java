@@ -19,28 +19,22 @@ import lombok.ToString;
 public class PsGschoolDto {
 	
 	
-//	G_EDU_NO   NOT NULL NUMBER       
-//	G_ACT               VARCHAR2(1)  
-//	G_NAME              VARCHAR2(30) 
-//	G_CATEGORY          CHAR(6)      
-//	G_DATE              TIMESTAMP(6) 
-//	G_MAJOR             VARCHAR2(50) 
-//	G_POINT             NUMBER 
+//	GRAD_EDU_NO   NOT NULL NUMBER       
+//	GRAD_ACT               VARCHAR2(1)  
+//	GRAD_NAME              VARCHAR2(30) 
+//	GRAD_CATEGORY          CHAR(6)      
+//	GRAD_DATE              TIMESTAMP(6) 
+//	GRAD_MAJOR             VARCHAR2(50) 
+//	GRAD_POINT             NUMBER 
 
 	
-	private int gEduNo;
-	private String gAct;
-	private String gName;
-	private String gCategory;
-	private Date gDate;
-	private String gMajor;
-	private double gPoint;
+	private int gradEduNo;
+	private String gradAct;
+	private String gradName;
+	private String gradCategory;
+	private String gradDate;
+	private String gradMajor;
+	private double gradPoint;
 
 
-	// 졸업일자 입력 안 하면 null로 받기
-	public void setGdate(Object gDate) {
-		if(gDate.equals(""))
-			this.gDate = null;
-		this.gDate = (Date)gDate;
-		}
 	}

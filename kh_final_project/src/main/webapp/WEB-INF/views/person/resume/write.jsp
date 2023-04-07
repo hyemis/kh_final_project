@@ -288,7 +288,7 @@
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 													<button type="submit" class="btn btn-primary"
-														onclick="fn_checkY();">save</button>
+														onclick="fn_checkY();">저장</button>
 												</div>
 											</form>
 
@@ -310,10 +310,10 @@
 											<!-- 대학교 졸업 form -->
 											<form name="rUniversity" action="rUniversity" method="post">
 												<div class="row mb-3">
-													<label for="uAct" class="col-sm-2 col-form-label">대학
+													<label for="uniAct" class="col-sm-2 col-form-label">대학
 														졸업유무</label>
 													<div class="col-sm-10">
-														<select class="form-select" name="uAct">
+														<select class="form-select" name="uniAct">
 															<option selected>대학졸업유무선택</option>
 															<option value="N">재학중</option>
 															<option value="R">휴학</option>
@@ -322,10 +322,10 @@
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="uCategory" class="col-sm-2 col-form-label">대학
+													<label for="uniCategory" class="col-sm-2 col-form-label">대학
 														카테고리</label>
 													<div class="col-sm-10">
-														<select class="form-select" name="uCategory">
+														<select class="form-select" name="uniCategory">
 															<option selected>대학카테고리</option>
 															<option value="T">2,3년제</option>
 															<option value="F">4년제</option>
@@ -333,38 +333,38 @@
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="uName" class="col-sm-2 col-form-label">대학교명</label>
+													<label for="uniName" class="col-sm-2 col-form-label">대학교명</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="uName">
+														<input type="text" class="form-control" name="uniName">
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="uDate" class="col-sm-2 col-form-label">대학
+													<label for="uniDate" class="col-sm-2 col-form-label">대학
 														졸업일자</label><br>
 													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="uDate">
+														<input type="Date" class="form-control" name="uniDate">
 													</div>
 													<br>
 													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
-													<label for="uMajor" class="col-sm-2 col-form-label">대학
+													<label for="uniMajor" class="col-sm-2 col-form-label">대학
 														전공</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="uMajor">
+														<input type="text" class="form-control" name="uniMajor">
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="uPoint" class="col-sm-2 col-form-label">대학
+													<label for="uniPoint" class="col-sm-2 col-form-label">대학
 														학점</label>
 													<div class="col-sm-10">
 														<input type="number" step="0.01" class="form-control"
-															name="uPoint" placeholder="소수점 두번째 자리까지만 입력">
+															name="uniPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
 													</div>
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">save</button>
+													<button type="submit" class="btn btn-primary" >저장</button>
 												</div>
 											</form>
 										</div>
@@ -385,10 +385,10 @@
 											<!-- 대학원 졸업 form -->
 											<form name="rGSchool" action="rGSchool" method="post">
 												<div class="row mb-3">
-													<label for="gAct" class="col-sm-2 col-form-label">대학원
+													<label for="gradAct" class="col-sm-2 col-form-label">대학원
 														졸업유무</label>
 													<div class="col-sm-10">
-														<select class="form-select" name="gAct">
+														<select class="form-select" name="gradAct">
 															<option selected>대학졸업유무선택</option>
 															<option value="N">재학중</option>
 															<option value="R">휴학</option>
@@ -397,10 +397,10 @@
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="gCategory" class="col-sm-2 col-form-label">대학원
+													<label for="gradCategory" class="col-sm-2 col-form-label">대학원
 														카테고리</label>
 													<div class="col-sm-10">
-														<select class="form-select" name="gCategory">
+														<select class="form-select" name="gradCategory">
 															<option selected>대학원카테고리</option>
 															<option value="M">석사</option>
 															<option value="D">박사</option>
@@ -408,38 +408,38 @@
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="gName" class="col-sm-2 col-form-label">대학원명</label>
+													<label for="gradName" class="col-sm-2 col-form-label">대학원명</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="gName">
+														<input type="text" class="form-control" name="gradName">
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="gDate" class="col-sm-2 col-form-label">대학원
+													<label for="gradDate" class="col-sm-2 col-form-label">대학원
 														졸업일자</label><br>
 													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="gDate">
+														<input type="Date" class="form-control" name="gradDate">
 													</div>
 													<br>
 													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
-													<label for="gMajor" class="col-sm-2 col-form-label">대학원
+													<label for="gradMajor" class="col-sm-2 col-form-label">대학원
 														전공</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="gMajor">
+														<input type="text" class="form-control" name="gradMajor">
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="gPoint" class="col-sm-2 col-form-label">대학원
+													<label for="gradPoint" class="col-sm-2 col-form-label">대학원
 														학점</label>
 													<div class="col-sm-10">
 														<input type="number" step="0.01" class="form-control"
-															name="gPoint" placeholder="소수점 두번째 자리까지만 입력">
+															name="gradPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
 													</div>
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">save</button>
+													<button type="submit" class="btn btn-primary">저장</button>
 												</div>
 											</form>
 										</div>
@@ -503,7 +503,7 @@
 										</div>
 									</div>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-										<button type="submit" class="btn btn-primary">save</button>
+										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
 									</div>
 								</form>
 							</div>
@@ -539,7 +539,7 @@
 										</div>
 									</div>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-										<button type="submit" class="btn btn-primary">save</button>
+										<button type="submit" class="btn btn-primary" id="saveCerti">저장</button>
 									</div>
 								</form>
 							</div>
@@ -600,7 +600,7 @@
 				processData : false,
 				data : formdata,
 				success : function(result) {
-					if (result === 1) {
+					if (result == 1) {
 						alert("이력서가 등록되었습니다.");
 						var userId = $("#userId").val();
 						location.href = "/job/person/resume/list";
@@ -617,13 +617,36 @@
 			$("#ged").val(ged);
 		}
 
-		// 신입 라디오박스 체크확인
-
+		//  대입검정고시 체크박스 Y/N 체크
+		function fn_checkY() {
+			var ged = $("#checkY").prop("checked") ? "Y" : "N";
+			$("#ged").val(ged);
+		}
+		
+		
+		// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
+ 		const disableInputCheckbox = document.getElementById("checkY");
+ 		const dateField = document.getElementById("dateField");
+ 		const selectField = document.getElementById("selectField");
+		disableInputCheckbox.addEventListener("change", function() {
+		  if (this.checked) {
+		    inputField.disabled = true;
+		    dateField.disabled = true;
+		    selectField.disabled = true;
+		  } else {
+		    inputField.disabled = false;
+		    dateField.disabled = false;
+		    selectField.disabled = false;
+		  }
+		});
+	
+	
+		
+		
+		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
 		const radioBox = document.getElementById("radio-box");
 		const hiddenContent = document.getElementById("hidden-content");
-
 		let clickCount = 0;
-
 		radioBox.addEventListener("click", function() {
 			clickCount++;
 			if (radioBox.checked) {
@@ -636,6 +659,48 @@
 				hiddenContent.classList.remove("hidden");
 			}
 		});
+		
+		
+		// 경력사항 입력확인
+		const rCareer = document.querySelector('form[name="rCareer"]');
+		const saveCareer = document.querySelector('#saveCareer');
+		function checkInputs(event) {
+			let inputs = rCareer.querySelectorAll('input[type=text]');
+			let isAllFilled = true;
+			for (let i = 0; i < inputs.length; i++) {
+				if (inputs[i].value.trim() === '') {
+					isAllFilled = false;
+					break;
+				}
+			}
+			if (!isAllFilled) {
+				alert('모든 칸을 입력하세요!');
+				event.preventDefault(); // 저장 취소
+			}
+		}
+		saveCareer.addEventListener('click', checkInputs);
+		rCareer.addEventListener('submit', checkInputs);
+		// 자격증 입력 확인
+		const rCerti = document.querySelector('form[name="rCerti"]');
+		const saveCerti = document.querySelector('#saveCerti');
+		function checkInputs(event) {
+			let inputs = rCerti.querySelectorAll('input[type=text], input[type=date]');
+			let isAllFilled = true;
+			for (let i = 0; i < inputs.length; i++) {
+				if (inputs[i].value.trim() === '') {
+					isAllFilled = false;
+					break;
+				}
+			}
+			if (!isAllFilled) {
+				alert('모든 칸을 입력하세요!');
+				event.preventDefault(); // 저장 취소
+			}
+		}
+		saveCerti.addEventListener('click', checkInputs);
+		rCerti.addEventListener('submit', checkInputs);
+		
+		
 		
 		function showList(type) {
 			// 모든 표 숨기기

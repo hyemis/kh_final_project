@@ -1,9 +1,12 @@
 package kh.com.job.person.controller;
 
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,7 +66,7 @@ public class PsResumeController {
 		try {
 
 			PsUserDto result = pservice.selectOne(principal.getName());
-//			List<PsHschoolDto> Hschool = rservice.selectList(principal.getName());
+			
 			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.setViewName("person/resume/write");
@@ -182,8 +185,9 @@ public class PsResumeController {
 
 	// 대학교 입력
 	@PostMapping("rUniversity")
-	@ResponseBody
-	public ModelAndView rUniversity(ModelAndView mv, PsUnivDto dto, RedirectAttributes rttr) {
+	public ModelAndView rUniversity(ModelAndView mv, PsUnivDto dto
+			, RedirectAttributes rttr
+			) {
 		int result = -1;
 		try {
 			result = rservice.insertUniv(dto);
@@ -200,10 +204,12 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/write");
 		return mv;
 	}
+	
+	
+	
 
 	// 대학원 입력
 	@PostMapping("rGSchool")
-	@ResponseBody
 	public ModelAndView rGSchool(ModelAndView mv, PsGschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
@@ -224,7 +230,6 @@ public class PsResumeController {
 
 	// 경력사항 입력
 	@PostMapping("rCareer")
-	@ResponseBody
 	public ModelAndView rCareer(ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
@@ -245,7 +250,6 @@ public class PsResumeController {
 
 	// 자격증 입력
 	@PostMapping("rCerti")
-	@ResponseBody
 	public ModelAndView rCerti(ModelAndView mv, PsCertiDto dto, RedirectAttributes rttr) {
 
 		int result = -1;

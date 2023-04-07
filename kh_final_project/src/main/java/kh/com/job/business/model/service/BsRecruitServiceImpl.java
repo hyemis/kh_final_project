@@ -38,7 +38,8 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	public Object getCateList(String categoryType) {
 		return dao.getCateList(categoryType);
 	}
-
+	
+	//구글클라우드 -채용공고 이력서 파일 파일 형식 업로드 기능 구분 	
 	@Override
 	public String uploadDocument(MultipartFile uploadReport, String userId) {
 		//버켓 폴더 작업 추가해야됨
@@ -46,17 +47,10 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 			String fileName = UUID.randomUUID().toString();
 			String extension = FilenameUtils.getExtension(uploadReport.getOriginalFilename());
-			String fullName = userId + "/"+ fileName + "." + extension;
 			
-			System.out.println("storage 변수 설정 : " + storage);
-			System.out.println("fullName 변수 설정 : " + fullName);
-			System.out.println("extension 변수 설정 : " + extension);
+			//경로에 해당하는 폴더 명이 없을 때 자동으로 구글클라우드 스토리지에서 생성해 줌
 			
-		     // userId 폴더가 없으면 새로 생성
-
-			
-	        System.out.println("아이디 폴더 진행되면 이쪽으로");
-	        
+			String fullName = userId + "/"+ "document" + "/"+ fileName + "." + extension;
 			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fullName).build();
 			storage.create(blobInfo, uploadReport.getBytes());
 			return "https://storage.googleapis.com/" + bucketName + "/" + fullName;

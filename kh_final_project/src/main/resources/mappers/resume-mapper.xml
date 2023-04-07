@@ -42,20 +42,18 @@
 		
 	</select> -->
 
-	<insert id="insertUniv" parameterType="udto">
-		insert into
-		R_UNIVERSITY(U_EDU_NO, U_ACT, U_CATEGORY, U_NAME, U_DATE, U_MAJOR,
-		U_POINT)
-		values (R_UNIVERSITY_SEQ.NEXTVAL, #{uAct}, #{uCategory},
-		#{uName}, #{uDate}, #{uMajor}, #{uPoint})
+  	<insert id="insertUniv" parameterType="udto">
+	insert into RESUME_UNIVERSITY(UNI_EDU_NO, UNI_ACT, UNI_CATEGORY,
+	UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT)
+	values (RESUME_UNIVERSITY_SEQ.NEXTVAL, #{uniAct}, #{uniCategory}, #{uniName},
+	#{uniDate}, #{uniMajor}, #{uniPoint})
 	</insert>
 
 	<insert id="insertGschool" parameterType="gdto">
-		insert into
-		R_GSCHOOL(G_EDU_NO, G_ACT, G_NAME, G_CATEGORY, G_DATE, G_MAJOR,
-		G_POINT)
-		values (R_GSCHOOL_SEQ.NEXTVAL, #{gAct}, #{gName},
-		#{gCategory}, #{gDate}, #{gMajor}, #{gPoint})
+	insert into
+	RESUME_GRADSCHOOL(GRAD_EDU_NO, GRAD_ACT, GRAD_NAME, GRAD_CATEGORY, GRAD_DATE, GRAD_MAJOR, GRAD_POINT)
+	values (RESUME_GRADSCHOOL_SEQ.NEXTVAL, #{gradAct}, #{gradName},
+	#{gradCategory}, #{gradDate}, #{gradMajor}, #{gradPoint})
 	</insert>
 
 	<insert id="insertCareer" parameterType="careerdto">

@@ -29,6 +29,11 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
+    
+    <!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    
+    <link href="${pageContext.request.contextPath}/resources/css/recruit.textarea.css" rel="stylesheet">
     <!-- css file link part end -->
 
 <title>채용공고등록</title>
@@ -203,7 +208,8 @@
 								<td colspan="2"><input type="text" id="raTitle" class="raTitle form-control" name="raTitle"></td>
 							</tr>
 							<tr>
-								<td><textarea class="raContent form-control"></textarea></td>
+								<td><label for="raContent">상세 내용</label></td>
+								<td colspan="3"><textarea id="raContent" class="raContent form-control" name="raContent" rows="15"></textarea></td>
 							</tr>
 							<tr>
 								<td><label for="report">이력서 샘플</label></td>
@@ -282,80 +288,80 @@
 			});
 		});
 
+		
+		
+
 	</script>
+	<script type="text/javascript">
+	class UploadAdapter {
+	    constructor(loader) {
+	        this.loader = loader;
+	    }
+
+	    upload() {
+	        return this.loader.file.then( file => new Promise(((resolve, reject) => {
+	            this._initRequest();
+	            this._initListeners( resolve, reject, file );
+	            this._sendRequest( file );
+	        })))
+	    }
+
+	    _initRequest() {
+	        const xhr = this.xhr = new XMLHttpRequest();
+	        xhr.open('POST', 'imageUpload', true);
+	        xhr.responseType = 'json';
+	        console.log(xhr);
+	        console.log(xhr.response);
+	    }
+
+	    _initListeners(resolve, reject, file) {
+	        const xhr = this.xhr;
+	        const loader = this.loader;
+	        const genericErrorText = '파일을 업로드 할 수 없습니다.'
+
+	        xhr.addEventListener('error', () => {reject(genericErrorText)})
+	        xhr.addEventListener('abort', () => reject())
+	        xhr.addEventListener('load', () => {
+	            const response = xhr.response
+	            console.log(response);
+	            if(!response || response.error) {
+	                return reject( response && response.error ? response.error.message : genericErrorText );
+	            }
+
+	            resolve({
+	                default: response.url //업로드된 파일 주소
+	            })
+	        })
+	    }
+
+	    _sendRequest(file) {
+	        const data = new FormData();
+	    	console.log("폼 생성");
+	        data.append('upload',file);
+	        this.xhr.send(data);
+	    }
+	}
 	
-	<script>
-		    //도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-		    function sample4_execDaumPostcode() {
-		        new daum.Postcode({
-		            oncomplete: function(data) {
-		
-		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		                var roadAddr = data.roadAddress; // 도로명 주소 변수
-		                var extraRoadAddr = ''; // 참고 항목 변수
-		
-		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                    extraRoadAddr += data.bname;
-		                }
-		                // 건물명이 있고, 공동주택일 경우 추가한다.
-		                if(data.buildingName !== '' && data.apartment === 'Y'){
-		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		                }
-		                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-		                if(extraRoadAddr !== ''){
-		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-		                }
-		
-		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		                document.getElementById('sample4_postcode').value = data.zonecode;
-		                document.getElementById("sample4_roadAddress").value = roadAddr;
-		                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-		                
-		                geocoder.addressSearch(data.address, function(results, status) {
-		                    // 정상적으로 검색이 완료됐으면
-		                    if (status === daum.maps.services.Status.OK) {
-		
-		                        var result = results[0]; //첫번째 결과의 값을 활용
-		
-		                        // 해당 주소에 대한 좌표를 받아서
-		                        var coords = new daum.maps.LatLng(result.y, result.x);
-		                        // 지도를 보여준다.
-		                        mapContainer.style.display = "block";
-		                        map.relayout();
-		                        // 지도 중심을 변경한다.
-		                        map.setCenter(coords);
-		                        // 마커를 결과값으로 받은 위치로 옮긴다.
-		                        marker.setPosition(coords)
-		                     	// 인포윈도우로 장소에 대한 설명을 표시합니다
-// 		                        var infowindow = new kakao.maps.InfoWindow({
-// 		                            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-// 		                        });
-		                        infowindow.open(map, marker);
-		                    }
-		                });
-		
-		                var guideTextBox = document.getElementById("guide");
-		                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-		                if(data.autoRoadAddress) {
-		                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-		                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-		                    guideTextBox.style.display = 'block';
-		
-		                } else if(data.autoJibunAddress) {
-		                    var expJibunAddr = data.autoJibunAddress;
-		                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-		                    guideTextBox.style.display = 'block';
-		                } else {
-		                    guideTextBox.innerHTML = '';
-		                    guideTextBox.style.display = 'none';
-		                }
-		            }
-		        }).open();
-		    }
-		</script>
+	function MyCustomUploadAdapterPlugin(editor) {
+	    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+	        return new UploadAdapter(loader)
+	    }
+	}
+	
+	
+    ClassicEditor
+    .create( document.querySelector( '#raContent' ),{
+    	extraPlugins: [MyCustomUploadAdapterPlugin]
+		,simpleUpload :{
+			uploadUrl : 'imageUpload',
+		},
+    		height: 100,
+	   		width:600
+    })
+    .catch( error => {
+        console.error( error );
+    });
+	</script>
 
 </body>
 
