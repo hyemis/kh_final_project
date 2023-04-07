@@ -100,23 +100,23 @@ public class PsResumeController {
 	// 이력서 작성
 	@PostMapping("/write")
 	@ResponseBody
-	public int writeResume(Principal principal, PsResumeDto dto,
-			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) {
+	public int writeResume(Principal principal, PsResumeDto dto
+//			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf
+			) {
 
 		System.out.println("로그인정보: " + principal.getName());
 		System.out.println("파일 url " + dto.getResumePhoto());
 
 		dto.setUserId(principal.getName());
 
-		if (uploadPortf != null && !uploadPortf.isEmpty()) {
-			String portfUrl = rservice.upload(uploadPortf, principal.getName());
-			dto.setPortfFile(portfUrl);
-		}
+//		if (uploadPortf != null && !uploadPortf.isEmpty()) {
+//			String portfUrl = rservice.upload(uploadPortf, principal.getName());
+//			dto.setPortfFile(portfUrl);
+//		}
 
 		int result = -1;
 		try {
 			result = rservice.insert(dto);
-			//TODO: 끼인테이블에도 insert 되도록 해야함. 
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -269,6 +269,8 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/write");
 		return mv;
 	}
+	
+	
 
 	// 예외처리는 프로젝트 후반에 작성
 

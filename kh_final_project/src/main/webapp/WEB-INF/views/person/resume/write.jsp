@@ -83,6 +83,7 @@
 						class="form-check-label" for="flexCheckChecked"> 이력서 공개여부
 					</label>
 				</div>
+
 			</div>
 
 
@@ -152,9 +153,15 @@
 									<%-- <span>주소 : </span>
 										<span>${userinfo.AdressRoad }, ${userinfo.AdressRoad }, ${userinfo.AdressJibun },  ${userinfo.AdressDetail }, ${userinfo.AdressPostcode }</span><br> --%>
 								</div>
+
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end m-2">
+					<button class="btn btn-primary" type="button" id="rWrite"
+						onclick="fn_rWrite(); return false;">이력서 저장</button>
+
 				</div>
 			</div>
 
@@ -364,7 +371,7 @@
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary" >저장</button>
+													<button type="submit" class="btn btn-primary">저장</button>
 												</div>
 											</form>
 										</div>
@@ -568,8 +575,8 @@
 
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-				<button class="btn btn-primary me-md-2" type="button" id="rWrite"
-					onclick="fn_rWrite(); return false;">save</button>
+				<button class="btn btn-primary me-md-2" type="button" id=""
+					onclick="">save</button>
 				<button class="btn btn-primary" type="button">cancel</button>
 			</div>
 		</div>
@@ -590,7 +597,7 @@
 			let formdata = new FormData();
 			formdata.append("resumeTitle", $("#resumeTitle").val());
 			formdata.append("flexCheckChecked", $("#flexCheckChecked").val());
-			formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]);
+			/* formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]); */
 			formdata.append("resumePhoto", $("#url").val());
 
 			$.ajax({

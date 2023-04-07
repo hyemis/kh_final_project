@@ -17,10 +17,15 @@
 		where USER_ID=#{USER_ID} order by RESUME_DATE desc
 	</select>
 
-	<insert id="insert" parameterType="rdto">
+	<!-- <insert id="insert" parameterType="rdto">
 		INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE,
 		PORTF_FILE, USER_ID)
 		VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId})
+	</insert> -->
+	
+	<insert id="insert" parameterType="rdto">
+		INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
+		VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, #{resumePhoto}, sysdate, #{userId})
 	</insert>
 
 	<delete id="delete" parameterType="_int">
