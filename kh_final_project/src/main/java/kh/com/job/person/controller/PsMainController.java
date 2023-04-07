@@ -146,21 +146,21 @@ public class PsMainController {
 	// 아이디 중복 체크 
 	@PostMapping("/idChk") 
 	@ResponseBody
-	public String idChk(@RequestParam(value="userId", required=false) String id) {
-		String result = "N";
+	public String idChk(String userId) throws Exception {
 		
-		try {
+		int result = service.idChk(userId);
+		if(result != 0) {
 			
-			int idChk = service.idChk(id);
-			if(idChk == 1) {
-				result = "Y";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			return "fail";	// 중복 아이디가 존재
+			
+		} else {
+			
+			return "success";	// 중복 아이디 x
+			
+		}	
 		
-		return result;
 	}
+
 	
 	
 	// 마이페이지 홈-회원정보 확인 화면

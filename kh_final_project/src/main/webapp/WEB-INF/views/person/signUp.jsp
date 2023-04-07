@@ -49,9 +49,10 @@
 					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">기업회원</button>
 				</div>
 
-			 
-			 	<!-- 개인회원가입 -->
+			   
+			    
 		        <form class="hidden" name=signUpForm id="personal-sign-form" action="signUp" method="post" onsubmit="return checkAll()">
+			 	<!-- 개인회원가입 
 			        	<div class="m-4"><h3>개인회원 회원가입</h3></div>
 			        	
 				          <div class="row">
@@ -127,39 +128,39 @@
 				          <!-- <div class="custom-control custom-checkbox">
 				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
 				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
-				          </div> -->
+				          </div> 
 						
 						</div>
 				         <div class="d-grid m-3">
 						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
-						</div>
-				</form>
+						</div>-->
+				</form> 
 				
 				<!-- 기업회원가입 -->
-				<form class="hidden" name=signUpForm id="corporate-sign-form" action="signUp" method="post" onsubmit="return checkAll()">	
+				<form class="hidden was-validated" name=signUpForm id="corporate-sign-form" action="signUp" method="post" onsubmit="return checkAll()">	
 					<h3 class="mt-5 text-center" style="height: 100px;">기업회원 회원가입</h3>
  		            	<div class="row text-center">
-				        	<div class="mb-3 row">
+				        	<div class="row">
 							    <label for="userId" class="col-sm-2 col-form-label text-center">아이디</label>
 							    <div class="col-sm-6">
 									<input type="text" class="form-control" id="userId" name="userId" placeholder="영문,숫자,'_' 사용가능" required>
+									<span class="id_input_re_1 text-start">사용 가능한 아이디입니다.</span>
+									<span class="id_input_re_2 text-start">아이디가 이미 존재합니다.</span>
 								</div>
 								<div class="col-sm-2">
-									<button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">아이디 중복 체크</button>
+									<input type="button" class="form-control" id="idChk" onclick="fn_idChk()" value="아이디중복체크"><br>
 								</div>	
 							</div>		
 							<div class="mb-3 row">
 							    <label for="userPw" class="col-sm-2 col-form-label text-center">비밀번호</label>
 							    <div class="col-sm-8">
 							        <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" required>
-							    	<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
 							    <label for="userPw2" class="col-sm-2 col-form-label text-center">비밀번호재확인</label>
 							    <div class="col-sm-8">
 							    	<input type="password" class="form-control" name="userPw2" placeholder="비밀번호확인을 위해 한번 더 입력해주세요" required>
-				              	    <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
 							    </div>
 							 </div>  	
 							 <div class="mb-3 row">
@@ -198,37 +199,40 @@
 							<div class="mb-3 row">
 							    <label for="addressRoad" class="col-sm-2 col-form-label text-center">도로명주소</label>
 							    <div class="col-sm-8">
-							      <input type="text" class="form-control" id="roadAddress" name ="addressRoad" >
+							      <input type="text" class="form-control" id="roadAddress" name ="addressRoad" required >
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
 							    <label for="addressJibun" class="col-sm-2 col-form-label text-center">지번주소</label>
 							    <div class="col-sm-8">
-							      <input type="text" class="form-control" id="jibunAddress" name ="addressJibun" >
+							      <input type="text" class="form-control" id="jibunAddress" name ="addressJibun"  >
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
-							    <label for="addressDetail" class="col-sm-2 col-form-label text-center">상세주소</label>
+							    <label for="addressDetail" class="col-sm-2  text-center">상세주소</label>
 							    <div class="col-sm-8">
-							      <input type="text" class="form-control" id="detailAddress" name ="addressDetail">
+							      <input type="text" class="form-control" id="detailAddress" name ="addressDetail" >
 								  <span id="guide" style="color:#999;display:none"></span>
 							    </div>
 							 </div>
-				          
-				          <!-- <div class="custom-control custom-checkbox">
-				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
-				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
-				          </div> -->
+							 <div class="m-4 row">
+							    <div class="col">
+							    <input type="checkbox" class="form-check-input" id="termsAct" required>
+							    <label class="form-check-label" for="validationFormCheck1">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
+							    <a class="invalid-feedback link-dark" href="">약관보기</a>
+							    </div>
+							 </div>
+							 
+						  	<div class="d-grid m-4">
+								 <button class="btn btn-primary" type="submit" id="btnJoin">회원가입 완료</button>
+							</div>
+							
+							</div>
+						 </form>
 				          
 						
-						</div>
 				  	
-				  	<div class="d-grid m-4">
-						 <button class="btn btn-primary" type="submit">회원가입 완료</button>
-					</div>
 						
-				  
-				  </form>
 				  
 				  
 				  
@@ -236,12 +240,102 @@
 				    
 		    </div>
 		</div>
-	</div>
 	
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
 	
+	
+	<script>
+	<!-- 회원가입 유효성 test 중 
+	// 유효성 검사 통과유무 변수 
+	 var userId = false;			// 아이디
+	 var userIdChk = false;			// 아이디 중복 검사
+	 var userPw = false;			// 비번
+	 var userPwChk = false;			// 비번 확인
+	 var pwChk = false;				// 비번 확인 일치 확인
+	 var userName = false;			// 이름
+	 var userEmail = false;			// 이메일
+	 var bsMainPhone = false;		// 대표번호
+	 var bsLicense = false;			// 사업자번호
+	 var postcode = false 			// 주소
+	 
+	$(document).ready(function(){
+		//회원가입 버튼(회원가입 기능 작동)
+		$("#btnJoin").click(function(){
+			
+			// 입력값 변수 
+			var id = $('#userId').val(); 			// id 입력란
+			var pw = $('#userPw').val();			// 비밀번호 입력란
+			var pwck = $('#userPw2').val();			// 비밀번호 확인 입력란
+			var name = $('#userName').val();		// 이름 입력란
+			var mail = $('#userEmail').val();		// 이메일 입력란
+			var mail = $('#bsMainPhone').val();		// 대표전화 입력란
+			var mail = $('#bsLicense').val();		// 사업자번호 입력란
+			var addr = $('#postcode').val();		// 주소 입력란
+			
+			/* 아이디 유효성검사 */
+			if(id == ""){
+				$('.final_id_ck').css('display','block');
+				idChk = false;
+			}else{
+				$('.final_id_ck').css('display', 'none');
+				idChk = true;
+			}
+			
+		});
+	});
+	
+
+	 
+	// ID 중복 확인
+	function fn_idChk() {
+		let userId = $('.userId').val();
+		
+		$.ajax({
+			type : 'post',
+			url:"idChk",
+			data : {"userId" : userId},
+			success : function(result) {
+				console.log("아이디사용가능 : " + result);
+				if(result != 'fail') {
+					$('.id_input_re_1').css("display","inline-block");
+					$('.id_input_re_2').css("display","none");
+				} else {
+					$('.id_input_re_1').css("display","none");
+					$('.id_input_re_2').css("display","inline-block");
+				}
+			}
+		})
+	}
+	
+	// 비밀번호 확인 일치 유효성 검사
+	 
+	$('.userPw').on("propertychange change keyup paste input", function(){
+	 
+	    var pw = $('.userPw').val();
+	    var pwck = $('.userPw2').val();
+	    $('.final_pwck_ck').css('display', 'none');
+	 
+	    if(pw == pwck){
+	        $('.pwck_input_re_1').css('display','block');
+	        $('.pwck_input_re_2').css('display','none');
+	    }else{
+	        $('.pwck_input_re_1').css('display','none');
+	        $('.pwck_input_re_2').css('display','block');
+	    }        
+	    
+	});    
+
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	<!-- toggle -->
 	<script>
 	function toggleForm(type) {
 	    var personalForm = document.getElementById('personal-sign-form');
@@ -255,8 +349,8 @@
 	        corporateForm.classList.remove('hidden');
 	      }
 	  }
-	
-	
+	</script>
+	<!-- script 
 	
 			// id 중복확인
 			function fn_idChk() {
@@ -275,7 +369,7 @@
 					}
 				})
 			}
-		
+			
 	
 			
 			function checkAll() {
@@ -451,7 +545,7 @@
 		
 	
 			
-	</script>
+	</script> -->
 	
 	<!-- map -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
