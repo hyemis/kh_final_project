@@ -1,6 +1,9 @@
 package kh.com.job.person.model.dto;
 
-import java.sql.Date;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -34,16 +37,32 @@ public class PsHschoolDto {
 	
 	
 	
+//	// 졸업일자 미입력시 null값으로 들어가게 하기
+//	public void setHdate(Object highDate) {
+//	    if(highDate == null) {
+//	        this.highDate = null;
+//	    } else {
+//	        this.highDate = (java.util.Date) highDate;
+//	    }
+//	}
+	
 	// 졸업일자 미입력시 null값으로 들어가게 하기
-	public void setHdate(Object hDate) {
-		if(hDate.equals(""))
-			this.highDate = null;
-		this.highDate = (Date)highDate;
+	public void setHdate(Object highDate) {
+	    if(highDate == null || highDate.equals("")) {
+	        this.highDate = null;
+	    } else {
+	        try {
+	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            java.util.Date utilDate = dateFormat.parse((String) highDate);
+	            this.highDate = new java.sql.Date(utilDate.getTime());
+	        } catch (Exception  e) {
+	        }
+	    }
 	}
 	
 	// 고등학교 미입력시 null값으로 들어가게 하기
-		public void setHname(Object hName) {
-			if(hName.equals(""))
+		public void setHname(Object highName) {
+			if(highName.equals(""))
 				this.highName = null;
 			this.highName = (String)highName;
 		}
