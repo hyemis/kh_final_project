@@ -57,6 +57,7 @@
 .hidden {
 	display: none;
 }
+
 </style>
 
 </head>
@@ -235,25 +236,24 @@
 														</div>
 													</div>
 												</div>
-
 												<div class="row mb-3">
 													<label for="hName" class="col-sm-2 col-form-label">고등학교명</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="hName">
+														<input type="text" class="form-control" name="hName" id="inputField">
 													</div>
 												</div>
 												<div class="row mb-3">
 													<label for="hDate" class="col-sm-2 col-form-label">고등학교
 														졸업일자</label>
 													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="hDate">
+														<input type="Date" class="form-control" name="hDate" id="dateField">
 													</div>
 												</div>
 												<div class="row mb-3">
 													<label for="hMajor" class="col-sm-2 col-form-label">고등학교
 														전공계열</label>
 													<div class="col-sm-10">
-														<select class="form-select" name="hMajor">
+														<select class="form-select" name="hMajor" id="selectField">
 															<option selected>전공계열</option>
 															<option value="이과">이과</option>
 															<option value="문과">문과</option>
@@ -544,8 +544,7 @@
 
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-				<button class="btn btn-primary me-md-2" type="button" id="rWrite"
-					onclick="fn_rWrite(); return false;">save</button>
+				<button class="btn btn-primary me-md-2" type="button" id="rWrite">save</button>
 				<button class="btn btn-primary" type="button">cancel</button>
 			</div>
 		</div>
@@ -586,15 +585,38 @@
 				}
 			})
 		}
+		
+			
 
 		//  대입검정고시 체크박스 Y/N 체크
 		function fn_checkY() {
 			var ged = $("#checkY").prop("checked") ? "Y" : "N";
 			$("#ged").val(ged);
 		}
+		
+		
+		// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
 
-		// 신입 라디오박스 체크확인
+ 		const disableInputCheckbox = document.getElementById("checkY");
+ 		const dateField = document.getElementById("dateField");
+ 		const selectField = document.getElementById("selectField");
 
+		disableInputCheckbox.addEventListener("change", function() {
+		  if (this.checked) {
+		    inputField.disabled = true;
+		    dateField.disabled = true;
+		    selectField.disabled = true;
+		  } else {
+		    inputField.disabled = false;
+		    dateField.disabled = false;
+		    selectField.disabled = false;
+		  }
+		});
+	
+	
+		
+		
+		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
 		const radioBox = document.getElementById("radio-box");
 		const hiddenContent = document.getElementById("hidden-content");
 
