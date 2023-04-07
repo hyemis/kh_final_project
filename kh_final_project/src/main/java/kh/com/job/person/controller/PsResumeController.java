@@ -164,7 +164,6 @@ public class PsResumeController {
 	@PostMapping("rHSchool")
 	public ModelAndView rHschool(ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
-		System.out.println("받은 date : "  + dto.getHighDate());
 		try {
 			result = rservice.insertHschool(dto);
 

@@ -28,6 +28,6 @@ public class PsCertiDto {
 	private int certiNo;
 	private String certiName;
 	private String certiPub;
-	private Date certiDate;
+	private String certiDate;
 
 }
