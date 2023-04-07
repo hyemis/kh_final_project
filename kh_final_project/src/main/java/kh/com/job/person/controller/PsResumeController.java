@@ -88,7 +88,8 @@ public class PsResumeController {
 		if (!file.isEmpty()) {
 			PsUserDto result = pservice.selectOne(principal.getName());
 			if (result != null) {
-				mv.addObject("url", rservice.upload(file));
+				String url = rservice.upload(file, principal.getName());
+				mv.addObject("url", url);
 				mv.addObject("userinfo", result);
 			}
 		}
@@ -108,7 +109,7 @@ public class PsResumeController {
 		dto.setUserId(principal.getName());
 
 		if (uploadPortf != null && !uploadPortf.isEmpty()) {
-			String portfUrl = rservice.upload(uploadPortf);
+			String portfUrl = rservice.upload(uploadPortf, principal.getName());
 			dto.setPortfFile(portfUrl);
 		}
 

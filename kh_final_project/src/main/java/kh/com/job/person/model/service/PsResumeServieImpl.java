@@ -62,12 +62,12 @@ public class PsResumeServieImpl implements PsResumeService {
 
 	// google cloud
 	@Override
-	public String upload(MultipartFile file) {
+	public String upload(MultipartFile file,  String userId) {
 		try {
 			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
 			String fileName = UUID.randomUUID().toString();
 			String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-			String fullName = fileName + "." + extension;
+			String fullName = userId + "/"+ "document" + "/"+ fileName + "." + extension;
 			
 			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fullName).build();
 			storage.create(blobInfo, file.getBytes());
