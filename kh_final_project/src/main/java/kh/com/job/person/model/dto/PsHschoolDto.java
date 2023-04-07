@@ -26,33 +26,33 @@ public class PsHschoolDto {
 //	H_MAJOR           VARCHAR2(10) 
 
 	
-	private int hEduNo;
+	private int highEduNo;
 	private String ged;
-	private String hName;
-	private Date hDate;
-	private String hMajor;
+	private String highName;
+	private Date highDate;
+	private String highMajor;
 	
 	
 	
 	// 졸업일자 미입력시 null값으로 들어가게 하기
 	public void setHdate(Object hDate) {
 		if(hDate.equals(""))
-			this.hDate = null;
-		this.hDate = (Date)hDate;
+			this.highDate = null;
+		this.highDate = (Date)highDate;
 	}
 	
 	// 고등학교 미입력시 null값으로 들어가게 하기
 		public void setHname(Object hName) {
 			if(hName.equals(""))
-				this.hName = null;
-			this.hName = (String)hName;
+				this.highName = null;
+			this.highName = (String)highName;
 		}
 
 	// 전공계열 미입력시 null값으로 들어가게 하기
-		public void setHmajor(Object hMajor) {
-			if(hMajor.equals(""))
-				this.hMajor = null;
-			this.hMajor = (String)hMajor;
+		public void setHmajor(Object highMajor) {
+			if(highMajor.equals(""))
+				this.highMajor = null;
+			this.highMajor = (String)highMajor;
 		}
 	
 

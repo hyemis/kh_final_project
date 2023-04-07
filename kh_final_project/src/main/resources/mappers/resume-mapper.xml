@@ -33,9 +33,9 @@
 
 	<insert id="insertHschool" parameterType="hdto">
 		insert into
-		R_HSCHOOL(H_EDU_NO, GED, H_NAME, H_DATE, H_MAJOR)
+		RESUME_HIGHSCHOOL(HIGH_EDU_NO, GED, HIGH_NAME, HIGH_DATE, HIGH_MAJOR)
 		values
-		(R_HSCHOOL_SEQ.NEXTVAL, #{ged}, #{hName}, #{hDate}, #{hMajor})
+		(RESUME_HIGHSCHOOL_SEQ.NEXTVAL, #{ged}, #{highName}, #{highDate}, #{highMajor})
 	</insert>
 	
 <!-- 	<select id="selectList" resultType="rdto">
@@ -59,15 +59,15 @@
 	</insert>
 
 	<insert id="insertCareer" parameterType="careerdto">
-		insert into R_CAREER
+		insert into RESUME_CAREER
 		(CAR_NO, CAR_NAME, CAR_DATE, CAR_POSITION, CAR_DEPT, CAR_RESP,
 		CAR_SALARY)
-		values (R_CAREER_SEQ.NEXTVAL, #{carName}, #{carDate},
+		values (RESUME_CAREER_SEQ.NEXTVAL, #{carName}, #{carDate},
 		#{carPosition}, #{carDept}, #{carResp}, #{carSalary})
 	</insert>
 
 	<insert id="insertCerti" parameterType="certidto">
-		insert into R_CERTI
+		insert into RESUME_CERTI
 		(CERTI_NO, CERTI_NAME, CERTI_PUB, CERTI_DATE)
 		values
 		(R_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})

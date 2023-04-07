@@ -261,23 +261,23 @@
 												</div>
 
 												<div class="row mb-3">
-													<label for="hName" class="col-sm-2 col-form-label">고등학교명</label>
+													<label for="highName" class="col-sm-2 col-form-label">고등학교명</label>
 													<div class="col-sm-10">
-														<input type="text" class="form-control" name="hName">
+														<input type="text" class="form-control" name="highName">
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="hDate" class="col-sm-2 col-form-label">고등학교
+													<label for="highDate" class="col-sm-2 col-form-label">고등학교
 														졸업일자</label>
 													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="hDate">
+														<input type="Date" class="form-control" name="highDate">
 													</div>
 												</div>
 												<div class="row mb-3">
-													<label for="hMajor" class="col-sm-2 col-form-label">고등학교
+													<label for="highMajor" class="col-sm-2 col-form-label">고등학교
 														전공계열</label>
 													<div class="col-sm-10">
-														<select class="form-select" name="hMajor">
+														<select class="form-select" name="highMajor">
 															<option selected>전공계열</option>
 															<option value="이과">이과</option>
 															<option value="문과">문과</option>

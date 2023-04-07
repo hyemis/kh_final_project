@@ -112,6 +112,7 @@ public class PsResumeController {
 		int result = -1;
 		try {
 			result = rservice.insert(dto);
+			//TODO: 끼인테이블에도 insert 되도록 해야함. 
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,7 +162,6 @@ public class PsResumeController {
 
 	// 고등학교입력
 	@PostMapping("rHSchool")
-	@ResponseBody
 	public ModelAndView rHschool(ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
