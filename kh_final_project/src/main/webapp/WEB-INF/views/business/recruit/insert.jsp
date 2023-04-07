@@ -290,16 +290,18 @@
 		
 	    ClassicEditor
         .create( document.querySelector( '#raContent' ),{
-    		ckfinder: {
-    			uploadUrl : '/image/upload'
-    		},
-// 				filebrowserUploadUrl:'imageUpload.do',
+//     		ckfinder: {
+//     			uploadUrl : '/image/upload'
+//     		},
+			simpleUpload :{
+    			uploadUrl : 'imageUpload.do'
+			},
         		height: 100,
     	   		width:600
-        } )
+        })
         .catch( error => {
             console.error( error );
-        } );
+        });
 		
 		
 
