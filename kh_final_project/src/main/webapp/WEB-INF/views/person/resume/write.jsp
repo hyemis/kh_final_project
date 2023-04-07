@@ -34,8 +34,7 @@
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/person.css"
+<link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -52,6 +51,13 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+
+
+<style>
+.hidden {
+	display: none;
+}
+</style>
 
 </head>
 <body>
@@ -157,7 +163,72 @@
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
-							<h3 class="mb-3">학력사항</h3>
+							<div class="row align-items-center">
+								<div class="col">
+									<h3 class="mb-3">학력사항</h3>
+								</div>
+								<!-- 모달 버튼 -->
+								<div class="col-auto">
+									<button type="button" class="btn btn-outline-dark m-2 btn-sm"
+										data-bs-toggle="modal" data-bs-target="#viewRHSchool">저장된
+										정보 불러오기</button>
+								</div>
+							</div>
+
+							<!-- 모달 창 -->
+							<div class="modal fade" id="viewRHSchool" tabindex="-1"
+								role="dialog" aria-labelledby="uploadModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="uploadModalLabel">학력사항 불러오기</h5>
+											<button type="button" class="close" data-bs-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											최종 학력 선택 후 불러올 학력을 체크하세요.
+											<!-- 버튼 그룹 -->
+											<div class="btn-group mb-3">
+												<button type="button" class="btn btn-outline-secondary"
+													onclick="showList('highSchool')">고등학교 졸업</button>
+												<button type="button" class="btn btn-outline-secondary"
+													onclick="showList('university')">대학교 졸업</button>
+												<button type="button" class="btn btn-outline-secondary"
+													onclick="showList('graduate')">대학원 졸업</button>
+											</div>
+											<!-- 버튼 클릭 내용 -->
+											<div class="table-responsive">
+												<table class="table table-striped table-bordered">
+													<thead>
+														<tr>
+															<th>선택</th>
+															<th>재학기간</th>
+															<th>학교명(소재지)</th>
+															<th>전공</th>
+															<th>학점</th>
+														</tr>
+													</thead>
+													<tbody id="highSchoolList">
+														<!-- 고등학교 졸업 내용 출력 -->
+													</tbody>
+													<tbody id="universityList" style="display: none">
+														<!-- 대학교 졸업 내용 출력 -->
+													</tbody>
+													<tbody id="graduateList" style="display: none">
+														<!-- 대학원 졸업 내용 출력 -->
+													</tbody>
+												</table>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
 							<!--  아코디언 -->
 							<div class="accordion accordion-flush" id="accordionFlushExample">
 								<div class="accordion-item">
@@ -171,6 +242,8 @@
 										aria-labelledby="flush-headingOne"
 										data-bs-parent="#accordionFlushExample">
 										<div class="accordion-body">
+											<!-- 보유중인 고등학교 학력사항 출력 -->
+
 											<!--  고등학교 학력사항 Form  -->
 											<form name="rHSchool" action="rHSchool" method="post">
 												<div class="row mb-3">
@@ -179,8 +252,9 @@
 													<div class="col-sm-10">
 														<div class="row mb-3">
 															<div class="col-sm-10 offset-sm-2">
-																<input type="hidden" id="checkN" name="ged"> 
-																<input type="checkbox" id="checkY" name="checkY" value="Y"> 대입 검정고시
+																<input type="hidden" id="ged" name="ged"> <input
+																	type="checkbox" id="checkY" name="checkY" value="Y">대입
+																검정고시
 															</div>
 														</div>
 													</div>
@@ -213,7 +287,8 @@
 												</div>
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">save</button>
+													<button type="submit" class="btn btn-primary"
+														onclick="fn_checkY();">save</button>
 												</div>
 											</form>
 
@@ -268,7 +343,8 @@
 														졸업일자</label><br>
 													<div class="col-sm-10">
 														<input type="Date" class="form-control" name="uDate">
-													</div><br>
+													</div>
+													<br>
 													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
@@ -339,10 +415,12 @@
 												</div>
 												<div class="row mb-3">
 													<label for="gDate" class="col-sm-2 col-form-label">대학원
-														졸업일자</label>
+														졸업일자</label><br>
 													<div class="col-sm-10">
 														<input type="Date" class="form-control" name="gDate">
 													</div>
+													<br>
+													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 												</div>
 												<div class="row mb-3">
 													<label for="gMajor" class="col-sm-2 col-form-label">대학원
@@ -380,6 +458,11 @@
 						<div class="mb-4">
 							<h3 class="mb-3">경력사항</h3>
 							<div>
+								<input type="radio" id="radio-box" name="radio-group"> <label
+									for="radio-box">경력없음(신입)</label>
+							</div>
+							<br>
+							<div id="hidden-content">
 								<form name="rCareer" action="rCareer" method="post">
 									<div class="row mb-3">
 										<label for="carName" class="col-sm-2 col-form-label">회사명</label>
@@ -391,7 +474,8 @@
 									<div class="row mb-3">
 										<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
 										<div class="col-sm-10">
-											<input type="Date" class="form-control" name="carDate">
+											<input type="text" class="form-control" name="carDate"
+												placeholder="ex) 2020-01-01 ~ 2022-12-31">
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -495,6 +579,12 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<script>
+		// alret
+		var msg = "${msg}";
+		if (msg) {
+			alert(msg);
+		}
+
 		// 이력서 등록
 		function fn_rWrite() {
 			let formdata = new FormData();
@@ -513,26 +603,50 @@
 					if (result === 1) {
 						alert("이력서가 등록되었습니다.");
 						var userId = $("#userId").val();
-						location.href = "/job/person/resume/list?userId="
-								+ userId;
+						location.href = "/job/person/resume/list";
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}
 				}
 			})
 		}
-		
-		
 
- 		// 대입검정고시 체크박스 Y/N 체크
-		 var ged = $("#checkY").prop("checked")? "Y" :"N";
-			$("#checkN").val(ged);
+		//  대입검정고시 체크박스 Y/N 체크
+		function fn_checkY() {
+			var ged = $("#checkY").prop("checked") ? "Y" : "N";
+			$("#ged").val(ged);
+		}
 
- 		
- 		
+		// 신입 라디오박스 체크확인
+
+		const radioBox = document.getElementById("radio-box");
+		const hiddenContent = document.getElementById("hidden-content");
+
+		let clickCount = 0;
+
+		radioBox.addEventListener("click", function() {
+			clickCount++;
+			if (radioBox.checked) {
+				hiddenContent.classList.add("hidden");
+			} else {
+				hiddenContent.classList.remove("hidden");
+			}
+			if (clickCount % 2 === 1) {
+				radioBox.checked = false;
+				hiddenContent.classList.remove("hidden");
+			}
+		});
 		
-		
+		function showList(type) {
+			// 모든 표 숨기기
+			document.getElementById("highSchoolList").style.display = "none";
+			document.getElementById("universityList").style.display = "none";
+			document.getElementById("graduateList").style.display = "none";
 			
+			// 해당 타입에 맞는 표 보이기
+			document.getElementById(type+"List").style.display = "table-row-group";
+		}
+		
 	</script>
 
 </body>

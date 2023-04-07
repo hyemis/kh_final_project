@@ -183,11 +183,17 @@ public class PsServiceImpl implements PsService {
 			return dao.selectUserEmail(userEmail);
 		}
 
-		// Email 로 id 찾기 
+		// 아이디 찾기 
 		@Override
-		public PsUserDto findIdEmail(Map<String, Object> findId) throws Exception {
-			return dao.findIdEmail(findId);
+		public PsUserDto findId(Map<String, Object> findId) throws Exception {
+			return dao.findId(findId);
 		}
+		
+		// 비밀번호 찾기 
+		@Override
+		public PsUserDto findPw(Map<String, Object> findPw) throws Exception {
+			return dao.findPw(findPw);
+				}
 
 
 	

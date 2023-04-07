@@ -55,6 +55,10 @@ public class PsResumeDao {
 		return sqlSession.insert("resume.insertHschool",dto);
 	}
 	
+	public List<PsHschoolDto>  viewHschoolList(String userId) throws Exception{
+		return sqlSession.selectList("resume.viewHschoolList",userId);
+	}
+	
 	// 이력서-대학교입력
 	public int insertUniv(PsUnivDto dto) throws Exception{
 		return sqlSession.insert("resume.insertUniv",dto);

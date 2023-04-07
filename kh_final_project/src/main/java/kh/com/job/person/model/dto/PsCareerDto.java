@@ -30,7 +30,7 @@ public class PsCareerDto {
 	
 	private int carNo;
 	private String carName;
-	private Date carDate;
+	private String carDate;
 	private String carPosition;
 	private String carDept;
 	private String carResp;

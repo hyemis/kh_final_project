@@ -15,7 +15,8 @@ public interface PsService {
 	public int insert(PsUserDto dto) throws Exception;
 	public int update(PsUserDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
-	public PsUserDto findIdEmail(Map<String, Object> findId) throws Exception;
+	public PsUserDto findId(Map<String, Object> findId) throws Exception;
+	public PsUserDto findPw(Map<String, Object> findPw) throws Exception;
 	
 	// 카카오 로그인 
 	String getAccessToken(String authorize_code) throws Throwable;

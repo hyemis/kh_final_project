@@ -69,33 +69,32 @@
 			</li>
 		</ul>
 	
+		<form action="insert" method="post" id="formdata1" enctype="multipart/form-data">
 		<!-- 탭 내용 -->
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
-				
 				<div class="justify-content-center">
 				<!-- 1번에서 8번 -->
 					<h3>회사 정보</h3>
-					<form id="formdata1" class="form-control">
 						<!-- princple get.name으로 가져올 거 -->
 						<table class="table table-borderless">
 							<thead>
 								<tr>
+									<th scope="col" class="col-2"></th>
 									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-3"></th>
+									<th scope="col" class="col-2"></th>
 									<th scope="col" class="col-3"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr class="mb-3 ">
 									<td><label for="companyName">회사 이름</label></td>
-									<td><input type="text" id="companyName" class="companyName" name="companyName"></td>
+									<td><input type="text" id="companyName" class="companyName form-control" name="companyName"></td>
 								</tr>
 								<tr class="mb-3">
 									<td><label for="category2dept">모집 분야</label></td>
 									<td>
-										<select id="category2dept" class="category2dept">
+										<select id="category2dept" class="category2dept form-control">
 											<option value="0">선택안함</option>
 										<c:forEach items="${JNlist}" var="categoryJN">
 											<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
@@ -103,7 +102,7 @@
 										</select>			
 									</td>
 									<td>
-										<select id="recruitType" class="recruitType" style="text-overflow: ellipsis;">
+										<select id="recruitType" class="recruitType form-control" name="recruitType" style="text-overflow: ellipsis;">
 											<option value="0">선택안함</option>
 										</select>
 									</td>
@@ -111,7 +110,8 @@
 								<tr class="mb-3">
 									<td><label for="career">경력선택</label></td>
 									<td>
-									<select id="career" class="career">
+									<select id="careerType" class="careerType form-control">
+											<option value="0">선택안함</option>
 										<c:forEach items="${CAlist}" var="categoryCA">
 											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
 										</c:forEach>
@@ -121,7 +121,8 @@
 								<tr class="mb-3">
 									<td><label for="userEducation">학력선택</label></td>
 									<td>
-									<select id="userEducation" class="userEducation">
+									<select id="userEducation" class="userEducation form-control">
+										<option value="0">선택안함</option>
 										<c:forEach items="${EDlist}" var="categoryED">
 											<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
 										</c:forEach>
@@ -130,15 +131,16 @@
 								</tr>
 								<tr class="mb-3">
 									<td><label for=minSalary>급여</label></td>
-									<td colspan="2"><input type="text" id="minSalary" class="minSalary" name="minSalary" placeholder="최소 연봉">
-									 ~ <input type="text" id="maxSalary" class="maxSalary" name="maxSalary" placeholder="최대 연봉"></td>
+									<td><input type="text" id="minSalary" class="minSalary form-control" name="minSalary" placeholder="최소 연봉"></td>
+									<td class="text-center">~</td>
+									<td><input type="text" id="maxSalary" class="maxSalary form-control" name="maxSalary" placeholder="최대 연봉"></td>
 								</tr>
 								<!-- 체크박스로 처리한거 값들 배열로 받아서 xxx, xxx 순으로 넣기 -->
 								<tr class="mb-3">
 									<td>우대조건</td>
 									<td colspan="2">
 										<c:forEach items="${SClist}" var="categorySC">
-											<label><input type="checkbox" id="conditionTypeList" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }">
+											<label><input type="checkbox" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }">
 											${categorySC.categoryName }</label>
 										</c:forEach>
 									</td>
@@ -147,15 +149,16 @@
 								받은 다음에 string 값으로 변환 -->
 								<tr class="mb-3">
 									<td><label for=registDate>지원등록 시작일</label></td>
-									<td><input type="date" id="registDate" class="registDate" name="registDate"></td>
+									<td><input type="date" id="registDate" class="registDate form-control" name="registDate"></td>
 									<td><label for=closeDate>지원등록 마감일</label></td>
-									<td><input type="date" id="closeDate" class="closeDate" name="closeDate"></td>
+									<td><input type="date" id="closeDate" class="closeDate form-control" name="closeDate"></td>
 								</tr>
 								<!-- 10 11 20 21 카테고리 추가 필요 -->
 								<tr class="mb-3">
 									<td><label for="empTypeCode">고용형태</label></td>
 									<td>
-									<select id="empTypeCode" class="empTypeCode">
+									<select id="empTypeCode" class="empTypeCode form-control">
+											<option value="0">선택안함</option>
 										<c:forEach items="${ETlist}" var="categoryET">
 											<option value="${categoryET.categoryId }">${categoryET.categoryName}</option>
 										</c:forEach>
@@ -166,9 +169,10 @@
 								<tr class="mb-3">
 									<td><label for="holidayType">상세 근무 형태</label></td>
 									<td>
-									<select id="holidayType" class="holidayType">
-										<c:forEach items="${CAlist}" var="categoryCA">
-											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+									<select id="holidayType" class="holidayType form-control">
+											<option value="0">선택안함</option>
+										<c:forEach items="${HTlist}" var="categoryHT">
+											<option value="${categoryHT.categoryId }">${categoryHT.categoryName}</option>
 										</c:forEach>
 									</select>
 									</td>
@@ -176,7 +180,6 @@
 							</tbody>
 						</table>					
 		
-					</form>
 					<button type="button" class="btn nextbtn">다음</button>
 				</div>
 				
@@ -185,37 +188,37 @@
 				<div>
 					<!-- 9번에서 16번 -->
 					<h3>채용 정보</h3>
-					<form id="formdata2" class="form-control">
-						<table class="table table-borderless">
-							<thead>
-								<tr>
-									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-3"></th>
-									<th scope="col" class="col-6"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label for="raTitle">채용 공고 제목</label></td>
-									<td><input type="text" id="raTitle" class="raTitle" name="raTitle"></td>
-								</tr>
-								<tr>
-									<td><textarea class="form-control"></textarea></td>
-								</tr>
-								<tr>
-									<td><label for="raExtraDocument">이력서 샘플</label></td>
-									<td><input type="file" id="raExtraDocument" class="raExtraDocument" name="raExtraDocument"></td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th scope="col" class="col-2"></th>
+								<th scope="col" class="col-3"></th>
+								<th scope="col" class="col-3"></th>
+								<th scope="col" class="col-3"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><label for="raTitle">채용 공고 제목</label></td>
+								<td colspan="2"><input type="text" id="raTitle" class="raTitle form-control" name="raTitle"></td>
+							</tr>
+							<tr>
+								<td><textarea class="raContent form-control"></textarea></td>
+							</tr>
+							<tr>
+								<td><label for="report">이력서 샘플</label></td>
+								<td><input type="file" id="report" class="report form-control" name="report"></td>
+							</tr>
+						</tbody>
+					</table>
 					<div>
 						<button type="button" class="btn prevbtn">이전</button>
-						<button type="button" class="btn insertbtn">작성</button>
+						<button type="submit" class="btn insertbtn">작성</button>
 					</div>
 				</div>
 			</div>
 		</div>
+	</form>
 
 	</div>
 	
@@ -224,6 +227,7 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
 			// 다음 버튼 클릭 시 다음 탭으로 이동
 			$('.nextbtn').click(function() {

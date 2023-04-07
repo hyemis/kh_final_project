@@ -17,28 +17,38 @@
   </select>
   
    <!-- 아이디 찾기 -->
-    <select id="findIdEmail" parameterType="string" resultType="pdto">
+    <select id="findId" parameterType="string" resultType="pdto">
   	select USER_ID 
   	from USER_TABLE 
   	WHERE USER_NAME = #{userName} AND USER_BIRTH = #{userBirth}
-  	<choose>
-  		<when test="userEmail != null and userEmail != ''">
-  			AND USER_EMAIL = #{userEmail}
-  		</when>
-  		<when test="userPhone != null and userPhone != ''">
-  			AND USER_PHONE = #{userPhone}
-  		</when>
-  	</choose> 
-  	
+	  	<choose>
+	  		<when test="userEmail != null and userEmail != ''">
+	  			AND USER_EMAIL = #{userEmail}
+	  		</when>
+	  		<when test="userPhone != null and userPhone != ''">
+	  			AND USER_PHONE = #{userPhone}
+	  		</when>
+	  	</choose> 
   	</select>
-
-  <select id="selectList" resultType="pdto">
-  	select * from USER_TABLE  
+  
+ 	<!-- 비밀번호 찾기 -->
+ 	<select id="findPw" parameterType="string" resultType="pdto">
+	  	select USER_ID, USER_EMAIL, USER_PHONE, TERMS_PERIOD
+	  	from USER_TABLE 
+	  	WHERE USER_ID =  #{userId} AND USER_NAME = #{userName} AND USER_BIRTH = #{userBirth}
+		  	<choose>
+		  		<when test="userEmail != null and userEmail != ''">
+		  			AND USER_EMAIL = #{userEmail}
+		  		</when>
+		  		<when test="userPhone != null and userPhone != ''">
+		  			AND USER_PHONE = #{userPhone}
+		  		</when>
+		  	</choose> 
   </select>
   
   <!-- 개인회원 insert -->
   <insert id="insert" parameterType="pdto">
-  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, ADRESS_ROAD, ADRESS_JIBUN, ADRESS_DETAIL, ADRESS_POSTCODE, USER_NAME, USER_CREATED_AT, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD, USER_PIC)
+  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE, USER_NAME, USER_CREATED_AT, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD, USER_PIC)
 	VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{addressRoad},#{addressJibun},#{addressDetail}, #{addressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default, #{userPic})
   </insert>
 

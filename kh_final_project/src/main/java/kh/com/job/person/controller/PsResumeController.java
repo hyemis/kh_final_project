@@ -30,226 +30,241 @@ import kh.com.job.person.model.service.PsService;
 @Controller
 @RequestMapping("person/resume")
 public class PsResumeController {
-	
+
 	@Autowired
 	private PsResumeService rservice;
 	@Autowired
 	private PsService pservice;
-	
-	
-	//이력서관리 페이지 열기
+
+	// 이력서관리 페이지 열기
 	@GetMapping("/list")
-	public ModelAndView doList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+	public ModelAndView doList(ModelAndView mv, Principal principal) {
 		try {
-			
-			PsUserDto result = pservice.selectOne(userId);
-			List<PsResumeDto> resume = rservice.selectList(userId);
-			
-			if(result!=null) {
+
+			PsUserDto result = pservice.selectOne(principal.getName());
+			List<PsResumeDto> resume = rservice.selectList(principal.getName());
+
+			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.addObject("resumelist", resume);
 				mv.setViewName("person/resume/list");
 			} else {
 				mv.setViewName("redirect:/");
 			}
-		} 
-			catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	
-	
-	
-	// 이력서 작성 페이지 열기 
+
+	// 이력서 작성 페이지 열기
 	@GetMapping("/write")
-	public ModelAndView doResume(ModelAndView mv
-			, @RequestParam(name = "userId") String userId){
-		
-			System.out.println(userId);
+	public ModelAndView doResume(ModelAndView mv, Principal principal) {
 		try {
-			
-			PsUserDto result = pservice.selectOne(userId);
-			
-			if(result!=null) {
+
+			PsUserDto result = pservice.selectOne(principal.getName());
+//			List<PsHschoolDto> Hschool = rservice.selectList(principal.getName());
+			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.setViewName("person/resume/write");
 			} else {
 				mv.setViewName("redirect:/");
 			}
-		} 
-			catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	
-	// 이력서 파일 업로드 
-		@PostMapping("/fileupload")
-		@ResponseBody
-		  public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,Principal principal) throws Exception {
-			
-			if(!file.isEmpty()) {
-				PsUserDto result = pservice.selectOne(principal.getName());
-				if(result!=null) {
-					mv.addObject("url", rservice.upload(file));
-					mv.addObject("userinfo", result);
-				}
-			}  
-			mv.setViewName("person/resume/write");
-			  return mv;
-		  }
 
-		
-		// 이력서 작성
-		@PostMapping("/write")
-		@ResponseBody
-		public int writeResume( Principal principal
-				, PsResumeDto dto
-				, @RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) {
-			
-			System.out.println("로그인정보: "+principal.getName());
-			System.out.println("파일 url "+ dto.getResumePhoto());
-			
-			dto.setUserId(principal.getName());
-			
-			if(uploadPortf != null && !uploadPortf.isEmpty()) {
-				String portfUrl = rservice.upload(uploadPortf);
-			    dto.setPortfFile(portfUrl);
+	// 이력서 파일 업로드
+	@PostMapping("/fileupload")
+	@ResponseBody
+	public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,
+			Principal principal) throws Exception {
+
+		if (!file.isEmpty()) {
+			PsUserDto result = pservice.selectOne(principal.getName());
+			if (result != null) {
+				mv.addObject("url", rservice.upload(file));
+				mv.addObject("userinfo", result);
 			}
-			
-			int result = -1;
-			try {
-				result = rservice.insert(dto);
-				return result;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
-			return result;
 		}
-	
-	// 이력서 삭제 
+		mv.setViewName("person/resume/write");
+		return mv;
+	}
+
+	// 이력서 작성
+	@PostMapping("/write")
+	@ResponseBody
+	public int writeResume(Principal principal, PsResumeDto dto,
+			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) {
+
+		System.out.println("로그인정보: " + principal.getName());
+		System.out.println("파일 url " + dto.getResumePhoto());
+
+		dto.setUserId(principal.getName());
+
+		if (uploadPortf != null && !uploadPortf.isEmpty()) {
+			String portfUrl = rservice.upload(uploadPortf);
+			dto.setPortfFile(portfUrl);
+		}
+
+		int result = -1;
+		try {
+			result = rservice.insert(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	// 이력서 삭제
 	@PostMapping("/delete")
-	public ModelAndView deleteResume(ModelAndView mv, int resumeNo, Principal principal, RedirectAttributes rttr) throws Exception {
-		
-		System.out.println(resumeNo);
-		
-		String url = "/person/resume/list?userId=" + principal.getName();
+	public ModelAndView deleteResume(ModelAndView mv, int resumeNo, Principal principal, RedirectAttributes rttr)
+			throws Exception {
+
 		int result = rservice.delete(resumeNo);
-		
-		if(result > 0 ) {
+
+		if (result > 0) {
 			rttr.addFlashAttribute("msg", "이력서가 삭제되었습니다.");
-			
+
 		} else {
 			rttr.addFlashAttribute("msg", "이력서 삭제에 실패했습니다.");
 		}
-		mv.setViewName("redirect:"+ url);
+
+		mv.setViewName("redirect:/person/resume/list");
 		return mv;
 	}
-	
-	
-	// 이력서 상세보기 화면 
+
+	// 이력서 상세보기 화면
 	@GetMapping("/read/{resumeNo}")
-	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo ) throws Exception {
+	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo)
+			throws Exception {
 		String userId = principal.getName();
-	
+
 		Map<String, Object> infoMap = new HashMap<>();
 		infoMap.put("userId", userId);
 		infoMap.put("resumeNo", resumeNo);
-		
+
 		PsUserDto result = pservice.selectOne(userId);
 		mv.addObject("userinfo", result);
-		
+
 		PsResumeDto dto = rservice.rselectOne(infoMap);
 		mv.addObject("resume", dto);
 		mv.setViewName("person/resume/read");
 		return mv;
 	}
-	
-	
-	
-	
-	//TODO 이력서- 학력사항,자격증,경력사항 INSERT
-	
-	//고등학교입력
+
+	// TODO 이력서- 학력사항,자격증,경력사항 INSERT
+
+	// 고등학교입력
 	@PostMapping("rHSchool")
 	@ResponseBody
-	public int rHschool(PsHschoolDto dto) {
+	public ModelAndView rHschool(ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertHschool(dto);
-			return result;
+
+			if (result > 0) {
+				rttr.addFlashAttribute("msg", "성공");
+			} else {
+				rttr.addFlashAttribute("msg", "실패");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 	}
-	
+
 	// 대학교 입력
 	@PostMapping("rUniversity")
 	@ResponseBody
-	public int rUniversity(PsUnivDto dto) {
+	public ModelAndView rUniversity(ModelAndView mv, PsUnivDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertUniv(dto);
-			return result;
+			
+			if (result > 0) {
+				rttr.addFlashAttribute("msg", "성공");
+			} else {
+				rttr.addFlashAttribute("msg", "실패");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 	}
-	
+
 	// 대학원 입력
 	@PostMapping("rGSchool")
 	@ResponseBody
-	public int rGSchool(PsGschoolDto dto) {
+	public ModelAndView rGSchool(ModelAndView mv, PsGschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertGschool(dto);
-			return result;
+			
+			if (result > 0) {
+				rttr.addFlashAttribute("msg", "성공");
+			} else {
+				rttr.addFlashAttribute("msg", "실패");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 	}
-	
-	
+
 	// 경력사항 입력
 	@PostMapping("rCareer")
 	@ResponseBody
-	public int rCareer(PsCareerDto dto) {
+	public ModelAndView rCareer(ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertCareer(dto);
-			return result;
+			
+			if (result > 0) {
+				rttr.addFlashAttribute("msg", "성공");
+			} else {
+				rttr.addFlashAttribute("msg", "실패");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 	}
-	
-	
+
 	// 자격증 입력
 	@PostMapping("rCerti")
 	@ResponseBody
-	public int rCerti(PsCertiDto dto) {
-		
+	public ModelAndView rCerti(ModelAndView mv, PsCertiDto dto, RedirectAttributes rttr) {
+
 		int result = -1;
 		try {
 			result = rservice.insertCerti(dto);
-			return result;
+			
+			if (result > 0) {
+				rttr.addFlashAttribute("msg", "성공");
+			} else {
+				rttr.addFlashAttribute("msg", "실패");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		mv.setViewName("redirect:/person/resume/write");
+		return mv;
 	}
-	
-	
 
-	
-	
-	// 예외처리는 프로젝트 후반에 작성 
-	
+	// 예외처리는 프로젝트 후반에 작성
 
 }

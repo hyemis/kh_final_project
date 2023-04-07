@@ -41,5 +41,19 @@ public class PsHschoolDto {
 		this.hDate = (Date)hDate;
 	}
 	
+	// 고등학교 미입력시 null값으로 들어가게 하기
+		public void setHname(Object hName) {
+			if(hName.equals(""))
+				this.hName = null;
+			this.hName = (String)hName;
+		}
+
+	// 전공계열 미입력시 null값으로 들어가게 하기
+		public void setHmajor(Object hMajor) {
+			if(hMajor.equals(""))
+				this.hMajor = null;
+			this.hMajor = (String)hMajor;
+		}
+	
 
 }

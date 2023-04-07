@@ -156,7 +156,7 @@
 				alert("회원님의 아이디는"+ data + "입니다.");
 				location.href="/job/person/login";
 			}	else {
-				alert("입력하신 아이디는 job-a 에 등록된 아이디가 아닙니다. 회원가입 후 job-a 를 이용해주세요.");
+				alert("입력하신 정보가 올바르지 않습니다. 회원가입 후 job-a 를 이용해주세요.");
 				location.href="/job/person/signUp";
 			}
 		}

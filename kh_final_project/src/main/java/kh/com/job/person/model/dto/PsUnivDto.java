@@ -35,10 +35,10 @@ public class PsUnivDto {
 	private Date uDate;
 	private String uMajor;
 	private double uPoint;
-	public Date getuDate() {
-		return uDate;
-	}
-	public void setUdte(Object uDate) {
+	public Date getuDate;
+	
+	// 졸업일자 입력 안 하면 null값 받기
+	public void setUdate(Object uDate) {
 		if(uDate.equals(""))
 			this.uDate = null;
 		this.uDate = (Date)uDate;

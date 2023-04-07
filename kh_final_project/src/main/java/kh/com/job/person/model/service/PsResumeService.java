@@ -39,6 +39,7 @@ public interface PsResumeService {
 	
 	// 이력서 - 고등학교입력
 	public int insertHschool(PsHschoolDto dto) throws Exception;
+	public List<PsHschoolDto> viewHschoolList(String userId) throws Exception;
 	
 	// 이력서 - 대학교입력
 	public int insertUniv(PsUnivDto dto) throws Exception;

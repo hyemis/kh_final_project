@@ -61,22 +61,22 @@
 			       		</div>
 			       		
 						<form id="personal-email-form" class="hidden m-5" method="post" action="">
-						   <input class="form-control" type="text" placeholder="아이디">
-						   <input class="form-control" type="text" placeholder="이름">
-			      		   <input class="form-control" type="text" placeholder="생년월일(19990101)">
-			        	   <input class="form-control" type="text" placeholder="이메일(job-a@joba.com)">
+						   <input class="form-control" type="text" id="personal-e-id" placeholder="아이디">
+						   <input class="form-control" type="text" id="personal-e-name" placeholder="이름">
+			      		   <input class="form-control" type="text" id="personal-e-birth" placeholder="생년월일(19990101)">
+			        	   <input class="form-control" type="text" id="personal-email" placeholder="이메일(job-a@joba.com)">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
-							  <button class="btn btn-outline-dark" type="button" onclick="fn_findPwEamil(); return false;">비밀번호 찾기</button>
+							  <button class="btn btn-outline-dark" type="button" onclick="findPw(); return false;">비밀번호 찾기</button>
 						   </div>
 						</form>
 						
 						<form id="personal-phone-form" class="hidden m-5" method="post" action="">
-						   <input class="form-control" type="text" placeholder="아이디">
-						   <input class="form-control" type="text" placeholder="이름">
-			      		   <input class="form-control" type="text" placeholder="생년월일(19990101)">
-			        	   <input class="form-control" type="text" placeholder="'-' 빼고 숫자만 입력">
+						   <input class="form-control" type="text" id="personal-p-id" placeholder="아이디">
+						   <input class="form-control" type="text" id="personal-p-name" placeholder="이름">
+			      		   <input class="form-control" type="text" id="personal-p-birth" placeholder="생년월일(19990101)">
+			        	   <input class="form-control" type="text" id="personal-phone" placeholder="'-' 빼고 숫자만 입력">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
-							  <button class="btn btn-outline-dark" type="button" onclick="fn_findPwPhone(); return false;">비밀번호 찾기</button>
+							  <button class="btn btn-outline-dark" type="button" onclick="findPw(); return false;">비밀번호 찾기</button>
 						   </div>
 						</form>
 						 
@@ -128,9 +128,38 @@
 	    	}
 	    } 
 	 
+	
+	 
+	 function findPw() {
+		 let formdata = new FormData();
+		 formdata.append("id", $('#personal-e-id').val());
+		 formdata.append("pid", $('#personal-p-id').val());
+		 formdata.append("name", $('#personal-e-name').val());
+		 formdata.append("pname", $('#personal-p-name').val());
+		 formdata.append("birth", $('#personal-e-birth').val());
+		 formdata.append("pbirth", $('#personal-p-birth').val());
+		 formdata.append("email", $('#personal-email').val());
+		 formdata.append("phone", $('#personal-phone').val());
+		 
 
-	 
-	 
+		 $.ajax({
+		 	url : "${pageContext.request.contextPath}/person/findpw",
+			type : "post",
+			contentType: false, 
+			processData: false,
+			data: formdata, 
+			success: function(update){
+					if (update > 0) {
+					alert("job-a 회원가입 시 입력하신 이메일로 임시 비밀번호가 발송되었습니다. 확인 후 다시 로그인 해주세요.");
+					location.href="/job/person/login";
+				}	else {
+					alert("입력하신 정보가 올바르지 않습니다. 회원가입 시 입력한 정보와 일치하는지 다시 확인해 주세요.");
+					location.href="/job/person/signUp";
+				}
+			}
+
+			});
+	 }
 	
  	 </script>
 </body>
