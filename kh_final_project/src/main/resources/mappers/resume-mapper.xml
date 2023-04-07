@@ -46,7 +46,7 @@
 	insert into RESUME_UNIVERSITY(UNI_EDU_NO, UNI_ACT, UNI_CATEGORY,
 	UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT)
 	values (RESUME_UNIVERSITY_SEQ.NEXTVAL, #{uniAct}, #{uniCategory}, #{uniName},
-	#{uniDate}, #{uniMajor}, #{uPoint})
+	#{uniDate}, #{uniMajor}, #{uniPoint})
 	</insert>
 
 	<insert id="insertGschool" parameterType="gdto">

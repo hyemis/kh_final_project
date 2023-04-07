@@ -32,15 +32,9 @@ public class PsGschoolDto {
 	private String gradAct;
 	private String gradName;
 	private String gradCategory;
-	private Date gradDate;
+	private String gradDate;
 	private String gradMajor;
 	private double gradPoint;
 
 
-	// 졸업일자 입력 안 하면 null로 받기
-	public void setGradDate(Object gradDate) {
-		if(gradDate.equals(""))
-			this.gradDate = null;
-		this.gradDate = (Date)gradDate;
-		}
 	}

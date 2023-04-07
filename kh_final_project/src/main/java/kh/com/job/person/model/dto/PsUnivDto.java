@@ -32,30 +32,11 @@ public class PsUnivDto {
 	private String uniAct; 
 	private String uniCategory;
 	private String uniName;
-	private Date uniDate;
+	private String uniDate;
 	private String uniMajor;
-	private double uniPoint;
+	private Double uniPoint;
 	
 	
-	
-	// 졸업일자 미입력시 null값으로 들어가게 하기
-//	public void setUniDate(Object uniDate) {
-//		if(uniDate.equals(""))
-//			this.uniDate = null;
-//		this.uniDate = (Date)uniDate;
-//	}
-	
-	public void setUniDate(Object uniDate) {
-	    if (uniDate == null || uniDate.equals("")) {
-	        this.uniDate = null;
-	    } else {
-	        this.uniDate = (Date) uniDate;
-	    }
-	}
-
-	
-
-
 
 
 
