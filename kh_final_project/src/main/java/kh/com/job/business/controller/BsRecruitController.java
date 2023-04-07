@@ -2,7 +2,9 @@ package kh.com.job.business.controller;
 
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -98,7 +100,6 @@ public class BsRecruitController {
 			dto.setMaxSalary("0");
 		}
 		
-		
 		dto.setSalary(dto.getMinSalary()+" ~ "+dto.getMaxSalary());
 		//이력서 파일 업로드
 		if(uploadReport != null && !uploadReport.isEmpty()) {
@@ -124,6 +125,23 @@ public class BsRecruitController {
 		}
 
 		return new Gson().toJson(mlist);
+	}
+	
+	@PostMapping("/imageUpload.do")
+	public String imageUpload(ModelAndView mv,
+			@RequestParam("upload") MultipartFile file
+			, Principal principal){
+		Map<String, Object> map = new HashMap<>();
+		 
+		String url = service.uploadDocument(file, principal.getName());		
+	
+		/*
+		 * mv.addObject("uploaded", true); mv.addObject("url", url);
+		 */
+		map.put("uploaded", true);
+		map.put("url", url);
+
+		return new Gson().toJson(map);
 	}
 	
 
