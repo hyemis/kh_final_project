@@ -30,6 +30,9 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     
+    <!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    
     <link href="${pageContext.request.contextPath}/resources/css/recruit.textarea.css" rel="stylesheet">
     <!-- css file link part end -->
 
@@ -284,6 +287,21 @@
 				
 			});
 		});
+		
+	    ClassicEditor
+        .create( document.querySelector( '#raContent' ),{
+    		ckfinder: {
+    			uploadUrl : '/image/upload'
+    		},
+// 				filebrowserUploadUrl:'imageUpload.do',
+        		height: 100,
+    	   		width:600
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+		
+		
 
 	</script>
 	

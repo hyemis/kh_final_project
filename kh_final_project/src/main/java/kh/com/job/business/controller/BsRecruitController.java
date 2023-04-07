@@ -134,11 +134,9 @@ public class BsRecruitController {
 		Map<String, Object> map = new HashMap<>();
 		 
 		String url = service.uploadDocument(file, principal.getName());		
-	
-		/*
-		 * mv.addObject("uploaded", true); mv.addObject("url", url);
-		 */
-		map.put("uploaded", true);
+
+		map.put("fileName", file.getOriginalFilename());
+		map.put("uploaded", "1");
 		map.put("url", url);
 
 		return new Gson().toJson(map);
