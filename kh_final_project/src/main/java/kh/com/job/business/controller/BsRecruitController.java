@@ -128,6 +128,7 @@ public class BsRecruitController {
 	}
 	
 	@PostMapping("/imageUpload")
+	@ResponseBody
 	public String imageUpload(@RequestParam("upload") MultipartFile file
 			, Principal principal
 			){
