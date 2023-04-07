@@ -127,16 +127,15 @@ public class BsRecruitController {
 		return new Gson().toJson(mlist);
 	}
 	
-	@PostMapping("/imageUpload.do")
-	public String imageUpload(ModelAndView mv,
-			@RequestParam("upload") MultipartFile file
-			, Principal principal){
+	@PostMapping("/imageUpload")
+	public String imageUpload(@RequestParam("upload") MultipartFile file
+			, Principal principal
+			){
 		Map<String, Object> map = new HashMap<>();
 		 
 		String url = service.uploadDocument(file, principal.getName());		
 
-		map.put("fileName", file.getOriginalFilename());
-		map.put("uploaded", "1");
+		map.put("uploaded", 1);
 		map.put("url", url);
 
 		return new Gson().toJson(map);
