@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,7 +63,7 @@ public class PsResumeController {
 		try {
 
 			PsUserDto result = pservice.selectOne(principal.getName());
-			
+//			List<PsHschoolDto> Hschool = rservice.selectList(principal.getName());
 			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.setViewName("person/resume/write");

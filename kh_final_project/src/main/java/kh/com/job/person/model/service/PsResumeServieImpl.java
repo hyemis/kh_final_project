@@ -87,6 +87,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int insertHschool(PsHschoolDto dto) throws Exception {
 		return dao.insertHschool(dto);
 	}
+	
+	@Override
+	public List<PsHschoolDto> viewHschoolList(String userId) throws Exception {
+		return dao.viewHschoolList(userId);
+	}
 
 	@Override
 	public int insertUniv(PsUnivDto dto) throws Exception {

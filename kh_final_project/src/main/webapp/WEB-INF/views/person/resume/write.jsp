@@ -191,7 +191,7 @@
 										<div class="modal-body">
 											최종 학력 선택 후 불러올 학력을 체크하세요.
 											<!-- 버튼 그룹 -->
-											<div class="btn-group mb-3" role="group" aria-label="학력사항 선택">
+											<div class="btn-group mb-3">
 												<button type="button" class="btn btn-outline-secondary"
 													onclick="showList('highSchool')">고등학교 졸업</button>
 												<button type="button" class="btn btn-outline-secondary"
@@ -199,6 +199,30 @@
 												<button type="button" class="btn btn-outline-secondary"
 													onclick="showList('graduate')">대학원 졸업</button>
 											</div>
+											<!-- 버튼 클릭 내용 -->
+											<div class="table-responsive">
+												<table class="table table-striped table-bordered">
+													<thead>
+														<tr>
+															<th>선택</th>
+															<th>재학기간</th>
+															<th>학교명(소재지)</th>
+															<th>전공</th>
+															<th>학점</th>
+														</tr>
+													</thead>
+													<tbody id="highSchoolList">
+														<!-- 고등학교 졸업 내용 출력 -->
+													</tbody>
+													<tbody id="universityList" style="display: none">
+														<!-- 대학교 졸업 내용 출력 -->
+													</tbody>
+													<tbody id="graduateList" style="display: none">
+														<!-- 대학원 졸업 내용 출력 -->
+													</tbody>
+												</table>
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -612,6 +636,17 @@
 				hiddenContent.classList.remove("hidden");
 			}
 		});
+		
+		function showList(type) {
+			// 모든 표 숨기기
+			document.getElementById("highSchoolList").style.display = "none";
+			document.getElementById("universityList").style.display = "none";
+			document.getElementById("graduateList").style.display = "none";
+			
+			// 해당 타입에 맞는 표 보이기
+			document.getElementById(type+"List").style.display = "table-row-group";
+		}
+		
 	</script>
 
 </body>

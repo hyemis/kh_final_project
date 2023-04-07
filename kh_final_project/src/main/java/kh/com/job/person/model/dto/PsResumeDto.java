@@ -30,7 +30,7 @@ public class PsResumeDto {
 	private String resumeTitle;
 	private String resumePhoto;
 	private String resumeAct;
-	private Date resumeDate;
+	private Timestamp resumeDate;
 	private String portfFile;
 	private String userId;
 	
