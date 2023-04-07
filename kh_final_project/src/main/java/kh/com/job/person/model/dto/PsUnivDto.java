@@ -19,30 +19,44 @@ import lombok.ToString;
 public class PsUnivDto {
 	
 	
-//	U_EDU_NO   NOT NULL NUMBER       
-//	U_ACT               VARCHAR2(1)  
-//	U_CATEGORY          VARCHAR2(1)  
-//	U_NAME              VARCHAR2(30) 
-//	U_DATE              TIMESTAMP(6) 
-//	U_MAJOR             VARCHAR2(50) 
-//	U_POINT             NUMBER 
+//	UNI_EDU_NO   NOT NULL NUMBER       
+//	UNI_ACT               VARCHAR2(1)  
+//	UNI_CATEGORY          VARCHAR2(1)  
+//	UNI_NAME              VARCHAR2(30) 
+//	UNI_DATE              TIMESTAMP(6) 
+//	UNI_MAJOR             VARCHAR2(50) 
+//	UNI_POINT             NUMBER 
 
 	
-	private int uEduNo;
-	private String uAct;
-	private String uCategory;
-	private String uName;
-	private Date uDate;
-	private String uMajor;
-	private double uPoint;
-	public Date getuDate;
+	private int uniEduNo;
+	private String uniAct; 
+	private String uniCategory;
+	private String uniName;
+	private Date uniDate;
+	private String uniMajor;
+	private double uniPoint;
 	
-	// 졸업일자 입력 안 하면 null값 받기
-	public void setUdate(Object uDate) {
-		if(uDate.equals(""))
-			this.uDate = null;
-		this.uDate = (Date)uDate;
+	
+	
+	// 졸업일자 미입력시 null값으로 들어가게 하기
+//	public void setUniDate(Object uniDate) {
+//		if(uniDate.equals(""))
+//			this.uniDate = null;
+//		this.uniDate = (Date)uniDate;
+//	}
+	
+	public void setUniDate(Object uniDate) {
+	    if (uniDate == null || uniDate.equals("")) {
+	        this.uniDate = null;
+	    } else {
+	        this.uniDate = (Date) uniDate;
+	    }
 	}
+
 	
-	
+
+
+
+
+
 }
