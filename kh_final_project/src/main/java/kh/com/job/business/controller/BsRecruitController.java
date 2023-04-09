@@ -82,25 +82,32 @@ public class BsRecruitController {
 	public ModelAndView insertRecruit(ModelAndView mv, BsRecruitDto dto
 								,@RequestParam(value = "conditionTypeList", required = false) List<String> conditionTypeList
 								,@RequestParam(name = "report", required = false) MultipartFile uploadReport
+								,@RequestParam(name = "category2dept", required = false) String category2dept
 								,Principal principal){
+		
+		int result = -1;
+		
+		if(principal != null) {
+			dto.setUserId(principal.getName());
+		}
 		
 		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
 			//우대조건 컬럼 한개로 합치기
 			String conditionType = String.join(",", conditionTypeList);
 			dto.setConditionType(conditionType);
+			
 			//join으로 합친거 자르기위한 거
-			String[] conditionType2 = conditionType.split(",");
-			List<String> list = Arrays.asList(conditionType2);			
+//			String[] conditionType2 = conditionType.split(",");
+//			List<String> list = Arrays.asList(conditionType2);			
 		}
 		
-		//salary데이터 관리
+		//salary 최대값 최소값 null일 때 0으로  
 		if(dto.getMinSalary() == null || dto.getMinSalary().isEmpty()){
 			dto.setMinSalary("0");
 		}
 		if(dto.getMaxSalary() == null || dto.getMaxSalary().isEmpty()){
 			dto.setMaxSalary("0");
 		}
-		
 		dto.setSalary(dto.getMinSalary()+" ~ "+dto.getMaxSalary());
 		//이력서 파일 업로드
 		if(uploadReport != null && !uploadReport.isEmpty()) {
@@ -108,8 +115,29 @@ public class BsRecruitController {
 		    dto.setRaExtraDocument(reportUrl);
 		}
 		
+		//모집분야 상위 분류만 선택 할때 모집분야 상위분류로 넣기
+		if(dto.getRecruitType().equals("0")) {
+			dto.setRecruitType(category2dept);
+		}
+		
 		//여기다가 채용공고 내용 넣기
 		System.out.println(dto);
+		/*
+		 * 들어가야할 내용
+		 * 회사이름 모집분야 경력선택 학력선택 급여
+		 * 우대조건 등록, 마감
+		 * 고용 형태
+		 * 상세 근무형태
+		 * 공고 제목
+		 * 공고 내용
+		 * 기타 문서
+		 */
+		result = service.insertRecruit(dto);
+		
+		if(result == 1) {
+			mv.setViewName("redirect:/business/recruit/main");
+		}
+		
 		mv.setViewName("redirect:/business/recruit/main");
 		return mv;
 	}

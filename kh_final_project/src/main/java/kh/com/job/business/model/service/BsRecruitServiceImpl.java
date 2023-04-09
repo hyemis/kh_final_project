@@ -17,6 +17,7 @@ import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.business.model.dao.BsAccountDao;
 import kh.com.job.business.model.dao.BsRecruitDao;
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 
 @Service
@@ -59,6 +60,13 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 				 throw new RuntimeException(e);
 			}
 		
+	}
+
+	@Override
+	public int insertRecruit(BsRecruitDto dto) {
+		int result = -1;
+		result = dao.insertRecruit(dto);
+		return result;
 	}
 
 }

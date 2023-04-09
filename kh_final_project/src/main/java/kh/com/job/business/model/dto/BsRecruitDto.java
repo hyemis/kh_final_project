@@ -20,6 +20,7 @@ public class BsRecruitDto {
 	
 	private Number raNum;
 	private String recruitType;
+	private String busino;
 	private String userId;
 	private String companyName;
 	private String careerType;
@@ -42,6 +43,7 @@ public class BsRecruitDto {
 	private String career;
 	private String holidayType;
 	private String empTypeCode;
+	private String raAdmission;
 	
 	
 	

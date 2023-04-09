@@ -28,4 +28,8 @@ public class BsRecruitDao {
 		return sqlSession.selectList("business.getCateList", categoryType);
 	}
 
+	public int insertRecruit(BsRecruitDto dto) {
+		return sqlSession.insert("business.insertRecruit", dto);
+	}
+
 }

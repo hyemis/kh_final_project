@@ -33,3 +33,5 @@ kh_final_project/.classpath
 kh_final_project/.settings/org.eclipse.wst.common.component
 kh_final_project/src/main/webapp/resources/khfinal5joba-efa3ba3dbf4e.json
 .project
+.dbeaver/data-sources.json
+.dbeaver/credentials-config.json

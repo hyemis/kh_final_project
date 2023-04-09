@@ -115,7 +115,7 @@
 								<tr class="mb-3">
 									<td><label for="career">경력선택</label></td>
 									<td>
-									<select id="careerType" class="careerType form-control" name="careerType">
+									<select id="career" class="career form-control" name="career">
 											<option value="0">선택안함</option>
 										<c:forEach items="${CAlist}" var="categoryCA">
 											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
@@ -291,15 +291,14 @@
 		
 		//게시글 입력칸 체크
 		function checkVailed() {
+			alert(recruitContent.closeDate.value);
 			if(recruitContent.companyName.value == "" || /^\s+/.test(recruitContent.companyName.value)){
 				alert("회사 이름을 입력해 주세요.");
 				return false;
-			}else if(recruitContent.recruitType.value == 0){
-				if(recruitContent.category2dept.value == 0){
+			}else if(recruitContent.category2dept.value == 0){
 					alert("모집 분야를 선택해 주세요");
 					return false;					
-				}
-			}else if(recruitContent.careerType.value == 0){
+			}else if(recruitContent.career.value == 0){
 				alert("경력 조건을을 선택해 주세요.");
 				return false;
 			}else if(recruitContent.userEducation.value == 0){
