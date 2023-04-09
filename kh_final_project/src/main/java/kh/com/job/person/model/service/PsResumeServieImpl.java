@@ -113,6 +113,16 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.insertCerti(dto);
 	}
 
+	@Override
+	public int getMaxHighNo() throws Exception {
+		return dao.getMaxHighNo();
+	}
+
+	@Override
+	public int insertHighInfo(Map<String, Object> HighInfo) throws Exception {
+		return dao.insertHighInfo(HighInfo);
+	}
+
 
 	
 

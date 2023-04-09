@@ -55,6 +55,11 @@ public class PsResumeDao {
 		return sqlSession.insert("resume.insertHschool",dto);
 	}
 	
+	// 이력서-고등학교 최신보기 
+	public int getMaxHighNo() throws Exception {
+		return sqlSession.selectOne("resume.selectOneHigh");
+	}
+	
 	public List<PsHschoolDto>  viewHschoolList(String userId) throws Exception{
 		return sqlSession.selectList("resume.viewHschoolList",userId);
 	}
@@ -79,4 +84,8 @@ public class PsResumeDao {
 		return sqlSession.insert("resume.insertCerti",dto);
 	}
 
+	// highInfo - 입력
+	public int insertHighInfo(Map<String, Object> HighInfo) throws Exception {
+		return sqlSession.insert("resume.insertHighInfo", HighInfo);
+	}
 }

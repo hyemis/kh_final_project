@@ -3,69 +3,104 @@
 <mapper namespace="resume">
 
 	<select id="selectOne" resultType="rdto">
-		select RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
-		USER_RESUME where USER_ID=#{USER_ID}
+		select RESUME_NO,
+		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
+		USER_RESUME
+		WHERE USER_ID = #{USER_ID} AND RESUME_DATE = (
+		SELECT MAX(RESUME_DATE)
+		FROM USER_RESUME
+		WHERE USER_ID = #{USER_ID}
+		)
 	</select>
 
 	<select id="rselectOne" resultType="rdto">
-		select RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
-		USER_RESUME where USER_ID=#{userId} and RESUME_NO=#{resumeNo}
+		select RESUME_NO,
+		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
+		USER_RESUME
+		where USER_ID=#{userId} and RESUME_NO=#{resumeNo}
 	</select>
 
 	<select id="selectList" resultType="rdto">
-		select RESUME_NO, RESUME_TITLE, RESUME_DATE, PORTF_FILE FROM USER_RESUME
-		where USER_ID=#{USER_ID} order by RESUME_DATE desc
+		select RESUME_NO,
+		RESUME_TITLE, RESUME_DATE, PORTF_FILE FROM USER_RESUME
+		where
+		USER_ID=#{USER_ID} order by RESUME_DATE desc
 	</select>
 
-	<!-- <insert id="insert" parameterType="rdto">
-		INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE,
-		PORTF_FILE, USER_ID)
-		VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId})
-	</insert> -->
-	
+
+	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
+	<select id="selectOneHigh" resultType="_int">
+		SELECT HIGH_EDU_NO
+		FROM
+		RESUME_HIGHSCHOOL
+		WHERE HIGH_EDU_NO = (
+		SELECT MAX(HIGH_EDU_NO)
+		FROM
+		RESUME_HIGHSCHOOL
+		)
+	</select>
+
+	<!-- <insert id="insert" parameterType="rdto"> INSERT INTO USER_RESUME (RESUME_NO, 
+		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) VALUES(USER_RESUME_SEQ.NEXTVAL, 
+		#{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId}) </insert> -->
+
 	<insert id="insert" parameterType="rdto">
-		INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
-		VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, #{resumePhoto}, sysdate, #{userId})
+		INSERT INTO USER_RESUME
+		(RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
+		VALUES(USER_RESUME_SEQ.NEXTVAL, #{resumeTitle}, #{resumePhoto},
+		sysdate, #{userId})
 	</insert>
 
 	<delete id="delete" parameterType="_int">
-		delete from USER_RESUME where RESUME_NO=#{RESUME_NO}
+		delete from USER_RESUME where
+		RESUME_NO=#{RESUME_NO}
 	</delete>
 
 	<update id="update" parameterType="rdto">
-		update USERS set USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID}
+		update USERS set
+		USER_NAME=#{USER_NAME} where USER_ID = #{USER_ID}
 	</update>
 
 	<insert id="insertHschool" parameterType="hdto">
 		insert into
 		RESUME_HIGHSCHOOL(HIGH_EDU_NO, GED, HIGH_NAME, HIGH_DATE, HIGH_MAJOR)
 		values
-		(RESUME_HIGHSCHOOL_SEQ.NEXTVAL, #{ged}, #{highName}, #{highDate}, #{highMajor})
+		(RESUME_HIGHSCHOOL_SEQ.NEXTVAL, #{ged}, #{highName},
+		#{highDate}, #{highMajor})
 	</insert>
-	
-<!-- 	<select id="selectList" resultType="rdto">
-		
-	</select> -->
 
-  	<insert id="insertUniv" parameterType="udto">
-	insert into RESUME_UNIVERSITY(UNI_EDU_NO, UNI_ACT, UNI_CATEGORY,
-	UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT)
-	values (RESUME_UNIVERSITY_SEQ.NEXTVAL, #{uniAct}, #{uniCategory}, #{uniName},
-	#{uniDate}, #{uniMajor}, #{uniPoint})
+	<!-- <select id="selectList" resultType="rdto"> </select> -->
+
+	<insert id="insertUniv" parameterType="udto">
+		insert into
+		RESUME_UNIVERSITY(UNI_EDU_NO, UNI_ACT, UNI_CATEGORY,
+		UNI_NAME,
+		UNI_DATE, UNI_MAJOR, UNI_POINT)
+		values (RESUME_UNIVERSITY_SEQ.NEXTVAL,
+		#{uniAct}, #{uniCategory},
+		#{uniName},
+		#{uniDate}, #{uniMajor},
+		#{uniPoint})
 	</insert>
 
 	<insert id="insertGschool" parameterType="gdto">
-	insert into
-	RESUME_GRADSCHOOL(GRAD_EDU_NO, GRAD_ACT, GRAD_NAME, GRAD_CATEGORY, GRAD_DATE, GRAD_MAJOR, GRAD_POINT)
-	values (RESUME_GRADSCHOOL_SEQ.NEXTVAL, #{gradAct}, #{gradName},
-	#{gradCategory}, #{gradDate}, #{gradMajor}, #{gradPoint})
+		insert into
+		RESUME_GRADSCHOOL(GRAD_EDU_NO, GRAD_ACT, GRAD_NAME, GRAD_CATEGORY,
+		GRAD_DATE, GRAD_MAJOR,
+		GRAD_POINT)
+		values
+		(RESUME_GRADSCHOOL_SEQ.NEXTVAL, #{gradAct}, #{gradName},
+		#{gradCategory}, #{gradDate}, #{gradMajor}, #{gradPoint})
 	</insert>
 
 	<insert id="insertCareer" parameterType="careerdto">
-		insert into RESUME_CAREER
-		(CAR_NO, CAR_NAME, CAR_DATE, CAR_POSITION, CAR_DEPT, CAR_RESP,
+		insert into
+		RESUME_CAREER
+		(CAR_NO, CAR_NAME, CAR_DATE, CAR_POSITION, CAR_DEPT,
+		CAR_RESP,
 		CAR_SALARY)
-		values (RESUME_CAREER_SEQ.NEXTVAL, #{carName}, #{carDate},
+		values (RESUME_CAREER_SEQ.NEXTVAL, #{carName},
+		#{carDate},
 		#{carPosition}, #{carDept}, #{carResp}, #{carSalary})
 	</insert>
 
@@ -75,5 +110,11 @@
 		values
 		(R_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
+
+<insert id="insertHighInfo" parameterType="hinfodto">
+	insert into RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO) 
+	values (#{resumeNo},#{highEduNo})
+</insert>
+
 
 </mapper>

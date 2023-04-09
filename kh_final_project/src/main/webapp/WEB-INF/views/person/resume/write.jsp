@@ -158,11 +158,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end m-2">
+				<!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end m-2">
 					<button class="btn btn-primary" type="button" id="rWrite"
 						onclick="fn_rWrite(); return false;">이력서 저장</button>
 
-				</div>
+				</div> -->
 			</div>
 
 			<div class="bg-light rounded p-3">
@@ -220,6 +220,7 @@
 													</thead>
 													<tbody id="highSchoolList">
 														<!-- 고등학교 졸업 내용 출력 -->
+														
 													</tbody>
 													<tbody id="universityList" style="display: none">
 														<!-- 대학교 졸업 내용 출력 -->
@@ -575,9 +576,9 @@
 
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-				<button class="btn btn-primary me-md-2" type="button" id=""
-					onclick="">save</button>
-				<button class="btn btn-primary" type="button">cancel</button>
+				<button class="btn btn-primary me-md-2" type="button" id="rWrite"
+					onclick="fn_rWrite(); return false;">이력서 저장</button>
+				<button class="btn btn-primary" type="button">취소</button>
 			</div>
 		</div>
 	</div>
@@ -591,17 +592,18 @@
 		if (msg) {
 			alert(msg);
 		}
-
-		// 이력서 등록
+		
+		
+// 이력서 등록
 		function fn_rWrite() {
 			let formdata = new FormData();
 			formdata.append("resumeTitle", $("#resumeTitle").val());
 			formdata.append("flexCheckChecked", $("#flexCheckChecked").val());
-			/* formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]); */
-			formdata.append("resumePhoto", $("#url").val());
+			formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]); 
+ 			formdata.append("resumePhoto", $("#url").val());
 
 			$.ajax({
-				url : "${pageContext.request.contextPath}/person/resume/write",
+				url : "${pageContext.request.contextPath}/person/resume/list",
 				type : "post",
 				contentType : false,
 				processData : false,
@@ -609,15 +611,15 @@
 				success : function(result) {
 					if (result == 1) {
 						alert("이력서가 등록되었습니다.");
-						var userId = $("#userId").val();
-						location.href = "/job/person/resume/list";
+						location.href = "/job/person/resume/write";
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}
 				}
 			})
-		}
+		} 
 
+ 
 		//  대입검정고시 체크박스 Y/N 체크
 		function fn_checkY() {
 			var ged = $("#checkY").prop("checked") ? "Y" : "N";

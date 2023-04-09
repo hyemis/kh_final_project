@@ -122,7 +122,7 @@
 												var="user_id"></sec:authentication>
 											<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 												<a
-													href="${pageContext.request.contextPath}/person/resume/write?userId=${user_id}">이력서
+													href="${pageContext.request.contextPath}/person/resume/write">이력서
 													생성</a>
 											</div>
 										</sec:authorize>

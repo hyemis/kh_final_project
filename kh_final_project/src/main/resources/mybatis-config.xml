@@ -25,6 +25,8 @@
 		<typeAlias type="kh.com.job.person.model.dto.PsHschoolDto" alias="hdto"/>
 		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto" alias="udto"/>
 		
+		<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto" alias="hinfodto"/>
+		
 		
 	</typeAliases>
 
