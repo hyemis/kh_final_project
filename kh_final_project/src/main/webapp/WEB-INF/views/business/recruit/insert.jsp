@@ -74,7 +74,7 @@
 			</li>
 		</ul>
 	
-		<form action="insert" method="post" id="formdata1" enctype="multipart/form-data">
+		<form action="insert" method="post" id="recruitContent" class="recruitContent" name="recruitContent" enctype="multipart/form-data" onsubmit="return checkVailed()">
 		<!-- 탭 내용 -->
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
@@ -99,7 +99,7 @@
 								<tr class="mb-3">
 									<td><label for="category2dept">모집 분야</label></td>
 									<td>
-										<select id="category2dept" class="category2dept form-control">
+										<select id="category2dept" class="category2dept form-control" name="category2dept">
 											<option value="0">선택안함</option>
 										<c:forEach items="${JNlist}" var="categoryJN">
 											<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
@@ -115,7 +115,7 @@
 								<tr class="mb-3">
 									<td><label for="career">경력선택</label></td>
 									<td>
-									<select id="careerType" class="careerType form-control">
+									<select id="careerType" class="careerType form-control" name="careerType">
 											<option value="0">선택안함</option>
 										<c:forEach items="${CAlist}" var="categoryCA">
 											<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
@@ -126,7 +126,7 @@
 								<tr class="mb-3">
 									<td><label for="userEducation">학력선택</label></td>
 									<td>
-									<select id="userEducation" class="userEducation form-control">
+									<select id="userEducation" class="userEducation form-control" name="userEducation">
 										<option value="0">선택안함</option>
 										<c:forEach items="${EDlist}" var="categoryED">
 											<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
@@ -162,7 +162,7 @@
 								<tr class="mb-3">
 									<td><label for="empTypeCode">고용형태</label></td>
 									<td>
-									<select id="empTypeCode" class="empTypeCode form-control">
+									<select id="empTypeCode" class="empTypeCode form-control" name="empTypeCode">
 											<option value="0">선택안함</option>
 										<c:forEach items="${ETlist}" var="categoryET">
 											<option value="${categoryET.categoryId }">${categoryET.categoryName}</option>
@@ -174,7 +174,7 @@
 								<tr class="mb-3">
 									<td><label for="holidayType">상세 근무 형태</label></td>
 									<td>
-									<select id="holidayType" class="holidayType form-control">
+									<select id="holidayType" class="holidayType form-control" name="holidayType">
 											<option value="0">선택안함</option>
 										<c:forEach items="${HTlist}" var="categoryHT">
 											<option value="${categoryHT.categoryId }">${categoryHT.categoryName}</option>
@@ -184,8 +184,9 @@
 								</tr>
 							</tbody>
 						</table>					
-		
-					<button type="button" class="btn nextbtn">다음</button>
+					<div class="d-flex justify-content-end">
+						<button type="button" class="btn btn-success my-3 nextbtn">다음</button>
+					</div>
 				</div>
 				
 			</div>
@@ -217,9 +218,9 @@
 							</tr>
 						</tbody>
 					</table>
-					<div>
-						<button type="button" class="btn prevbtn">이전</button>
-						<button type="submit" class="btn insertbtn">작성</button>
+					<div class="d-flex justify-content-between">
+						<button type="button" class="btn btn-success my-3 prevbtn">이전</button>
+						<button type="submit" class="btn btn-success my-3 insertbtn">작성</button>
 					</div>
 				</div>
 			</div>
@@ -287,11 +288,47 @@
 				
 			});
 		});
-
 		
+		//게시글 입력칸 체크
+		function checkVailed() {
+			if(recruitContent.companyName.value == "" || /^\s+/.test(recruitContent.companyName.value)){
+				alert("회사 이름을 입력해 주세요.");
+				return false;
+			}else if(recruitContent.recruitType.value == 0){
+				if(recruitContent.category2dept.value == 0){
+					alert("모집 분야를 선택해 주세요");
+					return false;					
+				}
+			}else if(recruitContent.careerType.value == 0){
+				alert("경력 조건을을 선택해 주세요.");
+				return false;
+			}else if(recruitContent.userEducation.value == 0){
+				alert("학력 조건을을 선택해 주세요.");
+				return false;
+			}else if(recruitContent.registDate.value === ""){
+				alert("공고 등록 일자를 선택해 주세요.");
+				return false;
+			}else if(recruitContent.closeDate.value === ""){
+				alert("공고 마감 일자를 선택해 주세요.");
+				return false;
+			}else if(recruitContent.empTypeCode.value == 0){
+				alert("고용 형태를 선택해 주세요.");
+				return false;
+			}else if(recruitContent.holidayType.value == 0){
+				alert("근무 형태를 선택해 주세요.");
+				return false;
+			}else if(recruitContent.raTitle.value == ""){
+				alert("채용 공고 제목을 입력해 주세요.");
+				return false;
+			}
+
+			return true;
+			
+		}		
 		
 
 	</script>
+	<!-- ckeditor5 이미지 업로드를 위한 업로드 어뎁터 추가  -->
 	<script type="text/javascript">
 	class UploadAdapter {
 	    constructor(loader) {
@@ -336,7 +373,6 @@
 
 	    _sendRequest(file) {
 	        const data = new FormData();
-	    	console.log("폼 생성");
 	        data.append('upload',file);
 	        this.xhr.send(data);
 	    }

@@ -85,6 +85,7 @@ public class BsRecruitController {
 								,Principal principal){
 		
 		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
+			//우대조건 컬럼 한개로 합치기
 			String conditionType = String.join(",", conditionTypeList);
 			dto.setConditionType(conditionType);
 			//join으로 합친거 자르기위한 거
@@ -107,6 +108,7 @@ public class BsRecruitController {
 		    dto.setRaExtraDocument(reportUrl);
 		}
 		
+		//여기다가 채용공고 내용 넣기
 		System.out.println(dto);
 		mv.setViewName("redirect:/business/recruit/main");
 		return mv;
