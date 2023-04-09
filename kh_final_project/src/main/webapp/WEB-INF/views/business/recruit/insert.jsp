@@ -291,7 +291,6 @@
 		
 		//게시글 입력칸 체크
 		function checkVailed() {
-			alert(recruitContent.closeDate.value);
 			if(recruitContent.companyName.value == "" || /^\s+/.test(recruitContent.companyName.value)){
 				alert("회사 이름을 입력해 주세요.");
 				return false;
