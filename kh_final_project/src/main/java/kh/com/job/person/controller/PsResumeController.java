@@ -205,10 +205,10 @@ public class PsResumeController {
 				int highEduNo = rservice.getMaxHighNo();
 				
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", InfoNo);
-				InfoNo.put("highEduNo", InfoNo);
+				InfoNo.put("resumeNo", resumeNo);
+				InfoNo.put("highEduNo", highEduNo);
 				
-				//낀테이블
+				// 낀테이블 insert
 				rservice.insertHighInfo(InfoNo);
 				
 				rttr.addFlashAttribute("msg", "성공");
@@ -226,14 +226,23 @@ public class PsResumeController {
 
 	// 대학교 입력
 	@PostMapping("rUniversity")
-	public ModelAndView rUniversity(ModelAndView mv, PsUnivDto dto
-			, RedirectAttributes rttr
-			) {
+	public ModelAndView rUniversity(Principal principal, ModelAndView mv, PsUnivDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertUniv(dto);
 			
 			if (result > 0) {
+				PsResumeDto resume= rservice.selectOne(principal.getName());
+				int resumeNo = resume.getResumeNo();
+				int uniEduNo = rservice.getMaxUniNo();
+				
+				Map<String, Object> InfoNo = new HashMap<>();
+				InfoNo.put("resumeNo", resumeNo);
+				InfoNo.put("highEduNo", uniEduNo);
+				
+				// 낀테이블 insert
+				rservice.insertUniInfo(InfoNo);
+				
 				rttr.addFlashAttribute("msg", "성공");
 			} else {
 				rttr.addFlashAttribute("msg", "실패");
@@ -242,7 +251,7 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
 	
@@ -251,7 +260,7 @@ public class PsResumeController {
 
 	// 대학원 입력
 	@PostMapping("rGSchool")
-	public ModelAndView rGSchool(ModelAndView mv, PsGschoolDto dto, RedirectAttributes rttr) {
+	public ModelAndView rGSchool(Principal principal, ModelAndView mv, PsGschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertGschool(dto);
