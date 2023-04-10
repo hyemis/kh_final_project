@@ -90,17 +90,18 @@
 							<div class="modal fade" id="viewRHSchool" tabindex="-1"
 								role="dialog" aria-labelledby="uploadModalLabel"
 								aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="uploadModalLabel">학력사항 불러오기</h5>
+										
 											<button type="button" class="close" data-bs-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
 										<div class="modal-body">
-											최종 학력 선택 후 불러올 학력을 체크하세요.
+											<p>최종 학력 선택 후 불러올 학력을 체크하세요.</p>
 											<!-- 버튼 그룹 -->
 											<div class="btn-group mb-3">
 												<button type="button" class="btn btn-outline-secondary"
@@ -116,21 +117,52 @@
 													<thead>
 														<tr>
 															<th>선택</th>
-															<th>재학기간</th>
+															<th>졸업상태</th>
 															<th>학교명(소재지)</th>
+															<th>카테고리</th>
+															<th>졸업일자</th>
 															<th>전공</th>
 															<th>학점</th>
 														</tr>
 													</thead>
 													<tbody id="highSchoolList">
-														<!-- 고등학교 졸업 내용 출력 -->
-
+														<c:forEach var="hschool" items="${high}">
+															<tr>
+																<td></td>
+																<td>${hschool.ged}</td>
+																<td>${hschool.highName}</td>
+																<td></td>
+																<td>${hschool.highDate}</td>
+																<td>${hschool.highMajor}</td>
+																<td></td>
+															</tr>
+														</c:forEach>
 													</tbody>
 													<tbody id="universityList" style="display: none">
-														<!-- 대학교 졸업 내용 출력 -->
+														<c:forEach var="university" items="${uni}">
+															<tr>
+																<td></td>
+																<td>${university.uniAct}</td>
+																<td>${university.uniName}</td>
+																<td>${university.uniCategory}</td>
+																<td>${university.uniDate}</td>
+																<td>${university.uniMajor}</td>
+																<td>${university.uniPoint}</td>
+															</tr>
+														</c:forEach>
 													</tbody>
 													<tbody id="graduateList" style="display: none">
-														<!-- 대학원 졸업 내용 출력 -->
+														<c:forEach var="gschool" items="${grad}">
+															<tr>
+																<td></td>
+																<td>${gschool.gradAct}</td>
+																<td>${gschool.gradName}</td>
+																<td>${gschool.gradCategory}</td>
+																<td>${gschool.gradDate}</td>
+																<td>${gschool.gradMajor}</td>
+																<td>${gschool.gradPoint}</td>
+															</tr>
+														</c:forEach>
 													</tbody>
 												</table>
 											</div>
@@ -387,7 +419,7 @@
 		if (msg) {
 			alert(msg);
 		}
-		
+
 		//  대입검정고시 체크박스 Y/N 체크
 		function fn_checkY() {
 			var ged = $("#checkY").prop("checked") ? "Y" : "N";
@@ -399,35 +431,32 @@
 			var ged = $("#checkY").prop("checked") ? "Y" : "N";
 			$("#ged").val(ged);
 		}
-		
-		
+
 		// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
- 		const disableInputCheckbox = document.getElementById("checkY");
- 		const dateField = document.getElementById("dateField");
- 		const selectField = document.getElementById("selectField");
+		const disableInputCheckbox = document.getElementById("checkY");
+		const dateField = document.getElementById("dateField");
+		const selectField = document.getElementById("selectField");
 		disableInputCheckbox.addEventListener("change", function() {
-		  if (this.checked) {
-		    inputField.disabled = true;
-		    dateField.disabled = true;
-		    selectField.disabled = true;
-		  } else {
-		    inputField.disabled = false;
-		    dateField.disabled = false;
-		    selectField.disabled = false;
-		  }
+			if (this.checked) {
+				inputField.disabled = true;
+				dateField.disabled = true;
+				selectField.disabled = true;
+			} else {
+				inputField.disabled = false;
+				dateField.disabled = false;
+				selectField.disabled = false;
+			}
 		});
-		
-		
+
 		function showList(type) {
 			// 모든 표 숨기기
 			document.getElementById("highSchoolList").style.display = "none";
 			document.getElementById("universityList").style.display = "none";
 			document.getElementById("graduateList").style.display = "none";
-			
+
 			// 해당 타입에 맞는 표 보이기
-			document.getElementById(type+"List").style.display = "table-row-group";
+			document.getElementById(type + "List").style.display = "table-row-group";
 		}
-		
 	</script>
 
 </body>

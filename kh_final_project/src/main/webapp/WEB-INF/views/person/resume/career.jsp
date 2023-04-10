@@ -160,6 +160,7 @@
 		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
 		const radioBox = document.getElementById("radio-box");
 		const hiddenContent = document.getElementById("hidden-content");
+		
 		let clickCount = 0;
 		radioBox.addEventListener("click", function() {
 			clickCount++;

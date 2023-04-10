@@ -101,32 +101,39 @@
 	</insert>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
-		insert into RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO)
-		values (#{resumeNo},#{highEduNo})
+		insert into
+		RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO)
+		values
+		(#{resumeNo},#{highEduNo})
 	</insert>
 
 	<insert id="insertUniInfo" parameterType="uinfodto">
-		insert into RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO) values
+		insert into
+		RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO) values
 		(#{resumeNo},#{uniEduNo})
 	</insert>
 
 	<insert id="insertGradInfo" parameterType="ginfodto">
-		insert into	RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
+		insert into
+		RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
 		(#{resumeNo},#{gradEduNo})
 	</insert>
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
-		insert into	RESUME_CAR_INFO (RESUME_NO, CAR_NO) values
+		insert into
+		RESUME_CAR_INFO (RESUME_NO, CAR_NO) values
 		(#{resumeNo},#{carNo})
 	</insert>
 
 	<insert id="insertCertiInfo" parameterType="certiinfodto">
-		insert into	RESUME_CERTI_INFO (RESUME_NO, CERTI_NO) values
+		insert into
+		RESUME_CERTI_INFO (RESUME_NO, CERTI_NO) values
 		(#{resumeNo},#{certiNo})
 	</insert>
-	
+
 	<insert id="insertClInfo" parameterType="clinfodto">
-		insert into	RESUME_CL_INFO (RESUME_NO, CL_NO) values
+		insert into
+		RESUME_CL_INFO (RESUME_NO, CL_NO) values
 		(#{resumeNo},#{clNo})
 	</insert>
 
@@ -153,7 +160,7 @@
 		RESUME_UNIVERSITY
 		)
 	</select>
-	
+
 	<!-- GRAD_EDU_NO 이 제일 큰 값 -->
 	<select id="selectOneGrad" resultType="_int">
 		SELECT GRAD_EDU_NO
@@ -165,7 +172,7 @@
 		RESUME_GRADSCHOOL
 		)
 	</select>
-	
+
 	<!-- CAR_NO 이 제일 큰 값 -->
 	<select id="selectOneCar" resultType="_int">
 		SELECT CAR_NO
@@ -189,7 +196,7 @@
 		RESUME_CERTI
 		)
 	</select>
-	
+
 	<!-- CL_NO 이 제일 큰 값 -->
 	<select id="selectOneCl" resultType="_int">
 		SELECT CL_NO
@@ -201,5 +208,43 @@
 		RESUME_CL
 		)
 	</select>
-	
+
+	<select id="selectListHigh" resultType="hdto">
+		SELECT h.high_Edu_no AS
+		highEduNo, h.ged AS ged, h.high_name AS highName, h.high_date AS
+		highDate, h.high_major AS highMajor
+		FROM RESUME_HIGHSCHOOL h
+		INNER JOIN
+		RESUME_HIGH_INFO i ON h.high_Edu_no = i.HIGH_EDU_NO
+		INNER JOIN
+		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{USER_ID}
+		ORDER BY h.high_date DESC
+	</select>
+
+	<select id="selectListUni" resultType="udto">
+		SELECT u.UNI_EDU_NO AS
+		uniEduNo, u.UNI_ACT AS uniAct, u.UNI_CATEGORY AS uniCategory,
+		u.UNI_NAME AS uniName, u.UNI_DATE AS uniDate, u.UNI_MAJOR AS uniMajor,
+		u.UNI_POINT AS uniPoint
+		FROM RESUME_UNIVERSITY u
+		INNER JOIN
+		RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
+		INNER JOIN 
+		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{userId}
+		ORDER BY u.UNI_DATE DESC
+	</select>
+
+	<select id="selectListGrad" resultType="gdto">
+		SELECT rg.GRAD_EDU_NO AS gradEduNo, rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as
+		gradCategory, rg.GRAD_NAME AS gradName, rg.GRAD_DATE AS gradDate, rg.GRAD_MAJOR AS
+		gradMajor, rg.GRAD_POINT as gradPoint
+		FROM RESUME_GRADSCHOOL rg
+		INNER JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
+		INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{userId}
+		ORDER BY rg.GRAD_DATE DESC
+	</select>
+
 </mapper>
