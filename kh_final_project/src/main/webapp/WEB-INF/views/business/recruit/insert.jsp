@@ -33,7 +33,7 @@
     <!-- ckeditor5 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     
-    <link href="${pageContext.request.contextPath}/resources/css/recruit.textarea.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css" rel="stylesheet">
     <!-- css file link part end -->
 
 <title>채용공고등록</title>
@@ -135,10 +135,10 @@
 									</td>
 								</tr>
 								<tr class="mb-3">
-									<td><label for=minSalary>급여</label></td>
-									<td><input type="text" id="minSalary" class="minSalary form-control" name="minSalary" placeholder="최소 연봉"></td>
-									<td class="text-center">~</td>
-									<td><input type="text" id="maxSalary" class="maxSalary form-control" name="maxSalary" placeholder="최대 연봉"></td>
+									<td><label for=minSalary>최소 연봉</label></td>
+									<td><input type="text" id="minSalary" class="minSalary form-control" name="minSalary" placeholder="만원"></td>
+									<td class="text-center">최대 연봉</td>
+									<td><input type="text" id="maxSalary" class="maxSalary form-control" name="maxSalary" placeholder="만원"></td>
 								</tr>
 								<!-- 체크박스로 처리한거 값들 배열로 받아서 xxx, xxx 순으로 넣기 -->
 								<tr class="mb-3">
