@@ -28,17 +28,6 @@
 	</select>
 
 
-	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
-	<select id="selectOneHigh" resultType="_int">
-		SELECT HIGH_EDU_NO
-		FROM
-		RESUME_HIGHSCHOOL
-		WHERE HIGH_EDU_NO = (
-		SELECT MAX(HIGH_EDU_NO)
-		FROM
-		RESUME_HIGHSCHOOL
-		)
-	</select>
 
 	<!-- <insert id="insert" parameterType="rdto"> INSERT INTO USER_RESUME (RESUME_NO, 
 		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) VALUES(USER_RESUME_SEQ.NEXTVAL, 
@@ -111,10 +100,37 @@
 		(R_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
 
-<insert id="insertHighInfo" parameterType="hinfodto">
-	insert into RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO) 
-	values (#{resumeNo},#{highEduNo})
-</insert>
+	<insert id="insertHighInfo" parameterType="hinfodto">
+		insert into RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO)
+		values (#{resumeNo},#{highEduNo})
+	</insert>
 
+	<insert id="insertUniInfo" parameterType="uinfodto">
+		insert into RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO) values
+		(#{resumeNo},#{uniEduNo})
+	</insert>
 
+	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
+	<select id="selectOneHigh" resultType="_int">
+		SELECT HIGH_EDU_NO
+		FROM
+		RESUME_HIGHSCHOOL
+		WHERE HIGH_EDU_NO = (
+		SELECT MAX(HIGH_EDU_NO)
+		FROM
+		RESUME_HIGHSCHOOL
+		)
+	</select>
+
+	<!-- UNI_EDU_NO 이 제일 큰 값 -->
+	<select id="selectOneUni" resultType="_int">
+		SELECT UNI_EDU_NO
+		FROM
+		RESUME_UNIVERSITY
+		WHERE UNI_EDU_NO = (
+		SELECT MAX(UNI_EDU_NO)
+		FROM
+		RESUME_UNIVERSITY
+		)
+	</select>
 </mapper>

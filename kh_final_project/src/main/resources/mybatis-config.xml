@@ -4,50 +4,56 @@
 
 	<settings>
 		<!-- null -->
-		<setting name="jdbcTypeForNull" value="NULL"/>
-		<!-- camelcase setting   -->
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<!-- camelcase setting -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-	
-	<!-- typeAlias setting  -->
+
+	<!-- typeAlias setting -->
 	<typeAliases>
-		<typeAlias type="kh.com.job.temp.model.dto.TempDto" alias="mdto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsUserDto" alias="pdto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsResumeDto" alias="rdto"/>
-		<typeAlias type="kh.com.job.business.model.dto.BsUserDto" alias="budto"/>
-		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto" alias="brdto"/>
-		<typeAlias type="kh.com.job.business.model.dto.BsInfoDto" alias="bidto"/>
-		
-		<typeAlias type="kh.com.job.person.model.dto.PsCareerDto" alias="careerdto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsCertiDto" alias="certidto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsClDto" alias="cldto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsGschoolDto" alias="gdto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsHschoolDto" alias="hdto"/>
-		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto" alias="udto"/>
-		
-		<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto" alias="hinfodto"/>
-		
-		
+		<typeAlias type="kh.com.job.temp.model.dto.TempDto"
+			alias="mdto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsUserDto"
+			alias="pdto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsResumeDto"
+			alias="rdto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"
+			alias="budto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
+			alias="brdto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsInfoDto"
+			alias="bidto" />
+
+		<typeAlias type="kh.com.job.person.model.dto.PsCareerDto"
+			alias="careerdto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsCertiDto"
+			alias="certidto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsClDto"
+			alias="cldto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsGschoolDto"
+			alias="gdto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsHschoolDto"
+			alias="hdto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto"
+			alias="udto" />
+
+		<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
+			alias="hinfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"
+			alias="uinfodto" />
+
+
 	</typeAliases>
 
-	
-<!-- 	 <mappers>
-	 	<mapper resource="mappers/temp-mapper.xml"/>
-	 	<mapper resource="mappers/person-mapper.xml"/>
-	</mappers> -->
 
-	 
-<!-- 	
-	<environments default="development">
-		<environment id="development">
-			<dataSource type="POOLED">
-				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
-				<property name="username" value="KH"/>
-				<property name="password" value="KH"/>
-			</dataSource>
-		</environment>		
-	</environments>
- -->	
+	<!-- <mappers> <mapper resource="mappers/temp-mapper.xml"/> <mapper resource="mappers/person-mapper.xml"/> 
+		</mappers> -->
+
+
+	<!-- <environments default="development"> <environment id="development"> 
+		<dataSource type="POOLED"> <property name="driver" value="oracle.jdbc.driver.OracleDriver"/> 
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/> <property 
+		name="username" value="KH"/> <property name="password" value="KH"/> </dataSource> 
+		</environment> </environments> -->
 
 </configuration>

@@ -119,10 +119,19 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 
 	@Override
-	public int insertHighInfo(Map<String, Object> HighInfo) throws Exception {
-		return dao.insertHighInfo(HighInfo);
+	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception {
+		return dao.insertHighInfo(InfoNo);
+	}
+	
+	@Override
+	public int getMaxUniNo() throws Exception {
+		return dao.getMaxUniNo();
 	}
 
+	@Override
+	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception {
+		return dao.insertUniInfo(InfoNo);
+	}
 
 	
 

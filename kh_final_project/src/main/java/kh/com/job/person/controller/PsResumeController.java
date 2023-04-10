@@ -116,17 +116,21 @@ public class PsResumeController {
 		try {
 			result = rservice.insert(dto);
 			
-			//TODO: (이력서 고유번호 알아오기 + 고등학교 학력사항 고유번호 알아오기) 고등학교 학력정보 테이블 insert 
+			//TODO: (이력서 고유번호 알아오기 +  학력사항 고유번호 알아오기) 고등학교 학력정보 테이블 insert 
 			PsResumeDto resume= rservice.selectOne(principal.getName());
 			int resumeNo = resume.getResumeNo();
 			int highEduNo = rservice.getMaxHighNo();
+			int uniEduNo = rservice.getMaxUniNo();
 			
-			Map<String, Object> HighInfo = new HashMap<>();
-			HighInfo.put("resumeNo", resumeNo);
-			HighInfo.put("highEduNo", highEduNo);
+			
+			Map<String, Object> InfoNo = new HashMap<>();
+			InfoNo.put("resumeNo", InfoNo);
+			InfoNo.put("highEduNo", InfoNo);
+			InfoNo.put("uniEduNo", InfoNo);
 			
 			// 끼인 테이블 insert 
-			rservice.insertHighInfo(HighInfo);
+			rservice.insertHighInfo(InfoNo);
+			rservice.insertUniInfo(InfoNo);
 			
 			
 			return result;

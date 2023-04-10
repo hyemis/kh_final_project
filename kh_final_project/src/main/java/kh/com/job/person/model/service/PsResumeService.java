@@ -39,7 +39,6 @@ public interface PsResumeService {
 	
 	// 이력서 - 고등학교입력
 	public int insertHschool(PsHschoolDto dto) throws Exception;
-	public int getMaxHighNo() throws Exception;
 	public List<PsHschoolDto> viewHschoolList(String userId) throws Exception;
 	
 	// 이력서 - 대학교입력
@@ -54,8 +53,13 @@ public interface PsResumeService {
 	// 이력서-자격증 입력
 	public int insertCerti(PsCertiDto dto) throws Exception;
 	
-	// highInfo - 입력 
-	public int insertHighInfo(Map<String, Object> HighInfo) throws Exception;
+	// highInfo  
+	public int getMaxHighNo() throws Exception;
+	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	// uniInfo
+	public int getMaxUniNo() throws Exception;
+	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception;
 
 
 }

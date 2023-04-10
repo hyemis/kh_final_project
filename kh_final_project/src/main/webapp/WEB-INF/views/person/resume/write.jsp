@@ -603,7 +603,7 @@
  			formdata.append("resumePhoto", $("#url").val());
 
 			$.ajax({
-				url : "${pageContext.request.contextPath}/person/resume/list",
+				url : "${pageContext.request.contextPath}/person/resume/write",
 				type : "post",
 				contentType : false,
 				processData : false,
@@ -611,7 +611,7 @@
 				success : function(result) {
 					if (result == 1) {
 						alert("이력서가 등록되었습니다.");
-						location.href = "/job/person/resume/write";
+						location.href = "/job/person/resume/list";
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}
