@@ -208,7 +208,7 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
 
@@ -253,13 +253,19 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/school");
+		return mv;
+	}
+	
+	// 경력사항 페이지 
+	@GetMapping("career")
+	public ModelAndView viewCareer(ModelAndView mv) {
 		return mv;
 	}
 
 	// 경력사항 입력
-	@PostMapping("rCareer")
-	public ModelAndView rCareer(ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
+	@PostMapping("career")
+	public ModelAndView doCareer(ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertCareer(dto);
@@ -273,13 +279,19 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/career");
 		return mv;
 	}
+	
+	// 자격증 페이지 
+		@GetMapping("certi")
+		public ModelAndView viewCerti(ModelAndView mv) {
+			return mv;
+		}
 
 	// 자격증 입력
-	@PostMapping("rCerti")
-	public ModelAndView rCerti(ModelAndView mv, PsCertiDto dto, RedirectAttributes rttr) {
+	@PostMapping("certi")
+	public ModelAndView doCerti(ModelAndView mv, PsCertiDto dto, RedirectAttributes rttr) {
 
 		int result = -1;
 		try {
@@ -294,9 +306,15 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/certi");
 		return mv;
 	}
+	
+	// 자격증 페이지 
+			@GetMapping("cl")
+			public ModelAndView viewCl(ModelAndView mv) {
+				return mv;
+			}
 	
 	
 
