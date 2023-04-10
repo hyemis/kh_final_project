@@ -36,7 +36,7 @@
 			alias="hdto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto"
 			alias="udto" />
-
+		
 	<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
 		alias="hinfodto" />
 	<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"

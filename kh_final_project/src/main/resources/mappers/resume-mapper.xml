@@ -97,7 +97,7 @@
 		insert into RESUME_CERTI
 		(CERTI_NO, CERTI_NAME, CERTI_PUB, CERTI_DATE)
 		values
-		(R_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
+		(RESUME_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">

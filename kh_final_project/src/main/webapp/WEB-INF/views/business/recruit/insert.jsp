@@ -137,7 +137,7 @@
 								<tr class="mb-3">
 									<td><label for=minSalary>최소 연봉</label></td>
 									<td><input type="text" id="minSalary" class="minSalary form-control" name="minSalary" placeholder="만원"></td>
-									<td class="text-center">최대 연봉</td>
+									<td><label for=maxSalary>최대 연봉</label></td>
 									<td><input type="text" id="maxSalary" class="maxSalary form-control" name="maxSalary" placeholder="만원"></td>
 								</tr>
 								<!-- 체크박스로 처리한거 값들 배열로 받아서 xxx, xxx 순으로 넣기 -->
@@ -210,7 +210,7 @@
 							</tr>
 							<tr>
 								<td><label for="raContent">상세 내용</label></td>
-								<td colspan="3"><textarea id="raContent" class="raContent form-control" name="raContent" rows="15"></textarea></td>
+								<td colspan="3"><textarea id="raContent" class="raContent form-control" name="raContent"></textarea></td>
 							</tr>
 							<tr>
 								<td><label for="report">이력서 샘플</label></td>
@@ -291,6 +291,7 @@
 		
 		//게시글 입력칸 체크
 		function checkVailed() {
+			let intCheck =  /^\d*$/;
 			if(recruitContent.companyName.value == "" || /^\s+/.test(recruitContent.companyName.value)){
 				alert("회사 이름을 입력해 주세요.");
 				return false;
@@ -298,12 +299,20 @@
 					alert("모집 분야를 선택해 주세요");
 					return false;					
 			}else if(recruitContent.career.value == 0){
-				alert("경력 조건을을 선택해 주세요.");
+				alert("경력 조건을 선택해 주세요.");
 				return false;
 			}else if(recruitContent.userEducation.value == 0){
-				alert("학력 조건을을 선택해 주세요.");
+				alert("학력 조건을 선택해 주세요.");
 				return false;
-			}else if(recruitContent.registDate.value === ""){
+			}
+			else if(!intCheck.test(recruitContent.minSalary.value)){
+				alert("연봉 정보에는 숫자만 입력해 주세요.");
+				return false;
+			}else if(!intCheck.test(recruitContent.maxSalary.value)){
+				alert("연봉 정보에는 숫자만 입력해 주세요.");
+				return false;
+			}
+			else if(recruitContent.registDate.value === ""){
 				alert("공고 등록 일자를 선택해 주세요.");
 				return false;
 			}else if(recruitContent.closeDate.value === ""){
@@ -385,12 +394,15 @@
 	
     ClassicEditor
     .create( document.querySelector( '#raContent' ),{
-    	extraPlugins: [MyCustomUploadAdapterPlugin]
-		,simpleUpload :{
+    	language: "ko"
+    	, extraPlugins: [MyCustomUploadAdapterPlugin]
+		, simpleUpload :{
 			uploadUrl : 'imageUpload',
-		},
-    		height: 100,
-	   		width:600
+		}
+    	, config : {
+    		height:'400px'
+	   		, width:'100%'
+    	}
     })
     .catch( error => {
         console.error( error );

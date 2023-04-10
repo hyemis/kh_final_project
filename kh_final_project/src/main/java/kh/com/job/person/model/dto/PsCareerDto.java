@@ -35,4 +35,5 @@ public class PsCareerDto {
 	private String carDept;
 	private String carResp;
 	private int carSalary;
+
 }

@@ -1,6 +1,7 @@
 package kh.com.job.business.model.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
@@ -61,12 +62,18 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 			}
 		
 	}
-
+	//채용공고 작성
 	@Override
 	public int insertRecruit(BsRecruitDto dto) {
 		int result = -1;
 		result = dao.insertRecruit(dto);
 		return result;
 	}
+	//메인페이지 채용공고진행중 리스트
+	@Override
+	public List<BsRecruitDto> recruitProgress(String userId) {
+		return dao.recruitProgress(userId);
+	}
+
 
 }
