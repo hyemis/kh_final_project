@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.job.business.model.dto.BsInfoDto;
+import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Repository
@@ -14,6 +15,14 @@ public class BsInfoDao {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	//회원정보 불러오기
+		public BsUserDto viewAccount(String userId) {
+			return sqlSession.selectOne("business.viewAccount", userId);
+		}
+	
+	
+	
 	
 	public int insert(BsInfoDto dto) {
 		return sqlSession.insert("business.insert", dto);		

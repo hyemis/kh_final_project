@@ -13,17 +13,11 @@
 	<typeAliases>
 		<typeAlias type="kh.com.job.temp.model.dto.TempDto"
 			alias="mdto" />
+			
 		<typeAlias type="kh.com.job.person.model.dto.PsUserDto"
 			alias="pdto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsResumeDto"
 			alias="rdto" />
-		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"
-			alias="budto" />
-		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
-			alias="brdto" />
-		<typeAlias type="kh.com.job.business.model.dto.BsInfoDto"
-			alias="bidto" />
-
 		<typeAlias type="kh.com.job.person.model.dto.PsCareerDto"
 			alias="careerdto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsCertiDto"
@@ -36,11 +30,18 @@
 			alias="hdto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto"
 			alias="udto" />
-
 		<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
 			alias="hinfodto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"
 			alias="uinfodto" />
+			
+			
+		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"
+			alias="budto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
+			alias="brdto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsInfoDto"
+			alias="bidto" />
 
 
 	</typeAliases>

@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="business">
 
-
+<!-- 회원정보 불러오기 -->
+    <select id="viewAccount" resultType="budto">
+        SELECT *
+        FROM USER_TABLE
+        WHERE USER_ID = #{userId}
+    </select>
+    
 <!-- myinfo -->
+
+	<!-- 회사소개 작성 -->
+	<insert id="insertBsInfo">
+		insert into
+	</insert>
+	<!-- 뉴스레터 불러오기 -->
+	<select id="selectNews" resultType="bidto"> 
+		select 
+	</select>
+	<!--  -->
+
+
+
 
 	<!-- USER_TABLE에서 id가 일치하는 게시물 꺼내옴  -->
 	<select id="selectOne1" parameterType="string" resultType="budto">
@@ -68,13 +87,6 @@
         WHERE user_id = #{userId}
     </update>
 	
-	<!-- 회원정보 불러오기 -->
-    <select id="viewAccount" resultType="budto">
-        SELECT *
-        FROM USER_TABLE
-        WHERE USER_ID = #{userId}
-    </select>
-    
     <!-- //todo회원비밀번호  불러오기-->
     <select id="getUserPw" resultType="budto">
         SELECT USER_ID, USER_PW
