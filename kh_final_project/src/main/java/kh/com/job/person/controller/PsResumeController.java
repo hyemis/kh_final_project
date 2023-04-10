@@ -139,13 +139,13 @@ public class PsResumeController {
 //			
 //			rservice.insertGradInfo(InfoNo);
 //			
-//			return result;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return result;
-//	}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 
 	// 이력서 삭제
 	@PostMapping("/delete")
