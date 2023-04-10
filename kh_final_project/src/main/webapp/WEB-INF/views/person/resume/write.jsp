@@ -69,41 +69,25 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm py-5">
 		<div class="grid gap-3 border border-dark-subtle">
-		<!-- 	<div
-				class="input-group has-validation row d-grid gap-2 col-10 mx-auto">
-				<div class="form-floating is-invalid">
-					<input type="text" class="form-control is-invalid" id="resumeTitle"
-						placeholder="resumeTitle" required> <label
-						for="resumeTitle">이력서 제목을 입력하세요.</label>
-				</div>
-				<div class="invalid-feedback">이력서 제목을 입력하세요.</div>
-				<div class="form-check ms-3">
-					<input class="form-check-input" type="checkbox" value="Y"
-						id="flexCheckChecked" checked> <label
-						class="form-check-label" for="flexCheckChecked"> 이력서 공개여부
-					</label>
-				</div>
 
-			</div> -->
-			
-					<div class="bg-light rounded p-3">
+			<div class="bg-light rounded p-3">
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
 							<h3 class="mb-3">이력서</h3>
-								<div class="form-floating is-invalid">
-					<input type="text" class="form-control is-invalid" id="resumeTitle"
-						placeholder="resumeTitle" required> <label
-						for="resumeTitle">이력서 제목을 입력하세요.</label>
-				</div>
-				<div class="invalid-feedback mb-3">이력서 제목을 입력하세요.</div>
-				<div class="form-check ms-3">
-					<input class="form-check-input" type="checkbox" value="Y"
-						id="flexCheckChecked" checked> <label
-						class="form-check-label" for="flexCheckChecked"> 이력서 공개여부
-					</label>
-				</div>
+							<div class="form-floating is-invalid">
+								<input type="text" class="form-control is-invalid"
+									id="resumeTitle" placeholder="resumeTitle" required> <label
+									for="resumeTitle">이력서 제목을 입력하세요.</label>
+							</div>
+							<div class="invalid-feedback mb-3">이력서 제목을 입력하세요.</div>
+							<div class="form-check ms-3">
+								<input class="form-check-input" type="checkbox" value="Y"
+									id="flexCheckChecked" checked> <label
+									class="form-check-label" for="flexCheckChecked"> 이력서
+									공개여부 </label>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -420,7 +404,7 @@
 														졸업유무</label>
 													<div class="col-sm-10">
 														<select class="form-select" name="gradAct">
-															<option selected>대학졸업유무선택</option>
+															<option selected>대학원졸업유무선택</option>
 															<option value="N">재학중</option>
 															<option value="R">휴학</option>
 															<option value="Y">졸업</option>
@@ -482,11 +466,13 @@
 				</div>
 			</div> -->
 
-			<div class="bg-light rounded p-3">
+			<!-- <div class="bg-light rounded p-3">
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
+						
+						
 							<h3 class="mb-3">경력사항</h3>
 							<div>
 								<input type="radio" id="radio-box" name="radio-group"> <label
@@ -542,8 +528,8 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="bg-light rounded p-3">
+ -->
+			<!-- 			<div class="bg-light rounded p-3">
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
@@ -577,7 +563,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="bg-light rounded p-3">
 				<div class="bg-white rounded p-4"
@@ -600,8 +586,10 @@
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<button class="btn btn-primary me-md-2" type="button" id="rWrite"
-					onclick="fn_rWrite(); return false;">이력서 저장</button>
-				<button class="btn btn-primary" type="button">취소</button>
+					onclick="fn_rWrite(); return false;">다음</button>
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
+
 			</div>
 		</div>
 	</div>
@@ -615,15 +603,14 @@
 		if (msg) {
 			alert(msg);
 		}
-		
-		
-// 이력서 등록
+
+		// 이력서 등록
 		function fn_rWrite() {
 			let formdata = new FormData();
 			formdata.append("resumeTitle", $("#resumeTitle").val());
 			formdata.append("flexCheckChecked", $("#flexCheckChecked").val());
-			formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]); 
- 			formdata.append("resumePhoto", $("#url").val());
+			formdata.append("uploadPortf", $("#uploadPortf")[0].files[0]);
+			formdata.append("resumePhoto", $("#url").val());
 
 			$.ajax({
 				url : "${pageContext.request.contextPath}/person/resume/write",
@@ -634,62 +621,28 @@
 				success : function(result) {
 					if (result == 1) {
 						alert("이력서가 등록되었습니다.");
-						location.href = "/job/person/resume/list";
+						location.href = "/job/person/resume/school";
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}
 				}
 			})
-		} 
-
- /* 
-		//  대입검정고시 체크박스 Y/N 체크
-		function fn_checkY() {
-			var ged = $("#checkY").prop("checked") ? "Y" : "N";
-			$("#ged").val(ged);
 		}
 
-		//  대입검정고시 체크박스 Y/N 체크
-		function fn_checkY() {
-			var ged = $("#checkY").prop("checked") ? "Y" : "N";
-			$("#ged").val(ged);
-		}
-		
-		
-		// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
- 		const disableInputCheckbox = document.getElementById("checkY");
- 		const dateField = document.getElementById("dateField");
- 		const selectField = document.getElementById("selectField");
-		disableInputCheckbox.addEventListener("change", function() {
-		  if (this.checked) {
-		    inputField.disabled = true;
-		    dateField.disabled = true;
-		    selectField.disabled = true;
-		  } else {
-		    inputField.disabled = false;
-		    dateField.disabled = false;
-		    selectField.disabled = false;
-		  }
-		});
-	
-	
-		
-		
-		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
-		const radioBox = document.getElementById("radio-box");
-		const hiddenContent = document.getElementById("hidden-content");
-		let clickCount = 0;
-		radioBox.addEventListener("click", function() {
-			clickCount++;
-			if (radioBox.checked) {
-				hiddenContent.classList.add("hidden");
-			} else {
-				hiddenContent.classList.remove("hidden");
+		/* 
+			//  대입검정고시 체크박스 Y/N 체크
+			function fn_checkY() {
+				var ged = $("#checkY").prop("checked") ? "Y" : "N";
+				$("#ged").val(ged);
 			}
-			if (clickCount % 2 === 1) {
-				radioBox.checked = false;
-				hiddenContent.classList.remove("hidden");
+
+			//  대입검정고시 체크박스 Y/N 체크
+			function fn_checkY() {
+				var ged = $("#checkY").prop("checked") ? "Y" : "N";
+				$("#ged").val(ged);
 			}
+<<<<<<< HEAD
+=======
 		});
 		
 		
@@ -712,6 +665,7 @@
 		}
 		saveCareer.addEventListener('click', checkInputs);
 		rCareer.addEventListener('submit', checkInputs);
+		
 		// 자격증 입력 확인
 		const rCerti = document.querySelector('form[name="rCerti"]');
 		const saveCerti = document.querySelector('#saveCerti');
@@ -739,10 +693,96 @@
 			document.getElementById("highSchoolList").style.display = "none";
 			document.getElementById("universityList").style.display = "none";
 			document.getElementById("graduateList").style.display = "none";
+>>>>>>> 9d530cda853bb64552573ac02ed19c991cde29de
 			
-			// 해당 타입에 맞는 표 보이기
-			document.getElementById(type+"List").style.display = "table-row-group";
-		}
+			
+			// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
+				const disableInputCheckbox = document.getElementById("checkY");
+				const dateField = document.getElementById("dateField");
+				const selectField = document.getElementById("selectField");
+			disableInputCheckbox.addEventListener("change", function() {
+			  if (this.checked) {
+			    inputField.disabled = true;
+			    dateField.disabled = true;
+			    selectField.disabled = true;
+			  } else {
+			    inputField.disabled = false;
+			    dateField.disabled = false;
+			    selectField.disabled = false;
+			  }
+			});
+		
+		
+			
+			
+			// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
+			const radioBox = document.getElementById("radio-box");
+			const hiddenContent = document.getElementById("hidden-content");
+			let clickCount = 0;
+			radioBox.addEventListener("click", function() {
+				clickCount++;
+				if (radioBox.checked) {
+					hiddenContent.classList.add("hidden");
+				} else {
+					hiddenContent.classList.remove("hidden");
+				}
+				if (clickCount % 2 === 1) {
+					radioBox.checked = false;
+					hiddenContent.classList.remove("hidden");
+				}
+			});
+			
+			
+			// 경력사항 입력확인
+			const rCareer = document.querySelector('form[name="rCareer"]');
+			const saveCareer = document.querySelector('#saveCareer');
+			function checkInputs(event) {
+				let inputs = rCareer.querySelectorAll('input[type=text]');
+				let isAllFilled = true;
+				for (let i = 0; i < inputs.length; i++) {
+					if (inputs[i].value.trim() === '') {
+						isAllFilled = false;
+						break;
+					}
+				}
+				if (!isAllFilled) {
+					alert('모든 칸을 입력하세요!');
+					event.preventDefault(); // 저장 취소
+				}
+			}
+			saveCareer.addEventListener('click', checkInputs);
+			rCareer.addEventListener('submit', checkInputs);
+			// 자격증 입력 확인
+			const rCerti = document.querySelector('form[name="rCerti"]');
+			const saveCerti = document.querySelector('#saveCerti');
+			function checkInputs(event) {
+				let inputs = rCerti.querySelectorAll('input[type=text], input[type=date]');
+				let isAllFilled = true;
+				for (let i = 0; i < inputs.length; i++) {
+					if (inputs[i].value.trim() === '') {
+						isAllFilled = false;
+						break;
+					}
+				}
+				if (!isAllFilled) {
+					alert('모든 칸을 입력하세요!');
+					event.preventDefault(); // 저장 취소
+				}
+			}
+			saveCerti.addEventListener('click', checkInputs);
+			rCerti.addEventListener('submit', checkInputs);
+			
+			
+			
+			function showList(type) {
+				// 모든 표 숨기기
+				document.getElementById("highSchoolList").style.display = "none";
+				document.getElementById("universityList").style.display = "none";
+				document.getElementById("graduateList").style.display = "none";
+				
+				// 해당 타입에 맞는 표 보이기
+				document.getElementById(type+"List").style.display = "table-row-group";
+			}
 		 */
 	</script>
 

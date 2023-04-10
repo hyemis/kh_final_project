@@ -124,7 +124,7 @@
 													</thead>
 													<tbody id="highSchoolList">
 														<!-- 고등학교 졸업 내용 출력 -->
-														
+
 													</tbody>
 													<tbody id="universityList" style="display: none">
 														<!-- 대학교 졸업 내용 출력 -->
@@ -363,13 +363,18 @@
 				</div>
 			</div>
 
+			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/career">다음</a>
+			</div>
 
 
 
-			
 
 
-			
+
 		</div>
 	</div>
 

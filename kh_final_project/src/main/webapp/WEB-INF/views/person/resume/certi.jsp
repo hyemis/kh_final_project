@@ -74,56 +74,29 @@
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="mb-4">
-
-
-							<h3 class="mb-3">경력사항</h3>
+							<h3 class="mb-3">자격증</h3>
 							<div>
-								<input type="radio" id="radio-box" name="radio-group"> <label
-									for="radio-box">경력없음(신입)</label>
-							</div>
-							<br>
-							<div id="hidden-content">
-								<form name="career" action="career" method="post">
+								<form name="certi" action="certi" method="post">
 									<div class="row mb-3">
-										<label for="carName" class="col-sm-2 col-form-label">회사명</label>
+										<label for="certiName" class="col-sm-2 col-form-label">자격증명</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carName">
-										</div>
-									</div>
-
-									<div class="row mb-3">
-										<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carDate"
-												placeholder="ex) 2020-01-01 ~ 2022-12-31">
+											<input type="text" class="form-control" name="certiName">
 										</div>
 									</div>
 									<div class="row mb-3">
-										<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
+										<label for="certiPub" class="col-sm-2 col-form-label">자격증발행처</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carPosition">
+											<input type="text" class="form-control" name="certiPub">
 										</div>
 									</div>
 									<div class="row mb-3">
-										<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
+										<label for="certiDate" class="col-sm-2 col-form-label">자격증취득일자</label>
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carDept">
+											<input type="Date" class="form-control" name="certiDate">
 										</div>
 									</div>
-									<div class="row mb-3">
-										<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carResp">
-										</div>
-									</div>
-									<div class="row mb-3">
-										<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
-										<div class="col-sm-10">
-											<input type="number" class="form-control" name="carSalary">
-										</div>
-									</div>
-									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+										<button type="submit" class="btn btn-primary" id="saveCerti">저장</button>
 									</div>
 								</form>
 							</div>
@@ -133,13 +106,14 @@
 			</div>
 
 
+
+
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
 				<a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/person/resume/certi">다음</a>
+					href="${pageContext.request.contextPath}/person/resume/cl">다음</a>
 			</div>
-
 
 
 
@@ -156,29 +130,12 @@
 		if (msg) {
 			alert(msg);
 		}
-
-		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
-		const radioBox = document.getElementById("radio-box");
-		const hiddenContent = document.getElementById("hidden-content");
-		let clickCount = 0;
-		radioBox.addEventListener("click", function() {
-			clickCount++;
-			if (radioBox.checked) {
-				hiddenContent.classList.add("hidden");
-			} else {
-				hiddenContent.classList.remove("hidden");
-			}
-			if (clickCount % 2 === 1) {
-				radioBox.checked = false;
-				hiddenContent.classList.remove("hidden");
-			}
-		});
-
-		// 경력사항 입력확인
-		const rCareer = document.querySelector('form[name="rCareer"]');
-		const saveCareer = document.querySelector('#saveCareer');
+		
+		// 자격증 입력 확인
+		const rCerti = document.querySelector('form[name="rCerti"]');
+		const saveCerti = document.querySelector('#saveCerti');
 		function checkInputs(event) {
-			let inputs = rCareer.querySelectorAll('input[type=text]');
+			let inputs = rCerti.querySelectorAll('input[type=text], input[type=date]');
 			let isAllFilled = true;
 			for (let i = 0; i < inputs.length; i++) {
 				if (inputs[i].value.trim() === '') {
@@ -191,8 +148,11 @@
 				event.preventDefault(); // 저장 취소
 			}
 		}
-		saveCareer.addEventListener('click', checkInputs);
-		rCareer.addEventListener('submit', checkInputs);
+		saveCerti.addEventListener('click', checkInputs);
+		rCerti.addEventListener('submit', checkInputs);
+		
+		
+
 	</script>
 
 </body>

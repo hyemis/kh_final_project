@@ -3,3 +3,14 @@
 textarea{
 	resize: none;
 }
+
+.ck-editor__editable { 
+	height: 400px; 
+}
+
+.minSalary{
+	text-align: right;
+}
+.maxSalary{
+	text-align: right;
+}

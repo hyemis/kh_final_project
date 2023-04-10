@@ -53,7 +53,11 @@ public class BsRecruitController {
 		
 		BsUserDto dto = acservice.viewAccount(principal.getName());
 		
+		//메인 진행중인 리스트
+		List<BsRecruitDto> reCruitDto = service.recruitProgress(principal.getName());
+		
 		mv.addObject("userinfo", dto);
+		mv.addObject("recruitList", reCruitDto);
 		
 		return mv;
 	}
@@ -108,7 +112,7 @@ public class BsRecruitController {
 		if(dto.getMaxSalary() == null || dto.getMaxSalary().isEmpty()){
 			dto.setMaxSalary("0");
 		}
-		dto.setSalary(dto.getMinSalary()+" ~ "+dto.getMaxSalary());
+		dto.setSalary(dto.getMinSalary()+"만원 ~ "+dto.getMaxSalary()+"만원");
 		//이력서 파일 업로드
 		if(uploadReport != null && !uploadReport.isEmpty()) {
 			String reportUrl = service.uploadDocument(uploadReport, principal.getName());
@@ -141,7 +145,6 @@ public class BsRecruitController {
 		mv.setViewName("redirect:/business/recruit/main");
 		return mv;
 	}
-
 	
 	
 	@PostMapping("/catelist")

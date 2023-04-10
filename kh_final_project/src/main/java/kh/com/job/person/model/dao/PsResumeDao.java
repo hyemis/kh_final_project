@@ -98,4 +98,44 @@ public class PsResumeDao {
 	public int getMaxUniNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneUni");
 	}
+	
+	// GradInfo - 입력
+	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.insert("resume.insertGradInfo", InfoNo);
+	}
+	
+	// 이력서 - 대학원 최신보기
+	public int getMaxGradNo() throws Exception {
+		return sqlSession.selectOne("resume.selectOneGrad");
+	}
+	
+	// CareerInfo - 입력
+	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.insert("resume.insertCareerInfo", InfoNo);
+	}
+	
+	// 이력서 - 경력 최신보기
+	public int getMaxCareerNo() throws Exception {
+		return sqlSession.selectOne("resume.selectOneCar");
+	}
+	
+	// CertiInfo - 입력
+	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.insert("resume.insertCertiInfo", InfoNo);
+	}
+	
+	// 이력서 - 자격증 최신보기
+	public int getMaxCertiNo() throws Exception {
+		return sqlSession.selectOne("resume.selectOneCerti");
+	}
+	
+	// ClInfo - 입력
+	public int insertClInfo(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.insert("resume.insertClInfo", InfoNo);
+	}
+	
+	// 이력서 - 자기소개서 최신보기
+	public int getMaxClNo() throws Exception {
+		return sqlSession.selectOne("resume.selectOneCl");
+	}
 }

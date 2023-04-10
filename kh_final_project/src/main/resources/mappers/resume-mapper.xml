@@ -110,6 +110,26 @@
 		(#{resumeNo},#{uniEduNo})
 	</insert>
 
+	<insert id="insertGradInfo" parameterType="ginfodto">
+		insert into	RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
+		(#{resumeNo},#{gradEduNo})
+	</insert>
+
+	<insert id="insertCareerInfo" parameterType="carinfodto">
+		insert into	RESUME_CAR_INFO (RESUME_NO, CAR_NO) values
+		(#{resumeNo},#{carNo})
+	</insert>
+
+	<insert id="insertCertiInfo" parameterType="certiinfodto">
+		insert into	RESUME_CERTI_INFO (RESUME_NO, CERTI_NO) values
+		(#{resumeNo},#{certiNo})
+	</insert>
+	
+	<insert id="insertClInfo" parameterType="clinfodto">
+		insert into	RESUME_CL_INFO (RESUME_NO, CL_NO) values
+		(#{resumeNo},#{clNo})
+	</insert>
+
 	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
 	<select id="selectOneHigh" resultType="_int">
 		SELECT HIGH_EDU_NO
@@ -133,4 +153,53 @@
 		RESUME_UNIVERSITY
 		)
 	</select>
+	
+	<!-- GRAD_EDU_NO 이 제일 큰 값 -->
+	<select id="selectOneGrad" resultType="_int">
+		SELECT GRAD_EDU_NO
+		FROM
+		RESUME_GRADSCHOOL
+		WHERE GRAD_EDU_NO = (
+		SELECT MAX(GRAD_EDU_NO)
+		FROM
+		RESUME_GRADSCHOOL
+		)
+	</select>
+	
+	<!-- CAR_NO 이 제일 큰 값 -->
+	<select id="selectOneCar" resultType="_int">
+		SELECT CAR_NO
+		FROM
+		RESUME_CAREER
+		WHERE CAR_NO = (
+		SELECT MAX(CAR_NO)
+		FROM
+		RESUME_CAREER
+		)
+	</select>
+
+	<!-- CERTI_NO 이 제일 큰 값 -->
+	<select id="selectOneCerti" resultType="_int">
+		SELECT CERTI_NO
+		FROM
+		RESUME_CERTI
+		WHERE CERTI_NO = (
+		SELECT MAX(CERTI_NO)
+		FROM
+		RESUME_CERTI
+		)
+	</select>
+	
+	<!-- CL_NO 이 제일 큰 값 -->
+	<select id="selectOneCl" resultType="_int">
+		SELECT CL_NO
+		FROM
+		RESUME_CL
+		WHERE CL_NO = (
+		SELECT MAX(CL_NO)
+		FROM
+		RESUME_CL
+		)
+	</select>
+	
 </mapper>

@@ -60,6 +60,23 @@ public interface PsResumeService {
 	// uniInfo
 	public int getMaxUniNo() throws Exception;
 	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	// gradInfo
+	public int getMaxGradNo() throws Exception;
+	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	// CareerInfo 
+	public int getMaxCareerNo() throws Exception;
+	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	// CertiInfo
+	public int getMaxCertiNo() throws Exception;
+	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	// ClInfo
+	public int getMaxClNo() throws Exception;
+	public int insertClInfo(Map<String, Object> InfoNo) throws Exception;
+	
 
 
 }

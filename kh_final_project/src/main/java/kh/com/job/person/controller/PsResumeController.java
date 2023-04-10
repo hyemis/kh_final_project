@@ -116,21 +116,28 @@ public class PsResumeController {
 		try {
 			result = rservice.insert(dto);
 			
-//			//TODO: (이력서 고유번호 알아오기 +  학력사항 고유번호 알아오기) 고등학교 학력정보 테이블 insert 
-//			PsResumeDto resume= rservice.selectOne(principal.getName());
-//			int resumeNo = resume.getResumeNo();
-//			int highEduNo = rservice.getMaxHighNo();
+			//TODO: (이력서 고유번호 알아오기 +  학력사항 고유번호 알아오기) 고등학교 학력정보 테이블 insert 
+			//대학원 낀테이블 insert되는지 test
+////			PsResumeDto resume= rservice.selectOne(principal.getName());
+////			int resumeNo = resume.getResumeNo();
+////			int highEduNo = rservice.getMaxHighNo();
 //			int uniEduNo = rservice.getMaxUniNo();
+//			
+//			int gradEduNo = rservice.getMaxGradNo();
 //			
 //			
 //			Map<String, Object> InfoNo = new HashMap<>();
-//			InfoNo.put("resumeNo", InfoNo);
-//			InfoNo.put("highEduNo", InfoNo);
+////			InfoNo.put("resumeNo", InfoNo);
+////			InfoNo.put("highEduNo", InfoNo);
 //			InfoNo.put("uniEduNo", InfoNo);
 //			
+//			InfoNo.put("gradEduNo", InfoNo);
+//			
 //			// 끼인 테이블 insert 
-//			rservice.insertHighInfo(InfoNo);
+////			rservice.insertHighInfo(InfoNo);
 //			rservice.insertUniInfo(InfoNo);
+//			
+//			rservice.insertGradInfo(InfoNo);
 			
 			return result;
 		} catch (Exception e) {
@@ -187,13 +194,25 @@ public class PsResumeController {
 
 	// 고등학교입력
 	@PostMapping("rHSchool")
-	public ModelAndView rHschool(ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
+	public ModelAndView rHschool(Principal principal, ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertHschool(dto);
 
 			if (result > 0) {
+				PsResumeDto resume= rservice.selectOne(principal.getName());
+				int resumeNo = resume.getResumeNo();
+				int highEduNo = rservice.getMaxHighNo();
+				
+				Map<String, Object> InfoNo = new HashMap<>();
+				InfoNo.put("resumeNo", InfoNo);
+				InfoNo.put("highEduNo", InfoNo);
+				
+				//낀테이블
+				rservice.insertHighInfo(InfoNo);
+				
 				rttr.addFlashAttribute("msg", "성공");
+				
 			} else {
 				rttr.addFlashAttribute("msg", "실패");
 			}
@@ -201,7 +220,7 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
 
@@ -246,13 +265,19 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/school");
+		return mv;
+	}
+	
+	// 경력사항 페이지 
+	@GetMapping("career")
+	public ModelAndView viewCareer(ModelAndView mv) {
 		return mv;
 	}
 
 	// 경력사항 입력
-	@PostMapping("rCareer")
-	public ModelAndView rCareer(ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
+	@PostMapping("career")
+	public ModelAndView doCareer(ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
 			result = rservice.insertCareer(dto);
@@ -266,13 +291,19 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/career");
 		return mv;
 	}
+	
+	// 자격증 페이지 
+		@GetMapping("certi")
+		public ModelAndView viewCerti(ModelAndView mv) {
+			return mv;
+		}
 
 	// 자격증 입력
-	@PostMapping("rCerti")
-	public ModelAndView rCerti(ModelAndView mv, PsCertiDto dto, RedirectAttributes rttr) {
+	@PostMapping("certi")
+	public ModelAndView doCerti(ModelAndView mv, PsCertiDto dto, RedirectAttributes rttr) {
 
 		int result = -1;
 		try {
@@ -287,9 +318,15 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mv.setViewName("redirect:/person/resume/write");
+		mv.setViewName("redirect:/person/resume/certi");
 		return mv;
 	}
+	
+	// 자격증 페이지 
+			@GetMapping("cl")
+			public ModelAndView viewCl(ModelAndView mv) {
+				return mv;
+			}
 	
 	
 

@@ -44,6 +44,7 @@ public class BsRecruitDto {
 	private String holidayType;
 	private String empTypeCode;
 	private String raAdmission;
+	private String raProgress;
 	
 	
 	
