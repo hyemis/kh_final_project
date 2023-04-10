@@ -133,6 +133,46 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.insertUniInfo(InfoNo);
 	}
 
+	@Override
+	public int getMaxGradNo() throws Exception {
+		return dao.getMaxGradNo();
+	}
+
+	@Override
+	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception {
+		return dao.insertGradInfo(InfoNo);
+	}
+
+	@Override
+	public int getMaxCareerNo() throws Exception {
+		return dao.getMaxCareerNo();
+	}
+
+	@Override
+	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception {
+		return dao.insertCareerInfo(InfoNo);
+	}
+
+	@Override
+	public int getMaxCertiNo() throws Exception {
+		return dao.getMaxCertiNo();
+	}
+
+	@Override
+	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception {
+		return dao.insertCertiInfo(InfoNo);
+	}
+
+	@Override
+	public int getMaxClNo() throws Exception {
+		return dao.getMaxClNo();
+	}
+
+	@Override
+	public int insertClInfo(Map<String, Object> InfoNo) throws Exception {
+		return dao.insertClInfo(InfoNo);
+	}
+
 	
 
 

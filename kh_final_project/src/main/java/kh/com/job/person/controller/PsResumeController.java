@@ -116,11 +116,14 @@ public class PsResumeController {
 		try {
 			result = rservice.insert(dto);
 			
-//			//TODO: (이력서 고유번호 알아오기 +  학력사항 고유번호 알아오기) 고등학교 학력정보 테이블 insert 
+			//TODO: (이력서 고유번호 알아오기 +  학력사항 고유번호 알아오기) 고등학교 학력정보 테이블 insert 
+			//대학원 낀테이블 insert되는지 test
 //			PsResumeDto resume= rservice.selectOne(principal.getName());
 //			int resumeNo = resume.getResumeNo();
 //			int highEduNo = rservice.getMaxHighNo();
 //			int uniEduNo = rservice.getMaxUniNo();
+//			
+//			int gradEduNo = rservice.getMaxGradNo();
 //			
 //			
 //			Map<String, Object> InfoNo = new HashMap<>();
@@ -128,10 +131,14 @@ public class PsResumeController {
 //			InfoNo.put("highEduNo", InfoNo);
 //			InfoNo.put("uniEduNo", InfoNo);
 //			
+//			InfoNo.put("gradEduNo", InfoNo);
+//			
 //			// 끼인 테이블 insert 
 //			rservice.insertHighInfo(InfoNo);
 //			rservice.insertUniInfo(InfoNo);
-			
+//			
+//			rservice.insertGradInfo(InfoNo);
+//			
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

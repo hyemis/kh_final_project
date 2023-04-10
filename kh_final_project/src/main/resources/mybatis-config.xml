@@ -37,10 +37,20 @@
 		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto"
 			alias="udto" />
 
-		<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
-			alias="hinfodto" />
-		<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"
-			alias="uinfodto" />
+	<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
+		alias="hinfodto" />
+	<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"
+		alias="uinfodto" />
+	<typeAlias type="kh.com.job.person.model.dto.PsGradInfoDto"
+		alias="ginfodto" />
+	<typeAlias type="kh.com.job.person.model.dto.PsCareerInfoDto"
+		alias="carinfodto" />
+	<typeAlias type="kh.com.job.person.model.dto.PsCertiInfoDto"
+		alias="certiinfodto" />
+	<typeAlias type="kh.com.job.person.model.dto.PsClInfoDto"
+		alias="clinfodto" />
+			
+
 
 
 	</typeAliases>
