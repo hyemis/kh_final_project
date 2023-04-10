@@ -1,5 +1,9 @@
 package kh.com.job.person.model.dao;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,10 +57,6 @@ public class PsResumeDao {
 	// 이력서-고등학교입력
 	public int insertHschool(PsHschoolDto dto) throws Exception {
 		return sqlSession.insert("resume.insertHschool", dto);
-	}
-
-	public List<PsHschoolDto> viewHschoolList(String userId) throws Exception {
-		return sqlSession.selectList("resume.viewHschoolList", userId);
 	}
 
 	// 이력서-대학교입력
@@ -138,4 +138,97 @@ public class PsResumeDao {
 	public int getMaxClNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneCl");
 	}
+	
+	// 고등학교 학력사항 보기 
+	public List<PsHschoolDto> selectListHigh(String userId) throws Exception {
+		 List<PsHschoolDto> highSchoolList = sqlSession.selectList("resume.selectListHigh", userId);
+		    for (PsHschoolDto hschool : highSchoolList) {
+		        if ("Y".equals(hschool.getGed())) {
+		            hschool.setHighName("검정고시");
+		            hschool.setHighMajor("");
+		            hschool.setHighDate(null);
+		            hschool.setGed("검정고시");
+		        } else {
+		            String dateString = hschool.getHighDate();
+		            if (dateString != null) {
+		                LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+		                hschool.setHighDate(date.toString());
+		            }
+		        }
+		    }
+	    
+	        
+	    return highSchoolList;
+	}
+	
+	public List<PsUnivDto> selectListUni(String userId) throws Exception {
+	    List<PsUnivDto> univList = sqlSession.selectList("resume.selectListUni", userId);
+
+	    for (PsUnivDto univ : univList) {
+	        switch (univ.getUniAct()) {
+	            case "Y":
+	                univ.setUniAct("졸업");
+	                break;
+	            case "N":
+	                univ.setUniAct("재학중");
+	                break;
+	            case "R":
+	                univ.setUniAct("휴학");
+	                break;
+	            default:
+	                univ.setUniAct("");
+	                break;
+	        }
+	        
+	        if ("T".equals(univ.getUniCategory())) {
+	            univ.setUniCategory("2,3년제");
+	        } else if ("F".equals(univ.getUniCategory())) {
+	            univ.setUniCategory("4년제");
+	        }
+	        
+	        String dateString = univ.getUniDate();
+	        if (dateString != null) {
+	            LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	            univ.setUniDate(date.toString());
+	        }
+	    }
+
+	    return univList;
+	}
+	
+	public List<PsGschoolDto> selectListGrad(String userId) throws Exception {
+	    List<PsGschoolDto> gradList = sqlSession.selectList("resume.selectListGrad", userId);
+
+	    for (PsGschoolDto grad : gradList) {
+	        switch (grad.getGradAct()) {
+	            case "Y":
+	                grad.setGradAct("졸업");
+	                break;
+	            case "N":
+	                grad.setGradAct("재학중");
+	                break;
+	            case "R":
+	                grad.setGradAct("휴학");
+	                break;
+	            default:
+	                grad.setGradAct("");
+	                break;
+	        }
+
+	        if ("M".equals(grad.getGradCategory())) {
+	            grad.setGradCategory("석사");
+	        } else {
+	        	grad.setGradCategory("박사");
+	        }
+	        
+	        String dateString = grad.getGradDate();
+	        if (dateString != null) {
+	            LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	            grad.setGradDate(date.toString());
+	        }
+	    }
+
+	    return gradList;
+	}
+	
 }

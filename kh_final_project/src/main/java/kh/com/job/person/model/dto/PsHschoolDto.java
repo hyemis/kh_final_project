@@ -39,18 +39,18 @@ public class PsHschoolDto {
 	
 	
 	// 고등학교 미입력시 null값으로 들어가게 하기
-		public void setHname(Object highName) {
-			if(highName.equals(""))
-				this.highName = null;
-			this.highName = (String)highName;
-		}
-
-	// 전공계열 미입력시 null값으로 들어가게 하기
-		public void setHmajor(Object highMajor) {
-			if(highMajor.equals(""))
-				this.highMajor = null;
-			this.highMajor = (String)highMajor;
-		}
+//		public void setHighname(Object highName) {
+//			if(highName.equals("") || highName == null )
+//				this.highName = null;
+//			this.highName = (String)highName;
+//		}
+//
+//	// 전공계열 미입력시 null값으로 들어가게 하기
+//		public void setHighmajor(Object highMajor) {
+//			if(highMajor.equals("") || highMajor == null)
+//				this.highMajor = null;
+//			this.highMajor = (String)highMajor;
+//		}
 	
 
 }

@@ -89,11 +89,6 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
-	public List<PsHschoolDto> viewHschoolList(String userId) throws Exception {
-		return dao.viewHschoolList(userId);
-	}
-
-	@Override
 	public int insertUniv(PsUnivDto dto) throws Exception {
 		return dao.insertUniv(dto);
 	}
@@ -173,7 +168,21 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.insertClInfo(InfoNo);
 	}
 
-	
+	@Override
+	public List<PsHschoolDto> selectListHigh(String userId) throws Exception {
+		return dao.selectListHigh(userId);
+	}
+
+	@Override
+	public List<PsUnivDto> selectListUni(String userId) throws Exception {
+		return dao.selectListUni(userId);
+	}
+
+	@Override
+	public List<PsGschoolDto> selectListGrad(String userId) throws Exception {
+		return  dao.selectListGrad(userId);
+	}
+
 
 
 }

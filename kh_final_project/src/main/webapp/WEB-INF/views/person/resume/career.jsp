@@ -119,7 +119,7 @@
 									<div class="row mb-3">
 										<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
 										<div class="col-sm-10">
-											<input type="number" class="form-control" name="carSalary">
+											<input type="number" class="form-control" name="carSalary" min="0">
 										</div>
 									</div>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
@@ -160,6 +160,7 @@
 		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
 		const radioBox = document.getElementById("radio-box");
 		const hiddenContent = document.getElementById("hidden-content");
+		
 		let clickCount = 0;
 		radioBox.addEventListener("click", function() {
 			clickCount++;
@@ -175,8 +176,9 @@
 		});
 
 		// 경력사항 입력확인
-		const rCareer = document.querySelector('form[name="rCareer"]');
+		const rCareer = document.querySelector('form[name="career"]');
 		const saveCareer = document.querySelector('#saveCareer');
+		
 		function checkInputs(event) {
 			let inputs = rCareer.querySelectorAll('input[type=text]');
 			let isAllFilled = true;
