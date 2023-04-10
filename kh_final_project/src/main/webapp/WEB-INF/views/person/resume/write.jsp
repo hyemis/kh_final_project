@@ -420,7 +420,7 @@
 														졸업유무</label>
 													<div class="col-sm-10">
 														<select class="form-select" name="gradAct">
-															<option selected>대학졸업유무선택</option>
+															<option selected>대학원졸업유무선택</option>
 															<option value="N">재학중</option>
 															<option value="R">휴학</option>
 															<option value="Y">졸업</option>
@@ -712,6 +712,7 @@
 		}
 		saveCareer.addEventListener('click', checkInputs);
 		rCareer.addEventListener('submit', checkInputs);
+		
 		// 자격증 입력 확인
 		const rCerti = document.querySelector('form[name="rCerti"]');
 		const saveCerti = document.querySelector('#saveCerti');
