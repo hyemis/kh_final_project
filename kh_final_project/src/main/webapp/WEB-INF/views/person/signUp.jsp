@@ -42,14 +42,21 @@
 	<div class="container-sm">	
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
-		        <form class="personal-sign-form signUpForm" name="signUpForm" id="signUpForm" action="signUp" method="post" onsubmit="return checkAll()">
-			        	<div class="m-4"><h3>JOB-A 회원가입</h3></div>
+			 <!-- toggle -->
+				<div class="row">
+					<button class="col-6 btn btn-outline-dark"
+						onclick="toggleForm('personal')">개인회원</button>
+					<button class="col-6 btn btn-outline-dark"
+						onclick="toggleForm('corporate')">기업회원</button>
+				</div>
+		        <form class="hidden personal-sign-form signUpForm" name="pssignUpForm" id="personal-sign-form" action="signUp" method="post" onsubmit="return pscheckAll()">
+			        	<div class="m-4"><h3>개인회원 회원가입</h3></div>
 			        	
 				          <div class="row">
 				          
 				            <div class="mb-3">
 				              <label for="userId">아이디</label>
-				              <input type="text" class="form-control userId" name="userId" id="userId" placeholder="영문,숫자,'_' 사용가능" >
+				              <input type="text" class="form-control userId" name="userId" id="psuserId" placeholder="영문,숫자,'_' 사용가능" >
 				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
 				              <button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">아이디 중복 체크</button>
 				              
@@ -73,17 +80,9 @@
 				            <div class="invalid-feedback">이름을 입력해주세요.</div>
 				          </div>
 				          
-				          <!-- //TODO 기업일 경우, 이름 >기업명으로 기입 
-				           <div class="mb-3">
-				            <label for="userName">기업명</label>
-				            <input type="text" class="form-control" name="userName" placeholder="이름 입력" required>
-				            <div class="invalid-feedback">기업명을 입력해주세요.</div>
-				          </div>
-				          -->
-				          
 				          <div class="mb-3">
 				            <label for="userBirth">생년월일</label>
-				            <input type="text" class="form-control" name="userBirth" placeholder="YYYYMMDD" >
+				            <input type="date" class="form-control" name="userBirth" placeholder="YYYYMMDD" >
 				            <div class="invalid-feedback">생년월일을 입력해주세요.</div>
 				          </div>
 				          
@@ -99,11 +98,30 @@
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				          
-				          <div class="mb-3">
-				            <label for="userAdress">주소</label>
-				            <input type="text" class="form-control" name="userAdress" placeholder="서울시 자바구 자바동" >
-				            <div class="invalid-feedback">주소를 입력해주세요.</div>
-				          </div>
+				          <div class="row">
+							<label for="addressPostcode">주소</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="postcode"
+									name="addressPostcode" required>
+							</div>
+							<div class="col-sm-2">
+								<input type="button" class="form-control"
+									onclick="execDaumPostcode()" value="주소찾기"><br>
+							</div>
+						</div>
+						<div class="mb-3 ">
+							<label for="addressRoad">도로명주소</label> <input type="text"
+								class="form-control" id="roadAddress" name="addressRoad">
+						</div>
+						<div class="mb-3 ">
+							<label for="addressJibun">지번주소</label> <input type="text"
+								class="form-control" id="jibunAddress" name="addressJibun">
+						</div>
+						<div class="mb-3 ">
+							<label for="addressDetail">상세주소</label> <input type="text"
+								class="form-control" id="detailAddress" name="addressDetail">
+							<span id="guide" style="color: #999; display: none"></span>
+						</div>
 				
 				          <hr class="mb-4">
 						</div>
@@ -111,8 +129,88 @@
 				        <div class="d-grid m-3">
 							<button class="btn btn-primary" type="submit">회원가입 완료</button>
 						</div>
-				</form>	       
-				    
+				</form>	     
+				<form class="hidden corporate-sign-form signUpForm" name="signUpForm" id="corporate-sign-form" action="signUp" method="post" onsubmit="return bscheckAll()">
+				<div class="m-4"><h3>기업회원 회원가입</h3></div>
+			        	
+				          <div class="row">
+				          
+				            <div class="mb-3">
+				              <label for="userId">아이디</label>
+				              <input type="text" class="form-control userId" name="userId" id="bsuserId" placeholder="영문,숫자,'_' 사용가능" >
+				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
+				              <button class="btn btn-primary" type="button"  onclick="fn_idChk2();" value="N">아이디 중복 체크</button>
+				              
+				            </div>
+				            
+				            <div class="mb-3">
+				              <label for="userPw">비밀번호</label>
+				              <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" >
+				              <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+				            </div>
+				
+							<div class="mb-3">
+				              <label for="userPw2">비밀번호재확인</label>
+				              <input type="password" class="form-control" name="userPw2" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" >
+				              <div class="invalid-feedback">비밀번호를 입력해주세요. </div>
+				            </div>
+					
+				          <div class="mb-3">
+				            <label for="userName">기업명</label>
+				            <input type="text" class="form-control" name="userName" placeholder="이름 입력" >
+				            <div class="invalid-feedback">기업명을 입력해주세요.</div>
+				          </div>
+				          
+				          <div class="mb-3">
+				            <label for="bsLicense">사업자번호</label>
+				            <input type="text" class="form-control" name="bsLicense" placeholder="YYYYMMDD" >
+				            <div class="invalid-feedback">사업자번호을 입력해주세요.</div>
+				          </div>
+				          
+				          <div class="mb-3">
+				            <label for="bsMainPhone">대표전화</label>
+				            <input type="text" class="form-control" name="bsMainPhone" placeholder="'-' 빼고 숫자만 입력" >
+				            <div class="invalid-feedback">대표번호를 입력해주세요.</div>
+				          </div>
+				          
+				          <div class="mb-3">
+				            <label for="userEmail">이메일</label>
+				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" >
+				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
+				          </div>
+				          
+				          <div class="row">
+							<label for="addressPostcode">주소</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" 
+									name="addressPostcode" >
+							</div>
+							<div class="col-sm-2">
+								<input type="button" class="form-control" id="postcode2"
+									onclick="execDaumPostcode2()" value="주소찾기"><br>
+							</div>
+						</div>
+						<div class="mb-3 ">
+							<label for="addressRoad">도로명주소</label> <input type="text"
+								class="form-control" id="addressRoad" name="addressRoad">
+						</div>
+						<div class="mb-3 ">
+							<label for="addressJibun">지번주소</label> <input type="text"
+								class="form-control" id="addressJibun" name="addressJibun">
+						</div>
+						<div class="mb-3 ">
+							<label for="addressDetail">상세주소</label> <input type="text"
+								class="form-control" id="addressDetail" name="addressDetail">
+							<span id="guide" style="color: #999; display: none"></span>
+						</div>
+				
+				          <hr class="mb-4">
+						</div>
+						
+				        <div class="d-grid m-3">
+							<button class="btn btn-primary" type="submit">회원가입 완료</button>
+						</div>
+				</form>
 		    </div>
 		</div>
 	</div>
@@ -120,12 +218,43 @@
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
-	
+	<!-- toggle -->
 	<script>
+		function toggleForm(type) {
+			var personalForm = document.getElementById('personal-sign-form');
+			var corporateForm = document.getElementById('corporate-sign-form');
+			if (type === 'personal') {
+				personalForm.classList.remove('hidden');
+				corporateForm.classList.add('hidden');
+			} else if (type === 'corporate') {
+				personalForm.classList.add('hidden');
+				corporateForm.classList.remove('hidden');
+			}
+		}
+	</script>
 
+	<script>
 			// id 중복확인
 			function fn_idChk() {
-				let userId = $("#userId").val();
+				let userId = $("#psuserId").val();
+				
+				$.ajax({
+					type : 'post',
+					url:"idChk",
+					data : {"userId" : userId},
+					success : function(data) {
+						if(data == "N") {
+							alert("사용 가능한 아이디입니다.");
+						} else {
+							alert("중복된 아이디 입니다. 다시 입력해주세요.");
+						}
+					}
+				})
+			}
+			
+			// id 중복확인
+			function fn_idChk2() {
+				let userId = $("#bsuserId").val();
 				
 				$.ajax({
 					type : 'post',
@@ -141,9 +270,26 @@
 				})
 			}
 		
-	
+			function pscheckAll() {
+		        if (!checkUserId(pssignUpForm.userId.value)) {
+		            return false;
+		        } else if (!checkPassword(pssignUpForm.userId.value, pssignUpForm.userPw.value, pssignUpForm.userPw2.value)) {
+		            return false;
+		        } else if (!checkName(pssignUpForm.userName.value)) {
+		            return false;
+		        } else if (!checkBirth(pssignUpForm.userBirth.value)) {
+		            return false;
+		        } else if (!checkPhone(pssignUpForm.userPhone.value)) {
+		            return false;
+		        } else if (!checkEmail(pssignUpForm.userEmail.value)) {
+		            return false;
+		        }  else if (!checkAdress(pssignUpForm.userAdress.value)) {
+		            return false;
+		        }  
+		        return true;
+		    }
 			
-			function checkAll() {
+			function bscheckAll() {
 		        if (!checkUserId(signUpForm.userId.value)) {
 		            return false;
 		        } else if (!checkPassword(signUpForm.userId.value, signUpForm.userPw.value, signUpForm.userPw2.value)) {
@@ -161,6 +307,8 @@
 		        }  
 		        return true;
 		    }
+			
+		
 	
 	
 		// 공백 확인
@@ -171,7 +319,6 @@
 		        }
 		        return true;
 		    }
-
 		// 아이디 체크 
 		 function checkUserId(id) {
 		        //Id가 입력되었는지 확인하기
@@ -187,7 +334,6 @@
 		        }
 		        return true; //확인이 완료되었을 때
 		    }
-
 		// 비밀번호1, 비밀번호2 체크 
 		function checkPassword(id, userPw, userPw2) {
 	        //비밀번호가 입력되었는지 확인하기
@@ -292,7 +438,105 @@
 			alert(msg);
 		}
 		
-
 	</script>
+	
+	<!-- map -->
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+		function execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var roadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 참고 항목 변수
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('postcode').value = data.zonecode;
+							document.getElementById("roadAddress").value = roadAddr;
+							document.getElementById("jibunAddress").value = data.jibunAddress;
+							var guideTextBox = document.getElementById("guide");
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								guideTextBox.innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								guideTextBox.innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else {
+								guideTextBox.innerHTML = '';
+								guideTextBox.style.display = 'none';
+							}
+						}
+					}).open();
+		}
+	</script>
+	<script>
+		function execDaumPostcode2() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var roadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 참고 항목 변수
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('postcode2').value = data.zonecode;
+							document.getElementById("addressRoad").value = roadAddr;
+							document.getElementById("addressDetail").value = data.jibunAddress;
+							var guideTextBox = document.getElementById("guide");
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								guideTextBox.innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								guideTextBox.innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else {
+								guideTextBox.innerHTML = '';
+								guideTextBox.style.display = 'none';
+							}
+						}
+					}).open();
+		}
+	</script>
+
 </body>
 </html>
