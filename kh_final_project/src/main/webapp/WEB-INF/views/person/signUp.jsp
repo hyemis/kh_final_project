@@ -52,7 +52,7 @@
 			   
 			    
 		        <form class="hidden" name=signUpForm id="personal-sign-form" action="signUp" method="post" onsubmit="return checkAll()">
-			 	<!-- 개인회원가입 
+			  개인회원가입 
 			        	<div class="m-4"><h3>개인회원 회원가입</h3></div>
 			        	
 				          <div class="row">
@@ -125,7 +125,7 @@
 							 </div>
 				          
 				  
-				          <!-- <div class="custom-control custom-checkbox">
+				           <div class="custom-control custom-checkbox">
 				            <input type="checkbox" class="custom-control-input" id="termsAct" required>
 				            <label class="custom-control-label" for="termsAct">서비스 이용약관, 개인정보 취급방침을 확인하였고, 이에 동의합니다.</label>
 				          </div> 
@@ -133,7 +133,7 @@
 						</div>
 				         <div class="d-grid m-3">
 						  <button class="btn btn-primary" type="submit">회원가입 완료</button>
-						</div>-->
+						</div>
 				</form> 
 				
 				<!-- 기업회원가입 -->
@@ -246,8 +246,8 @@
 	
 	
 	
-	<script>
-	<!-- 회원가입 유효성 test 중 
+<!-- 	<script>
+/* 	<!-- 회원가입 유효성 test 중 
 	// 유효성 검사 통과유무 변수 
 	 var userId = false;			// 아이디
 	 var userIdChk = false;			// 아이디 중복 검사
@@ -284,13 +284,13 @@
 			}
 			
 		});
-	});
+	}); */
 	
 
 	 
-	// ID 중복 확인
+/* 	// ID 중복 확인
 	function fn_idChk() {
-		let userId = $('.userId').val();
+		let userId = $('#userId').val();
 		
 		$.ajax({
 			type : 'post',
@@ -307,7 +307,7 @@
 				}
 			}
 		})
-	}
+	} */
 	
 	// 비밀번호 확인 일치 유효성 검사
 	 
@@ -327,7 +327,7 @@
 	    
 	});    
 
-	</script>
+	</script> -->
 	
 	
 	
@@ -349,9 +349,23 @@
 	        corporateForm.classList.remove('hidden');
 	      }
 	  }
-	</script>
-	<!-- script 
+	// 아이디 체크 
+	 function checkUserId(id) {
+	        //Id가 입력되었는지 확인하기
+	        if (!checkExistData(id, "아이디를"))
+	            return false;
+	 
+	        var idRegExp = /^[a-zA-z0-9]{4,20}$/; //아이디 유효성 검사
+	        if (!idRegExp.test(id)) {
+	            alert("아이디는 영문 대소문자와 숫자 4~20자리로 입력해야합니다!");
+	            singUpForm.userId.value = "";
+	            singUpForm.userId.focus();
+	            return false;
+	        }
+	        return true; //확인이 완료되었을 때
+	    }
 	
+		
 			// id 중복확인
 			function fn_idChk() {
 				let userId = $("#userId").val();
@@ -401,21 +415,7 @@
 		        return true;
 		    }
 
-		// 아이디 체크 
-		 function checkUserId(id) {
-		        //Id가 입력되었는지 확인하기
-		        if (!checkExistData(id, "아이디를"))
-		            return false;
-		 
-		        var idRegExp = /^[a-zA-z0-9]{4,20}$/; //아이디 유효성 검사
-		        if (!idRegExp.test(id)) {
-		            alert("아이디는 영문 대소문자와 숫자 4~20자리로 입력해야합니다!");
-		            singUpForm.userId.value = "";
-		            singUpForm.userId.focus();
-		            return false;
-		        }
-		        return true; //확인이 완료되었을 때
-		    }
+		
 
 		// 비밀번호1, 비밀번호2 체크 
 		function checkPassword(id, userPw, userPw2) {
@@ -541,15 +541,12 @@
 		if(msg) {
 			alert(msg);
 		}
-		
-		
 	
-			
-	</script> -->
+	</script>
 	
 	<!-- map -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
+<!-- 	<script>
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -593,7 +590,7 @@
             }
         }).open();
     }
-</script>
+</script> -->
 
 	
 </body>

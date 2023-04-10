@@ -249,8 +249,6 @@ public class PsMainController {
 		
 	
 		  int result = -1;
-		  
-		// 패스워드 암호화 
 		
 		try {
 			
@@ -277,18 +275,15 @@ public class PsMainController {
 	@PostMapping("/idChk") 
 	@ResponseBody
 	public String idChk(String userId) throws Exception {
-		
+		System.out.println("회원아이디: " + userId);
 		int result = service.idChk(userId);
-		if(result != 0) {
-			
-			return "fail";	// 중복 아이디가 존재
-			
+		String data = "N";
+		if(result == 1) {
+			data = "Y";
+			return data;
 		} else {
-			
-			return "success";	// 중복 아이디 x
-			
-		}	
-		
+			return data;
+		}
 	}
 
 	
