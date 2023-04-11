@@ -107,4 +107,17 @@
 		WHERE REQ_CATEGORY_ID = #{categoryId}
 		ORDER BY CATEGORY_ID DESC
 	</select>
+	
+	<!-- 채용공고 미승인 리스트 -->
+	<select id="recruitAdmission" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT * FROM RECRUIT_REGIST
+		WHERE RA_ADMISSION = 'N'
+		AND CLOSE_DATE > SYSDATE
+		ORDER BY RA_NUM DESC 
+	</select>
+	<!-- 채용공고 전체 리스트  -->
+	<select id="recruitAllList" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT * FROM RECRUIT_REGIST
+		ORDER BY RA_NUM DESC 
+	</select>
 </mapper>

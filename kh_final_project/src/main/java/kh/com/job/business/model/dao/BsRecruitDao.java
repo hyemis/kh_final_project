@@ -36,4 +36,8 @@ public class BsRecruitDao {
 		return sqlSession.selectList("business.recruitProgress", userId);
 	}
 
+	public List<BsRecruitDto> recruitAdmission(String userId) {
+		return sqlSession.selectList("business.recruitAdmission", userId);
+	}
+
 }

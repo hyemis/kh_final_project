@@ -28,7 +28,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="testimonial.html" class="dropdown-item">기업 회원 관리</a>
-                                <a href="404.html" class="dropdown-item">채용 공고 관리</a>
+                                <a href="${pageContext.request.contextPath}/admin/business/main" class="dropdown-item">채용 공고 관리</a>
                             </div>
                         </div>
                         <a href="${pageContext.request.contextPath}/admin/account/usercheck" class="nav-item nav-link">내 계정 관리</a>
