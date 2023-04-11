@@ -88,5 +88,11 @@ public interface PsResumeService {
 	
 	// 대학원 학력사항 보기
 	public List<PsGschoolDto> selectListGrad(String userId) throws Exception;
+	
+	// 경력사항 보기
+	public List<PsCareerDto> selectListCareer(String userId) throws Exception;
+	
+	// 자격증 보기
+	public List<PsCertiDto> selectListCerti(String userId) throws Exception;
 
 }

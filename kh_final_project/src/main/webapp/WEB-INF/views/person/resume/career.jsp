@@ -73,66 +73,118 @@
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
-						<div class="mb-4">
-
-
+						<div class="col">
 							<h3 class="mb-3">경력사항</h3>
-							<div>
-								<input type="radio" id="radio-box" name="radio-group"> <label
-									for="radio-box">경력없음(신입)</label>
-							</div>
-							<br>
-							<div id="hidden-content">
-								<form name="career" action="career" method="post">
-									<div class="row mb-3">
-										<label for="carName" class="col-sm-2 col-form-label">회사명</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carName">
+						</div>
+						<!-- 모달 버튼 -->
+						<div class="col-auto">
+							<button type="button" class="btn btn-outline-dark m-2 btn-sm"
+								data-bs-toggle="modal" data-bs-target="#viewCareer">저장된
+								정보 불러오기</button>
+						</div>
+						<div>
+							<!-- 모달 창 -->
+							<div class="modal fade" id="viewCareer" tabindex="-1"
+								role="dialog" aria-labelledby="uploadModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-lg"
+									role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="uploadModalLabel">경력사항 불러오기</h5>
+											<button type="button" class="close" data-bs-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
 										</div>
-									</div>
+										<div class="modal-body">
+											<p>불러올 경력을 체크하세요.</p>
+											<div class="table-responsive">
+												<table class="table table-striped table-bordered">
+													<thead>
+														<tr>
+															<th>선택</th>
+															<th>재직기간</th>
+															<th>회사명</th>
+															<th>직급/직책</th>
+															<th>근무부서</th>
+															<th>담당업무</th>
+															<th>연봉</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="careerList" items="${career}">
+															<tr>
+																<td></td>
+																<td>${careerList.carDate}</td>
+																<td>${careerList.carName}</td>
+																<td>${careerList.carPosition}</td>
+																<td>${careerList.carDept}</td>
+																<td>${careerList.carResp}</td>
+																<td>${careerList.carSalary}</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
 
-									<div class="row mb-3">
-										<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carDate"
-												placeholder="ex) 2020-01-01 ~ 2022-12-31">
 										</div>
 									</div>
-									<div class="row mb-3">
-										<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carPosition">
-										</div>
-									</div>
-									<div class="row mb-3">
-										<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carDept">
-										</div>
-									</div>
-									<div class="row mb-3">
-										<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="carResp">
-										</div>
-									</div>
-									<div class="row mb-3">
-										<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
-										<div class="col-sm-10">
-											<input type="number" class="form-control" name="carSalary" min="0">
-										</div>
-									</div>
-									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
-									</div>
-								</form>
+								</div>
 							</div>
+							<input type="radio" id="radio-box" name="radio-group"> <label
+								for="radio-box">경력없음(신입)</label>
+						</div>
+						<br>
+						<div id="hidden-content">
+							<form name="career" action="career" method="post">
+								<div class="row mb-3">
+									<label for="carName" class="col-sm-2 col-form-label">회사명</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carName">
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carDate"
+											placeholder="ex) 2020-01-01 ~ 2022-12-31">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carPosition">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carDept">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carResp">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" name="carSalary"
+											min="0">
+									</div>
+								</div>
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+									<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
@@ -140,11 +192,14 @@
 					href="${pageContext.request.contextPath}/person/resume/certi">다음</a>
 			</div>
 
-
-
-
-
 		</div>
+
+
+
+
+
+
+
 	</div>
 
 	<!-- footer -->
@@ -160,7 +215,7 @@
 		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
 		const radioBox = document.getElementById("radio-box");
 		const hiddenContent = document.getElementById("hidden-content");
-		
+
 		let clickCount = 0;
 		radioBox.addEventListener("click", function() {
 			clickCount++;
@@ -178,7 +233,7 @@
 		// 경력사항 입력확인
 		const rCareer = document.querySelector('form[name="career"]');
 		const saveCareer = document.querySelector('#saveCareer');
-		
+
 		function checkInputs(event) {
 			let inputs = rCareer.querySelectorAll('input[type=text]');
 			let isAllFilled = true;

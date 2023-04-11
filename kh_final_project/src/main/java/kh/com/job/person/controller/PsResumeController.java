@@ -168,7 +168,7 @@ public class PsResumeController {
 		List<PsUnivDto> uni = rservice.selectListUni(principal.getName());
 		mv.addObject("uni", uni);
 
-		//	대학원 학력정보 불러오기 
+		// 대학원 학력정보 불러오기
 		List<PsGschoolDto> grad = rservice.selectListGrad(principal.getName());
 		mv.addObject("grad", grad);
 
@@ -215,31 +215,28 @@ public class PsResumeController {
 			result = rservice.insertUniv(dto);
 
 			if (result > 0) {
-				PsResumeDto resume= rservice.selectOne(principal.getName());
+				PsResumeDto resume = rservice.selectOne(principal.getName());
 				int resumeNo = resume.getResumeNo();
 				int uniEduNo = rservice.getMaxUniNo();
-				
+
 				Map<String, Object> InfoNo = new HashMap<>();
 				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("uniEduNo", uniEduNo);
-				
+
 				// 낀테이블 insert
 				rservice.insertUniInfo(InfoNo);
-				
+
 				rttr.addFlashAttribute("msg", "성공");
 			} else {
 				rttr.addFlashAttribute("msg", "실패");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
-	
-	
-	
 
 	// 대학원 입력
 	@PostMapping("rGSchool")
@@ -247,16 +244,16 @@ public class PsResumeController {
 		int result = -1;
 		try {
 			result = rservice.insertGschool(dto);
-			
+
 			if (result > 0) {
-				PsResumeDto resume= rservice.selectOne(principal.getName());
+				PsResumeDto resume = rservice.selectOne(principal.getName());
 				int resumeNo = resume.getResumeNo();
 				int gradEduNo = rservice.getMaxGradNo();
-				
+
 				Map<String, Object> InfoNo = new HashMap<>();
 				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("gradEduNo", gradEduNo);
-				
+
 				// 낀테이블 insert
 				rservice.insertUniInfo(InfoNo);
 				rttr.addFlashAttribute("msg", "성공");
@@ -271,10 +268,14 @@ public class PsResumeController {
 		return mv;
 	}
 
-
 	// 경력사항 페이지
 	@GetMapping("career")
-	public ModelAndView viewCareer(ModelAndView mv) {
+	public ModelAndView viewCareer(Principal principal, ModelAndView mv) throws Exception {
+
+		// 경력사항 불러오기
+		List<PsCareerDto> career = rservice.selectListCareer(principal.getName());
+		mv.addObject("career", career);
+
 		return mv;
 	}
 
@@ -286,14 +287,14 @@ public class PsResumeController {
 			result = rservice.insertCareer(dto);
 
 			if (result > 0) {
-				PsResumeDto resume= rservice.selectOne(principal.getName());
+				PsResumeDto resume = rservice.selectOne(principal.getName());
 				int resumeNo = resume.getResumeNo();
 				int carNo = rservice.getMaxCareerNo();
-				
+
 				Map<String, Object> InfoNo = new HashMap<>();
 				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("carNo", carNo);
-				
+
 				// 낀테이블 insert
 				rservice.insertCareerInfo(InfoNo);
 				rttr.addFlashAttribute("msg", "성공");
@@ -310,7 +311,12 @@ public class PsResumeController {
 
 	// 자격증 페이지
 	@GetMapping("certi")
-	public ModelAndView viewCerti(ModelAndView mv) {
+	public ModelAndView viewCerti(Principal principal, ModelAndView mv) throws Exception {
+
+		// 자격증 불러오기
+		List<PsCertiDto> certi = rservice.selectListCerti(principal.getName());
+		mv.addObject("certi", certi);
+
 		return mv;
 	}
 
@@ -323,14 +329,14 @@ public class PsResumeController {
 			result = rservice.insertCerti(dto);
 
 			if (result > 0) {
-				PsResumeDto resume= rservice.selectOne(principal.getName());
+				PsResumeDto resume = rservice.selectOne(principal.getName());
 				int resumeNo = resume.getResumeNo();
 				int certiNo = rservice.getMaxCertiNo();
-				
+
 				Map<String, Object> InfoNo = new HashMap<>();
 				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("certiNo", certiNo);
-				
+
 				// 낀테이블 insert
 				rservice.insertCertiInfo(InfoNo);
 				rttr.addFlashAttribute("msg", "성공");
@@ -345,12 +351,11 @@ public class PsResumeController {
 		return mv;
 	}
 
-	
-	// 자소서 페이지 
-			@GetMapping("cl")
-			public ModelAndView viewCl(ModelAndView mv) {
-				return mv;
-			}
+	// 자소서 페이지
+	@GetMapping("cl")
+	public ModelAndView viewCl(ModelAndView mv) {
+		return mv;
+	}
 
 	// 예외처리는 프로젝트 후반에 작성
 

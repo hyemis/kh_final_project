@@ -160,7 +160,7 @@ public class PsResumeDao {
 	        
 	    return highSchoolList;
 	}
-	
+	// 대학교 학력사항 보기 
 	public List<PsUnivDto> selectListUni(String userId) throws Exception {
 	    List<PsUnivDto> univList = sqlSession.selectList("resume.selectListUni", userId);
 
@@ -196,6 +196,7 @@ public class PsResumeDao {
 	    return univList;
 	}
 	
+	// 대학원 학력사항 보기 
 	public List<PsGschoolDto> selectListGrad(String userId) throws Exception {
 	    List<PsGschoolDto> gradList = sqlSession.selectList("resume.selectListGrad", userId);
 
@@ -215,10 +216,10 @@ public class PsResumeDao {
 	                break;
 	        }
 
-	        if ("M".equals(grad.getGradCategory())) {
+	        if ("M".equals(grad.getGradCategory().trim())) {
 	            grad.setGradCategory("석사");
 	        } else {
-	        	grad.setGradCategory("박사");
+	        	 grad.setGradCategory("박사");
 	        }
 	        
 	        String dateString = grad.getGradDate();
@@ -229,6 +230,17 @@ public class PsResumeDao {
 	    }
 
 	    return gradList;
+	}
+	// 경력사항 학력사항 보기 
+	public List<PsCareerDto> selectListCareer(String userId) {
+		 List<PsCareerDto> careerList = sqlSession.selectList("resume.selectListCareer", userId);
+		return careerList;
+	}
+	
+	// 자격증 학력사항 보기 
+	public List<PsCertiDto> selectListCerti(String userId) {
+		 List<PsCertiDto> CertiList = sqlSession.selectList("resume.selectListCerti", userId);
+		return CertiList;
 	}
 	
 }

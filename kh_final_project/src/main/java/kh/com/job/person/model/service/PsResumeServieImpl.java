@@ -183,6 +183,16 @@ public class PsResumeServieImpl implements PsResumeService {
 		return  dao.selectListGrad(userId);
 	}
 
+	@Override
+	public List<PsCareerDto> selectListCareer(String userId) throws Exception {
+		return dao.selectListCareer(userId);
+	}
+
+	@Override
+	public List<PsCertiDto> selectListCerti(String userId) throws Exception {
+		return dao.selectListCerti(userId);
+	}
+
 
 
 }

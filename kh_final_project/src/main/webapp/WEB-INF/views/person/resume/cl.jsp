@@ -83,8 +83,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
@@ -92,13 +90,14 @@
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/list">다음</a>
 			</div>
+			</div>
+
 
 
 
 
 
 		</div>
-	</div>
 
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
