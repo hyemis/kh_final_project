@@ -15,18 +15,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdAccountService;
-import kh.com.job.business.model.dto.BsInfoDto;
+import kh.com.job.business.model.dto.BsBoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
-import kh.com.job.business.model.service.BsInfoService;
+import kh.com.job.business.model.service.BsAboutUsService;
 
 
 
 @Controller
-@RequestMapping("/business/myinfo")
-public class BsMyinfoController {
+@RequestMapping("/business/aboutus")
+public class BsAboutUsController {
 	
 	@Autowired
-	private BsInfoService service;
+	private BsAboutUsService service;
 	
 	//회사소개 상세페이지
 	@GetMapping("/companyinfo")
@@ -36,7 +36,7 @@ public class BsMyinfoController {
 	}
 	
 	@GetMapping("/insert")
-	public Model infoWrite(BsInfoDto infoDto, Model model, HttpSession session) throws Exception{
+	public Model infoWrite(BsBoardDto infoDto, Model model, HttpSession session) throws Exception{
 		BsUserDto dto = (BsUserDto)session.getAttribute("Login");
 		model.addAttribute("userId",dto);
 		model.addAttribute("boardDate",dto);
@@ -44,7 +44,7 @@ public class BsMyinfoController {
 	}
 	
    	@PostMapping("/insert")
-	public String insert(BsInfoDto Dto) {
+	public String insert(BsBoardDto Dto) {
 		  return "redirect:/companyinfo";
 		}
    	

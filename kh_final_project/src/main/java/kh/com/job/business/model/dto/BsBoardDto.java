@@ -17,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class BsInfoDto {
+public class BsBoardDto {
 //Board
 	
 		private Number boardNum;

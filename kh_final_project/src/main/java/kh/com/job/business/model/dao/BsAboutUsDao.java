@@ -6,12 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.com.job.business.model.dto.BsInfoDto;
+import kh.com.job.business.model.dto.BsBoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Repository
-public class BsInfoDao {
+public class BsAboutUsDao {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -24,15 +24,15 @@ public class BsInfoDao {
 	
 	
 	
-	public int insert(BsInfoDto dto) {
+	public int insert(BsBoardDto dto) {
 		return sqlSession.insert("business.insert", dto);		
 	}
 	
-	public BsInfoDto selectOne(int boardnum /* PK */) {          
+	public BsBoardDto selectOne(int boardnum /* PK */) {          
 		return sqlSession.selectOne("business.selectOne", boardnum); 
 	}
 	
-	public List<BsInfoDto> selectList() {
+	public List<BsBoardDto> selectList() {
 		return sqlSession.selectList("business.selectList");
 	}
 

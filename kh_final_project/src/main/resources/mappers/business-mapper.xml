@@ -12,13 +12,9 @@
 <!-- myinfo -->
 
 	<!-- 회사소개 작성 -->
-	<insert id="insertBsInfo">
-		insert into
-	</insert>
+	
 	<!-- 뉴스레터 불러오기 -->
-	<select id="selectNews" resultType="bidto"> 
-		select 
-	</select>
+
 	<!--  -->
 
 
@@ -31,17 +27,17 @@
 
 	<!-- todo/ 04.05 -->	
 	<!-- BOARD에서 Qna (코드번호 UDB04)인 게시물 꺼내옴  -->
-	<select id="selectQna" resultType="bidto">
+	<select id="selectQna" resultType="bbdto">
 	select * from BOARD where CATEGORY_ID='UDB04'
 	</select>
 	
 	<!-- BOARD에서 뉴스레터 (코드번호 UDB05) 인 게시물 꺼내옴  -->
-	<select id="selectNews" resultType="bidto">
+	<select id="selectNews" resultType="bbdto">
 	select * from BOARD where CATEGORY_ID='UDB05'
 	</select>
 	
 	<!-- BOARD에서 회사소개 (코드번호 UDB06) 인 게시물 꺼내옴  -->
-	<select id="selectInfo" resultType="bidto">
+	<select id="selectInfo" resultType="bbdto">
 	select * from BOARD where CATEGORY_ID='UDB06'
 	</select>
 	<!-- 회사소개작성 -->

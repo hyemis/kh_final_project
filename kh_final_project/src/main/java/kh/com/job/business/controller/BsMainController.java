@@ -39,8 +39,8 @@ public class BsMainController {
 	
 		
 	//내기업관리
-	@GetMapping("/myinfo")
-	public ModelAndView myInfo(ModelAndView mv) {
+	@GetMapping("/aboutus")
+	public ModelAndView aboutUs(ModelAndView mv) {
 		
 		return mv;
 	}

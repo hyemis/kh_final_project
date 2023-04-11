@@ -35,8 +35,7 @@
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/person.userId.css"
+<link href="${pageContext.request.contextPath}/resources/css/business.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -96,6 +95,7 @@
 
 				</div>
 				<div class="col-md-8 col-sm-8 border border-secondary">
+					<!-- 회사소개 -->
 					<div class="border border-secondary">
 						<h1>회사소개</h1>
 						<!-- Button trigger modal -->
@@ -215,12 +215,10 @@
 												</div>
 												<div class="col-10 was-validated">
 													<div class="mb-3">
-														<label for="validationTextarea" class="form-label">내용작성</label>
 														<textarea class="form-control is-invalid"
 															name="boardContent" id="validationTextarea"
 															style="height: 300px;" placeholder="회사소개 내용을 입력하세요."
 															required></textarea>
-														<div class="invalid-feedback">회사소개를 작성해주세요</div>
 													</div>
 													<!-- TODO : file 첨부 
    					 <div class="mb-3">
@@ -284,10 +282,95 @@
 							</button>
 						</div>
 						<!-- 회사소개 내용 -->
-						<div>${.userName}</div>
+						<div></div>
 					</div>
+					<!-- 뉴스레터 -->
 					<div class="border border-secondary">
 						<h1>뉴스레터</h1>
+						<button type="button" class="btn btn-light"
+							href="<%=request.getContextPath()%>/business/aboutus/newsletter">더보기</button>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="newsletter" data-bs-backdrop="static"
+							data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div
+								class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h3 class="modal-title text-center" id="staticBackdropLabel">뉴스레터
+											작성</h3>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form action="/save" method="post"
+											enctype="multipart/form-data">
+
+											<div class="row ">
+												<div class="col-2 text-center font-monospace">
+													<h4>제목</h4>
+												</div>
+												<div class="col-10 was-validated">
+													<input type="text" class="form-control is-invalid"
+														name="boardTitle" placeholder="제목을 입력해주세요" required>
+													<hr>
+												</div>
+											</div>
+											<div class="row ">
+												<div class="col-2 text-center font-monospace">
+													<h4>파일첨부</h4>
+												</div>
+												<div class="col-10 ">
+													<div class="mb-3">
+														<label for="formFile" class="form-label">Default
+															file input example</label> <input class="form-control"
+															type="file" id="formFile" multiple>
+													</div>
+												</div>
+											</div>
+											<div class="row ">
+												<div class="col-2 text-center font-monospace">
+													<h4>관련링크</h4>
+												</div>
+												<div class="col-10 ">
+													<input type="text" class="form-control" name=""
+														placeholder="링크를 입력해주세요">
+													<hr>
+												</div>
+											</div>
+
+											<div class="row ">
+												<div class="col-2 text-center font-monospace">
+													<h4>소개글</h4>
+												</div>
+												<div class="col-10 was-validated">
+													<div class="mb-3">
+														<textarea class="form-control is-invalid"
+															name="boardContent" style="height: 300px;" required></textarea>
+
+													</div>
+													<!-- TODO : file 첨부 
+   					 <div class="mb-3">
+   					 	<input type="file" name="file" class="form-control" aria-label="file example" required>
+   					 	<div class="invalid-feedback">Example invalid form file feedback</div>
+  					 </div>
+  					  -->
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-light"
+											data-bs-dismiss="modal">취소</button>
+										<button type="submit" class="btn btn-primary">등록</button>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="container">
 							<div class="row">
 								<div class="col">
@@ -339,9 +422,26 @@
 							</div>
 						</div>
 					</div>
+					<!-- Q&A -->
 					<div class="border border-secondary">
 						<h1>Q&A</h1>
-						<p>소개 해주세요.</p>
+						<button type="button" class="btn btn-light"
+							href="<%=request.getContextPath()%>/business/aboutus/qna">더보기</button>
+						<!-- 숫자 인덱스	 -->
+					    <div class="num-container row" id="num-container">
+					        <div class="col num-item">
+					            <h4 class="in-title">게시글 수</h4>
+					            <span class="nums" data-count="180">0</span><span id="num-unit">개</span><br>
+					        </div>
+					        <div class="col num-item">
+					            <h4 class="in-title">미답변 게시글</h4>
+					            <span class="nums" data-count="1143">0</span><span id="num-unit">개</span><br>
+					        </div>
+					        <div class="col num-item">
+					            <h4 class="in-title">답변완료 게시글</h4>
+					            <span class="nums" data-count="34">0</span><span id="num-unit">개</span><br>
+					        </div>
+					    </div>
 					</div>
 				</div>
 			</div>
@@ -353,7 +453,30 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>
 
-	<!-- page script -->
+	<!-- 숫자 카운트 애니메이션 -->
+	  <script>
+        $('.nums').each(function () {
+            const $this = $(this),
+                countTo = $this.attr('data-count');
+
+            $({
+                countNum: $this.text()
+            }).animate({
+                countNum: countTo
+            }, {
+                duration: 3000,
+                easing: 'linear',
+                step: function () {
+                    $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                    $this.text(this.countNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                    //3자리 마다 콤마 표시 적용
+                }
+            });
+        });
+    </script>
+	
 
 </body>
 </html>
