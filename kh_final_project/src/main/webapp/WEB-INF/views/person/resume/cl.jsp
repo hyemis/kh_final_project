@@ -51,11 +51,23 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ko.js"></script>
 
 
 <style>
 .hidden {
 	display: none;
+}
+
+.bg-gray {
+	background-color: rgb(248, 249, 249);
+}
+
+.editor {
+	height: 300px;
+	width: 700px;
 }
 </style>
 
@@ -73,16 +85,82 @@
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
-						<div class="mb-4">
-
-
+						<div class="col">
 							<h3 class="mb-3">자기소개서</h3>
-							
-							
+						</div>
+						<!-- 모달 버튼 -->
+						<div class="col-auto">
+							<button type="button" class="btn btn-outline-dark m-2 btn-sm"
+								data-bs-toggle="modal" data-bs-target="#viewCl">저장된 정보
+								불러오기</button>
+						</div>
+					</div>
+					<!-- 모달 창 -->
+					<div class="modal fade" id="viewCl" tabindex="-1" role="dialog"
+						aria-labelledby="uploadModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg"
+							role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="uploadModalLabel">자기소개서 불러오기</h5>
+									<button type="button" class="close" data-bs-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>불러올 자기소개서를 체크하세요.</p>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>선택</th>
+													<th>자기소개서 항목명</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td></td>
+
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+								</div>
 							</div>
 						</div>
 					</div>
+
+					<!-- 성장과정 내용 -->
+					<div class="bg-gray p-4 mb-4">
+						<h5>성장과정</h5>
+						<div class="justify-content-center align-items-center">
+							<form action="" method="POST">
+								<textarea name="text" id="" class="form-control ek"></textarea>
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+									<button type="submit" class="btn btn-primary">저장</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<br>
+					<!-- 지원동기 내용 -->
+					<div class="bg-gray p-4 mb-4">
+						<h5>지원동기</h5>
+						<div class="justify-content-center align-items-center">
+							<form action="" method="POST">
+								<textarea name="text" id="" class="form-control ek"></textarea>
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+									<button type="submit" class="btn btn-primary">저장</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+
 				</div>
+			</div>
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
@@ -90,14 +168,14 @@
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/list">다음</a>
 			</div>
-			</div>
-
-
-
-
-
-
 		</div>
+
+
+
+
+
+
+	</div>
 
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
@@ -108,6 +186,10 @@
 		if (msg) {
 			alert(msg);
 		}
+
+		ClassicEditor.create(document.querySelector('.ek'),{
+			 language: "ko"
+		});
 	</script>
 
 </body>
