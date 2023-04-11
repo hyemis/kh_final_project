@@ -94,7 +94,11 @@
 									<td>${list.companyName }</td>
 									<td>${list.raTitle }</td>
 									<td> ${list.closeDate }까지</td>
-									<td></td>
+									<td>
+										<div class="form-check form-switch">
+											<input class="form-check-input raAdmission" type="checkbox" role="switch" >
+										</div>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

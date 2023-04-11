@@ -2,19 +2,19 @@ package kh.com.job.business.model.service;
 
 import java.util.List;
 
-import kh.com.job.business.model.dto.BsInfoDto;
+import kh.com.job.business.model.dto.BsBoardDto;
 
 
-public interface BsInfoService {
+public interface BsAboutUsService {
 	
 	//글 등록
-	public int insert(BsInfoDto dto) ;
+	public int insert(BsBoardDto dto) ;
 	
 	// 한 개 읽기
-	public BsInfoDto selectOne(int boardnum);
+	public BsBoardDto selectOne(int boardnum);
 
 	// 전체읽기 	
-	public List<BsInfoDto> selectList();
+	public List<BsBoardDto> selectList();
 	
 	
 	

@@ -21,8 +21,8 @@
 			alias="budto" />
 		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
 			alias="brdto" />
-		<typeAlias type="kh.com.job.business.model.dto.BsInfoDto"
-			alias="bidto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsBoardDto"
+			alias="bbdto" />
 
 		<typeAlias type="kh.com.job.person.model.dto.PsCareerDto"
 			alias="careerdto" />
