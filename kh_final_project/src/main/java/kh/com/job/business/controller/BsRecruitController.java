@@ -55,9 +55,12 @@ public class BsRecruitController {
 		
 		//메인 진행중인 리스트
 		List<BsRecruitDto> reCruitDto = service.recruitProgress(principal.getName());
+		//관리자 미승인 리스트
+		List<BsRecruitDto> admissionDto = service.recruitAdmission(principal.getName());
 		
 		mv.addObject("userinfo", dto);
 		mv.addObject("recruitList", reCruitDto);
+		mv.addObject("admissionList", admissionDto);
 		
 		return mv;
 	}
@@ -123,19 +126,7 @@ public class BsRecruitController {
 		if(dto.getRecruitType().equals("0")) {
 			dto.setRecruitType(category2dept);
 		}
-		
-		//여기다가 채용공고 내용 넣기
-		System.out.println(dto);
-		/*
-		 * 들어가야할 내용
-		 * 회사이름 모집분야 경력선택 학력선택 급여
-		 * 우대조건 등록, 마감
-		 * 고용 형태
-		 * 상세 근무형태
-		 * 공고 제목
-		 * 공고 내용
-		 * 기타 문서
-		 */
+
 		result = service.insertRecruit(dto);
 		
 		if(result == 1) {
