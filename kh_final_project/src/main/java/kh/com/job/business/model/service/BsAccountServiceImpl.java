@@ -42,6 +42,11 @@ public class BsAccountServiceImpl implements BsAccountService{
 		return dao.getUserPw(userId);
 	}
 
+	@Override
+	public int pwChk(String userPw) throws Exception {
+		return dao.pwChk(userPw);
+	}
+
 	
 
 }

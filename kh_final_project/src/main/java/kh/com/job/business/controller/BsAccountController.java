@@ -75,21 +75,27 @@ public class BsAccountController {
 		return mv;
 	}
 	
-	//회원 비밀번호 확인  -- 임시삭제
-	@PostMapping("/checkPassword") 
-	public ModelAndView pwChk(String userPw, ModelAndView mv, RedirectAttributes rttr) throws Exception{
+	
+	//회원비밀번호 확인
+	@PostMapping("/pwChk") 
+	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) throws Exception{
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		BsUserDto dto = service.getUserPw(auth.getName());
+		BsUserDto dto = service.viewAccount(auth.getName());
 				
-		if(passwordEncoder.matches(userPw, dto.getUserPw())) {
-			mv.setViewName("redirect:/account/info");
+		if(passwordEncoder.matches(confirmPw, dto.getUserPw())) {
+			rttr.addFlashAttribute("msg", "비밀번호 일치");
+			mv.setViewName("redirect:/business/account/info");
 		}else {
-			rttr.addFlashAttribute("msg", "비밀번호가 틀렸습니다. 다시 확인해주세요.");
+			mv.setViewName("redirect:/business/account/info");
 		}
 			
 		return mv;
 		}
+	
+
+	
+	
 	
 	//비밀번호 변경
 	@PostMapping("/updatePw")
