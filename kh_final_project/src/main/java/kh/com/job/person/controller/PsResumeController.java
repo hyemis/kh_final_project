@@ -1,6 +1,5 @@
 package kh.com.job.person.controller;
 
-import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -192,7 +191,7 @@ public class PsResumeController {
 				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("highEduNo", highEduNo);
 
-				// 낀테이블
+				// 낀테이블 insert
 				rservice.insertHighInfo(InfoNo);
 
 				rttr.addFlashAttribute("msg", "성공");
@@ -214,17 +213,6 @@ public class PsResumeController {
 		int result = -1;
 		try {
 			result = rservice.insertUniv(dto);
-
-			PsResumeDto resume = rservice.selectOne(principal.getName());
-			int resumeNo = resume.getResumeNo();
-			int uniEduNo = rservice.getMaxUniNo();
-
-			Map<String, Object> InfoNo = new HashMap<>();
-			InfoNo.put("resumeNo", resumeNo);
-			InfoNo.put("uniEduNo", uniEduNo);
-
-			// 낀테이블
-			rservice.insertUniInfo(InfoNo);
 
 			if (result > 0) {
 				PsResumeDto resume= rservice.selectOne(principal.getName());
@@ -283,36 +271,6 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 대학원 입력
-	@PostMapping("rGSchool")
-	public ModelAndView rGSchool(Principal principal, ModelAndView mv, PsGschoolDto dto, RedirectAttributes rttr) {
-		int result = -1;
-		try {
-			result = rservice.insertGschool(dto);
-
-			PsResumeDto resume = rservice.selectOne(principal.getName());
-			int resumeNo = resume.getResumeNo();
-			int gradEduNo = rservice.getMaxGradNo();
-
-			Map<String, Object> InfoNo = new HashMap<>();
-			InfoNo.put("resumeNo", resumeNo);
-			InfoNo.put("gradEduNo", gradEduNo);
-
-			// 낀테이블
-			rservice.insertGradInfo(InfoNo);
-
-			if (result > 0) {
-				rttr.addFlashAttribute("msg", "성공");
-			} else {
-				rttr.addFlashAttribute("msg", "실패");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mv.setViewName("redirect:/person/resume/school");
-		return mv;
-	}
 
 	// 경력사항 페이지
 	@GetMapping("career")
@@ -387,11 +345,6 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 자격증 페이지
-	@GetMapping("cl")
-	public ModelAndView viewCl(ModelAndView mv) {
-		return mv;
-	}
 	
 	// 자소서 페이지 
 			@GetMapping("cl")
