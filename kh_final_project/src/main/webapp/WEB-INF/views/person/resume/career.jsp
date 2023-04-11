@@ -174,7 +174,7 @@
 									<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
 									<div class="col-sm-10">
 										<input type="number" class="form-control" name="carSalary"
-											min="0">
+											min="0" placeholder="단위 : 만원">
 									</div>
 								</div>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
