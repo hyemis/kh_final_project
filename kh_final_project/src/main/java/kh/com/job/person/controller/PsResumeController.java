@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
 import kh.com.job.person.model.dto.PsGschoolDto;
 import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -354,6 +355,15 @@ public class PsResumeController {
 	// 자소서 페이지
 	@GetMapping("cl")
 	public ModelAndView viewCl(ModelAndView mv) {
+		return mv;
+	}
+
+	// 자소서 페이지
+	@PostMapping("cl")
+	@ResponseBody
+	public ModelAndView doCl(ModelAndView mv, PsClDto dto, @RequestParam(name = "uploadCl", required = false) MultipartFile clFile) {
+		System.out.println("잘가져왔니?" + dto);
+		
 		return mv;
 	}
 
