@@ -115,7 +115,7 @@
 													<tbody>
 														<c:forEach var="careerList" items="${career}">
 															<tr>
-																<td></td>
+																<td><input type="checkbox" name="selectedCareer"/></td>
 																<td>${careerList.carDate}</td>
 																<td>${careerList.carName}</td>
 																<td>${careerList.carPosition}</td>
@@ -126,17 +126,21 @@
 														</c:forEach>
 													</tbody>
 												</table>
+												<button type="button" class="btn btn-primary mx-auto d-block" id="selectCarBtn">불러오기</button>
 											</div>
 
 										</div>
 									</div>
 								</div>
 							</div>
+							
 							<input type="radio" id="radio-box" name="radio-group"> <label
-								for="radio-box">경력없음(신입)</label>
+								for="radio-box">경력없음(신입)</label><br><hr>
+								<button class="btn btn-primary" onclick="addCar()">정보추가</button><br>
 						</div>
-						<br>
+						
 						<div id="hidden-content">
+						<div id="CarFormContainer">
 							<form name="career" action="career" method="post">
 								<div class="row mb-3">
 									<label for="carName" class="col-sm-2 col-form-label">회사명</label>
@@ -179,8 +183,12 @@
 								</div>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 									<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
+									<button class="btn btn-primary delete-btn"
+										onclick="removeForm(this.parentNode.parentNode)">삭제</button>
 								</div>
+								<hr>
 							</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -250,6 +258,48 @@
 		}
 		saveCareer.addEventListener('click', checkInputs);
 		rCareer.addEventListener('submit', checkInputs);
+		
+		
+		// 경력 입력폼 추가
+		function addCar() {
+			  var form = document.getElementsByName("career")[0].cloneNode(true);
+			  document.getElementById("CarFormContainer").appendChild(form);
+			}
+		
+ 		// 입력폼 삭제
+	    function removeForm(form) {
+	        form.remove();
+	    }
+		
+		
+		
+		// TODO : 체크박스 데이터 가져오기
+		// 체크된 경력사항 배열에 저장
+		let saveButton = document.getElementById("selectCarBtn");
+		saveButton
+				.addEventListener(
+						"click",
+						function() {
+							let careerForm = document.forms["career"];
+
+							// 체크된 경력 데이터를 가져와서 form에 추가
+							let selectedCareerList = document
+									.querySelectorAll('input[name="selectedCareer"]:checked');
+							for (let i = 0; i < selectedCareerList.length; i++) {
+								let careerData = selectedCareerList[i].parentElement.parentElement
+										.getElementsByTagName("td");
+								careerForm.elements["carName"].value = careerData[1].textContent;
+								careerForm.elements["carDate"].value = careerData[2].textContent;
+								careerForm.elements["carPosition"].value = careerData[3].textContent;
+								careerForm.elements["carDept"].value = careerData[4].textContent;
+								careerForm.elements["carResp"].value = careerData[5].textContent;
+								careerForm.elements["carSalary"].value = careerData[6].textContent;
+							}
+
+							// 모달창 닫기
+							let modal = document.getElementById("viewCareer");
+							modal.style.display = "none";
+						});
 	</script>
 
 </body>
