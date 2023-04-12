@@ -61,6 +61,8 @@
 	float: left;
 	margin-right: 10px;
 }
+
+</style>
 </style>
 
 
@@ -111,10 +113,9 @@
 									<div class="mb-4">
 										<h1 class="mb-3">이력서 목록</h1>
 										<p>
-											1. 이력서 생성한 뒤 작성해주세요.<br> 2. 이력서는 최대 5개까지 생성하실 수 있습니다. <br>
-											3. 생성된 이력서로 채용공고마다 다른 이력서로 입사지원이 가능합니다. (단, 입사 지원 후 이력서 수정
-											내용은 반영되지 않습니다.) <br> 4. 인재정보에는 작성하신 이력서 중 대표 이력서 1개만 공개
-											가능합니다.
+											1. 이력서 생성한 뒤 작성해주세요.<br> 2. 생성된 이력서로 채용공고마다 다른 이력서로
+											입사지원이 가능합니다.<br> (단, 입사 지원 후 이력서 수정 내용은 반영되지 않습니다.) <br>
+											3. 인재정보에는 작성하신 이력서 중 대표 이력서 1개만 공개 가능합니다.
 										</p>
 										<br>
 										<sec:authorize access="isAuthenticated()">
@@ -130,8 +131,8 @@
 										<table class="table table-hover">
 											<thead>
 												<tr>
-													<th scope="col">이력서 제목</th>
-													<th scope="col">최종 수정일</th>
+													<th scope="col" >이력서 제목</th>
+													<th scope="col">작성일</th>
 													<th scope="col"></th>
 												</tr>
 											</thead>
@@ -143,7 +144,6 @@
 														<td>${resume.resumeDate }</td>
 														<td>
 															<div class="btn-container">
-																<button type="button" class="btn btn-outline-dark">수정</button>
 																<form method="post" action="delete">
 																	<input type="hidden" name="resumeNo"
 																		value="${resume.resumeNo}" required>

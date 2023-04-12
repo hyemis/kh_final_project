@@ -100,6 +100,12 @@
 		(RESUME_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
 
+	<insert id="insertCl" parameterType="cldto">
+		insert into RESUME_CL(CL_NO,
+		CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP)
+		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive}, #{clAdv}, #{clAsp})
+	</insert>
+
 	<insert id="insertHighInfo" parameterType="hinfodto">
 		insert into
 		RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO)
@@ -230,21 +236,71 @@
 		FROM RESUME_UNIVERSITY u
 		INNER JOIN
 		RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
-		INNER JOIN 
-		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		INNER JOIN
+		USER_RESUME
+		u ON i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
-		ORDER BY u.UNI_DATE DESC
+		ORDER BY
+		u.UNI_DATE DESC
 	</select>
 
 	<select id="selectListGrad" resultType="gdto">
-		SELECT rg.GRAD_EDU_NO AS gradEduNo, rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as
-		gradCategory, rg.GRAD_NAME AS gradName, rg.GRAD_DATE AS gradDate, rg.GRAD_MAJOR AS
+		SELECT rg.GRAD_EDU_NO AS
+		gradEduNo, rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as gradCategory,
+		rg.GRAD_NAME AS gradName, rg.GRAD_DATE AS gradDate,
+		rg.GRAD_MAJOR AS
 		gradMajor, rg.GRAD_POINT as gradPoint
 		FROM RESUME_GRADSCHOOL rg
-		INNER JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
-		INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		INNER
+		JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
+		INNER
+		JOIN
+		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY rg.GRAD_DATE DESC
+	</select>
+
+	<select id="selectListCareer" resultType="careerdto">
+		SELECT rc.CAR_NO AS
+		carNo, rc.CAR_NAME
+		AS carName, rc.CAR_DATE AS carDate, rc.CAR_POSITION
+		AS carPosition, rc.CAR_DEPT AS carDept,
+		rc.CAR_RESP AS carResp,
+		rc.CAR_SALARY AS carSalary
+		FROM RESUME_CAREER rc
+		INNER JOIN
+		RESUME_CAR_INFO i on rc.CAR_NO = i.CAR_NO
+		INNER JOIN USER_RESUME u on
+		i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{userId}
+		ORDER BY
+		rc.CAR_DATE DESC
+	</select>
+
+	<select id="selectListCerti" resultType="certidto">
+		SELECT rc.CERTI_NO AS
+		certiNo,
+		rc.CERTI_NAME AS certiName, rc.CERTI_PUB AS certiPub,
+		rc.CERTI_DATE AS certiDate
+		FROM RESUME_CERTI rc
+		INNER JOIN
+		RESUME_CERTI_INFO i on rc.CERTI_NO = i.CERTI_NO
+		INNER JOIN USER_RESUME
+		u on i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{userId}
+		ORDER BY
+		rc.CERTI_DATE DESC
+	</select>
+	
+		<select id="selectListCl" resultType="cldto">
+	SELECT cl.CL_NO AS clNo, cl.CL_FILE AS clFile, cl.CL_GROWTH AS clGrowth, cl.CL_MOTIVE AS clMotive, cl.CL_ADV AS clAdv, cl.CL_ASP AS clAsp
+		FROM RESUME_CL cl
+		INNER JOIN
+		RESUME_CL_INFO i on cl.CL_NO = i.CL_NO
+		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{userId}
+		ORDER BY
+		cl.CL_NO DESC
 	</select>
 
 </mapper>

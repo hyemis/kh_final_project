@@ -75,5 +75,11 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 		return dao.recruitProgress(userId);
 	}
 
+	@Override
+	public List<BsRecruitDto> recruitAdmission(String userId) {
+		// TODO Auto-generated method stub
+		return  dao.recruitAdmission(userId);
+	}
+
 
 }

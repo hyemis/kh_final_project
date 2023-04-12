@@ -18,6 +18,7 @@ import com.google.cloud.storage.StorageOptions;
 import kh.com.job.person.model.dao.PsResumeDao;
 import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
 import kh.com.job.person.model.dto.PsGschoolDto;
 import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -107,6 +108,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int insertCerti(PsCertiDto dto) throws Exception {
 		return dao.insertCerti(dto);
 	}
+	
+	@Override
+	public int insertCl(PsClDto dto) throws Exception {
+		return dao.insertCl(dto);
+	}
 
 	@Override
 	public int getMaxHighNo() throws Exception {
@@ -182,6 +188,23 @@ public class PsResumeServieImpl implements PsResumeService {
 	public List<PsGschoolDto> selectListGrad(String userId) throws Exception {
 		return  dao.selectListGrad(userId);
 	}
+
+	@Override
+	public List<PsCareerDto> selectListCareer(String userId) throws Exception {
+		return dao.selectListCareer(userId);
+	}
+
+	@Override
+	public List<PsCertiDto> selectListCerti(String userId) throws Exception {
+		return dao.selectListCerti(userId);
+	}
+
+	@Override
+	public List<PsClDto> selectListCl(String userId) throws Exception {
+		return dao.selectListCl(userId);
+	}
+
+	
 
 
 

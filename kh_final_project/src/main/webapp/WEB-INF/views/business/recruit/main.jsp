@@ -76,32 +76,81 @@
 					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/business/recruit/insert'" >채용 공고 등록</button>
 				</div>
 			</div>
-			<div class="recruitlist p-2 col-9">
-				<h3>채용 중인 공고</h3>
-				<div class="bg-white border">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>회사이름</th>
-								<th>제목</th>
-								<th>기간</th>
-								<th>게시승인</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${recruitList }" var="list" varStatus="i">
+			<div class="p-2 col-9">
+				<div class="recruitlist p-2">
+					<h3>채용 중인 공고</h3>
+					<div class="bg-white border">
+						<table class="table">
+							<thead>
 								<tr>
-									<td>${list.companyName }</td>
-									<td>${list.raTitle }</td>
-									<td> ${list.closeDate }까지</td>
-									<td></td>
+									<th>회사이름</th>
+									<th>제목</th>
+									<th>기간</th>
+									<th>게시승인</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<c:choose>
+									<c:when test="${empty recruitList}">
+									<tr>
+										<td colspan="4">채용 중인 공고가 없습니다.</td>
+									</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${recruitList }" var="list" varStatus="i">
+											<tr>
+												<td>${list.companyName }</td>
+												<td>${list.raTitle }</td>
+												<td> ${list.closeDate }까지</td>
+												<td>
+													<div class="form-check form-switch">
+														<input class="form-check-input raAdmission" type="checkbox" role="switch" >
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				
+				<div class="recruitAdmissionList p-2">
+					<h3>관리자 미승인 공고</h3>
+					<div class="bg-white border">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>회사이름</th>
+									<th>제목</th>
+									<th>기간</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:choose>
+									<c:when test="${empty admissionList}">
+										<tr>
+											<td colspan="3">미승인 된 공고가 없습니다.</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${admissionList }" var="list" varStatus="i">
+											<tr>
+												<td>${list.companyName }</td>
+												<td>${list.raTitle }</td>
+												<td> ${list.closeDate }까지</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
+			
+			
 		</div>
 		<!-- Category End -->
 		

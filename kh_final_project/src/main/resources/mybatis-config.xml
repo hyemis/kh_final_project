@@ -11,8 +11,8 @@
 
 	<!-- typeAlias setting -->
 	<typeAliases>
-		<typeAlias type="kh.com.job.temp.model.dto.TempDto"
-			alias="mdto" />
+	<!-- 	<typeAlias type="kh.com.job.temp.model.dto.TempDto"
+			alias="mdto" /> -->
 		<typeAlias type="kh.com.job.person.model.dto.PsUserDto"
 			alias="pdto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsResumeDto"
