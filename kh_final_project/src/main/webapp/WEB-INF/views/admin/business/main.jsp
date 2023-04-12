@@ -82,10 +82,36 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+					<tr>
+						<td>
+							--------------------------
+						</td>
+						<td>
+							--------------------------
+						</td>
+					</tr>
+					<c:choose>
+						<c:when test="${empty list}">
+							<tr>
+								<td colspan="3">미승인 된 공고가 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
+								<tr>
+									<td>${list.companyName }</td>
+									<td>${list.raTitle }</td>
+									<td> ${list.closeDate }까지</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					
 		 		</tbody>
 		 	</table>
 		 </div>
 
+	
 		 
 
         

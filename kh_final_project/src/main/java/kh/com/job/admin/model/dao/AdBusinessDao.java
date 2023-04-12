@@ -17,6 +17,15 @@ public class AdBusinessDao {
 	public List<BsRecruitDto> recruitAllList() {
 		return sqlsession.selectList("admin.recruitAllList");
 	}
+
+	public int pageListCount(String search) {
+		return sqlsession.selectOne("admin.pageListCount", search);
+	}
+
+	public Object pageList(String search) {
+		
+		return sqlsession.selectList("admin.pageList", search);
+	}
 	
 	
 
