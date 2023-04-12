@@ -51,9 +51,9 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
-	<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ko.js"></script>
+<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
+
+
 
 
 <style>
@@ -133,31 +133,58 @@
 					</div>
 
 					<!-- 성장과정 내용 -->
-					<div class="bg-gray p-4 mb-4">
-						<h5>성장과정</h5>
+					<div class="bg-gray p-4 mb-3">
+						<div class="mb-3">
+							<h4>성장과정</h4>
+						</div>
 						<div class="justify-content-center align-items-center">
-							<form action="" method="POST">
-								<textarea name="text" id="" class="form-control ek"></textarea>
-									<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-									<button type="submit" class="btn btn-primary">저장</button>
-								</div>
-							</form>
+							<textarea name="text" id="growth" class="form-control"></textarea>
 						</div>
 					</div>
-					<br>
 					<!-- 지원동기 내용 -->
-					<div class="bg-gray p-4 mb-4">
-						<h5>지원동기</h5>
+					<div class="bg-gray p-4 mb-3">
+						<div class="mb-3">
+							<h4>지원동기</h4>
+						</div>
 						<div class="justify-content-center align-items-center">
-							<form action="" method="POST">
-								<textarea name="text" id="" class="form-control ek"></textarea>
-									<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-									<button type="submit" class="btn btn-primary">저장</button>
-								</div>
+							<textarea name="text" id="motive" class="form-control"></textarea>
+						</div>
+					</div>
+					<!-- 장단점 내용 -->
+					<div class="bg-gray p-4 mb-3">
+						<div class="mb-3">
+							<h4>성격의 장/단점</h4>
+						</div>
+						<div class="justify-content-center align-items-center">
+							<textarea name="text" id="adv" class="form-control"></textarea>
+						</div>
+					</div>
+					<!-- 입사 후 포부 내용 -->
+					<div class="bg-gray p-4 mb-3">
+						<div class="mb-3">
+							<h4>입사 후 포부</h4>
+						</div>
+						<div class="justify-content-center align-items-center">
+							<textarea name="text" id="asp" class="form-control"></textarea>
+						</div>
+					</div>
+					<!-- 파일 첨부 -->
+					<div class="bg-gray p-4 mb-3">
+						<div class="mb-3">
+							<h4>자기소개서</h4>
+						</div>
+						<div class="justify-content-center align-items-center">
+							<form enctype="multipart/form-data">
+								<input type="file" class="form-control" id="uploadCl"
+									placeholder="자기소개서 첨부파일"><br>
 							</form>
 						</div>
 					</div>
 
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+						<button type="button" class="btn btn-primary"
+							onclick="fn_clWrite(); return false;">저장</button>
+					</div>
 
 				</div>
 			</div>
@@ -187,9 +214,38 @@
 			alert(msg);
 		}
 
-		ClassicEditor.create(document.querySelector('.ek'),{
-			 language: "ko"
-		});
+		var textareas = document.querySelectorAll('textarea');
+		for (var i = 0; i < textareas.length; i++) {
+		  CKEDITOR.replace(textareas[i].id, {
+		    language: 'ko',
+		  });
+		}
+
+		// cl 등록
+		function fn_clWrite() {
+			let formdata = new FormData();
+			formdata.append("growth", CKEDITOR.instances.growth.getData());
+			formdata.append("motive", CKEDITOR.instances.motive.getData());
+			formdata.append("adv", CKEDITOR.instances.adv.getData());
+			formdata.append("asp", CKEDITOR.instances.asp.getData());
+			formdata.append("uploadCl", $("#uploadCl")[0].files[0]);
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/person/resume/cl",
+				type : "post",
+				contentType : false,
+				processData : false,
+				data : formdata,
+				success : function(result) {
+					if (result == 1) {
+						alert("자기소개서가 등록되었습니다.");
+						location.href = "/job/person/resume/list";
+					} else {
+						alert("자기소개서 등록에 실패했습니다.");
+					}
+				}
+			})
+		}
 	</script>
 
 </body>
