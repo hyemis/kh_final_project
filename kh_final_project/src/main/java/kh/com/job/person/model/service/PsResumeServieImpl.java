@@ -199,6 +199,11 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.selectListCerti(userId);
 	}
 
+	@Override
+	public List<PsClDto> selectListCl(String userId) throws Exception {
+		return dao.selectListCl(userId);
+	}
+
 	
 
 

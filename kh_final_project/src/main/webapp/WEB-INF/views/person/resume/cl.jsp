@@ -110,19 +110,31 @@
 								</div>
 								<div class="modal-body">
 									<p>불러올 자기소개서를 체크하세요.</p>
+									<p>작성하신 자기소개서와 자기소개서 파일은 이력서에서 확인하실 수 있습니다.</p>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
 											<thead>
 												<tr>
 													<th>선택</th>
-													<th>자기소개서 항목명</th>
+													<th>파일</th>
+													<th>성장과정</th>
+													<th>지원동기</th>
+													<th>장단점</th>
+													<th>입사 후 포부</th>
 												</tr>
 											</thead>
 											<tbody>
+											<c:forEach var="coverList" items="${clList}">
 												<tr>
 													<td></td>
+													<td>${coverList.clFile}</td>
+															<td>${coverList.clGrowth}</td>
+															<td>${coverList.clMotive}</td>
+															<td>${coverList.clAdv}</td>
+															<td>${coverList.clAsp}</td>
 
 												</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>
@@ -222,6 +234,7 @@
 		for (var i = 0; i < textareas.length; i++) {
 		  CKEDITOR.replace(textareas[i].id, {
 		    language: 'ko',
+		    toolbar: []
 		  });
 
 		  const textarea = CKEDITOR.instances[textareas[i].id];

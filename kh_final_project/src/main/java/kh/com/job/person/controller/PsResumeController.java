@@ -354,56 +354,65 @@ public class PsResumeController {
 
 	// 자소서 페이지
 	@GetMapping("cl")
-	public ModelAndView viewCl(ModelAndView mv) {
+	public ModelAndView viewCl(ModelAndView mv, Principal principal) throws Exception {
+
+		// 자기소개서 불러오기
+		List<PsClDto> clList = rservice.selectListCl(principal.getName());
+		for (PsClDto cl : clList) {
+	        cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
+	        cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
+	        cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
+	        cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
+	        
+	        if (cl.getClFile() != null) {
+	            cl.setClFile("파일 존재");
+	        } else {
+	        	cl.setClFile("파일 없음");
+	        }
 		
-		//TODO: 정보불러오기
+		}
+		mv.addObject("clList", clList);
 		return mv;
 	}
 
 	// 자소서 페이지
 	@PostMapping("cl")
 	@ResponseBody
-	public int doCl(ModelAndView mv, 
-			@RequestParam("growth") String growth,
-			@RequestParam("motive") String motive,
-            @RequestParam("adv") String adv,
-            @RequestParam("asp") String asp,
-            @RequestParam(name = "uploadCl", required = false) MultipartFile clFile,
-            PsClDto dto,
-            Principal principal) {
-		
+	public int doCl(ModelAndView mv, @RequestParam("growth") String growth, @RequestParam("motive") String motive,
+			@RequestParam("adv") String adv, @RequestParam("asp") String asp,
+			@RequestParam(name = "uploadCl", required = false) MultipartFile clFile, PsClDto dto, Principal principal) {
+
 		dto.setClGrowth(growth);
 		dto.setClMotive(motive);
 		dto.setClAdv(adv);
 		dto.setClAsp(asp);
-		
 
 		if (clFile != null && !clFile.isEmpty()) {
 			String portfUrl = rservice.upload(clFile, principal.getName());
 			dto.setClFile(portfUrl);
 		}
-		
+
 		int result = -1;
-		
+
 		try {
 			result = rservice.insertCl(dto);
-			if(result > 0) {
+			if (result > 0) {
 				PsResumeDto resume = rservice.selectOne(principal.getName());
 				int resumeNo = resume.getResumeNo();
 				int clNo = rservice.getMaxClNo();
-				
+
 				Map<String, Object> InfoNo = new HashMap<>();
 				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("clNo", clNo);
-				
+
 				rservice.insertClInfo(InfoNo);
 				return result;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 

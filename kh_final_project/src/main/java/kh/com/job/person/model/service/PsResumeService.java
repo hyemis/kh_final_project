@@ -50,7 +50,7 @@ public interface PsResumeService {
 
 	// 이력서-자격증 입력
 	public int insertCerti(PsCertiDto dto) throws Exception;
-	
+
 	// 이력서-자기소개서 입력
 	public int insertCl(PsClDto dto) throws Exception;
 
@@ -89,14 +89,17 @@ public interface PsResumeService {
 
 	// 대학교 학력사항 보기
 	public List<PsUnivDto> selectListUni(String userId) throws Exception;
-	
+
 	// 대학원 학력사항 보기
 	public List<PsGschoolDto> selectListGrad(String userId) throws Exception;
-	
+
 	// 경력사항 보기
 	public List<PsCareerDto> selectListCareer(String userId) throws Exception;
-	
+
 	// 자격증 보기
 	public List<PsCertiDto> selectListCerti(String userId) throws Exception;
+
+	// 자기소개서 보기
+	public List<PsClDto> selectListCl(String userId) throws Exception;
 
 }

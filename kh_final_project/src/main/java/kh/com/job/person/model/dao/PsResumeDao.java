@@ -79,8 +79,8 @@ public class PsResumeDao {
 	public int insertCerti(PsCertiDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCerti", dto);
 	}
-	
-	// 이력서 - 자기소개서 입력 
+
+	// 이력서 - 자기소개서 입력
 	public int insertCl(PsClDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCl", dto);
 	}
@@ -89,7 +89,6 @@ public class PsResumeDao {
 	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertHighInfo", InfoNo);
 	}
-	
 
 	// 이력서-고등학교 최신보기
 	public int getMaxHighNo() throws Exception {
@@ -105,149 +104,156 @@ public class PsResumeDao {
 	public int getMaxUniNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneUni");
 	}
-	
+
 	// GradInfo - 입력
 	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertGradInfo", InfoNo);
 	}
-	
+
 	// 이력서 - 대학원 최신보기
 	public int getMaxGradNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneGrad");
 	}
-	
+
 	// CareerInfo - 입력
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertCareerInfo", InfoNo);
 	}
-	
+
 	// 이력서 - 경력 최신보기
 	public int getMaxCareerNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneCar");
 	}
-	
+
 	// CertiInfo - 입력
 	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertCertiInfo", InfoNo);
 	}
-	
+
 	// 이력서 - 자격증 최신보기
 	public int getMaxCertiNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneCerti");
 	}
-	
+
 	// ClInfo - 입력
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertClInfo", InfoNo);
 	}
-	
+
 	// 이력서 - 자기소개서 최신보기
 	public int getMaxClNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneCl");
 	}
-	
-	// 고등학교 학력사항 보기 
+
+	// 고등학교 학력사항 보기
 	public List<PsHschoolDto> selectListHigh(String userId) throws Exception {
-		 List<PsHschoolDto> highSchoolList = sqlSession.selectList("resume.selectListHigh", userId);
-		    for (PsHschoolDto hschool : highSchoolList) {
-		        if ("Y".equals(hschool.getGed())) {
-		            hschool.setHighName("검정고시");
-		            hschool.setHighMajor("");
-		            hschool.setHighDate(null);
-		            hschool.setGed("검정고시");
-		        } else {
-		            String dateString = hschool.getHighDate();
-		            if (dateString != null) {
-		                LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-		                hschool.setHighDate(date.toString());
-		            }
-		        }
-		    }
-	    
-	        
-	    return highSchoolList;
+		List<PsHschoolDto> highSchoolList = sqlSession.selectList("resume.selectListHigh", userId);
+		for (PsHschoolDto hschool : highSchoolList) {
+			if ("Y".equals(hschool.getGed())) {
+				hschool.setHighName("검정고시");
+				hschool.setHighMajor("");
+				hschool.setHighDate(null);
+				hschool.setGed("검정고시");
+			} else {
+				String dateString = hschool.getHighDate();
+				if (dateString != null) {
+					LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+					hschool.setHighDate(date.toString());
+				}
+			}
+		}
+
+		return highSchoolList;
 	}
-	// 대학교 학력사항 보기 
+
+	// 대학교 학력사항 보기
 	public List<PsUnivDto> selectListUni(String userId) throws Exception {
-	    List<PsUnivDto> univList = sqlSession.selectList("resume.selectListUni", userId);
+		List<PsUnivDto> univList = sqlSession.selectList("resume.selectListUni", userId);
 
-	    for (PsUnivDto univ : univList) {
-	        switch (univ.getUniAct()) {
-	            case "Y":
-	                univ.setUniAct("졸업");
-	                break;
-	            case "N":
-	                univ.setUniAct("재학중");
-	                break;
-	            case "R":
-	                univ.setUniAct("휴학");
-	                break;
-	            default:
-	                univ.setUniAct("");
-	                break;
-	        }
-	        
-	        if ("T".equals(univ.getUniCategory())) {
-	            univ.setUniCategory("2,3년제");
-	        } else if ("F".equals(univ.getUniCategory())) {
-	            univ.setUniCategory("4년제");
-	        }
-	        
-	        String dateString = univ.getUniDate();
-	        if (dateString != null) {
-	            LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-	            univ.setUniDate(date.toString());
-	        }
-	    }
+		for (PsUnivDto univ : univList) {
+			switch (univ.getUniAct()) {
+			case "Y":
+				univ.setUniAct("졸업");
+				break;
+			case "N":
+				univ.setUniAct("재학중");
+				break;
+			case "R":
+				univ.setUniAct("휴학");
+				break;
+			default:
+				univ.setUniAct("");
+				break;
+			}
 
-	    return univList;
+			if ("T".equals(univ.getUniCategory())) {
+				univ.setUniCategory("2,3년제");
+			} else if ("F".equals(univ.getUniCategory())) {
+				univ.setUniCategory("4년제");
+			}
+
+			String dateString = univ.getUniDate();
+			if (dateString != null) {
+				LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+				univ.setUniDate(date.toString());
+			}
+		}
+
+		return univList;
 	}
-	
-	// 대학원 학력사항 보기 
+
+	// 대학원 학력사항 보기
 	public List<PsGschoolDto> selectListGrad(String userId) throws Exception {
-	    List<PsGschoolDto> gradList = sqlSession.selectList("resume.selectListGrad", userId);
+		List<PsGschoolDto> gradList = sqlSession.selectList("resume.selectListGrad", userId);
 
-	    for (PsGschoolDto grad : gradList) {
-	        switch (grad.getGradAct()) {
-	            case "Y":
-	                grad.setGradAct("졸업");
-	                break;
-	            case "N":
-	                grad.setGradAct("재학중");
-	                break;
-	            case "R":
-	                grad.setGradAct("휴학");
-	                break;
-	            default:
-	                grad.setGradAct("");
-	                break;
-	        }
+		for (PsGschoolDto grad : gradList) {
+			switch (grad.getGradAct()) {
+			case "Y":
+				grad.setGradAct("졸업");
+				break;
+			case "N":
+				grad.setGradAct("재학중");
+				break;
+			case "R":
+				grad.setGradAct("휴학");
+				break;
+			default:
+				grad.setGradAct("");
+				break;
+			}
 
-	        if ("M".equals(grad.getGradCategory().trim())) {
-	            grad.setGradCategory("석사");
-	        } else {
-	        	 grad.setGradCategory("박사");
-	        }
-	        
-	        String dateString = grad.getGradDate();
-	        if (dateString != null) {
-	            LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-	            grad.setGradDate(date.toString());
-	        }
-	    }
+			if ("M".equals(grad.getGradCategory().trim())) {
+				grad.setGradCategory("석사");
+			} else {
+				grad.setGradCategory("박사");
+			}
 
-	    return gradList;
+			String dateString = grad.getGradDate();
+			if (dateString != null) {
+				LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+				grad.setGradDate(date.toString());
+			}
+		}
+
+		return gradList;
 	}
-	// 경력사항 학력사항 보기 
+
+	// 경력사항 학력사항 보기
 	public List<PsCareerDto> selectListCareer(String userId) {
-		 List<PsCareerDto> careerList = sqlSession.selectList("resume.selectListCareer", userId);
+		List<PsCareerDto> careerList = sqlSession.selectList("resume.selectListCareer", userId);
 		return careerList;
 	}
-	
-	// 자격증 학력사항 보기 
+
+	// 자격증 학력사항 보기
 	public List<PsCertiDto> selectListCerti(String userId) {
-		 List<PsCertiDto> CertiList = sqlSession.selectList("resume.selectListCerti", userId);
+		List<PsCertiDto> CertiList = sqlSession.selectList("resume.selectListCerti", userId);
 		return CertiList;
 	}
-	
+
+	// 자기소개서 보기
+	public List<PsClDto> selectListCl(String userId) {
+		List<PsClDto> ClList = sqlSession.selectList("resume.selectListCl", userId);
+		return ClList;
+	}
+
 }
