@@ -355,6 +355,8 @@ public class PsResumeController {
 	// 자소서 페이지
 	@GetMapping("cl")
 	public ModelAndView viewCl(ModelAndView mv) {
+		
+		//TODO: 정보불러오기
 		return mv;
 	}
 
@@ -385,7 +387,19 @@ public class PsResumeController {
 		
 		try {
 			result = rservice.insertCl(dto);
-			return result;
+			if(result > 0) {
+				PsResumeDto resume = rservice.selectOne(principal.getName());
+				int resumeNo = resume.getResumeNo();
+				int clNo = rservice.getMaxClNo();
+				
+				Map<String, Object> InfoNo = new HashMap<>();
+				InfoNo.put("resumeNo", resumeNo);
+				InfoNo.put("clNo", clNo);
+				
+				rservice.insertClInfo(InfoNo);
+				return result;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
