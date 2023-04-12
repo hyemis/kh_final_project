@@ -66,31 +66,7 @@
 		 			</tr>
 		 		</thead>
 		 		<tbody>
-					<c:choose>
-						<c:when test="${empty allList}">
-							<tr>
-								<td colspan="3">미승인 된 공고가 없습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${allList }" var="list" varStatus="i">
-								<tr>
-									<td>${list.companyName }</td>
-									<td>${list.raTitle }</td>
-									<td> ${list.closeDate }까지</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-					<tr>
-						<td>
-							--------------------------
-						</td>
-						<td>
-							--------------------------
-						</td>
-					</tr>
-					<c:choose>
+		 			<c:choose>
 						<c:when test="${empty list}">
 							<tr>
 								<td colspan="3">미승인 된 공고가 없습니다.</td>
@@ -106,9 +82,33 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					
 		 		</tbody>
 		 	</table>
+		 	<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
+		 	
+		 	
+		 	<ul class = "pagination text-center">
+				<c:choose>
+					<c:when test="${list.prevPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">prev</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }">prev</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="pNum" items="${list.pageList }">
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum }">${pNum }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${list.nextPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }">next</a></li>
+					</c:otherwise>
+				</c:choose>					
+			</ul>
 		 </div>
 
 	

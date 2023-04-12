@@ -140,15 +140,24 @@
 		   , CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
 		   , RA_CONTENT, RA_EXTRA_DOCUMENT
 		   , CAREER, HOLIDAY_TYPE, RA_ADMISSION
-		   , ROWNUM AS N
-		FROM RECRUIT_REGIST
-		<trim prefix="where" prefixOverrides="AND|OR">
-			<if test="search != null and search neq ''">
-				RA_TITLE like '%'||#{search}||'%'
-				or RA_CONTENT like '%'||#{search}||'%'
-				or COMPANY_NAME like '%'||#{search}||'%'
-			</if>
-		</trim>
-		ORDER BY RA_NUM DESC
+		FROM(
+			SELECT ROWNUM AS NUM , A.*
+			FROM (
+				SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+				   , CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
+				   , RA_CONTENT, RA_EXTRA_DOCUMENT
+				   , CAREER, HOLIDAY_TYPE, RA_ADMISSION
+				FROM RECRUIT_REGIST
+				<trim prefix="where" prefixOverrides="AND|OR">
+					<if test="search != null and search neq ''">
+						RA_TITLE like '%'||#{search}||'%'
+						or RA_CONTENT like '%'||#{search}||'%'
+						or COMPANY_NAME like '%'||#{search}||'%'
+					</if>
+				</trim>
+				ORDER BY RA_NUM ASC
+			) A
+			)
+		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
 </mapper>

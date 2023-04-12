@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.common.page.PagingInfoDto;
 
 @Repository
 public class AdBusinessDao {
@@ -22,9 +23,9 @@ public class AdBusinessDao {
 		return sqlsession.selectOne("admin.pageListCount", search);
 	}
 
-	public Object pageList(String search) {
+	public Object pageList(PagingInfoDto pdto) {
 		
-		return sqlsession.selectList("admin.pageList", search);
+		return sqlsession.selectList("admin.pageList", pdto);
 	}
 	
 	

@@ -31,6 +31,7 @@ public class AdBusinessController {
 		
 		Paging list = service.pageList(search, pnum);
 		
+		mv.addObject("pnum", pnum);
 		mv.addObject("allList", allList);
 		mv.addObject("list", list);
 		return mv;
