@@ -36,5 +36,17 @@ public class AdBusinessController {
 		mv.addObject("list", list);
 		return mv;
 	}
+	
+	//공고 상세 페이지
+	@GetMapping("/view")
+	public ModelAndView viewRecruit(ModelAndView mv
+			, @RequestParam(name = "pnum", defaultValue = "1") int pnum
+			, @RequestParam(name = "search", required = false) String search
+			, @RequestParam(name = "raNum", required = false) String raNum
+			) {
+
+		
+		return mv;
+	}
 
 }
