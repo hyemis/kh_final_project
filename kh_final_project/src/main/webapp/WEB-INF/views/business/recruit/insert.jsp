@@ -30,9 +30,6 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     
-    <!-- ckeditor5 -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-    
     <link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css" rel="stylesheet">
     <!-- css file link part end -->
 
@@ -54,6 +51,9 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/kakaomap.script.js"></script> --%>
+	
+    <!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	
 	<!-- js part end -->
  

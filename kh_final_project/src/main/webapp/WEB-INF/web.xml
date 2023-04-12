@@ -11,11 +11,6 @@
 		</param-value>
 	</context-param>
 	
-	<context-param> 
-		<param-name>webAppRootKey</param-name> 
-		<param-value>app.root</param-value> 
-	</context-param>
-	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
