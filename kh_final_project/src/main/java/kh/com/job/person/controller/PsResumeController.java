@@ -195,10 +195,10 @@ public class PsResumeController {
 				// 낀테이블 insert
 				rservice.insertHighInfo(InfoNo);
 
-				rttr.addFlashAttribute("msg", "성공");
+				rttr.addFlashAttribute("msg", "저장에 성공했습니다");
 
 			} else {
-				rttr.addFlashAttribute("msg", "실패");
+				rttr.addFlashAttribute("msg", "저장에 실패했습니다.");
 			}
 
 		} catch (Exception e) {
