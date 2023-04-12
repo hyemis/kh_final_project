@@ -56,7 +56,16 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 <div class="container-xl px-5">
-		 <h3 class="my-5">채용공고 목록</h3>
+		 <h3 class="my-5"><a href="${pageContext.request.contextPath}/admin/business/main">채용공고 목록</a></h3>
+		 	
+		 	<form action="" method="get" class="row g-2 mb-4">
+			 	<div class="col-6">
+			 		<input type="text" class="form-control" name="search" placeholder="검색어를 입력해 주세요.">
+			 	</div>
+			 	<div class="col-auto">
+			 		<button class="btn btn-primary" type="submit">검색</button>
+			 	</div>
+		 	</form>
 		 	<table class="table">
 		 		<thead>
 		 			<tr>
@@ -87,7 +96,7 @@
 		 	<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
 		 	
 		 	
-		 	<ul class = "pagination text-center">
+		 	<ul class = "pagination text-center justify-content-center">
 				<c:choose>
 					<c:when test="${list.prevPage eq -1 }">
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
