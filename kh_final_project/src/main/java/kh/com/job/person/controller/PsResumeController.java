@@ -361,10 +361,36 @@ public class PsResumeController {
 	// 자소서 페이지
 	@PostMapping("cl")
 	@ResponseBody
-	public ModelAndView doCl(ModelAndView mv, PsClDto dto, @RequestParam(name = "uploadCl", required = false) MultipartFile clFile) {
-		System.out.println("잘가져왔니?" + dto);
+	public int doCl(ModelAndView mv, 
+			@RequestParam("growth") String growth,
+			@RequestParam("motive") String motive,
+            @RequestParam("adv") String adv,
+            @RequestParam("asp") String asp,
+            @RequestParam(name = "uploadCl", required = false) MultipartFile clFile,
+            PsClDto dto,
+            Principal principal) {
 		
-		return mv;
+		dto.setClGrowth(growth);
+		dto.setClMotive(motive);
+		dto.setClAdv(adv);
+		dto.setClAsp(asp);
+		
+
+		if (clFile != null && !clFile.isEmpty()) {
+			String portfUrl = rservice.upload(clFile, principal.getName());
+			dto.setClFile(portfUrl);
+		}
+		
+		int result = -1;
+		
+		try {
+			result = rservice.insertCl(dto);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	// 예외처리는 프로젝트 후반에 작성

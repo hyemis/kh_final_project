@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
 import kh.com.job.person.model.dto.PsGschoolDto;
 import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -78,11 +79,17 @@ public class PsResumeDao {
 	public int insertCerti(PsCertiDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCerti", dto);
 	}
+	
+	// 이력서 - 자기소개서 입력 
+	public int insertCl(PsClDto dto) throws Exception {
+		return sqlSession.insert("resume.insertCl", dto);
+	}
 
 	// highInfo - 입력
 	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertHighInfo", InfoNo);
 	}
+	
 
 	// 이력서-고등학교 최신보기
 	public int getMaxHighNo() throws Exception {

@@ -137,9 +137,10 @@
 						<div class="mb-3">
 							<h4>성장과정</h4>
 						</div>
-						<div class="justify-content-center align-items-center">
+						<div class="justify-content-center align-items-center mb-3">
 							<textarea name="text" id="growth" class="form-control"></textarea>
 						</div>
+						<span class="d-flex justify-content-end"></span>
 					</div>
 					<!-- 지원동기 내용 -->
 					<div class="bg-gray p-4 mb-3">
@@ -149,6 +150,7 @@
 						<div class="justify-content-center align-items-center">
 							<textarea name="text" id="motive" class="form-control"></textarea>
 						</div>
+						<span class="d-flex justify-content-end"></span>
 					</div>
 					<!-- 장단점 내용 -->
 					<div class="bg-gray p-4 mb-3">
@@ -158,6 +160,7 @@
 						<div class="justify-content-center align-items-center">
 							<textarea name="text" id="adv" class="form-control"></textarea>
 						</div>
+						<span class="d-flex justify-content-end"></span>
 					</div>
 					<!-- 입사 후 포부 내용 -->
 					<div class="bg-gray p-4 mb-3">
@@ -167,6 +170,7 @@
 						<div class="justify-content-center align-items-center">
 							<textarea name="text" id="asp" class="form-control"></textarea>
 						</div>
+						<span class="d-flex justify-content-end"></span>
 					</div>
 					<!-- 파일 첨부 -->
 					<div class="bg-gray p-4 mb-3">
@@ -219,6 +223,15 @@
 		  CKEDITOR.replace(textareas[i].id, {
 		    language: 'ko',
 		  });
+
+		  const textarea = CKEDITOR.instances[textareas[i].id];
+		  const charCount = textarea.element.$.parentNode.nextElementSibling;
+
+		  textarea.on('change', () => {
+		    const text = textarea.getData().replace(/(<([^>]+)>)/gi, '');
+		    const count = text.trim().length;
+		    charCount.textContent = '글자 수 (공백제외) ' + count + ' 자';
+		  });
 		}
 
 		// cl 등록
@@ -229,7 +242,7 @@
 			formdata.append("adv", CKEDITOR.instances.adv.getData());
 			formdata.append("asp", CKEDITOR.instances.asp.getData());
 			formdata.append("uploadCl", $("#uploadCl")[0].files[0]);
-			
+
 			$.ajax({
 				url : "${pageContext.request.contextPath}/person/resume/cl",
 				type : "post",

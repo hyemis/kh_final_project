@@ -100,6 +100,12 @@
 		(RESUME_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
 
+	<insert id="insertCl" parameterType="cldto">
+		insert into RESUME_CL(CL_NO,
+		CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP)
+		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive}, #{clAdv}, #{clAsp})
+	</insert>
+
 	<insert id="insertHighInfo" parameterType="hinfodto">
 		insert into
 		RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO)
@@ -267,17 +273,23 @@
 		INNER JOIN USER_RESUME u on
 		i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
-		ORDER BY rc.CAR_DATE DESC
+		ORDER BY
+		rc.CAR_DATE DESC
 	</select>
 
 	<select id="selectListCerti" resultType="certidto">
-		SELECT rc.CERTI_NO AS certiNo,
-		rc.CERTI_NAME AS certiName, rc.CERTI_PUB AS certiPub, rc.CERTI_DATE AS certiDate
+		SELECT rc.CERTI_NO AS
+		certiNo,
+		rc.CERTI_NAME AS certiName, rc.CERTI_PUB AS certiPub,
+		rc.CERTI_DATE AS certiDate
 		FROM RESUME_CERTI rc
-		INNER JOIN RESUME_CERTI_INFO i on rc.CERTI_NO = i.CERTI_NO
-		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
+		INNER JOIN
+		RESUME_CERTI_INFO i on rc.CERTI_NO = i.CERTI_NO
+		INNER JOIN USER_RESUME
+		u on i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
-		ORDER BY rc.CERTI_DATE DESC
+		ORDER BY
+		rc.CERTI_DATE DESC
 	</select>
 
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
 import kh.com.job.person.model.dto.PsGschoolDto;
 import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -49,6 +50,9 @@ public interface PsResumeService {
 
 	// 이력서-자격증 입력
 	public int insertCerti(PsCertiDto dto) throws Exception;
+	
+	// 이력서-자기소개서 입력
+	public int insertCl(PsClDto dto) throws Exception;
 
 	// highInfo
 	public int getMaxHighNo() throws Exception;
