@@ -251,7 +251,6 @@
 		JOIN
 		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
-		#{userId}
 		ORDER BY rg.GRAD_DATE DESC
 	</select>
 
@@ -268,8 +267,7 @@
 		INNER JOIN USER_RESUME u on
 		i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
-		ORDER BY
-		rc.CAR_DATE DESC
+		ORDER BY rc.CAR_DATE DESC
 	</select>
 
 	<select id="selectListCerti" resultType="certidto">
