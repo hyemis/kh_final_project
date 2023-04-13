@@ -93,21 +93,25 @@ public class BsAccountController {
 		return mv;
 		}
 	
+	
+	
 
-	
-	
-	
-	//비밀번호 변경
-	@PostMapping("/updatePw")
-	public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr)  {
-		dto.setUserId(principal.getName()); 
-		service.updatePassword(dto);
-		mv.setViewName("redirect:/business/account/info");
-		rttr.addFlashAttribute("msg", "비밀번호변경에 성공했습니다.");
-		
-		return mv;
-	}
-	
+	// 비밀번호 업데이트
+		@PostMapping("/updatePw")
+		public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
+
+			if(principal.getName()!= null) {
+				dto.setUserPw(passwordEncoder.encode(dto.getUserPw())); // 패스워드 암호화
+				service.updatePassword(dto);
+				mv.setViewName("redirect:/");
+				rttr.addFlashAttribute("msg", "비밀번호변경에 성공했습니다.");
+			}else {
+				mv.setViewName("redirect:/business/account/info");
+				rttr.addFlashAttribute("msg", "비밀번호변경에  실패했습니다.");
+			}
+
+			return mv;
+		}
 	
 	// 회원 프로필 이미지 수정처리
     
