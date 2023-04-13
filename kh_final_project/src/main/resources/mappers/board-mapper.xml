@@ -6,12 +6,24 @@
 <!-- business -->
 	<!-- 회사소개작성 -->
 	<insert id="insertInfo">
-	INSERT INTO BOARD(USER_ID,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,
-					  BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
- 			   VALUES(#{userId},#{boardContent},#{boardDate},#{boardOriginalFilename},
- 			          #{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
+	INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
+		   VALUES(BOARD_SEQ.NEXTVAL,#{userId},UDB06,#{userName},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
 	</insert>
 	
+	<!-- 뉴스레터작성 -->
+	<insert id="insertNewsletter">
+	INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
+		   VALUES(BOARD_SEQ.NEXTVAL,#{userId},UDB05,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	</insert>	
+
+	<!-- qna -->
+	<insert id="insertQnA">
+	INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
+		   VALUES(BOARD_SEQ.NEXTVAL,#{userId},UDB04,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	</insert>	
+	
+	   
+		   
 
 	
 	
