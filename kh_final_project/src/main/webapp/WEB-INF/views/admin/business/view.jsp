@@ -57,11 +57,8 @@
 		
 		 <div class="container-xl px-5">
 		 	<h3 class="my-5"><a href="${pageContext.request.contextPath}/admin/business/main">채용공고 목록</a></h3>
+		 	
 		 </div>
-
-        
-		<%-- <%@ include file="../common/footer.jsp" %> --%>
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
