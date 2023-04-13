@@ -56,12 +56,56 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 <div class="container-xl px-5">
-		 	<h3 class="my-5"><a href="${pageContext.request.contextPath}/admin/business/main">채용공고 목록</a></h3>
+		 	<h3 class="my-5">채용공고 상세 내역</h3>
+		 	
+		 	<div class="my-3 d-flex">
+		 		<div class="bg-white rounded p-4 row">
+						<img class="object-fit-sm-contain border" src="${userinfo.userPic eq null? 'https://dummyimage.com/300x200/d6d6d6/000000&text=300x200' : budto.userPic }" alt="">
+				</div>
+				<div class="p-4 row">
+					<table class="col-12">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td >회사 이름</td>
+								<td><b> : </b></td>
+								<td>${recruit.companyName }</td>
+							</tr>
+							<tr>
+								<td>담당자 이름</td>
+								<td><b> : </b></td>
+								<td>${userinfo.userName}</td>
+							</tr>
+							<tr>
+								<td>담당자 연락처</td>
+								<td><b> : </b></td>
+								<td>${userinfo.userPhone}</td>
+							</tr>
+							<tr>
+								<td>담당자 E-mail</td>
+								<td><b> : </b></td>
+								<td>${userinfo.userEmail}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		 	</div>
+		 	<div class="my-5 mx-3">
+		 		<div>
+		 			<h5> 채용 마감 </h5>
+		 			<p >${recruit.closeDate }</p>		 		
+		 		</div>
+		 	
+		 	
+		 	</div>
+		 	
 		 </div>
-
-        
-		<%-- <%@ include file="../common/footer.jsp" %> --%>
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

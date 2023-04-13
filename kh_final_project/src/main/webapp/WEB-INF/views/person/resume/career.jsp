@@ -126,7 +126,7 @@
 														</c:forEach>
 													</tbody>
 												</table>
-												<button type="button"
+												<button type="button" data-bs-dismiss="modal"
 													class="btn btn-primary mx-auto d-block" id="selectCarBtn">불러오기</button>
 											</div>
 
@@ -141,7 +141,6 @@
 							<button class="btn btn-primary" onclick="addCar()">정보추가</button>
 							<br>
 						</div>
-
 						<div id="hidden-content">
 							<div id="CarFormContainer">
 								<form name="career" action="career" method="post">
@@ -184,12 +183,12 @@
 												min="0" placeholder="단위 : 만원">
 										</div>
 									</div>
+									<hr>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
 										<button class="btn btn-primary delete-btn"
 											onclick="removeForm(this.parentNode.parentNode)">삭제</button>
 									</div>
-									<hr>
 								</form>
 							</div>
 						</div>
@@ -261,12 +260,43 @@
 		}
 		saveCareer.addEventListener('click', checkInputs);
 		rCareer.addEventListener('submit', checkInputs);
+		
+		
+		// 모달창 체크박스 초기화
+		$(document).ready(function() {
+			$('#viewCareer').on('hidden.bs.modal', function() {
+				$('input[name=selectedCareer]').prop('checked', false);
+			});
+		});
 
 		// 경력 입력폼 추가
+		var forms = [ document.getElementsByName("career")[0] ];
+
 		function addCar() {
-			var form = document.getElementsByName("career")[0].cloneNode(true);
+//			var lastForm = forms[forms.length - 1];
+
+// lastForm -- re
+			var lastForm = forms[0];
+			var form = lastForm.cloneNode(true);
 			document.getElementById("CarFormContainer").appendChild(form);
+			forms.push(form);
 		}
+
+		/* 이 방법으로 하면 불러오기가 안됨..ㅎ 		
+		var forms = [ document.getElementsByName("career")[0] ];
+
+		 function addCar() {
+		 var lastForm = forms[forms.length - 1];
+		 var form = lastForm.cloneNode(true);
+		 var inputs = form.getElementsByTagName("input");
+
+		 for (var i = 0; i < inputs.length; i++) {
+		 inputs[i].value = "";
+		 }
+
+		 document.getElementById("CarFormContainer").appendChild(form);
+		 forms.push(form);
+		 } */
 
 		// 입력폼 삭제
 		function removeForm(form) {
@@ -291,46 +321,8 @@
 			});
 		}
 
-		/* 	// TODO : 체크박스 데이터 가져오기
-			// 체크된 경력사항 배열에 저장
-			let saveButton = document.getElementById("selectCarBtn");
-			saveButton
-					.addEventListener(
-							"click",
-							function() {
-								
-								
-								
-								let careerForm = document.forms["career"];
-
-								// 체크된 경력 데이터를 가져와서 form에 추가
-								let selectedCareerList = document
-										.querySelectorAll('input[name="selectedCareer"]:checked');
-								
-								
-
-								
-								for (let i = 0; i < selectedCareerList.length; i++) {
-									let careerData = selectedCareerList[i].parentElement.parentElement
-											.getElementsByTagName("td");
-									careerForm.elements["carName"].value = careerData[1].textContent;
-									careerForm.elements["carDate"].value = careerData[2].textContent;
-									careerForm.elements["carPosition"].value = careerData[3].textContent;
-									careerForm.elements["carDept"].value = careerData[4].textContent;
-									careerForm.elements["carResp"].value = careerData[5].textContent;
-									careerForm.elements["carSalary"].value = careerData[6].textContent;
-								}
-								
-								let closeModalBtn = document.getElementById("closeModalBtn");
-								closeModalBtn.addEventListener("click", function() {
-								   let modal = document.getElementById("viewCareer");
-								   modal.style.display = "none";
-								});
-
-								
-							}); */
-
-		// TODO : 체크박스 데이터 가져오기
+		
+		// 체크박스 데이터 가져오기
 		// 체크된 경력사항 배열에 저장
 		let saveButton = document.getElementById("selectCarBtn");
 		saveButton
@@ -338,11 +330,9 @@
 						"click",
 						function() {
 							let careerForm = document.forms["career"];
-
 							// 체크된 경력 데이터를 가져와서 form에 추가
 							let selectedCareerList = document
 									.querySelectorAll('input[name="selectedCareer"]:checked');
-
 							for (let i = 0; i < selectedCareerList.length; i++) {
 								selectedIdx = selectedCareerList[i].parentNode.parentNode.rowIndex - 1;
 								otherCheckBoxList = document
@@ -352,7 +342,6 @@
 										otherCheckBoxList[j].disabled = true;
 									}
 								}
-
 								let careerData = selectedCareerList[i].parentElement.parentElement
 										.getElementsByTagName("td");
 								careerForm.elements["carName"].value = careerData[1].textContent;
@@ -362,14 +351,7 @@
 								careerForm.elements["carResp"].value = careerData[5].textContent;
 								careerForm.elements["carSalary"].value = careerData[6].textContent;
 							}
-
-							let closeModalBtn = document
-									.getElementById("closeModalBtn");
-							closeModalBtn.addEventListener("click", function() {
-								let modal = document
-										.getElementById("viewCareer");
-								modal.style.display = "none";
-							});
+							
 						});
 	</script>
 

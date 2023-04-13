@@ -577,25 +577,37 @@
 		}
 
 		// 고등학교 입력폼 추가
+		var forms = [ document.getElementsByName("rHSchool")[0] ];
+
 		function addHigh() {
-			var form = document.getElementsByName("rHSchool")[0]
-					.cloneNode(true);
+			var lastForm = forms[forms.length - 1];
+			var form = lastForm.cloneNode(true);
 			document.getElementById("HighFormContainer").appendChild(form);
+			forms.push(form);
 		}
 
+		
 		// 대학교 입력폼 추가
-		function addUniv() {
-			var form = document.getElementsByName("rUniversity")[0]
-					.cloneNode(true);
-			document.getElementById("UnivFormContainer").appendChild(form);
-		}
+		var forms = [ document.getElementsByName("rUniversity")[0] ];
 
-		// 대학원 입력폼 추가
-		function addGrad() {
-			var form = document.getElementsByName("rGSchool")[0]
-					.cloneNode(true);
-			document.getElementById("GradFormContainer").appendChild(form);
+		function addUniv() {
+			var lastForm = forms[forms.length - 1];
+			var form = lastForm.cloneNode(true);
+			document.getElementById("UnivFormContainer").appendChild(form);
+			forms.push(form);
 		}
+		
+		
+		// 대학원 입력폼 추가
+		var forms = [ document.getElementsByName("rGSchool")[0] ];
+
+		function addGrad() {
+			var lastForm = forms[forms.length - 1];
+			var form = lastForm.cloneNode(true);
+			document.getElementById("GradFormContainer").appendChild(form);
+			forms.push(form);
+		}
+		
 
 		// 입력폼 삭제
 		function removeForm(form) {

@@ -21,12 +21,13 @@ import lombok.ToString;
 public class BoardDto {
 	//Board
 	
-		private Number boardNum;
+		private String boardNum;
 		private String userId;
 		private String categoryId;
 		private String boardTitle;
 		private Clob   boardContent;
 		private Timestamp boardDate;
+		private Timestamp updateDate;
 		private String boardOriginalFilename;
 		private String boardRenameFilename;
 		private Number boardRead;
@@ -34,6 +35,5 @@ public class BoardDto {
 		private String tag;
 		private String salaryAvg;
 		private String employee;
-		private String latitude;
-		private String longitude;
+		private String link;
 }
