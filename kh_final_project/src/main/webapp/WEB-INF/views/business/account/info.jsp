@@ -129,9 +129,9 @@
 					<h4 class="text-center m-2 ">비밀번호 변경 및 탈퇴</h4>
 					<p class="text-center">비밀번호 확인 후 변경과 탈퇴가 가능합니다.</p>
 						<!-- password -->
-						<form class="m-5" action="pwChk" method="post">
+						<form class="m-5" name="pwForm" action="pwChk" method="post">
 							 <div class="mb-3 row">
-							    <label for="confirmPw" class="col-sm-3 col-form-label">현재 비밀번호</label>
+							    <label for="confirmPw"  class="col-sm-3 col-form-label">현재 비밀번호</label>
 							    <div class="col-sm-6">
 							      <input type="password" class="form-control" id="confirmPw" name="confirmPw">
 							    </div>
@@ -140,7 +140,7 @@
 								  <span class="id_input_re_2 text-center">비밀번호가 일치하지 않습니다.</span>
 							 </div>
 						</form>
-						<form action="updatePw" method="post">	 
+						<form name="newPwForm" action="updatePw" method="post">	 
 							 <div class="mb-3 row">
 							    <label for="newPw" class="col-sm-3 col-form-label">새 비밀번호</label>
 							    <div class="col-sm-8">
@@ -186,12 +186,10 @@
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-
                 // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var roadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 참고 항목 변수
-
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -205,7 +203,6 @@
                 if(extraRoadAddr !== ''){
                     extraRoadAddr = ' (' + extraRoadAddr + ')';
                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("roadAddress").value = roadAddr;
@@ -214,9 +211,7 @@
                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면
                     if (status === kakao.maps.services.Status.OK) {
-
                         var result = results[0]; //첫번째 결과의 값을 활용
-
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new kakao.maps.LatLng(result.y, result.x);
                         // 지도를 보여준다.
@@ -233,14 +228,12 @@
                         infowindow.open(map, marker);
                     }
                 });
-
                 var guideTextBox = document.getElementById("guide");
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                     guideTextBox.style.display = 'block';
-
                 } else if(data.autoJibunAddress) {
                     var expJibunAddr = data.autoJibunAddress;
                     guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
@@ -255,7 +248,6 @@
 </script>
 
 <script>
-
 	//회원정보의 주소로 페이지 로딩하기
 	var roadAddress = "${bsinfo.addressRoad}";
 	var jibunAddress = "${bsinfo.addressJibun}";
@@ -266,33 +258,26 @@
             center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
-
     //지도를 미리 생성
     var map = new kakao.maps.Map(mapContainer, mapOption);
     
  	// 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
-
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch(bsAddress, function(result, status) {
-
         // 정상적으로 검색이 완료됐으면 
          if (status === kakao.maps.services.Status.OK) {
-
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
                 map: map,
                 position: coords
             });
-
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
                 content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
             });
             infowindow.open(map, marker);
-
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);
         } 
@@ -311,12 +296,10 @@
             roadmapControl.className = 'btn';
         }
     }
-
     // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
     function zoomIn() {
         map.setLevel(map.getLevel() - 1);
     }
-
     // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
     function zoomOut() {
         map.setLevel(map.getLevel() + 1);
@@ -344,39 +327,29 @@
 	    
 	    return true; // submit 허용
 	}
-
 	//비밀번호일치시 버튼 활성화
 			$(document).ready(function() {
 				var msg = "${msg}";
 				if (msg === "비밀번호 일치") {
+					console.log(msg);
 					$("#btnChangePw").prop("disabled", false);
 					$("#btnSecede").prop("disabled", false);
 					$('.id_input_re_1').css("display","inline-block");
+					newPwForm.newPw.focus();
+					return true;
 				} else {
 					$('.id_input_re_2').css("display","inline-block");
+					PwForm.confirmPw.focus();
+					return false;
 				}
 			});
-
-
-</script>
-
-
-
-<!-- button 
-<script>
-	function btnActive()  {
-  	const target = document.getElementById('btnChangePw');
-  	target.disabled = false;
-	}
 	
-	function btnActive()  {
-	 const target = document.getElementById('btnSecede');
-	 target.disabled = false;
-	}
+			var newPw = "${newPw}";
+			console.log(newPw);
 </script>
--->
 
-		
+
+	
 	
 </body>
 </html>

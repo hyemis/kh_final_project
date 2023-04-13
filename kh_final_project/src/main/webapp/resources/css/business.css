@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-/* 유효성 검사*/
+
+/* 비밀번호 확인 유효성검사 */
 	.id_input_re_1{
 		color : green;
 		display : none;
@@ -9,7 +10,17 @@
 		color : red;
 		display : none;
 	}
-	
+
+/* 비밀번호 확인 일치 유효성검사 */
+	.pwck_input_re_1{
+	        color : green;
+	        display : none;    
+	}
+	.pwck_input_re_2{
+	        color : red;
+	        display : none;    
+	} 
+		
 /* 카운트 바*/
  .upper_blank {
             height: 300px;
