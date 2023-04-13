@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.com.job.admin.model.dao.AdBusinessDao;
 import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
 
@@ -51,6 +52,18 @@ public class AdBusinessServiceImpl implements AdBusinessService {
 		//로 생성한다.
 		
 		return list;
+	}
+
+
+	@Override
+	public BsRecruitDto viewDetail(String raNum) {
+		return dao.viewDetail(raNum);
+	}
+
+
+	@Override
+	public BsUserDto userDetail(String userId) {
+		return dao.userDetail(userId);
 	}
 
 }

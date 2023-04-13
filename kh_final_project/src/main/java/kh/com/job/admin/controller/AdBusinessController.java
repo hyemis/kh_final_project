@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
 
 @Controller
@@ -45,6 +46,16 @@ public class AdBusinessController {
 			, @RequestParam(name = "id", required = false) String raNum
 			) {
 		
+		
+		//받은 게시글 정보로 게시글 상세 정보 조회
+		BsRecruitDto redto = service.viewDetail(raNum);
+		
+		if(redto != null) {
+			BsUserDto budto = service.userDetail(redto.getUserId());
+			mv.addObject("userinfo", budto);
+		}
+		
+		mv.addObject("recruit", redto);
 		
 		return mv;
 	}

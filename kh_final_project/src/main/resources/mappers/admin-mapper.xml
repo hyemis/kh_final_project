@@ -160,4 +160,16 @@
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
+	
+	<!-- 게시글 상세 -->
+	<select id="viewDetail" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT * FROM RECRUIT_REGIST
+		WHERE RA_NUM = #{raNum}
+	</select>
+	
+	<select id="userDetail" resultType="kh.com.job.business.model.dto.BsUserDto">
+		SELECT * FROM USER_TABLE
+		WHERE USER_ID = #{userId}
+	</select>
+	
 </mapper>
