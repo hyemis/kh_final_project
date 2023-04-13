@@ -18,7 +18,7 @@ import lombok.ToString;
 public class BsRecruitDto {
 //BUSINESS_RECRUIT_ANNOUNCEMENT
 	
-	private Number raNum;
+	private String raNum;
 	private String recruitType;
 	private String busino;
 	private String userId;

@@ -351,14 +351,8 @@
 													<div class="mb-3">
 														<textarea class="form-control is-invalid"
 															name="boardContent" style="height: 300px;" required></textarea>
-
 													</div>
-													<!-- TODO : file 첨부 
-   					 <div class="mb-3">
-   					 	<input type="file" name="file" class="form-control" aria-label="file example" required>
-   					 	<div class="invalid-feedback">Example invalid form file feedback</div>
-  					 </div>
-  					  -->
+													<div>작성일자</div>
 												</div>
 											</div>
 										</form>

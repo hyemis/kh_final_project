@@ -18,7 +18,7 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.userId.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/business.css" rel="stylesheet">
 	
 <!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -129,14 +129,18 @@
 					<h4 class="text-center m-2 ">비밀번호 변경 및 탈퇴</h4>
 					<p class="text-center">비밀번호 확인 후 변경과 탈퇴가 가능합니다.</p>
 						<!-- password -->
-						<form class="m-5" action="updatePw" name="updatePw" method="post">
+						<form class="m-5" action="pwChk" method="post">
 							 <div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-3 col-form-label">현재 비밀번호</label>
+							    <label for="confirmPw" class="col-sm-3 col-form-label">현재 비밀번호</label>
 							    <div class="col-sm-6">
-							      <input type="password" class="form-control" id="userPw" name="userPw">
+							      <input type="password" class="form-control" id="confirmPw" name="confirmPw">
 							    </div>
-							    <input type="button" class="col-sm-2 btn btn-primary" onclick="checkPassword()" value="확인">
+							    <button class="col-sm-2 btn btn-primary" type="submit" onclick="checkPassword()">확인</button>
+							      <span class="id_input_re_1 text-center">비밀번호가 일치합니다</span>
+								  <span class="id_input_re_2 text-center">비밀번호가 일치하지 않습니다.</span>
 							 </div>
+						</form>
+						<form action="updatePw" method="post">	 
 							 <div class="mb-3 row">
 							    <label for="newPw" class="col-sm-3 col-form-label">새 비밀번호</label>
 							    <div class="col-sm-8">
@@ -160,7 +164,7 @@
 						<!-- secede --><br>
 						<p class="text-end">
 						<button class="btn btn-primary" id="btnSecede" disabled="disabled" type="button"  onclick='btnActive()'
-						href="<%=request.getContextPath() %>/person/delete">기업회원 탈퇴</button> 
+						href="<%=request.getContextPath()%>/person/delete">기업회원 탈퇴</button> 
 						</p>
 
 						
@@ -327,33 +331,34 @@
 <!-- map end -->
 
 <!-- updatePassword -->
+
 <script>
-function checkPassword(){	
-	var password = $('input[name=userPw]').val();
+	// 비밀번호 확인시 공백 확인
+	function checkPassword() {
+	    var checkPassword = $("#confirmPw").val().trim();
+	    
+	    if (checkPassword === "") {
+	        alert("비밀번호를 확인해주세요");
+	        return false; // submit 방지
+	    }
+	    
+	    return true; // submit 허용
+	}
 
-	$.ajax({
-		type: 'POST',
-		url: '/business/account/info',
-		data : {userPw:"password"},
-		success: function(result) {
-			if(result.password == password){
-				$('#btnChangePw').attr('disabled',false);
-				$('#btnSecede').attr('disabled',false);
-			}
-			else{
-				alert("비밀번호가 일치하지않습니다");
-			}
-		}
-		,
-		error: function(result) {
-		},
-		complete: function() {
-		}
+	//비밀번호일치시 버튼 활성화
+			$(document).ready(function() {
+				var msg = "${msg}";
+				if (msg === "비밀번호 일치") {
+					$("#btnChangePw").prop("disabled", false);
+					$("#btnSecede").prop("disabled", false);
+					$('.id_input_re_1').css("display","inline-block");
+				} else {
+					$('.id_input_re_2').css("display","inline-block");
+				}
+			});
 
-	})
-}
+
 </script>
-
 
 
 
@@ -370,14 +375,8 @@ function checkPassword(){
 	}
 </script>
 -->
-<!-- alter -->
-<script>
-var msg = "${msg}";
-if(msg) {
-	alert(msg);
-}
-</script>
 
+		
 	
 </body>
 </html>

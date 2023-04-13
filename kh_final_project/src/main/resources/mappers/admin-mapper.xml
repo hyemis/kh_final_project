@@ -120,4 +120,44 @@
 		SELECT * FROM RECRUIT_REGIST
 		ORDER BY RA_NUM DESC 
 	</select>
+	
+	<!-- 페이지 리스트 카운트 -->
+	<select id="pageListCount" resultType="_int">
+		SELECT COUNT(*) AS CNT 
+		FROM RECRUIT_REGIST
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="search != null and search neq ''">
+				RA_TITLE like '%'||#{search}||'%'
+				or RA_CONTENT like '%'||#{search}||'%'
+				or COMPANY_NAME like '%'||#{search}||'%'
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 페이지 리스트 -->
+	<select id="pageList" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+		   , CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
+		   , RA_CONTENT, RA_EXTRA_DOCUMENT
+		   , CAREER, HOLIDAY_TYPE, RA_ADMISSION
+		FROM(
+			SELECT ROWNUM AS NUM , A.*
+			FROM (
+				SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+				   , CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
+				   , RA_CONTENT, RA_EXTRA_DOCUMENT
+				   , CAREER, HOLIDAY_TYPE, RA_ADMISSION
+				FROM RECRUIT_REGIST
+				<trim prefix="where" prefixOverrides="AND|OR">
+					<if test="search != null and search neq ''">
+						RA_TITLE like '%'||#{search}||'%'
+						or RA_CONTENT like '%'||#{search}||'%'
+						or COMPANY_NAME like '%'||#{search}||'%'
+					</if>
+				</trim>
+				ORDER BY RA_NUM DESC
+			) A
+			)
+		WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	</select>
 </mapper>

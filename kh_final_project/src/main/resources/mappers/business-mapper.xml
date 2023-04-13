@@ -90,7 +90,7 @@
         WHERE USER_ID = #{userId}
     </select>
     
-    
+      
     
  <!-- 워크넷API data insert -->
    	<insert id="apiInsert" parameterType="brdto">

@@ -3,6 +3,8 @@ package kh.com.job.common.page;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 public class Paging {
 	
 	private Object page;

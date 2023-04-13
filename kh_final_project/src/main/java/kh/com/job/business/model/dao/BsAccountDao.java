@@ -42,6 +42,12 @@ public class BsAccountDao {
 		return sqlSession.selectOne("business.getUserPw", userId);
 	}
 	
+	//비밀번호 중복 체크 
+	public int pwChk(String userPw) throws Exception {
+		int result = sqlSession.selectOne("business.pwChk", userPw);
+		return result;
+	}
+	
 	
 }
 

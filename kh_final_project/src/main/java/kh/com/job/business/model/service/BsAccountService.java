@@ -8,6 +8,7 @@ public interface BsAccountService {
     public int updateAccount(BsUserDto dto);
     public int updatePassword(BsUserDto dto);
     public int updateUimage(BsUserDto dto);
+    public int pwChk(String userPw) throws Exception;
     public BsUserDto viewAccount(String userId);
     public BsUserDto getUserPw(String userId);
 }

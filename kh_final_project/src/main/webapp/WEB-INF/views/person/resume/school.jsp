@@ -57,6 +57,7 @@
 .hidden {
 	display: none;
 }
+
 </style>
 
 </head>
@@ -80,6 +81,7 @@
 								</div>
 								<!-- 모달 버튼 -->
 								<div class="col-auto">
+								
 									<button type="button" class="btn btn-outline-dark m-2 btn-sm"
 										data-bs-toggle="modal" data-bs-target="#viewRSchool">저장된
 										정보 불러오기</button>
@@ -199,6 +201,9 @@
 											<!-- 보유중인 고등학교 학력사항 출력 -->
 
 											<!--  고등학교 학력사항 Form  -->
+											<button class="btn btn-primary" onclick="addHigh()">정보추가</button>
+											<br> <br>
+											<div id="HighFormContainer">	
 											<form name="rHSchool" action="rHSchool" method="post">
 												<div class="row mb-3">
 													<label for="ged" class="col-sm-2 col-form-label">대입
@@ -239,13 +244,15 @@
 														</select>
 													</div>
 												</div>
-												<div
-													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary"
-														onclick="fn_checkY();">저장</button>
-												</div>
+													<div
+														class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+														<button type="submit" class="btn btn-primary"
+															onclick="fn_checkY();">저장</button>
+														<button class="btn btn-primary delete-btn" onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+													</div>
+													<hr>
 											</form>
-
+										</div>
 										</div>
 									</div>
 								</div>
@@ -262,6 +269,9 @@
 										data-bs-parent="#accordionFlushExample">
 										<div class="accordion-body">
 											<!-- 대학교 졸업 form -->
+											<button class="btn btn-primary" onclick="addUniv()">정보추가</button>
+											<br> <br>
+											<div id="UnivFormContainer">
 											<form name="rUniversity" action="rUniversity" method="post">
 												<div class="row mb-3">
 													<label for="uniAct" class="col-sm-2 col-form-label">대학
@@ -319,8 +329,11 @@
 												<div
 													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 													<button type="submit" class="btn btn-primary">저장</button>
+													<button class="btn btn-primary delete-btn" onclick="removeForm(this.parentNode.parentNode)">삭제</button>
 												</div>
+												<hr>
 											</form>
+										</div>
 										</div>
 									</div>
 								</div>
@@ -337,67 +350,74 @@
 										data-bs-parent="#accordionFlushExample">
 										<div class="accordion-body">
 											<!-- 대학원 졸업 form -->
-											<form name="rGSchool" action="rGSchool" method="post">
-												<div class="row mb-3">
-													<label for="gradAct" class="col-sm-2 col-form-label">대학원
-														졸업유무</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="gradAct">
-															<option selected>대학졸업유무선택</option>
-															<option value="N">재학중</option>
-															<option value="R">휴학</option>
-															<option value="Y">졸업</option>
-														</select>
+											<button class="btn btn-primary" onclick="addGrad()">정보추가</button>
+											<br> <br>
+											<div id="GradFormContainer">
+												<form name="rGSchool" action="rGSchool" method="post">
+													<div class="row mb-3">
+														<label for="gradAct" class="col-sm-2 col-form-label">대학원
+															졸업유무</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="gradAct">
+																<option selected>대학원졸업유무선택</option>
+																<option value="N">재학중</option>
+																<option value="R">휴학</option>
+																<option value="Y">졸업</option>
+															</select>
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradCategory" class="col-sm-2 col-form-label">대학원
-														카테고리</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="gradCategory">
-															<option selected>대학원카테고리</option>
-															<option value="M">석사</option>
-															<option value="D">박사</option>
-														</select>
+													<div class="row mb-3">
+														<label for="gradCategory" class="col-sm-2 col-form-label">대학원
+															카테고리</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="gradCategory">
+																<option selected>대학원카테고리</option>
+																<option value="M">석사</option>
+																<option value="D">박사</option>
+															</select>
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradName" class="col-sm-2 col-form-label">대학원명</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="gradName">
+													<div class="row mb-3">
+														<label for="gradName" class="col-sm-2 col-form-label">대학원명</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="gradName">
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradDate" class="col-sm-2 col-form-label">대학원
-														졸업일자</label><br>
-													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="gradDate">
+													<div class="row mb-3">
+														<label for="gradDate" class="col-sm-2 col-form-label">대학원
+															졸업일자</label><br>
+														<div class="col-sm-10">
+															<input type="Date" class="form-control" name="gradDate">
+														</div>
+														<br>
+														<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 													</div>
-													<br>
-													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
-												</div>
-												<div class="row mb-3">
-													<label for="gradMajor" class="col-sm-2 col-form-label">대학원
-														전공</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="gradMajor">
+													<div class="row mb-3">
+														<label for="gradMajor" class="col-sm-2 col-form-label">대학원
+															전공</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="gradMajor">
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradPoint" class="col-sm-2 col-form-label">대학원
-														학점</label>
-													<div class="col-sm-10">
-														<input type="number" step="0.01" class="form-control"
-															name="gradPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
+													<div class="row mb-3">
+														<label for="gradPoint" class="col-sm-2 col-form-label">대학원
+															학점</label>
+														<div class="col-sm-10">
+															<input type="number" step="0.01" class="form-control"
+																name="gradPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
+														</div>
 													</div>
+													<div
+														class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+														<button type="submit" class="btn btn-primary">저장</button>
+														<button class="btn btn-primary delete-btn"
+															onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+													</div>
+													<hr>
+												</form>
 												</div>
-												<div
-													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">저장</button>
-												</div>
-											</form>
+											</div>
 										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -462,13 +482,9 @@
 			var ged = $("#checkY").prop("checked") ? "Y" : "N";
 			$("#ged").val(ged);
 		}
-
-		//  대입검정고시 체크박스 Y/N 체크
-		function fn_checkY() {
-			var ged = $("#checkY").prop("checked") ? "Y" : "N";
-			$("#ged").val(ged);
-		}
-
+		
+		
+		
 		// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
 		const disableInputCheckbox = document.getElementById("checkY");
 		const dateField = document.getElementById("dateField");
@@ -494,6 +510,36 @@
 			// 해당 타입에 맞는 표 보이기
 			document.getElementById(type + "List").style.display = "table-row-group";
 		}
+		
+		
+		// 고등학교 입력폼 추가
+		function addHigh() {
+			  var form = document.getElementsByName("rHSchool")[0].cloneNode(true);
+			  document.getElementById("HighFormContainer").appendChild(form);
+			}
+		
+		// 대학교 입력폼 추가
+		function addUniv() {
+			  var form = document.getElementsByName("rUniversity")[0].cloneNode(true);
+			  document.getElementById("UnivFormContainer").appendChild(form);
+			}
+		
+		// 대학원 입력폼 추가
+		function addGrad() {
+			  var form = document.getElementsByName("rGSchool")[0].cloneNode(true);
+			  document.getElementById("GradFormContainer").appendChild(form);
+			}
+		
+ 		// 입력폼 삭제
+	    function removeForm(form) {
+	        form.remove();
+	    }
+ 		
+ 		
+ 		
+
+
+		
 	</script>
 
 </body>

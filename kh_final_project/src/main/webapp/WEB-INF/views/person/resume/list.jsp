@@ -61,6 +61,8 @@
 	float: left;
 	margin-right: 10px;
 }
+
+</style>
 </style>
 
 
@@ -129,8 +131,8 @@
 										<table class="table table-hover">
 											<thead>
 												<tr>
-													<th scope="col">이력서 제목</th>
-													<th scope="col">최종 수정일</th>
+													<th scope="col" >이력서 제목</th>
+													<th scope="col">작성일</th>
 													<th scope="col"></th>
 												</tr>
 											</thead>
@@ -142,7 +144,6 @@
 														<td>${resume.resumeDate }</td>
 														<td>
 															<div class="btn-container">
-																<button type="button" class="btn btn-outline-dark">수정</button>
 																<form method="post" action="delete">
 																	<input type="hidden" name="resumeNo"
 																		value="${resume.resumeNo}" required>

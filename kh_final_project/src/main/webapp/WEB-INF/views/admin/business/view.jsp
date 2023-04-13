@@ -54,77 +54,10 @@
     <div class="container-xxl bg-white p-0">
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-    	<!-- 현재 페이지 확인 -->
-		 <c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
 		
 		 <div class="container-xl px-5">
-		 <h3 class="my-5"><a href="${pageContext.request.contextPath}/admin/business/main">채용공고 목록</a></h3>
-		 	
-		 	<form action="" method="get" class="row g-2 mb-4">
-			 	<div class="col-6">
-			 		<input type="text" class="form-control" name="search" placeholder="검색어를 입력해 주세요.">
-			 	</div>
-			 	<div class="col-auto">
-			 		<button class="btn btn-primary" type="submit">검색</button>
-			 	</div>
-		 	</form>
-		 	<table class="table">
-		 		<thead>
-		 			<tr>
-		 				<th scope="col">회사이름</th>
-		 				<th scope="col">제목</th>
-		 				<th scope="col">마감일</th>
-		 			</tr>
-		 		</thead>
-		 		<tbody>
-		 			<c:choose>
-						<c:when test="${empty list}">
-							<tr>
-								<td colspan="3">미승인 된 공고가 없습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
-							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
-								<tr>
-									<td>${list.companyName }</td>
-									<td><a class="" href="${pageContext.request.contextPath}/admin/business/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
-									<td> ${list.closeDate }까지</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-		 		</tbody>
-		 	</table>
-		 	
-		 	
-		 	<!-- 페이지네이션  -->
-		 	<ul class = "pagination text-center justify-content-center">
-				<c:choose>
-					<c:when test="${list.prevPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">prev</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }">prev</a></li>
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum }">${pNum }</a></li>
-				</c:forEach>
-				
-				<c:choose>
-					<c:when test="${list.nextPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">next</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }">next</a></li>
-					</c:otherwise>
-				</c:choose>					
-			</ul>
+		 	<h3 class="my-5"><a href="${pageContext.request.contextPath}/admin/business/main">채용공고 목록</a></h3>
 		 </div>
-
-	
-		 
 
         
 		<%-- <%@ include file="../common/footer.jsp" %> --%>
