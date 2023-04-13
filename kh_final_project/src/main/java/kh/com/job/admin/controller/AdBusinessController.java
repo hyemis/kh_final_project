@@ -32,6 +32,7 @@ public class AdBusinessController {
 		
 		//현재 페이지 정보를 가져오기 위한 addObject
 		mv.addObject("pnum", pnum);
+		mv.addObject("search", search);
 		
 		return mv;
 	}
@@ -41,9 +42,9 @@ public class AdBusinessController {
 	public ModelAndView viewRecruit(ModelAndView mv
 			, @RequestParam(name = "pnum", defaultValue = "1") int pnum
 			, @RequestParam(name = "search", required = false) String search
-			, @RequestParam(name = "raNum", required = false) String raNum
+			, @RequestParam(name = "id", required = false) String raNum
 			) {
-
+		
 		
 		return mv;
 	}

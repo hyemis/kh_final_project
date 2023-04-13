@@ -54,6 +54,8 @@
     <div class="container-xxl bg-white p-0">
      
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
+    	<!-- 현재 페이지 확인 -->
+		 <c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
 		
 		 <div class="container-xl px-5">
 		 <h3 class="my-5"><a href="${pageContext.request.contextPath}/admin/business/main">채용공고 목록</a></h3>
@@ -86,7 +88,7 @@
 							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
 								<tr>
 									<td>${list.companyName }</td>
-									<td>${list.raTitle }</td>
+									<td><a class="" href="${pageContext.request.contextPath}/admin/business/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
 									<td> ${list.closeDate }까지</td>
 								</tr>
 							</c:forEach>
@@ -94,8 +96,7 @@
 					</c:choose>
 		 		</tbody>
 		 	</table>
-		 	<!-- 현재 페이지 확인 -->
-		 	<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
+		 	
 		 	
 		 	<!-- 페이지네이션  -->
 		 	<ul class = "pagination text-center justify-content-center">
