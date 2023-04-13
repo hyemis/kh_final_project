@@ -3,4 +3,17 @@
 <mapper namespace="boards">
 
 
+<!-- business -->
+	<!-- 회사소개작성 -->
+	<insert id="insertInfo">
+	INSERT INTO BOARD(USER_ID,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,
+					  BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
+ 			   VALUES(#{userId},#{boardContent},#{boardDate},#{boardOriginalFilename},
+ 			          #{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
+	</insert>
+	
+
+	
+	
+	
 </mapper>
