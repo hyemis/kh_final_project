@@ -54,16 +54,16 @@
 								data-bs-toggle="dropdown">개인서비스</a>
 							<div class="dropdown-menu rounded-0 ">
 								<a
-									href="${pageContext.request.contextPath}/person/main?userId=${user_id}"
+									href="${pageContext.request.contextPath}/person/main"
 									class="dropdown-item">MY 홈</a> <a
-									href="${pageContext.request.contextPath}/person/resume/list?userId=${user_id}"
+									href="${pageContext.request.contextPath}/person/resume/list"
 									class="dropdown-item">이력서 관리</a> <a href="property-agent.html"
 									class="dropdown-item">입사지원 현황</a> <a href="property-agent.html"
 									class="dropdown-item">스크랩한 채용공고</a> <a
 									href="property-agent.html" class="dropdown-item">관심기업 정보</a>
 								<hr class="dropdown-divider">
 								<a
-									href="${pageContext.request.contextPath}/person/mypage?userId=${user_id}"
+									href="${pageContext.request.contextPath}/person/mypage"
 									class="dropdown-item" class="dropdown-item">회원정보 관리</a>
 							</div>
 						</div>

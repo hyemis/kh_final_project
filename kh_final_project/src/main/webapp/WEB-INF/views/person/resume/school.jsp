@@ -81,20 +81,21 @@
 								<!-- 모달 버튼 -->
 								<div class="col-auto">
 									<button type="button" class="btn btn-outline-dark m-2 btn-sm"
-										data-bs-toggle="modal" data-bs-target="#viewRHSchool">저장된
+										data-bs-toggle="modal" data-bs-target="#viewRSchool">저장된
 										정보 불러오기</button>
 								</div>
 							</div>
 
 							<!-- 모달 창 -->
-							<div class="modal fade" id="viewRHSchool" tabindex="-1"
+							<div class="modal fade" id="viewRSchool" tabindex="-1"
 								role="dialog" aria-labelledby="uploadModalLabel"
 								aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+								<div class="modal-dialog modal-dialog-centered modal-lg"
+									role="document">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="uploadModalLabel">학력사항 불러오기</h5>
-										
+
 											<button type="button" class="close" data-bs-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
@@ -128,7 +129,8 @@
 													<tbody id="highSchoolList">
 														<c:forEach var="hschool" items="${high}">
 															<tr>
-																<td></td>
+																<td><input type="checkbox" name="hschool"
+																	value="${hschool.highEduNo}" onclick="checkOnly(this)"></td>
 																<td>${hschool.ged}</td>
 																<td>${hschool.highName}</td>
 																<td></td>
@@ -141,7 +143,8 @@
 													<tbody id="universityList" style="display: none">
 														<c:forEach var="university" items="${uni}">
 															<tr>
-																<td></td>
+																<td><input type="checkbox" name="university"
+																	value="${university.uniEduNo}" onclick="checkOnly(this)"></td>
 																<td>${university.uniAct}</td>
 																<td>${university.uniName}</td>
 																<td>${university.uniCategory}</td>
@@ -154,7 +157,8 @@
 													<tbody id="graduateList" style="display: none">
 														<c:forEach var="gschool" items="${grad}">
 															<tr>
-																<td></td>
+																<td><input type="checkbox" name="gschool"
+																	value="${gschool.gradEduNo}" onclick="checkOnly(this)"></td>
 																<td>${gschool.gradAct}</td>
 																<td>${gschool.gradName}</td>
 																<td>${gschool.gradCategory}</td>
@@ -167,9 +171,15 @@
 												</table>
 											</div>
 
+											<div
+												class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+												<button type="button" class="btn btn-primary" onclick="completeCheck()">선택완료</button>
+											</div>
 										</div>
+
 									</div>
 								</div>
+
 							</div>
 
 
@@ -419,6 +429,33 @@
 		if (msg) {
 			alert(msg);
 		}
+		
+		// 체크박스 하나만 체크 
+		function checkOnly(checkbox) {
+			  var checkboxes = document.querySelectorAll('#highSchoolList input[type="checkbox"], #universityList input[type="checkbox"], #graduateList input[type="checkbox"]');
+			  for (var i = 0; i < checkboxes.length; i++) {
+			    if (checkboxes[i] !== checkbox && checkboxes[i].checked) {
+			      checkboxes[i].checked = false;
+			    }
+			  }
+			}
+		
+		// 선택 완료 버튼
+		function completeCheck() {
+			  var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+			  if (checkboxes.length > 0) {
+			    // 체크박스가 하나 이상 선택된 경우 모달 창 닫기
+			    $('#viewRSchool').modal('hide');
+			    
+			    // 모달 창이 닫히면 체크박스 초기화
+			    var allCheckboxes = document.querySelectorAll('input[type=checkbox]');
+			    for (var i = 0; i < allCheckboxes.length; i++) {
+			      allCheckboxes[i].checked = false;
+			    }
+			    
+			  } 
+			}
+
 
 		//  대입검정고시 체크박스 Y/N 체크
 		function fn_checkY() {
