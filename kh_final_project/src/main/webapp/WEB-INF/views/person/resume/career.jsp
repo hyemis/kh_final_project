@@ -138,7 +138,7 @@
 							<input type="radio" id="radio-box" name="radio-group"> <label
 								for="radio-box">경력없음(신입)</label><br>
 							<hr>
-							<button class="btn btn-primary" onclick="addCar()">정보추가</button>
+							<button class="btn btn-primary" onclick="addCar()">경력추가</button>
 							<br>
 						</div>
 						<div id="hidden-content">
@@ -183,12 +183,12 @@
 												min="0" placeholder="단위 : 만원">
 										</div>
 									</div>
-									<hr>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
 										<button class="btn btn-primary delete-btn"
 											onclick="removeForm(this.parentNode.parentNode)">삭제</button>
 									</div>
+								<hr>
 								</form>
 							</div>
 						</div>
@@ -273,37 +273,20 @@
 		var forms = [ document.getElementsByName("career")[0] ];
 
 		function addCar() {
-//			var lastForm = forms[forms.length - 1];
 
-// lastForm -- re
 			var lastForm = forms[0];
 			var form = lastForm.cloneNode(true);
 			document.getElementById("CarFormContainer").appendChild(form);
 			forms.push(form);
 		}
 
-		/* 이 방법으로 하면 불러오기가 안됨..ㅎ 		
-		var forms = [ document.getElementsByName("career")[0] ];
-
-		 function addCar() {
-		 var lastForm = forms[forms.length - 1];
-		 var form = lastForm.cloneNode(true);
-		 var inputs = form.getElementsByTagName("input");
-
-		 for (var i = 0; i < inputs.length; i++) {
-		 inputs[i].value = "";
-		 }
-
-		 document.getElementById("CarFormContainer").appendChild(form);
-		 forms.push(form);
-		 } */
 
 		// 입력폼 삭제
 		function removeForm(form) {
 			form.remove();
 		}
 
-		let checkBoxes = document
+		/* let checkBoxes = document
 				.querySelectorAll('input[name="selectedCareer"]');
 		for (let i = 0; i < checkBoxes.length; i++) {
 			checkBoxes[i].addEventListener("click", function() {
@@ -319,12 +302,12 @@
 					}
 				}
 			});
-		}
+		} */
 
 		
 		// 체크박스 데이터 가져오기
 		// 체크된 경력사항 배열에 저장
-		let saveButton = document.getElementById("selectCarBtn");
+/* 		let saveButton = document.getElementById("selectCarBtn");
 		saveButton
 				.addEventListener(
 						"click",
@@ -352,7 +335,69 @@
 								careerForm.elements["carSalary"].value = careerData[6].textContent;
 							}
 							
-						});
+						}); */
+						
+						
+						// 경력사항 불러오기 모달에서 불러오기 버튼 클릭 시 실행되는 함수
+						function loadCareer() {
+						  // 선택된 경력사항의 정보를 저장할 배열
+						  var selectedCareer = [];
+
+						  // 모든 경력사항 정보를 담은 tr 태그를 선택
+						  var careerList = document.querySelectorAll('#viewCareer tbody tr');
+
+						  // 선택된 경력사항 정보를 배열에 추가
+						  for (var i = 0; i < careerList.length; i++) {
+						    var checkbox = careerList[i].querySelector('input[name="selectedCareer"]');
+						    if (checkbox.checked) {
+						      var career = {
+						        carName: careerList[i].querySelector('td:nth-child(2)').textContent,
+						        carDate: careerList[i].querySelector('td:nth-child(3)').textContent,
+						        carPosition: careerList[i].querySelector('td:nth-child(4)').textContent,
+						        carDept: careerList[i].querySelector('td:nth-child(5)').textContent,
+						        carResp: careerList[i].querySelector('td:nth-child(6)').textContent,
+						        carSalary: careerList[i].querySelector('td:nth-child(7)').textContent
+						      };
+						      selectedCareer.push(career);
+						    }
+						  }
+
+						  // 선택된 경력사항 정보를 담은 form 태그 생성
+						  var form = document.createElement('form');
+						  form.method = 'post';
+						  form.action = 'career';
+
+						  // 선택된 경력사항 정보를 form에 추가
+						  for (var j = 0; j < selectedCareer.length; j++) {
+						    var inputCarName = document.createElement('input');
+						    inputCarName.type = 'hidden';
+						    inputCarName.name = 'carName';
+						    inputCarName.value = selectedCareer[j].carName;
+						    form.appendChild(inputCarName);
+
+						    var inputCarDate = document.createElement('input');
+						    inputCarDate.type = 'hidden';
+						    inputCarDate.name = 'carDate';
+						    inputCarDate.value = selectedCareer[j].carDate;
+						    form.appendChild(inputCarDate);
+
+						    var inputCarPosition = document.createElement('input');
+						    inputCarPosition.type = 'hidden';
+						    inputCarPosition.name = 'carPosition';
+						    inputCarPosition.value = selectedCareer[j].carPosition;
+						    form.appendChild(inputCarPosition);
+
+						    var inputCarDept = document.createElement('input');
+						    inputCarDept.type = 'hidden';
+						    inputCarDept.name = 'carDept';
+						    inputCarDept.value = selectedCareer[j].carDept;
+						    form.appendChild(inputCarDept);
+
+						    var inputCarResp = document.createElement('input');
+						    inputCarResp.type = 'hidden';
+						    inputCarResp.name = 'carResp';
+						    inputCarResp.value = selectedCareer[j].car
+
 	</script>
 
 </body>
