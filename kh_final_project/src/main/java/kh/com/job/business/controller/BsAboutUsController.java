@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdAccountService;
-import kh.com.job.business.model.dto.BsBoardDto;
+import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 
@@ -36,7 +36,7 @@ public class BsAboutUsController {
 	}
 	
 	@GetMapping("/insert")
-	public Model infoWrite(BsBoardDto infoDto, Model model, HttpSession session) throws Exception{
+	public Model infoWrite(BoardDto infoDto, Model model, HttpSession session) throws Exception{
 		BsUserDto dto = (BsUserDto)session.getAttribute("Login");
 		model.addAttribute("userId",dto);
 		model.addAttribute("boardDate",dto);
@@ -44,13 +44,13 @@ public class BsAboutUsController {
 	}
 	
    	@PostMapping("/insert")
-	public String insert(BsBoardDto Dto) {
+	public String insert(BoardDto Dto) {
 		  return "redirect:/companyinfo";
 		}
    	
   //공고관리
   		@GetMapping("/infowrite")
-  		public ModelAndView infowrite(ModelAndView mv) {
+  		public ModelAndView infowriteRecruit(ModelAndView mv) {
   			
   			return mv;
   		}

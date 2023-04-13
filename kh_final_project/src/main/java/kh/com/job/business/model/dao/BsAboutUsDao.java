@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.com.job.business.model.dto.BsBoardDto;
+import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -24,36 +24,17 @@ public class BsAboutUsDao {
 	
 	
 	
-	public int insert(BsBoardDto dto) {
+	public int insert(BoardDto dto) {
 		return sqlSession.insert("business.insert", dto);		
 	}
 	
-	public BsBoardDto selectOne(int boardnum /* PK */) {          
+	public BoardDto selectOne(int boardnum /* PK */) {          
 		return sqlSession.selectOne("business.selectOne", boardnum); 
 	}
 	
-	public List<BsBoardDto> selectList() {
+	public List<BoardDto> selectList() {
 		return sqlSession.selectList("business.selectList");
 	}
 
-/*
-	public List<BsInfoDto> tag() {
-		return sqlSession.selectList("boards.tag");
-	}
-	
-	public int insert(BsInfoDto dto) {
-		return sqlSession.insert("boardns.insert", dto);		
-	}
-	
-	public int update(BsInfoDto dto) {
-		return sqlSession.update("boardns.update", dto);		
-	}
-	
-	public int delete(BsInfoDto dto) {
-		return sqlSession.delete("boardns.delete", dto);		
-	} 
- 
-  
-  
- */
+
 }

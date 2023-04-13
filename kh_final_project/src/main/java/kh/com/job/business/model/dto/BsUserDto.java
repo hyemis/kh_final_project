@@ -45,6 +45,7 @@ public class BsUserDto {
 	private String userPhone;
 	private String userEmail;
 	private String userName;
+	private String userPic;
 	private Timestamp userCreatedAt;
 	private Timestamp userLastLogin;
 	private String userCount;
