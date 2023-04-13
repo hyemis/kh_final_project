@@ -82,6 +82,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
+							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
 							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
 								<tr>
 									<td>${list.companyName }</td>
@@ -93,9 +94,10 @@
 					</c:choose>
 		 		</tbody>
 		 	</table>
+		 	<!-- 현재 페이지 확인 -->
 		 	<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
 		 	
-		 	
+		 	<!-- 페이지네이션  -->
 		 	<ul class = "pagination text-center justify-content-center">
 				<c:choose>
 					<c:when test="${list.prevPage eq -1 }">

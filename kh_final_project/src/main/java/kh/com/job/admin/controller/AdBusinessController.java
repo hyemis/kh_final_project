@@ -25,15 +25,14 @@ public class AdBusinessController {
 			, @RequestParam(name = "pnum", defaultValue = "1") int pnum
 			, @RequestParam(name = "search", required = false) String search 
 			) {
-
-		//전체 공고
-		List<BsRecruitDto> allList = service.recruitAllList();
 		
+		//페이지네이션 처리가 완료된 리스트
 		Paging list = service.pageList(search, pnum);
-		
-		mv.addObject("pnum", pnum);
-		mv.addObject("allList", allList);
 		mv.addObject("list", list);
+		
+		//현재 페이지 정보를 가져오기 위한 addObject
+		mv.addObject("pnum", pnum);
+		
 		return mv;
 	}
 	
