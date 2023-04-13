@@ -35,13 +35,14 @@ public class BsAboutUsController {
 		return mv;
 	}
 	
-	@GetMapping("/insert")
-	public Model infoWrite(BoardDto infoDto, Model model, HttpSession session) throws Exception{
-		BsUserDto dto = (BsUserDto)session.getAttribute("Login");
-		model.addAttribute("userId",dto);
-		model.addAttribute("boardDate",dto);
-		return model;
-	}
+//	TODO principal 사용해서 수정
+//	@GetMapping("/insert")
+//	public Model infoWrite(BoardDto infoDto, Model model, HttpSession session) throws Exception{
+//		BsUserDto dto = (BsUserDto)session.getAttribute("Login");
+//		model.addAttribute("userId",dto);
+//		model.addAttribute("boardDate",dto);
+//		return model;
+//	}
 	
    	@PostMapping("/insert")
 	public String insert(BoardDto Dto) {
