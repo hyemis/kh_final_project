@@ -9,16 +9,16 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 
-	<!-- typeAlias setting -->
 	<typeAliases>
+	<!-- board -->
+		<typeAlias type="kh.com.job.board.model.dto.BoardDto"
+			alias="bdto" />
+			
+	<!-- person -->	
 		<typeAlias type="kh.com.job.person.model.dto.PsUserDto"
 			alias="pdto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsResumeDto"
 			alias="rdto" />
-		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"
-			alias="budto" />
-		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
-			alias="brdto" />
 
 		<typeAlias type="kh.com.job.person.model.dto.PsCareerDto"
 			alias="careerdto" />
@@ -33,20 +33,27 @@
 		<typeAlias type="kh.com.job.person.model.dto.PsUnivDto"
 			alias="udto" />
 		
-	<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
-		alias="hinfodto" />
-	<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"
-		alias="uinfodto" />
-	<typeAlias type="kh.com.job.person.model.dto.PsGradInfoDto"
-		alias="ginfodto" />
-	<typeAlias type="kh.com.job.person.model.dto.PsCareerInfoDto"
-		alias="carinfodto" />
-	<typeAlias type="kh.com.job.person.model.dto.PsCertiInfoDto"
-		alias="certiinfodto" />
-	<typeAlias type="kh.com.job.person.model.dto.PsClInfoDto"
-		alias="clinfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsHighInfoDto"
+			alias="hinfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsUniInfoDto"
+			alias="uinfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsGradInfoDto"
+			alias="ginfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsCareerInfoDto"
+			alias="carinfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsCertiInfoDto"
+			alias="certiinfodto" />
+		<typeAlias type="kh.com.job.person.model.dto.PsClInfoDto"
+			alias="clinfodto" />
+		
+	<!-- business -->		
+		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"
+			alias="budto" />
+		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
+			alias="brdto" />
 			
-
+			
+	
 
 
 	</typeAliases>
