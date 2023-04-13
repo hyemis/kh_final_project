@@ -274,6 +274,8 @@
 
 		function addCar() {
 //			var lastForm = forms[forms.length - 1];
+
+// lastForm -- re
 			var lastForm = forms[0];
 			var form = lastForm.cloneNode(true);
 			document.getElementById("CarFormContainer").appendChild(form);
