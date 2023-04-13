@@ -261,17 +261,24 @@
 		}
 		saveCareer.addEventListener('click', checkInputs);
 		rCareer.addEventListener('submit', checkInputs);
+		
+		
 
 		// 경력 입력폼 추가
+		var forms = [ document.getElementsByName("career")[0] ];
+
 		function addCar() {
-			var form = document.getElementsByName("career")[0].cloneNode(true);
+			var lastForm = forms[forms.length - 1];
+			var form = lastForm.cloneNode(true);
 			document.getElementById("CarFormContainer").appendChild(form);
+			forms.push(form);
 		}
 
 		// 입력폼 삭제
 		function removeForm(form) {
 			form.remove();
 		}
+
 
 		let checkBoxes = document
 				.querySelectorAll('input[name="selectedCareer"]');
@@ -330,6 +337,8 @@
 								
 							}); */
 
+
+
 		// TODO : 체크박스 데이터 가져오기
 		// 체크된 경력사항 배열에 저장
 		let saveButton = document.getElementById("selectCarBtn");
@@ -338,11 +347,9 @@
 						"click",
 						function() {
 							let careerForm = document.forms["career"];
-
 							// 체크된 경력 데이터를 가져와서 form에 추가
 							let selectedCareerList = document
 									.querySelectorAll('input[name="selectedCareer"]:checked');
-
 							for (let i = 0; i < selectedCareerList.length; i++) {
 								selectedIdx = selectedCareerList[i].parentNode.parentNode.rowIndex - 1;
 								otherCheckBoxList = document
@@ -352,7 +359,6 @@
 										otherCheckBoxList[j].disabled = true;
 									}
 								}
-
 								let careerData = selectedCareerList[i].parentElement.parentElement
 										.getElementsByTagName("td");
 								careerForm.elements["carName"].value = careerData[1].textContent;
@@ -362,7 +368,6 @@
 								careerForm.elements["carResp"].value = careerData[5].textContent;
 								careerForm.elements["carSalary"].value = careerData[6].textContent;
 							}
-
 							let closeModalBtn = document
 									.getElementById("closeModalBtn");
 							closeModalBtn.addEventListener("click", function() {
