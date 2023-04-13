@@ -295,10 +295,14 @@
 								careerForm.elements["carResp"].value = careerData[5].textContent;
 								careerForm.elements["carSalary"].value = careerData[6].textContent;
 							}
+							
+							let closeModalBtn = document.getElementById("closeModalBtn");
+							closeModalBtn.addEventListener("click", function() {
+							   let modal = document.getElementById("viewCareer");
+							   modal.style.display = "none";
+							});
 
-							// 모달창 닫기
-							let modal = document.getElementById("viewCareer");
-							modal.style.display = "none";
+							
 						});
 	</script>
 
