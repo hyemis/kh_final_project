@@ -93,6 +93,12 @@
 		#{carPosition}, #{carDept}, #{carResp}, #{carSalary})
 	</insert>
 
+	<delete id="deleteCareer" parameterType="_int">
+		DELETE FROM
+		RESUME_CAREER
+		WHERE CAR_NO = #{carNo}
+	</delete>
+
 	<insert id="insertCerti" parameterType="certidto">
 		insert into RESUME_CERTI
 		(CERTI_NO, CERTI_NAME, CERTI_PUB, CERTI_DATE)
@@ -103,7 +109,8 @@
 	<insert id="insertCl" parameterType="cldto">
 		insert into RESUME_CL(CL_NO,
 		CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP)
-		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive}, #{clAdv}, #{clAsp})
+		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive},
+		#{clAdv}, #{clAsp})
 	</insert>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
@@ -291,13 +298,16 @@
 		ORDER BY
 		rc.CERTI_DATE DESC
 	</select>
-	
-		<select id="selectListCl" resultType="cldto">
-	SELECT cl.CL_NO AS clNo, cl.CL_FILE AS clFile, cl.CL_GROWTH AS clGrowth, cl.CL_MOTIVE AS clMotive, cl.CL_ADV AS clAdv, cl.CL_ASP AS clAsp
-		FROM RESUME_CL cl
+
+	<select id="selectListCl" resultType="cldto">
+		SELECT cl.CL_NO AS clNo, cl.CL_FILE AS clFile, cl.CL_GROWTH AS clGrowth,
+		cl.CL_MOTIVE AS clMotive, cl.CL_ADV AS clAdv, cl.CL_ASP AS clAsp
+		FROM
+		RESUME_CL cl
 		INNER JOIN
 		RESUME_CL_INFO i on cl.CL_NO = i.CL_NO
-		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
+		INNER JOIN
+		USER_RESUME u on i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY
 		cl.CL_NO DESC

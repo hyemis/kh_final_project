@@ -57,6 +57,10 @@
 .hidden {
 	display: none;
 }
+
+#deleteCareer {
+	width: 60px;
+}
 </style>
 
 </head>
@@ -110,6 +114,7 @@
 															<th>근무부서</th>
 															<th>담당업무</th>
 															<th>연봉</th>
+															<th></th>
 														</tr>
 													</thead>
 													<tbody>
@@ -122,12 +127,18 @@
 																<td>${careerList.carDept}</td>
 																<td>${careerList.carResp}</td>
 																<td>${careerList.carSalary}</td>
+																<td>
+																<input type="hidden" name="carNo"
+																	value="${careerList.carNo}" required>
+																	<button type="button"
+																		class="btn btn-outline-dark deleteCareer"
+																		>삭제</button></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
 												<button type="button" data-bs-dismiss="modal"
-													class="btn btn-primary mx-auto d-block" id="selectCarBtn">불러오기</button>
+													class="btn btn-primary mx-auto d-block" id="selectCarBtn" data-carNo="${careerList.carNo}">불러오기</button>
 											</div>
 
 										</div>
@@ -360,6 +371,27 @@
 						  }
 
 						});
+						
+						
+						// 경력사항 삭제 
+	$('.deleteCareer').click(function() {
+		var carNo = $(this).prev('input[name="carNo"]').val();
+  console.log(carNo);
+
+  $.ajax({
+    type: 'POST',
+    url: 'deleteCareer',
+    data: { carNo: carNo },
+    success: function(result) {
+      if(result > 0) {
+        alert('삭제 성공!');
+        location.reload();
+      } else {
+        alert('삭제 실패!');
+      }
+    }
+  });
+});
 
 
 	</script>

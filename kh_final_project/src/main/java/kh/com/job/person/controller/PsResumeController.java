@@ -309,6 +309,17 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/career");
 		return mv;
 	}
+	
+	// 경력사항 삭제 
+	@PostMapping("deleteCareer")
+	@ResponseBody
+	public int deleteCareer(@RequestParam("carNo") Integer carNo) throws Exception {
+		
+		System.out.println(carNo);
+		int result = -1;
+		result = rservice.deleteCareer(carNo);
+		return result;
+	}
 
 	// 자격증 페이지
 	@GetMapping("certi")

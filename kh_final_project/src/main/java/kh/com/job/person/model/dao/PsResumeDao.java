@@ -74,6 +74,10 @@ public class PsResumeDao {
 	public int insertCareer(PsCareerDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCareer", dto);
 	}
+	
+	public int deleteCareer(int carNo) throws Exception {
+		return sqlSession.delete("resume.deleteCareer", carNo);
+	}
 
 	// 이력서-자격증입력
 	public int insertCerti(PsCertiDto dto) throws Exception {

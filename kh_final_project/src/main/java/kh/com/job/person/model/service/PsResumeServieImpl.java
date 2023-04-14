@@ -103,6 +103,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int insertCareer(PsCareerDto dto) throws Exception {
 		return dao.insertCareer(dto);
 	}
+	
+	@Override
+	public int deleteCareer(int carNo) throws Exception {
+		return dao.deleteCareer(carNo);
+	}
 
 	@Override
 	public int insertCerti(PsCertiDto dto) throws Exception {
@@ -203,6 +208,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	public List<PsClDto> selectListCl(String userId) throws Exception {
 		return dao.selectListCl(userId);
 	}
+
+	
 
 	
 
