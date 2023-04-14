@@ -54,6 +54,9 @@ public interface PsResumeService {
 	// 이력서-자격증 입력
 	public int insertCerti(PsCertiDto dto) throws Exception;
 
+	// 이력서-자격증 삭제
+	public int deleteCerti(int certiNo) throws Exception;
+
 	// 이력서-자기소개서 입력
 	public int insertCl(PsClDto dto) throws Exception;
 

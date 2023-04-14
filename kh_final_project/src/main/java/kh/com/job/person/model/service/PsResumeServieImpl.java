@@ -115,6 +115,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
+	public int deleteCerti(int certiNo) throws Exception {
+		return dao.deleteCerti(certiNo);
+	}
+	
+	@Override
 	public int insertCl(PsClDto dto) throws Exception {
 		return dao.insertCl(dto);
 	}
@@ -208,6 +213,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	public List<PsClDto> selectListCl(String userId) throws Exception {
 		return dao.selectListCl(userId);
 	}
+
+	
 
 	
 

@@ -105,6 +105,11 @@
 		values
 		(RESUME_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
+	
+	<delete id="deleteCerti" parameterType="_int">
+		delete from RESUME_CERTI where
+		CERTI_NO = #{certiNo}
+	</delete>
 
 	<insert id="insertCl" parameterType="cldto">
 		insert into RESUME_CL(CL_NO,

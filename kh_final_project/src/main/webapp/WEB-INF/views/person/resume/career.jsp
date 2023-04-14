@@ -319,37 +319,37 @@
 									<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" name="carNewDate"
-											value="">
+											>
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewPosition" value="">
+										<input type="text" class="form-control" name="carNewPosition" >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewDept" value="">
+										<input type="text" class="form-control" name="carNewDept" >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewResp" value="">
+										<input type="text" class="form-control" name="carNewResp">
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
 									<div class="col-sm-10">
 										<input type="number" class="form-control" name="carNewSalary"
-											value="">
+											>
 									</div>
 								</div>
 								<hr>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-									<button type="submit" class="btn btn-primary" id="">수정</button>
+									<button type="submit" class="btn btn-primary">수정</button>
 									
 								</div>
 							</form>
@@ -376,11 +376,9 @@
 						});
 						
 						
-<<<<<<< HEAD
 						// 경력사항 삭제 
 	$('.deleteCareer').click(function() {
 		var carNo = $(this).prev('input[name="carNo"]').val();
-  console.log(carNo);
 
   $.ajax({
     type: 'POST',
@@ -388,10 +386,10 @@
     data: { carNo: carNo },
     success: function(result) {
       if(result > 0) {
-        alert('삭제 성공!');
+        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
         location.reload();
       } else {
-        alert('삭제 실패!');
+        alert('해당 경력사항 삭제에 실패했습니다.');
       }
     }
   });
