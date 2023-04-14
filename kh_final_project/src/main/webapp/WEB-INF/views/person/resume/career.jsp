@@ -121,6 +121,7 @@
 														<c:forEach var="careerList" items="${career}">
 															<tr>
 																<td><input type="checkbox" name="selectedCareer" /></td>
+																<td><input type="checkbox" name="selectedCareer"/></td>
 																<td>${careerList.carDate}</td>
 																<td>${careerList.carName}</td>
 																<td>${careerList.carPosition}</td>
@@ -137,6 +138,9 @@
 														</c:forEach>
 													</tbody>
 												</table>
+												
+												<div id="selectedCareerList"></div>
+												
 												<button type="button" data-bs-dismiss="modal"
 													class="btn btn-primary mx-auto d-block" id="selectCarBtn" data-carNo="${careerList.carNo}">불러오기</button>
 											</div>
@@ -194,7 +198,6 @@
 												min="0" placeholder="단위 : 만원">
 										</div>
 									</div>
-									<hr>
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 										<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
 										<button class="btn btn-primary delete-btn"
@@ -296,14 +299,15 @@
 			form.remove();
 		}
 		
-		// 정보 불러오기 
+		// 모달창에서 정보 불러와서 출력하기
 		let saveButton = document.getElementById("selectCarBtn");
 						
 						saveButton.addEventListener("click", function() {
 						  // 체크된 경력 데이터를 가져와서 form에 추가
 						  let selectedCareerList = document.querySelectorAll('input[name="selectedCareer"]:checked');
 						    
-						  let newFormHTML =	`<form>
+						  let newFormHTML =	`
+						  <form>
 								<div class="row mb-3">
 									<label for="carName" class="col-sm-2 col-form-label">회사명</label>
 									<div class="col-sm-10">
@@ -373,6 +377,7 @@
 						});
 						
 						
+<<<<<<< HEAD
 						// 경력사항 삭제 
 	$('.deleteCareer').click(function() {
 		var carNo = $(this).prev('input[name="carNo"]').val();
@@ -392,6 +397,63 @@
     }
   });
 });
+						
+						
+		// 모달창에 체크한 이력서 순서대로 표시
+		$(document).ready(function() {
+	 	$('input[name="selectedCareer"]').change(function() {
+	    // 선택된 체크박스를 담을 배열을 초기화
+	    var selectedCareers = [];
+	
+	    // 체크된 체크박스의 값 가져오기
+	    $('input[name="selectedCareer"]:checked').each(function(index) {
+	
+	    	var career = {
+	        carDate: $(this).closest('tr').find('td:eq(1)').text(),
+	        carName: $(this).closest('tr').find('td:eq(2)').text(),
+	        carPosition: $(this).closest('tr').find('td:eq(3)').text(),
+	        carDept: $(this).closest('tr').find('td:eq(4)').text(),
+	        carResp: $(this).closest('tr').find('td:eq(5)').text(),
+	        carSalary: $(this).closest('tr').find('td:eq(6)').text(),
+	        carNumber: index + 1 // 선택된 체크박스가 배열에서 몇 번째인지를 이용해 번호 매기기
+	      };
+	
+	      // 배열에 추가
+	      selectedCareers.push(career);
+	   	 });
+	
+	    // 선택된 값을 테이블 형태로 출력
+	    var html = '<table class="table">';
+	    html += '<thead><tr><th>순서</th><th>재직기간</th><th>회사명</th><th>직급/직책</th><th>근무부서</th><th>담당업무</th><th>연봉</th></tr></thead>';
+	    html += '<tbody>';
+	
+	    for (var i = 0; i < selectedCareers.length; i++) {
+	      html += '<tr>';
+	      html += '<td>' + selectedCareers[i].carNumber + '</td>';
+	      html += '<td>' + selectedCareers[i].carDate + '</td>';
+	      html += '<td>' + selectedCareers[i].carName + '</td>';
+	      html += '<td>' + selectedCareers[i].carPosition + '</td>';
+	      html += '<td>' + selectedCareers[i].carDept + '</td>';
+	      html += '<td>' + selectedCareers[i].carResp + '</td>';
+	      html += '<td>' + selectedCareers[i].carSalary + '</td>';
+	      html += '</tr>';
+	    }
+	
+	    html += '</tbody></table>';
+	
+		    $('#selectedCareerList').html(html);
+		  });
+		});
+	
+	
+		// 모달창 닫으면 초기화
+		$('#viewCareer').on('hidden.bs.modal', function () {
+		    $('#selectedCareerList').html('');
+		    $('input[name="selectedCareer"]').prop('checked', false);
+		});
+
+
+
 
 
 	</script>
