@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.PagingInfoDto;
@@ -28,7 +29,7 @@ public class AdBusinessDao {
 		return sqlsession.selectList("admin.pageList", pdto);
 	}
 
-	public BsRecruitDto viewDetail(String raNum) {
+	public BsRecruitDetailDto viewDetail(String raNum) {
 		return sqlsession.selectOne("admin.viewDetail", raNum);
 	}
 

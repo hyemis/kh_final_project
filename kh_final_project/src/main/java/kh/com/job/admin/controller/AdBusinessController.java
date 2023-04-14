@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdBusinessService;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
@@ -48,12 +49,7 @@ public class AdBusinessController {
 		
 		
 		//받은 게시글 정보로 게시글 상세 정보 조회
-		BsRecruitDto redto = service.viewDetail(raNum);
-		
-		if(redto != null) {
-			BsUserDto budto = service.userDetail(redto.getUserId());
-			mv.addObject("userinfo", budto);
-		}
+		BsRecruitDetailDto redto = service.viewDetail(raNum);
 		
 		mv.addObject("recruit", redto);
 		

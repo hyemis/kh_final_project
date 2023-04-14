@@ -57,54 +57,130 @@
 		
 		 <div class="container-xl px-5">
 		 	<h3 class="my-5">채용공고 상세 내역</h3>
-		 	
-		 	<div class="my-3 d-flex">
-		 		<div class="bg-white rounded p-4 row">
-						<img class="object-fit-sm-contain border" src="${userinfo.userPic eq null? 'https://dummyimage.com/300x200/d6d6d6/000000&text=300x200' : budto.userPic }" alt="">
-				</div>
-				<div class="p-4 row">
-					<table class="col-12">
-						<thead>
-							<tr>
-								<th scope="col"></th>
-								<th scope="col"></th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td >회사 이름</td>
-								<td><b> : </b></td>
-								<td>${recruit.companyName }</td>
-							</tr>
-							<tr>
-								<td>담당자 이름</td>
-								<td><b> : </b></td>
-								<td>${userinfo.userName}</td>
-							</tr>
-							<tr>
-								<td>담당자 연락처</td>
-								<td><b> : </b></td>
-								<td>${userinfo.userPhone}</td>
-							</tr>
-							<tr>
-								<td>담당자 E-mail</td>
-								<td><b> : </b></td>
-								<td>${userinfo.userEmail}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		 	<div>
+		 		<h5 class="mb-5 ms-3">${recruit.recruitType }</h5>
 		 	</div>
-		 	<div class="my-5 mx-3">
-		 		<div>
-		 			<h5> 채용 마감 </h5>
-		 			<p >${recruit.closeDate }</p>		 		
-		 		</div>
+		 	<div class="container mb-5">
+                <div class="bg-light rounded">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row g-5 align-items-center">
+                        	<!-- 지도 화면 -->
+                            <div class="col-lg-6" >
+                                <img class="object-fit-sm-contain border" src="${recruit.userPic eq null? 'https://dummyimage.com/300x200/d6d6d6/000000&text=300x200' : recruit.userPic }" alt="">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <table class="col-12">
+										<thead>
+											<tr>
+												<th scope="col"></th>
+												<th scope="col"></th>
+												<th scope="col"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td >회사 이름</td>
+												<td><b> : </b></td>
+												<td>${recruit.companyName }</td>
+											</tr>
+											<tr>
+												<td>회사 대표 번호</td>
+												<td><b> : </b></td>
+												<td>${recruit.bsMainPhone}</td>
+											</tr>
+											<tr>
+												<td>담당자 E-mail</td>
+												<td><b> : </b></td>
+												<td>${recruit.userEmail}</td>
+											</tr>
+											<tr>
+												<td>담당자 연락처</td>
+												<td><b> : </b></td>
+												<td>${recruit.userPhone}</td>
+											</tr>
+										</tbody>
+									</table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		 	<div class="container mb-5">
+                <div class="bg-light rounded">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row g-5 align-items-center">
+                        	<!-- 지도 화면 -->
+                            <div class="col-lg-6" >
+                            	<p>
+                            		<c:choose>
+                            			<c:when test="${recruit.addressRoad != null}">
+                            				${recruit.addressRoad}
+                            			</c:when>
+                            			<c:otherwise>
+                            				${recruit.addressJibun}
+                            			</c:otherwise>
+                            		</c:choose>
+                            		 - ${recruit.addressDetail}
+                            	</p>
+                                <img class="img-fluid rounded w-100" src="https://dummyimage.com/500x500/d6d6d6/000000&text=500x500" alt="">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                	<ul>
+                                		<li>
+                                			<h5> 채용 기간 </h5>
+		 									<p>${recruit.registDate } ~ ${recruit.closeDate }</p>
+                                		</li>
+                                		<li>
+                                			<h5> 급여 정보 </h5>
+		 									<p>${recruit.salary}</p>
+                                		</li>
+                                		<li>
+                                			<h5> 학력 사항 </h5>
+		 									<p>${recruit.userEducation}</p>
+                                		</li>
+                                		<li>
+                                			<h5> 모집 인원 </h5>
+		 									<p>${recruit.career}</p>
+                                		</li>
+                                		<li>
+                                			<h5> 근무 요일 </h5>
+		 									<p>${recruit.holidayType}</p>
+                                		</li>
+                                		<li>
+                                			<h5> 계약 조건 </h5>
+		 									<p>${recruit.empTypeCode}</p>
+                                		</li>
+                                	</ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mb-5">
+                <div class="bg-light rounded p-3">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row g-5 align-items-center">
+                            <h3 class="mb-3">제목 : ${recruit.raTitle }</h3>
+                            <div class="col-lg">
+                                <div class="mb-4">
+                                    ${recruit.raContent}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		 </div>
+		 <div class="container mb-5">
 		 	
-		 	
-		 	</div>
-		 	
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 admissionBtn">승인</button>
+		 	<a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
+			<a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a>
 		 </div>
 
         <!-- Back to Top -->
