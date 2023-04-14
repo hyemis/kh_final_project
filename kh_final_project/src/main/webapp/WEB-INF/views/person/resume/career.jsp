@@ -138,7 +138,7 @@
 							<input type="radio" id="radio-box" name="radio-group"> <label
 								for="radio-box">경력없음(신입)</label><br>
 							<hr>
-							<button class="btn btn-primary" onclick="addCar()">정보추가</button>
+							<button class="btn btn-primary" onclick="addCar()">새정보추가</button>
 							<br>
 						</div>
 						<div id="hidden-content">
@@ -274,9 +274,9 @@
 		var forms = [ document.getElementsByName("career")[0] ];
 
 		function addCar() {
-			var lastForm = forms[0];
-			var form = lastForm.cloneNode(true);
-			lastForm.parentNode.insertBefore(form, lastForm.nextSibling);
+			var originForm = forms[0];
+			var form = originForm.cloneNode(true);
+			originForm.parentNode.insertBefore(form, originForm.nextSibling);
 			forms.push(form);
 		}
 
