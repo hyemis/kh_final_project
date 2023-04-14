@@ -130,7 +130,7 @@
 							<button class="btn btn-primary" type="submit">회원가입 완료</button>
 						</div>
 				</form>	     
-				<form class="hidden corporate-sign-form signUpForm" name="signUpForm" id="corporate-sign-form" action="signUp" method="post" onsubmit="return bscheckAll()">
+				<form class="hidden corporate-sign-form signUpForm" name="signUpForm" id="corporate-sign-form" action="bsSignUp" method="post" onsubmit="return bscheckAll()">
 				<div class="m-4"><h3>기업회원 회원가입</h3></div>
 			        	
 				          <div class="row">
