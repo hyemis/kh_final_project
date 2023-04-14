@@ -177,16 +177,38 @@
             </div>
 		 </div>
 		 <div class="container mb-5">
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 admissionBtn">${recruit.raAdmission == 'N'? '승인' : '반려'}</button>
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 rejectMailBtn">반려 메일 발송</button>
 		 	
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 admissionBtn">승인</button>
-		 	<a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
-			<a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a>
+			<a href="./main?pnum=${pnum}&search=${search}" class="btn btn-dark py-3 px-4">목록으로</a>
 		 </div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+<script type="text/javascript">
+        $(document).on('click','.admissionBtn', function() {
+        	let raAdmission = "${recruit.raAdmission}";
+        	let raNum = "${recruit.raNum}";      	
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/admin/business/admissChange"
+    			, type: "post"
+    			, data:  {raNum : raNum, raAdmission : raAdmission}
+    			, success: function(result){
+    				if(result > 0){
+    					location.href="${pageContext.request.contextPath}/admin/business/main?pnum=${pnum}&search=${search}";
+    				}else{
+    					alert("승인에 실패 했습니다.");
+    				}
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+        	
+        });
+</script>
 
 </body>
 

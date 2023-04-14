@@ -1,6 +1,7 @@
 package kh.com.job.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
@@ -16,5 +17,7 @@ public interface AdBusinessService {
 	public BsRecruitDetailDto viewDetail(String raNum);
 
 	public BsUserDto userDetail(String userId);
+
+	public int admissChange(Map<String, String> map);
 
 }

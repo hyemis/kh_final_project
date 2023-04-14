@@ -1,12 +1,16 @@
 package kh.com.job.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdBusinessService;
@@ -35,6 +39,7 @@ public class AdBusinessController {
 		//현재 페이지 정보를 가져오기 위한 addObject
 		mv.addObject("pnum", pnum);
 		mv.addObject("search", search);
+		mv.addObject("search", search);
 		
 		return mv;
 	}
@@ -51,9 +56,29 @@ public class AdBusinessController {
 		//받은 게시글 정보로 게시글 상세 정보 조회
 		BsRecruitDetailDto redto = service.viewDetail(raNum);
 		
+		mv.addObject("pnum", pnum);
+		mv.addObject("search", search);
+		mv.addObject("id", raNum);
 		mv.addObject("recruit", redto);
 		
 		return mv;
+	}
+	
+	@PostMapping("/admissChange")
+	@ResponseBody
+	public int admissChange(ModelAndView mv
+			, @RequestParam(name = "raNum", required = false) String raNum
+			, @RequestParam(name = "raAdmission", required = false) String raAdmission
+			) {
+		int result = -1;
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("raNum", raNum);
+		map.put("raAdmission", raAdmission);
+		
+		result = service.admissChange(map);
+		
+		return result;
 	}
 
 }
