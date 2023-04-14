@@ -307,7 +307,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="/save" method="post"
+										<form action="/saveNewletter" method="post"
 											enctype="multipart/form-data">
 
 											<div class="row ">

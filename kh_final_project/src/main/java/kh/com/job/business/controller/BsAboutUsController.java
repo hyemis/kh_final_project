@@ -1,83 +1,66 @@
 package kh.com.job.business.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kh.com.job.admin.model.service.AdAccountService;
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 
-
-
 @Controller
 @RequestMapping("/business/aboutus")
 public class BsAboutUsController {
-	
+
 	@Autowired
 	private BsAboutUsService service;
-	
-	//회사소개 상세페이지
-	@GetMapping("/companyinfo")
-	public ModelAndView infoView(ModelAndView mv) {
-		mv.addObject("imfoview", service.selectList());	
+
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+
+	// 회원정보 불러오기
+	@GetMapping("/")
+	public ModelAndView viewinfo(ModelAndView mv, BsUserDto dto, Principal principal) {
+		// 로그인한 아이디
+		System.out.println(principal.getName());
+
+		// jsp에서 불러올 이름 :bsinfo , 불러올값 :service.viewAccount
+		mv.addObject("userinfo", service.viewAccount(principal.getName()));
 		return mv;
 	}
 	
-//	TODO principal 사용해서 수정
-//	@GetMapping("/insert")
-//	public Model infoWrite(BoardDto infoDto, Model model, HttpSession session) throws Exception{
-//		BsUserDto dto = (BsUserDto)session.getAttribute("Login");
-//		model.addAttribute("userId",dto);
-//		model.addAttribute("boardDate",dto);
-//		return model;
-//	}
 	
-   	@PostMapping("/insert")
-	public String insert(BoardDto Dto) {
-		  return "redirect:/companyinfo";
-		}
-   	
-  //공고관리
-  		@GetMapping("/infowrite")
-  		public ModelAndView infowriteRecruit(ModelAndView mv) {
-  			
-  			return mv;
-  		}
-	
-	/* 모달창으로 합치는중
-	//회사소개 작성페이지
-	@GetMapping("/infowrite")
-	public ModelAndView infoWrite(ModelAndView mv) {
-			
+
+	// 뉴스레터 페이지 불러오기
+	@GetMapping("/newsletter")
+	public ModelAndView newsletter(ModelAndView mv) {
 		return mv;
-	}
-	
-	//회사소개 작성 저장
-	@PostMapping("/save")
-	public String save(BsInfoDto Dto) {
-		  return "redirect:/success";
-		}
-		
-	@PostMapping("/insert")
-	public String registReviewPost(BsInfoDto infoDto, Model model, HttpSession session) throws Exception{
-		BsInfoService.infoWrite(bsInfoDto);
-		return "companyinfo";
 	}
 
-	 */
+	// Q&A 페이지 불러오기
+	@GetMapping("/qna")
+	public ModelAndView qna(ModelAndView mv) {
+		return mv;
+	}
+	
+	// 뉴스레터 작성
+	@PostMapping("/saveNewsletter")
+	public ModelAndView update(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
+		dto.setUserId(principal.getName()); 
+		service.insert(dto);
+		mv.setViewName("redirect:/business/aboutus/newsletter");
+		rttr.addFlashAttribute("msg", "뉴스레터가 성공적으로 등록되었습니다.");
+		return mv;
+	}
+	
+	
+	
+//	
 }
-	
-	
-	
