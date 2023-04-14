@@ -1,11 +1,13 @@
 package kh.com.job.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.admin.model.dao.AdBusinessDao;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
@@ -56,7 +58,7 @@ public class AdBusinessServiceImpl implements AdBusinessService {
 
 
 	@Override
-	public BsRecruitDto viewDetail(String raNum) {
+	public BsRecruitDetailDto viewDetail(String raNum) {
 		return dao.viewDetail(raNum);
 	}
 
@@ -64,6 +66,13 @@ public class AdBusinessServiceImpl implements AdBusinessService {
 	@Override
 	public BsUserDto userDetail(String userId) {
 		return dao.userDetail(userId);
+	}
+
+
+	@Override
+	public int admissChange(Map<String, String> map) {
+		
+		return dao.admissChange(map);
 	}
 
 }

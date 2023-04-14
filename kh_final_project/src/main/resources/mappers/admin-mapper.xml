@@ -162,14 +162,31 @@
 	</select>
 	
 	<!-- 게시글 상세 -->
-	<select id="viewDetail" resultType="kh.com.job.business.model.dto.BsRecruitDto">
-		SELECT * FROM RECRUIT_REGIST
+	<select id="viewDetail" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+		SELECT UT.USER_PHONE, UT.USER_EMAIL, UT.USER_NAME, UT.USER_PIC, UT.BS_MAIN_PHONE
+	    , UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
+	    , RR.RA_NUM
+	    , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.RECRUIT_TYPE) AS RECRUIT_TYPE
+	    , RR.COMPANY_NAME, RR.SALARY
+	    , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.USER_EDUCATION) AS USER_EDUCATION
+	    , RR.REGIST_DATE, RR.CLOSE_DATE
+	    , RR.RA_TITLE, RR.RA_CONTENT, RR.RA_EXTRA_DOCUMENT
+	    , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.CAREER) AS CAREER
+	    , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.HOLIDAY_TYPE) AS HOLIDAY_TYPE
+	    , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.EMP_TYPE_CODE) AS EMP_TYPE_CODE
+	    , RR.RA_ADMISSION
+		FROM USER_TABLE UT
+		JOIN RECRUIT_REGIST RR ON UT.USER_ID = RR.USER_ID
+		WHERE RR.RA_NUM = #{raNum}
+	</select>
+	
+	<update id="admissChange" parameterType="map">
+		UPDATE RECRUIT_REGIST
+		<set>
+			<if test='raAdmission == "N"'>RA_ADMISSION = 'Y'</if>
+			<if test='raAdmission == "P"'>RA_ADMISSION = 'N'</if>
+			<if test='raAdmission == "Y"'>RA_ADMISSION = 'N'</if>
+		</set>	 
 		WHERE RA_NUM = #{raNum}
-	</select>
-	
-	<select id="userDetail" resultType="kh.com.job.business.model.dto.BsUserDto">
-		SELECT * FROM USER_TABLE
-		WHERE USER_ID = #{userId}
-	</select>
-	
+	</update>
 </mapper>

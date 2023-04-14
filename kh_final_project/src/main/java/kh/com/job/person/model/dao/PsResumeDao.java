@@ -1,9 +1,6 @@
 package kh.com.job.person.model.dao;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -74,10 +71,21 @@ public class PsResumeDao {
 	public int insertCareer(PsCareerDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCareer", dto);
 	}
+	
+	// 이력서 - 경력사항 삭제
+	public int deleteCareer(int carNo) throws Exception {
+		return sqlSession.delete("resume.deleteCareer", carNo);
+	}
+	
 
 	// 이력서-자격증입력
 	public int insertCerti(PsCertiDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCerti", dto);
+	}
+	
+	// 이력서 - 자격증 삭제
+	public int deleteCerti(int certiNo) throws Exception {
+		return sqlSession.delete("resume.deleteCerti", certiNo);
 	}
 
 	// 이력서 - 자기소개서 입력

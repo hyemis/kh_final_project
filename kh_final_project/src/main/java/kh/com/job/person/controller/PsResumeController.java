@@ -298,9 +298,9 @@ public class PsResumeController {
 
 				// 낀테이블 insert
 				rservice.insertCareerInfo(InfoNo);
-				rttr.addFlashAttribute("msg", "성공");
+				rttr.addFlashAttribute("msg", "경력사항이 입력되었습니다.");
 			} else {
-				rttr.addFlashAttribute("msg", "실패");
+				rttr.addFlashAttribute("msg", "경력사항 입력에 실패했습니다.");
 			}
 
 		} catch (Exception e) {
@@ -308,6 +308,17 @@ public class PsResumeController {
 		}
 		mv.setViewName("redirect:/person/resume/career");
 		return mv;
+	}
+	
+	// 경력사항 삭제 
+	@PostMapping("deleteCareer")
+	@ResponseBody
+	public int deleteCareer(@RequestParam("carNo") Integer carNo) throws Exception {
+		
+		System.out.println(carNo);
+		int result = -1;
+		result = rservice.deleteCareer(carNo);
+		return result;
 	}
 
 	// 자격증 페이지
@@ -340,9 +351,9 @@ public class PsResumeController {
 
 				// 낀테이블 insert
 				rservice.insertCertiInfo(InfoNo);
-				rttr.addFlashAttribute("msg", "성공");
+				rttr.addFlashAttribute("msg", "자격증이 입력되었습니다.");
 			} else {
-				rttr.addFlashAttribute("msg", "실패");
+				rttr.addFlashAttribute("msg", "자격증 입력에 실패했습니다.");
 			}
 
 		} catch (Exception e) {
@@ -351,6 +362,18 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/certi");
 		return mv;
 	}
+	
+	// 경력사항 삭제 
+	@PostMapping("deleteCerti")
+	@ResponseBody
+	public int deleteCerti(@RequestParam("certiNo") Integer certiNo) throws Exception {
+		
+		System.out.println(certiNo);
+		int result = -1;
+		result = rservice.deleteCerti(certiNo);
+		return result;
+	}
+
 
 	// 자소서 페이지
 	@GetMapping("cl")

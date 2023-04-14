@@ -74,6 +74,7 @@
 		 				<th scope="col">회사이름</th>
 		 				<th scope="col">제목</th>
 		 				<th scope="col">마감일</th>
+		 				<th scope="col">승인확인</th>
 		 			</tr>
 		 		</thead>
 		 		<tbody>
@@ -90,6 +91,7 @@
 									<td>${list.companyName }</td>
 									<td><a class="" href="${pageContext.request.contextPath}/admin/business/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
 									<td> ${list.closeDate }까지</td>
+									<td class="text-center"><p>${list.raAdmission == 'N'? '미승인' : '승인' }</p></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -105,11 +107,11 @@
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }">prev</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }&search=${search}">prev</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum }">${pNum }</a></li>
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum}&search=${search}">${pNum }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -117,7 +119,7 @@
 						<li class="page-item disabled"><a class="page-link">next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }">next</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }&search=${search}">next</a></li>
 					</c:otherwise>
 				</c:choose>					
 			</ul>
