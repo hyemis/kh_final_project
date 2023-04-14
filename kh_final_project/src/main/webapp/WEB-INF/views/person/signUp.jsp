@@ -294,7 +294,7 @@
 		            return false;
 		        } else if (!checkPassword(signUpForm.userId.value, signUpForm.userPw.value, signUpForm.userPw2.value)) {
 		            return false;
-		        } else if (!checkName(signUpForm.userName.value)) {
+		        } else if (!checkName2(signUpForm.userName.value)) {
 		            return false;
 		        } else if (!checkBirth(signUpForm.userBirth.value)) {
 		            return false;
@@ -380,6 +380,14 @@
             alert("이름이 올바르지 않습니다.");
             return false;
         }
+        return true; //확인이 완료되었을 때
+    	}
+		
+		// 기업 이름 체크 
+		function checkName2(userName) {
+        if (!checkExistData(userName, "이름을"))
+            return false;
+        
         return true; //확인이 완료되었을 때
     	}
 		
