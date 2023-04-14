@@ -189,6 +189,7 @@
 										<button class="btn btn-primary delete-btn"
 											onclick="removeForm(this.parentNode.parentNode)">삭제</button>
 									</div>
+									<hr>
 								</form>
 							</div>
 						</div>
@@ -273,86 +274,100 @@
 		var forms = [ document.getElementsByName("career")[0] ];
 
 		function addCar() {
-//			var lastForm = forms[forms.length - 1];
-
-// lastForm -- re
 			var lastForm = forms[0];
 			var form = lastForm.cloneNode(true);
 			document.getElementById("CarFormContainer").appendChild(form);
 			forms.push(form);
 		}
 
-		/* 이 방법으로 하면 불러오기가 안됨..ㅎ 		
-		var forms = [ document.getElementsByName("career")[0] ];
-
-		 function addCar() {
-		 var lastForm = forms[forms.length - 1];
-		 var form = lastForm.cloneNode(true);
-		 var inputs = form.getElementsByTagName("input");
-
-		 for (var i = 0; i < inputs.length; i++) {
-		 inputs[i].value = "";
-		 }
-
-		 document.getElementById("CarFormContainer").appendChild(form);
-		 forms.push(form);
-		 } */
-
 		// 입력폼 삭제
 		function removeForm(form) {
 			form.remove();
 		}
+						let saveButton = document.getElementById("selectCarBtn");
+						
+						saveButton.addEventListener("click", function() {
+						  // 체크된 경력 데이터를 가져와서 form에 추가
+						  let selectedCareerList = document.querySelectorAll('input[name="selectedCareer"]:checked');
+						    
+						  let newFormHTML = '';
 
-		let checkBoxes = document
-				.querySelectorAll('input[name="selectedCareer"]');
-		for (let i = 0; i < checkBoxes.length; i++) {
-			checkBoxes[i].addEventListener("click", function() {
-				if (this.checked) {
-					for (let j = 0; j < checkBoxes.length; j++) {
-						if (i !== j) {
-							checkBoxes[j].disabled = true;
-						}
-					}
-				} else {
-					for (let j = 0; j < checkBoxes.length; j++) {
-						checkBoxes[j].disabled = false;
-					}
-				}
-			});
-		}
+						  for (let i = 0; i < selectedCareerList.length; i++) {
+						   
+						    
+						    newFormHTML += `
+							  <form>
+								<div class="row mb-3">
+									<label for="carName" class="col-sm-2 col-form-label">회사명</label>
+									<div class="col-sm-10">
+									
+										<input type="text" class="form-control" name="carNewName">
+									</div>
+								</div>
 
+								<div class="row mb-3">
+									<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carNewDate"
+											value="">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carNewPosition" value="">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carNewDept" value="">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="carNewResp" value="">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" name="carNewSalary"
+											value="">
+									</div>
+								</div>
+								<hr>
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+									<button type="submit" class="btn btn-primary" id="">수정</button>
+									
+								</div>
+							</form>
+
+						    `;
+						    
+						     // 기존 form 뒤에 새로운 form 추가
+						    let formContainer = document.getElementById("CarFormContainer");
+						    let newForm = document.createElement("form");
+						    newForm.innerHTML = newFormHTML;
+						    formContainer.appendChild(newForm);
+
+						    let carData = selectedCareerList[i].closest("tr").getElementsByTagName("td");
+						    newForm.elements["carNewName"].value = carData[1].textContent;
+						    newForm.elements["carNewDate"].value = carData[2].textContent;
+						    newForm.elements["carNewPosition"].value = carData[3].textContent;
+						    newForm.elements["carNewDept"].value = carData[4].textContent;
+						    newForm.elements["carNewResp"].value = carData[5].textContent;
+						    newForm.elements["carNewSalary"].value = carData[6].textContent;
+						    
+						  }
+
+						 
+						  
 		
-		// 체크박스 데이터 가져오기
-		// 체크된 경력사항 배열에 저장
-		let saveButton = document.getElementById("selectCarBtn");
-		saveButton
-				.addEventListener(
-						"click",
-						function() {
-							let careerForm = document.forms["career"];
-							// 체크된 경력 데이터를 가져와서 form에 추가
-							let selectedCareerList = document
-									.querySelectorAll('input[name="selectedCareer"]:checked');
-							for (let i = 0; i < selectedCareerList.length; i++) {
-								selectedIdx = selectedCareerList[i].parentNode.parentNode.rowIndex - 1;
-								otherCheckBoxList = document
-										.querySelectorAll('input[name="selectedCareer"]');
-								for (let j = 0; j < otherCheckBoxList.length; j++) {
-									if (j !== selectedIdx) {
-										otherCheckBoxList[j].disabled = true;
-									}
-								}
-								let careerData = selectedCareerList[i].parentElement.parentElement
-										.getElementsByTagName("td");
-								careerForm.elements["carName"].value = careerData[1].textContent;
-								careerForm.elements["carDate"].value = careerData[2].textContent;
-								careerForm.elements["carPosition"].value = careerData[3].textContent;
-								careerForm.elements["carDept"].value = careerData[4].textContent;
-								careerForm.elements["carResp"].value = careerData[5].textContent;
-								careerForm.elements["carSalary"].value = careerData[6].textContent;
-							}
-							
+	
 						});
+
 	</script>
 
 </body>
