@@ -120,7 +120,6 @@
 													<tbody>
 														<c:forEach var="careerList" items="${career}">
 															<tr>
-																<td><input type="checkbox" name="selectedCareer" /></td>
 																<td><input type="checkbox" name="selectedCareer"/></td>
 																<td>${careerList.carDate}</td>
 																<td>${careerList.carName}</td>
