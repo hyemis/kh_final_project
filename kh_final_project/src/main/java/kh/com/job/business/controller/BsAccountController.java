@@ -39,7 +39,7 @@ public class BsAccountController {
 
 /*	기본형
 	@GetMapping("/url")
-	public ModelAndView 해당컨트롤러에서 사용할이름(ModelAndView mv, BsUserDto dto,
+	public ModelAndView 해당컨트롤러에서 사용할이름(ModelAndView mv) {
 		return mv;
 	}
 */	

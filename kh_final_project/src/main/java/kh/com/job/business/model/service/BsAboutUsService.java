@@ -3,35 +3,22 @@ package kh.com.job.business.model.service;
 import java.util.List;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsUserDto;
 
 
 
 public interface BsAboutUsService {
 	
-	//글 등록
-	public int insert(BoardDto dto) ;
-	
-	// 한 개 읽기
-	public BoardDto selectOne(int boardnum);
+	public BsUserDto viewAccount(String userId); //회원정보불러오기
+	public int insert(BoardDto dto); //글쓰기
+	public int update(BoardDto dto); //수정
+	public int delete(BoardDto dto); //삭제
+	public BoardDto selectOne(String boardNum, String userId) ; //하나읽기
+	public int selectOneCount(); 
+	public int selectOneCount(String searchWord);
+	public List<BoardDto> newsLetterList(int currentPage, int limit, String searchWord); //뉴스레터 paging처리+검색하여 읽기
 
-	// 전체읽기 	
-	public List<BoardDto> selectList();
 	
 	
-	
-/*	
-		public int insert(BsInfoDto dto);
-		public int update(BsInfoDto dto);   
-		public int delete(BsInfoDto dto);
-		
-		//하나 읽기
-		public BsInfoDto selectOne(int boardNum, String writer  ) ; //PK
-		public int selectOneCount();
-		public int selectOneCount(String searchWord);
 
-		public List<BsInfoDto> selectList();  // 전체읽기 
-		
-		public List<BsInfoDto> selectList(int currentPage, int limit);  // paging처리하여 읽기
-		public List<BsInfoDto> selectList(int currentPage, int limit, String searchWord);  // paging처리+검색하여 읽기
-*/
 }

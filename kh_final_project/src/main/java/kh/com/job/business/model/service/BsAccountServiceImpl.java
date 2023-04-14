@@ -33,6 +33,11 @@ public class BsAccountServiceImpl implements BsAccountService{
 	}
 	
 	@Override
+	public int pwChk(String userPw) throws Exception {
+		return dao.pwChk(userPw);
+	}
+	
+	@Override
 	public BsUserDto viewAccount(String userId) {
 		return dao.viewAccount(userId);
 	}
@@ -41,12 +46,6 @@ public class BsAccountServiceImpl implements BsAccountService{
 	public BsUserDto getUserPw(String userId) {
 		return dao.getUserPw(userId);
 	}
-
-	@Override
-	public int pwChk(String userPw) throws Exception {
-		return dao.pwChk(userPw);
-	}
-
 	
 
 }
