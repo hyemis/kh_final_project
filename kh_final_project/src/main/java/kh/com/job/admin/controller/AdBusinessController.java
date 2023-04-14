@@ -1,7 +1,6 @@
 package kh.com.job.admin.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
-import kh.com.job.business.model.dto.BsRecruitDto;
-import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
 
