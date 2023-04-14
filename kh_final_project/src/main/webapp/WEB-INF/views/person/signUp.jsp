@@ -182,11 +182,11 @@
 				          <div class="row">
 							<label for="addressPostcode">주소</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" 
+								<input type="text" class="form-control" id="postcode2"
 									name="addressPostcode" >
 							</div>
 							<div class="col-sm-2">
-								<input type="button" class="form-control" id="postcode2"
+								<input type="button" class="form-control"
 									onclick="execDaumPostcode2()" value="주소찾기"><br>
 							</div>
 						</div>
@@ -515,7 +515,7 @@
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('postcode2').value = data.zonecode;
 							document.getElementById("addressRoad").value = roadAddr;
-							document.getElementById("addressDetail").value = data.jibunAddress;
+							document.getElementById("addressJibun").value = data.jibunAddress;
 							var guideTextBox = document.getElementById("guide");
 							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
 							if (data.autoRoadAddress) {
