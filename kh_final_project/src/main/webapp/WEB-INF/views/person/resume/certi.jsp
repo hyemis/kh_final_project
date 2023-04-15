@@ -92,9 +92,8 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="uploadModalLabel">경력사항 불러오기</h5>
-											<button type="button" class="close" data-bs-dismiss="modal"
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
 												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
 										<div class="modal-body">
@@ -221,7 +220,7 @@
 		
 		// 모달창 체크박스 초기화
 		$(document).ready(function() {
-			$('#viewCert').on('hidden.bs.modal', function() {
+			$('#viewCerti').on('hidden.bs.modal', function() {
 				$('input[name=selectedCerti]').prop('checked', false);
 			});
 		});
@@ -334,11 +333,11 @@
 						});
 					
 						
-						// 모달창 닫으면 초기화
+						/* // 모달창 닫으면 초기화
 						$('#viewCerti').on('hidden.bs.modal', function () {
 						    $('#selectedCertiList').html('');
 						    $('input[name="selectedCerti"]').prop('checked', false);
-						});
+						}); */
 						
 						// 자격증 삭제 
 						$('.deleteCerti').click(function() {

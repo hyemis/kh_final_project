@@ -309,12 +309,12 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/career");
 		return mv;
 	}
-	
-	// 경력사항 삭제 
+
+	// 경력사항 삭제
 	@PostMapping("deleteCareer")
 	@ResponseBody
 	public int deleteCareer(@RequestParam("carNo") Integer carNo) throws Exception {
-		
+
 		System.out.println(carNo);
 		int result = -1;
 		result = rservice.deleteCareer(carNo);
@@ -362,18 +362,17 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/certi");
 		return mv;
 	}
-	
-	// 경력사항 삭제 
+
+	// 경력사항 삭제
 	@PostMapping("deleteCerti")
 	@ResponseBody
 	public int deleteCerti(@RequestParam("certiNo") Integer certiNo) throws Exception {
-		
+
 		System.out.println(certiNo);
 		int result = -1;
 		result = rservice.deleteCerti(certiNo);
 		return result;
 	}
-
 
 	// 자소서 페이지
 	@GetMapping("cl")
@@ -382,17 +381,17 @@ public class PsResumeController {
 		// 자기소개서 불러오기
 		List<PsClDto> clList = rservice.selectListCl(principal.getName());
 		for (PsClDto cl : clList) {
-	        cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
-	        cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
-	        cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
-	        cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
-	        
-	        if (cl.getClFile() != null) {
-	            cl.setClFile("파일 존재");
-	        } else {
-	        	cl.setClFile("파일 없음");
-	        }
-		
+			cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
+			cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
+			cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
+			cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
+
+			if (cl.getClFile() != null) {
+				cl.setClFile("파일 존재");
+			} else {
+				cl.setClFile("파일 없음");
+			}
+
 		}
 		mv.addObject("clList", clList);
 		return mv;
@@ -437,6 +436,16 @@ public class PsResumeController {
 		}
 
 		return result;
+	}
+
+	// 자소서 정보불러오기
+	@GetMapping("detail/{clNo}")
+	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable int clNo) throws Exception {
+
+		PsClDto dto = rservice.selectOneCl(clNo);
+		mv.addObject("cl", dto);
+		mv.setViewName("person/resume/detail");
+		return mv;
 	}
 
 	// 예외처리는 프로젝트 후반에 작성

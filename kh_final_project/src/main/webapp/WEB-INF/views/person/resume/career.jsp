@@ -58,7 +58,7 @@
 	display: none;
 }
 
-#deleteCareer {
+.deleteCareer {
 	width: 60px;
 }
 </style>
@@ -96,9 +96,8 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="uploadModalLabel">경력사항 불러오기</h5>
-											<button type="button" class="close" data-bs-dismiss="modal"
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
 												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
 										<div class="modal-body">
@@ -362,7 +361,6 @@
 						          formContainer.appendChild(newForm);
 						    
 						     // 기존 form 뒤에 새로운 form 추가
-
 						    let carData = selectedCareerList[i].closest("tr").getElementsByTagName("td");
 						    newForm.elements["carNewName"].value = carData[1].textContent;
 						    newForm.elements["carNewDate"].value = carData[2].textContent;
@@ -376,25 +374,25 @@
 						});
 						
 						
-						// 경력사항 삭제 
-	$('.deleteCareer').click(function() {
-		var carNo = $(this).prev('input[name="carNo"]').val();
-
-  $.ajax({
-    type: 'POST',
-    url: 'deleteCareer',
-    data: { carNo: carNo },
-    success: function(result) {
-      if(result > 0) {
-        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
-        location.reload();
-      } else {
-        alert('해당 경력사항 삭제에 실패했습니다.');
-      }
-    }
-  });
-});
-						
+			// 경력사항 삭제 
+			$('.deleteCareer').click(function() {
+				var carNo = $(this).prev('input[name="carNo"]').val();
+		
+		  $.ajax({
+		    type: 'POST',
+		    url: 'deleteCareer',
+		    data: { carNo: carNo },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
+		        location.reload();
+		      } else {
+		        alert('해당 경력사항 삭제에 실패했습니다.');
+		      }
+		    }
+		  });
+		});
+								
 						
 		// 모달창에 체크한 이력서 순서대로 표시
 		$(document).ready(function() {

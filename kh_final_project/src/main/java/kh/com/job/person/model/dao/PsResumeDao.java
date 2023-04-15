@@ -71,21 +71,31 @@ public class PsResumeDao {
 	public int insertCareer(PsCareerDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCareer", dto);
 	}
-	
+
 	// 이력서 - 경력사항 삭제
 	public int deleteCareer(int carNo) throws Exception {
 		return sqlSession.delete("resume.deleteCareer", carNo);
 	}
-	
 
 	// 이력서-자격증입력
 	public int insertCerti(PsCertiDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCerti", dto);
 	}
-	
+
 	// 이력서 - 자격증 삭제
 	public int deleteCerti(int certiNo) throws Exception {
 		return sqlSession.delete("resume.deleteCerti", certiNo);
+	}
+
+	// 이력서 - 자기소개서 detail 보기
+	public PsClDto selectOneCl(int clNo) throws Exception {
+	    PsClDto dto = sqlSession.selectOne("resume.selectOneCl", clNo);
+	    dto.setClFile(removeHtmlTag(dto.getClFile()));
+	    dto.setClGrowth(removeHtmlTag(dto.getClGrowth()));
+	    dto.setClMotive(removeHtmlTag(dto.getClMotive()));
+	    dto.setClAdv(removeHtmlTag(dto.getClAdv()));
+	    dto.setClAsp(removeHtmlTag(dto.getClAsp()));
+	    return dto;
 	}
 
 	// 이력서 - 자기소개서 입력
@@ -100,7 +110,7 @@ public class PsResumeDao {
 
 	// 이력서-고등학교 최신보기
 	public int getMaxHighNo() throws Exception {
-		return sqlSession.selectOne("resume.selectOneHigh");
+		return sqlSession.selectOne("resume.selectOneMaxHigh");
 	}
 
 	// UniInfo - 입력
@@ -110,7 +120,7 @@ public class PsResumeDao {
 
 	// 이력서-대학교 최신보기
 	public int getMaxUniNo() throws Exception {
-		return sqlSession.selectOne("resume.selectOneUni");
+		return sqlSession.selectOne("resume.selectOneMaxUni");
 	}
 
 	// GradInfo - 입력
@@ -120,7 +130,7 @@ public class PsResumeDao {
 
 	// 이력서 - 대학원 최신보기
 	public int getMaxGradNo() throws Exception {
-		return sqlSession.selectOne("resume.selectOneGrad");
+		return sqlSession.selectOne("resume.selectOneMaxGrad");
 	}
 
 	// CareerInfo - 입력
@@ -130,7 +140,7 @@ public class PsResumeDao {
 
 	// 이력서 - 경력 최신보기
 	public int getMaxCareerNo() throws Exception {
-		return sqlSession.selectOne("resume.selectOneCar");
+		return sqlSession.selectOne("resume.selectOneMaxCar");
 	}
 
 	// CertiInfo - 입력
@@ -140,7 +150,7 @@ public class PsResumeDao {
 
 	// 이력서 - 자격증 최신보기
 	public int getMaxCertiNo() throws Exception {
-		return sqlSession.selectOne("resume.selectOneCerti");
+		return sqlSession.selectOne("resume.selectOneMaxCerti");
 	}
 
 	// ClInfo - 입력
@@ -150,7 +160,7 @@ public class PsResumeDao {
 
 	// 이력서 - 자기소개서 최신보기
 	public int getMaxClNo() throws Exception {
-		return sqlSession.selectOne("resume.selectOneCl");
+		return sqlSession.selectOne("resume.selectOneMaxCl");
 	}
 
 	// 고등학교 학력사항 보기
@@ -262,6 +272,14 @@ public class PsResumeDao {
 	public List<PsClDto> selectListCl(String userId) {
 		List<PsClDto> ClList = sqlSession.selectList("resume.selectListCl", userId);
 		return ClList;
+	}
+	
+	// html태그 제거 
+	public static String removeHtmlTag(String html) {
+	    if(html == null || html.trim().length() == 0) {
+	        return "";
+	    }
+	    return html.replaceAll("<[^>]*>", "");
 	}
 
 }

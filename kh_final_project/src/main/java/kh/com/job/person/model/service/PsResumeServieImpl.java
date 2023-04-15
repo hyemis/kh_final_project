@@ -123,6 +123,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int insertCl(PsClDto dto) throws Exception {
 		return dao.insertCl(dto);
 	}
+	
+	@Override
+	public PsClDto selectOneCl(int clNo) throws Exception {
+		return dao.selectOneCl(clNo);
+	}
 
 	@Override
 	public int getMaxHighNo() throws Exception {
@@ -213,6 +218,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	public List<PsClDto> selectListCl(String userId) throws Exception {
 		return dao.selectListCl(userId);
 	}
+
+	
 
 	
 

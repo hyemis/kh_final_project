@@ -27,12 +27,6 @@
 		USER_ID=#{USER_ID} order by RESUME_DATE desc
 	</select>
 
-
-
-	<!-- <insert id="insert" parameterType="rdto"> INSERT INTO USER_RESUME (RESUME_NO, 
-		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) VALUES(USER_RESUME_SEQ.NEXTVAL, 
-		#{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId}) </insert> -->
-
 	<insert id="insert" parameterType="rdto">
 		INSERT INTO USER_RESUME
 		(RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
@@ -117,6 +111,10 @@
 		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive},
 		#{clAdv}, #{clAsp})
 	</insert>
+	
+	<select id="selectOneCl" resultType="cldto">
+	select CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP  from RESUME_CL where CL_NO = #{clNo}
+	</select> 
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
 		insert into
@@ -156,7 +154,7 @@
 	</insert>
 
 	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
-	<select id="selectOneHigh" resultType="_int">
+	<select id="selectOneMaxHigh" resultType="_int">
 		SELECT HIGH_EDU_NO
 		FROM
 		RESUME_HIGHSCHOOL
@@ -168,7 +166,7 @@
 	</select>
 
 	<!-- UNI_EDU_NO 이 제일 큰 값 -->
-	<select id="selectOneUni" resultType="_int">
+	<select id="selectOneMaxUni" resultType="_int">
 		SELECT UNI_EDU_NO
 		FROM
 		RESUME_UNIVERSITY
@@ -180,7 +178,7 @@
 	</select>
 
 	<!-- GRAD_EDU_NO 이 제일 큰 값 -->
-	<select id="selectOneGrad" resultType="_int">
+	<select id="selectOneMaxGrad" resultType="_int">
 		SELECT GRAD_EDU_NO
 		FROM
 		RESUME_GRADSCHOOL
@@ -192,7 +190,7 @@
 	</select>
 
 	<!-- CAR_NO 이 제일 큰 값 -->
-	<select id="selectOneCar" resultType="_int">
+	<select id="selectOneMaxCar" resultType="_int">
 		SELECT CAR_NO
 		FROM
 		RESUME_CAREER
@@ -204,7 +202,7 @@
 	</select>
 
 	<!-- CERTI_NO 이 제일 큰 값 -->
-	<select id="selectOneCerti" resultType="_int">
+	<select id="selectOneMaxCerti" resultType="_int">
 		SELECT CERTI_NO
 		FROM
 		RESUME_CERTI
@@ -216,7 +214,7 @@
 	</select>
 
 	<!-- CL_NO 이 제일 큰 값 -->
-	<select id="selectOneCl" resultType="_int">
+	<select id="selectOneMaxCl" resultType="_int">
 		SELECT CL_NO
 		FROM
 		RESUME_CL
