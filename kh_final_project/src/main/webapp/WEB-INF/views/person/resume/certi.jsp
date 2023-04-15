@@ -92,9 +92,8 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="uploadModalLabel">경력사항 불러오기</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-												aria-label="Close">
-											</button>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
 											<p>불러올 자격증을 체크하세요.</p>
@@ -244,11 +243,17 @@
 		let saveButton = document.getElementById("selectCertiBtn");
 						
 						saveButton.addEventListener("click", function() {
+							
 						  // 체크된 경력 데이터를 가져와서 form에 추가
 						  let selectedCertiList = document.querySelectorAll('input[name="selectedCerti"]:checked');
 						    
 						  let newFormHTML =	`
 							  <form name="certi" action="certi" method="post">
+							  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+								<button type="button" class="btn btn-outline-dark" id="deleteInfo">
+								  <i class="fa fa-minus"></i>
+								</button>
+								</div>
 								<div class="row mb-3">
 									<label for="certiNewName" class="col-sm-2 col-form-label">자격증명</label>
 									<div class="col-sm-10">
@@ -267,27 +272,37 @@
 										<input type="text" class="form-control" name="certiNewDate">
 									</div>
 								</div>
-								<hr>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 								<button type="submit" class="btn btn-primary">수정</button>
-							</div>
+								</div>
+								<hr>
 							</form>
 						    `;
 						    
-						      for (let i = 0; i < selectedCertiList.length; i++) {
-						          let newForm = document.createElement("form");
-						          let formContainer = document.getElementById("CertiFormContainer");
-						          newForm.innerHTML = newFormHTML;
-						          formContainer.appendChild(newForm);
-						    
-						     // 기존 form 뒤에 새로운 form 추가
+						for (let i = 0; i < selectedCertiList.length; i++) {
+						  let newForm = document.createElement("form");
+						  let formContainer = document.getElementById("CertiFormContainer");
+						  newForm.id = "certi-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+						  newForm.innerHTML = newFormHTML;
+						  console.log(newForm.id);
+						  formContainer.appendChild(newForm);
+						
+						  // 기존 form 뒤에 새로운 form 추가
+						  let certiData = selectedCertiList[i].closest("tr").getElementsByTagName("td");
+						  newForm.elements["certiNewName"].value = certiData[1].textContent;
+						  newForm.elements["certiNewPub"].value = certiData[2].textContent;
+						  newForm.elements["certiNewDate"].value = certiData[3].textContent;
+						
+						  // - 버튼
+						  let deleteBtn = newForm.querySelector("#deleteInfo");
+						  deleteBtn.addEventListener("click", function() {
+						    const formId = newForm.id;
+						    const formToRemove = document.getElementById(formId);
+						    formContainer.removeChild(formToRemove);
+						  });
 
-						    let certiData = selectedCertiList[i].closest("tr").getElementsByTagName("td");
-						    newForm.elements["certiNewName"].value = certiData[1].textContent;
-						    newForm.elements["certiNewPub"].value = certiData[2].textContent;
-						    newForm.elements["certiNewDate"].value = certiData[3].textContent;
-						    
-						  }
+						}
+
 
 						});
 						
@@ -331,13 +346,13 @@
 						    $('#selectedCertiList').html(html);
 						  });
 						});
-					
 						
-						/* // 모달창 닫으면 초기화
+						// 모달창 닫으면 초기화
 						$('#viewCerti').on('hidden.bs.modal', function () {
 						    $('#selectedCertiList').html('');
 						    $('input[name="selectedCerti"]').prop('checked', false);
-						}); */
+						});
+					
 						
 						// 자격증 삭제 
 						$('.deleteCerti').click(function() {
@@ -358,6 +373,11 @@
 						    }
 						  });
 						});
+						
+						
+						
+        
+
 		
 		
 	</script>

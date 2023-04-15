@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
 
+<!-- userId 들고오면 resumeNo max 인거 찾아줌 삭제 예정! -->
 	<select id="selectOne" resultType="rdto">
 		select RESUME_NO,
 		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
@@ -140,28 +141,29 @@
 	</insert>
 
 	<insert id="insertGradInfo" parameterType="ginfodto">
-		insert into
-		RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
+		insert into RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
 		(#{resumeNo},#{gradEduNo})
 	</insert>
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
 		INSERT INTO RESUME_CAR_INFO (RESUME_NO, CAR_NO)
-		SELECT NVL(MAX(RESUME_NO), 1), #{carNo} FROM USER_RESUME WHERE userId =
+		SELECT NVL(MAX(RESUME_NO), 1), #{carNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
 
 
 	<insert id="insertCertiInfo" parameterType="certiinfodto">
 		insert into
-		RESUME_CERTI_INFO (RESUME_NO, CERTI_NO) values
-		(#{resumeNo},#{certiNo})
+		RESUME_CERTI_INFO (RESUME_NO, CERTI_NO)
+		SELECT NVL(MAX(RESUME_NO), 1), #{certiNo} FROM USER_RESUME WHERE USER_ID =
+		#{userId}
 	</insert>
 
 	<insert id="insertClInfo" parameterType="clinfodto">
 		insert into
-		RESUME_CL_INFO (RESUME_NO, CL_NO) values
-		(#{resumeNo},#{clNo})
+		RESUME_CL_INFO (RESUME_NO, CL_NO) 
+		SELECT NVL(MAX(RESUME_NO), 1), #{clNo} FROM USER_RESUME WHERE USER_ID =
+		#{userId}
 	</insert>
 	
 	

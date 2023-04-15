@@ -96,9 +96,8 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h5 class="modal-title" id="uploadModalLabel">경력사항 불러오기</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-												aria-label="Close">
-											</button>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
 											<p>불러올 경력을 체크하세요.</p>
@@ -119,28 +118,29 @@
 													<tbody>
 														<c:forEach var="careerList" items="${career}">
 															<tr>
-																<td><input type="checkbox" name="selectedCareer"/></td>
+																<td><input type="checkbox" name="selectedCareer" /></td>
 																<td>${careerList.carDate}</td>
 																<td>${careerList.carName}</td>
 																<td>${careerList.carPosition}</td>
 																<td>${careerList.carDept}</td>
 																<td>${careerList.carResp}</td>
 																<td>${careerList.carSalary}</td>
-																<td>
-																<input type="hidden" name="carNo"
+																<td><input type="hidden" name="carNo"
 																	value="${careerList.carNo}" required>
 																	<button type="button"
-																		class="btn btn-outline-dark deleteCareer"
-																		>삭제</button></td>
+																		class="btn btn-outline-dark deleteCareer">삭제</button></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
-												
+
 												<div id="selectedCareerList"></div>
-												
+
 												<button type="button" data-bs-dismiss="modal"
-													class="btn btn-primary mx-auto d-block" id="selectCarBtn" data-carNo="${careerList.carNo}" class="btn btn-primary mx-auto d-block" id="selectCarBtn" onclick="saveCar();">불러오기</button>
+													class="btn btn-primary mx-auto d-block" id="selectCarBtn"
+													data-carNo="${careerList.carNo}"
+													class="btn btn-primary mx-auto d-block" id="selectCarBtn"
+													onclick="saveCar();">불러오기</button>
 											</div>
 
 										</div>
@@ -151,7 +151,8 @@
 							<input type="radio" id="radio-box" name="radio-group"> <label
 								for="radio-box">경력없음(신입)</label><br>
 							<hr>
-							<button class="btn btn-primary" onclick="addCar()">새 경력추가</button>
+							<button class="btn btn-primary" onclick="addCar()">새
+								경력추가</button>
 							<br>
 						</div>
 						<div id="hidden-content">
@@ -347,8 +348,10 @@
 									</div>
 								</div>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-									<button type="submit" class="btn btn-primary">수정</button>
-									
+								<button type="submit" class="btn btn-primary">수정</button>
+								<button type="button" class="btn btn-outline-dark" id="deleteInfo">
+								  <i class="fa fa-minus"></i>
+								</button>
 								</div>
 								<hr>
 							</form>
@@ -393,29 +396,6 @@
 		  });
 		});
 								
-						// 경력사항 삭제 
-	// 경력사항 삭제 
-	$('.deleteCareer').click(function() {
-		var carNo = $(this).prev('input[name="carNo"]').val();
-
-  $.ajax({
-    type: 'POST',
-    url: 'deleteCareer',
-    data: { carNo: carNo },
-    success: function(result) {
-      if(result > 0) {
-        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
-        location.reload();
-      } else {
-        alert('해당 경력사항 삭제에 실패했습니다.');
-      }
-    }
-  });
-});
-	
-
-	
-	
 	// '불러오기' 버튼 클릭시 낀테이블 inesrt
 	function saveCar() {
 		var reqData = {
@@ -490,7 +470,6 @@
 		    $('#selectedCareerList').html('');
 		    $('input[name="selectedCareer"]').prop('checked', false);
 		});
-
 
 
 

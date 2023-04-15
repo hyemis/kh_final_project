@@ -111,6 +111,7 @@ public class PsResumeController {
 
 		int resumeNo = -1;
 		try {
+			
 			resumeNo = rservice.insert(dto);
 			return resumeNo;
 		} catch (Exception e) {
@@ -285,6 +286,7 @@ public class PsResumeController {
 	public ModelAndView doCareer(Principal principal, ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
 		int result = -1;
 		try {
+			//경력사항 테이블 insert 
 			result = rservice.insertCareer(dto);
 
 			if (result > 0) {
@@ -360,13 +362,11 @@ public class PsResumeController {
 			result = rservice.insertCerti(dto);
 
 			if (result > 0) {
-				PsResumeDto resume = rservice.selectOne(principal.getName());
-				int resumeNo = resume.getResumeNo();
 				int certiNo = rservice.getMaxCertiNo();
-
+				
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("certiNo", certiNo);
+				InfoNo.put("userId", principal.getName());
 
 				// 낀테이블 insert
 				rservice.insertCertiInfo(InfoNo);
@@ -438,13 +438,14 @@ public class PsResumeController {
 		try {
 			result = rservice.insertCl(dto);
 			if (result > 0) {
-				PsResumeDto resume = rservice.selectOne(principal.getName());
-				int resumeNo = resume.getResumeNo();
+//				PsResumeDto resume = rservice.selectOne(principal.getName());
+//				int resumeNo = resume.getResumeNo();
 				int clNo = rservice.getMaxClNo();
 
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", resumeNo);
+//				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("clNo", clNo);
+				InfoNo.put("userId", principal.getName());
 
 				rservice.insertClInfo(InfoNo);
 				return result;
