@@ -109,15 +109,15 @@ public class PsResumeController {
 			dto.setPortfFile(portfUrl);
 		}
 
-		int result = -1;
+		int resumeNo = -1;
 		try {
-			result = rservice.insert(dto);
-			return result;
+			resumeNo = rservice.insert(dto);
+			return resumeNo;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return resumeNo;
 	}
 
 	// 이력서 삭제
@@ -159,7 +159,8 @@ public class PsResumeController {
 
 	// 학력사항 페이지
 	@GetMapping("school")
-	public ModelAndView viewSchool(ModelAndView mv, Principal principal) throws Exception {
+	public ModelAndView viewSchool(ModelAndView mv, Principal principal
+			) throws Exception {
 
 		// 고등학교 학력정보 불러오기
 		List<PsHschoolDto> high = rservice.selectListHigh(principal.getName());
@@ -172,10 +173,9 @@ public class PsResumeController {
 		// 대학원 학력정보 불러오기
 		List<PsGschoolDto> grad = rservice.selectListGrad(principal.getName());
 		mv.addObject("grad", grad);
-
 		return mv;
 	}
-
+	
 	// 고등학교입력
 	@PostMapping("rHSchool")
 	public ModelAndView rHschool(Principal principal, ModelAndView mv, PsHschoolDto dto, RedirectAttributes rttr) {
@@ -288,13 +288,14 @@ public class PsResumeController {
 			result = rservice.insertCareer(dto);
 
 			if (result > 0) {
-				PsResumeDto resume = rservice.selectOne(principal.getName());
-				int resumeNo = resume.getResumeNo();
+//				PsResumeDto resume = rservice.selectOne(principal.getName());
+				//int resumeNo = resume.getResumeNo();
 				int carNo = rservice.getMaxCareerNo();
 
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", resumeNo);
+	//			InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("carNo", carNo);
+				InfoNo.put("userId", principal.getName());
 
 				// 낀테이블 insert
 				rservice.insertCareerInfo(InfoNo);
@@ -311,6 +312,24 @@ public class PsResumeController {
 	}
 
 	// 경력사항 삭제
+	// 경력 불러올때 낀테이블 insert
+	@PostMapping("career.aj")
+	@ResponseBody
+	public String doCareer(Principal principal,
+			@RequestParam("carNo") Integer carNo
+			) throws Exception {
+
+	
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("carNo", carNo);
+		InfoNo.put("userId", principal.getName());
+		
+		rservice.insertCareerInfo(InfoNo);
+
+		return "success";
+	}
+	
+	// 경력사항 삭제 
 	@PostMapping("deleteCareer")
 	@ResponseBody
 	public int deleteCareer(@RequestParam("carNo") Integer carNo) throws Exception {

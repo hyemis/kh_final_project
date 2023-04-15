@@ -270,6 +270,36 @@ public class PsMainController {
 		}
 		
 	}
+	
+	@PostMapping("/bsSignUp")
+	public ModelAndView doBsSignUp(ModelAndView mv
+			, PsUserDto dto
+			, RedirectAttributes rttr
+			, HttpServletRequest request) {
+		
+	
+		  int result = -1;
+		
+		try {
+			
+			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
+			result = service.insert(dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0 ) {
+			rttr.addFlashAttribute("msg", "JOB-A 기업 회원가입에 성공하였습니다.");
+			mv.setViewName("redirect:/");
+			return mv;
+		} else {
+			rttr.addFlashAttribute("msg", "JOB-A 기업  회원가입에 실패하였습니다.");
+			mv.setViewName("redirect:/person/signUp");
+			return mv;
+		}
+		
+	}
 
 	// 아이디 중복 체크 
 	@PostMapping("/idChk") 

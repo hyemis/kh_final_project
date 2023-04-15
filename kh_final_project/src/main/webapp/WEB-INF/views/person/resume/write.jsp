@@ -223,9 +223,10 @@
 				processData : false,
 				data : formdata,
 				success : function(result) {
-					if (result == 1) {
+					// result <== resumeNo 
+					if (result > 1) {
 						alert("이력서가 등록되었습니다.");
-						location.href = "/job/person/resume/school";
+						location.href = "${pageContext.request.contextPath}/person/resume/school";
 					} else {
 						alert("이력서 등록에 실패했습니다.");
 					}

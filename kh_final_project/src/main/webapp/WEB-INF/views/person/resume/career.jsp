@@ -140,7 +140,7 @@
 												<div id="selectedCareerList"></div>
 												
 												<button type="button" data-bs-dismiss="modal"
-													class="btn btn-primary mx-auto d-block" id="selectCarBtn" data-carNo="${careerList.carNo}">불러오기</button>
+													class="btn btn-primary mx-auto d-block" id="selectCarBtn" data-carNo="${careerList.carNo}" class="btn btn-primary mx-auto d-block" id="selectCarBtn" onclick="saveCar();">불러오기</button>
 											</div>
 
 										</div>
@@ -151,7 +151,7 @@
 							<input type="radio" id="radio-box" name="radio-group"> <label
 								for="radio-box">경력없음(신입)</label><br>
 							<hr>
-							<button class="btn btn-primary" onclick="addCar()">새정보추가</button>
+							<button class="btn btn-primary" onclick="addCar()">새 경력추가</button>
 							<br>
 						</div>
 						<div id="hidden-content">
@@ -346,11 +346,11 @@
 											>
 									</div>
 								</div>
-								<hr>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 									<button type="submit" class="btn btn-primary">수정</button>
 									
 								</div>
+								<hr>
 							</form>
 						    `;
 						    
@@ -393,6 +393,50 @@
 		  });
 		});
 								
+						// 경력사항 삭제 
+	// 경력사항 삭제 
+	$('.deleteCareer').click(function() {
+		var carNo = $(this).prev('input[name="carNo"]').val();
+
+  $.ajax({
+    type: 'POST',
+    url: 'deleteCareer',
+    data: { carNo: carNo },
+    success: function(result) {
+      if(result > 0) {
+        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
+        location.reload();
+      } else {
+        alert('해당 경력사항 삭제에 실패했습니다.');
+      }
+    }
+  });
+});
+	
+
+	
+	
+	// '불러오기' 버튼 클릭시 낀테이블 inesrt
+	function saveCar() {
+		var reqData = {
+			    carNo: ($("#carNo").val())
+			};
+		console.log(reqData);
+		$.ajax({
+			url : "${pageContext.request.contextPath}/person/resume/career.aj",
+			type : "post",
+			data : reqData,
+			success : function(result) {
+				if (result == 1) {
+					alert("성공");
+					location.href = "/job/person/resume/career";
+				} else {
+					alert("실패");
+				}
+			}
+		})
+	}
+						
 						
 		// 모달창에 체크한 이력서 순서대로 표시
 		$(document).ready(function() {

@@ -130,7 +130,7 @@
 							<button class="btn btn-primary" type="submit">회원가입 완료</button>
 						</div>
 				</form>	     
-				<form class="hidden corporate-sign-form signUpForm" name="signUpForm" id="corporate-sign-form" action="signUp" method="post" onsubmit="return bscheckAll()">
+				<form class="hidden corporate-sign-form signUpForm" name="signUpForm" id="corporate-sign-form" action="bsSignUp" method="post" onsubmit="return bscheckAll()">
 				<div class="m-4"><h3>기업회원 회원가입</h3></div>
 			        	
 				          <div class="row">
@@ -182,11 +182,11 @@
 				          <div class="row">
 							<label for="addressPostcode">주소</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" 
+								<input type="text" class="form-control" id="postcode2"
 									name="addressPostcode" >
 							</div>
 							<div class="col-sm-2">
-								<input type="button" class="form-control" id="postcode2"
+								<input type="button" class="form-control"
 									onclick="execDaumPostcode2()" value="주소찾기"><br>
 							</div>
 						</div>
@@ -294,7 +294,7 @@
 		            return false;
 		        } else if (!checkPassword(signUpForm.userId.value, signUpForm.userPw.value, signUpForm.userPw2.value)) {
 		            return false;
-		        } else if (!checkName(signUpForm.userName.value)) {
+		        } else if (!checkName2(signUpForm.userName.value)) {
 		            return false;
 		        } else if (!checkBirth(signUpForm.userBirth.value)) {
 		            return false;
@@ -380,6 +380,14 @@
             alert("이름이 올바르지 않습니다.");
             return false;
         }
+        return true; //확인이 완료되었을 때
+    	}
+		
+		// 기업 이름 체크 
+		function checkName2(userName) {
+        if (!checkExistData(userName, "이름을"))
+            return false;
+        
         return true; //확인이 완료되었을 때
     	}
 		
@@ -515,7 +523,7 @@
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('postcode2').value = data.zonecode;
 							document.getElementById("addressRoad").value = roadAddr;
-							document.getElementById("addressDetail").value = data.jibunAddress;
+							document.getElementById("addressJibun").value = data.jibunAddress;
 							var guideTextBox = document.getElementById("guide");
 							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
 							if (data.autoRoadAddress) {

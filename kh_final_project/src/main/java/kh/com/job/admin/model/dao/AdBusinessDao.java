@@ -1,6 +1,7 @@
 package kh.com.job.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class AdBusinessDao {
 
 	public BsUserDto userDetail(String userId) {
 		return sqlsession.selectOne("admin.userDetail", userId);
+	}
+
+	public int admissChange(Map<String, String> map) {
+		return sqlsession.insert("admin.admissChange", map);
 	}
 	
 	

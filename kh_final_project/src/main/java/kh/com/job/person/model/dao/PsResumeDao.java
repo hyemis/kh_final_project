@@ -36,11 +36,17 @@ public class PsResumeDao {
 		return sqlSession.selectList("resume.selectList", userId);
 	}
 
-	// 이력서 등록
+	// 이력서 등록 - return val : resumeNo
 	public int insert(PsResumeDto dto) throws Exception {
+		int resumeNo = -1;
 		int result = -1;
+		resumeNo = sqlSession.selectOne("resume.getResumeNextval");
+		dto.setResumeNo(resumeNo);
 		result = sqlSession.insert("resume.insert", dto);
-		return result;
+		if(result < 1) {
+			resumeNo = result;
+		}
+		return resumeNo;
 	}
 
 	// 이력서 삭제

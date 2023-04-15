@@ -4,22 +4,56 @@
 
 
 <!-- business -->
-	<!-- 회사소개작성 -->
+	<select id="getBoardNum">
+	 SELECT BOARD_NO FROM BOARD
+	</select>
+
+
+	<!-- 회사소개 -->
 	<insert id="insertInfo">
 	INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
-		   VALUES(BOARD_SEQ.NEXTVAL,#{userId},UDB06,#{userName},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
+		   VALUES(#{boardNum},#{userId},UDB06,#{userName},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
+	<selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+	select max(BOARD_NO) +1 from BOARD
+	</selectKey>
 	</insert>
 	
-	<!-- 뉴스레터작성 -->
+	
+	
+	
+	
+	
+	
+	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
 	INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
-		   VALUES(BOARD_SEQ.NEXTVAL,#{userId},UDB05,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
-	</insert>	
-
+		   VALUES(#{boardNum},#{userId},UDB05,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	<selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+	select max(BOARD_NO) +1 from BOARD
+	</selectKey>	
+	</insert>
+	
+	<update id="updateNewsletter">
+	
+	</update>
+	
+	<select id="newsLetterList">
+		SELECT * FROM BOARD
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	<!-- qna -->
 	<insert id="insertQnA">
 	INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
-		   VALUES(BOARD_SEQ.NEXTVAL,#{userId},UDB04,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+		   VALUES(#{boardNum},#{userId},UDB04,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	<selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+	select max(BOARD_NO) +1 from BOARD
+	</selectKey>	
 	</insert>	
 	
 	   
