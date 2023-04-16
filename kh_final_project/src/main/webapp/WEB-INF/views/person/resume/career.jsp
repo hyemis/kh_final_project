@@ -398,16 +398,15 @@
 								
 	// '불러오기' 버튼 클릭시 낀테이블 inesrt
 	function saveCar() {
-		var reqData = {
-			    carNo: ($("#carNo").val())
-			};
-		console.log(reqData);
+		let carNo = "${careerList.carNo}"
+		console.log(carNo);
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/person/resume/career.aj",
 			type : "post",
-			data : reqData,
+			data : {carNo : carNo},
 			success : function(result) {
-				if (result == 1) {
+				if (result > 0) {
 					alert("성공");
 					location.href = "/job/person/resume/career";
 				} else {

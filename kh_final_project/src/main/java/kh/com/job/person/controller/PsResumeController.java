@@ -280,7 +280,8 @@ public class PsResumeController {
 
 		return mv;
 	}
-
+	
+	// TODO : 낀테이블 insert빼기
 	// 경력사항 입력
 	@PostMapping("career")
 	public ModelAndView doCareer(Principal principal, ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
@@ -313,7 +314,6 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 경력사항 삭제
 	// 경력 불러올때 낀테이블 insert
 	@PostMapping("career.aj")
 	@ResponseBody
