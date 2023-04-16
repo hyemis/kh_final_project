@@ -381,13 +381,39 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/certi");
 		return mv;
 	}
+	
+	
+	// 끼인 테이블 insert 분리하기
+	@PostMapping("insertInfoCerti")
+	@ResponseBody
+	public int insertInfoCerti(Principal principal, @RequestParam("certiNo") Integer certiNo) throws Exception {
+		int result = -1;
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("certiNo", certiNo);
+		InfoNo.put("userId", principal.getName());
+		result = rservice.insertCertiInfo(InfoNo);
+		return result;
+	}
+	
+	// 자격증 끼인 테이블 삭제
+	@PostMapping("deleteInfoCerti")
+	@ResponseBody
+	public int deleteInfoCerti(Principal principal, @RequestParam("certiNo") Integer certiNo) throws Exception {
+			System.out.println(certiNo);
+			int result = -1;
+			Map<String, Object> InfoNo = new HashMap<>();
+			InfoNo.put("certiNo", certiNo);
+			InfoNo.put("userId", principal.getName());
+			result = rservice.deleteInfoCerti(InfoNo);
+			return result;
+	}
 
-	// 경력사항 삭제
+
+	// 자격증 테이블 삭제
 	@PostMapping("deleteCerti")
 	@ResponseBody
 	public int deleteCerti(@RequestParam("certiNo") Integer certiNo) throws Exception {
 
-		System.out.println(certiNo);
 		int result = -1;
 		result = rservice.deleteCerti(certiNo);
 		return result;
@@ -438,12 +464,9 @@ public class PsResumeController {
 		try {
 			result = rservice.insertCl(dto);
 			if (result > 0) {
-//				PsResumeDto resume = rservice.selectOne(principal.getName());
-//				int resumeNo = resume.getResumeNo();
 				int clNo = rservice.getMaxClNo();
 
 				Map<String, Object> InfoNo = new HashMap<>();
-//				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("clNo", clNo);
 				InfoNo.put("userId", principal.getName());
 

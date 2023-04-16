@@ -82,6 +82,8 @@ public interface PsResumeService {
 	public int getMaxCareerNo() throws Exception;
 
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception;
 
 	// CertiInfo
 	public int getMaxCertiNo() throws Exception;

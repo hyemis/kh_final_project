@@ -173,6 +173,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int getMaxCertiNo() throws Exception {
 		return dao.getMaxCertiNo();
 	}
+	
+	@Override
+	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoCerti(InfoNo);
+	}
 
 	@Override
 	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception {

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
 
-<!-- userId 들고오면 resumeNo max 인거 찾아줌 삭제 예정! -->
+	<!-- userId 들고오면 resumeNo max 인거 찾아줌 삭제 예정! -->
 	<select id="selectOne" resultType="rdto">
 		select RESUME_NO,
 		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
@@ -35,7 +35,8 @@
 		#{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId}) </insert> -->
 
 	<select id="getResumeNextval" resultType="_int">
-		select USER_RESUME_SEQ.NEXTVAL from dual
+		select
+		USER_RESUME_SEQ.NEXTVAL from dual
 	</select>
 
 	<insert id="insert" parameterType="rdto">
@@ -110,9 +111,10 @@
 		values
 		(RESUME_CERTI_SEQ.NEXTVAL, #{certiName}, #{certiPub}, #{certiDate})
 	</insert>
-	
+
 	<delete id="deleteCerti" parameterType="_int">
-		delete from RESUME_CERTI where
+		delete from RESUME_CERTI
+		where
 		CERTI_NO = #{certiNo}
 	</delete>
 
@@ -122,10 +124,12 @@
 		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive},
 		#{clAdv}, #{clAsp})
 	</insert>
-	
+
 	<select id="selectOneCl" resultType="cldto">
-	select CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP  from RESUME_CL where CL_NO = #{clNo}
-	</select> 
+		select CL_FILE, CL_GROWTH,
+		CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL where
+		CL_NO = #{clNo}
+	</select>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
 		insert into
@@ -141,13 +145,16 @@
 	</insert>
 
 	<insert id="insertGradInfo" parameterType="ginfodto">
-		insert into RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
+		insert into
+		RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
 		(#{resumeNo},#{gradEduNo})
 	</insert>
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
-		INSERT INTO RESUME_CAR_INFO (RESUME_NO, CAR_NO)
-		SELECT NVL(MAX(RESUME_NO), 1), #{carNo} FROM USER_RESUME WHERE USER_ID =
+		INSERT INTO
+		RESUME_CAR_INFO (RESUME_NO, CAR_NO)
+		SELECT NVL(MAX(RESUME_NO), 1),
+		#{carNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
 
@@ -155,18 +162,27 @@
 	<insert id="insertCertiInfo" parameterType="certiinfodto">
 		insert into
 		RESUME_CERTI_INFO (RESUME_NO, CERTI_NO)
-		SELECT NVL(MAX(RESUME_NO), 1), #{certiNo} FROM USER_RESUME WHERE USER_ID =
+		SELECT NVL(MAX(RESUME_NO), 1),
+		#{certiNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
 
+	<delete id="deleteInfoCerti" parameterType="certiinfodto">
+		DELETE FROM RESUME_CERTI_INFO
+		WHERE CERTI_NO = #{certiNo}
+		AND RESUME_NO = (SELECT NVL(MAX(RESUME_NO), 1) FROM USER_RESUME WHERE
+		USER_ID = #{userId})
+	</delete>
+
 	<insert id="insertClInfo" parameterType="clinfodto">
 		insert into
-		RESUME_CL_INFO (RESUME_NO, CL_NO) 
-		SELECT NVL(MAX(RESUME_NO), 1), #{clNo} FROM USER_RESUME WHERE USER_ID =
+		RESUME_CL_INFO (RESUME_NO, CL_NO)
+		SELECT NVL(MAX(RESUME_NO), 1),
+		#{clNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
-	
-	
+
+
 
 	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxHigh" resultType="_int">
@@ -318,17 +334,22 @@
 	</select>
 
 	<select id="selectListCl" resultType="cldto">
-		SELECT cl.CL_NO AS clNo, cl.CL_FILE AS clFile, cl.CL_GROWTH AS clGrowth,
-		cl.CL_MOTIVE AS clMotive, cl.CL_ADV AS clAdv, cl.CL_ASP AS clAsp
+		SELECT cl.CL_NO AS clNo,
+		cl.CL_FILE AS clFile, cl.CL_GROWTH AS clGrowth,
+		cl.CL_MOTIVE AS
+		clMotive, cl.CL_ADV AS clAdv, cl.CL_ASP AS clAsp
 		FROM
 		RESUME_CL cl
-		INNER JOIN
+		INNER
+		JOIN
 		RESUME_CL_INFO i on cl.CL_NO = i.CL_NO
 		INNER JOIN
-		USER_RESUME u on i.RESUME_NO = u.RESUME_NO
+		USER_RESUME u on
+		i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY
-		cl.CL_NO DESC
+		cl.CL_NO
+		DESC
 	</select>
 
 </mapper>

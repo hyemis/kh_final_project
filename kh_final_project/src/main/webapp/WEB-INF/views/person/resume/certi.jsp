@@ -135,7 +135,7 @@
 								</div>
 							</div>
 							<hr>
-							<button class="btn btn-primary" onclick="addCerti()">정보추가</button>
+							<button class="btn btn-primary" onclick="addCerti()">새 정보추가</button>
 							<br>
 
 						</div>
@@ -284,7 +284,6 @@
 						  let formContainer = document.getElementById("CertiFormContainer");
 						  newForm.id = "certi-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
 						  newForm.innerHTML = newFormHTML;
-						  console.log(newForm.id);
 						  formContainer.appendChild(newForm);
 						
 						  // 기존 form 뒤에 새로운 form 추가
@@ -299,9 +298,45 @@
 						    const formId = newForm.id;
 						    const formToRemove = document.getElementById(formId);
 						    formContainer.removeChild(formToRemove);
+						    
+						    var certiNo = $("input[name='certiNo']").val();
+							
+							  $.ajax({
+							    type: 'POST',
+							    url: 'deleteInfoCerti',
+							    data: { certiNo: certiNo },
+							    success: function(result) {
+							      if(result > 0) {
+							        alert('작성 중인 이력서에서 해당 자격증 정보가 삭제되었습니다.');
+							      } else {
+							        alert('작성 중인 이력서에서 해당 자격증 정보 삭제에 실패했습니다.');
+							      }
+							    }
+							  });
+						    
+						    
 						  });
+						  
+						  
 
 						}
+						
+						 // 정보불러오기 버튼 시 끼인 테이블 insert 
+						var certiNo = $("input[name='certiNo']").val();
+						$.ajax({
+						    type: 'POST',
+						    url: 'insertInfoCerti',
+						    data: { certiNo: certiNo },
+						    success: function(result) {
+						      if(result > 0) {
+						        alert('작성 중인 이력서에서 해당 자격증 정보가 입력되었습니다.');
+						      } else {
+						        alert('작성 중인 이력서에서 해당 자격증 입력에 실패했습니다. ');
+						      }
+						    }
+						  }); 
+						
+						
 
 
 						});
@@ -352,12 +387,13 @@
 						    $('#selectedCertiList').html('');
 						    $('input[name="selectedCerti"]').prop('checked', false);
 						});
+						
+						
 					
 						
 						// 자격증 삭제 
 						$('.deleteCerti').click(function() {
 						var certiNo = $(this).prev('input[name="certiNo"]').val();
-						
 				
 						  $.ajax({
 						    type: 'POST',

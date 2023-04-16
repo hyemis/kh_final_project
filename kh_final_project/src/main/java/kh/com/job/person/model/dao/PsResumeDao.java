@@ -149,7 +149,7 @@ public class PsResumeDao {
 		return sqlSession.selectOne("resume.selectOneMaxCar");
 	}
 
-	// CertiInfo - 입력
+	// 이력서 - 자격증Info 입력
 	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertCertiInfo", InfoNo);
 	}
@@ -158,11 +158,17 @@ public class PsResumeDao {
 	public int getMaxCertiNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneMaxCerti");
 	}
+	
+	// 이력서 - 자격증info 삭제
+	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.delete("resume.deleteInfoCerti", InfoNo);
+	}
 
 	// ClInfo - 입력
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertClInfo", InfoNo);
 	}
+	
 
 	// 이력서 - 자기소개서 최신보기
 	public int getMaxClNo() throws Exception {
