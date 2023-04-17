@@ -184,18 +184,16 @@ public class PsResumeController {
 			result = rservice.insertHschool(dto);
 
 			if (result > 0) {
-				PsResumeDto resume = rservice.selectOne(principal.getName());
-				int resumeNo = resume.getResumeNo();
 				int highEduNo = rservice.getMaxHighNo();
 
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("highEduNo", highEduNo);
+				InfoNo.put("userId", principal.getName());
 
 				// 낀테이블 insert
 				rservice.insertHighInfo(InfoNo);
 
-				rttr.addFlashAttribute("msg", "저장에 성공했습니다");
+				rttr.addFlashAttribute("msg", "고등학교 학력사항이 입력되었습니다.");
 
 			} else {
 				rttr.addFlashAttribute("msg", "저장에 실패했습니다.");
@@ -206,7 +204,7 @@ public class PsResumeController {
 		}
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
-	}
+	}	
 	
 	// 고등학교 테이블 삭제
 	@PostMapping("deleteHigh")
@@ -242,20 +240,17 @@ public class PsResumeController {
 			result = rservice.insertUniv(dto);
 
 			if (result > 0) {
-				PsResumeDto resume = rservice.selectOne(principal.getName());
-				int resumeNo = resume.getResumeNo();
 				int uniEduNo = rservice.getMaxUniNo();
-
+				
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("uniEduNo", uniEduNo);
+				InfoNo.put("userId", principal.getName());
 
 				// 낀테이블 insert
 				rservice.insertUniInfo(InfoNo);
-
-				rttr.addFlashAttribute("msg", "성공");
+				rttr.addFlashAttribute("msg", "대학교 학력사항이 입력되었습니다.");
 			} else {
-				rttr.addFlashAttribute("msg", "실패");
+				rttr.addFlashAttribute("msg", "입력에 실패하였습니다.");
 			}
 
 		} catch (Exception e) {
@@ -317,19 +312,17 @@ public class PsResumeController {
 			result = rservice.insertGschool(dto);
 
 			if (result > 0) {
-				PsResumeDto resume = rservice.selectOne(principal.getName());
-				int resumeNo = resume.getResumeNo();
 				int gradEduNo = rservice.getMaxGradNo();
 
 				Map<String, Object> InfoNo = new HashMap<>();
-				InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("gradEduNo", gradEduNo);
-
+				InfoNo.put("userId", principal.getName());
+				
 				// 낀테이블 insert
 				rservice.insertUniInfo(InfoNo);
-				rttr.addFlashAttribute("msg", "성공");
+				rttr.addFlashAttribute("msg", "대학원 학력사항이 입력되었습니다.");
 			} else {
-				rttr.addFlashAttribute("msg", "실패");
+				rttr.addFlashAttribute("msg", "입력에 실패하였습니다.");
 			}
 
 		} catch (Exception e) {
@@ -384,12 +377,9 @@ public class PsResumeController {
 			result = rservice.insertCareer(dto);
 
 			if (result > 0) {
-//				PsResumeDto resume = rservice.selectOne(principal.getName());
-				//int resumeNo = resume.getResumeNo();
 				int carNo = rservice.getMaxCareerNo();
 
 				Map<String, Object> InfoNo = new HashMap<>();
-	//			InfoNo.put("resumeNo", resumeNo);
 				InfoNo.put("carNo", carNo);
 				InfoNo.put("userId", principal.getName());
 
