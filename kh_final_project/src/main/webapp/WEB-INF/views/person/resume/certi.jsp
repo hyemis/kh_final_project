@@ -441,42 +441,6 @@
 						  });
 						});
 						
-						
-						
-					/* 	// 수정 버튼
-						  let updateBtn = newForm.querySelector("#update");
-						  updateBtn.addEventListener("click", function() {
-							  
-						    // 입력된 데이터 가져오기
-						    const certiNewName = newForm.elements["certiNewName"].value;
-						    const certiNewPub = newForm.elements["certiNewPub"].value;
-						    const certiNewDate = newForm.elements["certiNewDate"].value;
-						    
-						    const data = {
-						      certiNo: certiNo,
-						      certiNewName: certiNewName,
-						      certiNewPub: certiNewPub,
-						      certiNewDate: certiNewDate
-						    };
-						    
-						    $.ajax({
-						      type: "POST",
-						      url: 'updateCerti',
-						      data: data,
-						      success: function(result) {
-						        if(result > 0) {
-						          alert('해당 자격증이 수정되었습니다.');
-						          location.reload();
-						        } else {
-						          alert('해당 자격증 수정에 실패했습니다.');
-						        }
-						      }
-						    });
-						  }); */
-						
-        
-
-		
 		
 	</script>
 

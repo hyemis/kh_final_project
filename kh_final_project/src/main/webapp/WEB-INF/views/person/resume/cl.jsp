@@ -240,6 +240,7 @@
 		alert(msg);
 	}
 
+	// ck editor, 글자 수 체크 
 	var textareas = document.querySelectorAll('textarea');
 	for (var i = 0; i < textareas.length; i++) {
 		CKEDITOR.replace(textareas[i].id, {
@@ -366,6 +367,26 @@
 	  // 새로운 페이지 열기
 	  window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(',')));
 
+	});
+	
+
+	// 자기소개서 삭제 
+	$('.deleteCl').click(function() {
+	var clNo = $(this).prev('input[name="clNo"]').val();
+
+	  $.ajax({
+	    type: 'POST',
+	    url: 'deleteCl',
+	    data: { clNo: clNo },
+	    success: function(result) {
+	      if(result > 0) {
+	        alert('해당 자기소개서가 삭제되었습니다.');
+	        location.reload();
+	      } else {
+	        alert('해당 자기소개서가 삭제에 실패했습니다.');
+	      }
+	    }
+	  });
 	});
 
 	</script>

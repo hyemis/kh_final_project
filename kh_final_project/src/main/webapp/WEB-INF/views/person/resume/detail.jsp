@@ -145,22 +145,19 @@
 							</c:if>
 							<c:if test="${not empty cl.clFile}">
 								<input type="text" class="form-control" id="uploadCl"
-									value="${cl.clFile}">
+									value="${cl.clFile}"> 
 							</c:if>
+							<form enctype="multipart/form-data">
+										<input type="file" class="form-control" id="uploadCl"
+											placeholder="자기소개서 첨부파일">
+											<br>
+							</form> 
 							<br>
 						</div>
 					</div>
 
-					<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-						<button type="button" class="btn btn-primary"
-							onclick="fn_clWrite(); return false;">수정</button>
-					</div>
-
-					<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-						<a class="btn btn-primary"
-							href="${pageContext.request.contextPath}/person/resume/list">취소</a>
-						<a class="btn btn-primary"
-							href="${pageContext.request.contextPath}/person/resume/list">다음</a>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+						<button type="button" id="update" class="btn btn-primary">수정</button>
 					</div>
 				</div>
 			</div>
@@ -172,7 +169,59 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<script>
+	// ck editor, 글자 수 체크 
+	var textareas = document.querySelectorAll('textarea');
+	for (var i = 0; i < textareas.length; i++) {
+		CKEDITOR.replace(textareas[i].id, {
+			  language: 'ko',
+			  toolbar: []
+			});
+
+	  const textarea = CKEDITOR.instances[textareas[i].id];
+	  const charCount = textarea.element.$.parentNode.nextElementSibling;
+
+	  textarea.on('change', () => {
+	    const text = textarea.getData().replace(/(<([^>]+)>)/gi, '');
+	    const count = text.trim().length;
+	    charCount.textContent = '글자 수 (공백제외) ' + count + ' 자';
+	  });
+	}
 	
+	 // 수정 버튼 
+	let updateBtn = document.querySelector("#update");
+	updateBtn.addEventListener("click", function() {
+		let formdata = new FormData();
+		formdata.append("No", parseInt(window.location.href.split('/').pop()));
+		formdata.append("updateClFile", $("#uploadCl")[0].files[0]);
+		formdata.append("growth", document.querySelector("#growth").value);
+		formdata.append("motive", document.querySelector("#motive").value);
+		formdata.append("adv", document.querySelector("#adv").value);
+		formdata.append("asp", document.querySelector("#asp").value);
+		
+
+
+  	/*   const No = parseInt(window.location.href.split('/').pop());
+	  const growth = document.querySelector("#growth").value;
+	  const motive = document.querySelector("#motive").value;
+	  const adv = document.querySelector("#adv").value;
+	  const asp = document.querySelector("#asp").value; */
+	
+	  $.ajax({
+	    type: 'POST',
+	    url: '${pageContext.request.contextPath}/person/resume/updateCl',
+		contentType : false,
+		processData : false,
+		data : formdata,
+	    success: function(result) {
+	      if(result > 0) {
+	        alert('자기소개서가 수정되었습니다.');
+	        location.reload();
+	      } else {
+	        alert('자기소개서 수정에 실패했습니다.');
+	      }
+	    }
+	  });
+	});
 			
 		</script>
 </body>

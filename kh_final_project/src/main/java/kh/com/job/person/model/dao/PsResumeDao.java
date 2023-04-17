@@ -43,7 +43,7 @@ public class PsResumeDao {
 		resumeNo = sqlSession.selectOne("resume.getResumeNextval");
 		dto.setResumeNo(resumeNo);
 		result = sqlSession.insert("resume.insert", dto);
-		if(result < 1) {
+		if (result < 1) {
 			resumeNo = result;
 		}
 		return resumeNo;
@@ -54,7 +54,6 @@ public class PsResumeDao {
 		return sqlSession.delete("resume.delete", resumeNo);
 	}
 
-	
 	public int update(PsResumeDto dto) throws Exception {
 		return sqlSession.update("resume.update", dto);
 	}
@@ -93,25 +92,36 @@ public class PsResumeDao {
 	public int deleteCerti(int certiNo) throws Exception {
 		return sqlSession.delete("resume.deleteCerti", certiNo);
 	}
-	// 이력서 - 자격증 수정 
+
+	// 이력서 - 자격증 수정
 	public int updateCerti(Map<String, Object> updateCerti) throws Exception {
 		return sqlSession.update("resume.updateCerti", updateCerti);
 	}
 
 	// 이력서 - 자기소개서 detail 보기
 	public PsClDto selectOneCl(int clNo) throws Exception {
-	    PsClDto dto = sqlSession.selectOne("resume.selectOneCl", clNo);
-	    dto.setClFile(removeHtmlTag(dto.getClFile()));
-	    dto.setClGrowth(removeHtmlTag(dto.getClGrowth()));
-	    dto.setClMotive(removeHtmlTag(dto.getClMotive()));
-	    dto.setClAdv(removeHtmlTag(dto.getClAdv()));
-	    dto.setClAsp(removeHtmlTag(dto.getClAsp()));
-	    return dto;
+		PsClDto dto = sqlSession.selectOne("resume.selectOneCl", clNo);
+		dto.setClFile(removeHtmlTag(dto.getClFile()));
+		dto.setClGrowth(removeHtmlTag(dto.getClGrowth()));
+		dto.setClMotive(removeHtmlTag(dto.getClMotive()));
+		dto.setClAdv(removeHtmlTag(dto.getClAdv()));
+		dto.setClAsp(removeHtmlTag(dto.getClAsp()));
+		return dto;
 	}
 
 	// 이력서 - 자기소개서 입력
 	public int insertCl(PsClDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCl", dto);
+	}
+
+	// 이력서 - 자기소개서 삭제
+	public int deleteCl(int clNo) throws Exception {
+		return sqlSession.delete("resume.deleteCl", clNo);
+	}
+
+	// 이력서 - 자기소개서 수정
+	public int updateCl(Map<String, Object> updateCl) throws Exception {
+		return sqlSession.update("resume.updateCl", updateCl);
 	}
 
 	// highInfo - 입력
@@ -163,7 +173,7 @@ public class PsResumeDao {
 	public int getMaxCertiNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneMaxCerti");
 	}
-	
+
 	// 이력서 - 자격증info 삭제
 	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.delete("resume.deleteInfoCerti", InfoNo);
@@ -173,7 +183,6 @@ public class PsResumeDao {
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertClInfo", InfoNo);
 	}
-	
 
 	// 이력서 - 자기소개서 최신보기
 	public int getMaxClNo() throws Exception {
@@ -290,13 +299,13 @@ public class PsResumeDao {
 		List<PsClDto> ClList = sqlSession.selectList("resume.selectListCl", userId);
 		return ClList;
 	}
-	
-	// html태그 제거 
+
+	// html태그 제거
 	public static String removeHtmlTag(String html) {
-	    if(html == null || html.trim().length() == 0) {
-	        return "";
-	    }
-	    return html.replaceAll("<[^>]*>", "");
+		if (html == null || html.trim().length() == 0) {
+			return "";
+		}
+		return html.replaceAll("<[^>]*>", "");
 	}
 
 }

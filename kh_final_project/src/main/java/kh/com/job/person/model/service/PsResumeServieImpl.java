@@ -130,6 +130,16 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
+	public int deleteCl(int clNo) throws Exception {
+		return dao.deleteCl(clNo); 
+	}
+	
+	@Override
+	public int updateCl(Map<String, Object> updateCl) throws Exception {
+		return dao.updateCl(updateCl); 	
+	}
+	
+	@Override
 	public PsClDto selectOneCl(int clNo) throws Exception {
 		return dao.selectOneCl(clNo);
 	}
@@ -228,6 +238,9 @@ public class PsResumeServieImpl implements PsResumeService {
 	public List<PsClDto> selectListCl(String userId) throws Exception {
 		return dao.selectListCl(userId);
 	}
+
+	
+	
 
 	
 

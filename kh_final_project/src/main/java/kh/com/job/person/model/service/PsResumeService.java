@@ -56,7 +56,7 @@ public interface PsResumeService {
 
 	// 이력서-자격증 삭제
 	public int deleteCerti(int certiNo) throws Exception;
-	
+
 	// 이력서-자격증 수정
 	public int updateCerti(Map<String, Object> updateCerti) throws Exception;
 
@@ -65,6 +65,12 @@ public interface PsResumeService {
 
 	// 이력서-자기소개서 입력
 	public int insertCl(PsClDto dto) throws Exception;
+
+	// 이력서-자기소개서 삭제
+	public int deleteCl(int clNo) throws Exception;
+
+	// 이력서-자기소개서 수정
+	public int updateCl(Map<String, Object> updateCl) throws Exception;
 
 	// highInfo
 	public int getMaxHighNo() throws Exception;
@@ -85,7 +91,7 @@ public interface PsResumeService {
 	public int getMaxCareerNo() throws Exception;
 
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception;
-	
+
 	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception;
 
 	// CertiInfo

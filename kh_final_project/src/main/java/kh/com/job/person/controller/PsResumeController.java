@@ -80,7 +80,6 @@ public class PsResumeController {
 
 	// 이력서 파일 업로드
 	@PostMapping("/fileupload")
-	@ResponseBody
 	public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,
 			Principal principal) throws Exception {
 
@@ -383,7 +382,7 @@ public class PsResumeController {
 	}
 	
 	
-	// 끼인 테이블 insert 분리하기
+	// 끼인 테이블 insert 
 	@PostMapping("insertInfoCerti")
 	@ResponseBody
 	public int insertInfoCerti(Principal principal, @RequestParam("certiNo") Integer certiNo) throws Exception {
@@ -392,6 +391,7 @@ public class PsResumeController {
 		InfoNo.put("certiNo", certiNo);
 		InfoNo.put("userId", principal.getName());
 		result = rservice.insertCertiInfo(InfoNo);
+		
 		return result;
 	}
 	
@@ -506,10 +506,53 @@ public class PsResumeController {
 	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable int clNo) throws Exception {
 
 		PsClDto dto = rservice.selectOneCl(clNo);
+		// 불러오면서 끼인 테이블에도 넣어야해 ! 
 		mv.addObject("cl", dto);
 		mv.setViewName("person/resume/detail");
 		return mv;
 	}
+	
+	// 자소서 테이블 삭제
+	@PostMapping("deleteCl")
+	@ResponseBody
+	public int deleteCl(@RequestParam("clNo") Integer clNo) throws Exception {
+
+			int result = -1;
+			result = rservice.deleteCl(clNo);
+			return result;
+	}
+	
+	// 자소서 테이블 수정 
+	@PostMapping("updateCl")
+	@ResponseBody
+	public int updateCl( @RequestParam("No") String clNumber, 
+			@RequestParam("growth") String  clGrowth,
+			@RequestParam("motive") String clMotive,
+			@RequestParam("adv") String clAdv,
+			@RequestParam("asp") String clAsp, 
+			@RequestParam(name = "updateClFile", required = false) MultipartFile clFile) throws Exception {
+		
+		int result = -1;
+		// 파일업로드 구현 중 
+//		String portfUrl = rservice.upload(clFile, principal.getName());
+		
+		int clNo = Integer.parseInt(clNumber);
+		Map<String, Object> updateCl = new HashMap<>();
+		updateCl.put("clNo", clNo);
+		updateCl.put("clFile", clFile);
+		updateCl.put("clGrowth", clGrowth);
+		updateCl.put("clMotive", clMotive);
+		updateCl.put("clAdv", clAdv);
+		updateCl.put("clAsp", clAsp);
+		
+		result = rservice.updateCl(updateCl);
+		return result;
+	}
+	
+	
+	
+	
+	
 
 	// 예외처리는 프로젝트 후반에 작성
 

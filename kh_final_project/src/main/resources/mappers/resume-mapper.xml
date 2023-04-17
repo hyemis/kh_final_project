@@ -118,12 +118,37 @@
 		CERTI_NO = #{certiNo}
 	</delete>
 
+	<update id="updateCerti" parameterType="certidto">
+		UPDATE RESUME_CERTI SET
+		CERTI_NAME = #{certiName},
+		CERTI_PUB = #{certiPub},
+		CERTI_DATE =
+		#{certiDate}
+		WHERE CERTI_NO = #{certiNo}
+	</update>
+
 	<insert id="insertCl" parameterType="cldto">
 		insert into RESUME_CL(CL_NO,
 		CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP)
 		values(RESUME_CL_SEQ.NEXTVAL, #{clFile}, #{clGrowth}, #{clMotive},
 		#{clAdv}, #{clAsp})
 	</insert>
+
+	<delete id="deleteCl" parameterType="_int">
+		delete from RESUME_CL
+		where
+		CL_NO = #{clNo}
+	</delete>
+
+	<update id="updateCl" parameterType="cldto">
+		UPDATE RESUME_CL SET
+		CL_GROWTH = #{clGrowth},
+		CL_MOTIVE = #{clMotive},
+		CL_ADV = #{clAdv},
+		CL_ASP = #{clAsp},
+		CL_FILE = #{clFile}
+		WHERE CL_NO = #{clNo}
+	</update>
 
 	<select id="selectOneCl" resultType="cldto">
 		select CL_FILE, CL_GROWTH,
@@ -336,13 +361,6 @@
 		)
 	</select>
 
-	<update id="updateCerti" parameterType="certidto">
-		UPDATE RESUME_CERTI SET
-		CERTI_NAME = #{certiName},
-		CERTI_PUB = #{certiPub},
-		CERTI_DATE = #{certiDate}
-		WHERE CERTI_NO = #{certiNo}
-	</update>
 
 	<select id="selectListCl" resultType="cldto">
 		SELECT cl.CL_NO AS clNo,
@@ -362,7 +380,6 @@
 		cl.CL_NO
 		DESC
 	</select>
-
 
 
 </mapper>
