@@ -141,4 +141,19 @@
 		AND RA_ADMISSION IN ('P', 'Y')
 		AND CLOSE_DATE > SYSDATE
 	</select>
+	
+	<update id="changeAdmission">
+		UPDATE RECRUIT_REGIST 
+		<set>
+			<choose>
+				<when test=' raAdmission eq "P"'>
+					RA_ADMISSION = 'Y'
+				</when>
+				<otherwise>
+					RA_ADMISSION = 'P'
+				</otherwise>
+			</choose>
+		</set>
+		WHERE RA_NUM = #{raNum}
+	</update>
 </mapper>

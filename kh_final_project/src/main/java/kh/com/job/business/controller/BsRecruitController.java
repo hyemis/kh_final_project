@@ -166,6 +166,17 @@ public class BsRecruitController {
 		return new Gson().toJson(map);
 	}
 	
+	@PostMapping("/changeAdmission")
+	@ResponseBody
+	public int changeAdmission(BsRecruitDto dto
+			){
+		int result = -1;
+		
+		result = service.changeAdmission(dto);
+		
+		return result;
+	}
+	
 
 
 }

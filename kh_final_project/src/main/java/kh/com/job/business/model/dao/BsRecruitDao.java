@@ -40,4 +40,8 @@ public class BsRecruitDao {
 		return sqlSession.selectList("business.recruitAdmission", userId);
 	}
 
+	public int changeAdmission(BsRecruitDto dto) {
+		return sqlSession.update("business.changeAdmission", dto);
+	}
+
 }

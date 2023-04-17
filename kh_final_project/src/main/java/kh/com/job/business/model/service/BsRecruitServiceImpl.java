@@ -81,5 +81,10 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 		return  dao.recruitAdmission(userId);
 	}
 
+	@Override
+	public int changeAdmission(BsRecruitDto dto) {
+		return dao.changeAdmission(dto);
+	}
+
 
 }
