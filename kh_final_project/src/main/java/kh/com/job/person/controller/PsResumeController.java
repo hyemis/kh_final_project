@@ -217,6 +217,22 @@ public class PsResumeController {
 		result = rservice.deleteHigh(highEduNo);
 		return result;
 	}
+	
+	
+	// 고등학교 끼인 테이블 삭제
+	@PostMapping("deleteInfoHigh")
+	@ResponseBody
+	public int deleteInfoHigh(Principal principal, @RequestParam("highEduNo") Integer highEduNo) throws Exception {
+		System.out.println(highEduNo);
+		int result = -1;
+
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("highEduNo", highEduNo);
+		InfoNo.put("userId", principal.getName());
+
+		result = rservice.deleteInfoHigh(InfoNo);
+		return result;
+	}
 
 	// 대학교 입력
 	@PostMapping("rUniversity")
@@ -255,9 +271,43 @@ public class PsResumeController {
 	public int deleteUni(@RequestParam("uniEduNo") Integer uniEduNo) throws Exception {
 
 		int result = -1;
-		result = rservice.deleteHigh(uniEduNo);
+		result = rservice.deleteUni(uniEduNo);
 		return result;
 	}
+	
+	// 대학교 불러올때 낀테이블 insert
+	@PostMapping("insertInfoUni")
+	@ResponseBody
+	public int insertInfoUni(Principal principal,
+			@RequestParam("uniEduNo") Integer uniEduNo
+			) throws Exception {
+
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("uniEduNo", uniEduNo);
+		InfoNo.put("userId", principal.getName());
+		
+		result = rservice.insertUniInfo(InfoNo);
+
+		return result;
+	}
+	
+	// 대학교 끼인 테이블 삭제
+	@PostMapping("deleteInfoUni")
+	@ResponseBody
+	public int deleteInfoUni(Principal principal, @RequestParam("uniEduNo") Integer uniEduNo) throws Exception {
+		System.out.println(uniEduNo);
+		int result = -1;
+
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("uniEduNo", uniEduNo);
+		InfoNo.put("userId", principal.getName());
+
+		result = rservice.deleteInfoUni(InfoNo);
+		return result;
+	}
+	
 
 	// 대학원 입력
 	@PostMapping("rGSchool")
@@ -287,6 +337,31 @@ public class PsResumeController {
 		}
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
+	}
+	
+	// 대학원 테이블 삭제
+	@PostMapping("deleteGrad")
+	@ResponseBody
+	public int deleteGrad(@RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
+
+		int result = -1;
+		result = rservice.deleteUni(gradEduNo);
+		return result;
+	}
+	
+	// 대학교 끼인 테이블 삭제
+	@PostMapping("deleteInfoGrad")
+	@ResponseBody
+	public int deleteInfoGrad(Principal principal, @RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
+		System.out.println(gradEduNo);
+		int result = -1;
+
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("gradEduNo", gradEduNo);
+		InfoNo.put("userId", principal.getName());
+
+		result = rservice.deleteInfoGrad(InfoNo);
+		return result;
 	}
 
 	// 경력사항 페이지
@@ -448,7 +523,7 @@ public class PsResumeController {
 	}
 	
 	
-	// 끼인 테이블 insert 
+	// 자격증 끼인 테이블 insert 
 	@PostMapping("insertInfoCerti")
 	@ResponseBody
 	public int insertInfoCerti(Principal principal, @RequestParam("certiNo") Integer certiNo) throws Exception {

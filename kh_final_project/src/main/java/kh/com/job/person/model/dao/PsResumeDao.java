@@ -72,12 +72,22 @@ public class PsResumeDao {
 	public int insertUniv(PsUnivDto dto) throws Exception {
 		return sqlSession.insert("resume.insertUniv", dto);
 	}
+	
+	// 이력서 - 대학교 삭제
+	public int deleteUni(int uniEduNo) throws Exception {
+		return sqlSession.delete("resume.deleteUni", uniEduNo);
+	}
 
 	// 이력서-대학원입력
 	public int insertGschool(PsGschoolDto dto) throws Exception {
 		return sqlSession.insert("resume.insertGschool", dto);
 	}
-
+	
+	// 이력서 - 대학교 삭제
+	public int deleteGrad(int gradEduNo) throws Exception {
+		return sqlSession.delete("resume.deleteGrad", gradEduNo);
+	}
+	
 	// 이력서-경력사항입력
 	public int insertCareer(PsCareerDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCareer", dto);
@@ -138,6 +148,11 @@ public class PsResumeDao {
 	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertHighInfo", InfoNo);
 	}
+	
+	// highinfo 삭제
+		public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception {
+			return sqlSession.delete("resume.deleteInfoHigh",InfoNo);
+		}
 
 	// 이력서-고등학교 최신보기
 	public int getMaxHighNo() throws Exception {
@@ -148,6 +163,11 @@ public class PsResumeDao {
 	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertUniInfo", InfoNo);
 	}
+	
+	// UniInfo 삭제
+	public int deleteInfoUni(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.delete("resume.deleteInfoUni",InfoNo);
+	}
 
 	// 이력서-대학교 최신보기
 	public int getMaxUniNo() throws Exception {
@@ -157,6 +177,11 @@ public class PsResumeDao {
 	// GradInfo - 입력
 	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertGradInfo", InfoNo);
+	}
+	
+	// GradInfo 삭제
+	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.delete("resume.deleteInfoGrad",InfoNo);
 	}
 
 	// 이력서 - 대학원 최신보기

@@ -76,28 +76,45 @@ public interface PsResumeService {
 	public int getMaxHighNo() throws Exception;
 
 	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteHigh(int highEduNo) throws Exception;
+	
+	public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception;
 
 	// uniInfo
 	public int getMaxUniNo() throws Exception;
 
 	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteUni(int uniEduNo) throws Exception;
+	
+	public int deleteInfoUni(Map<String, Object> InfoNo) throws Exception;
 
 	// gradInfo
 	public int getMaxGradNo() throws Exception;
 
 	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteGrad(int gradEduNo) throws Exception;
+	
+	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception;
+
 
 	// CareerInfo
 	public int getMaxCareerNo() throws Exception;
 
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception;
 
-	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception;
+	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateCareer(Map<String, Object> updateCareer) throws Exception;
 
 	// CertiInfo
 	public int getMaxCertiNo() throws Exception;
 
 	public int insertCertiInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception;
 
 	// ClInfo
 	public int getMaxClNo() throws Exception;

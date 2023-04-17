@@ -256,14 +256,27 @@ public class PsResumeServieImpl implements PsResumeService {
 
 	@Override
 	public int deleteUni(int uniEduNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteUni(uniEduNo);
 	}
 
 	@Override
 	public int deleteGrad(int gradEduNo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteGrad(gradEduNo);
+	}
+
+	@Override
+	public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoHigh(InfoNo);
+	}
+
+	@Override
+	public int deleteInfoUni(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoUni(InfoNo);
+	}
+
+	@Override
+	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoGrad(InfoNo);
 	}
 
 	
