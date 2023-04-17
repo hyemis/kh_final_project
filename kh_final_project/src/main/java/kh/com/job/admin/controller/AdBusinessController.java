@@ -37,7 +37,6 @@ public class AdBusinessController {
 		//현재 페이지 정보를 가져오기 위한 addObject
 		mv.addObject("pnum", pnum);
 		mv.addObject("search", search);
-		mv.addObject("search", search);
 		
 		return mv;
 	}

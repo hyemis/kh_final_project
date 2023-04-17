@@ -25,6 +25,8 @@ import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsRecruitService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Controller
@@ -175,6 +177,26 @@ public class BsRecruitController {
 		result = service.changeAdmission(dto);
 		
 		return result;
+	}
+	
+	//전체 공고 리스트
+	@GetMapping("/recruitAll")
+	public ModelAndView adminRecruit(ModelAndView mv
+			,PagingInfoDto pidto
+			,Principal principal
+			) {
+		if(pidto.getPnum() < 1) {
+			pidto.setPnum(1);
+		}
+		pidto.setUserId(principal.getName());
+		//페이지네이션 처리가 완료된 리스트
+		Paging list = service.recruitAll(pidto);
+		System.out.println(pidto);
+		mv.addObject("list", list);
+		//현재 페이지 정보를 가져오기 위한 addObject
+		mv.addObject("pidto", pidto);
+		
+		return mv;
 	}
 	
 

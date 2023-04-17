@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingInfoDto;
 
 public interface BsRecruitService {
 
@@ -20,6 +22,8 @@ public interface BsRecruitService {
 	public List<BsRecruitDto> recruitAdmission(String userId);
 
 	public int changeAdmission(BsRecruitDto dto);
+
+	public Paging recruitAll(PagingInfoDto pidto);
 
 
 }
