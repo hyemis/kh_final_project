@@ -418,6 +418,15 @@ public class PsResumeController {
 		result = rservice.deleteCerti(certiNo);
 		return result;
 	}
+	
+	// 자격증 테이블 수정 
+	@PostMapping("updateCerti")
+	@ResponseBody
+	public int updateCerti(PsCertiDto dto) throws Exception {
+		int result = -1;
+		System.out.println("@@@@@@@@@@@@@@자격증수정 " + dto);
+		return result;
+	}
 
 	// 자소서 페이지
 	@GetMapping("cl")
