@@ -131,6 +131,7 @@
 						<!-- password -->
 						<form class="m-5" name="pwForm" action="pwChk" method="post">
 							 <div class="mb-3 row">
+							 	
 							    <label for="confirmPw"  class="col-sm-3 col-form-label">현재 비밀번호</label>
 							    <div class="col-sm-6">
 							      <input type="password" class="form-control" id="confirmPw" name="confirmPw">
@@ -140,11 +141,12 @@
 								  <span class="id_input_re_2 text-center">비밀번호가 일치하지 않습니다.</span>
 							 </div>
 						</form>
-						<form name="newPwForm" action="updatePw" method="post">	 
+						<form name="newPwForm" action="updatePw" method="post">	
+							<input type="hidden" class="userId" name="userId" value="${bsinfo.userId }"> 
 							 <div class="mb-3 row">
-							    <label for="newPw" class="col-sm-3 col-form-label">새 비밀번호</label>
+							    <label for="userPw" class="col-sm-3 col-form-label">새 비밀번호</label>
 							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="newPw" name="newPw">
+							      <input type="password" class="form-control" id="userPw" name="userPw">
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
@@ -339,13 +341,10 @@
 					return true;
 				} else {
 					$('.id_input_re_2').css("display","inline-block");
-					PwForm.confirmPw.focus();
+					pwForm.confirmPw.focus();
 					return false;
 				}
 			});
-	
-			var newPw = "${newPw}";
-			console.log(newPw);
 </script>
 
 

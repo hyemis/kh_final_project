@@ -101,6 +101,7 @@ public class BsAccountController {
 		public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
 
 			if(principal.getName()!= null) {
+				System.out.println(dto.getUserPw() + "정보 @@@ " + dto.getUserId() + "!!!!!" );
 				dto.setUserPw(passwordEncoder.encode(dto.getUserPw())); // 패스워드 암호화
 				service.updatePassword(dto);
 				mv.setViewName("redirect:/");

@@ -184,8 +184,7 @@
 		UPDATE RECRUIT_REGIST
 		<set>
 			<if test='raAdmission == "N"'>RA_ADMISSION = 'Y'</if>
-			<if test='raAdmission == "P"'>RA_ADMISSION = 'N'</if>
-			<if test='raAdmission == "Y"'>RA_ADMISSION = 'N'</if>
+			<if test='raAdmission == "P" or raAdmission == "Y"'>RA_ADMISSION = 'N'</if>
 		</set>	 
 		WHERE RA_NUM = #{raNum}
 	</update>

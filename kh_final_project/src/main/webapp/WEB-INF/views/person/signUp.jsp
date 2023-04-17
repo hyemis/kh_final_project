@@ -163,7 +163,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="bsLicense">사업자번호</label>
-				            <input type="text" class="form-control" name="bsLicense" placeholder="YYYYMMDD" >
+				            <input type="text" class="form-control" name="bsLicense" placeholder="사업자번호" >
 				            <div class="invalid-feedback">사업자번호을 입력해주세요.</div>
 				          </div>
 				          
