@@ -72,6 +72,7 @@
 		 		<thead>
 		 			<tr>
 		 				<th scope="col">회사이름</th>
+		 				<th scope="col">작성자</th>
 		 				<th scope="col">제목</th>
 		 				<th scope="col">마감일</th>
 		 				<th scope="col">승인확인</th>
@@ -89,6 +90,7 @@
 							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
 								<tr>
 									<td>${list.companyName }</td>
+									<td>${list.userId}</td>
 									<td><a class="" href="${pageContext.request.contextPath}/admin/business/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
 									<td> ${list.closeDate }까지</td>
 									<td class="text-center"><p>${list.raAdmission == 'N'? '미승인' : '승인' }</p></td>

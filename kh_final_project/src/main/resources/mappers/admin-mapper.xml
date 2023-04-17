@@ -155,7 +155,7 @@
 						or COMPANY_NAME like '%'||#{search}||'%'
 					</if>
 				</trim>
-				ORDER BY RA_NUM DESC
+				ORDER BY RA_ADMISSION DESC, RA_NUM DESC
 			) A
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
