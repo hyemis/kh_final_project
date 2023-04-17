@@ -39,10 +39,9 @@
 
 <!-- page section -->	
 <section>
-<div class="container-fluid bg-white p-5">
+<div class="container-fluid  p-5">
 <!-- Category Start -->
 		<div class="container-xxl py-5">
-			<div>로고 위치</div>
 			<!-- 상단 start -->
 			<div class="text-center mx-auto mb-5 wow fadeInUp"
 				data-wow-delay="0.1s" style="max-width: 600px;">
@@ -53,7 +52,8 @@
 							<span class="fs-3" id="user_id">${user_id } 님 반갑습니다</span>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
-							<span class="fs-3" id="user_id">반갑습니다.<br> 로그인하시면 더 많은 정보를 볼 수 있습니다.</span>
+							<span class="fs-3" id="user_id">반갑습니다.<br> 
+							<a href="<%=request.getContextPath()%>/person/login">로그인</a>하시면 더 많은 정보를 볼 수 있습니다.</span>
 					</sec:authorize>
 				</div>
 				<br>

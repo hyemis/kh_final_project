@@ -37,23 +37,19 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/business.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/summernote-lite.css"  rel="stylesheet" >	
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lang/summernote-ko-KR.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
 
-<!-- style -->
 
 
 </head>
@@ -108,7 +104,7 @@
 							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 							aria-labelledby="staticBackdropLabel" aria-hidden="true">
 							<div
-								class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+								class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h3 class="modal-title text-center" id="staticBackdropLabel">회사소개
@@ -117,7 +113,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="/save" method="post"
+										<form action="/companyInfoForm" method="post"
 											enctype="multipart/form-data">
 											<div class="row ">
 												<div class="col-2 text-center">
@@ -185,7 +181,7 @@
 															type="checkbox" name="tag" value="어학교육">어학교육 <input
 															type="checkbox" name="tag" value="해외연수">해외연수
 													</p>
-													<hr>
+												<hr>
 												</div>
 											</div>
 											<div class="row ">
@@ -193,10 +189,10 @@
 													<h4>직원수</h4>
 												</div>
 												<div class="col-10 ">
-													<a>직원수를 숫자로 입력해주세요</a> <input type="text" name="employee"
+													<a>직원수를 숫자로 입력해주세요</a> 
+													<input type="text" name="employee"
 														style="width: 30%;" placeholder="예시)300">명
-
-													<hr>
+												<hr>
 												</div>
 											</div>
 											<div class="row ">
@@ -204,28 +200,21 @@
 													<h4>평균연봉</h4>
 												</div>
 												<div class="col-10 ">
-													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> <input type="text"
-														name="salaryAvg" style="width: 30%;" placeholder="예시)3500">만원
-													<hr>
+													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> 
+													<input type="text" name="salaryAvg"
+														 style="width: 30%;" placeholder="예시)3500">만원
+												<hr>
 												</div>
 											</div>
+											<!-- 서머노트 test 중 -->
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
 													<h4>소개글</h4>
 												</div>
-												<div class="col-10 was-validated">
+												<div class="col-10 was-validated ">
 													<div class="mb-3">
-														<textarea class="form-control is-invalid"
-															name="boardContent" id="validationTextarea"
-															style="height: 300px;" placeholder="회사소개 내용을 입력하세요."
-															required></textarea>
+														<textarea class="summernote" name="boardContent" ></textarea>
 													</div>
-													<!-- TODO : file 첨부 
-   					 <div class="mb-3">
-   					 	<input type="file" name="file" class="form-control" aria-label="file example" required>
-   					 	<div class="invalid-feedback">Example invalid form file feedback</div>
-  					 </div>
-  					  -->
 												</div>
 											</div>
 										</form>
@@ -307,7 +296,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="/saveNewletter" method="post"
+										<form action="/newletterForm" method="post"
 											enctype="multipart/form-data">
 
 											<div class="row ">
@@ -337,7 +326,7 @@
 													<h4>관련링크</h4>
 												</div>
 												<div class="col-10 ">
-													<input type="text" class="form-control" name=""
+													<input type="text" class="form-control" name="link"
 														placeholder="링크를 입력해주세요">
 													<hr>
 												</div>
@@ -445,8 +434,14 @@
 
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	</div>
-
+	
+	<script>
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	</script>
+	
 	<!-- 숫자 카운트 애니메이션 -->
 	  <script>
         $('.nums').each(function () {
@@ -470,6 +465,55 @@
             });
         });
     </script>
+    
+    <!-- 서머노트 -->
+    <script>
+$(document).ready(function() {
+
+	var toolbar = [
+		    // 글꼴 설정
+		    ['fontname', ['fontname']],
+		    // 글자 크기 설정
+		    ['fontsize', ['fontsize']],
+		    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		    // 글자색
+		    ['color', ['forecolor','color']],
+		    // 표만들기
+		    ['table', ['table']],
+		    // 글머리 기호, 번호매기기, 문단정렬
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    // 줄간격
+		    ['height', ['height']],
+		    // 그림첨부, 링크만들기, 동영상첨부
+		    ['insert',['picture','link','video']],
+		    // 코드보기, 확대해서보기, 도움말
+		    ['view', ['codeview','fullscreen', 'help']]
+		  ];
+
+	var setting = {
+            height : 300,
+            minHeight : null,
+            maxHeight : null,
+            focus : true,
+            lang : 'ko-KR',
+            toolbar : toolbar,
+            //이미지 첨부를 위한 콜백함수
+            callbacks : { 
+            onImageUpload : function(files, editor, welEditable) {
+            // 파일 업로드(다중업로드를 위해 반복문 사용)
+            for (var i = files.length - 1; i >= 0; i--) {
+            uploadSummernoteImageFile(files[i],
+            this);
+            		}
+            	}
+            }
+         };
+
+        $('.summernote').summernote(setting);
+        });
+</script>
+    
 	
 
 </body>

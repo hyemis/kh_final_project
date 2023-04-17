@@ -36,7 +36,7 @@
 	
 	<div class="container-xxl py-5">
 
-		<h1 class="text-center m-3">${bsinfo.userName}님 회원정보</h1>
+		<h1 class="text-center m-3">${bsinfo.userName}님 계정정보</h1>
 		<div class="container-xxl py-5">
 			<div class="row">
 				<!-- profile area start -->

@@ -1,8 +1,6 @@
 package kh.com.job.business.model.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,22 +27,22 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	//BOARD
 	@Override
 	@Transactional
-	public int insert(BoardDto dto) {
+	public int insertNewsletter(BoardDto dto) {
 		return dao.insertNewsletter(dto);
 	}
-	
+
 	@Override
-	public int update(BoardDto dto) {
+	public int updateNewsLetter(BoardDto dto) {
 		return dao.updateNewsLetter(dto);
 	}
-	
+
 	@Override
-	public int delete(BoardDto dto) {
+	public int deleteNewsLetter(BoardDto dto) {
 		return dao.deleteNewsLetter(dto);
 	}
 
 	@Override
-	public BoardDto selectOne(String boardNum, String userId) {
+	public BoardDto NewsLetterOne(String boardNum, String userId) {
 		BoardDto result = dao.NewsLetterOne(boardNum);
 		if(result!=null && !result.getUserId().equals(userId)) {
 			dao.updateReadCount(boardNum);	
@@ -66,6 +64,10 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	public List<BoardDto> newsLetterList(int currentPage, int limit, String searchWord) {
 		return dao.selectList(currentPage, limit, searchWord);
 	}
+
+
+
+
 
 	
 

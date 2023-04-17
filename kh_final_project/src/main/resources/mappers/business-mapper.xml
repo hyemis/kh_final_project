@@ -9,53 +9,8 @@
         WHERE USER_ID = #{userId}
     </select>
     
-<!-- myinfo -->
-
-	<!-- 회사소개 작성 -->
-	
-	<!-- 뉴스레터 불러오기 -->
-
-	<!--  -->
-
-
-
-
-	<!-- USER_TABLE에서 id가 일치하는 게시물 꺼내옴  -->
-	<select id="selectOne1" parameterType="string" resultType="budto">
-  	select * from USER_TABLE where USER_ID=#{userId}
-	</select>
-
-	<!-- todo/ 04.05 -->	
-	<!-- BOARD에서 Qna (코드번호 UDB04)인 게시물 꺼내옴  -->
-	<select id="selectQna" resultType="bdto">
-	select * from BOARD where CATEGORY_ID='UDB04'
-	</select>
-	
-	<!-- BOARD에서 뉴스레터 (코드번호 UDB05) 인 게시물 꺼내옴  -->
-	<select id="selectNews" resultType="bdto">
-	select * from BOARD where CATEGORY_ID='UDB05'
-	</select>
-	
-	<!-- BOARD에서 회사소개 (코드번호 UDB06) 인 게시물 꺼내옴  -->
-	<select id="selectInfo" resultType="bdto">
-	select * from BOARD where CATEGORY_ID='UDB06'
-	</select>
-	<!-- 회사소개작성 -->
-	
-	<insert id="insertInfo">
-	INSERT INTO BOARD(USER_ID,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,
-					  BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
- 			   VALUES(#{userId},#{boardContent},#{boardDate},#{boardOriginalFilename},
- 			          #{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
-	</insert>
-
-
 
 <!-- account -->
-	<insert id="insertAccount">
-        INSERT INTO USER_TABLE (USER_PIC, USER_EMAIL, BS_LICENSE, BS_MAIN_PHONE, ADDRESS_POSTCODE, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL)
-        				VALUES (#{userPic}, #{userEmail}, #{bsLicense}, #{bsMainPhone}, #{addressPostcode}, #{addressRoad}, #{addressJibun}, #{addressDetail})
-    </insert>
     
 	<!-- 회원정보 수정하기 -->
     <update id="updateAccount">
