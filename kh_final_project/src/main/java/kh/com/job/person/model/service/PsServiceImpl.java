@@ -40,6 +40,11 @@ public class PsServiceImpl implements PsService {
 	public int insert(PsUserDto dto) throws Exception {
 		return dao.insert(dto);
 	}
+	
+	@Override
+	public int businessInsert(PsUserDto dto) throws Exception {
+		return dao.businessInsert(dto);
+	}
 
 	@Override
 	public int update(PsUserDto dto) throws Exception {

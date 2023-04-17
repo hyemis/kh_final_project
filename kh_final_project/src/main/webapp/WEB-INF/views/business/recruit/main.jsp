@@ -72,13 +72,15 @@
 					</div>
 				</div>
 				<div>
-					<button type="button" class="btn btn-dark">전체 공고 목록</button>
-					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/business/recruit/insert'" >채용 공고 등록</button>
+					<a href="insert" class="btn btn-dark mb-1">채용 공고 등록</a>
+					<a href="recruitAll" class="btn btn-dark mb-1">전체 공고 목록</a>					
+					<%-- <button type="button" class="btn btn-dark">전체 공고 목록</button>
+					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/business/recruit/insert'" >채용 공고 등록</button> --%>
 				</div>
 			</div>
 			<div class="p-2 col-9">
 				<div class="recruitlist p-2">
-					<h3>채용 중인 공고</h3>
+					<h3 class="my-2">채용 중인 공고</h3>
 					<div class="bg-white border">
 						<table class="table">
 							<thead>
@@ -103,8 +105,9 @@
 												<td>${list.raTitle }</td>
 												<td> ${list.closeDate }까지</td>
 												<td>
-													<div class="form-check form-switch">
-														<input class="form-check-input raAdmission" type="checkbox" role="switch" >
+													<div class="form-check form-switch openRecruit">
+														<input type="hidden" class="raNum" name="raNum" value="${list.raNum}">
+														<input class="form-check-input raAdmission" type="checkbox" role="switch" value="${list.raAdmission }" ${list.raAdmission eq 'P'? '' : 'checked' }>
 													</div>
 												</td>
 											</tr>
@@ -153,6 +156,31 @@
 			
 		</div>
 		<!-- Category End -->
+		
+		<script type="text/javascript">
+        
+        $(document).on('click','.openRecruit', function() {
+        	let raNum = $(this).find(".raNum").val();  
+        	let raAdmission = $(this).find(".raAdmission").val();
+        	
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/business/recruit/changeAdmission"
+    			, type: "post"
+    			, data:  {raNum : raNum, raAdmission : raAdmission}
+    			, success: function(result){
+    				if(result > 0){
+    					location.reload();
+    				}else{
+    					alert("게시글 공개에 실패 했습니다.");
+    				}
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+        	
+        });
+		</script>
 		
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 		

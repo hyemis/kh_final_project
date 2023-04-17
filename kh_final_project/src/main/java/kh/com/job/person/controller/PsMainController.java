@@ -270,7 +270,7 @@ public class PsMainController {
 		}
 		
 	}
-	
+	//기업 회원가입
 	@PostMapping("/bsSignUp")
 	public ModelAndView doBsSignUp(ModelAndView mv
 			, PsUserDto dto
@@ -283,7 +283,7 @@ public class PsMainController {
 		try {
 			
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
-			result = service.insert(dto);
+			result = service.businessInsert(dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -15,6 +15,8 @@ public class PagingInfoDto {
 	private int startNum;
 	private int endNum;
 	private String search;
+	private int pnum;
+	private String userId;
 	
 
 }

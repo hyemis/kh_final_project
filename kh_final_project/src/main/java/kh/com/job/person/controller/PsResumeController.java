@@ -418,6 +418,26 @@ public class PsResumeController {
 		result = rservice.deleteCerti(certiNo);
 		return result;
 	}
+	
+	// 자격증 테이블 수정 
+	@PostMapping("updateCerti")
+	@ResponseBody
+	public int updateCerti(@RequestParam("certiNo") Integer certiNo,
+			@RequestParam("certiNewName") String certiName,
+			@RequestParam("certiNewPub") String certiPub,
+			@RequestParam("certiNewDate") String certiDate) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> updateCerti = new HashMap<>();
+		updateCerti.put("certiNo", certiNo);
+		updateCerti.put("certiName", certiName);
+		updateCerti.put("certiPub", certiPub);
+		updateCerti.put("certiDate", certiDate);
+		
+		result = rservice.updateCerti(updateCerti);
+		return result;
+	}
 
 	// 자소서 페이지
 	@GetMapping("cl")
