@@ -37,7 +37,6 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/business.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/summernote-lite.css"  rel="stylesheet" >	
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -47,9 +46,10 @@
 <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/lang/summernote-ko-KR.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
 
+
+<!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
 </head>
@@ -79,8 +79,8 @@
 							</div>
 						</div>
 						<div class="text-center p-4 mt-3">
-							<h5 class="fw-bold mb-0">Full Name</h5>
-							<small>email</small>
+							<h5 class="fw-bold mb-0">${userinfo.userName }</h5>
+							<small>${userinfo.userEmail }</small>
 						</div>
 						<div class="list-group">
 							<a href="#" class="list-group-item list-group-item-action">바로가기</a>
@@ -186,7 +186,7 @@
 											</div>
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>직원수</h4>
+													<h4>직 원 수</h4>
 												</div>
 												<div class="col-10 ">
 													<a>직원수를 숫자로 입력해주세요</a> 
@@ -206,14 +206,24 @@
 												<hr>
 												</div>
 											</div>
-											<!-- 서머노트 test 중 -->
+												<div class="row ">
+												<div class="col-2 text-center font-monospace">
+													<h4>기업사진</h4>
+												</div>
+												<div class="col-10 ">
+													<div class="mb-3">
+														<input class="form-control" type="file" id="formFile" multiple>
+														<label for="formFile" class="form-label">기업 대표 사진을 등록해주세요</label> 
+													</div>
+												</div>
+											</div>
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>소개글</h4>
+													<h4>소 개 글</h4>
 												</div>
 												<div class="col-10 was-validated ">
 													<div class="mb-3">
-														<textarea class="summernote" name="boardContent" ></textarea>
+														<textarea id="infoContent" name="boardContent" ></textarea>
 													</div>
 												</div>
 											</div>
@@ -222,6 +232,7 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-light"
 											data-bs-dismiss="modal">취소</button>
+										<button type="reset" class="btn btn-light">초기화</button>	
 										<button type="submit" class="btn btn-primary">등록</button>
 									</div>
 								</div>
@@ -276,11 +287,13 @@
 					<!-- 뉴스레터 -->
 					<div class="border border-secondary">
 						<h1>뉴스레터</h1>
+						<div>
 						<button type="button" class="btn btn-light"
 							href="<%=request.getContextPath()%>/business/aboutus/newsletter">더보기</button>
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
 							data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
+						</div>
 
 						<!-- Modal -->
 						<div class="modal fade" id="newsletter" data-bs-backdrop="static"
@@ -311,18 +324,6 @@
 											</div>
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>파일첨부</h4>
-												</div>
-												<div class="col-10 ">
-													<div class="mb-3">
-														<label for="formFile" class="form-label">Default
-															file input example</label> <input class="form-control"
-															type="file" id="formFile" multiple>
-													</div>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
 													<h4>관련링크</h4>
 												</div>
 												<div class="col-10 ">
@@ -334,14 +335,14 @@
 
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>소개글</h4>
+													<h4>내용작성</h4>
 												</div>
 												<div class="col-10 was-validated">
 													<div class="mb-3">
-														<textarea class="form-control is-invalid"
+														<textarea id="newsLetterContent"
 															name="boardContent" style="height: 300px;" required></textarea>
 													</div>
-													<div>작성일자</div>
+													<div class="text-end ">작성일자</div>
 												</div>
 											</div>
 										</form>
@@ -354,6 +355,7 @@
 								</div>
 							</div>
 						</div>
+						<!-- 뉴스레터 보기 -->
 						<div class="container">
 							<div class="row">
 								<div class="col">
@@ -466,53 +468,98 @@
         });
     </script>
     
-    <!-- 서머노트 -->
-    <script>
-$(document).ready(function() {
+    <!-- ckeditor5 -->
+	<script type="text/javascript">
+	class UploadAdapter {
+	    constructor(loader) {
+	        this.loader = loader;
+	    }
 
-	var toolbar = [
-		    // 글꼴 설정
-		    ['fontname', ['fontname']],
-		    // 글자 크기 설정
-		    ['fontsize', ['fontsize']],
-		    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
-		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-		    // 글자색
-		    ['color', ['forecolor','color']],
-		    // 표만들기
-		    ['table', ['table']],
-		    // 글머리 기호, 번호매기기, 문단정렬
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    // 줄간격
-		    ['height', ['height']],
-		    // 그림첨부, 링크만들기, 동영상첨부
-		    ['insert',['picture','link','video']],
-		    // 코드보기, 확대해서보기, 도움말
-		    ['view', ['codeview','fullscreen', 'help']]
-		  ];
+	    upload() {
+	        return this.loader.file.then( file => new Promise(((resolve, reject) => {
+	            this._initRequest();
+	            this._initListeners( resolve, reject, file );
+	            this._sendRequest( file );
+	        })))
+	    }
 
-	var setting = {
-            height : 300,
-            minHeight : null,
-            maxHeight : null,
-            focus : true,
-            lang : 'ko-KR',
-            toolbar : toolbar,
-            //이미지 첨부를 위한 콜백함수
-            callbacks : { 
-            onImageUpload : function(files, editor, welEditable) {
-            // 파일 업로드(다중업로드를 위해 반복문 사용)
-            for (var i = files.length - 1; i >= 0; i--) {
-            uploadSummernoteImageFile(files[i],
-            this);
-            		}
-            	}
-            }
-         };
+	    _initRequest() {
+	        const xhr = this.xhr = new XMLHttpRequest();
+	        xhr.open('POST', 'imageUpload', true);
+	        xhr.responseType = 'json';
+	        console.log(xhr);
+	        console.log(xhr.response);
+	    }
 
-        $('.summernote').summernote(setting);
-        });
-</script>
+	    _initListeners(resolve, reject, file) {
+	        const xhr = this.xhr;
+	        const loader = this.loader;
+	        const genericErrorText = '파일을 업로드 할 수 없습니다.'
+
+	        xhr.addEventListener('error', () => {reject(genericErrorText)})
+	        xhr.addEventListener('abort', () => reject())
+	        xhr.addEventListener('load', () => {
+	            const response = xhr.response
+	            console.log(response);
+	            if(!response || response.error) {
+	                return reject( response && response.error ? response.error.message : genericErrorText );
+	            }
+
+	            resolve({
+	                default: response.url //업로드된 파일 주소
+	            })
+	        })
+	    }
+
+	    _sendRequest(file) {
+	        const data = new FormData();
+	        data.append('upload',file);
+	        this.xhr.send(data);
+	    }
+	}
+	
+	function MyCustomUploadAdapterPlugin(editor) {
+	    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+	        return new UploadAdapter(loader)
+	    }
+	}
+	
+	
+    
+    ClassicEditor
+    .create( document.querySelector ('#infoContent'),{
+    	language: "ko"
+    	, extraPlugins: [MyCustomUploadAdapterPlugin]
+		, simpleUpload :{
+			uploadUrl : 'imageUpload',
+		}
+    	
+    	, config : {
+    		height:'400px;'
+	   		, width:'100%'
+    	}
+    })
+    .catch( error => {
+        console.error( error );
+    });
+    
+    ClassicEditor
+    .create( document.querySelector ('#newsLetterContent'),{
+    	language: "ko"
+    	, extraPlugins: [MyCustomUploadAdapterPlugin]
+		, simpleUpload :{
+			uploadUrl : 'imageUpload',
+		}
+    	
+    	, config : {
+    		height:'400px;'
+	   		, width:'100%'
+    	}
+    })
+    .catch( error => {
+        console.error( error );
+    });
+	</script>
     
 	
 

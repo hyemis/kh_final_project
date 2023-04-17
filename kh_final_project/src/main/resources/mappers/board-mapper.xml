@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boards">
 
+	<select id="boardList">
+		SELECT * 
+		FROM BOARD 
+		WHERE USER_ID =#{userId}
+	</select>
 
 <!-- business -->
 	<select id="getBoardNum">

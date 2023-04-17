@@ -41,33 +41,23 @@ public class BsAboutUsDao {
 		return sqlSession.delete("boards.deleteNewsLetter", dto);
 		// TODO Auto-generated method stub
 	}
-	
-	// 뉴스레터 하나 읽어오기
+
 	public BoardDto NewsLetterOne(String boardNum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public void updateReadCount(String boardNum) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public int selectOneCount() {
-		return 0;
-		// TODO Auto-generated method stub
+	
+	//뉴스레터 리스트
+	public List<BoardDto> newsLetterList(String userId) {
+		return sqlSession.selectList("boards.newsLetterList", userId);
 	}
-
-	public int selectOneCount(String searchWord) {
-		return 0;
-		// TODO Auto-generated method stub
-	}
-
-	public List<BoardDto> selectList(int currentPage, int limit, String searchWord) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
 	
 	
 	
