@@ -142,7 +142,6 @@
 							 </div>
 						</form>
 						<form name="newPwForm" action="updatePw" method="post">	
-							<input type="hidden" class="userId" name="userId" value="${bsinfo.userId }"> 
 							 <div class="mb-3 row">
 							    <label for="userPw" class="col-sm-3 col-form-label">새 비밀번호</label>
 							    <div class="col-sm-8">
