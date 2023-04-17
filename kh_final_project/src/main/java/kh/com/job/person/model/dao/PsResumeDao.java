@@ -83,6 +83,11 @@ public class PsResumeDao {
 	public int deleteCareer(int carNo) throws Exception {
 		return sqlSession.delete("resume.deleteCareer", carNo);
 	}
+	
+	// 이력서 - 경력사항 수정 
+	public int updateCareer(Map<String, Object> updateCareer) throws Exception {
+		return sqlSession.update("resume.updateCareer", updateCareer);
+	}
 
 	// 이력서-자격증입력
 	public int insertCerti(PsCertiDto dto) throws Exception {
@@ -148,7 +153,12 @@ public class PsResumeDao {
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertCareerInfo", InfoNo);
 	}
-
+	
+	// 이력서 - 경력info 삭제
+	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.delete("resume.deleteInfoCareer",InfoNo);
+	}
+	
 	// 이력서 - 경력 최신보기
 	public int getMaxCareerNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneMaxCar");

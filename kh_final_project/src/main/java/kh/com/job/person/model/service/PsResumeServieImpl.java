@@ -229,6 +229,16 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.selectListCl(userId);
 	}
 
+	@Override
+	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoCareer(InfoNo);
+	}
+
+	@Override
+	public int updateCareer(Map<String, Object> updateCareer) throws Exception {
+		return dao.updateCareer(updateCareer);
+	}
+
 	
 
 	
