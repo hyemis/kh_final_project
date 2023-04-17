@@ -567,39 +567,42 @@
 		// ---------------------------------------------------
 		
 
-// 고등학교 입력폼 추가
-var forms = document.getElementsByName("rHSchool")[0];
-// event click
-function addHigh() {
-	var originForm = forms[0];
-	var form = originForm.cloneNode(true);
-	originForm.parentNode.insertBefore(form, originForm.nextSibling);
-	forms.push(form);
-}
+		// 고등학교 입력폼 추가
+		// event click
+		function addHigh() {
+			var originForm = rsforms[0];
+			var form = originForm.cloneNode(true);
+			originForm.parentNode.insertBefore(form, originForm.nextSibling);
 
-		
-		// 대학교 입력폼 추가
-		var forms = [ document.getElementsByName("rUniversity")[0] ];
-
-		function addUniv() {
-			var lastForm = forms[forms.length - 1];
-			var form = lastForm.cloneNode(true);
-			document.getElementById("UnivFormContainer").appendChild(form);
-			forms.push(form);
+			rsforms.push(form);
 		}
+		var rsforms = [ document.getElementsByName("rHSchool")[0] ];
+		
+				
+		// 대학교 입력폼 추가
+	
+		function addUniv() {
+			var originForm = uniforms[0];
+			var form = originForm.cloneNode(true);
+			originForm.parentNode.insertBefore(form, originForm.nextSibling);
+
+			uniforms.push(form);
+		}
+		var uniforms = [ document.getElementsByName("rUniversity")[0] ];
 		
 		
 		// 대학원 입력폼 추가
-		var forms = [ document.getElementsByName("rGSchool")[0] ];
-
+	
 		function addGrad() {
-			var lastForm = forms[forms.length - 1];
-			var form = lastForm.cloneNode(true);
-			document.getElementById("GradFormContainer").appendChild(form);
-			forms.push(form);
-		}
-		
+			var originForm = gsforms[0];
+			var form = originForm.cloneNode(true);
+			originForm.parentNode.insertBefore(form, originForm.nextSibling);
 
+			gsforms.push(form);
+		}
+		var gsforms = [ document.getElementsByName("rGSchool")[0] ];
+		
+	
 		// 입력폼 삭제
 		function removeForm(form) {
 			form.remove();
