@@ -19,5 +19,7 @@ public interface BsRecruitService {
 
 	public List<BsRecruitDto> recruitAdmission(String userId);
 
+	public int changeAdmission(BsRecruitDto dto);
+
 
 }

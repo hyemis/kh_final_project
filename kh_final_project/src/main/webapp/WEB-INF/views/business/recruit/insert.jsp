@@ -399,6 +399,7 @@
 		, simpleUpload :{
 			uploadUrl : 'imageUpload',
 		}
+    	
     	, config : {
     		height:'400px'
 	   		, width:'100%'

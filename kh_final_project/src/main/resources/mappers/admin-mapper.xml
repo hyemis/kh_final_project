@@ -155,7 +155,7 @@
 						or COMPANY_NAME like '%'||#{search}||'%'
 					</if>
 				</trim>
-				ORDER BY RA_ADMISSION DESC, RA_NUM DESC
+				ORDER BY RA_NUM DESC
 			) A
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
@@ -183,7 +183,7 @@
 	<update id="admissChange" parameterType="map">
 		UPDATE RECRUIT_REGIST
 		<set>
-			<if test='raAdmission == "N"'>RA_ADMISSION = 'Y'</if>
+			<if test='raAdmission == "N"'>RA_ADMISSION = 'P'</if>
 			<if test='raAdmission == "P" or raAdmission == "Y"'>RA_ADMISSION = 'N'</if>
 		</set>	 
 		WHERE RA_NUM = #{raNum}

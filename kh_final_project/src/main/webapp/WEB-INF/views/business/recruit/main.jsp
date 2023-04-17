@@ -103,8 +103,9 @@
 												<td>${list.raTitle }</td>
 												<td> ${list.closeDate }까지</td>
 												<td>
-													<div class="form-check form-switch">
-														<input class="form-check-input raAdmission" type="checkbox" role="switch" >
+													<div class="form-check form-switch openRecruit">
+														<input type="hidden" class="raNum" name="raNum" value="${list.raNum}">
+														<input class="form-check-input raAdmission" type="checkbox" role="switch" value="${list.raAdmission }" ${list.raAdmission eq 'P'? '' : 'checked' }>
 													</div>
 												</td>
 											</tr>
@@ -153,6 +154,31 @@
 			
 		</div>
 		<!-- Category End -->
+		
+		<script type="text/javascript">
+        
+        $(document).on('click','.openRecruit', function() {
+        	let raNum = $(this).find(".raNum").val();  
+        	let raAdmission = $(this).find(".raAdmission").val();
+        	
+    		$.ajax({ 
+    			url: "${pageContext.request.contextPath}/business/recruit/changeAdmission"
+    			, type: "post"
+    			, data:  {raNum : raNum, raAdmission : raAdmission}
+    			, success: function(result){
+    				if(result > 0){
+    					location.reload();
+    				}else{
+    					alert("게시글 공개에 실패 했습니다.");
+    				}
+    			}
+    			, error: function(e){
+    				alert(e +" : 오류")
+    			}
+    		}); 
+        	
+        });
+		</script>
 		
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 		
