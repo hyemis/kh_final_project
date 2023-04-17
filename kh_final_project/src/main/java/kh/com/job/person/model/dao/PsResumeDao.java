@@ -63,6 +63,11 @@ public class PsResumeDao {
 	public int insertHschool(PsHschoolDto dto) throws Exception {
 		return sqlSession.insert("resume.insertHschool", dto);
 	}
+	
+	// 이력서 - 고등학교 삭제
+	public int deleteHigh(int highEduNo) throws Exception {
+		return sqlSession.delete("resume.deleteHigh", highEduNo);
+	}
 
 	// 이력서-대학교입력
 	public int insertUniv(PsUnivDto dto) throws Exception {
@@ -82,6 +87,11 @@ public class PsResumeDao {
 	// 이력서 - 경력사항 삭제
 	public int deleteCareer(int carNo) throws Exception {
 		return sqlSession.delete("resume.deleteCareer", carNo);
+	}
+	
+	// 이력서 - 경력사항 수정 
+	public int updateCareer(Map<String, Object> updateCareer) throws Exception {
+		return sqlSession.update("resume.updateCareer", updateCareer);
 	}
 
 	// 이력서-자격증입력
@@ -148,7 +158,12 @@ public class PsResumeDao {
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertCareerInfo", InfoNo);
 	}
-
+	
+	// 이력서 - 경력info 삭제
+	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.delete("resume.deleteInfoCareer",InfoNo);
+	}
+	
 	// 이력서 - 경력 최신보기
 	public int getMaxCareerNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneMaxCar");

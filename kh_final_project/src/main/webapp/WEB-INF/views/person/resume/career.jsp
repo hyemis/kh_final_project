@@ -138,9 +138,7 @@
 
 												<button type="button" data-bs-dismiss="modal"
 													class="btn btn-primary mx-auto d-block" id="selectCarBtn"
-													data-carNo="${careerList.carNo}"
-													class="btn btn-primary mx-auto d-block" id="selectCarBtn"
-													onclick="saveCar();">불러오기</button>
+													data-carNo="${careerList.carNo}">불러오기</button>
 											</div>
 
 										</div>
@@ -152,7 +150,7 @@
 								for="radio-box">경력없음(신입)</label><br>
 							<hr>
 							<button class="btn btn-primary" onclick="addCar()">새
-								경력추가</button>
+								정보추가</button>
 							<br>
 						</div>
 						<div id="hidden-content">
@@ -229,194 +227,244 @@
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-	<script>
-		// alret
-		var msg = "${msg}";
-		if (msg) {
-			alert(msg);
-		}
+<script>
 
-		// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
-		const radioBox = document.getElementById("radio-box");
-		const hiddenContent = document.getElementById("hidden-content");
+// alret
+var msg = "${msg}";
+if (msg) {
+	alert(msg);
+}
 
-		let clickCount = 0;
-		radioBox.addEventListener("click", function() {
-			clickCount++;
-			if (radioBox.checked) {
-				hiddenContent.classList.add("hidden");
-			} else {
-				hiddenContent.classList.remove("hidden");
-			}
-			if (clickCount % 2 === 1) {
-				radioBox.checked = false;
-				hiddenContent.classList.remove("hidden");
-			}
-		});
+// 불러오기를 통해 선택된 carNo
+//let selectedCarNo = [];
 
-		// 경력사항 입력확인
-		const rCareer = document.querySelector('form[name="career"]');
-		const saveCareer = document.querySelector('#saveCareer');
-
-		function checkInputs(event) {
-			let inputs = rCareer.querySelectorAll('input[type=text]');
-			let isAllFilled = true;
-			for (let i = 0; i < inputs.length; i++) {
-				if (inputs[i].value.trim() === '') {
-					isAllFilled = false;
-					break;
-				}
-			}
-			if (!isAllFilled) {
-				alert('모든 칸을 입력하세요!');
-				event.preventDefault(); // 저장 취소
-			}
-		}
-		saveCareer.addEventListener('click', checkInputs);
-		rCareer.addEventListener('submit', checkInputs);
-		
-		
-		// 모달창 체크박스 초기화
-		$(document).ready(function() {
-			$('#viewCareer').on('hidden.bs.modal', function() {
-				$('input[name=selectedCareer]').prop('checked', false);
-			});
-		});
-
-		// 경력 입력폼 추가
-		var forms = [ document.getElementsByName("career")[0] ];
-
-		function addCar() {
-			var originForm = forms[0];
-			var form = originForm.cloneNode(true);
-			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-			forms.push(form);
-		}
-
-		// 입력폼 삭제
-		function removeForm(form) {
-			form.remove();
-		}
-		
-		// 모달창에서 정보 불러와서 출력하기
-		let saveButton = document.getElementById("selectCarBtn");
-						
-						saveButton.addEventListener("click", function() {
-						  // 체크된 경력 데이터를 가져와서 form에 추가
-						  let selectedCareerList = document.querySelectorAll('input[name="selectedCareer"]:checked');
-						    
-						  let newFormHTML =	`
-						  <form>
-								<div class="row mb-3">
-									<label for="carName" class="col-sm-2 col-form-label">회사명</label>
-									<div class="col-sm-10">
-									
-										<input type="text" class="form-control" name="carNewName">
-									</div>
-								</div>
-
-								<div class="row mb-3">
-									<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewDate"
-											>
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewPosition" >
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewDept" >
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="carNewResp">
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
-									<div class="col-sm-10">
-										<input type="number" class="form-control" name="carNewSalary"
-											>
-									</div>
-								</div>
-								<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-								<button type="submit" class="btn btn-primary">수정</button>
-								<button type="button" class="btn btn-outline-dark" id="deleteInfo">
-								  <i class="fa fa-minus"></i>
-								</button>
-								</div>
-								<hr>
-							</form>
-						    `;
-						    
-						      for (let i = 0; i < selectedCareerList.length; i++) {
-						          let newForm = document.createElement("form");
-						          let formContainer = document.getElementById("CarFormContainer");
-						          newForm.innerHTML = newFormHTML;
-						          formContainer.appendChild(newForm);
-						    
-						     // 기존 form 뒤에 새로운 form 추가
-						    let carData = selectedCareerList[i].closest("tr").getElementsByTagName("td");
-						    newForm.elements["carNewName"].value = carData[1].textContent;
-						    newForm.elements["carNewDate"].value = carData[2].textContent;
-						    newForm.elements["carNewPosition"].value = carData[3].textContent;
-						    newForm.elements["carNewDept"].value = carData[4].textContent;
-						    newForm.elements["carNewResp"].value = carData[5].textContent;
-						    newForm.elements["carNewSalary"].value = carData[6].textContent;
-						    
-						  }
-
-						});
-						
-						
-			// 경력사항 삭제 
-			$('.deleteCareer').click(function() {
-				var carNo = $(this).prev('input[name="carNo"]').val();
-		
-		  $.ajax({
-		    type: 'POST',
-		    url: 'deleteCareer',
-		    data: { carNo: carNo },
-		    success: function(result) {
-		      if(result > 0) {
-		        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
-		        location.reload();
-		      } else {
-		        alert('해당 경력사항 삭제에 실패했습니다.');
-		      }
-		    }
-		  });
-		});
-								
-	// '불러오기' 버튼 클릭시 낀테이블 inesrt
-	function saveCar() {
-		let carNo = "${careerList.carNo}"
-		console.log(carNo);
-		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/person/resume/career.aj",
-			type : "post",
-			data : {carNo : carNo},
-			success : function(result) {
-				if (result > 0) {
-					alert("성공");
-					location.href = "/job/person/resume/career";
-				} else {
-					alert("실패");
-				}
-			}
-		})
+// 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
+const radioBox = document.getElementById("radio-box");
+const hiddenContent = document.getElementById("hidden-content");
+let clickCount = 0;
+// event 
+radioBox.addEventListener("click", radioBoxClickHandler);
+function radioBoxClickHandler() {
+	clickCount++;
+	if (radioBox.checked) {
+		hiddenContent.classList.add("hidden");
+	} else {
+		hiddenContent.classList.remove("hidden");
 	}
-						
-						
+	if (clickCount % 2 === 1) {
+		radioBox.checked = false;
+		hiddenContent.classList.remove("hidden");
+	}
+}
+
+//경력사항 입력확인
+const rCareer = document.querySelector('form[name="career"]');
+const saveCareer = document.querySelector('#saveCareer');
+//event 
+saveCareer.addEventListener('click', checkInputs);
+//event 
+rCareer.addEventListener('submit', checkInputs);
+function checkInputs(event) {
+	let inputs = rCareer.querySelectorAll('input[type=text]');
+	let isAllFilled = true;
+	for (let i = 0; i < inputs.length; i++) {
+		if (inputs[i].value.trim() === '') {
+			isAllFilled = false;
+			break;
+		}
+	}
+	if (!isAllFilled) {
+		alert('모든 칸을 입력하세요!');
+		event.preventDefault(); // 저장 취소
+	}
+}
+
+		
+		
+// 모달창 체크박스 초기화
+$(document).ready(function() {
+	$('#viewCareer').on('hidden.bs.modal', function() {
+		$('input[name=selectedCareer]').prop('checked', false);
+	});
+});
+
+// 경력 입력폼 추가
+var forms = [ document.getElementsByName("career")[0] ];
+// event click 새경력추가
+function addCar() {
+	var originForm = forms[0];
+	var form = originForm.cloneNode(true);
+	originForm.parentNode.insertBefore(form, originForm.nextSibling);
+	forms.push(form);
+}
+// event click 입력폼 삭제
+function removeForm(form) {
+	form.remove();
+}
+		
+// 모달창에서 정보 불러와서 출력하기
+let saveButton = document.getElementById("selectCarBtn");
+// event
+saveButton.addEventListener("click", function() {
+  // 체크된 경력 데이터를 가져와서 form에 추가
+  let selectedCareerList = document.querySelectorAll('input[name="selectedCareer"]:checked');
+
+  let newFormHTML =	`
+	  <form name="career" action="career" method="post">
+	  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+	 	<button type="button" class="btn btn-outline-dark" id="deleteInfo">
+		  <i class="fa fa-minus"></i>
+		</button>
+	  </div>
+		<div class="row mb-3">
+			<label for="carNewName" class="col-sm-2 col-form-label">회사명</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carNewName">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label for="carNewDate" class="col-sm-2 col-form-label">재직기간</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carNewDate"
+					>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carNewPosition" class="col-sm-2 col-form-label">직급/직책</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carNewPosition" >
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carNewDept" class="col-sm-2 col-form-label">근무부서</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carNewDept" >
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carNewResp" class="col-sm-2 col-form-label">담당업무</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carNewResp">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carNewSalary" class="col-sm-2 col-form-label">연봉</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" name="carNewSalary"
+					>
+			</div>
+		</div>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+		<button type="button" id="update" class="btn btn-primary">수정</button>
+		</div>
+		<hr>
+	</form>
+    `;
+    
+    let newForm = null;
+    
+    for (let i = 0; i < selectedCareerList.length; i++) {
+    	  newForm = document.createElement("form");
+          let formContainer = document.getElementById("CarFormContainer");
+          newForm.id = "car-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+          newForm.innerHTML = newFormHTML;
+          formContainer.appendChild(newForm);
+    
+	     // 기존 form 뒤에 새로운 form 추가
+	    let carData = selectedCareerList[i].closest("tr").getElementsByTagName("td");
+	    newForm.elements["carNewName"].value = carData[1].textContent;
+	    newForm.elements["carNewDate"].value = carData[2].textContent;
+	    newForm.elements["carNewPosition"].value = carData[3].textContent;
+	    newForm.elements["carNewDept"].value = carData[4].textContent;
+	    newForm.elements["carNewResp"].value = carData[5].textContent;
+	    newForm.elements["carNewSalary"].value = carData[6].textContent;
+	    
+	  //- 버튼
+	    let deleteBtn = newForm.querySelector("#deleteInfo");
+	    deleteBtn.addEventListener("click", function() {
+	      const formId = newForm.id;
+	      const formToRemove = document.getElementById(formId);
+	      formContainer.removeChild(formToRemove);
+	      
+	      var carNo = $("input[name='carNo']").val();
+	    	
+	    	  $.ajax({
+	    	    type: 'POST',
+	    	    url: 'deleteInfoCareer',
+	    	    data: { carNo: carNo },
+	    	    success: function(result) {
+	    	      if(result > 0) {
+	    	        alert('작성 중인 이력서에서 해당 경력 정보가 삭제되었습니다.');
+	    	      } else {
+	    	        alert('작성 중인 이력서에서 해당 경력 정보 삭제에 실패했습니다.');
+			      }
+			    }
+			  });
+		  });
+	    
+	  //수정 버튼 
+	    let updateBtn = newForm.querySelector("#update");
+	    updateBtn.addEventListener("click", function() {
+	      const carNewName = newForm.elements["carNewName"].value;
+	      const carNewDate = newForm.elements["carNewDate"].value;
+	      const carNewPosition = newForm.elements["carNewPosition"].value;
+	      const carNewDept = newForm.elements["carNewDept"].value;
+	      const carNewResp = newForm.elements["carNewResp"].value;
+	      const carNewSalary = newForm.elements["carNewSalary"].value;
+	      
+	      
+	      const data = {
+	        carNo: carNo,
+	        carNewName: carNewName,
+	        carNewDate: carNewDate,
+	        carNewPosition: carNewPosition,
+	        carNewDept: carNewDept,
+	        carNewResp: carNewResp,
+	        carNewSalary: carNewSalary
+	      };
+
+	      $.ajax({
+	        type: "POST",
+	        url: 'updateCareer',
+	        data: data,
+	        success: function(result) {
+	          if(result > 0) {
+	            alert('해당 경력이 수정되었습니다.');
+	            location.reload();
+	          } else {
+	            alert('해당 경력 수정에 실패했습니다.');
+		        }
+		      }
+		    });
+		  });
+		}
+
+
+				
+
+// '불러오기' 버튼 클릭시 낀테이블 inesrt
+//$('.selectCarBtn').click(function(){
+var carNo = $("input[name='carNo']").val();
+$.ajax({
+	url : 'insertInfoCareer',
+	type: 'POST',
+	data : {carNo : carNo},
+	success : function(result) {
+		if(result > 0) {
+	        alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+	      } else {
+	        alert('작성 중인 이력서에서 해당 경력 입력에 실패했습니다. ');
+	      }
+    }
+  }); 
+
+
+
+
+});
+
+
 		// 모달창에 체크한 이력서 순서대로 표시
 		$(document).ready(function() {
 	 	$('input[name="selectedCareer"]').change(function() {
@@ -469,6 +517,25 @@
 		    $('#selectedCareerList').html('');
 		    $('input[name="selectedCareer"]').prop('checked', false);
 		});
+		
+		// 경력사항 삭제 
+		// event
+		$('.deleteCareer').click(function() {
+			var carNo = $(this).prev('input[name="carNo"]').val();
+		  $.ajax({
+		    type: 'POST',
+		    url: 'deleteCareer',
+		    data: { carNo: carNo },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('해당 경력사항이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 경력사항은 삭제되지 않습니다.');
+		        location.reload();
+		      } else {
+		        alert('해당 경력사항 삭제에 실패했습니다.');
+		      }  // if end
+		    } // success end
+		  });  // ajax end
+		}); // click-function
 
 
 
