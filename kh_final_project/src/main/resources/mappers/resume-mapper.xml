@@ -176,7 +176,7 @@
 		CAR_POSITION = #{carPosition},
 		CAR_DEPT = #{carDept},
 		CAR_RESP = #{carResp},
-		CAR_SALARY = #{carSalary},
+		CAR_SALARY = #{carSalary}
 		WHERE CAR_NO = #{carNo}
 	</update>
 

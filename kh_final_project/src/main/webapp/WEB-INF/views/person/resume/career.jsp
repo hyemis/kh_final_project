@@ -150,7 +150,7 @@
 								for="radio-box">경력없음(신입)</label><br>
 							<hr>
 							<button class="btn btn-primary" onclick="addCar()">새
-								경력추가</button>
+								정보추가</button>
 							<br>
 						</div>
 						<div id="hidden-content">

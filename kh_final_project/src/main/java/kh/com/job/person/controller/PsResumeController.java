@@ -363,13 +363,13 @@ public class PsResumeController {
 	// 경력 테이블 수정 
 	@PostMapping("updateCareer")
 	@ResponseBody
-	public int updateCerti(@RequestParam("carNo") Integer carNo,
+	public int updateCareer(@RequestParam("carNo") Integer carNo,
 			@RequestParam("carNewName") String carName,
 			@RequestParam("carNewDate") String carDate,
 			@RequestParam("carNewPosition") String carPosition,
 			@RequestParam("carNewDept") String carDept,
 			@RequestParam("carNewResp") String carResp,
-			@RequestParam("carNewSalary") String carSalary) throws Exception {
+			@RequestParam("carNewSalary") Integer carSalary) throws Exception {
 		
 		int result = -1;
 		
@@ -385,6 +385,7 @@ public class PsResumeController {
 		result = rservice.updateCareer(updateCareer);
 		return result;
 	}
+	
 	
 		
 	// 자격증 페이지

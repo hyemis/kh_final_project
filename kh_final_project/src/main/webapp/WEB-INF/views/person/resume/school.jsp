@@ -454,7 +454,7 @@
 			alert(msg);
 		}
 
-		// 체크박스 하나만 체크 
+/* 		// 체크박스 하나만 체크 
 		function checkOnly(checkbox) {
 			var checkboxes = document
 					.querySelectorAll('#highSchoolList input[type="checkbox"], #universityList input[type="checkbox"], #graduateList input[type="checkbox"]');
@@ -463,7 +463,7 @@
 					checkboxes[i].checked = false;
 				}
 			}
-		}
+		} */
 
 /* 		// 선택 완료 버튼
 		function completeCheck() {
@@ -541,6 +541,8 @@
 	    }
 	  } 
 	}
+		
+		
 
 
 		//  대입검정고시 체크박스 Y/N 체크
@@ -548,23 +550,9 @@
 			var ged = $("#checkY").prop("checked") ? "Y" : "N";
 			$("#ged").val(ged);
 		}
-
-		// 체크박스 '대입 검정고시' 체크하면 아래내용 비활성화
-		const disableInputCheckbox = document.getElementById("checkY");
-		const dateField = document.getElementById("dateField");
-		const selectField = document.getElementById("selectField");
-		disableInputCheckbox.addEventListener("change", function() {
-			if (this.checked) {
-				inputField.disabled = true;
-				dateField.disabled = true;
-				selectField.disabled = true;
-			} else {
-				inputField.disabled = false;
-				dateField.disabled = false;
-				selectField.disabled = false;
-			}
-		});
-
+		
+		
+		
 		function showList(type) {
 			// 모든 표 숨기기
 			document.getElementById("highSchoolList").style.display = "none";
@@ -574,16 +562,20 @@
 			// 해당 타입에 맞는 표 보이기
 			document.getElementById(type + "List").style.display = "table-row-group";
 		}
+		
+		
+		// ---------------------------------------------------
+		
 
-		// 고등학교 입력폼 추가
-		var forms = [ document.getElementsByName("rHSchool")[0] ];
-
-		function addHigh() {
-			var lastForm = forms[forms.length - 1];
-			var form = lastForm.cloneNode(true);
-			document.getElementById("HighFormContainer").appendChild(form);
-			forms.push(form);
-		}
+// 고등학교 입력폼 추가
+var forms = document.getElementsByName("rHSchool")[0];
+// event click
+function addHigh() {
+	var originForm = forms[0];
+	var form = originForm.cloneNode(true);
+	originForm.parentNode.insertBefore(form, originForm.nextSibling);
+	forms.push(form);
+}
 
 		
 		// 대학교 입력폼 추가
