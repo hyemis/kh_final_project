@@ -93,9 +93,21 @@
 								<tr>
 									<td>${list.companyName }</td>
 									<td>${list.userId}</td>
-									<td><a class="" href="${pageContext.request.contextPath}/admin/business/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
+									<td><a class="" href="${pageContext.request.contextPath}/business/recruit/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
 									<td> ${list.closeDate }까지</td>
-									<td class="text-center"><p>${list.raAdmission == 'N'? '미승인' : '승인' }</p></td>
+									<td class="text-center"><p>
+										<c:choose>
+											<c:when test="${list.raAdmission == 'N'}">
+												미승인
+											</c:when>
+											<c:when test="${list.raAdmission == 'P'}">
+												게시안함
+											</c:when>
+											<c:otherwise>
+												게시함
+											</c:otherwise>
+										</c:choose>
+									</p></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -129,7 +141,7 @@
 			</ul>
 			
 			<!-- 위치 나중에 수정 -->
-			<div>
+			<div class="container-xl p-5 d-flex justify-content-end" >
 				<a href="main" class="btn btn-dark">메인으로</a>
 			</div>
 			

@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
+import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.admin.model.service.AdCategotyService;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAccountService;
@@ -44,6 +46,9 @@ public class BsRecruitController {
 	
 	@Autowired
 	private AdCategotyService adservice;
+	
+	@Autowired
+	private AdBusinessService abs;
 	
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv, Principal principal) {
@@ -185,9 +190,13 @@ public class BsRecruitController {
 			,PagingInfoDto pidto
 			,Principal principal
 			) {
+		
+		System.out.println(pidto.getPnum() + "정보확인 ");
+		//페이징 할 때 pnum값 0일 때
 		if(pidto.getPnum() < 1) {
 			pidto.setPnum(1);
 		}
+		System.out.println(pidto.getPnum() + "정보확인2 ");
 		pidto.setUserId(principal.getName());
 		//페이지네이션 처리가 완료된 리스트
 		Paging list = service.recruitAll(pidto);
@@ -195,6 +204,21 @@ public class BsRecruitController {
 		mv.addObject("list", list);
 		//현재 페이지 정보를 가져오기 위한 addObject
 		mv.addObject("pidto", pidto);
+		
+		return mv;
+	}
+	//공고 상세
+	@GetMapping("/view")
+	public ModelAndView viewRecruit(ModelAndView mv
+			,PagingInfoDto pidto
+			, @RequestParam(name = "id", required = false) String raNum
+			,Principal principal
+			) {
+
+		BsRecruitDetailDto redto = abs.viewDetail(raNum);
+		
+		mv.addObject("pidto", pidto);
+		mv.addObject("redto", redto);
 		
 		return mv;
 	}

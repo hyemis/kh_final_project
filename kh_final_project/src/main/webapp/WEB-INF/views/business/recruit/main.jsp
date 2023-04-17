@@ -58,7 +58,7 @@
 			<div class="myinfo p-2 col-3 border border-primary">
 				<div class="container-xxl py-5">
 					<div class="bg-white rounded p-4 row" style="border: 1px dashed rgba(0, 185, 142, .3)">
-						<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
+						${userinfo.userPic eq null ? '<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">' : userinfo.userPic}
 					</div>
 					<div class="userinfo p-2 pt-4">
 						<span>이름 : </span>
@@ -102,7 +102,7 @@
 										<c:forEach items="${recruitList }" var="list" varStatus="i">
 											<tr>
 												<td>${list.companyName }</td>
-												<td>${list.raTitle }</td>
+												<td><a href="view?id=${list.raNum}">${list.raTitle }</a></td>
 												<td> ${list.closeDate }까지</td>
 												<td>
 													<div class="form-check form-switch openRecruit">
@@ -118,7 +118,7 @@
 						</table>
 					</div>
 				</div>
-				
+				<!--  
 				<div class="recruitAdmissionList p-2">
 					<h3>관리자 미승인 공고</h3>
 					<div class="bg-white border">
@@ -153,7 +153,7 @@
 				</div>
 			</div>
 			
-			
+			-->
 		</div>
 		<!-- Category End -->
 		
