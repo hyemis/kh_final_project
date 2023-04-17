@@ -185,7 +185,7 @@
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit">${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit">수정하기</button>
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 deleteRecruit">삭제하기</button>
-			<a href="recruitAll?pnum=${pnum}&search=${search}" class="btn btn-dark py-3 px-4">목록으로</a>
+			<a href="recruitAll?pnum=${pidto.pnum == 0? '1' : pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
 			<a href="main" class="btn btn-dark py-3 px-4">메인으로</a>
 		 </div>
 

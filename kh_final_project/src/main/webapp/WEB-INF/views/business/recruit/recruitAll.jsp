@@ -93,7 +93,7 @@
 								<tr>
 									<td>${list.companyName }</td>
 									<td>${list.userId}</td>
-									<td><a class="" href="${pageContext.request.contextPath}/business/recruit/view?id=${list.raNum}&pnum=${pnum }&search=${search}">${list.raTitle }</a></td>
+									<td><a class="" href="${pageContext.request.contextPath}/business/recruit/view?id=${list.raNum}&pnum=${pidto.pnum }&search=${pidto.search}">${list.raTitle }</a></td>
 									<td> ${list.closeDate }까지</td>
 									<td class="text-center"><p>
 										<c:choose>
@@ -123,11 +123,11 @@
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }&search=${search}">prev</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/recruit/recruitAll?pnum=${list.prevPage }&search=${search}">prev</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum}&search=${search}">${pNum }</a></li>
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/recruit/recruitAll?pnum=${pNum}&search=${search}">${pNum }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -135,7 +135,7 @@
 						<li class="page-item disabled"><a class="page-link">next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }&search=${search}">next</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/recruit/recruitAll?pnum=${list.nextPage }&search=${search}">next</a></li>
 					</c:otherwise>
 				</c:choose>					
 			</ul>
