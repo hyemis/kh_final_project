@@ -40,20 +40,16 @@
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
-<!-- style -->
+
+<!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
 </head>
@@ -83,8 +79,8 @@
 							</div>
 						</div>
 						<div class="text-center p-4 mt-3">
-							<h5 class="fw-bold mb-0">Full Name</h5>
-							<small>email</small>
+							<h5 class="fw-bold mb-0">${userinfo.userName }</h5>
+							<small>${userinfo.userEmail }</small>
 						</div>
 						<div class="list-group">
 							<a href="#" class="list-group-item list-group-item-action">바로가기</a>
@@ -108,7 +104,7 @@
 							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 							aria-labelledby="staticBackdropLabel" aria-hidden="true">
 							<div
-								class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+								class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h3 class="modal-title text-center" id="staticBackdropLabel">회사소개
@@ -117,7 +113,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="/save" method="post"
+										<form action="/companyInfoForm" method="post"
 											enctype="multipart/form-data">
 											<div class="row ">
 												<div class="col-2 text-center">
@@ -185,18 +181,18 @@
 															type="checkbox" name="tag" value="어학교육">어학교육 <input
 															type="checkbox" name="tag" value="해외연수">해외연수
 													</p>
-													<hr>
+												<hr>
 												</div>
 											</div>
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>직원수</h4>
+													<h4>직 원 수</h4>
 												</div>
 												<div class="col-10 ">
-													<a>직원수를 숫자로 입력해주세요</a> <input type="text" name="employee"
+													<a>직원수를 숫자로 입력해주세요</a> 
+													<input type="text" name="employee"
 														style="width: 30%;" placeholder="예시)300">명
-
-													<hr>
+												<hr>
 												</div>
 											</div>
 											<div class="row ">
@@ -204,28 +200,31 @@
 													<h4>평균연봉</h4>
 												</div>
 												<div class="col-10 ">
-													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> <input type="text"
-														name="salaryAvg" style="width: 30%;" placeholder="예시)3500">만원
-													<hr>
+													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> 
+													<input type="text" name="salaryAvg"
+														 style="width: 30%;" placeholder="예시)3500">만원
+												<hr>
+												</div>
+											</div>
+												<div class="row ">
+												<div class="col-2 text-center font-monospace">
+													<h4>기업사진</h4>
+												</div>
+												<div class="col-10 ">
+													<div class="mb-3">
+														<input class="form-control" type="file" id="formFile" multiple>
+														<label for="formFile" class="form-label">기업 대표 사진을 등록해주세요</label> 
+													</div>
 												</div>
 											</div>
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>소개글</h4>
+													<h4>소 개 글</h4>
 												</div>
-												<div class="col-10 was-validated">
+												<div class="col-10 was-validated ">
 													<div class="mb-3">
-														<textarea class="form-control is-invalid"
-															name="boardContent" id="validationTextarea"
-															style="height: 300px;" placeholder="회사소개 내용을 입력하세요."
-															required></textarea>
+														<textarea id="infoContent" name="boardContent" ></textarea>
 													</div>
-													<!-- TODO : file 첨부 
-   					 <div class="mb-3">
-   					 	<input type="file" name="file" class="form-control" aria-label="file example" required>
-   					 	<div class="invalid-feedback">Example invalid form file feedback</div>
-  					 </div>
-  					  -->
 												</div>
 											</div>
 										</form>
@@ -233,6 +232,7 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-light"
 											data-bs-dismiss="modal">취소</button>
+										<button type="reset" class="btn btn-light">초기화</button>	
 										<button type="submit" class="btn btn-primary">등록</button>
 									</div>
 								</div>
@@ -287,11 +287,13 @@
 					<!-- 뉴스레터 -->
 					<div class="border border-secondary">
 						<h1>뉴스레터</h1>
+						<div>
 						<button type="button" class="btn btn-light"
 							href="<%=request.getContextPath()%>/business/aboutus/newsletter">더보기</button>
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
 							data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
+						</div>
 
 						<!-- Modal -->
 						<div class="modal fade" id="newsletter" data-bs-backdrop="static"
@@ -307,7 +309,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="/saveNewletter" method="post"
+										<form action="/newletterForm" method="post"
 											enctype="multipart/form-data">
 
 											<div class="row ">
@@ -322,22 +324,10 @@
 											</div>
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>파일첨부</h4>
-												</div>
-												<div class="col-10 ">
-													<div class="mb-3">
-														<label for="formFile" class="form-label">Default
-															file input example</label> <input class="form-control"
-															type="file" id="formFile" multiple>
-													</div>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
 													<h4>관련링크</h4>
 												</div>
 												<div class="col-10 ">
-													<input type="text" class="form-control" name=""
+													<input type="text" class="form-control" name="link"
 														placeholder="링크를 입력해주세요">
 													<hr>
 												</div>
@@ -345,14 +335,14 @@
 
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
-													<h4>소개글</h4>
+													<h4>내용작성</h4>
 												</div>
 												<div class="col-10 was-validated">
 													<div class="mb-3">
-														<textarea class="form-control is-invalid"
+														<textarea id="newsLetterContent"
 															name="boardContent" style="height: 300px;" required></textarea>
 													</div>
-													<div>작성일자</div>
+													<div class="text-end ">작성일자</div>
 												</div>
 											</div>
 										</form>
@@ -365,6 +355,7 @@
 								</div>
 							</div>
 						</div>
+						<!-- 뉴스레터 보기 -->
 						<div class="container">
 							<div class="row">
 								<div class="col">
@@ -445,8 +436,14 @@
 
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	</div>
-
+	
+	<script>
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	</script>
+	
 	<!-- 숫자 카운트 애니메이션 -->
 	  <script>
         $('.nums').each(function () {
@@ -470,6 +467,100 @@
             });
         });
     </script>
+    
+    <!-- ckeditor5 -->
+	<script type="text/javascript">
+	class UploadAdapter {
+	    constructor(loader) {
+	        this.loader = loader;
+	    }
+
+	    upload() {
+	        return this.loader.file.then( file => new Promise(((resolve, reject) => {
+	            this._initRequest();
+	            this._initListeners( resolve, reject, file );
+	            this._sendRequest( file );
+	        })))
+	    }
+
+	    _initRequest() {
+	        const xhr = this.xhr = new XMLHttpRequest();
+	        xhr.open('POST', 'imageUpload', true);
+	        xhr.responseType = 'json';
+	        console.log(xhr);
+	        console.log(xhr.response);
+	    }
+
+	    _initListeners(resolve, reject, file) {
+	        const xhr = this.xhr;
+	        const loader = this.loader;
+	        const genericErrorText = '파일을 업로드 할 수 없습니다.'
+
+	        xhr.addEventListener('error', () => {reject(genericErrorText)})
+	        xhr.addEventListener('abort', () => reject())
+	        xhr.addEventListener('load', () => {
+	            const response = xhr.response
+	            console.log(response);
+	            if(!response || response.error) {
+	                return reject( response && response.error ? response.error.message : genericErrorText );
+	            }
+
+	            resolve({
+	                default: response.url //업로드된 파일 주소
+	            })
+	        })
+	    }
+
+	    _sendRequest(file) {
+	        const data = new FormData();
+	        data.append('upload',file);
+	        this.xhr.send(data);
+	    }
+	}
+	
+	function MyCustomUploadAdapterPlugin(editor) {
+	    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+	        return new UploadAdapter(loader)
+	    }
+	}
+	
+	
+    
+    ClassicEditor
+    .create( document.querySelector ('#infoContent'),{
+    	language: "ko"
+    	, extraPlugins: [MyCustomUploadAdapterPlugin]
+		, simpleUpload :{
+			uploadUrl : 'imageUpload',
+		}
+    	
+    	, config : {
+    		height:'400px;'
+	   		, width:'100%'
+    	}
+    })
+    .catch( error => {
+        console.error( error );
+    });
+    
+    ClassicEditor
+    .create( document.querySelector ('#newsLetterContent'),{
+    	language: "ko"
+    	, extraPlugins: [MyCustomUploadAdapterPlugin]
+		, simpleUpload :{
+			uploadUrl : 'imageUpload',
+		}
+    	
+    	, config : {
+    		height:'400px;'
+	   		, width:'100%'
+    	}
+    })
+    .catch( error => {
+        console.error( error );
+    });
+	</script>
+    
 	
 
 </body>

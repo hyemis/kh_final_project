@@ -207,6 +207,16 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
+	
+	// 고등학교 테이블 삭제
+	@PostMapping("deleteHigh")
+	@ResponseBody
+	public int deleteHigh(@RequestParam("highEduNo") Integer highEduNo) throws Exception {
+
+		int result = -1;
+		result = rservice.deleteHigh(highEduNo);
+		return result;
+	}
 
 	// 대학교 입력
 	@PostMapping("rUniversity")
@@ -237,6 +247,16 @@ public class PsResumeController {
 		}
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
+	}
+	
+	// 대학교 테이블 삭제
+	@PostMapping("deleteUni")
+	@ResponseBody
+	public int deleteUni(@RequestParam("uniEduNo") Integer uniEduNo) throws Exception {
+
+		int result = -1;
+		result = rservice.deleteHigh(uniEduNo);
+		return result;
 	}
 
 	// 대학원 입력
@@ -280,7 +300,6 @@ public class PsResumeController {
 		return mv;
 	}
 	
-	// TODO : 낀테이블 insert빼기
 	// 경력사항 입력
 	@PostMapping("career")
 	public ModelAndView doCareer(Principal principal, ModelAndView mv, PsCareerDto dto, RedirectAttributes rttr) {
@@ -314,21 +333,23 @@ public class PsResumeController {
 	}
 
 	// 경력 불러올때 낀테이블 insert
-	@PostMapping("career.aj")
+	@PostMapping("insertInfoCareer")
 	@ResponseBody
-	public String doCareer(Principal principal,
+	public int insertInfoCareer(Principal principal,
 			@RequestParam("carNo") Integer carNo
 			) throws Exception {
 
-	
+		int result = -1;
+		
 		Map<String, Object> InfoNo = new HashMap<>();
 		InfoNo.put("carNo", carNo);
 		InfoNo.put("userId", principal.getName());
 		
-		rservice.insertCareerInfo(InfoNo);
+		result = rservice.insertCareerInfo(InfoNo);
 
-		return "success";
+		return result;
 	}
+	
 	
 	// 경력사항 삭제 
 	@PostMapping("deleteCareer")
@@ -340,7 +361,52 @@ public class PsResumeController {
 		result = rservice.deleteCareer(carNo);
 		return result;
 	}
+	
+	
+	// 경력 끼인 테이블 삭제
+	@PostMapping("deleteInfoCareer")
+	@ResponseBody
+	public int deleteInfoCareer(Principal principal, @RequestParam("carNo") Integer carNo) throws Exception {
+		System.out.println(carNo);
+		int result = -1;
 
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("carNo", carNo);
+		InfoNo.put("userId", principal.getName());
+
+		result = rservice.deleteInfoCareer(InfoNo);
+		return result;
+	}
+	
+	
+	// 경력 테이블 수정 
+	@PostMapping("updateCareer")
+	@ResponseBody
+	public int updateCareer(@RequestParam("carNo") Integer carNo,
+			@RequestParam("carNewName") String carName,
+			@RequestParam("carNewDate") String carDate,
+			@RequestParam("carNewPosition") String carPosition,
+			@RequestParam("carNewDept") String carDept,
+			@RequestParam("carNewResp") String carResp,
+			@RequestParam("carNewSalary") Integer carSalary) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> updateCareer = new HashMap<>();
+		updateCareer.put("carNo", carNo);
+		updateCareer.put("carName", carName);
+		updateCareer.put("carDate", carDate);
+		updateCareer.put("carPosition", carPosition);
+		updateCareer.put("carDept", carDept);
+		updateCareer.put("carResp", carResp);
+		updateCareer.put("carSalary", carSalary);
+		
+		result = rservice.updateCareer(updateCareer);
+		return result;
+	}
+	
+	
+		
 	// 자격증 페이지
 	@GetMapping("certi")
 	public ModelAndView viewCerti(Principal principal, ModelAndView mv) throws Exception {

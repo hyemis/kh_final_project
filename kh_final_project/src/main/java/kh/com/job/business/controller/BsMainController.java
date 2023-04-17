@@ -1,13 +1,24 @@
 package kh.com.job.business.controller;
 
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsUserDto;
+import kh.com.job.business.model.service.BsAboutUsService;
+
 @Controller
 @RequestMapping("/business")
 public class BsMainController {
+	
+	@Autowired
+	private BsAboutUsService auservice;
 	
 	//메인창
 	@GetMapping("/main")
@@ -40,7 +51,13 @@ public class BsMainController {
 		
 	//내기업관리
 	@GetMapping("/aboutus")
-	public ModelAndView aboutUs(ModelAndView mv) {
+	public ModelAndView aboutUs(ModelAndView mv, Principal principal) {
+		System.out.println("로그인한 아이디" + principal.getName());
+		
+		List<BoardDto> bdto = auservice.newsLetterList(principal.getName());
+		
+		mv.addObject("userinfo", auservice.viewAccount(principal.getName()));
+		mv.addObject("newsletter", bdto);
 		
 		return mv;
 	}

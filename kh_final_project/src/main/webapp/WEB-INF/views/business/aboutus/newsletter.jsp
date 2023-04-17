@@ -155,6 +155,14 @@
 						</div>
 					</c:forEach>
 					</div>
+					
+					<!-- 페이징 -->
+					<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="page">
+						${page }
+						<c:if test="${pageInfo.endPage != page}">
+						,	
+						</c:if> 
+					</c:forEach>
 				</div>
 			</div>
 		</div>

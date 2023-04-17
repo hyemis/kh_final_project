@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingInfoDto;
 
 @Repository
 public class BsRecruitDao {
@@ -43,5 +45,14 @@ public class BsRecruitDao {
 	public int changeAdmission(BsRecruitDto dto) {
 		return sqlSession.update("business.changeAdmission", dto);
 	}
+
+	public Object recruitAll(PagingInfoDto pidto) {
+		return sqlSession.selectList("business.recruitAll", pidto);
+	}
+
+	public int recruitAllCount(PagingInfoDto pidto) {
+		return sqlSession.selectOne("business.recruitAllCount", pidto);
+	}
+
 
 }

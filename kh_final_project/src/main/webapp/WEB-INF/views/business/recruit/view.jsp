@@ -53,14 +53,14 @@
 </head>
 
 <body>
+	<%@include file="/WEB-INF/views/common/header.jsp"%>
+	
     <div class="container-xxl bg-white p-0">
-     
-    	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 <div class="container-xl px-5">
 		 	<h3 class="my-5">채용공고 상세 내역</h3>
 		 	<div>
-		 		<h5 class="mb-5 ms-3">${recruit.recruitType }</h5>
+		 		<h5 class="mb-5 ms-3">모집 분야 : ${redto.recruitType }</h5>
 		 	</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">
@@ -68,7 +68,7 @@
                         <div class="row g-5 align-items-center">
                         	<!-- 지도 화면 -->
                             <div class="col-lg-6" >
-                                <img class="object-fit-sm-contain border" src="${recruit.userPic eq null? 'https://dummyimage.com/300x200/d6d6d6/000000&text=300x200' : recruit.userPic }" alt="">
+                                <img class="object-fit-sm-contain border" src="${redto.userPic eq null? 'https://dummyimage.com/300x200/d6d6d6/000000&text=300x200' : redto.userPic }" alt="">
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-4">
@@ -84,17 +84,17 @@
 											<tr>
 												<td >회사 이름</td>
 												<td><b> : </b></td>
-												<td>${recruit.companyName }</td>
+												<td>${redto.companyName }</td>
 											</tr>
 											<tr>
 												<td>회사 대표 번호</td>
 												<td><b> : </b></td>
-												<td>${recruit.bsMainPhone}</td>
+												<td>${redto.bsMainPhone}</td>
 											</tr>
 											<tr>
 												<td>담당자 E-mail</td>
 												<td><b> : </b></td>
-												<td>${recruit.userEmail}</td>
+												<td>${redto.userEmail}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -112,13 +112,13 @@
                             <div class="col-lg-6" >
                             	<h5>주소</h5>
                             		<c:choose>
-                            			<c:when test="${recruit.addressRoad != null}">
-                            				<p> ${recruit.addressRoad} </p>
-                            				<p> - ${recruit.addressDetail}</p>
+                            			<c:when test="${redto.addressRoad != null}">
+                            				<p> ${redto.addressRoad} </p>
+                            				<p> - ${redto.addressDetail}</p>
                             			</c:when>
-                            			<c:when test="${recruit.addressJibun != null}">
-                            				<p> ${recruit.addressJibun} </p>
-                            				<p> - ${recruit.addressDetail}</p>
+                            			<c:when test="${redto.addressJibun != null}">
+                            				<p> ${redto.addressJibun} </p>
+                            				<p> - ${redto.addressDetail}</p>
                             			</c:when>
                             			<c:otherwise>
                             				<img class="img-fluid rounded w-100" src="https://dummyimage.com/500x500/d6d6d6/000000&text=500x500" alt="">
@@ -136,27 +136,27 @@
                                 	<ul>
                                 		<li>
                                 			<h5> 채용 기간 </h5>
-		 									<p>${recruit.registDate } ~ ${recruit.closeDate }</p>
+		 									<p>${redto.registDate } ~ ${redto.closeDate }</p>
                                 		</li>
                                 		<li>
                                 			<h5> 급여 정보 </h5>
-		 									<p>${recruit.salary}</p>
+		 									<p>${redto.salary}</p>
                                 		</li>
                                 		<li>
                                 			<h5> 학력 사항 </h5>
-		 									<p>${recruit.userEducation}</p>
+		 									<p>${redto.userEducation}</p>
                                 		</li>
                                 		<li>
                                 			<h5> 경력 </h5>
-		 									<p>${recruit.career}</p>
+		 									<p>${redto.career}</p>
                                 		</li>
                                 		<li>
                                 			<h5> 근무 요일 </h5>
-		 									<p>${recruit.holidayType}</p>
+		 									<p>${redto.holidayType}</p>
                                 		</li>
                                 		<li>
                                 			<h5> 계약 조건 </h5>
-		 									<p>${recruit.empTypeCode}</p>
+		 									<p>${redto.empTypeCode}</p>
                                 		</li>
                                 	</ul>
                                 </div>
@@ -170,10 +170,10 @@
                 <div class="bg-light rounded p-3">
                     <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
                         <div class="row g-5 align-items-center">
-                            <h3 class="mb-3">제목 : ${recruit.raTitle }</h3>
+                            <h3 class="mb-3">제목 : ${redto.raTitle }</h3>
                             <div class="col-lg">
                                 <div class="mb-4">
-                                    ${recruit.raContent}
+                                    ${redto.raContent}
                                 </div>
                             </div>
                         </div>
@@ -182,15 +182,18 @@
             </div>
 		 </div>
 		 <div class="container mb-5">
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 admissionBtn">${recruit.raAdmission == 'N'? '승인' : '반려'}</button>
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 rejectMailBtn">반려 메일 발송</button>
-		 	
-			<a href="./main?pnum=${pnum}&search=${search}" class="btn btn-dark py-3 px-4">목록으로</a>
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit">${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit">수정하기</button>
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 deleteRecruit">삭제하기</button>
+			<a href="recruitAll?pnum=${pidto.pnum == 0? '1' : pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
+			<a href="main" class="btn btn-dark py-3 px-4">메인으로</a>
 		 </div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+    
+    <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 <script type="text/javascript">
         $(document).on('click','.admissionBtn', function() {
