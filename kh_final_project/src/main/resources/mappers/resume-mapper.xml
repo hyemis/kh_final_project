@@ -64,6 +64,14 @@
 		#{highDate}, #{highMajor})
 	</insert>
 
+	<delete id="deleteHigh" parameterType="_int">
+		delete from
+		RESUME_HIGHSCHOOL
+		where
+		HIGH_EDU_NO = #{highEduNo}
+	</delete>
+	
+
 	<!-- <select id="selectList" resultType="rdto"> </select> -->
 
 	<insert id="insertUniv" parameterType="udto">

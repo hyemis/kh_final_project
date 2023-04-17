@@ -239,6 +239,23 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.updateCareer(updateCareer);
 	}
 
+	@Override
+	public int deleteHigh(int highEduNo) throws Exception {
+		return dao.deleteHigh(highEduNo);
+	}
+
+	@Override
+	public int deleteUni(int uniEduNo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteGrad(int gradEduNo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 
 	

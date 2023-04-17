@@ -63,6 +63,11 @@ public class PsResumeDao {
 	public int insertHschool(PsHschoolDto dto) throws Exception {
 		return sqlSession.insert("resume.insertHschool", dto);
 	}
+	
+	// 이력서 - 고등학교 삭제
+	public int deleteHigh(int highEduNo) throws Exception {
+		return sqlSession.delete("resume.deleteHigh", highEduNo);
+	}
 
 	// 이력서-대학교입력
 	public int insertUniv(PsUnivDto dto) throws Exception {

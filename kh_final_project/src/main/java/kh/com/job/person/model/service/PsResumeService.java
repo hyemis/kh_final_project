@@ -70,16 +70,22 @@ public interface PsResumeService {
 	public int getMaxHighNo() throws Exception;
 
 	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteHigh(int highEduNo) throws Exception;
 
 	// uniInfo
 	public int getMaxUniNo() throws Exception;
 
 	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception;
 
+	public int deleteUni(int uniEduNo) throws Exception;
+	
 	// gradInfo
 	public int getMaxGradNo() throws Exception;
 
 	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteGrad(int gradEduNo) throws Exception;
 
 	// CareerInfo
 	public int getMaxCareerNo() throws Exception;

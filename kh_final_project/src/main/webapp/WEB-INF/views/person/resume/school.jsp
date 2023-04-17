@@ -57,6 +57,11 @@
 .hidden {
 	display: none;
 }
+
+.deleteHigh {
+	width: 60px;
+}
+</style>
 </style>
 
 </head>
@@ -120,7 +125,6 @@
 															<th>선택</th>
 															<th>졸업상태</th>
 															<th>학교명(소재지)</th>
-															<th>카테고리</th>
 															<th>졸업일자</th>
 															<th>전공</th>
 															<th>학점</th>
@@ -129,43 +133,49 @@
 													<tbody id="highSchoolList">
 														<c:forEach var="hschool" items="${high}">
 															<tr>
-																<td><input type="checkbox" name="hschool"
-																	value="${hschool.highEduNo}" onclick="checkOnly(this)"></td>
+																<td><input type="checkbox" name="selectedHigh"/></td>
 																<td>${hschool.ged}</td>
 																<td>${hschool.highName}</td>
-																<td></td>
 																<td>${hschool.highDate}</td>
 																<td>${hschool.highMajor}</td>
-																<td></td>
+																<td><input type="hidden" name="highEduNo"
+																	value="${hschool.highEduNo}" required>
+																	<button type="button"
+																		class="btn btn-outline-dark deleteHigh">삭제</button></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 													<tbody id="universityList" style="display: none">
 														<c:forEach var="university" items="${uni}">
 															<tr>
-																<td><input type="checkbox" name="university"
-																	value="${university.uniEduNo}"
-																	onclick="checkOnly(this)"></td>
+																<td><input type="checkbox" name="selectedUni"/></td>
 																<td>${university.uniAct}</td>
 																<td>${university.uniName}</td>
 																<td>${university.uniCategory}</td>
 																<td>${university.uniDate}</td>
 																<td>${university.uniMajor}</td>
 																<td>${university.uniPoint}</td>
+																<td><input type="hidden" name="uniEduNo"
+																	value="${university.uniEduNo}" required>
+																	<button type="button"
+																		class="btn btn-outline-dark deleteUni">삭제</button></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 													<tbody id="graduateList" style="display: none">
 														<c:forEach var="gschool" items="${grad}">
 															<tr>
-																<td><input type="checkbox" name="gschool"
-																	value="${gschool.gradEduNo}" onclick="checkOnly(this)"></td>
+																<td><input type="checkbox" name="seletedGrad"/></td>
 																<td>${gschool.gradAct}</td>
 																<td>${gschool.gradName}</td>
 																<td>${gschool.gradCategory}</td>
 																<td>${gschool.gradDate}</td>
 																<td>${gschool.gradMajor}</td>
 																<td>${gschool.gradPoint}</td>
+																<td><input type="hidden" name="gradEduNo"
+																	value="${gschool.gradEduNo}" required>
+																	<button type="button"
+																		class="btn btn-outline-dark deleteGrad">삭제</button></td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -568,12 +578,10 @@
 		
 
 		// 고등학교 입력폼 추가
-		// event click
 		function addHigh() {
 			var originForm = rsforms[0];
 			var form = originForm.cloneNode(true);
 			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-
 			rsforms.push(form);
 		}
 		var rsforms = [ document.getElementsByName("rHSchool")[0] ];
@@ -585,7 +593,6 @@
 			var originForm = uniforms[0];
 			var form = originForm.cloneNode(true);
 			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-
 			uniforms.push(form);
 		}
 		var uniforms = [ document.getElementsByName("rUniversity")[0] ];
@@ -597,16 +604,79 @@
 			var originForm = gsforms[0];
 			var form = originForm.cloneNode(true);
 			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-
 			gsforms.push(form);
 		}
 		var gsforms = [ document.getElementsByName("rGSchool")[0] ];
-		
 	
 		// 입력폼 삭제
 		function removeForm(form) {
 			form.remove();
 		}
+		
+		
+		// 고등학교삭제
+		$('.deleteHigh').click(function() {
+			var highEduNo = $(this).prev('input[name="highEduNo"]').val();
+		  $.ajax({
+		    type: 'POST',
+		    url: 'deleteHigh',
+		    data: { highEduNo: highEduNo },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
+		        location.reload();
+		      } else {
+		        alert('해당 학력사항 삭제에 실패했습니다.');
+		      }  // if end
+		    } // success end
+		  });  // ajax end
+		}); // click-function
+		
+		// 대학교삭제
+		$('.deleteUni').click(function() {
+			var uniEduNo = $(this).prev('input[name="uniEduNo"]').val();
+		  $.ajax({
+		    type: 'POST',
+		    url: 'deleteUni',
+		    data: { uniEduNo: uniEduNo },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
+		        location.reload();
+		      } else {
+		        alert('해당 학력사항 삭제에 실패했습니다.');
+		      }  // if end
+		    } // success end
+		  });  // ajax end
+		}); // click-function
+		
+		// 대학원삭제
+		$('.deleteGrad').click(function() {
+			var gradEduNo = $(this).prev('input[name="gradEduNo"]').val();
+		  $.ajax({
+		    type: 'POST',
+		    url: 'deleteGrad',
+		    data: { gradEduNo: gradEduNo },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
+		        location.reload();
+		      } else {
+		        alert('해당 학력사항 삭제에 실패했습니다.');
+		      }  // if end
+		    } // success end
+		  });  // ajax end
+		}); // click-function
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 
 </body>

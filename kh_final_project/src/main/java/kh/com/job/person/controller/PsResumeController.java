@@ -208,6 +208,16 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
+	
+	// 고등학교 테이블 삭제
+	@PostMapping("deleteHigh")
+	@ResponseBody
+	public int deleteHigh(@RequestParam("highEduNo") Integer highEduNo) throws Exception {
+
+		int result = -1;
+		result = rservice.deleteHigh(highEduNo);
+		return result;
+	}
 
 	// 대학교 입력
 	@PostMapping("rUniversity")
@@ -238,6 +248,16 @@ public class PsResumeController {
 		}
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
+	}
+	
+	// 대학교 테이블 삭제
+	@PostMapping("deleteUni")
+	@ResponseBody
+	public int deleteUni(@RequestParam("uniEduNo") Integer uniEduNo) throws Exception {
+
+		int result = -1;
+		result = rservice.deleteHigh(uniEduNo);
+		return result;
 	}
 
 	// 대학원 입력
