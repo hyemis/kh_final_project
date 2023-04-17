@@ -61,6 +61,10 @@ public class PsDao {
 	public PsUserDto findPw(Map<String, Object> findPw) throws Exception {
 		return sqlSession.selectOne("person.findPw", findPw);
 	}
+	//기업 회원가입
+	public int businessInsert(PsUserDto dto) {
+		return sqlSession.insert("person.businessInsert", dto);
+	}
 
 
 }
