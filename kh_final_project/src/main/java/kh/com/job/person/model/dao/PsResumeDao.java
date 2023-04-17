@@ -54,6 +54,7 @@ public class PsResumeDao {
 		return sqlSession.delete("resume.delete", resumeNo);
 	}
 
+	
 	public int update(PsResumeDto dto) throws Exception {
 		return sqlSession.update("resume.update", dto);
 	}
@@ -91,6 +92,10 @@ public class PsResumeDao {
 	// 이력서 - 자격증 삭제
 	public int deleteCerti(int certiNo) throws Exception {
 		return sqlSession.delete("resume.deleteCerti", certiNo);
+	}
+	// 이력서 - 자격증 수정 
+	public int updateCerti(Map<String, Object> updateCerti) throws Exception {
+		return sqlSession.update("resume.updateCerti", updateCerti);
 	}
 
 	// 이력서 - 자기소개서 detail 보기

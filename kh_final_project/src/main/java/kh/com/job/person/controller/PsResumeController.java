@@ -422,9 +422,20 @@ public class PsResumeController {
 	// 자격증 테이블 수정 
 	@PostMapping("updateCerti")
 	@ResponseBody
-	public int updateCerti(PsCertiDto dto) throws Exception {
+	public int updateCerti(@RequestParam("certiNo") Integer certiNo,
+			@RequestParam("certiNewName") String certiName,
+			@RequestParam("certiNewPub") String certiPub,
+			@RequestParam("certiNewDate") String certiDate) throws Exception {
+		
 		int result = -1;
-		System.out.println("@@@@@@@@@@@@@@자격증수정 " + dto);
+		
+		Map<String, Object> updateCerti = new HashMap<>();
+		updateCerti.put("certiNo", certiNo);
+		updateCerti.put("certiName", certiName);
+		updateCerti.put("certiPub", certiPub);
+		updateCerti.put("certiDate", certiDate);
+		
+		result = rservice.updateCerti(updateCerti);
 		return result;
 	}
 

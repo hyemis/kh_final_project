@@ -56,6 +56,9 @@ public interface PsResumeService {
 
 	// 이력서-자격증 삭제
 	public int deleteCerti(int certiNo) throws Exception;
+	
+	// 이력서-자격증 수정
+	public int updateCerti(Map<String, Object> updateCerti) throws Exception;
 
 	// 이력서-자기소개서 보기
 	public PsClDto selectOneCl(int clNo) throws Exception;

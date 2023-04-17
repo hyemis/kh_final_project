@@ -321,9 +321,11 @@
 	</select>
 
 	<select id="selectListCerti" resultType="certidto">
-		SELECT CERTI_NO,CERTI_NAME,CERTI_PUB, CERTI_DATE
+		SELECT
+		CERTI_NO,CERTI_NAME,CERTI_PUB, CERTI_DATE
 		FROM RESUME_CERTI
-		WHERE CERTI_NO IN (
+		WHERE
+		CERTI_NO IN (
 		SELECT CERTI_NO
 		FROM RESUME_CERTI_INFO
 		WHERE RESUME_NO IN (
@@ -333,6 +335,14 @@
 		)
 		)
 	</select>
+
+	<update id="updateCerti" parameterType="certidto">
+		UPDATE RESUME_CERTI SET
+		CERTI_NAME = #{certiName},
+		CERTI_PUB = #{certiPub},
+		CERTI_DATE = #{certiDate}
+		WHERE CERTI_NO = #{certiNo}
+	</update>
 
 	<select id="selectListCl" resultType="cldto">
 		SELECT cl.CL_NO AS clNo,
@@ -352,5 +362,7 @@
 		cl.CL_NO
 		DESC
 	</select>
+
+
 
 </mapper>
