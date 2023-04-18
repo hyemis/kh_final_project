@@ -396,7 +396,6 @@
 																					<tr>
 																						<td><input type="checkbox" name="selectedUni" /></td>
 																						<td>${university.uniAct}</td>
-																						
 																						<td>${university.uniCategory}</td>
 																						<td>${university.uniName}</td>
 																						<td>${university.uniDate}</td>
@@ -913,7 +912,11 @@
 			     // 기존 form 뒤에 새로운 form 추가
 			    let uniData = selectedUniList[i].closest("tr").getElementsByTagName("td");
 			    uniNewForm.elements["uniNewAct"].value = uniData[1].textContent;
-			    uniNewForm.elements["uniNewCategory"].value = uniData[2].textContent;
+			    //uniNewForm.elements["uniNewCategory"].value = uniData[2].textContent;
+			   
+			    //TODO: 수정해주기
+			   $("[name=uniNewCategory]").val(uniData[2].).prop("selected", true);
+			    
 			    uniNewForm.elements["uniNewName"].value = uniData[3].textContent;
 			    uniNewForm.elements["uniNewDate"].value = uniData[4].textContent;
 			    uniNewForm.elements["uniNewMajor"].value = uniData[5].textContent;
@@ -1051,7 +1054,11 @@
 		
 		
 		
-		
+				// 모달창 닫으면 표 초기화
+				$('#viewUni').on('hidden.bs.modal', function () {
+				    $('#selectedUniList').html('');
+				    $('input[name="selectedUni"]').prop('checked', false);
+				});
 		
 		
 		
