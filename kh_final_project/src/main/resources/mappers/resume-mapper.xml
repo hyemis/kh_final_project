@@ -374,7 +374,7 @@
 		ORDER BY h.high_date DESC
 	</select>
 
-	<select id="selectListUni" resultType="udto">
+<!-- 	<select id="selectListUni" resultType="udto">
 		SELECT u.UNI_EDU_NO AS
 		uniEduNo, u.UNI_ACT AS uniAct, u.UNI_CATEGORY AS uniCategory,
 		u.UNI_NAME AS uniName, u.UNI_DATE AS uniDate, u.UNI_MAJOR AS uniMajor,
@@ -388,6 +388,23 @@
 		WHERE u.USER_ID = #{userId}
 		ORDER BY
 		u.UNI_DATE DESC
+	</select> -->
+	
+		<select id="selectListUni" resultType="udto">
+		SELECT
+		UNI_EDU_NO, UNI_ACT,
+		UNI_CATEGORY, UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT FROM
+		RESUME_UNIVERSITY
+		WHERE UNI_EDU_NO IN(
+		SELECT UNI_EDU_NO
+		FROM
+		RESUME_UNI_INFO
+		WHERE RESUME_NO IN (
+		SELECT RESUME_NO
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
+		)
+		)
 	</select>
 
 	<select id="selectListGrad" resultType="gdto">
