@@ -254,36 +254,15 @@ public class PsResumeDao {
 	public List<PsUnivDto> selectListUni(String userId) throws Exception {
 		List<PsUnivDto> univList = sqlSession.selectList("resume.selectListUni", userId);
 
-		for (PsUnivDto univ : univList) {
-			switch (univ.getUniAct()) {
-			case "Y":
-				univ.setUniAct("졸업");
-				break;
-			case "N":
-				univ.setUniAct("재학중");
-				break;
-			case "R":
-				univ.setUniAct("휴학");
-				break;
-			default:
-				univ.setUniAct("");
-				break;
-			}
+	    for (PsUnivDto univ : univList) {
+	        String dateString = univ.getUniDate();
+	        if (dateString != null) {
+	            LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	            univ.setUniDate(date.toString());
+	        }
+	    }
 
-			if ("T".equals(univ.getUniCategory())) {
-				univ.setUniCategory("2,3년제");
-			} else if ("F".equals(univ.getUniCategory())) {
-				univ.setUniCategory("4년제");
-			}
-
-			String dateString = univ.getUniDate();
-			if (dateString != null) {
-				LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-				univ.setUniDate(date.toString());
-			}
-		}
-
-		return univList;
+	    return univList;
 	}
 
 	// 대학원 학력사항 보기
@@ -291,27 +270,6 @@ public class PsResumeDao {
 		List<PsGschoolDto> gradList = sqlSession.selectList("resume.selectListGrad", userId);
 
 		for (PsGschoolDto grad : gradList) {
-			switch (grad.getGradAct()) {
-			case "Y":
-				grad.setGradAct("졸업");
-				break;
-			case "N":
-				grad.setGradAct("재학중");
-				break;
-			case "R":
-				grad.setGradAct("휴학");
-				break;
-			default:
-				grad.setGradAct("");
-				break;
-			}
-
-			if ("M".equals(grad.getGradCategory().trim())) {
-				grad.setGradCategory("석사");
-			} else {
-				grad.setGradCategory("박사");
-			}
-
 			String dateString = grad.getGradDate();
 			if (dateString != null) {
 				LocalDate date = LocalDate.parse(dateString.split(" ")[0]);

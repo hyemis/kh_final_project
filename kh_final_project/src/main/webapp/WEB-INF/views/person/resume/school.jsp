@@ -244,7 +244,7 @@
 														</div>
 														<div class="modal-body">
 															<p>이력서에 불러올 고등학교 학력정보를 선택하세요.</p>
-															
+
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
 																	<thead>
@@ -284,74 +284,74 @@
 												</div>
 											</div>
 
-										<div id="HighFormContainer">
-											<form name="rHSchool" action="rHSchool" method="post">
-												<div class="row mb-3">
-													<label for="ged" class="col-sm-2 col-form-label">대입
-														검정고시</label>
-													<div class="col-sm-10">
-														<div class="row mb-3">
-															<div class="col-sm-10 offset-sm-2">
-																<input type="hidden" id="ged" name="ged"> <input
-																	type="checkbox" id="checkY" name="checkY" value="Y">대입
-																검정고시
+											<div id="HighFormContainer">
+												<form name="rHSchool" action="rHSchool" method="post">
+													<div class="row mb-3">
+														<label for="ged" class="col-sm-2 col-form-label">대입
+															검정고시</label>
+														<div class="col-sm-10">
+															<div class="row mb-3">
+																<div class="col-sm-10 offset-sm-2">
+																	<input type="hidden" id="ged" name="ged"> <input
+																		type="checkbox" id="checkY" name="checkY" value="Y">대입
+																	검정고시
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
 
-												<div class="row mb-3">
-													<label for="highName" class="col-sm-2 col-form-label">고등학교명</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="highName">
+													<div class="row mb-3">
+														<label for="highName" class="col-sm-2 col-form-label">고등학교명</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="highName">
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="highDate" class="col-sm-2 col-form-label">고등학교
-														졸업일자</label>
-													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="highDate">
+													<div class="row mb-3">
+														<label for="highDate" class="col-sm-2 col-form-label">고등학교
+															졸업일자</label>
+														<div class="col-sm-10">
+															<input type="Date" class="form-control" name="highDate">
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="highMajor" class="col-sm-2 col-form-label">고등학교
-														전공계열</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="highMajor">
-															<option value="0">전공계열</option>
-															<option value="이과">이과</option>
-															<option value="문과">문과</option>
-															<option value="예체능">예체능</option>
-														</select>
+													<div class="row mb-3">
+														<label for="highMajor" class="col-sm-2 col-form-label">고등학교
+															전공계열</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="highMajor">
+																<option value="0">전공계열</option>
+																<option value="이과">이과</option>
+																<option value="문과">문과</option>
+																<option value="예체능">예체능</option>
+															</select>
+														</div>
 													</div>
-												</div>
-												<div
-													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary"
-														onclick="fn_checkY();">저장</button>
-													<button class="btn btn-primary delete-btn"
-														onclick="removeForm(this.parentNode.parentNode)">삭제</button>
-												</div>
-												<hr>
-											</form>
+													<div
+														class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+														<button type="submit" class="btn btn-primary"
+															onclick="fn_checkY();">저장</button>
+														<button class="btn btn-primary delete-btn"
+															onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+													</div>
+													<hr>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="flush-headingTwo">
-									<button class="accordion-button collapsed" type="button"
-										data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-										aria-expanded="false" aria-controls="flush-collapseTwo">
-										대학교 졸업</button>
-								</h2>
-								<div id="flush-collapseTwo" class="accordion-collapse collapse"
-									aria-labelledby="flush-headingTwo"
-									data-bs-parent="#accordionFlushExample">
-									<div class="accordion-body">
-										<!-- 대학교 졸업 form -->
-										<button class="btn btn-primary" onclick="addUniv()">새
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="flush-headingTwo">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+											aria-expanded="false" aria-controls="flush-collapseTwo">
+											대학교 졸업</button>
+									</h2>
+									<div id="flush-collapseTwo" class="accordion-collapse collapse"
+										aria-labelledby="flush-headingTwo"
+										data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">
+											<!-- 대학교 졸업 form -->
+											<button class="btn btn-primary" onclick="addUniv()">새
 												정보추가</button>
 											<div class="col-auto">
 												<button type="button"
@@ -359,8 +359,8 @@
 													data-bs-toggle="modal" data-bs-target="#viewUni">저장된
 													정보 불러오기</button>
 											</div>
-											<!-- 대학교 모달 창 -->
 											
+											<!-- 대학교 모달 창 -->
 											<div class="modal fade" id="viewUni" tabindex="-1"
 												role="dialog" aria-labelledby="uploadModalLabel"
 												aria-hidden="true">
@@ -383,7 +383,6 @@
 																		<tr>
 																			<th>선택</th>
 																			<th>졸업상태</th>
-																			
 																			<th>대학카테고리</th>
 																			<th>학교명(소재지)</th>
 																			<th>졸업일자</th>
@@ -391,23 +390,44 @@
 																			<th>학점</th>
 																		</tr>
 																	</thead>
-																			<tbody id="universityList">
-																				<c:forEach var="university" items="${uni}">
-																					<tr>
-																						<td><input type="checkbox" name="selectedUni" /></td>
-																						<td>${university.uniAct}</td>
-																						<td>${university.uniCategory}</td>
-																						<td>${university.uniName}</td>
-																						<td>${university.uniDate}</td>
-																						<td>${university.uniMajor}</td>
-																						<td>${university.uniPoint}</td>
-																						<td><input type="hidden" name="uniEduNo"
-																							value="${university.uniEduNo}" required>
-																							<button type="button"
-																								class="btn btn-outline-dark deleteUni">삭제</button></td>
-																					</tr>
-																				</c:forEach>
-																			</tbody>
+																	<tbody id="universityList">
+																		<c:forEach var="university" items="${uni}">
+																			<tr>
+																				<td><input type="checkbox" name="selectedUni" /></td>
+
+																				<td><c:choose>
+																						<c:when test="${university.uniAct == 'Y'}">
+																							<c:set var="uniActName" value="졸업" />
+																						</c:when>
+																						<c:when test="${university.uniAct == 'N'}">
+																							<c:set var="uniActName" value="재학중" />
+																						</c:when>
+																						<c:when test="${university.uniAct == 'R'}">
+																							<c:set var="uniActName" value="휴학" />
+																						</c:when>
+																					</c:choose> ${uniActName} <!-- uniActName 변수 출력 --></td>
+
+
+																				<td><c:set var="uniCategory"
+																						value="${university.uniCategory}" /> <c:if
+																						test="${uniCategory eq 'T'}">
+																						<c:set var="uniCategoryName" value="2,3년제" />
+																					</c:if> <c:if test="${uniCategory eq 'F'}">
+																						<c:set var="uniCategoryName" value="4년제" />
+																					</c:if> ${uniCategoryName} <!-- uniCategoryName 변수 출력 -->
+																				</td>
+
+																				<td>${university.uniName}</td>
+																				<td>${university.uniDate}</td>
+																				<td>${university.uniMajor}</td>
+																				<td>${university.uniPoint}</td>
+																				<td><input type="hidden" name="uniEduNo"
+																					value="${university.uniEduNo}" required>
+																					<button type="button"
+																						class="btn btn-outline-dark deleteUni">삭제</button></td>
+																			</tr>
+																		</c:forEach>
+																	</tbody>
 																</table>
 																<div id="selectedUniList"></div>
 
@@ -419,180 +439,268 @@
 													</div>
 												</div>
 											</div>
-
-
-
+											
+											<!-- 대학교 입력 form -->
 											<div id="UniFormContainer">
-											<form name="rUniversity" action="rUniversity" method="post">
-												<div class="row mb-3">
-													<label for="uniAct" class="col-sm-2 col-form-label">대학
-														졸업유무</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="uniAct">
-															<option selected>대학졸업유무선택</option>
-															<option value="N">재학중</option>
-															<option value="R">휴학</option>
-															<option value="Y">졸업</option>
-														</select>
+												<form name="rUniversity" action="rUniversity" method="post">
+													<div class="row mb-3">
+														<label for="uniAct" class="col-sm-2 col-form-label">대학
+															졸업유무</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="uniAct">
+																<option selected>대학졸업유무선택</option>
+																<option value="N">재학중</option>
+																<option value="R">휴학</option>
+																<option value="Y">졸업</option>
+															</select>
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="uniCategory" class="col-sm-2 col-form-label">대학
-														카테고리</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="uniCategory">
-															<option selected>대학카테고리</option>
-															<option value="T">2,3년제</option>
-															<option value="F">4년제</option>
-														</select>
+													<div class="row mb-3">
+														<label for="uniCategory" class="col-sm-2 col-form-label">대학
+															카테고리</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="uniCategory">
+																<option selected>대학카테고리</option>
+																<option value="T">2,3년제</option>
+																<option value="F">4년제</option>
+															</select>
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="uniName" class="col-sm-2 col-form-label">대학교명</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="uniName">
+													<div class="row mb-3">
+														<label for="uniName" class="col-sm-2 col-form-label">대학교명</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="uniName">
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="uniDate" class="col-sm-2 col-form-label">대학
-														졸업일자</label><br>
-													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="uniDate">
+													<div class="row mb-3">
+														<label for="uniDate" class="col-sm-2 col-form-label">대학
+															졸업일자</label><br>
+														<div class="col-sm-10">
+															<input type="Date" class="form-control" name="uniDate">
+														</div>
+														<br>
+														<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
 													</div>
-													<br>
-													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
-												</div>
-												<div class="row mb-3">
-													<label for="uniMajor" class="col-sm-2 col-form-label">대학
-														전공</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="uniMajor">
+													<div class="row mb-3">
+														<label for="uniMajor" class="col-sm-2 col-form-label">대학
+															전공</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="uniMajor">
+														</div>
 													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="uniPoint" class="col-sm-2 col-form-label">대학
-														학점</label>
-													<div class="col-sm-10">
-														<input type="number" step="0.01" class="form-control"
-															name="uniPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
+													<div class="row mb-3">
+														<label for="uniPoint" class="col-sm-2 col-form-label">대학
+															학점</label>
+														<div class="col-sm-10">
+															<input type="number" step="0.01" class="form-control"
+																name="uniPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
+														</div>
 													</div>
-												</div>
-												<div
-													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">저장</button>
-													<button class="btn btn-primary delete-btn"
-														onclick="removeForm(this.parentNode.parentNode)">삭제</button>
-												</div>
-												<hr>
-											</form>
+													<div
+														class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+														<button type="submit" class="btn btn-primary">저장</button>
+														<button class="btn btn-primary delete-btn"
+															onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+													</div>
+													<hr>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="flush-headingThree">
-									<button class="accordion-button collapsed" type="button"
-										data-bs-toggle="collapse"
-										data-bs-target="#flush-collapseThree" aria-expanded="false"
-										aria-controls="flush-collapseThree">대학원 졸업</button>
-								</h2>
-								<div id="flush-collapseThree"
-									class="accordion-collapse collapse"
-									aria-labelledby="flush-headingThree"
-									data-bs-parent="#accordionFlushExample">
-									<div class="accordion-body">
-										<!-- 대학원 졸업 form -->
-										<button class="btn btn-primary" onclick="addGrad()">새
-											정보추가</button>
-										<br> <br>
-										<div id="GradFormContainer">
-											<form name="rGSchool" action="rGSchool" method="post">
-												<div class="row mb-3">
-													<label for="gradAct" class="col-sm-2 col-form-label">대학원
-														졸업유무</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="gradAct">
-															<option selected>대학원졸업유무선택</option>
-															<option value="N">재학중</option>
-															<option value="R">휴학</option>
-															<option value="Y">졸업</option>
-														</select>
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradCategory" class="col-sm-2 col-form-label">대학원
-														카테고리</label>
-													<div class="col-sm-10">
-														<select class="form-select" name="gradCategory">
-															<option selected>대학원카테고리</option>
-															<option value="M">석사</option>
-															<option value="D">박사</option>
-														</select>
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradName" class="col-sm-2 col-form-label">대학원명</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="gradName">
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradDate" class="col-sm-2 col-form-label">대학원
-														졸업일자</label><br>
-													<div class="col-sm-10">
-														<input type="Date" class="form-control" name="gradDate">
-													</div>
-													<br>
-													<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
-												</div>
-												<div class="row mb-3">
-													<label for="gradMajor" class="col-sm-2 col-form-label">대학원
-														전공</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control" name="gradMajor">
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label for="gradPoint" class="col-sm-2 col-form-label">대학원
-														학점</label>
-													<div class="col-sm-10">
-														<input type="number" step="0.01" class="form-control"
-															name="gradPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
-													</div>
-												</div>
-												<div
-													class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-													<button type="submit" class="btn btn-primary">저장</button>
-													<button class="btn btn-primary delete-btn"
-														onclick="removeForm(this.parentNode.parentNode)">삭제</button>
-												</div>
-												<hr>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="accordion accordion-flush" id="accordionFlushNew"></div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="flush-headingThree">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse"
+											data-bs-target="#flush-collapseThree" aria-expanded="false"
+											aria-controls="flush-collapseThree">대학원 졸업</button>
+									</h2>
+									<div id="flush-collapseThree"
+										class="accordion-collapse collapse"
+										aria-labelledby="flush-headingThree"
+										data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">
 
+
+											<!-- 대학원 졸업 form -->
+											<button class="btn btn-primary" onclick="addGrad()">새
+												정보추가</button>
+											<div class="col-auto">
+												<button type="button"
+													class="btn btn-outline-dark m-2 btn-sm"
+													data-bs-toggle="modal" data-bs-target="#viewGrad">저장된
+													정보 불러오기</button>
+											</div>
+
+											<!-- 대학원 모달 창 -->
+											<div class="modal fade" id="viewGrad" tabindex="-1"
+												role="dialog" aria-labelledby="uploadModalLabel"
+												aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg"
+													role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="uploadModalLabel">학력사항
+																불러오기</h5>
+
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<p>이력서에 불러올 대학원 학력정보를 선택하세요.</p>
+
+															<div class="table-responsive">
+																<table class="table table-striped table-bordered">
+																	<thead>
+																		<tr>
+																			<th>선택</th>
+																			<th>졸업상태</th>
+																			<th>대학원카테고리</th>
+																			<th>학교명(소재지)</th>
+																			<th>졸업일자</th>
+																			<th>전공</th>
+																			<th>학점</th>
+																		</tr>
+																	</thead>
+																	<tbody id="gradList">
+																		<c:forEach var="gschool" items="${grad}">
+																			<tr>
+																				<td><input type="checkbox" name="seletedGrad" /></td>
+
+																				<td><c:choose>
+																						<c:when test="${gschool.gradAct == 'Y'}">
+																							<c:set var="gradActName" value="졸업" />
+																						</c:when>
+																						<c:when test="${gschool.gradAct == 'N'}">
+																							<c:set var="gradActName" value="재학중" />
+																						</c:when>
+																						<c:when test="${gschool.gradAct == 'R'}">
+																							<c:set var="gradActName" value="휴학" />
+																						</c:when>
+																					</c:choose> ${gradActName} <!-- gradActActName 변수 출력 --></td>
+
+																			<!-- 	TODO:하는중 -->
+																				<td><c:set var="gradCategory"
+																						value="${gschool.gradCategory}" /> <c:if
+																						test="${gradCategory eq 'M'}">
+																						<c:set var="gradCategoryName" value="석사" />
+																					</c:if> <c:if test="${gradCategory eq 'D'}">
+																						<c:set var="gradCategoryName" value="박사" />
+																					</c:if> ${gradCategoryName} <!-- gradCategoryName 변수 출력 --></td>
+														
+																				<td>${gschool.gradName}</td>
+																				<td>${gschool.gradDate}</td>
+																				<td>${gschool.gradMajor}</td>
+																				<td>${gschool.gradPoint}</td>
+
+																				<td><input type="hidden" name="gradEduNo"
+																					value="${gschool.gradEduNo}" required>
+																					<button type="button"
+																						class="btn btn-outline-dark deleteGrad">삭제</button></td>
+																			</tr>
+																		</c:forEach>
+																	</tbody>
+																</table>
+																<div id="selectedGradList"></div>
+
+																<button type="button" data-bs-dismiss="modal"
+																	class="btn btn-primary mx-auto d-block"
+																	id="selectGradBtn" data-carNo="{gschool.gradEduNo}">불러오기</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- 대학원 입력form -->
+											<div id="GradFormContainer">
+												<form name="rGSchool" action="rGSchool" method="post">
+													<div class="row mb-3">
+														<label for="gradAct" class="col-sm-2 col-form-label">대학원
+															졸업유무</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="gradAct">
+																<option selected>대학원졸업유무선택</option>
+																<option value="N">재학중</option>
+																<option value="R">휴학</option>
+																<option value="Y">졸업</option>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label for="gradCategory" class="col-sm-2 col-form-label">대학원
+															카테고리</label>
+														<div class="col-sm-10">
+															<select class="form-select" name="gradCategory">
+																<option selected>대학원카테고리</option>
+																<option value="M">석사</option>
+																<option value="D">박사</option>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label for="gradName" class="col-sm-2 col-form-label">대학원명</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="gradName">
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label for="gradDate" class="col-sm-2 col-form-label">대학원
+															졸업일자</label><br>
+														<div class="col-sm-10">
+															<input type="Date" class="form-control" name="gradDate">
+														</div>
+														<br>
+														<p>(졸업 전일 경우엔 공란으로 두셔도 됩니다.)</p>
+													</div>
+													<div class="row mb-3">
+														<label for="gradMajor" class="col-sm-2 col-form-label">대학원
+															전공</label>
+														<div class="col-sm-10">
+															<input type="text" class="form-control" name="gradMajor">
+														</div>
+													</div>
+													<div class="row mb-3">
+														<label for="gradPoint" class="col-sm-2 col-form-label">대학원
+															학점</label>
+														<div class="col-sm-10">
+															<input type="number" step="0.01" class="form-control"
+																name="gradPoint" placeholder="소수점 두번째 자리까지만 입력" min="0">
+														</div>
+													</div>
+													<div
+														class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+														<button type="submit" class="btn btn-primary">저장</button>
+														<button class="btn btn-primary delete-btn"
+															onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+													</div>
+													<hr>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion accordion-flush" id="accordionFlushNew"></div>
+
+						</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/career">다음</a>
+			</div>
+
+
+
+
+
+
 		</div>
-
-		<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-			<a class="btn btn-primary"
-				href="${pageContext.request.contextPath}/person/resume/list">취소</a>
-			<a class="btn btn-primary"
-				href="${pageContext.request.contextPath}/person/resume/career">다음</a>
-		</div>
-
-
-
-
-
-
-	</div>
 	</div>
 
 	<!-- footer -->
@@ -914,7 +1022,6 @@
 			    uniNewForm.elements["uniNewAct"].value = uniData[1].textContent;
 			    //uniNewForm.elements["uniNewCategory"].value = uniData[2].textContent;
 			   
-			    //TODO: 수정해주기
 			   $("[name=uniNewCategory]").val(uniData[2].).prop("selected", true);
 			    
 			    uniNewForm.elements["uniNewName"].value = uniData[3].textContent;
