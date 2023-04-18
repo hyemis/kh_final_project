@@ -91,7 +91,7 @@
 									role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="uploadModalLabel">경력사항 불러오기</h5>
+											<h5 class="modal-title" id="uploadModalLabel">자격증사항 불러오기</h5>
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>

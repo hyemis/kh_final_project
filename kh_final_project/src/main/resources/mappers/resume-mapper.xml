@@ -72,6 +72,20 @@
 	</delete>
 
 
+	<delete id="deleteUni" parameterType="_int">
+		delete from
+		RESUME_UNIVERSITY
+		where
+		UNI_EDU_NO = #{uniEduNo}
+	</delete>
+
+	<delete id="deleteGrad" parameterType="_int">
+		delete from
+		RESUME_GRADSCHOOL
+		where
+		GRAD_EDU_NO = #{gradEduNo}
+	</delete>
+
 	<!-- <select id="selectList" resultType="rdto"> </select> -->
 
 	<insert id="insertUniv" parameterType="udto">
@@ -170,21 +184,53 @@
 	<insert id="insertHighInfo" parameterType="hinfodto">
 		insert into
 		RESUME_HIGH_INFO (RESUME_NO, HIGH_EDU_NO)
-		values
-		(#{resumeNo},#{highEduNo})
+		SELECT
+		NVL(MAX(RESUME_NO),
+		1),
+		#{highEduNo} FROM USER_RESUME WHERE USER_ID =
+		#{userId}
 	</insert>
 
 	<insert id="insertUniInfo" parameterType="uinfodto">
-		insert into
-		RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO) values
-		(#{resumeNo},#{uniEduNo})
+	insert into
+	RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO)
+	SELECT NVL(MAX(RESUME_NO), 1),
+	#{uniEduNo} FROM USER_RESUME WHERE USER_ID =
+	#{userId}
 	</insert>
 
 	<insert id="insertGradInfo" parameterType="ginfodto">
 		insert into
-		RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO) values
-		(#{resumeNo},#{gradEduNo})
+		RESUME_GRAD_INFO (RESUME_NO, GRAD_EDU_NO)
+		SELECT NVL(MAX(RESUME_NO),
+		1),
+		#{gradEduNo} FROM USER_RESUME WHERE USER_ID =
+		#{userId}
 	</insert>
+
+	<delete id="deleteInfoUni" parameterType="uinfodto">
+		DELETE FROM
+		RESUME_UNI_INFO
+		WHERE UNI_EDU_NO = #{uniEduNo}
+		AND RESUME_NO = (SELECT
+		NVL(MAX(RESUME_NO), 1) FROM USER_RESUME WHERE
+		USER_ID = #{userId})
+	</delete>
+
+	<delete id="deleteInfoGrad" parameterType="ginfodto">
+		DELETE FROM
+		RESUME_GRAD_INFO
+		WHERE GRAD_EDU_NO = #{gradEduNo}
+		AND RESUME_NO =
+		(SELECT
+		NVL(MAX(RESUME_NO), 1) FROM USER_RESUME WHERE
+		USER_ID =
+		#{userId})
+	</delete>
+	
+	
+	
+	
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
 		INSERT INTO
@@ -243,6 +289,8 @@
 		#{clNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
+
+	
 
 
 
@@ -331,7 +379,7 @@
 		ORDER BY h.high_date DESC
 	</select>
 
-	<select id="selectListUni" resultType="udto">
+<!-- 	<select id="selectListUni" resultType="udto">
 		SELECT u.UNI_EDU_NO AS
 		uniEduNo, u.UNI_ACT AS uniAct, u.UNI_CATEGORY AS uniCategory,
 		u.UNI_NAME AS uniName, u.UNI_DATE AS uniDate, u.UNI_MAJOR AS uniMajor,
@@ -345,6 +393,23 @@
 		WHERE u.USER_ID = #{userId}
 		ORDER BY
 		u.UNI_DATE DESC
+	</select> -->
+	
+		<select id="selectListUni" resultType="udto">
+		SELECT
+		UNI_EDU_NO, UNI_ACT,
+		UNI_CATEGORY, UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT FROM
+		RESUME_UNIVERSITY
+		WHERE UNI_EDU_NO IN(
+		SELECT UNI_EDU_NO
+		FROM
+		RESUME_UNI_INFO
+		WHERE RESUME_NO IN (
+		SELECT RESUME_NO
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
+		)
+		)
 	</select>
 
 	<select id="selectListGrad" resultType="gdto">
