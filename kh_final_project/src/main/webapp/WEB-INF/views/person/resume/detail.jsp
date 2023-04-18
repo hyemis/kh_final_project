@@ -144,7 +144,7 @@
 								<span>파일없음</span>
 							</c:if>
 							<c:if test="${not empty cl.clFile}">
-								<input type="text" class="form-control" id="uploadCl"
+								<input type="text" class="form-control" id="uploadCl2"
 									value="${cl.clFile}">
 							</c:if>
 							<form enctype="multipart/form-data">
@@ -191,7 +191,14 @@
 	updateBtn.addEventListener("click", function() {
 		let formdata = new FormData();
 		formdata.append("No", parseInt(window.location.href.split('/').pop()));
-	 	formdata.append("updateClFile", $("#uploadCl")[0].files[0]);  
+	 	/* formdata.append("updateClFile", $("#uploadCl")[0].files[0]);  */ 
+		const clFileInput = $("#uploadCl")[0];
+		if (clFileInput && clFileInput.files && clFileInput.files.length > 0) {
+		  formdata.append("updateClFile", clFileInput.files[0]);
+		} else {
+			 formdata.append("updateClFile", document.querySelector("#uploadCl2").value);
+		}
+
 		formdata.append("growth", document.querySelector("#growth").value);
 		formdata.append("motive", document.querySelector("#motive").value);
 		formdata.append("adv", document.querySelector("#adv").value);

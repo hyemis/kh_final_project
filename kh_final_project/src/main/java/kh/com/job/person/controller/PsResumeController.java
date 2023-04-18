@@ -634,7 +634,7 @@ public class PsResumeController {
 
 	// 자소서 새창으로 불러오기
 	@GetMapping("detail/{clNo}")
-	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable int clNo) throws Exception {
+	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable Integer clNo) throws Exception {
 
 		PsClDto dto = rservice.selectOneCl(clNo);
 		mv.addObject("cl", dto);
