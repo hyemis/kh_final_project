@@ -51,13 +51,14 @@ public class BsMainController {
 		
 	//내기업관리
 	@GetMapping("/aboutus")
-	public ModelAndView aboutUs(ModelAndView mv, Principal principal) {
+	public ModelAndView aboutUs(ModelAndView mv, BoardDto dto, Principal principal) {
 		System.out.println("로그인한 아이디" + principal.getName());
 		
-		List<BoardDto> bdto = auservice.newsLetterList(principal.getName());
+//		List<BoardDto> bdto = auservice.listAll(principal.getName());
+		List<BoardDto> news = auservice.newsLetterList(principal.getName());
 		
-		mv.addObject("userinfo", auservice.viewAccount(principal.getName()));
-		mv.addObject("newsletter", bdto);
+//		mv.addObject("boards", bdto);
+		mv.addObject("news", news);
 		
 		return mv;
 	}

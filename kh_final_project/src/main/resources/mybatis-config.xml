@@ -13,6 +13,7 @@
 	<!-- board -->
 		<typeAlias type="kh.com.job.board.model.dto.BoardDto"
 			alias="bdto" />
+		
 			
 	<!-- person -->	
 		<typeAlias type="kh.com.job.person.model.dto.PsUserDto"
@@ -51,6 +52,8 @@
 			alias="budto" />
 		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
 			alias="brdto" />
+		<typeAlias type="kh.com.job.business.model.dto.InterviewDto"
+			alias="indto" />
 			
 			
 	
