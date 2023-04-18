@@ -13,6 +13,8 @@ public interface BsAboutUsService {
 	
 	//회원정보불러오기
 	public BsUserDto viewAccount(String userId); 
+	//게시판리스트전부
+	public List<BoardDto> listAll(String userId);
 	//글쓰기
 	public int insertNewsletter(BoardDto dto);
 	//수정

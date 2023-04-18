@@ -34,34 +34,6 @@ public class BsAboutUsController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
-//	// 회원정보 불러오기
-//	@GetMapping("/")
-//	public ModelAndView viewinfo(ModelAndView mv, BsUserDto dto, Principal principal) {
-//		// 로그인한 아이디
-//		System.out.println(principal.getName());
-//
-//		// jsp에서 불러올 이름 :bsinfo , 불러올값 :service.viewAccount
-//		mv.addObject("userinfo", service.viewAccount(principal.getName()));
-//		return mv;
-//	}
-//	
-//	// 여기하는중
-//	@GetMapping("/")
-//	public ModelAndView main(ModelAndView mv, Principal principal) {
-//		
-//		System.out.println("로그인한 아이디" + principal.getName());
-//		
-//		BsUserDto dto = service.viewAccount(principal.getName());
-//		List<BoardDto> bdto = service.newsLetterList(principal.getName());
-//		
-//		mv.addObject("userinfo", service.viewAccount(principal.getName()));
-//		mv.addObject("newsletter", bdto);
-//		
-//		return mv;
-//	}
-	
-
-
 	// 뉴스레터 페이지 불러오기
 	@GetMapping("/newsletter")
 	public ModelAndView newsletter(ModelAndView mv) {

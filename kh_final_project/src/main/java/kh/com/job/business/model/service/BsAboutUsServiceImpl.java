@@ -91,6 +91,11 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 			}
 		
 	}
+
+	@Override
+	public List<BoardDto> listAll(String userId) {
+		return dao.listAll(userId);
+	}
 	
 
 

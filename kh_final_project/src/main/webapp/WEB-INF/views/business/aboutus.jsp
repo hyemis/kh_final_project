@@ -357,54 +357,28 @@
 						</div>
 						<!-- 뉴스레터 보기 -->
 						<div class="container">
+							<c:forEach items="${news}" var="boards">
 							<div class="row">
 								<div class="col">
 									<div class="card">
-										<div class="card-header"></div>
+										<h5 class="card-header">${boards.boardTitle }</h5>
 										<div class="card-body">
-											<h5 class="card-title">Special title treatment</h5>
-											<p class="card-text">With supporting text below as a
-												natural lead-in to additional content.</p>
-											<a href="#" class="btn btn-primary">Go somewhere</a>
+											<div class="card-text"> ${boards.boardContent }</div>
+											<a href="" class="btn btn-primary">게시글보기</a>
 										</div>
 									</div>
 								</div>
 								<div class="col">
 									<div class="card">
-										<div class="card-header">Featured</div>
+										<h5 class="card-header">${boards.boardTitle }</h5>
 										<div class="card-body">
-											<h5 class="card-title">Special title treatment</h5>
-											<p class="card-text">With supporting text below as a
-												natural lead-in to additional content.</p>
-											<a href="#" class="btn btn-primary">Go somewhere</a>
+											<div class="card-text"> ${boards.boardContent }</div>
+											<a href="" class="btn btn-primary">게시글보기</a>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col">
-									<div class="card">
-										<div class="card-header">Featured</div>
-										<div class="card-body">
-											<h5 class="card-title">Special title treatment</h5>
-											<p class="card-text">With supporting text below as a
-												natural lead-in to additional content.</p>
-											<a href="#" class="btn btn-primary">Go somewhere</a>
-										</div>
-									</div>
-								</div>
-								<div class="col">
-									<div class="card">
-										<div class="card-header">Featured</div>
-										<div class="card-body">
-											<h5 class="card-title">Special title treatment</h5>
-											<p class="card-text">With supporting text below as a
-												natural lead-in to additional content.</p>
-											<a href="#" class="btn btn-primary">Go somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 					<!-- Q&A -->

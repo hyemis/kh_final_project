@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boards">
 
-	<select id="boardList">
+	<select id="listAll" resultType="kh.com.job.board.model.dto.BoardDto">
 		SELECT * 
 		FROM BOARD 
 		WHERE USER_ID =#{userId}
@@ -50,10 +50,10 @@
 	</selectKey>
 	</update>
 	
-	<select id="newsLetterList">
-		SELECT UDB05 
+	<select id="newsLetterList" resultType="kh.com.job.board.model.dto.BoardDto">
+		SELECT *
 		FROM BOARD 
-		WHERE USER_ID= #{userId}
+		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
 	</select>
 	
 	

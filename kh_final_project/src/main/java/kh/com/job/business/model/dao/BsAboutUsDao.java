@@ -56,6 +56,10 @@ public class BsAboutUsDao {
 	public List<BoardDto> newsLetterList(String userId) {
 		return sqlSession.selectList("boards.newsLetterList", userId);
 	}
+
+	public List<BoardDto> listAll(String userId) {
+		return sqlSession.selectList("boards.listAll", userId);
+	}
 	
 	
 	

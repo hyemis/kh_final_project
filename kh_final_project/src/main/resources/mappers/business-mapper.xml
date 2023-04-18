@@ -9,7 +9,14 @@
         WHERE USER_ID = #{userId}
     </select>
     
+<!-- applicant -->
 
+	<select id="interviewList" resultType="indto">
+		SELECT * 
+		FROM INTERVIEW
+		WHERE USER_ID = #{userId}
+	</select>
+	
 <!-- account -->
     
 	<!-- 회원정보 수정하기 -->
