@@ -144,13 +144,21 @@
 								<span>파일없음</span>
 							</c:if>
 							<c:if test="${not empty cl.clFile}">
-								<input type="text" class="form-control" id="uploadCl2"
-									value="${cl.clFile}">
+								<div class="row">
+										<div class="input-group">
+											<input type="text" class="form-control" id="uploadCl2"
+												value="${cl.clFile}"> <span class="input-group-btn">
+												<button type="button" id="deleteFile"
+													class="btn btn-primary">기존 파일 삭제</button>
+											</span>
+										</div>
+								</div>
 							</c:if>
 							<form enctype="multipart/form-data">
 								<input type="file" class="form-control" id="uploadCl"
 									placeholder="자기소개서 첨부파일"> <br>
 							</form>
+
 							<br>
 						</div>
 					</div>
@@ -220,7 +228,25 @@
 	      }
 	    }
 	  });
-	});
+ 	}); 
+	
+	// 기존 파일 삭제 버튼 
+	$(document).on('click', '#deleteFile', function() {
+    var fileUrl = $('#uploadCl2').val();
+    $.ajax({
+        type: 'POST',
+        url: '${pageContext.request.contextPath}/person/resume/deleteClFile',
+        data: { fileUrl: fileUrl },
+        success: function(result) {
+  	      if(result > 0) {
+  	        alert('기존에 작성했던 자기소개서 파일이 삭제되었습니다.');
+  	        location.reload();
+  	      } else {
+  	        alert('기존에 작성했던 자기소개서 파일 삭제에 실패했습니다.');
+  	      }
+  	    }
+    });
+});
 			
 		</script>
 </body>

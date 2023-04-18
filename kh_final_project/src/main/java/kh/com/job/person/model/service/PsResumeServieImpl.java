@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
@@ -61,7 +62,7 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.delete(resumeNo);
 	}
 
-	// google cloud
+	// google cloud file upload
 	@Override
 	public String upload(MultipartFile file,  String userId) {
 		try {
@@ -78,6 +79,27 @@ public class PsResumeServieImpl implements PsResumeService {
 				 throw new RuntimeException(e);
 			}
 		}
+	
+	// google cloud file delete
+	 @Override
+	 public void delete(String fileName, String userId) {
+		 String deleteFilePath = userId + "/document/" + fileName;
+	        try {
+	            Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+	            BlobId blobId = BlobId.of(bucketName, deleteFilePath);
+	            boolean deleted = storage.delete(blobId);
+	            if (deleted) {
+	                System.out.println("File was deleted.");
+	            } else {
+	                System.out.println("File was not found.");
+	            }
+	            
+//	            //TODO: DB 에서도 삭제
+//	            dao.deleteClFile();
+	        } catch (Exception e) {
+	            throw new RuntimeException("Error deleting file: " + deleteFilePath, e);
+	        }
+	    }
 
 	@Override
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {

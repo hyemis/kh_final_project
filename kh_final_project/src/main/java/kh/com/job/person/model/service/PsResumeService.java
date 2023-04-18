@@ -35,6 +35,9 @@ public interface PsResumeService {
 
 	// 파일 업로드
 	public String upload(MultipartFile file, String userId);
+	
+	// 파일 삭제
+	public void delete(String fileName, String userId);
 
 	// 이력서 - 고등학교입력
 	public int insertHschool(PsHschoolDto dto) throws Exception;
