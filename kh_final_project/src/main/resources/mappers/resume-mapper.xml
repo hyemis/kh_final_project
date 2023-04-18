@@ -70,7 +70,7 @@
 		where
 		HIGH_EDU_NO = #{highEduNo}
 	</delete>
-	
+
 
 	<!-- <select id="selectList" resultType="rdto"> </select> -->
 
@@ -153,10 +153,13 @@
 		CL_GROWTH = #{clGrowth},
 		CL_MOTIVE = #{clMotive},
 		CL_ADV = #{clAdv},
-		CL_ASP = #{clAsp},
-		CL_FILE = #{clFile}
+		CL_ASP = #{clAsp}
+		<if test="clFile != null || clfile != '' ">
+			, CL_FILE = #{clFile}
+		</if>
 		WHERE CL_NO = #{clNo}
 	</update>
+
 
 	<select id="selectOneCl" resultType="cldto">
 		select CL_FILE, CL_GROWTH,
@@ -200,16 +203,18 @@
 		NVL(MAX(RESUME_NO), 1) FROM USER_RESUME WHERE
 		USER_ID = #{userId})
 	</delete>
-	
+
 
 	<update id="updateCareer" parameterType="careerdto">
 		UPDATE RESUME_CAREER SET
 		CAR_NAME = #{carName},
 		CAR_DATE = #{carDate},
-		CAR_POSITION = #{carPosition},
+		CAR_POSITION =
+		#{carPosition},
 		CAR_DEPT = #{carDept},
 		CAR_RESP = #{carResp},
-		CAR_SALARY = #{carSalary}
+		CAR_SALARY
+		= #{carSalary}
 		WHERE CAR_NO = #{carNo}
 	</update>
 

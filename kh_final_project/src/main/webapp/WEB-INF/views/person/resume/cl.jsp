@@ -333,6 +333,8 @@
 		formdata.append("adv", CKEDITOR.instances.adv.getData());
 		formdata.append("asp", CKEDITOR.instances.asp.getData());
 		formdata.append("uploadCl", $("#uploadCl")[0].files[0]);
+		
+		
 
 		$.ajax({
 			url : "${pageContext.request.contextPath}/person/resume/cl",
@@ -352,23 +354,36 @@
 	}
 	
 	
-	// 불러오기 버튼 클릭 시
 	document.getElementById('selectClBtn').addEventListener('click', function() {
+		  // 체크된 체크박스의 clNo 값을 가져옴
+		  var checkedBoxes = document.querySelectorAll('#clList input[type="checkbox"]:checked');
+		  var clNoList = [];
 
-	  // 체크된 체크박스의 clNo 값을 가져옴
-	  var checkedBoxes = document.querySelectorAll('#clList input[type="checkbox"]:checked');
-	  var clNoList = [];
+		  for (var i = 0; i < checkedBoxes.length; i++) {
+		    var clNo = checkedBoxes[i].parentNode.parentNode.querySelector('input[name="clNo"]').value;
+		    clNoList.push(clNo);
+		  }
 
-	  for (var i = 0; i < checkedBoxes.length; i++) {
-	    var clNo = checkedBoxes[i].parentNode.parentNode.querySelector('input[name="clNo"]').value;
-	    clNoList.push(clNo);
-	  }
+		  // 새로운 페이지 열기
+		  window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(',')));
 
-	  // 새로운 페이지 열기
-	  window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(',')));
+		  // clNo ajax 로 보내서 끼인 테이블 insert 
+		  $.ajax({
+		    type: 'POST',
+		    url: '${pageContext.request.contextPath}/person/resume/insertInfoCl',
+		    data: { clNo: clNoList },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('작성 중인 이력서에 자기소개서가 등록되었습니다.');
+		        location.reload();
+		      } else {
+		        alert('작성 중인 이력서에 자기소개서 등록에 실패했습니다.');
+		      }
+		    }
+		  });
+		});
 
-	});
-	
+
 
 	// 자기소개서 삭제 
 	$('.deleteCl').click(function() {

@@ -567,12 +567,11 @@ public class PsResumeController {
 		return result;
 	}
 
-	// 자소서 정보불러오기
+	// 자소서 새창으로 불러오기
 	@GetMapping("detail/{clNo}")
 	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable int clNo) throws Exception {
 
 		PsClDto dto = rservice.selectOneCl(clNo);
-		// 불러오면서 끼인 테이블에도 넣어야해 ! 
 		mv.addObject("cl", dto);
 		mv.setViewName("person/resume/detail");
 		return mv;
@@ -596,16 +595,21 @@ public class PsResumeController {
 			@RequestParam("motive") String clMotive,
 			@RequestParam("adv") String clAdv,
 			@RequestParam("asp") String clAsp, 
-			@RequestParam(name = "updateClFile", required = false) MultipartFile clFile) throws Exception {
+			@RequestParam(name = "updateClFile", required = false) MultipartFile clFile,
+			Principal principal) throws Exception {
 		
 		int result = -1;
-		// 파일업로드 구현 중 
-//		String portfUrl = rservice.upload(clFile, principal.getName());
+		
+		String portfUrl = null;
+		
+	    if (clFile != null) { // 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
+	        portfUrl = rservice.upload(clFile, principal.getName());
+	    }
 		
 		int clNo = Integer.parseInt(clNumber);
 		Map<String, Object> updateCl = new HashMap<>();
 		updateCl.put("clNo", clNo);
-		updateCl.put("clFile", clFile);
+	    updateCl.put("clFile", portfUrl);
 		updateCl.put("clGrowth", clGrowth);
 		updateCl.put("clMotive", clMotive);
 		updateCl.put("clAdv", clAdv);
@@ -615,6 +619,17 @@ public class PsResumeController {
 		return result;
 	}
 	
+	// 자소서 끼인 테이블 insert 
+	@PostMapping("insertInfoCl")
+	@ResponseBody
+	public int insertInfoCl(Principal principal, @RequestParam("clNo") Integer clNo) throws Exception {
+		int result = -1;
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("clNo", clNo);
+		InfoNo.put("userId", principal.getName());
+		
+		return result;
+	}
 	
 	
 	

@@ -295,14 +295,15 @@
 						  newForm.elements["certiNewDate"].value = certiData[3].textContent;
 						
 						  // - 버튼
-						  let deleteBtn = newForm.querySelector("#deleteInfo");
-						  deleteBtn.addEventListener("click", function() {
-						    const formId = newForm.id;
-						    const formToRemove = document.getElementById(formId);
-						    formContainer.removeChild(formToRemove);
-						    
-						    var certiNo = $("input[name='certiNo']").val();
+						 let deleteBtn = newForm.querySelector("#deleteInfo");
+							deleteBtn.addEventListener("click", function() {
+							  const formToRemove = this.closest("form");
+							  const certiNoInput = formToRemove.querySelector("input[name='certiNo']");
+							  const certiNo = certiNoInput ? certiNoInput.value : null;
 							
+							  // certiNo 값을 가져온 후 삭제
+							  formContainer.removeChild(formToRemove);
+						    
 							  $.ajax({
 							    type: 'POST',
 							    url: 'deleteInfoCerti',
