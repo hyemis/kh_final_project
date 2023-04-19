@@ -635,34 +635,75 @@ public class PsResumeController {
 		return result;
 	}
 
-	// 자소서 테이블 수정
+//	// 자소서 테이블 수정
+//	@PostMapping("updateCl")
+//	@ResponseBody
+//	public int updateCl(@RequestParam("No") String clNumber, @RequestParam("growth") String clGrowth,
+//			@RequestParam("motive") String clMotive, @RequestParam("adv") String clAdv,
+//			@RequestParam("asp") String clAsp,
+//			@RequestParam(name = "updateClFile", required = false) MultipartFile clFile, Principal principal)
+//			throws Exception {
+//
+//		int result = -1;
+//
+//		String portfUrl = null;
+//
+//		// 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
+//		if (clFile != null) { 
+//			portfUrl = rservice.upload(clFile, principal.getName());
+//		}
+//
+//		int clNo = Integer.parseInt(clNumber);
+//		Map<String, Object> updateCl = new HashMap<>();
+//		updateCl.put("clNo", clNo);
+//		updateCl.put("clFile", portfUrl);
+//		updateCl.put("clGrowth", clGrowth);
+//		updateCl.put("clMotive", clMotive);
+//		updateCl.put("clAdv", clAdv);
+//		updateCl.put("clAsp", clAsp);
+//
+//		result = rservice.updateCl(updateCl);
+//		return result;
+//	}
+	
 	@PostMapping("updateCl")
 	@ResponseBody
 	public int updateCl(@RequestParam("No") String clNumber, @RequestParam("growth") String clGrowth,
-			@RequestParam("motive") String clMotive, @RequestParam("adv") String clAdv,
-			@RequestParam("asp") String clAsp,
-			@RequestParam(name = "updateClFile", required = false) MultipartFile clFile, Principal principal)
-			throws Exception {
+	        @RequestParam("motive") String clMotive, @RequestParam("adv") String clAdv,
+	        @RequestParam("asp") String clAsp, @RequestParam(name = "updateClFile", required = false) MultipartFile clFile,
+	        @RequestParam(name = "curPath", required = false, defaultValue = "") String curPath, Principal principal) throws Exception {
 
-		int result = -1;
+	    int result = -1;
+	    String portfUrl = null;
 
-		String portfUrl = null;
+	    // 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
+	    if (clFile != null) {
+	    	
+	        // 파일 업로드 처리
+	        portfUrl = rservice.upload(clFile, principal.getName());
+	        if (!curPath.equals("")) { 
+	        	// 기존 파일이 있으면 삭제
+	        	 String fileName = curPath.substring(curPath.lastIndexOf("/") + 1);
+	        	 rservice.delete(fileName, principal.getName());
+	        	 
+	        }
+	    } else { // 파일 업로드를 하지 않은 경우 기존 파일 경로를 그대로 사용
+	        if (!curPath.equals("")) {
+	            portfUrl = curPath;
+	        }
+	    }
 
-		if (clFile != null) { // 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
-			portfUrl = rservice.upload(clFile, principal.getName());
-		}
+	    int clNo = Integer.parseInt(clNumber);
+	    Map<String, Object> updateCl = new HashMap<>();
+	    updateCl.put("clNo", clNo);
+	    updateCl.put("clFile", portfUrl);
+	    updateCl.put("clGrowth", clGrowth);
+	    updateCl.put("clMotive", clMotive);
+	    updateCl.put("clAdv", clAdv);
+	    updateCl.put("clAsp", clAsp);
 
-		int clNo = Integer.parseInt(clNumber);
-		Map<String, Object> updateCl = new HashMap<>();
-		updateCl.put("clNo", clNo);
-		updateCl.put("clFile", portfUrl);
-		updateCl.put("clGrowth", clGrowth);
-		updateCl.put("clMotive", clMotive);
-		updateCl.put("clAdv", clAdv);
-		updateCl.put("clAsp", clAsp);
-
-		result = rservice.updateCl(updateCl);
-		return result;
+	    result = rservice.updateCl(updateCl);
+	    return result;
 	}
 
 	// 자소서 끼인 테이블 insert
