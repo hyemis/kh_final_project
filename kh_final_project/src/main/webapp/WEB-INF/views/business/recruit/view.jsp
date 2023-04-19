@@ -48,6 +48,9 @@
     
     <!-- 카카오 맵 -->
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
+    
+    <!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <!-- js part end -->
 
 </head>
@@ -183,7 +186,7 @@
                         <div class="row g-5 align-items-center">
                             <h3 class="mb-3">제목 : ${redto.raTitle }</h3>
                             <div class="col-lg">
-                                <div class="mb-4">
+                                <div class="mb-4 raContent" id="raContent">
                                     ${redto.raContent}
                                 </div>
                             </div>
@@ -320,6 +323,24 @@
 	        map: map
 	    });
 	</script>
+	
+	<script type="text/javascript">
+	
+    ClassicEditor
+    .create( document.querySelector( '#raContent' ),{
+    	language: "ko"    
+    	, config : {
+    		height:'400px'
+	   		, width:'100%'
+    	}, toolbar: []
+    })
+    .catch( error => {
+        console.error( error );
+    });
+	</script>
+	
+	
+	
 
 </body>
 
