@@ -287,7 +287,7 @@
 		#{clNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
-	
+
 	<delete id="deleteInfoCl" parameterType="clinfodto">
 		DELETE FROM
 		RESUME_CL_INFO
