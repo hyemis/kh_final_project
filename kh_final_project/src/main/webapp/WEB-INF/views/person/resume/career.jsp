@@ -106,8 +106,8 @@
 													<thead>
 														<tr>
 															<th>선택</th>
-															<th>재직기간</th>
 															<th>회사명</th>
+															<th>재직기간</th>
 															<th>직급/직책</th>
 															<th>근무부서</th>
 															<th>담당업무</th>
@@ -119,8 +119,8 @@
 														<c:forEach var="careerList" items="${career}">
 															<tr>
 																<td><input type="checkbox" name="selectedCareer" /></td>
-																<td>${careerList.carDate}</td>
 																<td>${careerList.carName}</td>
+																<td>${careerList.carDate}</td>
 																<td>${careerList.carPosition}</td>
 																<td>${careerList.carDept}</td>
 																<td>${careerList.carResp}</td>
@@ -304,9 +304,9 @@ function removeForm(form) {
 		
 // 모달창에서 정보 불러와서 출력하기
 let saveButton = document.getElementById("selectCarBtn");
-// event
+// event 모달창에서 불러와
 saveButton.addEventListener("click", function() {
-  // 체크된 경력 데이터를 가져와서 form에 추가
+  // 모달창에서 체크된 경력 데이터를 가져와서 form에 추가
   let selectedCareerList = document.querySelectorAll('input[name="selectedCareer"]:checked');
 
   let newFormHTML =	`
@@ -364,106 +364,115 @@ saveButton.addEventListener("click", function() {
     
     let newForm = null;
     
+    // 모달창에서 체크된 경력 데이터 - new form create 
     for (let i = 0; i < selectedCareerList.length; i++) {
-    	  newForm = document.createElement("form");
-          let formContainer = document.getElementById("CarFormContainer");
-          newForm.id = "car-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
-          newForm.innerHTML = newFormHTML;
-          formContainer.appendChild(newForm);
-    
-	     // 기존 form 뒤에 새로운 form 추가
-	    let carData = selectedCareerList[i].closest("tr").getElementsByTagName("td");
-	    newForm.elements["carNewName"].value = carData[1].textContent;
-	    newForm.elements["carNewDate"].value = carData[2].textContent;
-	    newForm.elements["carNewPosition"].value = carData[3].textContent;
-	    newForm.elements["carNewDept"].value = carData[4].textContent;
-	    newForm.elements["carNewResp"].value = carData[5].textContent;
-	    newForm.elements["carNewSalary"].value = carData[6].textContent;
+		// DB 낀테이블 insert - success - ok -> new form create - btn event handler
+	  	// 선택된 체크박스가 속한 <tr> 요소 찾기
+	  	let tr = selectedCareerList[i].closest("tr");
+	  	// 해당 <tr> 요소 내의 certiNo 값 가져오기
+	  	let carNo = tr.querySelector("input[name='carNo']").value;
+	  	$.ajax({
+	  		url : 'insertInfoCareer',
+	  		type: 'POST',
+	  		data : {carNo : carNo},
+	  		success : function(result) {
+	  			if(result > 0) {
+	  		        //alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+	  		        newForm = document.createElement("form");
+		  			let formContainer = document.getElementById("CarFormContainer");
+		  			newForm.id = "car-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+		  			newForm.innerHTML = newFormHTML;
+		  			formContainer.appendChild(newForm);
+		  	    
+		  		     // 기존 form 뒤에 새로운 form 추가
+		  		    let carData = selectedCareerList[i].closest("tr").getElementsByTagName("td");
+		  		    newForm.elements["carNewName"].value = carData[1].textContent;
+		  		    newForm.elements["carNewDate"].value = carData[2].textContent;
+		  		    newForm.elements["carNewPosition"].value = carData[3].textContent;
+		  		    newForm.elements["carNewDept"].value = carData[4].textContent;
+		  		    newForm.elements["carNewResp"].value = carData[5].textContent;
+		  		    newForm.elements["carNewSalary"].value = carData[6].textContent;
+		  		    
+		  			// new form delete 버튼 -
+		  			let deleteBtn = newForm.querySelector("#deleteInfo");
+		  			deleteBtn.addEventListener("click", deleteClickHandler);
+		  		    
+		  		    // new form 수정 버튼 
+		  		    let updateBtn = newForm.querySelector("#update");
+		  		    updateBtn.addEventListener("click", updateClickHandler);
+	  		      } else {
+	  		        //alert('작성 중인 이력서에서 해당 경력 입력에 실패했습니다. ');
+	  		      }
+	  	    }
+	  	}); 
 	    
-	  //- 버튼
-	    let deleteBtn = newForm.querySelector("#deleteInfo");
-	    deleteBtn.addEventListener("click", function() {
-	      const formId = newForm.id;
-	      const formToRemove = document.getElementById(formId);
-	      formContainer.removeChild(formToRemove);
-	      
-	      var carNo = $("input[name='carNo']").val();
-	    	
-	    	  $.ajax({
-	    	    type: 'POST',
-	    	    url: 'deleteInfoCareer',
-	    	    data: { carNo: carNo },
-	    	    success: function(result) {
-	    	      if(result > 0) {
-	    	        alert('작성 중인 이력서에서 해당 경력 정보가 삭제되었습니다.');
-	    	      } else {
-	    	        alert('작성 중인 이력서에서 해당 경력 정보 삭제에 실패했습니다.');
-			      }
-			    }
-			  });
-		  });
+	  	alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
 	    
-	  //수정 버튼 
-	    let updateBtn = newForm.querySelector("#update");
-	    updateBtn.addEventListener("click", function() {
-	      const carNewName = newForm.elements["carNewName"].value;
-	      const carNewDate = newForm.elements["carNewDate"].value;
-	      const carNewPosition = newForm.elements["carNewPosition"].value;
-	      const carNewDept = newForm.elements["carNewDept"].value;
-	      const carNewResp = newForm.elements["carNewResp"].value;
-	      const carNewSalary = newForm.elements["carNewSalary"].value;
-	      
-	      
-	      const data = {
-	        carNo: carNo,
-	        carNewName: carNewName,
-	        carNewDate: carNewDate,
-	        carNewPosition: carNewPosition,
-	        carNewDept: carNewDept,
-	        carNewResp: carNewResp,
-	        carNewSalary: carNewSalary
-	      };
-
-	      $.ajax({
-	        type: "POST",
-	        url: 'updateCareer',
-	        data: data,
-	        success: function(result) {
-	          if(result > 0) {
-	            alert('해당 경력이 수정되었습니다.');
-	            location.reload();
-	          } else {
-	            alert('해당 경력 수정에 실패했습니다.');
-		        }
-		      }
-		    });
-		  });
-		}
+    }			
 
 
-				
 
-// '불러오기' 버튼 클릭시 낀테이블 inesrt
-//$('.selectCarBtn').click(function(){
-var carNo = $("input[name='carNo']").val();
-$.ajax({
-	url : 'insertInfoCareer',
+
+
+
+});  // 
+
+// new form delete 버튼 - 
+function deleteClickHandler() {
+	const formToRemove = this.closest("form");
+	/* 	const carNoInput = formToRemove.querySelector("input[name='carNo']");
+		const carNo = carNoInput ? carNoInput.value : null; */
+	  var carNo = $("input[name='carNo']").val();
+	// carNo 값을 가져온 후 삭제
+	  formContainer.removeChild(formToRemove);
+
+	$.ajax({
 	type: 'POST',
-	data : {carNo : carNo},
-	success : function(result) {
-		if(result > 0) {
-	        alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
-	      } else {
-	        alert('작성 중인 이력서에서 해당 경력 입력에 실패했습니다. ');
+	url: 'deleteInfoCareer',
+	data: { carNo: carNo },
+	success: function(result) {
+	  if(result > 0) {
+	    alert('작성 중인 이력서에서 해당 경력 정보가 삭제되었습니다.');
+	  } else {
+	    alert('작성 중인 이력서에서 해당 경력 정보 삭제에 실패했습니다.');
+	  }
+	}
+	});
+}
+//new form 수정 버튼 
+function updateClickHandler() {
+    const carNewName = newForm.elements["carNewName"].value;
+    const carNewDate = newForm.elements["carNewDate"].value;
+    const carNewPosition = newForm.elements["carNewPosition"].value;
+    const carNewDept = newForm.elements["carNewDept"].value;
+    const carNewResp = newForm.elements["carNewResp"].value;
+    const carNewSalary = newForm.elements["carNewSalary"].value;
+    
+    
+    const data = {
+      carNo: carNo,
+      carNewName: carNewName,
+      carNewDate: carNewDate,
+      carNewPosition: carNewPosition,
+      carNewDept: carNewDept,
+      carNewResp: carNewResp,
+      carNewSalary: carNewSalary
+    };
+
+    $.ajax({
+      type: "POST",
+      url: 'updateCareer',
+      data: data,
+      success: function(result) {
+        if(result > 0) {
+          alert('해당 경력이 수정되었습니다.');
+          location.reload();
+        } else {
+          alert('해당 경력 수정에 실패했습니다.');
+	        }
 	      }
-    }
-  }); 
-
-
-
-
-});
-
+	    });
+ }
 
 		// 모달창에 체크한 이력서 순서대로 표시
 		$(document).ready(function() {
