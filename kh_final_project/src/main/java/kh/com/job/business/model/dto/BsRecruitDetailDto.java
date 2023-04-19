@@ -43,6 +43,8 @@ public class BsRecruitDetailDto {
 	private String conditionType;
 	private String userEducation;
 	private String salary;
+	private String minSalary;
+	private String maxSalary;
 	private String registDate;
 	private String closeDate;
 	private String raTitle;
