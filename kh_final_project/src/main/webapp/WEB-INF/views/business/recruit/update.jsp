@@ -102,13 +102,16 @@
 										<select id="category2dept" class="category2dept form-control" name="category2dept">
 											<option value="0">선택안함</option>
 										<c:forEach items="${JNlist}" var="categoryJN">
-											<option value="${categoryJN.categoryId }" ${categoryJN.categoryId == redto.recruitType?'selected' : ''}>${categoryJN.categoryName}</option>
+											<option value="${categoryJN.categoryId }" ${categoryJN.categoryId == cate2dept?'selected' : ''}>${categoryJN.categoryName}</option>
 										</c:forEach>			
 										</select>			
 									</td>
 									<td>
 										<select id="recruitType" class="recruitType form-control" name="recruitType" style="text-overflow: ellipsis;">
 											<option value="0">선택안함</option>
+										<c:forEach items="${mlist }" var="list">
+											<option value="${list.categoryId }" ${list.categoryId == redto.recruitType?'selected' : ''}>${list.categoryName}</option>
+										</c:forEach>
 										</select>
 									</td>
 								</tr>

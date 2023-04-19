@@ -264,15 +264,17 @@ public class BsRecruitController {
 			AdCategoryDto cateDto = adservice.checkCategory(redto.getRecruitType());
 			
 			if(cateDto.getCategoryDept().equals("3")) {
-				mv.addObject("category2dept", cateDto.getReqCategoryId());
+				mv.addObject("cate2dept", cateDto.getReqCategoryId());
 				mlist = adservice.cateMdeptList(cateDto.getReqCategoryId());
 				mv.addObject("mlist", mlist);
 				System.out.println("단계 3단계");
+				
 			}else if(cateDto.getCategoryDept().equals("2")) {
-				mv.addObject("category2dept", cateDto.getCategoryId());
+				mv.addObject("cate2dept", cateDto.getCategoryId());
 				mlist = adservice.cateMdeptList(cateDto.getCategoryId());
 				mv.addObject("mlist", mlist);
 				System.out.println("단계 2단계");
+				
 			}
 				
 		}
