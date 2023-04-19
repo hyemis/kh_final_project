@@ -40,6 +40,7 @@ public class BsRecruitDetailDto {
 	private String raNum;
 	private String recruitType;
 	private String companyName;
+	private String conditionType;
 	private String userEducation;
 	private String salary;
 	private String registDate;

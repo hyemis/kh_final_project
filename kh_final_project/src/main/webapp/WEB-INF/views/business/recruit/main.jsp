@@ -53,7 +53,7 @@
 	<body>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 		
-		<!-- Category Start -->
+		<section>
 		<div class="container-xxl py-5 d-flex">
 			<div class="myinfo p-2 col-3 border border-primary">
 				<div class="container-xxl py-5">
@@ -74,8 +74,6 @@
 				<div>
 					<a href="insert" class="btn btn-dark mb-1">채용 공고 등록</a>
 					<a href="recruitAll" class="btn btn-dark mb-1">전체 공고 목록</a>					
-					<%-- <button type="button" class="btn btn-dark">전체 공고 목록</button>
-					<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/business/recruit/insert'" >채용 공고 등록</button> --%>
 				</div>
 			</div>
 			<div class="p-2 col-9">
@@ -118,44 +116,11 @@
 						</table>
 					</div>
 				</div>
-				<!--  
-				<div class="recruitAdmissionList p-2">
-					<h3>관리자 미승인 공고</h3>
-					<div class="bg-white border">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>회사이름</th>
-									<th>제목</th>
-									<th>기간</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:choose>
-									<c:when test="${empty admissionList}">
-										<tr>
-											<td colspan="3">미승인 된 공고가 없습니다.</td>
-										</tr>
-									</c:when>
-									<c:otherwise>
-										<c:forEach items="${admissionList }" var="list" varStatus="i">
-											<tr>
-												<td>${list.companyName }</td>
-												<td>${list.raTitle }</td>
-												<td> ${list.closeDate }까지</td>
-											</tr>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</tbody>
-						</table>
-					</div>
-				</div>
 			</div>
 			
-			-->
 		</div>
-		<!-- Category End -->
+		</section>
+		
 		
 		<script type="text/javascript">
         

@@ -143,6 +143,17 @@
 		 									<p>${recruit.salary}</p>
                                 		</li>
                                 		<li>
+                                			<h5> 우대 사항 </h5>
+												<c:forEach items="${SClist}" var="categorySC">
+													<c:forEach items="${ctList}" var="ctList">
+														<c:if test="${categorySC.categoryId == ctList}">
+															<label><input type="checkbox" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }" ${categorySC.categoryId == ctList? 'checked': ''} disabled>
+															${categorySC.categoryName }</label>
+														</c:if>
+													</c:forEach>
+												</c:forEach>
+                                		</li>
+                                		<li>
                                 			<h5> 학력 사항 </h5>
 		 									<p>${recruit.userEducation}</p>
                                 		</li>
