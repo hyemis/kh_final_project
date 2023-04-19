@@ -685,8 +685,9 @@ public class PsResumeController {
 		String userId = principal.getName();
 		try {
 			 String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+			 
+			 // 파일 google 에서 삭제되면 db 에서도 삭제 
 		     rservice.delete(fileName, userId);
-
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();

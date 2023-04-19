@@ -481,5 +481,13 @@
 		DESC
 	</select>
 
+	<update id="deleteClFile" parameterType="_int">
+		UPDATE RESUME_CL
+		SET CL_File = NULL
+		WHERE CL_File = #{fileName}
+	</update>
+
+
+
 
 </mapper>

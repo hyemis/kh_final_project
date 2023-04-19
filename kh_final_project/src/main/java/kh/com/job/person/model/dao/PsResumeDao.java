@@ -62,7 +62,7 @@ public class PsResumeDao {
 	public int insertHschool(PsHschoolDto dto) throws Exception {
 		return sqlSession.insert("resume.insertHschool", dto);
 	}
-	
+
 	// 이력서 - 고등학교 삭제
 	public int deleteHigh(int highEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteHigh", highEduNo);
@@ -72,7 +72,7 @@ public class PsResumeDao {
 	public int insertUniv(PsUnivDto dto) throws Exception {
 		return sqlSession.insert("resume.insertUniv", dto);
 	}
-	
+
 	// 이력서 - 대학교 삭제
 	public int deleteUni(int uniEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteUni", uniEduNo);
@@ -82,12 +82,12 @@ public class PsResumeDao {
 	public int insertGschool(PsGschoolDto dto) throws Exception {
 		return sqlSession.insert("resume.insertGschool", dto);
 	}
-	
+
 	// 이력서 - 대학교 삭제
 	public int deleteGrad(int gradEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteGrad", gradEduNo);
 	}
-	
+
 	// 이력서-경력사항입력
 	public int insertCareer(PsCareerDto dto) throws Exception {
 		return sqlSession.insert("resume.insertCareer", dto);
@@ -97,8 +97,8 @@ public class PsResumeDao {
 	public int deleteCareer(int carNo) throws Exception {
 		return sqlSession.delete("resume.deleteCareer", carNo);
 	}
-	
-	// 이력서 - 경력사항 수정 
+
+	// 이력서 - 경력사항 수정
 	public int updateCareer(Map<String, Object> updateCareer) throws Exception {
 		return sqlSession.update("resume.updateCareer", updateCareer);
 	}
@@ -148,11 +148,11 @@ public class PsResumeDao {
 	public int insertHighInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertHighInfo", InfoNo);
 	}
-	
+
 	// highinfo 삭제
-		public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception {
-			return sqlSession.delete("resume.deleteInfoHigh",InfoNo);
-		}
+	public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.delete("resume.deleteInfoHigh", InfoNo);
+	}
 
 	// 이력서-고등학교 최신보기
 	public int getMaxHighNo() throws Exception {
@@ -163,10 +163,10 @@ public class PsResumeDao {
 	public int insertUniInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertUniInfo", InfoNo);
 	}
-	
+
 	// UniInfo 삭제
 	public int deleteInfoUni(Map<String, Object> InfoNo) throws Exception {
-		return sqlSession.delete("resume.deleteInfoUni",InfoNo);
+		return sqlSession.delete("resume.deleteInfoUni", InfoNo);
 	}
 
 	// 이력서-대학교 최신보기
@@ -178,10 +178,10 @@ public class PsResumeDao {
 	public int insertGradInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertGradInfo", InfoNo);
 	}
-	
+
 	// GradInfo 삭제
 	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception {
-		return sqlSession.delete("resume.deleteInfoGrad",InfoNo);
+		return sqlSession.delete("resume.deleteInfoGrad", InfoNo);
 	}
 
 	// 이력서 - 대학원 최신보기
@@ -193,12 +193,12 @@ public class PsResumeDao {
 	public int insertCareerInfo(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.insert("resume.insertCareerInfo", InfoNo);
 	}
-	
+
 	// 이력서 - 경력info 삭제
 	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception {
-		return sqlSession.delete("resume.deleteInfoCareer",InfoNo);
+		return sqlSession.delete("resume.deleteInfoCareer", InfoNo);
 	}
-	
+
 	// 이력서 - 경력 최신보기
 	public int getMaxCareerNo() throws Exception {
 		return sqlSession.selectOne("resume.selectOneMaxCar");
@@ -346,6 +346,11 @@ public class PsResumeDao {
 			return "";
 		}
 		return html.replaceAll("<[^>]*>", "");
+	}
+
+	// 자기소개서 삭제
+	public int deleteClFile(String fileName) {
+		return sqlSession.update("resume.deleteClFile", fileName);
 	}
 
 }

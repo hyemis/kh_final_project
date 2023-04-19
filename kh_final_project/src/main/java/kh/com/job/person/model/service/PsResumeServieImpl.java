@@ -94,8 +94,9 @@ public class PsResumeServieImpl implements PsResumeService {
 	                System.out.println("File was not found.");
 	            }
 	            
-//	            //TODO: DB 에서도 삭제
-//	            dao.deleteClFile();
+	            //TODO: DB 에서도 삭제
+	            dao.deleteClFile(fileName);
+	            
 	        } catch (Exception e) {
 	            throw new RuntimeException("Error deleting file: " + deleteFilePath, e);
 	        }
