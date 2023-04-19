@@ -334,7 +334,10 @@
     		height:'400px'
 	   		, width:'100%'
     	}, toolbar: []
-    })
+    }).then( newEditor => {
+		 editor = newEditor;
+	    	editor.enableReadOnlyMode( '#raContent' );
+	    })
     .catch( error => {
         console.error( error );
     });

@@ -417,6 +417,7 @@
 																					</c:if> ${uniCategoryName} <!-- uniCategoryName 변수 출력 -->
 																				</td>
 
+
 																				<td>${university.uniName}</td>
 																				<td>${university.uniDate}</td>
 																				<td>${university.uniMajor}</td>
@@ -578,8 +579,8 @@
 																							<c:set var="gradActName" value="휴학" />
 																						</c:when>
 																					</c:choose> ${gradActName} <!-- gradActActName 변수 출력 --></td>
-
-																			<!-- 	TODO:하는중 -->
+																					
+																				<!-- TODO : 하는중	 -->
 																				<td><c:set var="gradCategory"
 																						value="${gschool.gradCategory}" /> <c:if
 																						test="${gradCategory eq 'M'}">
@@ -587,7 +588,8 @@
 																					</c:if> <c:if test="${gradCategory eq 'D'}">
 																						<c:set var="gradCategoryName" value="박사" />
 																					</c:if> ${gradCategoryName} <!-- gradCategoryName 변수 출력 --></td>
-														
+																					
+																																			
 																				<td>${gschool.gradName}</td>
 																				<td>${gschool.gradDate}</td>
 																				<td>${gschool.gradMajor}</td>
@@ -1019,10 +1021,12 @@
 		    
 			     // 기존 form 뒤에 새로운 form 추가
 			    let uniData = selectedUniList[i].closest("tr").getElementsByTagName("td");
-			    uniNewForm.elements["uniNewAct"].value = uniData[1].textContent;
+			   
+			     //uniNewForm.elements["uniNewAct"].value = uniData[1].textContent;
 			    //uniNewForm.elements["uniNewCategory"].value = uniData[2].textContent;
 			   
-			   $("[name=uniNewCategory]").val(uniData[2].).prop("selected", true);
+			    $("[name=uniNewAct]").val(uniData[1]).prop("selected", true);
+			   $("[name=uniNewCategory]").val(uniData[2]).prop("selected", true);
 			    
 			    uniNewForm.elements["uniNewName"].value = uniData[3].textContent;
 			    uniNewForm.elements["uniNewDate"].value = uniData[4].textContent;
@@ -1035,11 +1039,12 @@
 			  //- 버튼
 			    let deleteUniInfoBtn = uniNewForm.querySelector("#deleteUniInfo");
 			    deleteUniInfoBtn.addEventListener("click", function() {
-			      const uniFormId = uniNewForm.id;
-			      const uniFormToRemove = document.getElementById(uniFormId);
-			      uniFormContainer.removeChild(uniFormToRemove);
-			      
-			      var uniEduNo = $("input[name='uniEduNo']").val();
+			    	const uniFormToRemove = this.closest("form");
+					const uniEduNoInput = uniFormToRemove.querySelector("input[name='uniEduNo']");
+					const uniEduNo = uniEduNoInput ? uniEduNoInput.value : null;
+		      
+					// uniEduNo 값을 가져온 후 삭제
+					  uniFormContainer.removeChild(uniFormToRemove);
 			    	
 			    	  $.ajax({
 			    	    type: 'POST',

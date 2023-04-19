@@ -171,4 +171,8 @@
 		AND USER_ID = #{userId}		
 	</update>
 	
+	<delete id="deleteRecruit">
+		delete from RECRUIT_REGIST RR where ra_num = #{raNum}
+	</delete>
+	
 </mapper>
