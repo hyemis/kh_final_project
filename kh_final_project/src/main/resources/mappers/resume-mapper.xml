@@ -176,9 +176,11 @@
 
 
 	<select id="selectOneCl" resultType="cldto">
-		select CL_NO,CL_FILE, CL_GROWTH,
+		select CL_NO,CL_FILE,
+		CL_GROWTH,
 		CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL where
-		CL_NO = #{clNo}
+		CL_NO =
+		#{clNo}
 	</select>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
@@ -442,19 +444,13 @@
 	</select>
 
 	<select id="selectListCerti" resultType="certidto">
-		SELECT
-		CERTI_NO,CERTI_NAME,CERTI_PUB, CERTI_DATE
-		FROM RESUME_CERTI
-		WHERE
-		CERTI_NO IN (
-		SELECT CERTI_NO
-		FROM RESUME_CERTI_INFO
-		WHERE RESUME_NO IN (
-		SELECT RESUME_NO
-		FROM USER_RESUME
-		WHERE USER_ID = #{userId}
-		)
-		)
+		SELECT rc.CERTI_NO AS certiNo, rc.CERTI_NAME AS certiName, rc.CERTI_DATE AS certiDate,
+		rc.CERTI_PUB AS certiPub
+		FROM RESUME_CERTI rc
+		INNER JOIN RESUME_CERTI_INFO i on rc.CERTI_NO = i.CERTI_NO
+		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
+		WHERE u.USER_ID = #{userId}
+		ORDER BY rc.CERTI_DATE DESC
 	</select>
 
 
@@ -479,7 +475,8 @@
 
 	<update id="deleteClFile" parameterType="String">
 		UPDATE RESUME_CL
-		SET CL_File = NULL
+		SET
+		CL_File = NULL
 		WHERE CL_File = #{fileName}
 	</update>
 
