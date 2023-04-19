@@ -74,7 +74,8 @@
 			</li>
 		</ul>
 	
-		<form action="insert" method="post" id="recruitContent" class="recruitContent" name="recruitContent" enctype="multipart/form-data" onsubmit="return checkVailed()">
+		<form action="update" method="post" id="recruitContent" class="recruitContent" name="recruitContent" enctype="multipart/form-data" onsubmit="return checkVailed()">
+		<input type="hidden" class="raNum" id="raNum" name="raNum" value="${redto.raNum }">
 		<!-- 탭 내용 -->
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-tab-1">
@@ -232,7 +233,7 @@
 					</table>
 					<div class="d-flex justify-content-between">
 						<button type="button" class="btn btn-success my-3 prevbtn">이전</button>
-						<button type="submit" class="btn btn-success my-3 insertbtn">작성</button>
+						<button type="submit" class="btn btn-success my-3 updatebtn">작성</button>
 					</div>
 				</div>
 			</div>

@@ -22,12 +22,12 @@
 	<!-- 회원정보 수정하기 -->
     <update id="updateAccount">
         UPDATE USER_TABLE SET
-        BS_LICENSE = #{bsLicense},
-        BS_MAIN_PHONE = #{bsMainPhone},
-        ADDRESS_POSTCODE = #{addressPostcode},
-        ADDRESS_ROAD = #{addressRoad},
-        ADDRESS_JIBUN = #{addressJibun},
-        ADDRESS_DETAIL = #{addressDetail}
+	       BS_LICENSE = #{bsLicense},
+	       BS_MAIN_PHONE = #{bsMainPhone},
+	       ADDRESS_POSTCODE = #{addressPostcode},
+	       ADDRESS_ROAD = #{addressRoad},
+	       ADDRESS_JIBUN = #{addressJibun},
+	       ADDRESS_DETAIL = #{addressDetail}
         WHERE USER_ID = #{userId}
     </update>
     
@@ -158,5 +158,17 @@
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 		
 	</select>
+	
+	<!-- 업데이트 채용공고 -->
+	<update id="updateRecruit">
+		UPDATE RECRUIT_REGIST SET COMPANY_NAME = #{companyName}, RECRUIT_TYPE =#{recruitType}
+		, USER_EDUCATION=#{userEducation},CONDITION_TYPE=#{conditionType}, SALARY= #{salary}, MIN_SALARY=#{minSalary}
+		, MAX_SALARY=#{maxSalary}, REGIST_DATE= #{registDate},CLOSE_DATE=#{closeDate}
+		, CAREER=#{career}, HOLIDAY_TYPE=#{holidayType}, EMP_TYPE_CODE=#{empTypeCode}
+		, RA_TITLE=#{raTitle}, RA_CONTENT=#{raContent}
+		, RA_EXTRA_DOCUMENT=#{raExtraDocument}
+		WHERE RA_NUM = #{raNum}
+		AND USER_ID = #{userId}		
+	</update>
 	
 </mapper>
