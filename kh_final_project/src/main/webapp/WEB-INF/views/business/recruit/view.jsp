@@ -199,9 +199,11 @@
             </div>
 		 </div>
 		 <div class="container mb-5">
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit" ${redto.raAdmission == 'N'? 'disabled' : ''}>${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit" onclick="location.href='update?id=${redto.raNum}&pnum=${pidto.pnum }&search=${pidto.search }'">수정하기</button>
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 deleteRecruit">삭제하기</button>
+		 	<c:if test="${redto.userId == member}">
+			 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit" ${redto.raAdmission == 'N'? 'disabled' : ''}>${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
+			 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit" onclick="location.href='update?id=${redto.raNum}&pnum=${pidto.pnum }&search=${pidto.search }'">수정하기</button>
+			 	<button type="button" class="btn btn-primary py-3 px-4 me-2 deleteRecruit">삭제하기</button>
+		 	</c:if>
 			<a href="recruitAll?pnum=${pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
 			<a href="main" class="btn btn-dark py-3 px-4">메인으로</a>
 		 </div>
@@ -235,18 +237,19 @@
 	        });
 	        
 	        $(document).on('click','.deleteRecruit', function() {
-	        	let userEmail = "${recruit.userEmail}";
-	        	let raNum = "${recruit.raNum}";      	
+	        	let userId = "${redto.userId}";
+	        	let raNum = "${redto.raNum}";      	
 	    		$.ajax({ 
-	    			url: "${pageContext.request.contextPath}/admin/business/rejectMail"
+	    			url: "${pageContext.request.contextPath}/business/recruit/deleteRecruit"
 	    			, type: "post"
-	    			, data:  {raNum : raNum, userEmail : userEmail}
+	    			, data:  {raNum : raNum, userId : userId}
 	    			, success: function(result){
 	    				if(result > 0){
-	    					alert("메일 발송 성공 했습니다.");
-	    					location.href="${pageContext.request.contextPath}/admin/business/main?pnum=${pnum}&search=${search}";
+	    					location.href="${pageContext.request.contextPath}/business/recruit/main?pnum=${pidto.pnum}&search=${pidto.search}";
+	    				}else if(result == -2){
+	    					alert("아이디 정보가 맞지 않습니다.");
 	    				}else{
-	    					alert("메일 발송 실패 했습니다.");
+	    					alert("삭제에 실패 했습니다.");
 	    				}
 	    			}
 	    			, error: function(e){
@@ -333,6 +336,9 @@
     		height:'400px'
 	   		, width:'100%'
     	}, toolbar: []
+    }).then( newEditor => {
+		 editor = newEditor;
+    	editor.enableReadOnlyMode( '#raContent' );
     })
     .catch( error => {
         console.error( error );

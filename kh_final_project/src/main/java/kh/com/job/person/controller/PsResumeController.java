@@ -685,7 +685,7 @@ public class PsResumeController {
 		Map<String, Object> InfoNo = new HashMap<>();
 		InfoNo.put("clNo", clNo);
 		InfoNo.put("userId", principal.getName());
-
+		result = rservice.insertClInfo(InfoNo);
 		return result;
 	}
 	

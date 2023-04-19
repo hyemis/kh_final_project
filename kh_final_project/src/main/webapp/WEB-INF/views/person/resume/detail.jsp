@@ -272,6 +272,8 @@
 		    success: function(result) {
 		      if(result > 0) {
 		        alert('작성 중인 이력서에서 해당 자기소개서가 삭제되었습니다.');
+		        window.close();
+		        
 		      } else {
 		        alert('작성 중인 이력서에서 해당 자기소개서 삭제에 실패했습니다.');
 		      }
