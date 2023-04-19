@@ -188,13 +188,16 @@
                                 </div>
                             </div>
                         </div>
+                       	<c:if test="${redto.raExtraDocument != null}">
+							<a class="btn btn-primary" href="${redto.raExtraDocument}" download>이력서 양식 다운로드</a>
+						</c:if>
                     </div>
                 </div>
             </div>
 		 </div>
 		 <div class="container mb-5">
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit" ${redto.raAdmission == 'N'? 'disabled' : ''}>${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit">수정하기</button>
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit" onclick="location.href='update?id=${redto.raNum}&pnum=${pidto.pnum }&search=${pidto.search }'">수정하기</button>
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 deleteRecruit">삭제하기</button>
 			<a href="recruitAll?pnum=${pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
 			<a href="main" class="btn btn-dark py-3 px-4">메인으로</a>
