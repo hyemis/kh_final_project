@@ -354,7 +354,12 @@
 						}
 						
 						 // 정보불러오기 버튼 시 끼인 테이블 insert 
-						var certiNo = $("input[name='certiNo']").val();
+						/* var certiNo = $("input[name='certiNo']").val(); */
+						// 선택된 체크박스가 속한 <tr> 요소 찾기
+						  let tr = selectedCertiList[i].closest("td").parent();
+						  // 해당 <tr> 요소 내의 certiNo 값 가져오기
+						  let certiNo = tr.querySelector("input[name='certiNo']").value;
+						  
 						$.ajax({
 						    type: 'POST',
 						    url: 'insertInfoCerti',

@@ -717,6 +717,15 @@ public class PsResumeController {
 
 		return result;
 	}
+	
+	// 자소서 끼인 테이블 delete
+	@PostMapping("deleteInfoCl")
+	@ResponseBody
+	public int deleteInfoCl(@RequestParam("clNo") String clNo) {
+		
+		int result = -1;
+		return result;
+	}
 
 	// 자소서 기존 파일 삭제
 	@PostMapping("deleteClFile")

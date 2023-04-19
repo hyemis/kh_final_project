@@ -90,9 +90,14 @@
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
 						<div class="col">
-							<h3 class="mb-3">불러온 자기소개서</h3>
+							<h3 class="mb-3">자기소개서</h3>
 						</div>
 					</div>
+					 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+								<button type="button" class="btn btn-outline-dark" id="deleteInfo">
+								  <i class="fa fa-minus"></i>
+								</button>
+								</div>
 
 					<!-- 성장과정 내용 -->
 					<div class="bg-gray p-4 mb-3">
@@ -253,6 +258,28 @@
   	    }
     });
 });
+	
+	
+	// - 버튼
+	let deleteBtn = document.querySelector("#deleteInfo");
+		deleteBtn.addEventListener("click", function() {
+		  const clNo = parseInt(window.location.href.split('/').pop());
+		
+		  $.ajax({
+		    type: 'POST',
+		    url: '${pageContext.request.contextPath}/person/resume/deleteInfoCl',
+		    data: { clNo: clNo },
+		    success: function(result) {
+		      if(result > 0) {
+		        alert('작성 중인 이력서에서 해당 자기소개서가 삭제되었습니다.');
+		      } else {
+		        alert('작성 중인 이력서에서 해당 자기소개서 삭제에 실패했습니다.');
+		      }
+		    }
+		  });
+	    
+	    
+	  });
 			
 		</script>
 </body>
