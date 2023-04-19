@@ -25,5 +25,7 @@ public interface BsRecruitService {
 
 	public Paging recruitAll(PagingInfoDto pidto);
 
+	public int updateRecruit(BsRecruitDto dto);
+
 
 }

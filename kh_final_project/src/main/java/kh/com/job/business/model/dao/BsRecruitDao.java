@@ -54,5 +54,9 @@ public class BsRecruitDao {
 		return sqlSession.selectOne("business.recruitAllCount", pidto);
 	}
 
+	public int updateRecruit(BsRecruitDto dto) {
+		return sqlSession.update("business.updateRecruit", dto);
+	}
+
 
 }

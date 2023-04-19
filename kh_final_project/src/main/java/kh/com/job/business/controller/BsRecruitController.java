@@ -139,7 +139,7 @@ public class BsRecruitController {
 		if(result == 1) {
 			mv.setViewName("redirect:/business/recruit/main");
 		}
-		
+		//이거 오류 페이지 넘기는거 해야됨
 		mv.setViewName("redirect:/business/recruit/main");
 		return mv;
 	}
@@ -237,7 +237,7 @@ public class BsRecruitController {
 	
 	//공고 수정
 	@GetMapping("/update")
-	public ModelAndView updateRecruit(ModelAndView mv
+	public ModelAndView updateView(ModelAndView mv
 			,PagingInfoDto pidto
 			, @RequestParam(name = "id", required = false) String raNum
 			,Principal principal
@@ -291,6 +291,55 @@ public class BsRecruitController {
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
+		return mv;
+	}
+	
+//	업데이트 부분
+	@PostMapping("/update")
+	public ModelAndView updateRecruit(ModelAndView mv, BsRecruitDto dto
+								,@RequestParam(value = "conditionTypeList", required = false) List<String> conditionTypeList
+								,@RequestParam(name = "report", required = false) MultipartFile uploadReport
+								,@RequestParam(name = "category2dept", required = false) String category2dept
+								,Principal principal){
+		
+		int result = -1;
+		
+		if(principal != null) {
+			dto.setUserId(principal.getName());
+		}
+		
+		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
+			//우대조건 컬럼 한개로 합치기
+			String conditionType = String.join(",", conditionTypeList);
+			dto.setConditionType(conditionType);		
+		}
+		
+		//salary 최대값 최소값 null일 때 0으로  
+		if(dto.getMinSalary() == null || dto.getMinSalary().isEmpty()){
+			dto.setMinSalary("0");
+		}
+		if(dto.getMaxSalary() == null || dto.getMaxSalary().isEmpty()){
+			dto.setMaxSalary("0");
+		}
+		dto.setSalary(dto.getMinSalary()+"만원 ~ "+dto.getMaxSalary()+"만원");
+		//이력서 파일 업로드
+		if(uploadReport != null && !uploadReport.isEmpty()) {
+			String reportUrl = service.uploadDocument(uploadReport, principal.getName());
+		    dto.setRaExtraDocument(reportUrl);
+		}
+		
+		//모집분야 상위 분류만 선택 할때 모집분야 상위분류로 넣기
+		if(dto.getRecruitType().equals("0")) {
+			dto.setRecruitType(category2dept);
+		}
+
+		result = service.updateRecruit(dto);
+		
+		if(result == 1) {
+			mv.setViewName("redirect:/business/recruit/main");
+		}
+		
+		mv.setViewName("redirect:/business/recruit/main");
 		return mv;
 	}
 	
