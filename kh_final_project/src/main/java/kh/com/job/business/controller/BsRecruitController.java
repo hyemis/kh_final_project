@@ -244,6 +244,7 @@ public class BsRecruitController {
 			) {
 		
 		BsRecruitDetailDto redto = abs.viewDetail(raNum);
+		List<AdCategoryDto> mlist = null;
 		
 		//직업 코드 타입 ('JN')가져오기
 		mv.addObject("JNlist", service.getCateList("JN"));
@@ -257,6 +258,24 @@ public class BsRecruitController {
 		mv.addObject("ETlist", service.getCateList("ET"));
 		//상세근무형태
 		mv.addObject("HTlist", service.getCateList("HT"));
+		
+		if(redto.getRecruitType() != null) {
+			
+			AdCategoryDto cateDto = adservice.checkCategory(redto.getRecruitType());
+			
+			if(cateDto.getCategoryDept().equals("3")) {
+				mv.addObject("category2dept", cateDto.getReqCategoryId());
+				mlist = adservice.cateMdeptList(cateDto.getReqCategoryId());
+				mv.addObject("mlist", mlist);
+				System.out.println("단계 3단계");
+			}else if(cateDto.getCategoryDept().equals("2")) {
+				mv.addObject("category2dept", cateDto.getCategoryId());
+				mlist = adservice.cateMdeptList(cateDto.getCategoryId());
+				mv.addObject("mlist", mlist);
+				System.out.println("단계 2단계");
+			}
+				
+		}
 		
 		if(redto.getConditionType() != null) {
 			String conditionType = redto.getConditionType();

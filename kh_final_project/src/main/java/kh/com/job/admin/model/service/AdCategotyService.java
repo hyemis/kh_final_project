@@ -24,4 +24,6 @@ public interface AdCategotyService {
 
 	public int addLastCategory(AdCategoryDto dto);
 
+	public AdCategoryDto checkCategory(String recruitType);
+
 }

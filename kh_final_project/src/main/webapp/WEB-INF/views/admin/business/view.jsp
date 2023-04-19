@@ -62,7 +62,7 @@
 		 <div class="container-xl px-5">
 		 	<h3 class="my-5">채용공고 상세 내역</h3>
 		 	<div>
-		 		<h5 class="mb-5 ms-3">${recruit.recruitType }</h5>
+		 		<h5 class="mb-5 ms-3">${recruit.recruitName}</h5>
 		 	</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">

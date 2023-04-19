@@ -47,8 +47,11 @@ public class AdCategoryDao {
 	}
 
 	public int addLastCategory(AdCategoryDto dto) {
-		// TODO Auto-generated method stub
 		return sqlsession.insert("admin.addLastCategory", dto);
+	}
+
+	public AdCategoryDto checkCategory(String recruitType) {
+		return sqlsession.selectOne("admin.checkCategory", recruitType);
 	}
 
 }

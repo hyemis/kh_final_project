@@ -58,6 +58,11 @@ public class AdCategotyServiceImpl implements AdCategotyService{
 	public int addLastCategory(AdCategoryDto dto) {
 		return dao.addLastCategory(dto);
 	}
+
+	@Override
+	public AdCategoryDto checkCategory(String recruitType) {
+		return dao.checkCategory(recruitType);
+	}
 	
 
 }
