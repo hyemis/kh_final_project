@@ -123,6 +123,8 @@ public interface PsResumeService {
 	public int getMaxClNo() throws Exception;
 
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteInfoCl(Map<String, Object> InfoNo) throws Exception;
 
 	// 고등학교 학력사항 보기
 	public List<PsHschoolDto> selectListHigh(String userId) throws Exception;

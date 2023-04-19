@@ -176,7 +176,7 @@
 
 
 	<select id="selectOneCl" resultType="cldto">
-		select CL_FILE, CL_GROWTH,
+		select CL_NO,CL_FILE, CL_GROWTH,
 		CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL where
 		CL_NO = #{clNo}
 	</select>
@@ -227,10 +227,6 @@
 		USER_ID =
 		#{userId})
 	</delete>
-
-
-
-
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
 		INSERT INTO
@@ -289,6 +285,15 @@
 		#{clNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
+	
+	<delete id="deleteInfoCl" parameterType="clinfodto">
+		DELETE FROM
+		RESUME_CL_INFO
+		WHERE CL_NO = #{clNo}
+		AND RESUME_NO = (SELECT
+		NVL(MAX(RESUME_NO), 1) FROM USER_RESUME WHERE
+		USER_ID = #{userId})
+	</delete>
 
 
 

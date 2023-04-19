@@ -620,6 +620,7 @@ public class PsResumeController {
 	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable Integer clNo) throws Exception {
 
 		PsClDto dto = rservice.selectOneCl(clNo);
+		dto.setClNo(clNo);
 		mv.addObject("cl", dto);
 		mv.setViewName("person/resume/detail");
 		return mv;
@@ -635,37 +636,7 @@ public class PsResumeController {
 		return result;
 	}
 
-//	// 자소서 테이블 수정
-//	@PostMapping("updateCl")
-//	@ResponseBody
-//	public int updateCl(@RequestParam("No") String clNumber, @RequestParam("growth") String clGrowth,
-//			@RequestParam("motive") String clMotive, @RequestParam("adv") String clAdv,
-//			@RequestParam("asp") String clAsp,
-//			@RequestParam(name = "updateClFile", required = false) MultipartFile clFile, Principal principal)
-//			throws Exception {
-//
-//		int result = -1;
-//
-//		String portfUrl = null;
-//
-//		// 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
-//		if (clFile != null) { 
-//			portfUrl = rservice.upload(clFile, principal.getName());
-//		}
-//
-//		int clNo = Integer.parseInt(clNumber);
-//		Map<String, Object> updateCl = new HashMap<>();
-//		updateCl.put("clNo", clNo);
-//		updateCl.put("clFile", portfUrl);
-//		updateCl.put("clGrowth", clGrowth);
-//		updateCl.put("clMotive", clMotive);
-//		updateCl.put("clAdv", clAdv);
-//		updateCl.put("clAsp", clAsp);
-//
-//		result = rservice.updateCl(updateCl);
-//		return result;
-//	}
-	
+	// 자소서 테이블 수정
 	@PostMapping("updateCl")
 	@ResponseBody
 	public int updateCl(@RequestParam("No") String clNumber, @RequestParam("growth") String clGrowth,
@@ -721,9 +692,15 @@ public class PsResumeController {
 	// 자소서 끼인 테이블 delete
 	@PostMapping("deleteInfoCl")
 	@ResponseBody
-	public int deleteInfoCl(@RequestParam("clNo") String clNo) {
+	public int deleteInfoCl(Principal principal, @RequestParam("clNo") Integer clNo) throws Exception {
 		
 		int result = -1;
+		
+		//TODO: 끼인테이블 delete
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("clNo", clNo);
+		InfoNo.put("userId", principal.getName());
+		result = rservice.deleteInfoCl(InfoNo);
 		return result;
 	}
 

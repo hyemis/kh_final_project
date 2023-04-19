@@ -135,7 +135,8 @@
 								</div>
 							</div>
 							<hr>
-							<button class="btn btn-primary" onclick="addCerti()">새 정보추가</button>
+							<button class="btn btn-primary" onclick="addCerti()">새
+								정보추가</button>
 							<br>
 
 						</div>
@@ -281,26 +282,62 @@
 						    
 						   let newForm = null;
 						    
+						   
+						// 모달창에서 체크된 자격증 데이터 - new form create   
 						for (let i = 0; i < selectedCertiList.length; i++) {
-						  newForm = document.createElement("form");
-						  let formContainer = document.getElementById("CertiFormContainer");
-						  newForm.id = "certi-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
-						  newForm.innerHTML = newFormHTML;
-						  formContainer.appendChild(newForm);
-						
-						  // 기존 form 뒤에 새로운 form 추가
-						  let certiData = selectedCertiList[i].closest("tr").getElementsByTagName("td");
-						  newForm.elements["certiNewName"].value = certiData[1].textContent;
-						  newForm.elements["certiNewPub"].value = certiData[2].textContent;
-						  newForm.elements["certiNewDate"].value = certiData[3].textContent;
-						
-						  // - 버튼
-						 let deleteBtn = newForm.querySelector("#deleteInfo");
-							deleteBtn.addEventListener("click", function() {
-							  const formToRemove = this.closest("form");
-							  const certiNoInput = formToRemove.querySelector("input[name='certiNo']");
-							  const certiNo = certiNoInput ? certiNoInput.value : null;
 							
+						// DB 끼인 테이블 insert 
+						  let tr = selectedCertiList[i].closest("tr");
+						  let certiNo = tr.querySelector("input[name='certiNo']").value;
+						  
+							$.ajax({
+							    type: 'POST',
+							    url: 'insertInfoCerti',
+							    data: { certiNo: certiNo },
+							    success: function(result) {
+							    	
+							      if(result > 0) {
+							    	  newForm = document.createElement("form");
+									  let formContainer = document.getElementById("CertiFormContainer");
+									  newForm.id = "certi-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+									  newForm.innerHTML = newFormHTML;
+									  formContainer.appendChild(newForm);
+							    	  
+								  // 기존 form 뒤에 새로운 form 추가
+								  let certiData = selectedCertiList[i].closest("tr").getElementsByTagName("td");
+								  newForm.elements["certiNewName"].value = certiData[1].textContent;
+								  newForm.elements["certiNewPub"].value = certiData[2].textContent;
+								  newForm.elements["certiNewDate"].value = certiData[3].textContent;
+								
+								  // new form delete 버튼 -
+								 let deleteBtn = newForm.querySelector("#deleteInfo");
+								 deleteBtn.addEventListener("click", function() {
+										  deleteClickHandler(formContainer, this, certiNo);
+										});
+
+								  
+								  // new form 수정 버튼 
+								  let updateBtn = newForm.querySelector("#update");
+								  updateBtn.addEventListener("click", function() {
+							  			updateClickHandler(newForm, certiNo);
+							  	});
+							    	  
+							      } else {
+							      }
+							      
+							      
+							    }
+							  }); 
+						  
+							alert('작성 중인 이력서에서 해당 자격증 정보가 입력되었습니다.');
+
+						}
+
+			});
+						
+						// new form delete 버튼 - 
+						function deleteClickHandler(formContainer, deleteBtn, certiNo) {
+							 const formToRemove = deleteBtn.closest("form");
 							  // certiNo 값을 가져온 후 삭제
 							  formContainer.removeChild(formToRemove);
 						    
@@ -318,11 +355,10 @@
 							  });
 						    
 						    
-						  });
+						  };
 						  
-						  // 수정 버튼 
-						  let updateBtn = newForm.querySelector("#update");
-						  updateBtn.addEventListener("click", function() {
+						  // new form 수정 버튼 
+						   function updateClickHandler(newForm,certiNo) {
 						    const certiNewName = newForm.elements["certiNewName"].value;
 						    const certiNewPub = newForm.elements["certiNewPub"].value;
 						    const certiNewDate = newForm.elements["certiNewDate"].value;
@@ -347,36 +383,9 @@
 						        }
 						      }
 						    });
-						  });
+						  };
 						  
-						  
-
-						}
-						
-						 // 정보불러오기 버튼 시 끼인 테이블 insert 
-						/* var certiNo = $("input[name='certiNo']").val(); */
-						// 선택된 체크박스가 속한 <tr> 요소 찾기
-						  let tr = selectedCertiList[i].closest("td").parent();
-						  // 해당 <tr> 요소 내의 certiNo 값 가져오기
-						  let certiNo = tr.querySelector("input[name='certiNo']").value;
-						  
-						$.ajax({
-						    type: 'POST',
-						    url: 'insertInfoCerti',
-						    data: { certiNo: certiNo },
-						    success: function(result) {
-						      if(result > 0) {
-						        alert('작성 중인 이력서에서 해당 자격증 정보가 입력되었습니다.');
-						      } else {
-						        alert('작성 중인 이력서에서 해당 자격증 입력에 실패했습니다. ');
-						      }
-						    }
-						  }); 
-						
-						
-
-
-						});
+						 
 						
 						// 모달창에 체크한 이력서 순서대로 표시
 						$(document).ready(function() {

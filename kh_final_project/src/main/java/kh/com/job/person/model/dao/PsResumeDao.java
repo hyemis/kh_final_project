@@ -306,9 +306,15 @@ public class PsResumeDao {
 		return html.replaceAll("<[^>]*>", "");
 	}
 
-	// 자기소개서 삭제
+	// 자기소개서 파일 삭제
 	public int deleteClFile(String fileName) {
 		return sqlSession.update("resume.deleteClFile", fileName);
 	}
+	
+	// 자기소개서 info 삭제
+	public int deleteInfoCl(Map<String, Object> InfoNo) throws Exception {
+		return sqlSession.update("resume.deleteInfoCl", InfoNo);
+		
+	};
 
 }

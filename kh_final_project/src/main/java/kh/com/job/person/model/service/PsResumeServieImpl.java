@@ -133,33 +133,19 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
-	public int deleteCareer(int carNo) throws Exception {
-		return dao.deleteCareer(carNo);
-	}
-
-	@Override
-	public int insertCerti(PsCertiDto dto) throws Exception {
-		return dao.insertCerti(dto);
-	}
-	
-	@Override
-	public int deleteCerti(int certiNo) throws Exception {
-		return dao.deleteCerti(certiNo);
-	}
-	
-	@Override
-	public int updateCerti(Map<String, Object> updateCerti) throws Exception {
-		return dao.updateCerti(updateCerti);
-	}
-	
-	@Override
 	public int insertCl(PsClDto dto) throws Exception {
 		return dao.insertCl(dto);
 	}
 	
 	@Override
-	public int deleteCl(int clNo) throws Exception {
-		return dao.deleteCl(clNo); 
+	public int insertCerti(PsCertiDto dto) throws Exception {
+		return dao.insertCerti(dto);
+	}
+	
+	
+	@Override
+	public int updateCerti(Map<String, Object> updateCerti) throws Exception {
+		return dao.updateCerti(updateCerti);
 	}
 	
 	@Override
@@ -168,10 +154,25 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
+	public int deleteCareer(int carNo) throws Exception {
+		return dao.deleteCareer(carNo);
+	}
+	
+	@Override
+	public int deleteCerti(int certiNo) throws Exception {
+		return dao.deleteCerti(certiNo);
+	}
+	
+	@Override
+	public int deleteCl(int clNo) throws Exception {
+		return dao.deleteCl(clNo); 
+	}
+	
+	@Override
 	public PsClDto selectOneCl(int clNo) throws Exception {
 		return dao.selectOneCl(clNo);
 	}
-
+	
 	@Override
 	public int getMaxHighNo() throws Exception {
 		return dao.getMaxHighNo();
@@ -267,10 +268,6 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.selectListCl(userId);
 	}
 
-	@Override
-	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception {
-		return dao.deleteInfoCareer(InfoNo);
-	}
 
 	@Override
 	public int updateCareer(Map<String, Object> updateCareer) throws Exception {
@@ -306,6 +303,18 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception {
 		return dao.deleteInfoGrad(InfoNo);
 	}
+	
+	@Override
+	public int deleteInfoCareer(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoCareer(InfoNo);
+	}
+	
+	@Override
+	public int deleteInfoCl(Map<String, Object> InfoNo) throws Exception {
+		return dao.deleteInfoCl(InfoNo);
+	}
+
+	
 
 	
 	
