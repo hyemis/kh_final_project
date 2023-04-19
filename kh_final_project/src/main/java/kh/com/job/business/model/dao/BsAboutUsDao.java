@@ -27,7 +27,6 @@ public class BsAboutUsDao {
 		sqlSession.insert("boards.insertNewsletter", dto);
 		int boardNum = dto.getBoardNum();
 		return boardNum;
-//		return sqlSession.insert("boards.insertNewsletter", dto);
 	}
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 	
@@ -57,6 +56,7 @@ public class BsAboutUsDao {
 		return sqlSession.selectList("boards.newsLetterList", userId);
 	}
 
+	//board table 게시글 전부
 	public List<BoardDto> listAll(String userId) {
 		return sqlSession.selectList("boards.listAll", userId);
 	}

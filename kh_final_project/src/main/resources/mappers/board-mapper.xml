@@ -32,8 +32,8 @@
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
 		INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
-		   	 VALUES(#{boardNum},#{userId},UDB05,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
-	<selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+		   	 VALUES(${boardNum},#{userId},'UDB05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	<selectKey keyProperty="boardNum" resultType="_int" order="BEFORE" >
 		SELECT MAX(BOARD_NO) +1 FROM BOARD
 	</selectKey>	
 	</insert>

@@ -188,8 +188,16 @@
                                 </div>
                             </div>
                         </div>
+                        <c:if test="${recruit.raExtraDocument != null}">
+							<a class="btn btn-primary" href="${recruit.raExtraDocument}" download>이력서 양식 다운로드</a>
+						</c:if>
                     </div>
                 </div>
+            </div>
+            <div class="container mb-5">
+	      		<c:if test="${recruit.raExtraDocument != null}">
+					<a class="btn btn-primary" href="${recruit.raExtraDocument}" download>파일 다운로드</a>
+				</c:if>
             </div>
 		 </div>
 		 <div class="container mb-5">
