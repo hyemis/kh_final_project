@@ -47,10 +47,14 @@ public class BsAboutUsController {
 		return mv;
 	}
 	
+	//회사소개작성 todo
+
+	
+	
 	// 뉴스레터 작성
-	@PostMapping("/newletterForm")
-	public ModelAndView insertNewsletter(ModelAndView mv, BsUserDto udto, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
-		udto.setUserId(principal.getName()); 
+	@PostMapping("/newsletterform")
+	public ModelAndView insertNewsletter(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
+		dto.setUserId(principal.getName()); 
 		service.insertNewsletter(dto);
 		mv.setViewName("redirect:/business/aboutus/newsletter");
 		rttr.addFlashAttribute("msg", "뉴스레터가 성공적으로 등록되었습니다.");

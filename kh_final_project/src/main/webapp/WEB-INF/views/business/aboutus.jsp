@@ -35,21 +35,29 @@
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/business.css"
+<link
+	href="${pageContext.request.contextPath}/resources/css/business.css"
 	rel="stylesheet">
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
 
 <!-- ckeditor5 -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
 </head>
@@ -106,6 +114,8 @@
 							<div
 								class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
 								<div class="modal-content">
+
+
 									<div class="modal-header">
 										<h3 class="modal-title text-center" id="staticBackdropLabel">회사소개
 											작성</h3>
@@ -115,6 +125,7 @@
 									<div class="modal-body">
 										<form action="/companyInfoForm" method="post"
 											enctype="multipart/form-data">
+
 											<div class="row ">
 												<div class="col-2 text-center">
 													<h4>태그</h4>
@@ -181,7 +192,7 @@
 															type="checkbox" name="tag" value="어학교육">어학교육 <input
 															type="checkbox" name="tag" value="해외연수">해외연수
 													</p>
-												<hr>
+													<hr>
 												</div>
 											</div>
 											<div class="row ">
@@ -189,10 +200,9 @@
 													<h4>직 원 수</h4>
 												</div>
 												<div class="col-10 ">
-													<a>직원수를 숫자로 입력해주세요</a> 
-													<input type="text" name="employee"
+													<a>직원수를 숫자로 입력해주세요</a> <input type="text" name="employee"
 														style="width: 30%;" placeholder="예시)300">명
-												<hr>
+													<hr>
 												</div>
 											</div>
 											<div class="row ">
@@ -200,20 +210,20 @@
 													<h4>평균연봉</h4>
 												</div>
 												<div class="col-10 ">
-													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> 
-													<input type="text" name="salaryAvg"
-														 style="width: 30%;" placeholder="예시)3500">만원
-												<hr>
+													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> <input type="text"
+														name="salaryAvg" style="width: 30%;" placeholder="예시)3500">만원
+													<hr>
 												</div>
 											</div>
-												<div class="row ">
+											<div class="row ">
 												<div class="col-2 text-center font-monospace">
 													<h4>기업사진</h4>
 												</div>
 												<div class="col-10 ">
 													<div class="mb-3">
-														<input class="form-control" type="file" id="formFile" multiple>
-														<label for="formFile" class="form-label">기업 대표 사진을 등록해주세요</label> 
+														<input class="form-control" type="file" id="infoPhoto"
+															multiple> <label for="infoPhoto"
+															class="form-label">기업 대표 사진을 등록해주세요</label>
 													</div>
 												</div>
 											</div>
@@ -223,18 +233,19 @@
 												</div>
 												<div class="col-10 was-validated ">
 													<div class="mb-3">
-														<textarea id="infoContent" name="boardContent" ></textarea>
+														<textarea id="infoContent" name="boardContent"></textarea>
 													</div>
 												</div>
 											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-light"
+													data-bs-dismiss="modal">취소</button>
+												<button type="reset" class="btn btn-light">초기화</button>
+												<button type="submit" class="btn btn-primary">등록</button>
+											</div>
 										</form>
 									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-light"
-											data-bs-dismiss="modal">취소</button>
-										<button type="reset" class="btn btn-light">초기화</button>	
-										<button type="submit" class="btn btn-primary">등록</button>
-									</div>
+
 								</div>
 							</div>
 						</div>
@@ -288,11 +299,11 @@
 					<div class="border border-secondary">
 						<h1>뉴스레터</h1>
 						<div>
-						<button type="button" class="btn btn-light"
-							href="<%=request.getContextPath()%>/business/aboutus/newsletter">더보기</button>
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
+							<button type="button" class="btn btn-light"
+								href="<%=request.getContextPath()%>/business/aboutus/newsletter">더보기</button>
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary"
+								data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
 						</div>
 
 						<!-- Modal -->
@@ -309,8 +320,8 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form action="/newletterForm" method="post"
-											enctype="multipart/form-data">
+										<form action="${pageContext.request.contextPath }/business/aboutus/newsletterform" method="post"
+											>
 
 											<div class="row ">
 												<div class="col-2 text-center font-monospace">
@@ -337,20 +348,20 @@
 												<div class="col-2 text-center font-monospace">
 													<h4>내용작성</h4>
 												</div>
-												<div class="col-10 was-validated">
+												<div class="col-10 ">
 													<div class="mb-3">
-														<textarea id="newsLetterContent"
-															name="boardContent" style="height: 300px;" required></textarea>
+														<textarea id="newsLetterContent" name="boardContent"
+															style="height: 300px;"></textarea>
 													</div>
 													<div class="text-end ">작성일자</div>
 												</div>
 											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-light"
+													data-bs-dismiss="modal">취소</button>
+												<button type="submit" class="btn btn-primary">등록</button>
+											</div>
 										</form>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-light"
-											data-bs-dismiss="modal">취소</button>
-										<button type="submit" class="btn btn-primary">등록</button>
 									</div>
 								</div>
 							</div>
@@ -358,26 +369,26 @@
 						<!-- 뉴스레터 보기 -->
 						<div class="container">
 							<c:forEach items="${news}" var="boards">
-							<div class="row">
-								<div class="col">
-									<div class="card">
-										<h5 class="card-header">${boards.boardTitle }</h5>
-										<div class="card-body">
-											<div class="card-text"> ${boards.boardContent }</div>
-											<a href="" class="btn btn-primary">게시글보기</a>
+								<div class="row">
+									<div class="col">
+										<div class="card">
+											<h5 class="card-header">${boards.boardTitle }</h5>
+											<div class="card-body">
+												<div class="card-text">${boards.boardContent }</div>
+												<a href="" class="btn btn-primary">게시글보기</a>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="card">
+											<h5 class="card-header">${boards.boardTitle }</h5>
+											<div class="card-body">
+												<div class="card-text">${boards.boardContent }</div>
+												<a href="" class="btn btn-primary">게시글보기</a>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col">
-									<div class="card">
-										<h5 class="card-header">${boards.boardTitle }</h5>
-										<div class="card-body">
-											<div class="card-text"> ${boards.boardContent }</div>
-											<a href="" class="btn btn-primary">게시글보기</a>
-										</div>
-									</div>
-								</div>
-							</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -387,20 +398,20 @@
 						<button type="button" class="btn btn-light"
 							href="<%=request.getContextPath()%>/business/aboutus/qna">더보기</button>
 						<!-- 숫자 인덱스	 -->
-					    <div class="num-container row" id="num-container">
-					        <div class="col num-item">
-					            <h4 class="in-title">게시글 수</h4>
-					            <span class="nums" data-count="180">0</span><span id="num-unit">개</span><br>
-					        </div>
-					        <div class="col num-item">
-					            <h4 class="in-title">미답변 게시글</h4>
-					            <span class="nums" data-count="1143">0</span><span id="num-unit">개</span><br>
-					        </div>
-					        <div class="col num-item">
-					            <h4 class="in-title">답변완료 게시글</h4>
-					            <span class="nums" data-count="34">0</span><span id="num-unit">개</span><br>
-					        </div>
-					    </div>
+						<div class="num-container row" id="num-container">
+							<div class="col num-item">
+								<h4 class="in-title">게시글 수</h4>
+								<span class="nums" data-count="180">0</span><span id="num-unit">개</span><br>
+							</div>
+							<div class="col num-item">
+								<h4 class="in-title">미답변 게시글</h4>
+								<span class="nums" data-count="1143">0</span><span id="num-unit">개</span><br>
+							</div>
+							<div class="col num-item">
+								<h4 class="in-title">답변완료 게시글</h4>
+								<span class="nums" data-count="34">0</span><span id="num-unit">개</span><br>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -410,16 +421,17 @@
 
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	
+
 	<script>
 	var msg = "${msg}";
 	if(msg) {
 		alert(msg);
 	}
-	</script>
 	
+	</script>
+
 	<!-- 숫자 카운트 애니메이션 -->
-	  <script>
+	<script>
         $('.nums').each(function () {
             const $this = $(this),
                 countTo = $this.attr('data-count');
@@ -441,9 +453,9 @@
             });
         });
     </script>
-    
-    <!-- ckeditor5 -->
-	<script type="text/javascript">
+
+	<!-- ckeditor5 -->
+	<script>
 	class UploadAdapter {
 	    constructor(loader) {
 	        this.loader = loader;
@@ -534,8 +546,8 @@
         console.error( error );
     });
 	</script>
-    
-	
+
+
 
 </body>
 </html>

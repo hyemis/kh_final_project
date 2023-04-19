@@ -41,7 +41,7 @@ public class BoardDto {
 		private String userId;
 		private String categoryId;
 		private String boardTitle;
-		private Clob   boardContent;
+		private String boardContent;
 		private String boardDate;
 		private String updateDate;
 		private String boardOriginalFilename;
