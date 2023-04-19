@@ -143,6 +143,17 @@
 		 									<p>${redto.salary}</p>
                                 		</li>
                                 		<li>
+                                			<h5> 우대 사항 </h5>
+												<c:forEach items="${SClist}" var="categorySC">
+													<c:forEach items="${ctList}" var="ctList">
+														<c:if test="${categorySC.categoryId == ctList}">
+															<label><input type="checkbox" class="conditionTypeList" name="conditionTypeList" value="${categorySC.categoryId }" ${categorySC.categoryId == ctList? 'checked': ''} disabled>
+															${categorySC.categoryName }</label>
+														</c:if>
+													</c:forEach>
+												</c:forEach>
+                                		</li>
+                                		<li>
                                 			<h5> 학력 사항 </h5>
 		 									<p>${redto.userEducation}</p>
                                 		</li>
@@ -182,10 +193,10 @@
             </div>
 		 </div>
 		 <div class="container mb-5">
-		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit">${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
+		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 openRecruit" ${redto.raAdmission == 'N'? 'disabled' : ''}>${redto.raAdmission == 'P'? '게시하기' : '공고 내리기'}</button>
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 updateRecruit">수정하기</button>
 		 	<button type="button" class="btn btn-primary py-3 px-4 me-2 deleteRecruit">삭제하기</button>
-			<a href="recruitAll?pnum=${pidto.pnum == 0? '1' : pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
+			<a href="recruitAll?pnum=${pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
 			<a href="main" class="btn btn-dark py-3 px-4">메인으로</a>
 		 </div>
 
@@ -195,117 +206,117 @@
     
     <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-<script type="text/javascript">
-        $(document).on('click','.admissionBtn', function() {
-        	let raAdmission = "${recruit.raAdmission}";
-        	let raNum = "${recruit.raNum}";      	
-    		$.ajax({ 
-    			url: "${pageContext.request.contextPath}/admin/business/admissChange"
-    			, type: "post"
-    			, data:  {raNum : raNum, raAdmission : raAdmission}
-    			, success: function(result){
-    				if(result > 0){
-    					location.href="${pageContext.request.contextPath}/admin/business/main?pnum=${pnum}&search=${search}";
-    				}else{
-    					alert("승인에 실패 했습니다.");
-    				}
-    			}
-    			, error: function(e){
-    				alert(e +" : 오류")
-    			}
-    		}); 
-        	
-        });
-        
-        $(document).on('click','.rejectMailBtn', function() {
-        	let userEmail = "${recruit.userEmail}";
-        	let raNum = "${recruit.raNum}";      	
-    		$.ajax({ 
-    			url: "${pageContext.request.contextPath}/admin/business/rejectMail"
-    			, type: "post"
-    			, data:  {raNum : raNum, userEmail : userEmail}
-    			, success: function(result){
-    				if(result > 0){
-    					alert("메일 발송 성공 했습니다.");
-    					location.href="${pageContext.request.contextPath}/admin/business/main?pnum=${pnum}&search=${search}";
-    				}else{
-    					alert("메일 발송 실패 했습니다.");
-    				}
-    			}
-    			, error: function(e){
-    				alert(e +" : 오류")
-    			}
-    		}); 
-        	
-        });
-        
-        
-</script>
+	<script type="text/javascript">
+	        $(document).on('click','.openRecruit', function() {
+	        	let raAdmission = "${redto.raAdmission}";
+	        	let raNum = "${redto.raNum}";      	
+	    		$.ajax({ 
+	    			url: "${pageContext.request.contextPath}/business/recruit/changeAdmission"
+	    			, type: "post"
+	    			, data:  {raNum : raNum, raAdmission : raAdmission}
+	    			, success: function(result){
+	    				if(result > 0){
+	    					location.reload();
+	    				}else{
+	    					alert("승인에 실패 했습니다.");
+	    				}
+	    			}
+	    			, error: function(e){
+	    				alert(e +" : 오류")
+	    			}
+	    		}); 
+	        	
+	        });
+	        
+	        $(document).on('click','.deleteRecruit', function() {
+	        	let userEmail = "${recruit.userEmail}";
+	        	let raNum = "${recruit.raNum}";      	
+	    		$.ajax({ 
+	    			url: "${pageContext.request.contextPath}/admin/business/rejectMail"
+	    			, type: "post"
+	    			, data:  {raNum : raNum, userEmail : userEmail}
+	    			, success: function(result){
+	    				if(result > 0){
+	    					alert("메일 발송 성공 했습니다.");
+	    					location.href="${pageContext.request.contextPath}/admin/business/main?pnum=${pnum}&search=${search}";
+	    				}else{
+	    					alert("메일 발송 실패 했습니다.");
+	    				}
+	    			}
+	    			, error: function(e){
+	    				alert(e +" : 오류")
+	    			}
+	    		}); 
+	        	
+	        });
+	        
+	        
+	</script>
 
-<script>
-	//회원정보의 주소로 페이지 로딩하기
-	var roadAddress = "${recruit.addressRoad}";
-	var jibunAddress = "${recruit.addressJibun}";
-	var bsAddress = (roadAddress) ? roadAddress : jibunAddress;
-	   
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
-    //지도를 미리 생성
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-    
- 	// 주소-좌표 변환 객체를 생성합니다
-    var geocoder = new kakao.maps.services.Geocoder();
-    // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(bsAddress, function(result, status) {
-        // 정상적으로 검색이 완료됐으면 
-         if (status === kakao.maps.services.Status.OK) {
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: coords
-            });
-            // 인포윈도우로 장소에 대한 설명을 표시합니다
-            var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
-            });
-            infowindow.open(map, marker);
-            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-            map.setCenter(coords);
-        } 
-    });    
- 	// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
-    function setMapType(maptype) { 
-        var roadmapControl = document.getElementById('btnRoadmap');
-        var skyviewControl = document.getElementById('btnSkyview'); 
-        if (maptype === 'roadmap') {
-            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
-            roadmapControl.className = 'selected_btn';
-            skyviewControl.className = 'btn';
-        } else {
-            map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
-            skyviewControl.className = 'selected_btn';
-            roadmapControl.className = 'btn';
-        }
-    }
-    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-    function zoomIn() {
-        map.setLevel(map.getLevel() - 1);
-    }
-    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-    function zoomOut() {
-        map.setLevel(map.getLevel() + 1);
-    }
-    
-    //마커를 미리 생성
-    var marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
-</script>
+	<script>
+		//회원정보의 주소로 페이지 로딩하기
+		var roadAddress = "${recruit.addressRoad}";
+		var jibunAddress = "${recruit.addressJibun}";
+		var bsAddress = (roadAddress) ? roadAddress : jibunAddress;
+		   
+	    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+	        mapOption = {
+	            center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+	            level: 3 // 지도의 확대 레벨
+	        };
+	    //지도를 미리 생성
+	    var map = new kakao.maps.Map(mapContainer, mapOption);
+	    
+	 	// 주소-좌표 변환 객체를 생성합니다
+	    var geocoder = new kakao.maps.services.Geocoder();
+	    // 주소로 좌표를 검색합니다
+	    geocoder.addressSearch(bsAddress, function(result, status) {
+	        // 정상적으로 검색이 완료됐으면 
+	         if (status === kakao.maps.services.Status.OK) {
+	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	            // 결과값으로 받은 위치를 마커로 표시합니다
+	            var marker = new kakao.maps.Marker({
+	                map: map,
+	                position: coords
+	            });
+	            // 인포윈도우로 장소에 대한 설명을 표시합니다
+	            var infowindow = new kakao.maps.InfoWindow({
+	                content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
+	            });
+	            infowindow.open(map, marker);
+	            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	            map.setCenter(coords);
+	        } 
+	    });    
+	 	// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+	    function setMapType(maptype) { 
+	        var roadmapControl = document.getElementById('btnRoadmap');
+	        var skyviewControl = document.getElementById('btnSkyview'); 
+	        if (maptype === 'roadmap') {
+	            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+	            roadmapControl.className = 'selected_btn';
+	            skyviewControl.className = 'btn';
+	        } else {
+	            map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+	            skyviewControl.className = 'selected_btn';
+	            roadmapControl.className = 'btn';
+	        }
+	    }
+	    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+	    function zoomIn() {
+	        map.setLevel(map.getLevel() - 1);
+	    }
+	    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+	    function zoomOut() {
+	        map.setLevel(map.getLevel() + 1);
+	    }
+	    
+	    //마커를 미리 생성
+	    var marker = new kakao.maps.Marker({
+	        position: new kakao.maps.LatLng(37.537187, 127.005476),
+	        map: map
+	    });
+	</script>
 
 </body>
 

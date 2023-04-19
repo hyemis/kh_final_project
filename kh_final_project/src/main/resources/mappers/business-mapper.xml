@@ -75,13 +75,13 @@
 	<!-- 채용공고 작성 -->
 	<insert id="insertRecruit">
 		insert INTO RECRUIT_REGIST
-			(RA_NUM, COMPANY_NAME, RECRUIT_TYPE,USER_EDUCATION, USER_ID
+			(RA_NUM, COMPANY_NAME, RECRUIT_TYPE,CONDITION_TYPE, USER_EDUCATION, USER_ID
 					, SALARY, MIN_SALARY, MAX_SALARY
 					, REGIST_DATE, CLOSE_DATE
 					, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE
 					, RA_TITLE, RA_CONTENT
 					, RA_EXTRA_DOCUMENT,RA_PROGRESS, RA_ADMISSION) 
-			VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName}, #{recruitType}, #{userEducation}, #{userId}
+			VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName}, #{recruitType}, #{conditionType},  #{userEducation}, #{userId}
 					, #{salary}, #{minSalary}, #{maxSalary}
  			        , #{registDate}, #{closeDate}
  			        , #{career}, #{holidayType}, #{empTypeCode}

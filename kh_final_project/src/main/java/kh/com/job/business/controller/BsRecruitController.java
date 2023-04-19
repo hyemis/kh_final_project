@@ -217,6 +217,56 @@ public class BsRecruitController {
 
 		BsRecruitDetailDto redto = abs.viewDetail(raNum);
 		
+		if(redto.getConditionType() != null) {
+			String conditionType = redto.getConditionType();
+			//join으로 합친거 자르기위한 거
+			String[] conditionList = conditionType.split(",");
+			List<String> ctList = Arrays.asList(conditionList);			
+			mv.addObject("ctList", ctList);
+		}
+		
+		//우대조건
+		mv.addObject("SClist", service.getCateList("SC"));
+		
+		
+		mv.addObject("pidto", pidto);
+		mv.addObject("redto", redto);
+		
+		return mv;
+	}
+	
+	//공고 수정
+	@GetMapping("/update")
+	public ModelAndView updateRecruit(ModelAndView mv
+			,PagingInfoDto pidto
+			, @RequestParam(name = "id", required = false) String raNum
+			,Principal principal
+			) {
+		
+		BsRecruitDetailDto redto = abs.viewDetail(raNum);
+		
+		//직업 코드 타입 ('JN')가져오기
+		mv.addObject("JNlist", service.getCateList("JN"));
+		//경력선택
+		mv.addObject("CAlist", service.getCateList("CA"));
+		//학력선택
+		mv.addObject("EDlist", service.getCateList("ED"));
+		//우대조건
+		mv.addObject("SClist", service.getCateList("SC"));
+		//고용형태
+		mv.addObject("ETlist", service.getCateList("ET"));
+		//상세근무형태
+		mv.addObject("HTlist", service.getCateList("HT"));
+		
+		if(redto.getConditionType() != null) {
+			String conditionType = redto.getConditionType();
+			//join으로 합친거 자르기위한 거
+			String[] conditionList = conditionType.split(",");
+			List<String> ctList = Arrays.asList(conditionList);			
+			mv.addObject("ctList", ctList);
+		}
+		
+		
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
