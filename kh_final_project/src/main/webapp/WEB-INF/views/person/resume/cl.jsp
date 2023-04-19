@@ -366,9 +366,7 @@
 		  }
 
 		  // 새로운 페이지 열기
-		  window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(',')));
-
-
+		  window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(','))); 
 
 		  // clNo ajax 로 보내서 끼인 테이블 insert 
 		  $.ajax({
@@ -379,6 +377,8 @@
 		      if(result > 0) {
 		        alert('작성 중인 이력서에 자기소개서가 등록되었습니다.');
 		        location.reload();
+		        
+		        
 		      } else {
 		        alert('작성 중인 이력서에 자기소개서 등록에 실패했습니다.');
 		      }
