@@ -235,18 +235,19 @@
 	        });
 	        
 	        $(document).on('click','.deleteRecruit', function() {
-	        	let userEmail = "${recruit.userEmail}";
-	        	let raNum = "${recruit.raNum}";      	
+	        	let userId = "${redto.userId}";
+	        	let raNum = "${redto.raNum}";      	
 	    		$.ajax({ 
-	    			url: "${pageContext.request.contextPath}/admin/business/rejectMail"
+	    			url: "${pageContext.request.contextPath}/business/recruit/deleteRecruit"
 	    			, type: "post"
-	    			, data:  {raNum : raNum, userEmail : userEmail}
+	    			, data:  {raNum : raNum, userId : userId}
 	    			, success: function(result){
 	    				if(result > 0){
-	    					alert("메일 발송 성공 했습니다.");
-	    					location.href="${pageContext.request.contextPath}/admin/business/main?pnum=${pnum}&search=${search}";
+	    					location.href="${pageContext.request.contextPath}/business/recruit/main?pnum=${pidto.pnum}&search=${pidto.search}";
+	    				}else if(result == -2){
+	    					alert("아이디 정보가 맞지 않습니다.");
 	    				}else{
-	    					alert("메일 발송 실패 했습니다.");
+	    					alert("삭제에 실패 했습니다.");
 	    				}
 	    			}
 	    			, error: function(e){
@@ -333,6 +334,9 @@
     		height:'400px'
 	   		, width:'100%'
     	}, toolbar: []
+    }).then( newEditor => {
+		 editor = newEditor;
+    	editor.enableReadOnlyMode( '#raContent' );
     })
     .catch( error => {
         console.error( error );

@@ -409,17 +409,13 @@
 	</select>
 
 	<select id="selectListGrad" resultType="gdto">
-		SELECT rg.GRAD_EDU_NO AS
-		gradEduNo, rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as gradCategory,
+		SELECT rg.GRAD_EDU_NO AS gradEduNo, 
+		rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as gradCategory,
 		rg.GRAD_NAME AS gradName, rg.GRAD_DATE AS gradDate,
-		rg.GRAD_MAJOR AS
-		gradMajor, rg.GRAD_POINT as gradPoint
+		rg.GRAD_MAJOR AS gradMajor, rg.GRAD_POINT as gradPoint
 		FROM RESUME_GRADSCHOOL rg
-		INNER
-		JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
-		INNER
-		JOIN
-		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		INNER JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
+		INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY rg.GRAD_DATE DESC
 	</select>

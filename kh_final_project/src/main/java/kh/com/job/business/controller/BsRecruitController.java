@@ -343,6 +343,21 @@ public class BsRecruitController {
 		return mv;
 	}
 	
+	//채용 공고 삭제
+	@PostMapping("/deleteRecruit")
+	@ResponseBody
+	public int deleteRecruit(BsRecruitDto dto
+			, Principal principal
+			){
+		int result = -1;
+		if(principal.getName().equals(dto.getUserId())) {
+			result = service.deleteRecruit(dto);
+		}else {
+			result = -2;
+		}
+		
+		return result;
+	}
 
 
 }
