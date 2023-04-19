@@ -1,6 +1,8 @@
 package kh.com.job.admin.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
+import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
 
@@ -23,6 +26,9 @@ public class AdBusinessController {
 	
 	@Autowired
 	private AdBusinessService service;
+	
+	@Autowired
+	private BsRecruitService bsrService;
 	
 	@GetMapping("/main")
 	public ModelAndView adminRecruit(ModelAndView mv
@@ -52,6 +58,15 @@ public class AdBusinessController {
 		
 		//받은 게시글 정보로 게시글 상세 정보 조회
 		BsRecruitDetailDto redto = service.viewDetail(raNum);
+		
+		if(redto.getConditionType() != null) {
+			String conditionType = redto.getConditionType();
+			//join으로 합친거 자르기위한 거
+			String[] conditionList = conditionType.split(",");
+			List<String> ctList = Arrays.asList(conditionList);			
+			mv.addObject("ctList", ctList);
+		}
+		mv.addObject("SClist", bsrService.getCateList("SC"));
 		
 		mv.addObject("pnum", pnum);
 		mv.addObject("search", search);

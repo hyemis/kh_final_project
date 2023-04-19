@@ -52,8 +52,8 @@
 			alias="budto" />
 		<typeAlias type="kh.com.job.business.model.dto.BsRecruitDto"
 			alias="brdto" />
-		<typeAlias type="kh.com.job.business.model.dto.InterviewDto"
-			alias="indto" />
+	<!-- 	<typeAlias type="kh.com.job.business.model.dto.InterviewDto"
+			alias="indto" /> -->
 			
 			
 	
