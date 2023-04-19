@@ -93,11 +93,11 @@
 							<h3 class="mb-3">자기소개서</h3>
 						</div>
 					</div>
-					 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-								<button type="button" class="btn btn-outline-dark" id="deleteInfo">
-								  <i class="fa fa-minus"></i>
-								</button>
-								</div>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+						<button type="button" class="btn btn-outline-dark" id="deleteInfo">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
 
 					<!-- 성장과정 내용 -->
 					<div class="bg-gray p-4 mb-3">
@@ -155,6 +155,10 @@
 											value="${cl.clFile}"> <span class="input-group-btn">
 											<button type="button" id="deleteFile" class="btn btn-primary">기존
 												파일 삭제</button>
+											<button class="btn btn-primary" onclick="clFileCheck()">자기소개서 
+												확인하기</button>
+											<button class="btn btn-primary" onclick="clFileDown()">자기소개서
+												다운하기</button> 
 										</span>
 									</div>
 								</div>
@@ -282,6 +286,16 @@
 	    
 	    
 	  });
+		
+		// 파일 viewer 로 
+		function clFileCheck() {
+			  window.open("https://drive.google.com/viewerng/viewer?embedded=true&url=${cl.clFile}");
+			}
+			
+		// 파일 다운 
+			function clFileDown() {
+				 window.location.href = "${cl.clFile}";
+			}
 			
 		</script>
 </body>

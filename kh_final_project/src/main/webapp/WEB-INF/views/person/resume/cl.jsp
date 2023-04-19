@@ -353,20 +353,16 @@
 		})
 	}
 	
-	
 	document.getElementById('selectClBtn').addEventListener('click', function() {
 		  // 체크된 체크박스의 clNo 값을 가져옴
 		  var checkedBoxes = document.querySelectorAll('#clList input[type="checkbox"]:checked');
 		  var clNoList = [];
 		  var clNo;
-	
+
 		  for (var i = 0; i < checkedBoxes.length; i++) {
-		   clNo = checkedBoxes[i].parentNode.parentNode.querySelector('input[name="clNo"]').value;
+		    clNo = checkedBoxes[i].parentNode.parentNode.querySelector('input[name="clNo"]').value;
 		    clNoList.push(clNo);
 		  }
-
-		  // 새로운 페이지 열기
-		  window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(','))); 
 
 		  // clNo ajax 로 보내서 끼인 테이블 insert 
 		  $.ajax({
@@ -375,10 +371,12 @@
 		    data: { clNo: parseInt(clNo) },
 		    success: function(result) {
 		      if(result > 0) {
+		        // 데이터베이스 삽입 작업이 성공한 경우에만 새 페이지 열기
+		        window.open('/job/person/resume/detail/' + encodeURIComponent(clNoList.join(','))); 
+
+		        // alert안떠... 
 		        alert('작성 중인 이력서에 자기소개서가 등록되었습니다.');
-		        location.reload();
-		        
-		        
+		        location.reload();        
 		      } else {
 		        alert('작성 중인 이력서에 자기소개서 등록에 실패했습니다.');
 		      }

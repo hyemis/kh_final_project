@@ -145,14 +145,25 @@ public class PsResumeController {
 			throws Exception {
 		String userId = principal.getName();
 
-		Map<String, Object> infoMap = new HashMap<>();
-		infoMap.put("userId", userId);
-		infoMap.put("resumeNo", resumeNo);
 
+		// user 정보 출력 
 		PsUserDto result = pservice.selectOne(userId);
 		mv.addObject("userinfo", result);
 
+		// 이력서 정보 출력 
+		Map<String, Object> infoMap = new HashMap<>();
+		infoMap.put("userId", userId);
+		infoMap.put("resumeNo", resumeNo);
 		PsResumeDto dto = rservice.rselectOne(infoMap);
+		
+		// 학력사항 정보 출력 
+		
+		// 경력사항 정보 출력 
+		
+		// 자격증 정보 출력
+		
+		// 자기소개서 정보 출력
+		
 		mv.addObject("resume", dto);
 		mv.setViewName("person/resume/read");
 		return mv;

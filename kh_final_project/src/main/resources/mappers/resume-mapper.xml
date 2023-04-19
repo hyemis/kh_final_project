@@ -176,12 +176,8 @@
 
 
 	<select id="selectOneCl" resultType="cldto">
-		select CL_NO,CL_FILE,
-		CL_GROWTH,
-		select CL_FILE, CL_GROWTH,
-		CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL where
-		CL_NO =
-		#{clNo}
+		select CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL 
+		where CL_NO = #{clNo}
 	</select>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
@@ -412,7 +408,7 @@
 		u.UNI_DATE DESC
 	</select>
 
-	<select id="selectListCerti" resultType="certidto">
+<!-- 	<select id="selectListCerti" resultType="certidto">
 		SELECT rc.CERTI_NO AS certiNo, rc.CERTI_NAME AS certiName, rc.CERTI_DATE AS certiDate,
 		rc.CERTI_PUB AS certiPub
 		FROM RESUME_CERTI rc
@@ -420,6 +416,7 @@
 		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY rc.CERTI_DATE DESC
+		</select> -->
 
  	<select id="selectListGrad" resultType="gdto">
 		SELECT 
@@ -440,6 +437,9 @@
 			rg.GRAD_EDU_NO, rg.GRAD_ACT, rg.GRAD_CATEGORY, rg.GRAD_NAME, rg.GRAD_DATE, rg.GRAD_MAJOR, rg.GRAD_POINT
 		ORDER BY 
 			rg.GRAD_DATE DESC
+	</select>
+	
+<!-- 	
 	<select id="selectListGrad" resultType="gdto">
 		SELECT rg.GRAD_EDU_NO AS gradEduNo, 
 		rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as gradCategory,
@@ -450,7 +450,7 @@
 		INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY rg.GRAD_DATE DESC
-	</select>
+	</select> -->
 	
 
 
@@ -482,37 +482,33 @@
 			rc.CERTI_NO AS certiNo,
 			rc.CERTI_NAME AS certiName,
 			rc.CERTI_PUB AS certiPub,
-			rc.CERTI_DATE AS certiDate,
+			rc.CERTI_DATE AS certiDate
 		FROM 
 			RESUME_CERTI RC
-			INNER JOIN RESUME_CERTI_INFO i ON rc.CAR_NO = i.CAR_NO
+			INNER JOIN RESUME_CERTI_INFO i ON rc.CERTI_NO = i.CERTI_NO
 			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
 		WHERE 
 			u.USER_ID = #{userId}
 		GROUP BY 
 			rc.CERTI_NO, rc.CERTI_NAME, rc.CERTI_PUB, rc.CERTI_DATE
 		ORDER BY 
-			rc.rc.CERTI_DATE DESC
+			rc.CERTI_DATE DESC
 	</select>
 
 
 	<select id="selectListCl" resultType="cldto">
-		SELECT cl.CL_NO AS clNo,
-		cl.CL_FILE AS clFile, cl.CL_GROWTH AS clGrowth,
-		cl.CL_MOTIVE AS
-		clMotive, cl.CL_ADV AS clAdv, cl.CL_ASP AS clAsp
-		FROM
-		RESUME_CL cl
-		INNER
-		JOIN
-		RESUME_CL_INFO i on cl.CL_NO = i.CL_NO
-		INNER JOIN
-		USER_RESUME u on
-		i.RESUME_NO = u.RESUME_NO
+		SELECT 
+			cl.CL_NO AS clNo,
+			cl.CL_FILE AS clFile, 
+			cl.CL_GROWTH AS clGrowth,
+			cl.CL_MOTIVE AS clMotive, 
+			cl.CL_ADV AS clAdv, 
+			cl.CL_ASP AS clAsp
+		FROM RESUME_CL cl
+		INNER JOIN RESUME_CL_INFO i on cl.CL_NO = i.CL_NO
+		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
-		ORDER BY
-		cl.CL_NO
-		DESC
+		ORDER BY cl.CL_NO DESC
 	</select>
 
 	<update id="deleteClFile" parameterType="String">
