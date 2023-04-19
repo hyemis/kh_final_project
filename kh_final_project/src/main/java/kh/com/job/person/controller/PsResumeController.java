@@ -315,7 +315,7 @@ public class PsResumeController {
 				InfoNo.put("userId", principal.getName());
 
 				// 낀테이블 insert
-				rservice.insertUniInfo(InfoNo);
+				rservice.insertGradInfo(InfoNo);
 				rttr.addFlashAttribute("msg", "대학원 학력사항이 입력되었습니다.");
 			} else {
 				rttr.addFlashAttribute("msg", "입력에 실패하였습니다.");

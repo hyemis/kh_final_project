@@ -176,7 +176,7 @@
 
 
 	<select id="selectOneCl" resultType="cldto">
-		select CL_NO,CL_FILE, CL_GROWTH,
+		select CL_FILE, CL_GROWTH,
 		CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL where
 		CL_NO = #{clNo}
 	</select>
@@ -227,6 +227,10 @@
 		USER_ID =
 		#{userId})
 	</delete>
+
+
+
+
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
 		INSERT INTO
@@ -285,15 +289,6 @@
 		#{clNo} FROM USER_RESUME WHERE USER_ID =
 		#{userId}
 	</insert>
-	
-	<delete id="deleteInfoCl" parameterType="clinfodto">
-		DELETE FROM
-		RESUME_CL_INFO
-		WHERE CL_NO = #{clNo}
-		AND RESUME_NO = (SELECT
-		NVL(MAX(RESUME_NO), 1) FROM USER_RESUME WHERE
-		USER_ID = #{userId})
-	</delete>
 
 
 
@@ -384,77 +379,90 @@
 		ORDER BY h.high_date DESC
 	</select>
 
-	<!-- <select id="selectListUni" resultType="udto"> SELECT u.UNI_EDU_NO AS 
-		uniEduNo, u.UNI_ACT AS uniAct, u.UNI_CATEGORY AS uniCategory, u.UNI_NAME 
-		AS uniName, u.UNI_DATE AS uniDate, u.UNI_MAJOR AS uniMajor, u.UNI_POINT AS 
-		uniPoint FROM RESUME_UNIVERSITY u INNER JOIN RESUME_UNI_INFO i ON u.UNI_EDU_NO 
-		= i.UNI_EDU_NO INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO WHERE 
-		u.USER_ID = #{userId} ORDER BY u.UNI_DATE DESC </select> -->
-
-	<select id="selectListUni" resultType="udto">
-		SELECT
-		UNI_EDU_NO, UNI_ACT,
-		UNI_CATEGORY, UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT FROM
-		RESUME_UNIVERSITY
-		WHERE UNI_EDU_NO IN(
-		SELECT UNI_EDU_NO
-		FROM
-		RESUME_UNI_INFO
-		WHERE RESUME_NO IN (
-		SELECT RESUME_NO
-		FROM USER_RESUME
-		WHERE USER_ID = #{userId}
-		)
-		)
-	</select>
-
-	<select id="selectListGrad" resultType="gdto">
-		SELECT rg.GRAD_EDU_NO AS
-		gradEduNo, rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as gradCategory,
-		rg.GRAD_NAME AS gradName, rg.GRAD_DATE AS gradDate,
-		rg.GRAD_MAJOR AS
-		gradMajor, rg.GRAD_POINT as gradPoint
-		FROM RESUME_GRADSCHOOL rg
-		INNER
-		JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
-		INNER
-		JOIN
-		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{userId}
-		ORDER BY rg.GRAD_DATE DESC
-	</select>
-
-	<select id="selectListCareer" resultType="careerdto">
-		SELECT rc.CAR_NO AS
-		carNo, rc.CAR_NAME
-		AS carName, rc.CAR_DATE AS carDate, rc.CAR_POSITION
-		AS carPosition, rc.CAR_DEPT AS carDept,
-		rc.CAR_RESP AS carResp,
-		rc.CAR_SALARY AS carSalary
-		FROM RESUME_CAREER rc
+<select id="selectListUni" resultType="udto">
+		SELECT 
+			u.UNI_EDU_NO AS uniEduNo, 
+			u.UNI_ACT AS uniAct, 
+			u.UNI_CATEGORY AS uniCategory,
+			u.UNI_NAME AS uniName, 
+			u.UNI_DATE AS uniDate, 
+			u.UNI_MAJOR AS uniMajor,
+			u.UNI_POINT AS uniPoint
+		FROM 
+			RESUME_UNIVERSITY u
 		INNER JOIN
-		RESUME_CAR_INFO i on rc.CAR_NO = i.CAR_NO
-		INNER JOIN USER_RESUME u on
-		i.RESUME_NO = u.RESUME_NO
+		RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
+		INNER JOIN
+		USER_RESUME
+		u ON i.RESUME_NO = u.RESUME_NO
 		WHERE u.USER_ID = #{userId}
 		ORDER BY
-		rc.CAR_DATE DESC
+		u.UNI_DATE DESC
 	</select>
 
-	<select id="selectListCerti" resultType="certidto">
-		SELECT
-		CERTI_NO,CERTI_NAME,CERTI_PUB, CERTI_DATE
-		FROM RESUME_CERTI
+
+ 	<select id="selectListGrad" resultType="gdto">
+		SELECT 
+			rg.GRAD_EDU_NO AS gradEduNo, 
+			rg.GRAD_ACT as gradAct, 
+			rg.GRAD_CATEGORY as gradCategory,
+			rg.GRAD_NAME AS gradName, 
+			rg.GRAD_DATE AS gradDate,
+			rg.GRAD_MAJOR AS gradMajor, 
+			rg.GRAD_POINT as gradPoint
+		FROM 
+			RESUME_GRADSCHOOL rg
+			INNER JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
+			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
 		WHERE
-		CERTI_NO IN (
-		SELECT CERTI_NO
-		FROM RESUME_CERTI_INFO
-		WHERE RESUME_NO IN (
-		SELECT RESUME_NO
-		FROM USER_RESUME
-		WHERE USER_ID = #{userId}
-		)
-		)
+			u.USER_ID = #{userId}
+		GROUP BY 
+			rg.GRAD_EDU_NO, rg.GRAD_ACT, rg.GRAD_CATEGORY, rg.GRAD_NAME, rg.GRAD_DATE, rg.GRAD_MAJOR, rg.GRAD_POINT
+		ORDER BY 
+			rg.GRAD_DATE DESC
+	</select>
+	
+
+
+	<select id="selectListCareer" resultType="careerdto">
+		SELECT
+			rc.CAR_NO AS carNo,
+			rc.CAR_NAME AS carName,
+			rc.CAR_DATE AS carDate,
+			rc.CAR_POSITION AS carPosition,
+			rc.CAR_DEPT AS carDept,
+			rc.CAR_RESP AS carResp,
+			rc.CAR_SALARY AS carSalary
+		FROM 
+			RESUME_CAREER rc
+			INNER JOIN RESUME_CAR_INFO i ON rc.CAR_NO = i.CAR_NO
+			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE 
+			u.USER_ID = #{userId}
+		GROUP BY 
+			rc.CAR_NO, rc.CAR_NAME, rc.CAR_DATE, rc.CAR_POSITION, rc.CAR_DEPT, rc.CAR_RESP, rc.CAR_SALARY
+		ORDER BY 
+			rc.CAR_DATE DESC
+	</select>
+
+
+<!-- 수정중 -->
+	<select id="selectListCerti" resultType="certidto">
+			SELECT
+			rc.CERTI_NO AS certiNo,
+			rc.CERTI_NAME AS certiName,
+			rc.CERTI_PUB AS certiPub,
+			rc.CERTI_DATE AS certiDate,
+		FROM 
+			RESUME_CERTI RC
+			INNER JOIN RESUME_CERTI_INFO i ON rc.CAR_NO = i.CAR_NO
+			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE 
+			u.USER_ID = #{userId}
+		GROUP BY 
+			rc.CERTI_NO, rc.CERTI_NAME, rc.CERTI_PUB, rc.CERTI_DATE
+		ORDER BY 
+			rc.rc.CERTI_DATE DESC
 	</select>
 
 
