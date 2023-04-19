@@ -375,19 +375,25 @@
 	</select>
 
 	<select id="selectListHigh" resultType="hdto">
-		SELECT h.high_Edu_no AS
-		highEduNo, h.ged AS ged, h.high_name AS highName, h.high_date AS
-		highDate, h.high_major AS highMajor
-		FROM RESUME_HIGHSCHOOL h
-		INNER JOIN
-		RESUME_HIGH_INFO i ON h.high_Edu_no = i.HIGH_EDU_NO
-		INNER JOIN
-		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{USER_ID}
-		ORDER BY h.high_date DESC
+		SELECT 
+			h.HIGH_EDU_NO AS highEduNo, 
+			h.GED AS ged, 
+			h.HIGH_NAME AS highName, 
+			h.HIGH_DATE AS highDate, 
+			h.HIGH_MAJOR AS highMajor
+		FROM 
+			RESUME_HIGHSCHOOL h
+			INNER JOIN RESUME_HIGH_INFO i ON h.HIGH_EDU_NO = i.HIGH_EDU_NO
+			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE 
+			u.USER_ID = #{userId}
+		GROUP BY
+			h.HIGH_EDU_NO, h.GED, h.HIGH_NAME, h.HIGH_DATE, h.HIGH_MAJOR
+		ORDER BY 
+			h.HIGH_DATE DESC
 	</select>
 
-<select id="selectListUni" resultType="udto">
+	<select id="selectListUni" resultType="udto">
 		SELECT 
 			u.UNI_EDU_NO AS uniEduNo, 
 			u.UNI_ACT AS uniAct, 
@@ -398,25 +404,16 @@
 			u.UNI_POINT AS uniPoint
 		FROM 
 			RESUME_UNIVERSITY u
-		INNER JOIN
-		RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
-		INNER JOIN
-		USER_RESUME
-		u ON i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{userId}
+			INNER JOIN RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
+			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE 
+			u.USER_ID = #{userId}
+		GROUP BY
+			u.UNI_EDU_NO, u.UNI_ACT, u.UNI_CATEGORY, u.UNI_NAME, u.UNI_DATE, u.UNI_MAJOR, u.UNI_POINT
 		ORDER BY
-		u.UNI_DATE DESC
+			u.UNI_DATE DESC
 	</select>
 
-<!-- 	<select id="selectListCerti" resultType="certidto">
-		SELECT rc.CERTI_NO AS certiNo, rc.CERTI_NAME AS certiName, rc.CERTI_DATE AS certiDate,
-		rc.CERTI_PUB AS certiPub
-		FROM RESUME_CERTI rc
-		INNER JOIN RESUME_CERTI_INFO i on rc.CERTI_NO = i.CERTI_NO
-		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{userId}
-		ORDER BY rc.CERTI_DATE DESC
-		</select> -->
 
  	<select id="selectListGrad" resultType="gdto">
 		SELECT 
@@ -439,21 +436,7 @@
 			rg.GRAD_DATE DESC
 	</select>
 	
-<!-- 	
-	<select id="selectListGrad" resultType="gdto">
-		SELECT rg.GRAD_EDU_NO AS gradEduNo, 
-		rg.GRAD_ACT as gradAct, rg.GRAD_CATEGORY as gradCategory,
-		rg.GRAD_NAME AS gradName, rg.GRAD_DATE AS gradDate,
-		rg.GRAD_MAJOR AS gradMajor, rg.GRAD_POINT as gradPoint
-		FROM RESUME_GRADSCHOOL rg
-		INNER JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
-		INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{userId}
-		ORDER BY rg.GRAD_DATE DESC
-	</select> -->
 	
-
-
 	<select id="selectListCareer" resultType="careerdto">
 		SELECT
 			rc.CAR_NO AS carNo,
@@ -476,7 +459,6 @@
 	</select>
 
 
-<!-- 수정중 -->
 	<select id="selectListCerti" resultType="certidto">
 			SELECT
 			rc.CERTI_NO AS certiNo,
