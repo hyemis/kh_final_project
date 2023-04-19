@@ -304,7 +304,7 @@ function removeForm(form) {
 		
 // 모달창에서 정보 불러와서 출력하기
 let saveButton = document.getElementById("selectCarBtn");
-// event 모달창에서 불러와
+// event 모달창에서 불러오기
 saveButton.addEventListener("click", function() {
   // 모달창에서 체크된 경력 데이터를 가져와서 form에 추가
   let selectedCareerList = document.querySelectorAll('input[name="selectedCareer"]:checked');
@@ -395,11 +395,17 @@ saveButton.addEventListener("click", function() {
 		  		    
 		  			// new form delete 버튼 -
 		  			let deleteBtn = newForm.querySelector("#deleteInfo");
-		  			deleteBtn.addEventListener("click", deleteClickHandler);
+					deleteBtn.addEventListener("click", function() {
+					  deleteClickHandler(formContainer, this, carNo);
+					});
+		  			
+		  			
 		  		    
 		  		    // new form 수정 버튼 
 		  		    let updateBtn = newForm.querySelector("#update");
-		  		    updateBtn.addEventListener("click", updateClickHandler);
+		  			updateBtn.addEventListener("click", function() {
+		  			updateClickHandler(newForm, carNo);
+		  			});
 	  		      } else {
 	  		        //alert('작성 중인 이력서에서 해당 경력 입력에 실패했습니다. ');
 	  		      }
@@ -409,20 +415,12 @@ saveButton.addEventListener("click", function() {
 	  	alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
 	    
     }			
-
-
-
-
-
-
-});  // 
+});  
 
 // new form delete 버튼 - 
-function deleteClickHandler() {
-	const formToRemove = this.closest("form");
-	/* 	const carNoInput = formToRemove.querySelector("input[name='carNo']");
-		const carNo = carNoInput ? carNoInput.value : null; */
-	  var carNo = $("input[name='carNo']").val();
+function deleteClickHandler(formContainer, deleteBtn, carNo){
+  const formToRemove = deleteBtn.closest("form");
+							  
 	// carNo 값을 가져온 후 삭제
 	  formContainer.removeChild(formToRemove);
 
@@ -440,7 +438,7 @@ function deleteClickHandler() {
 	});
 }
 //new form 수정 버튼 
-function updateClickHandler() {
+function updateClickHandler(newForm,carNo) {
     const carNewName = newForm.elements["carNewName"].value;
     const carNewDate = newForm.elements["carNewDate"].value;
     const carNewPosition = newForm.elements["carNewPosition"].value;
