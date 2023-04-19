@@ -192,11 +192,11 @@
 	</insert>
 
 	<insert id="insertUniInfo" parameterType="uinfodto">
-	insert into
-	RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO)
-	SELECT NVL(MAX(RESUME_NO), 1),
-	#{uniEduNo} FROM USER_RESUME WHERE USER_ID =
-	#{userId}
+		insert into
+		RESUME_UNI_INFO (RESUME_NO, UNI_EDU_NO)
+		SELECT NVL(MAX(RESUME_NO), 1),
+		#{uniEduNo} FROM USER_RESUME WHERE USER_ID =
+		#{userId}
 	</insert>
 
 	<insert id="insertGradInfo" parameterType="ginfodto">
@@ -227,10 +227,10 @@
 		USER_ID =
 		#{userId})
 	</delete>
-	
-	
-	
-	
+
+
+
+
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
 		INSERT INTO
@@ -290,7 +290,7 @@
 		#{userId}
 	</insert>
 
-	
+
 
 
 
@@ -379,23 +379,14 @@
 		ORDER BY h.high_date DESC
 	</select>
 
-<!-- 	<select id="selectListUni" resultType="udto">
-		SELECT u.UNI_EDU_NO AS
-		uniEduNo, u.UNI_ACT AS uniAct, u.UNI_CATEGORY AS uniCategory,
-		u.UNI_NAME AS uniName, u.UNI_DATE AS uniDate, u.UNI_MAJOR AS uniMajor,
-		u.UNI_POINT AS uniPoint
-		FROM RESUME_UNIVERSITY u
-		INNER JOIN
-		RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
-		INNER JOIN
-		USER_RESUME
-		u ON i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{userId}
-		ORDER BY
-		u.UNI_DATE DESC
-	</select> -->
-	
-		<select id="selectListUni" resultType="udto">
+	<!-- <select id="selectListUni" resultType="udto"> SELECT u.UNI_EDU_NO AS 
+		uniEduNo, u.UNI_ACT AS uniAct, u.UNI_CATEGORY AS uniCategory, u.UNI_NAME 
+		AS uniName, u.UNI_DATE AS uniDate, u.UNI_MAJOR AS uniMajor, u.UNI_POINT AS 
+		uniPoint FROM RESUME_UNIVERSITY u INNER JOIN RESUME_UNI_INFO i ON u.UNI_EDU_NO 
+		= i.UNI_EDU_NO INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO WHERE 
+		u.USER_ID = #{userId} ORDER BY u.UNI_DATE DESC </select> -->
+
+	<select id="selectListUni" resultType="udto">
 		SELECT
 		UNI_EDU_NO, UNI_ACT,
 		UNI_CATEGORY, UNI_NAME, UNI_DATE, UNI_MAJOR, UNI_POINT FROM
@@ -481,7 +472,7 @@
 		DESC
 	</select>
 
-	<update id="deleteClFile" parameterType="_int">
+	<update id="deleteClFile" parameterType="String">
 		UPDATE RESUME_CL
 		SET CL_File = NULL
 		WHERE CL_File = #{fileName}

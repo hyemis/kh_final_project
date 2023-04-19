@@ -10,12 +10,12 @@
     </select>
     
 <!-- applicant -->
-<!-- 
-	<select id="interviewList" resultType="indto">
+
+	<!-- <select id="interviewList" resultType="">
 		SELECT * 
 		FROM INTERVIEW
 		WHERE USER_ID = #{userId}
-	</select> -->
+	</select>  -->
 	
 <!-- account -->
     

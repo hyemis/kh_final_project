@@ -81,26 +81,31 @@ public class PsResumeServieImpl implements PsResumeService {
 		}
 	
 	// google cloud file delete
-	 @Override
-	 public void delete(String fileName, String userId) {
-		 String deleteFilePath = userId + "/document/" + fileName;
-	        try {
-	            Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
-	            BlobId blobId = BlobId.of(bucketName, deleteFilePath);
-	            boolean deleted = storage.delete(blobId);
-	            if (deleted) {
-	                System.out.println("File was deleted.");
-	            } else {
-	                System.out.println("File was not found.");
-	            }
-	            
-	            //TODO: DB 에서도 삭제
-	            dao.deleteClFile(fileName);
-	            
-	        } catch (Exception e) {
-	            throw new RuntimeException("Error deleting file: " + deleteFilePath, e);
+	@Override
+	public void delete(String fileName, String userId) {
+	    String filePath = userId + "/document/" + fileName;
+	    System.out.println(filePath);
+	    try {
+	        Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+	        BlobId blobId = BlobId.of(bucketName, filePath);
+	        
+	        boolean deleted = storage.delete(blobId);
+	        
+	        if (deleted) {
+	            System.out.println("File was deleted.");
+	            filePath = "https://storage.googleapis.com/" + bucketName + "/" + filePath;
+	            System.out.println("@@@@@@@@@@@@@@@"+filePath);
+	            dao.deleteClFile(filePath);
+	        } else {
+	            System.out.println("File was not found.");
 	        }
+
+	        
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error deleting file: " + filePath, e);
 	    }
+	}
 
 	@Override
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {
