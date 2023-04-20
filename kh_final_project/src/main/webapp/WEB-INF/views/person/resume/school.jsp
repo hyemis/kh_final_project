@@ -92,116 +92,6 @@
 								<div class="col">
 									<h3 class="mb-3">학력사항</h3>
 								</div>
-								<!-- 모달 버튼 -->
-								<div class="col-auto">
-
-									<button type="button" class="btn btn-outline-dark m-2 btn-sm"
-										data-bs-toggle="modal" data-bs-target="#viewRSchool">저장된
-										정보 불러오기</button>
-								</div>
-							</div>
-
-							<!-- 모달 창 -->
-							<div class="modal fade" id="viewRSchool" tabindex="-1"
-								role="dialog" aria-labelledby="uploadModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-lg"
-									role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="uploadModalLabel">학력사항 불러오기</h5>
-
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p>최종 학력 선택 후 불러올 학력을 체크하세요.</p>
-											<!-- 버튼 그룹 -->
-											<div class="btn-group mb-3">
-												<button type="button" class="btn btn-outline-secondary"
-													onclick="showList('highSchool')">고등학교 졸업</button>
-												<button type="button" class="btn btn-outline-secondary"
-													onclick="showList('university')">대학교 졸업</button>
-												<button type="button" class="btn btn-outline-secondary"
-													onclick="showList('graduate')">대학원 졸업</button>
-											</div>
-											<!-- 버튼 클릭 내용 -->
-											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
-													<thead>
-														<tr>
-															<th>선택</th>
-															<th>졸업상태</th>
-															<th>학교명(소재지)</th>
-															<th>졸업일자</th>
-															<th>전공</th>
-															<th>학점</th>
-														</tr>
-													</thead>
-													<tbody id="highSchoolList">
-														<c:forEach var="hschool" items="${high}">
-															<tr>
-																<td><input type="checkbox" name="selectedHigh" /></td>
-																<td>${hschool.ged}</td>
-																<td>${hschool.highName}</td>
-																<td>${hschool.highDate}</td>
-																<td>${hschool.highMajor}</td>
-																<td><input type="hidden" name="highEduNo"
-																	value="${hschool.highEduNo}" required>
-																	<button type="button"
-																		class="btn btn-outline-dark deleteHigh">삭제</button></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-													<tbody id="universityList" style="display: none">
-														<c:forEach var="university" items="${uni}">
-															<tr>
-																<td><input type="checkbox" name="selectedUni" /></td>
-																<td>${university.uniAct}</td>
-																<td>${university.uniName}</td>
-																<td>${university.uniCategory}</td>
-																<td>${university.uniDate}</td>
-																<td>${university.uniMajor}</td>
-																<td>${university.uniPoint}</td>
-																<td><input type="hidden" name="uniEduNo"
-																	value="${university.uniEduNo}" required>
-																	<button type="button"
-																		class="btn btn-outline-dark deleteUni">삭제</button></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-													<tbody id="graduateList" style="display: none">
-														<c:forEach var="gschool" items="${grad}">
-															<tr>
-																<td><input type="checkbox" name="seletedGrad" /></td>
-																<td>${gschool.gradAct}</td>
-																<td>${gschool.gradName}</td>
-																<td>${gschool.gradCategory}</td>
-																<td>${gschool.gradDate}</td>
-																<td>${gschool.gradMajor}</td>
-																<td>${gschool.gradPoint}</td>
-																<td><input type="hidden" name="gradEduNo"
-																	value="${gschool.gradEduNo}" required>
-																	<button type="button"
-																		class="btn btn-outline-dark deleteGrad">삭제</button></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</div>
-
-											<div
-												class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-												<button type="button" class="btn btn-primary"
-													onclick="completeCheck()">선택완료</button>
-											</div>
-										</div>
-
-									</div>
-								</div>
-
-							</div>
-
 
 							<!--  아코디언 -->
 							<div class="accordion accordion-flush" id="accordionFlushExample">
@@ -251,7 +141,7 @@
 																		<tr>
 																			<th>선택</th>
 																			<th>졸업상태</th>
-																			<th>학교명(소재지)</th>
+																			<th>학교명</th>
 																			<th>졸업일자</th>
 																			<th>전공</th>
 																			<th>학점</th>
@@ -260,6 +150,7 @@
 																	<tbody id="highSchoolList">
 																		<c:forEach var="hschool" items="${high}">
 																			<tr>
+																			
 																				<td><input type="checkbox" name="selectedHigh" /></td>
 																				<td><c:choose>
 																						<c:when test="${hschool.ged == 'Y'}">
@@ -392,7 +283,7 @@
 																			<th>선택</th>
 																			<th>졸업상태</th>
 																			<th>대학카테고리</th>
-																			<th>학교명(소재지)</th>
+																			<th>학교명</th>
 																			<th>졸업일자</th>
 																			<th>전공</th>
 																			<th>학점</th>
@@ -565,7 +456,7 @@
 																			<th>선택</th>
 																			<th>졸업상태</th>
 																			<th>대학원카테고리</th>
-																			<th>학교명(소재지)</th>
+																			<th>학교명</th>
 																			<th>졸업일자</th>
 																			<th>전공</th>
 																			<th>학점</th>
@@ -575,7 +466,7 @@
 																		<c:forEach var="gschool" items="${grad}">
 																			<tr>
 																			
-																				<td><input type="checkbox" name="seletedGrad" /></td>
+																				<td><input type="checkbox" name="selectedGrad" /></td>
 
 																				<td data-selectedvalue="${gschool.gradAct}"><c:choose>
 																						<c:when test="${gschool.gradAct == 'Y'}">
@@ -590,7 +481,7 @@
 																					</c:choose> ${gradActName} <!-- gradActActName 변수 출력 --></td>
 
 																				
-																				<td>
+																				<td data-selectedvalue="${gschool.gradCategory}">
 																				<c:set var="gradCategoryName"
 																					value="${gschool.gradCategory eq 'M' ? '석사' : '박사'}" />
 																				${gradCategoryName}</td>
@@ -714,40 +605,14 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<script>
-		// alret
-		var msg = "${msg}";
-		if (msg) {
-			alert(msg);
-		}
+	
+	// alret
+	var msg = "${msg}";
+	if (msg) {
+		alert(msg);
+	}
 
-/* 		// 체크박스 하나만 체크 
-		function checkOnly(checkbox) {
-			var checkboxes = document
-					.querySelectorAll('#highSchoolList input[type="checkbox"], #universityList input[type="checkbox"], #graduateList input[type="checkbox"]');
-			for (var i = 0; i < checkboxes.length; i++) {
-				if (checkboxes[i] !== checkbox && checkboxes[i].checked) {
-					checkboxes[i].checked = false;
-				}
-			}
-		} */
 
-/* 		// 선택 완료 버튼
-		function completeCheck() {
-			var checkboxes = document
-					.querySelectorAll('input[type=checkbox]:checked');
-			if (checkboxes.length > 0) {
-				// 체크박스가 하나 이상 선택된 경우 모달 창 닫기
-				$('#viewRSchool').modal('hide');
-
-				// 모달 창이 닫히면 체크박스 초기화
-				var allCheckboxes = document
-						.querySelectorAll('input[type=checkbox]');
-				for (var i = 0; i < allCheckboxes.length; i++) {
-					allCheckboxes[i].checked = false;
-				}
-
-			}
-		} */
 			
 	// 선택 완료 버튼 클릭 시
 	function completeCheck() {
@@ -811,23 +676,22 @@
 		
 
 
-		//  대입검정고시 체크박스 Y/N 체크
-		function fn_checkY() {
-			var ged = $("#checkY").prop("checked") ? "Y" : "N";
-			$("#ged").val(ged);
-		}
-		
-		
-		
-		function showList(type) {
-			// 모든 표 숨기기
-			document.getElementById("highSchoolList").style.display = "none";
-			document.getElementById("universityList").style.display = "none";
-			document.getElementById("graduateList").style.display = "none";
+//  대입검정고시 체크박스 Y/N 체크
+function fn_checkY() {
+	var ged = $("#checkY").prop("checked") ? "Y" : "N";
+	$("#ged").val(ged);
+}
 
-			// 해당 타입에 맞는 표 보이기
-			document.getElementById(type + "List").style.display = "table-row-group";
-		}
+
+// 모든 표 숨기기
+function showList(type) {
+	document.getElementById("highSchoolList").style.display = "none";
+	document.getElementById("universityList").style.display = "none";
+	document.getElementById("graduateList").style.display = "none";
+
+	// 해당 타입에 맞는 표 보이기
+	document.getElementById(type + "List").style.display = "table-row-group";
+}
 		
 		
 // 고등학교 입력폼 추가
@@ -940,9 +804,491 @@ $(document).ready(function() {
 		$('input[name=selectedGrad]').prop('checked', false);
 	});
 });
+
+
+//고등학교 DB 낀테이블 insert - success - ok -> new form create - btn event handler
+//고등학교 - 모달창에서 정보 불러와서 출력하기
+let highSaveButton = document.getElementById("selectHighBtn");
+//event
+highSaveButton.addEventListener("click", function() {
+	// 체크된 데이터를 가져와서 form에 추가
+	let selectedHighList = document.querySelectorAll('input[name="selectedHigh]:checked');
+
+	let highNewFormHTML =	`
+		<form name="rHSchool" action="rHSchool" method="post">
+		 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+			<button type="button" class="btn btn-outline-dark" id="deleteHighInfo">
+			  <i class="fa fa-minus"></i>
+			</button>
+	 	</div>
 		
+	 	<div class="row mb-3">
+			<label for="ged" class="col-sm-2 col-form-label">대입 검정고시</label>
+			<div class="col-sm-10">
+				<div class="row mb-3">
+					<div class="col-sm-10 offset-sm-2">
+						<input type="checkbox" name="highNewGed">대입 검정고시</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label for="highNewName" class="col-sm-2 col-form-label">고등학교명</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="highNewName">
+			</div>
+		</div>
 		
+		<div class="row mb-3">
+			<label for="highNewDate" class="col-sm-2 col-form-label">고등학교 졸업일자</label>
+			<div class="col-sm-10">
+				<input type="Date" class="form-control" name="highNewDate">
+			</div>
+		</div>
 		
+		<div class="row mb-3">
+			<label for="highNewMajor" class="col-sm-2 col-form-label">고등학교	전공계열</label>
+			<div class="col-sm-10">
+				<select class="form-select" name="highNewMajor">
+					<option value="0">전공계열</option>
+					<option value="이과">이과</option>
+					<option value="문과">문과</option>
+					<option value="예체능">예체능</option>
+				</select>
+			</div>
+		</div>
+	
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+			<button type="button" id="highUpdate" class="btn btn-primary">수정</button>
+		</div>
+		<hr>
+	</form>
+	`;
+	
+	 
+	let highNewForm = null;
+ 
+ // 모달창에서 체크된 경력 데이터 - new form create 
+ for (let i = 0; i < selectedHighList.length; i++) {
+	  	// 선택된 체크박스가 속한 <tr> 요소 찾기
+	  	let tr = selectedHighList[i].closest("tr");
+	  	// 해당 <tr> 요소 내의 highEduNo 값 가져오기
+	  	let highEduNo = tr.querySelector("input[name='highEduNo']").value;
+	  	$.ajax({
+	  		url : 'insertInfoHigh',
+	  		type: 'POST',
+	  		data : {highEduNo : highEduNo},
+	  		success : function(result) {
+	  			if(result > 0) {
+	  				highNewForm = document.createElement("form");
+		  			let highFormContainer = document.getElementById("highFormContainer");
+		  			highNewForm.id = "high-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+		  			highNewForm.innerHTML = highNewFormHTML;
+		  			highFormContainer.appendChild(highNewForm);
+ 
+	    // 기존 form 뒤에 새로운 form 추가
+	    let highData = selectedHighList[i].closest("tr").getElementsByTagName("td");
+	      
+	    if (hschool.ged == 'Y') {
+	    	  highNewForm.elements["highNewGed"].checked = true;
+	    	}
+	    
+	    highNewForm.elements["highName"].value = highData[2].textContent;
+	    highNewForm.elements["highNewDate"].value = highData[3].textContent;
+	    highNewForm.elements["highNewMajor"].value = highData[4].textContent;
+	    
+	    
+	    // new form delete 버튼 -
+	    let highDeleteBtn = highNewForm.querySelector("#deleteHighInfo");
+			highDeleteBtn.addEventListener("click", function() {
+			  highDeleteHandler(highFormContainer, this, highEduNo);
+			});
+   
+		    // new form 수정 버튼 
+		    let highUpdateBtn = highNewForm.querySelector("#highUpdate");
+			highUpdateBtn.addEventListener("click", function() {
+			highUpdateHandler(highNewForm, highEduNo);
+			});
+	      } else {
+	      }
+	    }
+	}); 
+
+alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+
+}			
+});  
+
+
+//new form delete 버튼 - 
+function highDeleteHandler(highFormContainer, highDeleteBtn, highEduNo){
+	const formToRemove = highDeleteBtn.closest("form");
+
+	// highEduNo 값을 가져온 후 삭제
+	highFormContainer.removeChild(formToRemove);
+	    	
+	 $.ajax({
+	   type: 'POST',
+	   url: 'deleteInfoHigh',
+	   data: { highEduNo: highEduNo },
+	   success: function(result) {
+	     if(result > 0) {
+	       alert('작성 중인 이력서에서 해당 학력 정보가 삭제되었습니다.');
+	     } else {
+	       alert('작성 중인 이력서에서 해당 학력 정보 삭제에 실패했습니다.');
+		  }
+		}
+		});
+	}
+
+//new form 수정 버튼 
+ function highUpdateHandler(highNewForm,highEduNo) {
+	const highNewAct = highNewForm.elements["highNewAct"].value;
+	const highNewName = highNewForm.elements["highNewName"].value;
+	const highNewDate = highNewForm.elements["highNewDate"].value;
+	const highNewMajor = highNewForm.elements["highNewMajor"].value;
+
+	const data = {
+		highEduNo: highEduNo,
+		highNewAct: highNewAct,
+		highNewName: highNewName,
+		highNewDate: highNewDate,
+		highNewMajor: highNewMajor
+		};
+
+	
+	$.ajax({
+		type: "POST",
+		url: 'updateHigh',
+		data: data,
+		success: function(result) {
+		 if(result > 0) {
+		   alert('해당 학력이 수정되었습니다.');
+		   location.reload();
+		 } else {
+		   alert('해당 학력 수정에 실패했습니다.');
+		    }
+		  }
+		});
+	 
+	}
+
+
+
+/* //대학원 모달창에서 체크한 사항 순서대로 표시
+$(document).ready(function() {
+	$('input[name="selectedHigh"]').change(function() {
+	// 선택된 체크박스를 담을 배열을 초기화
+	var selectedHighs = [];
+
+	// 체크된 체크박스의 값 가져오기
+	$('input[name="selectedHigh"]:checked').each(function(index) {
+
+		var hschool = {
+			ged: $(this).closest('tr').find('td:eq(1)').text(),
+			highName: $(this).closest('tr').find('td:eq(2)').text(),
+			highDate: $(this).closest('tr').find('td:eq(3)').text(),
+			highMajor: $(this).closest('tr').find('td:eq(4)').text(),
+	};
+
+	// 배열에 추가
+	selectedHighs.push(gschool);
+		}); 	
+
+	// 선택된 값을 테이블 형태로 출력
+	var html = '<table class="table">';
+	html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학원카테고리</th><th>학교명</th><th>졸업일자</th><th>전공</th></tr></thead>';
+	html += '<tbody>';
+	
+	for (var i = 0; i < selectedHighs.length; i++) {
+	html += '<tr>';
+	html += '<td>' + selectedHighs[i].gradNumber + '</td>';
+	html += '<td>' + selectedHighs[i].gradAct + '</td>';
+	html += '<td>' + selectedHighs[i].gradCategory + '</td>';
+	html += '<td>' + selectedHighs[i].gradName + '</td>';
+	html += '<td>' + selectedGschools[i].gradDate + '</td>';
+	html += '<td>' + selectedGschools[i].gradMajor + '</td>';
+	html += '<td>' + selectedGschools[i].gradPoint + '</td>';
+	html += '</tr>';
+	}
+
+	html += '</tbody></table>';
+	
+	$('#selectedGradList').html(html);
+	});
+});
+
+
+//모달창 닫으면 표 초기화
+$('#viewGrad').on('hidden.bs.modal', function () {
+	$('#selectedGradList').html('');
+	$('input[name="selectedGrad"]').prop('checked', false);
+}); */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------
+
+
+//대학원 DB 낀테이블 insert - success - ok -> new form create - btn event handler
+// 대학원 - 모달창에서 정보 불러와서 출력하기
+let gradSaveButton = document.getElementById("selectGradBtn");
+// event
+gradSaveButton.addEventListener("click", function() {
+  // 체크된 데이터를 가져와서 form에 추가
+  let selectedGradList = document.querySelectorAll('input[name="selectedGrad"]:checked');
+
+  let gradNewFormHTML =	`
+	  <form name="rGSchool" action="rGSchool" method="post">
+	  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+		<button type="button" class="btn btn-outline-dark" id="deleteGradInfo">
+		  <i class="fa fa-minus"></i>
+		</button>
+	 </div>
+
+	 <div class="row mb-3">
+			<label for="gradNewAct" class="col-sm-2 col-form-label">대학원
+				졸업유무</label>
+			<div class="col-sm-10">
+				<select class="form-select" name="gradNewAct">
+					<option selected>대학원졸업유무선택</option>
+					<option value="N">재학중</option>
+					<option value="R">휴학</option>
+					<option value="Y">졸업</option>
+				</select>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="gradNewCategory" class="col-sm-2 col-form-label">대학원
+				카테고리</label>
+			<div class="col-sm-10">
+				<select class="form-select" name="gradNewCategory">
+					<option selected>대학원카테고리</option>
+					<option value="M">석사</option>
+					<option value="D">박사</option>
+				</select>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="gradNewName" class="col-sm-2 col-form-label">대학원명</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="gradNewName">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="gradNewDate" class="col-sm-2 col-form-label">대학원
+				졸업일자</label><br>
+			<div class="col-sm-10">
+				<input type="Date" class="form-control" name="gradNewDate">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="gradNewMajor" class="col-sm-2 col-form-label">대학원
+				전공</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="gradNewMajor">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="gradNewPoint" class="col-sm-2 col-form-label">대학원
+				학점</label>
+			<div class="col-sm-10">
+				<input type="number" step="0.01" class="form-control"
+					name="gradNewPoint" min="0">
+			</div>
+		</div>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+		<button type="button" id="gradUpdate" class="btn btn-primary">수정</button>
+		</div>
+		<hr>
+	</form>
+    `;
+    
+    let gradNewForm = null;
+    
+    // 모달창에서 체크된 경력 데이터 - new form create 
+    for (let i = 0; i < selectedGradList.length; i++) {
+		// DB 낀테이블 insert - success - ok -> new form create - btn event handler
+	  	// 선택된 체크박스가 속한 <tr> 요소 찾기
+	  	let tr = selectedGradList[i].closest("tr");
+	  	// 해당 <tr> 요소 내의 gradEduNo 값 가져오기
+	  	let gradEduNo = tr.querySelector("input[name='gradEduNo']").value;
+	  	$.ajax({
+	  		url : 'insertInfoGrad',
+	  		type: 'POST',
+	  		data : {gradEduNo : gradEduNo},
+	  		success : function(result) {
+	  			if(result > 0) {
+	  		        //alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+	  		        gradNewForm = document.createElement("form");
+		  			let gradFormContainer = document.getElementById("GradFormContainer");
+		  			gradNewForm.id = "grad-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+		  			gradNewForm.innerHTML = gradNewFormHTML;
+		  			gradFormContainer.appendChild(gradNewForm);
+    
+	    // 기존 form 뒤에 새로운 form 추가
+	    let gradData = selectedGradList[i].closest("tr").getElementsByTagName("td");
+	  
+	    let gradNewAct = gradData[1].getAttribute("data-selectedvalue");
+	    let gradNewCategory = gradData[2].getAttribute("data-selectedvalue");
+	    gradNewForm.elements["gradNewAct"].value = gradNewAct;
+	    gradNewForm.elements["gradNewCategory"].value = gradNewCategory;
+	    gradNewForm.elements["gradNewName"].value = gradData[3].textContent;
+	    gradNewForm.elements["gradNewDate"].value = gradData[4].textContent;
+	    gradNewForm.elements["gradNewMajor"].value = gradData[5].textContent;
+	    gradNewForm.elements["gradNewPoint"].value = gradData[6].textContent;
+	    
+	    
+	    // new form delete 버튼 -
+	    let gradDeleteBtn = gradNewForm.querySelector("#deleteGradInfo");
+			gradDeleteBtn.addEventListener("click", function() {
+			  gradDeleteHandler(gradFormContainer, this, gradEduNo);
+			});
+      
+		    // new form 수정 버튼 
+		    let gradUpdateBtn = gradNewForm.querySelector("#gradUpdate");
+			gradUpdateBtn.addEventListener("click", function() {
+			gradUpdateHandler(gradNewForm, gradEduNo);
+			});
+	      } else {
+	      }
+	    }
+	}); 
+
+alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+
+}			
+});  
+
+
+//new form delete 버튼 - 
+function gradDeleteHandler(gradFormContainer, gradDeleteBtn, gradEduNo){
+	const formToRemove = gradDeleteBtn.closest("form");
+
+	// gradEduNo 값을 가져온 후 삭제
+	gradFormContainer.removeChild(formToRemove);
+	    	
+	 $.ajax({
+	   type: 'POST',
+	   url: 'deleteInfoGrad',
+	   data: { gradEduNo: gradEduNo },
+	   success: function(result) {
+	     if(result > 0) {
+	       alert('작성 중인 이력서에서 해당 학력 정보가 삭제되었습니다.');
+	     } else {
+	       alert('작성 중인 이력서에서 해당 학력 정보 삭제에 실패했습니다.');
+		  }
+		}
+		});
+	}
+
+//new form 수정 버튼 
+function gradUpdateHandler(gradNewForm,gradEduNo) {
+	const gradNewAct = gradNewForm.elements["gradNewAct"].value;
+	const gradNewCategory = gradNewForm.elements["gradNewCategory"].value;
+	const gradNewName = gradNewForm.elements["gradNewName"].value;
+	const gradNewDate = gradNewForm.elements["gradNewDate"].value;
+	const gradNewMajor = gradNewForm.elements["gradNewMajor"].value;
+	const gradNewPoint = gradNewForm.elements["gradNewPoint"].value;
+
+	const data = {
+		gradEduNo: gradEduNo,
+		gradNewAct: gradNewAct,
+		gradNewCategory: gradNewCategory,
+		gradNewName: gradNewName,
+		gradNewDate: gradNewDate,
+		gradNewMajor: gradNewMajor,
+		gradNewPoint: gradNewPoint
+		};
+
+	
+	$.ajax({
+		type: "POST",
+		url: 'updateGrad',
+		data: data,
+		success: function(result) {
+		 if(result > 0) {
+		   alert('해당 학력이 수정되었습니다.');
+		   location.reload();
+		 } else {
+		   alert('해당 학력 수정에 실패했습니다.');
+		    }
+		  }
+		});
+	 }
+
+
+
+// 대학원 모달창에서 체크한 사항 순서대로 표시
+$(document).ready(function() {
+	$('input[name="selectedGrad"]').change(function() {
+	// 선택된 체크박스를 담을 배열을 초기화
+	var selectedGschools = [];
+
+	// 체크된 체크박스의 값 가져오기
+	$('input[name="selectedGrad"]:checked').each(function(index) {
+
+		var gschool = {
+			gradAct: $(this).closest('tr').find('td:eq(1)').text(),
+			gradCategory: $(this).closest('tr').find('td:eq(2)').text(),
+			gradName: $(this).closest('tr').find('td:eq(3)').text(),
+			gradDate: $(this).closest('tr').find('td:eq(4)').text(),
+			gradNumber: index + 1
+	};
+
+	// 배열에 추가
+	selectedGschools.push(gschool);
+		}); 	
+
+	// 선택된 값을 테이블 형태로 출력
+	var html = '<table class="table">';
+	html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학원카테고리</th><th>학교명</th><th>졸업일자</th><th>전공</th><th>학점</th></tr></thead>';
+	html += '<tbody>';
+	
+	for (var i = 0; i < selectedGschools.length; i++) {
+	html += '<tr>';
+	html += '<td>' + selectedGschools[i].gradNumber + '</td>';
+	html += '<td>' + selectedGschools[i].gradAct + '</td>';
+	html += '<td>' + selectedGschools[i].gradCategory + '</td>';
+	html += '<td>' + selectedGschools[i].gradName + '</td>';
+	html += '<td>' + selectedGschools[i].gradDate + '</td>';
+	html += '<td>' + selectedGschools[i].gradMajor + '</td>';
+	html += '<td>' + selectedGschools[i].gradPoint + '</td>';
+	html += '</tr>';
+	}
+
+	html += '</tbody></table>';
+	
+	$('#selectedGradList').html(html);
+	});
+});
+
+
+//모달창 닫으면 표 초기화
+$('#viewGrad').on('hidden.bs.modal', function () {
+	$('#selectedGradList').html('');
+	$('input[name="selectedGrad"]').prop('checked', false);
+});
+		
+
+
+
+
 		
 // 대학교 DB 낀테이블 insert - success - ok -> new form create - btn event handler
 		// 대학교 - 모달창에서 정보 불러와서 출력하기
@@ -1155,7 +1501,7 @@ function updateClickHandler(uniNewForm,uniEduNo) {
 
     // 선택된 값을 테이블 형태로 출력
     var html = '<table class="table">';
-    html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학카테고리</th><th>학교명(소재지)</th><th>졸업일자</th><th>전공</th><th>학점</th></tr></thead>';
+    html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학카테고리</th><th>학교명</th><th>졸업일자</th><th>전공</th><th>학점</th></tr></thead>';
     html += '<tbody>';
 
     for (var i = 0; i < selectedUnis.length; i++) {

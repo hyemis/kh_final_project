@@ -39,6 +39,8 @@
 	href="${pageContext.request.contextPath}/resources/css/business.css"
 	rel="stylesheet">
 
+<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css" rel="stylesheet">
+
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
@@ -104,196 +106,11 @@
 						<h1>회사소개</h1>
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop">등록
-							및 수정</button>
-
-						<!-- Modal -->
-						<div class="modal fade" id="staticBackdrop"
-							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-							aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div
-								class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
-								<div class="modal-content">
-
-
-									<div class="modal-header">
-										<h3 class="modal-title text-center" id="staticBackdropLabel">회사소개
-											작성</h3>
-										<button type="button" class="btn-close"
-											data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<form action="/companyInfoForm" method="post"
-											enctype="multipart/form-data">
-
-											<div class="row ">
-												<div class="col-2 text-center">
-													<h4>태그</h4>
-												</div>
-												<div class="col-10 text-start">
-													<p>
-														<a class="fw-bold">근무/휴가</a> <input type="checkbox"
-															name="tag" value="유연근무">유연근무 <input
-															type="checkbox" name="tag" value="재택근무">재택근무 <input
-															type="checkbox" name="tag" value="주35시간">주35시간 <input
-															type="checkbox" name="tag" value="주4일근무">주4일근무 <input
-															type="checkbox" name="tag" value="육아휴직">육아휴직 <input
-															type="checkbox" name="tag" value="출산휴가">출산휴가 <input
-															type="checkbox" name="tag" value="리프레시휴가">리프레시휴가
-													</p>
-													<p>
-														<a class="fw-bold">보상</a> <input type="checkbox"
-															name="tag" value="성과금">성과금 <input type="checkbox"
-															name="tag" value="상여금">상여금 <input type="checkbox"
-															name="tag" value="연말보너스">연말보너스 <input
-															type="checkbox" name="tag" value="스톡옵션">스톡옵션
-													</p>
-													<p>
-														<a class="fw-bold">기업문화</a> <input type="checkbox"
-															name="tag" value="수평적조직">수평적조직 <input
-															type="checkbox" name="tag" value="스타트업">스타트업 <input
-															type="checkbox" name="tag" value="자율복장">자율복장 <input
-															type="checkbox" name="tag" value="워크샵">워크샵 <input
-															type="checkbox" name="tag" value="반려동물">반려동물
-													</p>
-													<p>
-														<a class="fw-bold">편의</a> <input type="checkbox"
-															name="tag" value="식비지원">식비지원 <input
-															type="checkbox" name="tag" value="간식제공">간식제공 <input
-															type="checkbox" name="tag" value="사내카페">사내카페 <input
-															type="checkbox" name="tag" value="사내식당">사내식당 <input
-															type="checkbox" name="tag" value="주차">주차 <input
-															type="checkbox" name="tag" value="수면실">수면실 <input
-															type="checkbox" name="tag" value="휴게실">휴게실 <input
-															type="checkbox" name="tag" value="헬스장">헬스장 <input
-															type="checkbox" name="tag" value="안마의자">안마의자
-													</p>
-
-													<p>
-														<a class="fw-bold">지원</a> <input type="checkbox"
-															name="tag" value="택시비">택시비 <input type="checkbox"
-															name="tag" value="셔틀버스">셔틀버스 <input
-															type="checkbox" name="tag" value="차량지원">차량지원 <input
-															type="checkbox" name="tag" value="기숙사">기숙사 <input
-															type="checkbox" name="tag" value="건강검진">건강검진 <input
-															type="checkbox" name="tag" value="동호회">동호회 <input
-															type="checkbox" name="tag" value="복지포인트">복지포인트 <input
-															type="checkbox" name="tag" value="문화비">문화비 <input
-															type="checkbox" name="tag" value="운동비">운동비 <input
-															type="checkbox" name="tag" value="자기계발비">자기계발비
-													</p>
-
-													<p>
-														<a class="fw-bold">교육</a> <input type="checkbox"
-															name="tag" value="교육비">교육비 <input type="checkbox"
-															name="tag" value="도서구매비">도서구매비 <input
-															type="checkbox" name="tag" value="직무교육">직무교육 <input
-															type="checkbox" name="tag" value="세미나비">세미나비 <input
-															type="checkbox" name="tag" value="어학교육">어학교육 <input
-															type="checkbox" name="tag" value="해외연수">해외연수
-													</p>
-													<hr>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>직 원 수</h4>
-												</div>
-												<div class="col-10 ">
-													<a>직원수를 숫자로 입력해주세요</a> <input type="text" name="employee"
-														style="width: 30%;" placeholder="예시)300">명
-													<hr>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>평균연봉</h4>
-												</div>
-												<div class="col-10 ">
-													<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> <input type="text"
-														name="salaryAvg" style="width: 30%;" placeholder="예시)3500">만원
-													<hr>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>기업사진</h4>
-												</div>
-												<div class="col-10 ">
-													<div class="mb-3">
-														<input class="form-control" type="file" id="infoPhoto"
-															multiple> <label for="infoPhoto"
-															class="form-label">기업 대표 사진을 등록해주세요</label>
-													</div>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>소 개 글</h4>
-												</div>
-												<div class="col-10 was-validated ">
-													<div class="mb-3">
-														<textarea id="infoContent" name="boardContent"></textarea>
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-light"
-													data-bs-dismiss="modal">취소</button>
-												<button type="reset" class="btn btn-light">초기화</button>
-												<button type="submit" class="btn btn-primary">등록</button>
-											</div>
-										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-
-
-						<!-- 이미지 -->
-						<div id="carouselExampleIndicators"
-							class="carousel slide w-75 p-3 h-auto " data-bs-ride="carousel">
-							<div class="carousel-indicators">
-								<button type="button"
-									data-bs-target="#carouselExampleIndicators"
-									data-bs-slide-to="0" class="active" aria-current="true"
-									aria-label="Slide 1"></button>
-								<button type="button"
-									data-bs-target="#carouselExampleIndicators"
-									data-bs-slide-to="1" aria-label="Slide 2"></button>
-								<button type="button"
-									data-bs-target="#carouselExampleIndicators"
-									data-bs-slide-to="2" aria-label="Slide 3"></button>
-							</div>
-							<div class="carousel-inner">
-								<div class="carousel-item active">
-									<img src="https://dummyimage.com/500x300/000/fff"
-										class="img-responsive center-block d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item">
-									<img src="https://dummyimage.com/500x300/000/fff"
-										class="img-responsive center-block d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item">
-									<img src="https://dummyimage.com/500x300/000/fff"
-										class="img-responsive center-block d-block w-100" alt="...">
-								</div>
-							</div>
-							<button class="carousel-control-prev" type="button"
-								data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							</button>
-							<button class="carousel-control-next" type="button"
-								data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							</button>
-						</div>
-						<!-- 회사소개 내용 -->
-						<div></div>
+							data-bs-toggle="modal" data-bs-target="#companyinfo">등록 및 수정</button>
+						
+						<button type="button" class="btn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#viewInfo">회사소개 페이지로 이동</button>
+						*** 모달창 작업 필요함
 					</div>
 					<!-- 뉴스레터 -->
 					<div class="border border-secondary">
@@ -306,84 +123,25 @@
 								data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
 						</div>
 
-						<!-- Modal -->
-						<div class="modal fade" id="newsletter" data-bs-backdrop="static"
-							data-bs-keyboard="false" tabindex="-1"
-							aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div
-								class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h3 class="modal-title text-center" id="staticBackdropLabel">뉴스레터
-											작성</h3>
-										<button type="button" class="btn-close"
-											data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<form action="${pageContext.request.contextPath }/business/aboutus/newsletterform" method="post"
-											>
 
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>제목</h4>
-												</div>
-												<div class="col-10 was-validated">
-													<input type="text" class="form-control is-invalid"
-														name="boardTitle" placeholder="제목을 입력해주세요" required>
-													<hr>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>관련링크</h4>
-												</div>
-												<div class="col-10 ">
-													<input type="text" class="form-control" name="link"
-														placeholder="링크를 입력해주세요">
-													<hr>
-												</div>
-											</div>
-
-											<div class="row ">
-												<div class="col-2 text-center font-monospace">
-													<h4>내용작성</h4>
-												</div>
-												<div class="col-10 ">
-													<div class="mb-3">
-														<textarea id="newsLetterContent" name="boardContent"
-															style="height: 300px;"></textarea>
-													</div>
-													<div class="text-end ">작성일자</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-light"
-													data-bs-dismiss="modal">취소</button>
-												<button type="submit" class="btn btn-primary">등록</button>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
 						<!-- 뉴스레터 보기 -->
 						<div class="container">
-							<c:forEach items="${news}" var="boards">
+							<c:forEach items="${news}" var="news">
 								<div class="row">
 									<div class="col">
 										<div class="card">
-											<h5 class="card-header">${boards.boardTitle }</h5>
+											<h5 class="card-header">${news.boardTitle }</h5>
 											<div class="card-body">
-												<div class="card-text">${boards.boardContent }</div>
+												<div class="card-text">${news.boardContent }</div>
 												<a href="" class="btn btn-primary">게시글보기</a>
 											</div>
 										</div>
 									</div>
 									<div class="col">
 										<div class="card">
-											<h5 class="card-header">${boards.boardTitle }</h5>
+											<h5 class="card-header">${news.boardTitle }</h5>
 											<div class="card-body">
-												<div class="card-text">${boards.boardContent }</div>
+												<div class="card-text">${news.boardContent }</div>
 												<a href="" class="btn btn-primary">게시글보기</a>
 											</div>
 										</div>
@@ -419,6 +177,213 @@
 	</section>
 
 
+	<!-- Modal -->
+	<!-- 회사소개 -->
+	<div class="modal fade" id="companyinfo" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div
+			class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+
+
+				<div class="modal-header">
+					<h3 class="modal-title text-center" id="staticBackdropLabel">회사소개
+						작성</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form action="${pageContext.request.contextPath }/business/aboutus/infoform" method="post"
+						enctype="multipart/form-data">
+
+						<div class="row ">
+							<div class="col-2 text-center">
+								<h4>태그</h4>
+							</div>
+							<div class="col-10 text-start">
+								<p>
+									<a class="fw-bold">근무/휴가</a> <input type="checkbox" name="tag"
+										value="유연근무">유연근무 <input type="checkbox" name="tag"
+										value="재택근무">재택근무 <input type="checkbox" name="tag"
+										value="주35시간">주35시간 <input type="checkbox" name="tag"
+										value="주4일근무">주4일근무 <input type="checkbox" name="tag"
+										value="육아휴직">육아휴직 <input type="checkbox" name="tag"
+										value="출산휴가">출산휴가 <input type="checkbox" name="tag"
+										value="리프레시휴가">리프레시휴가
+								</p>
+								<p>
+									<a class="fw-bold">보상</a> <input type="checkbox" name="tag"
+										value="성과금">성과금 <input type="checkbox" name="tag"
+										value="상여금">상여금 <input type="checkbox" name="tag"
+										value="연말보너스">연말보너스 <input type="checkbox" name="tag"
+										value="스톡옵션">스톡옵션
+								</p>
+								<p>
+									<a class="fw-bold">기업문화</a> <input type="checkbox" name="tag"
+										value="수평적조직">수평적조직 <input type="checkbox" name="tag"
+										value="스타트업">스타트업 <input type="checkbox" name="tag"
+										value="자율복장">자율복장 <input type="checkbox" name="tag"
+										value="워크샵">워크샵 <input type="checkbox" name="tag"
+										value="반려동물">반려동물
+								</p>
+								<p>
+									<a class="fw-bold">편의</a> <input type="checkbox" name="tag"
+										value="식비지원">식비지원 <input type="checkbox" name="tag"
+										value="간식제공">간식제공 <input type="checkbox" name="tag"
+										value="사내카페">사내카페 <input type="checkbox" name="tag"
+										value="사내식당">사내식당 <input type="checkbox" name="tag"
+										value="주차">주차 <input type="checkbox" name="tag"
+										value="수면실">수면실 <input type="checkbox" name="tag"
+										value="휴게실">휴게실 <input type="checkbox" name="tag"
+										value="헬스장">헬스장 <input type="checkbox" name="tag"
+										value="안마의자">안마의자
+								</p>
+
+								<p>
+									<a class="fw-bold">지원</a> <input type="checkbox" name="tag"
+										value="택시비">택시비 <input type="checkbox" name="tag"
+										value="셔틀버스">셔틀버스 <input type="checkbox" name="tag"
+										value="차량지원">차량지원 <input type="checkbox" name="tag"
+										value="기숙사">기숙사 <input type="checkbox" name="tag"
+										value="건강검진">건강검진 <input type="checkbox" name="tag"
+										value="동호회">동호회 <input type="checkbox" name="tag"
+										value="복지포인트">복지포인트 <input type="checkbox" name="tag"
+										value="문화비">문화비 <input type="checkbox" name="tag"
+										value="운동비">운동비 <input type="checkbox" name="tag"
+										value="자기계발비">자기계발비
+								</p>
+
+								<p>
+									<a class="fw-bold">교육</a> <input type="checkbox" name="tag"
+										value="교육비">교육비 <input type="checkbox" name="tag"
+										value="도서구매비">도서구매비 <input type="checkbox" name="tag"
+										value="직무교육">직무교육 <input type="checkbox" name="tag"
+										value="세미나비">세미나비 <input type="checkbox" name="tag"
+										value="어학교육">어학교육 <input type="checkbox" name="tag"
+										value="해외연수">해외연수
+								</p>
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>직 원 수</h4>
+							</div>
+							<div class="col-10 ">
+								<a>직원수를 숫자로 입력해주세요</a> <input type="text" name="employee"
+									style="width: 30%;" placeholder="예시)300">명
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>평균연봉</h4>
+							</div>
+							<div class="col-10 ">
+								<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> <input type="text"
+									name="salaryAvg" style="width: 30%;" placeholder="예시)3500">만원
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>기업사진</h4>
+							</div>
+							<div class="col-10 ">
+								<div class="mb-3">
+									<input class="form-control" type="file" id="infoPhoto" multiple>
+									<label for="infoPhoto" class="form-label">기업 대표 사진을
+										등록해주세요</label>
+								</div>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>소 개 글</h4>
+							</div>
+							<div class="col-10 was-validated ">
+								<div class="mb-3">
+									<textarea id="infoContent" name="boardContent"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light"
+								data-bs-dismiss="modal">취소</button>
+							<button type="reset" class="btn btn-light">초기화</button>
+							<button type="submit" class="btn btn-primary">등록</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- 뉴스레터 -->
+	<div class="modal fade" id="newsletter" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div
+			class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title text-center" id="staticBackdropLabel">뉴스레터
+						작성</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form
+						action="${pageContext.request.contextPath }/business/aboutus/newsletterform"
+						method="post">
+
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>제목</h4>
+							</div>
+							<div class="col-10 was-validated">
+								<input type="text" class="form-control is-invalid"
+									name="boardTitle" placeholder="제목을 입력해주세요" required>
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>관련링크</h4>
+							</div>
+							<div class="col-10 ">
+								<input type="text" class="form-control" name="link"
+									placeholder="링크를 입력해주세요">
+								<hr>
+							</div>
+						</div>
+
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>내용작성</h4>
+							</div>
+							<div class="col-10 ">
+								<div class="mb-3">
+									<textarea id="newsLetterContent" name="boardContent"
+										style="height: 300px;"></textarea>
+								</div>
+								<div class="text-end ">작성일자</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light"
+								data-bs-dismiss="modal">취소</button>
+							<button type="submit" class="btn btn-primary">등록</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
@@ -435,7 +400,6 @@
         $('.nums').each(function () {
             const $this = $(this),
                 countTo = $this.attr('data-count');
-
             $({
                 countNum: $this.text()
             }).animate({
@@ -460,7 +424,6 @@
 	    constructor(loader) {
 	        this.loader = loader;
 	    }
-
 	    upload() {
 	        return this.loader.file.then( file => new Promise(((resolve, reject) => {
 	            this._initRequest();
@@ -468,7 +431,6 @@
 	            this._sendRequest( file );
 	        })))
 	    }
-
 	    _initRequest() {
 	        const xhr = this.xhr = new XMLHttpRequest();
 	        xhr.open('POST', 'imageUpload', true);
@@ -476,12 +438,10 @@
 	        console.log(xhr);
 	        console.log(xhr.response);
 	    }
-
 	    _initListeners(resolve, reject, file) {
 	        const xhr = this.xhr;
 	        const loader = this.loader;
 	        const genericErrorText = '파일을 업로드 할 수 없습니다.'
-
 	        xhr.addEventListener('error', () => {reject(genericErrorText)})
 	        xhr.addEventListener('abort', () => reject())
 	        xhr.addEventListener('load', () => {
@@ -490,13 +450,11 @@
 	            if(!response || response.error) {
 	                return reject( response && response.error ? response.error.message : genericErrorText );
 	            }
-
 	            resolve({
 	                default: response.url //업로드된 파일 주소
 	            })
 	        })
 	    }
-
 	    _sendRequest(file) {
 	        const data = new FormData();
 	        data.append('upload',file);

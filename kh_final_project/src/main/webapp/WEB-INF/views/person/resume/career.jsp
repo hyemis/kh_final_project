@@ -469,7 +469,7 @@ function updateClickHandler(newForm,carNo) {
 	    });
  }
 
-		// 모달창에 체크한 이력서 순서대로 표시
+		// 모달창에서 체크사항 이력서 순서대로 표시
 		$(document).ready(function() {
 	 	$('input[name="selectedCareer"]').change(function() {
 	    // 선택된 체크박스를 담을 배열을 초기화

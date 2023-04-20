@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +22,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAboutUsService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingInfoDto;
 
 @Controller
 @RequestMapping("/business/aboutus")
@@ -36,7 +38,32 @@ public class BsAboutUsController {
 
 	// 뉴스레터 페이지 불러오기
 	@GetMapping("/newsletter")
-	public ModelAndView newsletter(ModelAndView mv) {
+	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
+		List<BoardDto> news = service.newsLetterList(principal.getName());
+		
+		mv.addObject("news", news);
+		
+		return mv;
+	}
+	
+	
+	// 회사소개 페이지
+	@GetMapping("/companyinfo")
+	public ModelAndView companyinfo(ModelAndView mv, BoardDto dto, Principal principal) {
+		
+		mv.addObject("info",service.viewCompanyInfo(principal.getName()));
+		return mv;
+		
+	}	
+	
+	// 뉴스레터 작성
+	@PostMapping("/infoform")
+	public ModelAndView insertCompanyInfo(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
+		dto.setUserId(principal.getName()); 
+		service.insertCompanyInfo(dto);
+		mv.setViewName("redirect:/business/aboutus");
+		rttr.addFlashAttribute("msg", "뉴스레터가 성공적으로 등록되었습니다.");
+		System.out.println(dto);
 		return mv;
 	}
 	
@@ -77,6 +104,24 @@ public class BsAboutUsController {
 
 		return new Gson().toJson(map);
 	}
+	
+	//상세보기
+	@GetMapping("/view")
+	public ModelAndView viewReadBoard(
+			ModelAndView mv
+			, @PathVariable int boardNum 
+			, Principal principal
+			) {
+		
+		String userId = principal.getName(); ;
+		
+		BoardDto dto = service.NewsLetterOne(boardNum,userId);
+		mv.addObject("news", dto);
+		
+		return mv;
+	}
+	
+	
 
 
 

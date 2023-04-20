@@ -200,7 +200,7 @@
 		GRAD_DATE = #{gradDate},
 		GRAD_MAJOR = #{gradMajor},
 		GRAD_POINT = #{gradPoint}
-		WHERE GRAD_EDU_NO = #{gradEduNos}
+		WHERE GRAD_EDU_NO = #{gradEduNo}
 	</update>
 	
 
