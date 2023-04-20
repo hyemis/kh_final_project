@@ -113,8 +113,33 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
-	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception {
-		return dao.highselectOne(infoMap);
+	public List<PsHschoolDto> highSelectList(Map<String, Object> infoMap) throws Exception {
+		return dao.highSelectList(infoMap);
+	}
+	
+	@Override
+	public List<PsUnivDto> uniSelectList(Map<String, Object> infoMap) throws Exception {
+		return dao.uniSelectList(infoMap);
+	}
+	
+	@Override
+	public List<PsGschoolDto> gradSelectList(Map<String, Object> infoMap) throws Exception {
+		return dao.gradSelectList(infoMap);
+	}
+	
+	@Override
+	public List<PsCareerDto> carSelectList(Map<String, Object> infoMap) throws Exception {
+		return dao.carSelectList(infoMap);
+	}
+	
+	@Override
+	public List<PsCertiDto> certiSelectList(Map<String, Object> infoMap) throws Exception {
+		return dao.certiSelectList(infoMap);
+	}
+	
+	@Override
+	public List<PsClDto> clSelectList(Map<String, Object> infoMap) throws Exception {
+		return dao.clSelectList(infoMap);
 	}
 	
 	@Override
