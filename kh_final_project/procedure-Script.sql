@@ -1,5 +1,5 @@
 
--- 마감일 지난 공고들 RA_ADMISSION 변경
+-- 마감일 지난 공고들 RA_ADMISSION 변경 프로시저 등록
 CREATE OR REPLACE PROCEDURE RECRUIT_ADMISSION_CHECK
 IS
 BEGIN
@@ -21,7 +21,7 @@ BEGIN
     (  JOB       => AD_CHECK
      , WHAT      => 'RECRUIT_ADMISSION_CHECK();'
      , NEXT_DATE =>  SYSDATE + 1/24/60		-- 1분후
-     , INTERVAL  => 'SYSDATE + 1/24/60/10'	-- 6초 간격
+     , INTERVAL  => 'TRUNC(SYSDATE)  + 20 / 24' 
      , NO_PARSE  => TRUE
     );
     commit;
@@ -31,8 +31,6 @@ END;
 -- 등록한 잡 확인
 --SELECT * 
 --  FROM USER_JOBS;
- 
-
 
 --등록한 잡 삭제
 --잡 테이블에서 보고 삭제
@@ -41,3 +39,7 @@ END;
 --    COMMIT;
 --END;
 --/
+
+-- 인터벌 수정 명령어
+--EXEC DBMS_JOB.INTERVAL(3, 'TRUNC(SYSDATE)  + 20 / 24');
+--commit;
