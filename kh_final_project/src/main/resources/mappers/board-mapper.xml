@@ -70,7 +70,7 @@
 		SELECT MAX(BOARD_NO) +1 FROM BOARD
 	</selectKey>	
 	</insert>	
-	
+	<!-- 임시 select 할 항목 선택 후 수정 -->
 	<select id="qnaList">
 		SELECT UDB04 
 		FROM BOARD 
