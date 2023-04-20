@@ -18,8 +18,9 @@ public interface PsResumeService {
 	// TODO: userid 수정 - 사용할 때 수정하기
 	public PsResumeDto selectOne(String userId) throws Exception;
 
-	// 이력서 상세보기
+	// 이력서 상세보기 - 이력서 정보
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception;
+	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception;
 
 	// 이력서 리스트
 	public List<PsResumeDto> selectList(String userId) throws Exception;

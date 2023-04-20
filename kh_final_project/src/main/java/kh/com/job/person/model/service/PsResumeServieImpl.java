@@ -113,6 +113,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
+	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception {
+		return dao.highselectOne(infoMap);
+	}
+	
+	@Override
 	public int insertHschool(PsHschoolDto dto) throws Exception {
 		return dao.insertHschool(dto);
 	}
@@ -313,6 +318,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int deleteInfoCl(Map<String, Object> InfoNo) throws Exception {
 		return dao.deleteInfoCl(InfoNo);
 	}
+
+	
 
 	
 
