@@ -209,9 +209,9 @@
 			</div>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
-				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/certi">다음</a>
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
 			</div>
 
 		</div>
@@ -234,9 +234,6 @@ var msg = "${msg}";
 if (msg) {
 	alert(msg);
 }
-
-// 불러오기를 통해 선택된 carNo
-//let selectedCarNo = [];
 
 // 경력사항 '신입' 라디오박스 체크하면 아래내용 hidden
 const radioBox = document.getElementById("radio-box");

@@ -67,6 +67,11 @@ public class PsResumeDao {
 	public int deleteHigh(int highEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteHigh", highEduNo);
 	}
+	
+	// 이력서 - 고등학교 수정
+	public int updateHigh(Map<String, Object> updateHigh) throws Exception {
+		return sqlSession.update("resume.updateHigh", updateHigh);
+	}
 
 	// 이력서-대학교입력
 	public int insertUniv(PsUnivDto dto) throws Exception {
@@ -77,6 +82,11 @@ public class PsResumeDao {
 	public int deleteUni(int uniEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteUni", uniEduNo);
 	}
+	
+	// 이력서 - 대학교 수정
+	public int updateUni(Map<String, Object> updateUni) throws Exception {
+		return sqlSession.update("resume.updateUni", updateUni);
+	}
 
 	// 이력서-대학원입력
 	public int insertGschool(PsGschoolDto dto) throws Exception {
@@ -86,6 +96,11 @@ public class PsResumeDao {
 	// 이력서 - 대학교 삭제
 	public int deleteGrad(int gradEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteGrad", gradEduNo);
+	}
+	
+	// 이력서 - 대학원 수정
+	public int updateGrad(Map<String, Object> updateGrad) throws Exception {
+		return sqlSession.update("resume.updateGrad", updateGrad);
 	}
 
 	// 이력서-경력사항입력
@@ -232,19 +247,13 @@ public class PsResumeDao {
 	// 고등학교 학력사항 보기
 	public List<PsHschoolDto> selectListHigh(String userId) throws Exception {
 		List<PsHschoolDto> highSchoolList = sqlSession.selectList("resume.selectListHigh", userId);
+	
 		for (PsHschoolDto hschool : highSchoolList) {
-			if ("Y".equals(hschool.getGed())) {
-				hschool.setHighName("검정고시");
-				hschool.setHighMajor("");
-				hschool.setHighDate(null);
-				hschool.setGed("검정고시");
-			} else {
 				String dateString = hschool.getHighDate();
 				if (dateString != null) {
 					LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
 					hschool.setHighDate(date.toString());
 				}
-			}
 		}
 
 		return highSchoolList;

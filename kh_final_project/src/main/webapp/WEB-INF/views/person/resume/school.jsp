@@ -261,7 +261,15 @@
 																		<c:forEach var="hschool" items="${high}">
 																			<tr>
 																				<td><input type="checkbox" name="selectedHigh" /></td>
-																				<td>${hschool.ged}</td>
+																				<td><c:choose>
+																						<c:when test="${hschool.ged == 'Y'}">
+																							<c:set var="gedName" value="검정고시" />
+																						</c:when>
+																						<c:when test="${hschool.ged == 'N'}">
+																							<c:set var="gedName" value="졸업" />
+																						</c:when>																		
+																					</c:choose> ${gedName} <!-- gedName 변수 출력 --></td>
+																				
 																				<td>${hschool.highName}</td>
 																				<td>${hschool.highDate}</td>
 																				<td>${hschool.highMajor}</td>
@@ -395,7 +403,7 @@
 																			<tr>
 																				<td><input type="checkbox" name="selectedUni" /></td>
 
-																				<td><c:choose>
+																				<td data-selectedvalue="${university.uniAct}"><c:choose>
 																						<c:when test="${university.uniAct == 'Y'}">
 																							<c:set var="uniActName" value="졸업" />
 																						</c:when>
@@ -408,7 +416,7 @@
 																					</c:choose> ${uniActName} <!-- uniActName 변수 출력 --></td>
 
 
-																				<td><c:set var="uniCategory"
+																				<td data-selectedvalue="${university.uniCategory}"><c:set var="uniCategory"
 																						value="${university.uniCategory}" /> <c:if
 																						test="${uniCategory eq 'T'}">
 																						<c:set var="uniCategoryName" value="2,3년제" />
@@ -566,9 +574,10 @@
 																	<tbody id="gradList">
 																		<c:forEach var="gschool" items="${grad}">
 																			<tr>
+																			
 																				<td><input type="checkbox" name="seletedGrad" /></td>
 
-																				<td><c:choose>
+																				<td data-selectedvalue="${gschool.gradAct}"><c:choose>
 																						<c:when test="${gschool.gradAct == 'Y'}">
 																							<c:set var="gradActName" value="졸업" />
 																						</c:when>
@@ -579,17 +588,13 @@
 																							<c:set var="gradActName" value="휴학" />
 																						</c:when>
 																					</c:choose> ${gradActName} <!-- gradActActName 변수 출력 --></td>
-																					
-																				<!-- TODO : 하는중	 -->
-																				<td><c:set var="gradCategory"
-																						value="${gschool.gradCategory}" /> <c:if
-																						test="${gradCategory eq 'M'}">
-																						<c:set var="gradCategoryName" value="석사" />
-																					</c:if> <c:if test="${gradCategory eq 'D'}">
-																						<c:set var="gradCategoryName" value="박사" />
-																					</c:if> ${gradCategoryName} <!-- gradCategoryName 변수 출력 --></td>
-																					
-																																			
+
+																				
+																				<td>
+																				<c:set var="gradCategoryName"
+																					value="${gschool.gradCategory eq 'M' ? '석사' : '박사'}" />
+																				${gradCategoryName}</td>
+
 																				<td>${gschool.gradName}</td>
 																				<td>${gschool.gradDate}</td>
 																				<td>${gschool.gradMajor}</td>
@@ -692,9 +697,9 @@
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
-				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/career">다음</a>
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
 			</div>
 
 
@@ -825,120 +830,121 @@
 		}
 		
 		
-		// ---------------------------------------------------
-		
-
-		// 고등학교 입력폼 추가
-		function addHigh() {
-			var originForm = rsforms[0];
-			var form = originForm.cloneNode(true);
-			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-			rsforms.push(form);
-		}
-		var rsforms = [ document.getElementsByName("rHSchool")[0] ];
+// 고등학교 입력폼 추가
+function addHigh() {
+	var originForm = rsforms[0];
+	var form = originForm.cloneNode(true);
+	originForm.parentNode.insertBefore(form, originForm.nextSibling);
+	rsforms.push(form);
+}
+var rsforms = [ document.getElementsByName("rHSchool")[0] ];
 		
 				
-		// 대학교 입력폼 추가
-	
-		function addUniv() {
-			var originForm = uniforms[0];
-			var form = originForm.cloneNode(true);
-			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-			uniforms.push(form);
-		}
-		var uniforms = [ document.getElementsByName("rUniversity")[0] ];
+// 대학교 입력폼 추가
+function addUniv() {
+	var originForm = uniforms[0];
+	var form = originForm.cloneNode(true);
+	originForm.parentNode.insertBefore(form, originForm.nextSibling);
+	uniforms.push(form);
+}
+var uniforms = [ document.getElementsByName("rUniversity")[0] ];
 		
 		
-		// 대학원 입력폼 추가
-	
-		function addGrad() {
-			var originForm = gsforms[0];
-			var form = originForm.cloneNode(true);
-			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-			gsforms.push(form);
-		}
-		var gsforms = [ document.getElementsByName("rGSchool")[0] ];
-	
-		// 입력폼 삭제
-		function removeForm(form) {
-			form.remove();
-		}
+// 대학원 입력폼 추가
+function addGrad() {
+	var originForm = gsforms[0];
+	var form = originForm.cloneNode(true);
+	originForm.parentNode.insertBefore(form, originForm.nextSibling);
+	gsforms.push(form);
+}
+var gsforms = [ document.getElementsByName("rGSchool")[0] ];
+
+// 입력폼 삭제
+function removeForm(form) {
+	form.remove();
+}
 		
 		
-		// 고등학교삭제
-		$('.deleteHigh').click(function() {
-			var highEduNo = $(this).prev('input[name="highEduNo"]').val();
-		  $.ajax({
-		    type: 'POST',
-		    url: 'deleteHigh',
-		    data: { highEduNo: highEduNo },
-		    success: function(result) {
-		      if(result > 0) {
-		        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
-		        location.reload();
-		      } else {
-		        alert('해당 학력사항 삭제에 실패했습니다.');
-		      }  // if end
-		    } // success end
-		  });  // ajax end
-		}); // click-function
 		
-		// 대학교삭제
-		$('.deleteUni').click(function() {
-			var uniEduNo = $(this).prev('input[name="uniEduNo"]').val();
-		  $.ajax({
-		    type: 'POST',
-		    url: 'deleteUni',
-		    data: { uniEduNo: uniEduNo },
-		    success: function(result) {
-		      if(result > 0) {
-		        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
-		        location.reload();
-		      } else {
-		        alert('해당 학력사항 삭제에 실패했습니다.');
-		      }  // if end
-		    } // success end
-		  });  // ajax end
-		}); // click-function
-		
-		// 대학원삭제
-		$('.deleteGrad').click(function() {
-			var gradEduNo = $(this).prev('input[name="gradEduNo"]').val();
-		  $.ajax({
-		    type: 'POST',
-		    url: 'deleteGrad',
-		    data: { gradEduNo: gradEduNo },
-		    success: function(result) {
-		      if(result > 0) {
-		        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
-		        location.reload();
-		      } else {
-		        alert('해당 학력사항 삭제에 실패했습니다.');
-		      }  // if end
-		    } // success end
-		  });  // ajax end
-		}); // click-function
-		
-		// 모달창 체크박스 초기화
-		$(document).ready(function() {
-			$('#viewHigh').on('hidden.bs.modal', function() {
-				$('input[name=selectedHigh]').prop('checked', false);
-			});
-		});
-		
-		$(document).ready(function() {
-			$('#viewUni').on('hidden.bs.modal', function() {
-				$('input[name=selectedUni]').prop('checked', false);
-			});
-		});
-		
-		$(document).ready(function() {
-			$('#viewGrad').on('hidden.bs.modal', function() {
-				$('input[name=selectedGrad]').prop('checked', false);
-			});
-		});
+// 고등학교삭제
+$('.deleteHigh').click(function() {
+	var highEduNo = $(this).prev('input[name="highEduNo"]').val();
+  $.ajax({
+    type: 'POST',
+    url: 'deleteHigh',
+    data: { highEduNo: highEduNo },
+    success: function(result) {
+      if(result > 0) {
+        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
+        location.reload();
+      } else {
+        alert('해당 학력사항 삭제에 실패했습니다.');
+      }  // if end
+    } // success end
+  });  // ajax end
+}); // click-function
+
+// 대학교삭제
+$('.deleteUni').click(function() {
+	var uniEduNo = $(this).prev('input[name="uniEduNo"]').val();
+  $.ajax({
+    type: 'POST',
+    url: 'deleteUni',
+    data: { uniEduNo: uniEduNo },
+    success: function(result) {
+      if(result > 0) {
+        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
+        location.reload();
+      } else {
+        alert('해당 학력사항 삭제에 실패했습니다.');
+      }  // if end
+    } // success end
+  });  // ajax end
+}); // click-function
+
+// 대학원삭제
+$('.deleteGrad').click(function() {
+	var gradEduNo = $(this).prev('input[name="gradEduNo"]').val();
+  $.ajax({
+    type: 'POST',
+    url: 'deleteGrad',
+    data: { gradEduNo: gradEduNo },
+    success: function(result) {
+      if(result > 0) {
+        alert('해당 학력이 삭제되었습니다. 이전에 이미 작성한 이력서에 포함된 학력사항은 삭제되지 않습니다.');
+        location.reload();
+      } else {
+        alert('해당 학력사항 삭제에 실패했습니다.');
+      }  // if end
+    } // success end
+  });  // ajax end
+}); // click-function
 		
 		
+		
+// 모달창 체크박스 초기화
+$(document).ready(function() {
+	$('#viewHigh').on('hidden.bs.modal', function() {
+		$('input[name=selectedHigh]').prop('checked', false);
+	});
+});
+
+$(document).ready(function() {
+	$('#viewUni').on('hidden.bs.modal', function() {
+		$('input[name=selectedUni]').prop('checked', false);
+	});
+});
+
+$(document).ready(function() {
+	$('#viewGrad').on('hidden.bs.modal', function() {
+		$('input[name=selectedGrad]').prop('checked', false);
+	});
+});
+		
+		
+		
+		
+// 대학교 DB 낀테이블 insert - success - ok -> new form create - btn event handler
 		// 대학교 - 모달창에서 정보 불러와서 출력하기
 		let uniSaveButton = document.getElementById("selectUniBtn");
 		// event
@@ -1012,317 +1018,177 @@
 		    
 		    let uniNewForm = null;
 		    
+		    // 모달창에서 체크된 경력 데이터 - new form create 
 		    for (let i = 0; i < selectedUniList.length; i++) {
-		    	uniNewForm = document.createElement("form");
-		          let uniFormContainer = document.getElementById("UniFormContainer");
-		          uniNewForm.id = "uni-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
-		          uniNewForm.innerHTML = uniNewFormHTML;
-		          uniFormContainer.appendChild(uniNewForm);
+				// DB 낀테이블 insert - success - ok -> new form create - btn event handler
+			  	// 선택된 체크박스가 속한 <tr> 요소 찾기
+			  	let tr = selectedUniList[i].closest("tr");
+			  	// 해당 <tr> 요소 내의 uniEduNo 값 가져오기
+			  	let uniEduNo = tr.querySelector("input[name='uniEduNo']").value;
+			  	$.ajax({
+			  		url : 'insertInfoUni',
+			  		type: 'POST',
+			  		data : {uniEduNo : uniEduNo},
+			  		success : function(result) {
+			  			if(result > 0) {
+			  		        //alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+			  		        uniNewForm = document.createElement("form");
+				  			let uniFormContainer = document.getElementById("UniFormContainer");
+				  			uniNewForm.id = "car-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
+				  			uniNewForm.innerHTML = uniNewFormHTML;
+				  			uniFormContainer.appendChild(uniNewForm);
 		    
-			     // 기존 form 뒤에 새로운 form 추가
+			    // 기존 form 뒤에 새로운 form 추가
 			    let uniData = selectedUniList[i].closest("tr").getElementsByTagName("td");
-			   
-			     //uniNewForm.elements["uniNewAct"].value = uniData[1].textContent;
-			    //uniNewForm.elements["uniNewCategory"].value = uniData[2].textContent;
-			   
-			    $("[name=uniNewAct]").val(uniData[1]).prop("selected", true);
-			   $("[name=uniNewCategory]").val(uniData[2]).prop("selected", true);
-			    
+			    let uniNewAct = uniData[1].getAttribute("data-selectedvalue");
+			    let uniNewCategory = uniData[2].getAttribute("data-selectedvalue");
+			    uniNewForm.elements["uniNewAct"].value = uniNewAct;
+			    uniNewForm.elements["uniNewCategory"].value = uniNewCategory;
 			    uniNewForm.elements["uniNewName"].value = uniData[3].textContent;
 			    uniNewForm.elements["uniNewDate"].value = uniData[4].textContent;
 			    uniNewForm.elements["uniNewMajor"].value = uniData[5].textContent;
 			    uniNewForm.elements["uniNewPoint"].value = uniData[6].textContent;
 			    
 			    
-			    
-			    
-			  //- 버튼
-			    let deleteUniInfoBtn = uniNewForm.querySelector("#deleteUniInfo");
-			    deleteUniInfoBtn.addEventListener("click", function() {
-			    	const uniFormToRemove = this.closest("form");
-					const uniEduNoInput = uniFormToRemove.querySelector("input[name='uniEduNo']");
-					const uniEduNo = uniEduNoInput ? uniEduNoInput.value : null;
+			    // new form delete 버튼 -
+			    let deleteBtn = uniNewForm.querySelector("#deleteUniInfo");
+					deleteBtn.addEventListener("click", function() {
+					  deleteClickHandler(uniFormContainer, this, uniEduNo);
+					});
 		      
-					// uniEduNo 값을 가져온 후 삭제
-					  uniFormContainer.removeChild(uniFormToRemove);
+	  		    // new form 수정 버튼 
+	  		    let updateBtn = uniNewForm.querySelector("#uniUpdate");
+	  			updateBtn.addEventListener("click", function() {
+	  			updateClickHandler(uniNewForm, uniEduNo);
+	  			});
+  		      } else {
+  		      }
+	  	    }
+	  	}); 
+    
+  	alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
+    
+   }			
+});  
+
+
+//new form delete 버튼 - 
+function deleteClickHandler(uniFormContainer, deleteBtn, uniEduNo){
+  const formToRemove = deleteBtn.closest("form");
+  
+	// uniEduNo 값을 가져온 후 삭제
+  uniFormContainer.removeChild(formToRemove);
 			    	
-			    	  $.ajax({
-			    	    type: 'POST',
-			    	    url: 'deleteInfoUni',
-			    	    data: { uniEduNo: uniEduNo },
-			    	    success: function(result) {
-			    	      if(result > 0) {
-			    	        alert('작성 중인 이력서에서 해당 학력 정보가 삭제되었습니다.');
-			    	      } else {
-			    	        alert('작성 중인 이력서에서 해당 학력 정보 삭제에 실패했습니다.');
-					      }
-					    }
-					  });
-				  });
-			    
-			  //수정 버튼 
-			    let updateUniBtn = uniNewForm.querySelector("#uniUpdate");
-			    updateUniBtn.addEventListener("click", function() {
-			      const uniNewAct = uniNewForm.elements["uniNewAct"].value;
-			      const uniNewCategory = uniNewForm.elements["uniNewCategory"].value;
-			      const uniNewName = uniNewForm.elements["uniNewName"].value;
-			      const uniNewDate = uniNewForm.elements["uniNewDate"].value;
-			      const uniNewMajor = uniNewForm.elements["uniNewMajor"].value;
-			      const uniNewPoint = uniNewForm.elements["uniNewPoint"].value;
-			      
-			      
-			      const data = {
-	    		    uniEduNo: carNo,
-			        uniNewAct: uniNewAct,
-			        uniNewCategory: uniNewCategory,
-			        uniNewName: uniNewName,
-			        uniNewDate: uniNewDate,
-			        uniNewMajor: uniNewMajor,
-			        uniNewPoint: uniNewPoint
-			      };
+   	  $.ajax({
+   	    type: 'POST',
+   	    url: 'deleteInfoUni',
+   	    data: { uniEduNo: uniEduNo },
+   	    success: function(result) {
+   	      if(result > 0) {
+   	        alert('작성 중인 이력서에서 해당 학력 정보가 삭제되었습니다.');
+   	      } else {
+   	        alert('작성 중인 이력서에서 해당 학력 정보 삭제에 실패했습니다.');
+   		  }
+   		}
+   		});
+   	}
+    
+//new form 수정 버튼 
+function updateClickHandler(uniNewForm,uniEduNo) {
+     const uniNewAct = uniNewForm.elements["uniNewAct"].value;
+     const uniNewCategory = uniNewForm.elements["uniNewCategory"].value;
+     const uniNewName = uniNewForm.elements["uniNewName"].value;
+     const uniNewDate = uniNewForm.elements["uniNewDate"].value;
+     const uniNewMajor = uniNewForm.elements["uniNewMajor"].value;
+     const uniNewPoint = uniNewForm.elements["uniNewPoint"].value;
+     
+     
+     const data = {
+ 	   uniEduNo: uniEduNo,
+       uniNewAct: uniNewAct,
+       uniNewCategory: uniNewCategory,
+       uniNewName: uniNewName,
+       uniNewDate: uniNewDate,
+       uniNewMajor: uniNewMajor,
+       uniNewPoint: uniNewPoint
+     };
 
-			      $.ajax({
-			        type: "POST",
-			        url: 'updateUni',
-			        data: data,
-			        success: function(result) {
-			          if(result > 0) {
-			            alert('해당 학력이 수정되었습니다.');
-			            location.reload();
-			          } else {
-			            alert('해당 학력 수정에 실패했습니다.');
-				        }
-				      }
-				    });
-				  });
-				}
+     $.ajax({
+       type: "POST",
+       url: 'updateUni',
+       data: data,
+       success: function(result) {
+         if(result > 0) {
+           alert('해당 학력이 수정되었습니다.');
+           location.reload();
+         } else {
+           alert('해당 학력 수정에 실패했습니다.');
+	        }
+	      }
+	    });
+}
 
 
-						
 
-		// '불러오기' 버튼 클릭시 낀테이블 insert
-		var uniEduNo = $("input[name='uniEduNo']").val();
-		$.ajax({
-			url : 'insertInfoUni',
-			type: 'POST',
-			data : {uniEduNo : uniEduNo},
-			success : function(result) {
-				if(result > 0) {
-			        alert('작성 중인 이력서에서 해당 학력 정보가 입력되었습니다.');
-			      } else {
-			        alert('작성 중인 이력서에서 해당 학력 입력에 실패했습니다. ');
-			      }
-		    }
-		  }); 
-		});
+	// 대학교 모달창에 체크한 이력서 순서대로 표시
+	$(document).ready(function() {
+ 	$('input[name="selectedUni"]').change(function() {
+    // 선택된 체크박스를 담을 배열을 초기화
+    var selectedUnis = [];
+
+    // 체크된 체크박스의 값 가져오기
+    $('input[name="selectedUni"]:checked').each(function(index) {
+
+    	var university = {
+  			uniAct: $(this).closest('tr').find('td:eq(1)').text(),
+  			uniCategory: $(this).closest('tr').find('td:eq(2)').text(),
+  			uniName: $(this).closest('tr').find('td:eq(3)').text(),
+  			uniDate: $(this).closest('tr').find('td:eq(4)').text(),
+  			uniMajor: $(this).closest('tr').find('td:eq(5)').text(),
+  			uniPoint: $(this).closest('tr').find('td:eq(6)').text(),
+        uniNumber: index + 1 // 선택된 체크박스가 배열에서 몇 번째인지를 이용해 번호 매기기
+      };
+
+      // 배열에 추가
+      selectedUnis.push(university);
+   	 });  // 
+
+    // 선택된 값을 테이블 형태로 출력
+    var html = '<table class="table">';
+    html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학카테고리</th><th>학교명(소재지)</th><th>졸업일자</th><th>전공</th><th>학점</th></tr></thead>';
+    html += '<tbody>';
+
+    for (var i = 0; i < selectedUnis.length; i++) {
+      html += '<tr>';
+      html += '<td>' + selectedUnis[i].uniNumber + '</td>';
+      html += '<td>' + selectedUnis[i].uniAct + '</td>';
+      html += '<td>' + selectedUnis[i].uniCategory + '</td>';
+      html += '<td>' + selectedUnis[i].uniName + '</td>';
+      html += '<td>' + selectedUnis[i].uniDate + '</td>';
+      html += '<td>' + selectedUnis[i].uniMajor + '</td>';
+      html += '<td>' + selectedUnis[i].uniPoint + '</td>';
+      html += '</tr>';
+    }
+
+    html += '</tbody></table>';
+
+    $('#selectedUniList').html(html);
+  });
+});
 
 
-				// 대학교 모달창에 체크한 이력서 순서대로 표시
-				$(document).ready(function() {
-			 	$('input[name="selectedUni"]').change(function() {
-			    // 선택된 체크박스를 담을 배열을 초기화
-			    var selectedUnis = [];
-			
-			    // 체크된 체크박스의 값 가져오기
-			    $('input[name="selectedUni"]:checked').each(function(index) {
-			
-			    	var university = {
-	    			uniAct: $(this).closest('tr').find('td:eq(1)').text(),
-	    			uniCategory: $(this).closest('tr').find('td:eq(2)').text(),
-	    			uniName: $(this).closest('tr').find('td:eq(3)').text(),
-	    			uniDate: $(this).closest('tr').find('td:eq(4)').text(),
-	    			uniMajor: $(this).closest('tr').find('td:eq(5)').text(),
-	    			uniPoint: $(this).closest('tr').find('td:eq(6)').text(),
-			        uniNumber: index + 1 // 선택된 체크박스가 배열에서 몇 번째인지를 이용해 번호 매기기
-			      };
-			
-			      // 배열에 추가
-			      selectedUnis.push(university);
-			   	 });
-			
-			    // 선택된 값을 테이블 형태로 출력
-			    var html = '<table class="table">';
-			    html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학카테고리</th><th>학교명(소재지)</th><th>졸업일자</th><th>전공</th><th>학점</th></tr></thead>';
-			    html += '<tbody>';
-			
-			    for (var i = 0; i < selectedUnis.length; i++) {
-			      html += '<tr>';
-			      html += '<td>' + selectedUnis[i].uniNumber + '</td>';
-			      html += '<td>' + selectedUnis[i].uniAct + '</td>';
-			      html += '<td>' + selectedUnis[i].uniCategory + '</td>';
-			      html += '<td>' + selectedUnis[i].uniName + '</td>';
-			      html += '<td>' + selectedUnis[i].uniDate + '</td>';
-			      html += '<td>' + selectedUnis[i].uniMajor + '</td>';
-			      html += '<td>' + selectedUnis[i].uniPoint + '</td>';
-			      html += '</tr>';
-			    }
-			
-			    html += '</tbody></table>';
-			
-				    $('#selectedUniList').html(html);
-				  });
-				});
-		
-		
-		
-		
-				// 모달창 닫으면 표 초기화
-				$('#viewUni').on('hidden.bs.modal', function () {
-				    $('#selectedUniList').html('');
-				    $('input[name="selectedUni"]').prop('checked', false);
-				});
+// 모달창 닫으면 표 초기화
+$('#viewUni').on('hidden.bs.modal', function () {
+    $('#selectedUniList').html('');
+    $('input[name="selectedUni"]').prop('checked', false);
+});
 		
 		
 		
 		
 		
 		
-		// TODO 검정고시 어떻게 표시하지
-		// 고등학교-모달창에서 정보 불러와서 출력하기
-/* 		let saveHighButton = document.getElementById("selectHighBtn");
-		// event
-		saveHighButton.addEventListener("click", function() {
-		  // 체크된  데이터를 가져와서 form에 추가
-		  let selectedHighList = document.querySelectorAll('input[name="selectedHigh"]:checked');
 
-		  let newFormHTML =	`
-			  <form name="rHSchool" action="rHSchool" method="post">
-			  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-			 	<button type="button" class="btn btn-outline-dark" id="deleteInfo">
-				  <i class="fa fa-minus"></i>
-				</button>
-			  </div>
-
-				<div class="row mb-3">
-					<label for="highNewName" class="col-sm-2 col-form-label">고등학교명</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="highNewName">
-					</div>
-				</div>
-				<div class="row mb-3">
-					<label for="highNewDate" class="col-sm-2 col-form-label">고등학교
-						졸업일자</label>
-					<div class="col-sm-10">
-						<input type="Date" class="form-control" name="highNewDate">
-					</div>
-				</div>
-				<div class="row mb-3">
-					<label for="highNewMajor" class="col-sm-2 col-form-label">고등학교
-						전공계열</label>
-					<div class="col-sm-10">
-						<select class="form-select" name="highNewMajor">
-							<option value="0">전공계열</option>
-							<option value="이과">이과</option>
-							<option value="문과">문과</option>
-							<option value="예체능">예체능</option>
-						</select>
-					</div>
-				</div>
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-				<button type="button" id="update" class="btn btn-primary">수정</button>
-				</div>
-				<hr>
-			</form>
-		    `;
-		    
-		    let newForm = null;
-		    
-		    for (let i = 0; i < selectedHighList.length; i++) {
-		    	  newForm = document.createElement("form");
-		          let formContainer = document.getElementById("HighFormContainer");
-		          newForm.id = "high-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
-		          newForm.innerHTML = newFormHTML;
-		          formContainer.appendChild(newForm);
-		    
-			     // 기존 form 뒤에 새로운 form 추가
-			    let carData = selectedHighList[i].closest("tr").getElementsByTagName("td");
-			    newForm.elements["highNewName"].value = carData[1].textContent;
-			    newForm.elements["highNewDate"].value = carData[2].textContent;
-			    newForm.elements["highNewMajor"].value = carData[3].textContent;
-			    
-			  //- 버튼
-			    let deleteHignBtn = newForm.querySelector("#deleteInfo");
-			    deleteHignBtn.addEventListener("click", function() {
-			      const highFormId = newForm.id;
-			      const highFormToRemove = document.getElementById(highFormId);
-			      formContainer.removeChild(highFormToRemove);
-			      
-			      var carNo = $("input[name='highEduNo']").val();
-			    	
-			    	  $.ajax({
-			    	    type: 'POST',
-			    	    url: 'deleteInfoCareer',
-			    	    data: { carNo: carNo },
-			    	    success: function(result) {
-			    	      if(result > 0) {
-			    	        alert('작성 중인 이력서에서 해당 경력 정보가 삭제되었습니다.');
-			    	      } else {
-			    	        alert('작성 중인 이력서에서 해당 경력 정보 삭제에 실패했습니다.');
-					      }
-					    }
-					  });
-				  });
-			    
-			  //수정 버튼 
-			    let updateBtn = newForm.querySelector("#update");
-			    updateBtn.addEventListener("click", function() {
-			      const carNewName = newForm.elements["carNewName"].value;
-			      const carNewDate = newForm.elements["carNewDate"].value;
-			      const carNewPosition = newForm.elements["carNewPosition"].value;
-			      const carNewDept = newForm.elements["carNewDept"].value;
-			      const carNewResp = newForm.elements["carNewResp"].value;
-			      const carNewSalary = newForm.elements["carNewSalary"].value;
-			      
-			      
-			      const data = {
-			        carNo: carNo,
-			        carNewName: carNewName,
-			        carNewDate: carNewDate,
-			        carNewPosition: carNewPosition,
-			        carNewDept: carNewDept,
-			        carNewResp: carNewResp,
-			        carNewSalary: carNewSalary
-			      };
-
-			      $.ajax({
-			        type: "POST",
-			        url: 'updateCareer',
-			        data: data,
-			        success: function(result) {
-			          if(result > 0) {
-			            alert('해당 경력이 수정되었습니다.');
-			            location.reload();
-			          } else {
-			            alert('해당 경력 수정에 실패했습니다.');
-				        }
-				      }
-				    });
-				  });
-				}
-
-
-						
-
-		// '불러오기' 버튼 클릭시 낀테이블 inesrt
-		var carNo = $("input[name='carNo']").val();
-		$.ajax({
-			url : 'insertInfoCareer',
-			type: 'POST',
-			data : {carNo : carNo},
-			success : function(result) {
-				if(result > 0) {
-			        alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
-			      } else {
-			        alert('작성 중인 이력서에서 해당 경력 입력에 실패했습니다. ');
-			      }
-		    }
-		  }); 
-
-
-
-
-		}); */
-		
 		
 		
 		
