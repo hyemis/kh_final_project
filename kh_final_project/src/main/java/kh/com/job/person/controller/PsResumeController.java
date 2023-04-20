@@ -365,6 +365,30 @@ public class PsResumeController {
 		result = rservice.deleteInfoGrad(InfoNo);
 		return result;
 	}
+	
+	// 자격증 테이블 수정
+	@PostMapping("updateUni")
+	@ResponseBody
+	public int updateUni(@RequestParam("uniEduNo") Integer uniEduNo, @RequestParam("uniNewAct") String uniAct,
+			@RequestParam("uniNewCategory") String uniCategory, @RequestParam("uniNewName") String uniName,
+			@RequestParam("uniNewDate") String uniDate, @RequestParam("uniNewMajor") String uniMajor,
+			@RequestParam("uniNewPoint") Double uniPoint)
+			throws Exception {
+
+		int result = -1;
+
+		Map<String, Object> updateUni = new HashMap<>();
+		updateUni.put("uniEduNo", uniEduNo);
+		updateUni.put("uniAct", uniAct);
+		updateUni.put("uniCategory", uniCategory);
+		updateUni.put("uniName", uniName);
+		updateUni.put("uniDate", uniDate);
+		updateUni.put("uniMajor", uniMajor);
+		updateUni.put("uniPoint", uniPoint);
+		
+		result = rservice.updateUni(updateUni);
+		return result;
+	}
 
 	// 경력사항 페이지
 	@GetMapping("career")

@@ -319,6 +319,21 @@ public class PsResumeServieImpl implements PsResumeService {
 		return dao.deleteInfoCl(InfoNo);
 	}
 
+	@Override
+	public int updateHigh(Map<String, Object> updateHigh) throws Exception {
+		return dao.updateHigh(updateHigh);
+	}
+
+	@Override
+	public int updateUni(Map<String, Object> updateUni) throws Exception {
+		return dao.updateUni(updateUni);
+	}
+
+	@Override
+	public int updateGrad(Map<String, Object> updateGrad) throws Exception {
+		return dao.updateGrad(updateGrad);
+	}
+
 	
 
 	

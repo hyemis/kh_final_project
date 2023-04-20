@@ -84,6 +84,8 @@ public interface PsResumeService {
 	public int deleteHigh(int highEduNo) throws Exception;
 	
 	public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateHigh(Map<String, Object> updateHigh) throws Exception;
 
 	// uniInfo
 	public int getMaxUniNo() throws Exception;
@@ -93,6 +95,8 @@ public interface PsResumeService {
 	public int deleteUni(int uniEduNo) throws Exception;
 	
 	public int deleteInfoUni(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateUni(Map<String, Object> updateUni) throws Exception;
 
 	// gradInfo
 	public int getMaxGradNo() throws Exception;
@@ -102,6 +106,8 @@ public interface PsResumeService {
 	public int deleteGrad(int gradEduNo) throws Exception;
 	
 	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateGrad(Map<String, Object> updateGrad) throws Exception;
 
 
 	// CareerInfo

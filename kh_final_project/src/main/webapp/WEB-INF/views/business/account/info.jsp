@@ -42,9 +42,10 @@
 				<!-- profile area start -->
 				<div class="col-md-3 col-sm-4  border border-secondary">
 					<div class="team-item rounded overflow-hidden">
-					<div class="position-relative">
-						<img class="img-fluid"
-							src="${pageContext.request.contextPath}/resources/template/makaan/img/team-1.jpg" alt="">
+					<div class="position-relative profileArea">
+						<img id="userPicArea" class="img-fluid"
+							src="${bsinfo.userPic eq null? 'https://dummyimage.com/200x200/d6d6d6/000000&text=200x200' : bsinfo.userPic }" alt="" style="width: 200px; height: 200px;">
+							
 						<div
 							class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
 							<a class="btn btn-square mx-1" href=""><i
@@ -64,10 +65,16 @@
 				<!-- info area start -->
 				<div class="col-md-8 col-sm-8 border border-secondary">
 					<!-- update -->
-					<div class="container border border-secondary" style="height: 900px;">
+					<div class="container border border-secondary" style="height: 1000px;">
 						<h4 class="text-center m-2 p-3">내정보</h4>
 						<div>
-							<form action="<%=request.getContextPath() %>/business/account/info" method="post">
+							<form action="<%=request.getContextPath() %>/business/account/info" method="post" enctype="multipart/form-data">
+							<div class="mb-3 row">
+							    <label for="userImage" class="col-sm-2 col-form-label btn btn-primary text-center">회사 사진</label>
+							    <div class="col-sm-8">
+							      <input type="file" accept="image/*" class="form-control userImage" id="userImage" name ="userImage" onchange="setThumbnail(this)" style="display:none">
+							    </div>
+							 </div>
 							<div class="mb-3 row">
 							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">이메일</label>
 							    <div class="col-sm-8">
@@ -344,7 +351,48 @@
 					return false;
 				}
 			});
+	
+			<!-- 이미지 미리보기 -->	
+			function setThumbnail(input) {
+				  if (input.files && input.files[0]) {
+				    var reader = new FileReader();
+				    
+				    reader.onload = function(e) {
+				      var img = new Image();
+				      img.src = e.target.result;
+				      img.onload = function() {
+				        // 썸네일 크기 설정
+				        var canvas = document.createElement("canvas");
+				        var context = canvas.getContext("2d");
+				        var size = 200;
+				        var width = img.width;
+				        var height = img.height;
+				        if (width > height) {
+				          if (width > size) {
+				            height *= size / width;
+				            width = size;
+				          }
+				        } else {
+				          if (height > size) {
+				            width *= size / height;
+				            height = size;
+				          }
+				        }
+				        canvas.width = size;
+				        canvas.height = size;
+				        context.drawImage(img, 0, 0, width, height, 0, 0, size, size);
+
+				        // 이미지 출력
+				        var thumbnail = canvas.toDataURL("image/png");
+				        document.getElementById("userPicArea").src = thumbnail;
+				      };
+				    };
+				    
+				    reader.readAsDataURL(input.files[0]);
+				  }
+				}
 </script>
+
 
 
 	

@@ -95,7 +95,16 @@
 		where
 		HIGH_EDU_NO = #{highEduNo}
 	</delete>
-
+	
+	<update id="updateHigh" parameterType="hdto">
+		UPDATE RESUME_HIGHSCHOOL SET
+		HIGH_EDU_NO = #{highEduNo},
+		GED = #{ged},
+		HIGH_NAME = #{highName},
+		HIGH_DATE = #{highDate},
+		HIGH_MAJOR = #{highMajor},
+		WHERE HIGH_EDU_NO = #{highEduNo}
+	</update>
 
 	<delete id="deleteUni" parameterType="_int">
 		delete from
@@ -103,15 +112,6 @@
 		where
 		UNI_EDU_NO = #{uniEduNo}
 	</delete>
-
-	<delete id="deleteGrad" parameterType="_int">
-		delete from
-		RESUME_GRADSCHOOL
-		where
-		GRAD_EDU_NO = #{gradEduNo}
-	</delete>
-
-	<!-- <select id="selectList" resultType="rdto"> </select> -->
 
 	<insert id="insertUniv" parameterType="udto">
 		insert into
@@ -124,6 +124,18 @@
 		#{uniDate}, #{uniMajor},
 		#{uniPoint})
 	</insert>
+	
+	<update id="updateUni" parameterType="udto">
+		UPDATE RESUME_UNIVERSITY SET
+		UNI_EDU_NO = #{uniEduNo},
+		UNI_ACT = #{uniAct},
+		UNI_CATEGORY = #{uniCategory},
+		UNI_NAME = #{uniName},
+		UNI_DATE = #{uniDate},
+		UNI_MAJOR = #{uniMajor},
+		UNI_POINT = #{uniPoint}
+		WHERE UNI_EDU_NO = #{uniEduNo}
+	</update>
 
 	<insert id="insertGschool" parameterType="gdto">
 		insert into
@@ -133,6 +145,26 @@
 		(RESUME_GRADSCHOOL_SEQ.NEXTVAL, #{gradAct}, #{gradName},
 		#{gradCategory}, #{gradDate}, #{gradMajor}, #{gradPoint})
 	</insert>
+	
+	<delete id="deleteGrad" parameterType="_int">
+		delete from
+		RESUME_GRADSCHOOL
+		where
+		GRAD_EDU_NO = #{gradEduNo}
+	</delete>
+	
+	<update id="updateGrad" parameterType="gdto">
+		UPDATE RESUME_GRADSCHOOL SET
+		GRAD_EDU_NO = #{gradEduNo},
+		GRAD_ACT = #{gradAct},
+		GRAD_NAME = #{gradName},
+		GRAD_CATEGORY = #{gradCategory},
+		GRAD_DATE = #{gradDate},
+		GRAD_MAJOR = #{gradMajor},
+		GRAD_POINT = #{gradPoint}
+		WHERE GRAD_EDU_NO = #{gradEduNos}
+	</update>
+	
 
 	<insert id="insertCareer" parameterType="careerdto">
 		insert into

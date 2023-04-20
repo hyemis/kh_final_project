@@ -178,9 +178,10 @@
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
-				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/cl">다음</a>
+				<a class="btn btn-primary"
+					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
+
 			</div>
 
 		</div>
