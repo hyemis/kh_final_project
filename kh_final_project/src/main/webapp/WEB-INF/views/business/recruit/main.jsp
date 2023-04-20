@@ -58,7 +58,8 @@
 			<div class="myinfo p-2 col-3 border border-primary">
 				<div class="container-xxl py-5">
 					<div class="bg-white rounded p-4 row" style="border: 1px dashed rgba(0, 185, 142, .3)">
-						${userinfo.userPic eq null ? '<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">' : userinfo.userPic}
+					<img class="object-fit-sm-contain border" src="${userinfo.userPic eq null ? 'https://dummyimage.com/150x200/d6d6d6/000000&text=150x200' : userinfo.userPic}" alt="">
+						
 					</div>
 					<div class="userinfo p-2 pt-4">
 						<span>이름 : </span>
