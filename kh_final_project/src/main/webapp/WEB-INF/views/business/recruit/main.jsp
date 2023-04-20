@@ -64,8 +64,6 @@
 					<div class="userinfo p-2 pt-4">
 						<span>이름 : </span>
 						<span>${userinfo.userName }</span><br>
-						<span>전화번호 : </span>
-						<span>${userinfo.userPhone }</span><br>
 						<span>대표전화번호 : </span>
 						<span>${userinfo.bsMainPhone }</span><br>
 						<span>이메일 : </span>
