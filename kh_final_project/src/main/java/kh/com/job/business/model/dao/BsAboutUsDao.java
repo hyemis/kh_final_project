@@ -65,7 +65,9 @@ public class BsAboutUsDao {
 	
 	// 회사소개 
 	public int insertCompanyInfo(BoardDto dto) {
-		return sqlSession.insert("boards.insertCompanyInfo", dto);
+		sqlSession.insert("boards.insertCompanyInfo", dto);
+		int boardNum = dto.getBoardNum();
+		return boardNum;
 	}
 
 	public int updateCompanyInfo(BoardDto dto) {

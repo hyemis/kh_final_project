@@ -107,17 +107,13 @@
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
 							data-bs-toggle="modal" data-bs-target="#companyinfo">등록 및 수정</button>
-						
-						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#viewInfo">회사소개 페이지로 이동</button>
-						*** 모달창 작업 필요함
+						<a class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/companyinfo" role="button">회사소개 페이지로 이동</a>
 					</div>
 					<!-- 뉴스레터 -->
 					<div class="border border-secondary">
 						<h1>뉴스레터</h1>
 						<div>
-							<button type="button" class="btn btn-light"
-								href="<%=request.getContextPath()%>/business/aboutus/newsletter">더보기</button>
+						<a class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/newsletter" role="button">더보기</a>
 							<!-- Button trigger modal -->
 							<button type="button" class="btn btn-primary"
 								data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
@@ -196,6 +192,38 @@
 				<div class="modal-body">
 					<form action="${pageContext.request.contextPath }/business/aboutus/infoform" method="post"
 						enctype="multipart/form-data">
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>기업이름</h4>
+							</div>
+							<div class="col-10 ">
+								<input type="text" name="boardTitle"
+									style="width: 30%;" placeholder="기업이름을 적어주세요" > 
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>직 원 수</h4>
+							</div>
+							<div class="col-10 ">
+								<p>직원수를 숫자로 입력해주세요</p>
+								<input type="text" name="employee"
+									style="width: 30%;" placeholder=" 예시)300"> 명
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>평균연봉</h4>
+							</div>
+							<div class="col-10 ">
+								<p>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</p>
+								<input type="text"
+									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500"> 만원
+								<hr>
+							</div>
+						</div>
 
 						<div class="row ">
 							<div class="col-2 text-center">
@@ -266,26 +294,7 @@
 								<hr>
 							</div>
 						</div>
-						<div class="row ">
-							<div class="col-2 text-center font-monospace">
-								<h4>직 원 수</h4>
-							</div>
-							<div class="col-10 ">
-								<a>직원수를 숫자로 입력해주세요</a> <input type="text" name="employee"
-									style="width: 30%;" placeholder="예시)300">명
-								<hr>
-							</div>
-						</div>
-						<div class="row ">
-							<div class="col-2 text-center font-monospace">
-								<h4>평균연봉</h4>
-							</div>
-							<div class="col-10 ">
-								<a>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</a> <input type="text"
-									name="salaryAvg" style="width: 30%;" placeholder="예시)3500">만원
-								<hr>
-							</div>
-						</div>
+					
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>기업사진</h4>
@@ -320,6 +329,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<!-- 뉴스레터 -->
 	<div class="modal fade" id="newsletter" data-bs-backdrop="static"

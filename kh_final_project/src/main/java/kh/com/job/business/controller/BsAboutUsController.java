@@ -50,19 +50,28 @@ public class BsAboutUsController {
 	// 회사소개 페이지
 	@GetMapping("/companyinfo")
 	public ModelAndView companyinfo(ModelAndView mv, BoardDto dto, Principal principal) {
-		
-		mv.addObject("info",service.viewCompanyInfo(principal.getName()));
-		return mv;
-		
-	}	
+	    System.out.println(principal.getName());
+	    
+	    mv.addObject("info",service.viewCompanyInfo(principal.getName()));
+	    
+	    //tag값 분리
+	    String tag = dto.getTag();		
+	    if (tag != null && !tag.isEmpty()) { // tag 값이 null 또는 빈 문자열이 아닌 경우에만 처리
+	        String[] tags = tag.split(",");
+	        mv.addObject("tags", tags);
+	    }
+	    
+	    return mv;
+	}
+
 	
-	// 뉴스레터 작성
+	// 회사소개작성
 	@PostMapping("/infoform")
 	public ModelAndView insertCompanyInfo(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
 		dto.setUserId(principal.getName()); 
 		service.insertCompanyInfo(dto);
 		mv.setViewName("redirect:/business/aboutus");
-		rttr.addFlashAttribute("msg", "뉴스레터가 성공적으로 등록되었습니다.");
+		rttr.addFlashAttribute("msg", "성공적으로 등록되었습니다.");
 		System.out.println(dto);
 		return mv;
 	}

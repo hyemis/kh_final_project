@@ -20,7 +20,6 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.css" rel="stylesheet">
 	
 <!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -31,7 +30,9 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
-
+<!-- ckeditor5 -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
  
  </head>
 
@@ -53,18 +54,144 @@
                      <h1 class="mb-3 text-primary">${info.boardTitle}</h1>
                     </div>
                 </div>
-                <div>${info.tag}</div>
-            </div>
                 
-              <!-- 회사소개  -->
-            <div class="container wow fadeInUp">
-            	<h1 class="mb-3">회사 소개</h1>
-            
-            	<div class="pt-3" id="infoContent">
-            	회사 소개 내용이 나타납니다
-            	</div>
-         	</div>
-            <Br>   
+                <div><a class="btn btn-primary">${info.tag}</a></div>
+
+                
+                <br> 
+                
+                <!-- 회사소개  -->
+	            <div class="container wow fadeInUp">
+	            	<h1 class="mb-3">회사 소개</h1>
+	            	<div class="pt-3"> ${info.boardContent} </div>
+	            	<div class="row">
+		            	<div class="col rounded" data-wow-delay="0.5s">
+		             				<img alt="" src="https://dummyimage.com/300x200/000/fff">
+		                </div>
+		                <div class="col rounded" data-wow-delay="0.5s">
+		             				<img alt="" src="https://dummyimage.com/300x200/000/fff">
+		                </div>
+		                <div class="col rounded" data-wow-delay="0.5s">
+		             				<img alt="" src="https://dummyimage.com/300x200/000/fff">
+		                </div>
+	            	</div>
+	            
+	         	</div>
+            </div>
+        <br>        
+         <!-- 채용중인 포지션 -->   
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end">
+                    <div class="col-lg-6">
+                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                            <h1 class="mb-3">채용중인포지션</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#">더보기</a>
+                            </li>
+                            <li class="nav-item me-0">
+                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#">QnA</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                   
+                                    <div class="p-4 pb-0">
+                                         <h5 class="text-primary mb-3">상시채용</h5>
+                                        <a class="d-block h5 mb-2" href="">개발자</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="property-item rounded overflow-hidden">
+                                   
+                                    <div class="p-4 pb-0">
+                                         <h5 class="text-primary mb-3">상시채용</h5>
+                                        <a class="d-block h5 mb-2" href="">개발자</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="property-item rounded overflow-hidden">
+                                   
+                                    <div class="p-4 pb-0">
+                                         <h5 class="text-primary mb-3">상시채용</h5>
+                                        <a class="d-block h5 mb-2" href="">개발자</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                   
+                                    <div class="p-4 pb-0">
+                                         <h5 class="text-primary mb-3">상시채용</h5>
+                                        <a class="d-block h5 mb-2" href="">개발자</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="property-item rounded overflow-hidden">
+                                   
+                                    <div class="p-4 pb-0">
+                                         <h5 class="text-primary mb-3">상시채용</h5>
+                                        <a class="d-block h5 mb-2" href="">개발자</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="property-item rounded overflow-hidden">
+                                   
+                                    <div class="p-4 pb-0">
+                                         <h5 class="text-primary mb-3">상시채용</h5>
+                                        <a class="d-block h5 mb-2" href="">개발자</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+
+              <br>
+           
            <!-- 오시는길 -->
                <div class="container">
                     <div class="col-12 row g-0 gx-5 align-items-end">
@@ -172,5 +299,6 @@
         console.error( error );
     });
 	</script>
+        
 </body>
 </html>

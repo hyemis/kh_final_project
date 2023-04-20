@@ -20,7 +20,6 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/person.css" rel="stylesheet">
 	
 <!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -31,7 +30,9 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
-
+<!-- ckeditor5 -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
  
  </head>
 
@@ -50,10 +51,10 @@
                     	</div>
                     </div>
                     <div class="col-11 ">
-                     <h1 class="mb-3 text-primary">백엔드개발자</h1>
+                     <h1 class="mb-3 text-primary">${info.boardTitle}</h1>
                     </div>
                 </div>
-                <div>태그 위치</div>
+                <div>${info.tag}</div>
             </div>
                 
                 
@@ -186,7 +187,7 @@
                 </div>
             	</div>
             	<div class="pt-3">
-            	회사 소개 내용이 나타납니다
+            	${info.boardContent}
             	</div>
          	</div>
             <Br>   
@@ -282,7 +283,21 @@
 </div>       
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-<script></script>
+<!-- ck에디터  -->
+<script type="text/javascript">
+	
+    ClassicEditor
+    .create( document.querySelector( '#infoContent' ),{
+    	language: "ko"    
+    	, config : {
+    		height:'400px'
+	   		, width:'100%'
+    	}, toolbar: []
+    })
+    .catch( error => {
+        console.error( error );
+    });
+	</script>
         
 </body>
 </html>

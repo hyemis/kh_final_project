@@ -19,8 +19,8 @@
 	<insert id="insertCompanyInfo">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE)
-		VALUES(${boardNum},#{userId},'UDB06',#{userName},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
-		<selectKey keyProperty="boardNum" resultType="String"
+		VALUES(${boardNum},#{userId},'UDB06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
+		<selectKey keyProperty="boardNum" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
@@ -41,7 +41,7 @@
 		</selectKey>
 	</update>
 	
-	<select id="viewCompanyInfo" resultType="budto">
+	<select id="viewCompanyInfo" resultType="bdto">
         SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE
         FROM BOARD
         WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
