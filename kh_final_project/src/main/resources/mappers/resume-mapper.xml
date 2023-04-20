@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
 
-	<!-- userId 들고오면 resumeNo max 인거 찾아줌 삭제 예정! -->
 	<select id="selectOne" resultType="rdto">
 		select RESUME_NO,
 		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
@@ -464,7 +463,7 @@
 			rc.CERTI_NO AS certiNo,
 			rc.CERTI_NAME AS certiName,
 			rc.CERTI_PUB AS certiPub,
-			rc.CERTI_DATE AS certiDate
+			to_char(rc.CERTI_DATE, 'YYYY-MM-DD') AS certiDate
 		FROM 
 			RESUME_CERTI RC
 			INNER JOIN RESUME_CERTI_INFO i ON rc.CERTI_NO = i.CERTI_NO
