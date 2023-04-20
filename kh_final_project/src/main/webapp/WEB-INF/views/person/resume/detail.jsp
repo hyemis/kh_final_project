@@ -151,7 +151,7 @@
 							<c:if test="${not empty cl.clFile}">
 								<div class="row">
 									<div class="input-group">
-										<input type="text" class="form-control" id="uploadCl2"
+										<input type="text" class="form-control" id="originPath"
 											value="${cl.clFile}"> <span class="input-group-btn">
 											<button type="button" id="deleteFile" class="btn btn-primary">기존
 												파일 삭제</button>
@@ -205,6 +205,7 @@
 	
 	// 수정 버튼 
 	let updateBtn = document.querySelector("#update");
+	
 	updateBtn.addEventListener("click", function() {
 	  let formdata = new FormData();
 	  formdata.append("No", parseInt(window.location.href.split('/').pop()));
@@ -215,11 +216,11 @@
 	    formdata.append("updateClFile", clFile);
 	    formdata.append("curPath", ""); // 기존 경로는 없음
 	  } else {
-	    const uploadCl2Val = $('#uploadCl2').val();
-	    if (uploadCl2Val !== null && uploadCl2Val !== '') {
-	      formdata.append("updateClFile", uploadCl2Val);
-	      formdata.append("curPath", curPath); // 기존 경로
-	    }
+		  const curPath = $('#originPath').val();
+		  if (curPath !== null && curPath !== '') {
+		      formdata.append("updateClFile", curPath);
+		      formdata.append("curPath", curPath); // 기존 경로
+		    }
 	  }
 
 	  formdata.append("growth", document.querySelector("#growth").value);
@@ -247,7 +248,7 @@
 	
 	// 기존 파일 삭제 버튼 
 	$(document).on('click', '#deleteFile', function() {
-    var fileUrl = $('#uploadCl2').val();
+    var fileUrl =dd$('#ㅐ').val();
     $.ajax({
         type: 'POST',
         url: '${pageContext.request.contextPath}/person/resume/deleteClFile',
