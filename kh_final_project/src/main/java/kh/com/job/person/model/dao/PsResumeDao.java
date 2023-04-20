@@ -30,6 +30,10 @@ public class PsResumeDao {
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception {
 		return sqlSession.selectOne("resume.rselectOne", infoMap);
 	}
+	
+	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectOne("resume.highselectOne", infoMap);
+	}
 
 	// 이력서 출력
 	public List<PsResumeDto> selectList(String userId) throws Exception {

@@ -223,10 +223,23 @@
 		    }
 	  }
 
-	  formdata.append("growth", document.querySelector("#growth").value);
-	  formdata.append("motive", document.querySelector("#motive").value);
-	  formdata.append("adv", document.querySelector("#adv").value);
-	  formdata.append("asp", document.querySelector("#asp").value);
+	  const growthEditor = CKEDITOR.instances['growth'];
+	  const growthText = growthEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("growth", growthText);
+	  
+	  const motiveEditor = CKEDITOR.instances['motive'];
+	  const motiveText = motiveEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("motive", motiveText);
+	  
+	  
+	  const advEditor = CKEDITOR.instances['adv'];
+	  const advText = advEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("adv", advText);
+	  
+	  
+	  const aspEditor = CKEDITOR.instances['asp'];
+	  const aspText = aspEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("asp", aspText);
 
 	  $.ajax({
 	    type: 'POST',

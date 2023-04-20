@@ -4,21 +4,48 @@
 
 	<select id="selectOne" resultType="rdto">
 		select RESUME_NO,
-			RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
-			USER_RESUME
-		WHERE USER_ID = #{USER_ID} 
+		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
+		USER_RESUME
+		WHERE USER_ID = #{USER_ID}
 		AND RESUME_DATE = (
-							SELECT MAX(RESUME_DATE)
-							FROM USER_RESUME
-							WHERE USER_ID = #{USER_ID}
-							)
+		SELECT MAX(RESUME_DATE)
+		FROM USER_RESUME
+		WHERE USER_ID = #{USER_ID}
+		)
 	</select>
 
+	<!-- 이력서 상세보기 - 이력서 정보 -->
 	<select id="rselectOne" resultType="rdto">
 		select RESUME_NO,
 		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
 		USER_RESUME
 		where USER_ID=#{userId} and RESUME_NO=#{resumeNo}
+	</select>
+
+	<!-- 이력서 상세보기 - 고등학교 정보 -->
+	<select id="highselectOne" resultType="hdto">
+		SELECT
+		rh.*
+		FROM
+		RESUME_HIGHSCHOOL rh
+		INNER JOIN RESUME_HIGH_INFO rhi ON rh.HIGH_EDU_NO
+		= rhi.HIGH_EDU_NO
+		INNER JOIN USER_RESUME ur ON rhi.RESUME_NO =
+		ur.RESUME_NO
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
+	</select>
+
+	<!-- 이력서 상세보기 - 대학교 정보 -->
+	<select id="uniselectOne" resultType="udto">
+		SELECT
+		ru.*
+		FROM
+		RESUME_UNIVERSITYL ru
+		INNER JOIN RESUME_UNI_INFO rui ON ru.UNI_EDU_NO =
+		rui.UNI_EDU_NO
+		INNER JOIN USER_RESUME ur ON rui.RESUME_NO =
+		ur.RESUME_NO
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
 	</select>
 
 	<select id="selectList" resultType="rdto">
@@ -40,7 +67,8 @@
 	</select>
 
 	<insert id="insert" parameterType="rdto">
-		INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
+		INSERT INTO USER_RESUME
+		(RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
 		VALUES(#{resumeNo}, #{resumeTitle}, #{resumePhoto},sysdate, #{userId})
 	</insert>
 
@@ -55,8 +83,10 @@
 	</update>
 
 	<insert id="insertHschool" parameterType="hdto">
-		insert into RESUME_HIGHSCHOOL(HIGH_EDU_NO, GED, HIGH_NAME, HIGH_DATE, HIGH_MAJOR)
-		values (RESUME_HIGHSCHOOL_SEQ.NEXTVAL, #{ged}, #{highName}, #{highDate}, #{highMajor})
+		insert into
+		RESUME_HIGHSCHOOL(HIGH_EDU_NO, GED, HIGH_NAME, HIGH_DATE, HIGH_MAJOR)
+		values (RESUME_HIGHSCHOOL_SEQ.NEXTVAL, #{ged}, #{highName},
+		#{highDate}, #{highMajor})
 	</insert>
 
 	<delete id="deleteHigh" parameterType="_int">
@@ -84,12 +114,15 @@
 	</delete>
 
 	<insert id="insertUniv" parameterType="udto">
-		insert into RESUME_UNIVERSITY(UNI_EDU_NO, UNI_ACT, UNI_CATEGORY,
+		insert into
+		RESUME_UNIVERSITY(UNI_EDU_NO, UNI_ACT, UNI_CATEGORY,
 		UNI_NAME,
 		UNI_DATE, UNI_MAJOR, UNI_POINT)
-		values (RESUME_UNIVERSITY_SEQ.NEXTVAL, #{uniAct}, #{uniCategory},
+		values (RESUME_UNIVERSITY_SEQ.NEXTVAL,
+		#{uniAct}, #{uniCategory},
 		#{uniName},
-		#{uniDate}, #{uniMajor}, #{uniPoint})
+		#{uniDate}, #{uniMajor},
+		#{uniPoint})
 	</insert>
 	
 	<update id="updateUni" parameterType="udto">
@@ -108,7 +141,8 @@
 		insert into
 		RESUME_GRADSCHOOL(GRAD_EDU_NO, GRAD_ACT, GRAD_NAME, GRAD_CATEGORY,
 		GRAD_DATE, GRAD_MAJOR, GRAD_POINT)
-		values (RESUME_GRADSCHOOL_SEQ.NEXTVAL, #{gradAct}, #{gradName},
+		values
+		(RESUME_GRADSCHOOL_SEQ.NEXTVAL, #{gradAct}, #{gradName},
 		#{gradCategory}, #{gradDate}, #{gradMajor}, #{gradPoint})
 	</insert>
 	
@@ -133,15 +167,21 @@
 	
 
 	<insert id="insertCareer" parameterType="careerdto">
-		insert into RESUME_CAREER
+		insert into
+		RESUME_CAREER
 		(CAR_NO, CAR_NAME, CAR_DATE,
-		 CAR_POSITION, CAR_DEPT, CAR_RESP, CAR_SALARY)
-		values (RESUME_CAREER_SEQ.NEXTVAL, #{carName}, #{carDate},
-		#{carPosition}, #{carDept}, #{carResp}, #{carSalary})
+		CAR_POSITION, CAR_DEPT,
+		CAR_RESP, CAR_SALARY)
+		values (RESUME_CAREER_SEQ.NEXTVAL,
+		#{carName},
+		#{carDate},
+		#{carPosition}, #{carDept}, #{carResp},
+		#{carSalary})
 	</insert>
 
 	<delete id="deleteCareer" parameterType="_int">
-		DELETE FROM RESUME_CAREER
+		DELETE FROM
+		RESUME_CAREER
 		WHERE CAR_NO = #{carNo}
 	</delete>
 
@@ -161,7 +201,8 @@
 		UPDATE RESUME_CERTI SET
 		CERTI_NAME = #{certiName},
 		CERTI_PUB = #{certiPub},
-		CERTI_DATE = #{certiDate}
+		CERTI_DATE =
+		#{certiDate}
 		WHERE CERTI_NO = #{certiNo}
 	</update>
 
@@ -174,7 +215,8 @@
 
 	<delete id="deleteCl" parameterType="_int">
 		delete from RESUME_CL
-		where CL_NO = #{clNo}
+		where
+		CL_NO = #{clNo}
 	</delete>
 
 	<update id="updateCl" parameterType="cldto">
@@ -191,54 +233,63 @@
 
 
 	<select id="selectOneCl" resultType="cldto">
-		select CL_FILE, CL_GROWTH, CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL 
+		select CL_FILE, CL_GROWTH,
+		CL_MOTIVE, CL_ADV, CL_ASP from RESUME_CL
 		where CL_NO = #{clNo}
 	</select>
 
 	<insert id="insertHighInfo" parameterType="hinfodto">
-		INSERT INTO RESUME_HIGH_INFO
-		            (RESUME_NO,
-		             HIGH_EDU_NO)
+		INSERT INTO
+		RESUME_HIGH_INFO
+		(RESUME_NO,
+		HIGH_EDU_NO)
 		SELECT NVL(Max(RESUME_NO), 1),
-		       #{highEduNo}
-		FROM   USER_RESUME
-		WHERE  USER_ID = #{userId} 
+		#{highEduNo}
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
 	</insert>
 
 	<insert id="insertUniInfo" parameterType="uinfodto">
-		INSERT INTO RESUME_UNI_INFO
-		            (RESUME_NO,
-		             UNI_EDU_NO)
+		INSERT INTO
+		RESUME_UNI_INFO
+		(RESUME_NO,
+		UNI_EDU_NO)
 		SELECT NVL(Max(RESUME_NO), 1),
-		       #{uniEduNo}
-		FROM   USER_RESUME
-		WHERE  USER_ID = #{userId} 
+		#{uniEduNo}
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
 	</insert>
 
 	<insert id="insertGradInfo" parameterType="ginfodto">
-		INSERT INTO RESUME_GRAD_INFO
-		            (RESUME_NO,
-		             GRAD_EDU_NO)
+		INSERT INTO
+		RESUME_GRAD_INFO
+		(RESUME_NO,
+		GRAD_EDU_NO)
 		SELECT NVL(Max(RESUME_NO), 1),
-		       #{gradEduNo}
-		FROM   USER_RESUME
-		WHERE  USER_ID = #{userId} 
+		#{gradEduNo}
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
 	</insert>
 
 	<delete id="deleteInfoUni" parameterType="uinfodto">
-		DELETE FROM RESUME_UNI_INFO
-		WHERE  UNI_EDU_NO = #{uniEduNo}
-		       AND RESUME_NO = (SELECT NVL(Max(RESUME_NO), 1)
-		                        FROM   USER_RESUME
-		                        WHERE  USER_ID = #{userId}) 
+		DELETE FROM
+		RESUME_UNI_INFO
+		WHERE UNI_EDU_NO = #{uniEduNo}
+		AND RESUME_NO = (SELECT
+		NVL(Max(RESUME_NO), 1)
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId})
 	</delete>
 
 	<delete id="deleteInfoGrad" parameterType="ginfodto">
-		DELETE FROM RESUME_GRAD_INFO
-		WHERE  GRAD_EDU_NO = #{gradEduNo}
-		       AND RESUME_NO = (SELECT NVL(Max(RESUME_NO), 1)
-		                        FROM   USER_RESUME
-		                        WHERE  USER_ID = #{userId}) 
+		DELETE FROM
+		RESUME_GRAD_INFO
+		WHERE GRAD_EDU_NO = #{gradEduNo}
+		AND RESUME_NO =
+		(SELECT NVL(Max(RESUME_NO), 1)
+		FROM USER_RESUME
+		WHERE USER_ID =
+		#{userId})
 	</delete>
 
 
@@ -246,71 +297,83 @@
 
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
-		INSERT INTO RESUME_CAR_INFO
-		            (RESUME_NO,
-		             CAR_NO)
+		INSERT INTO
+		RESUME_CAR_INFO
+		(RESUME_NO,
+		CAR_NO)
 		SELECT NVL(Max(RESUME_NO), 1),
-		       #{carNo}
-		FROM   USER_RESUME
-		WHERE  USER_ID = #{userId} 
+		#{carNo}
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
 	</insert>
 
 
 	<delete id="deleteInfoCareer" parameterType="carinfodto">
-		DELETE FROM RESUME_CAR_INFO
-		WHERE  CAR_NO = #{carNo}
-		       AND RESUME_NO = (SELECT NVL(Max(RESUME_NO), 1)
-		                        FROM   USER_RESUME
-		                        WHERE  USER_ID = #{userId}) 
+		DELETE FROM
+		RESUME_CAR_INFO
+		WHERE CAR_NO = #{carNo}
+		AND RESUME_NO = (SELECT
+		NVL(Max(RESUME_NO), 1)
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId})
 	</delete>
 
 
 	<update id="updateCareer" parameterType="careerdto">
 		UPDATE RESUME_CAREER
-		SET    CAR_NAME = #{carName},
-		       CAR_DATE = #{carDate},
-		       CAR_POSITION = #{carPosition},
-		       CAR_DEPT = #{carDept},
-		       CAR_RESP = #{carResp},
-		       CAR_SALARY = #{carSalary}
-		WHERE  CAR_NO = #{carNo} 
+		SET
+		CAR_NAME = #{carName},
+		CAR_DATE = #{carDate},
+		CAR_POSITION =
+		#{carPosition},
+		CAR_DEPT = #{carDept},
+		CAR_RESP = #{carResp},
+		CAR_SALARY
+		= #{carSalary}
+		WHERE CAR_NO = #{carNo}
 	</update>
 
 
 	<insert id="insertCertiInfo" parameterType="certiinfodto">
-		INSERT INTO RESUME_CERTI_INFO
-		            (RESUME_NO,
-		             CERTI_NO)
+		INSERT INTO
+		RESUME_CERTI_INFO
+		(RESUME_NO,
+		CERTI_NO)
 		SELECT NVL(Max(RESUME_NO), 1),
-		       #{certiNo}
-		FROM   USER_RESUME
-		WHERE  USER_ID = #{userId} 
+		#{certiNo}
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
 	</insert>
 
 	<delete id="deleteInfoCerti" parameterType="certiinfodto">
-		DELETE FROM RESUME_CERTI_INFO
-		WHERE  CERTI_NO = #{certiNo}
-		       AND RESUME_NO = (SELECT NVL(Max(RESUME_NO), 1)
-		                        FROM   USER_RESUME
-		                        WHERE  USER_ID = #{userId}) 
+		DELETE FROM
+		RESUME_CERTI_INFO
+		WHERE CERTI_NO = #{certiNo}
+		AND RESUME_NO = (SELECT
+		NVL(Max(RESUME_NO), 1)
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId})
 	</delete>
 
 	<insert id="insertClInfo" parameterType="clinfodto">
-		INSERT INTO RESUME_CL_INFO
-		            (RESUME_NO,
-		             CL_NO)
+		INSERT INTO
+		RESUME_CL_INFO
+		(RESUME_NO,
+		CL_NO)
 		SELECT NVL(Max(RESUME_NO), 1),
-		       #{clNo}
-		FROM   USER_RESUME
-		WHERE  USER_ID = #{userId} 
+		#{clNo}
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId}
 	</insert>
 
 	<delete id="deleteInfoCl" parameterType="clinfodto">
-		DELETE FROM RESUME_CL_INFO
-		WHERE  CL_NO = #{clNo}
-		       AND RESUME_NO = (SELECT NVL(Max(RESUME_NO), 1)
-		                        FROM   USER_RESUME
-		                        WHERE  USER_ID = #{userId}) 
+		DELETE FROM
+		RESUME_CL_INFO
+		WHERE CL_NO = #{clNo}
+		AND RESUME_NO = (SELECT
+		NVL(Max(RESUME_NO), 1)
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId})
 	</delete>
 
 
@@ -320,168 +383,208 @@
 	<!-- HIGH_EDU_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxHigh" resultType="_int">
 		SELECT HIGH_EDU_NO
-		FROM   RESUME_HIGHSCHOOL
-		WHERE  HIGH_EDU_NO = (SELECT MAX(HIGH_EDU_NO)
-		                      FROM   RESUME_HIGHSCHOOL) 
+		FROM
+		RESUME_HIGHSCHOOL
+		WHERE HIGH_EDU_NO = (SELECT MAX(HIGH_EDU_NO)
+		FROM
+		RESUME_HIGHSCHOOL)
 	</select>
 
 	<!-- UNI_EDU_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxUni" resultType="_int">
 		SELECT UNI_EDU_NO
-		FROM   RESUME_UNIVERSITY
-		WHERE  UNI_EDU_NO = (SELECT MAX(UNI_EDU_NO)
-		                     FROM   RESUME_UNIVERSITY) 
+		FROM
+		RESUME_UNIVERSITY
+		WHERE UNI_EDU_NO = (SELECT MAX(UNI_EDU_NO)
+		FROM
+		RESUME_UNIVERSITY)
 	</select>
 
 	<!-- GRAD_EDU_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxGrad" resultType="_int">
 		SELECT GRAD_EDU_NO
-		FROM   RESUME_GRADSCHOOL
-		WHERE  GRAD_EDU_NO = (SELECT MAX(GRAD_EDU_NO)
-		                      FROM   RESUME_GRADSCHOOL) 
+		FROM
+		RESUME_GRADSCHOOL
+		WHERE GRAD_EDU_NO = (SELECT MAX(GRAD_EDU_NO)
+		FROM
+		RESUME_GRADSCHOOL)
 	</select>
 
 	<!-- CAR_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxCar" resultType="_int">
 		SELECT CAR_NO
-		FROM   RESUME_CAREER
-		WHERE  CAR_NO = (SELECT MAX(CAR_NO)
-		                 FROM   RESUME_CAREER) 
+		FROM
+		RESUME_CAREER
+		WHERE CAR_NO = (SELECT MAX(CAR_NO)
+		FROM RESUME_CAREER)
 	</select>
 
 	<!-- CERTI_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxCerti" resultType="_int">
 		SELECT CERTI_NO
-		FROM   RESUME_CERTI
-		WHERE  CERTI_NO = (SELECT MAX(CERTI_NO)
-		                   FROM   RESUME_CERTI) 
+		FROM
+		RESUME_CERTI
+		WHERE CERTI_NO = (SELECT MAX(CERTI_NO)
+		FROM RESUME_CERTI)
 	</select>
 
 	<!-- CL_NO 이 제일 큰 값 -->
 	<select id="selectOneMaxCl" resultType="_int">
 		SELECT CL_NO
-		FROM   RESUME_CL
-		WHERE  CL_NO = (SELECT MAX(CL_NO)
-		                FROM   RESUME_CL) 
+		FROM
+		RESUME_CL
+		WHERE CL_NO = (SELECT MAX(CL_NO)
+		FROM RESUME_CL)
 	</select>
 
 	<select id="selectListHigh" resultType="hdto">
-		SELECT 
-			h.HIGH_EDU_NO AS highEduNo, 
-			h.GED AS ged, 
-			h.HIGH_NAME AS highName, 
-			h.HIGH_DATE AS highDate, 
-			h.HIGH_MAJOR AS highMajor
-		FROM 
-			RESUME_HIGHSCHOOL h
-			INNER JOIN RESUME_HIGH_INFO i ON h.HIGH_EDU_NO = i.HIGH_EDU_NO
-			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE 
-			u.USER_ID = #{userId}
+		SELECT
+		h.HIGH_EDU_NO AS
+		highEduNo,
+		h.GED AS ged,
+		h.HIGH_NAME AS highName,
+		h.HIGH_DATE AS
+		highDate,
+		h.HIGH_MAJOR AS highMajor
+		FROM
+		RESUME_HIGHSCHOOL h
+		INNER JOIN
+		RESUME_HIGH_INFO i ON h.HIGH_EDU_NO = i.HIGH_EDU_NO
+		INNER JOIN
+		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE
+		u.USER_ID = #{userId}
 		GROUP BY
-			h.HIGH_EDU_NO, h.GED, h.HIGH_NAME, h.HIGH_DATE, h.HIGH_MAJOR
-		ORDER BY 
-			h.HIGH_DATE DESC
+		h.HIGH_EDU_NO, h.GED, h.HIGH_NAME, h.HIGH_DATE, h.HIGH_MAJOR
+		ORDER BY
+		h.HIGH_DATE DESC
 	</select>
 
 	<select id="selectListUni" resultType="udto">
-		SELECT 
-			u.UNI_EDU_NO AS uniEduNo, 
-			u.UNI_ACT AS uniAct, 
-			u.UNI_CATEGORY AS uniCategory,
-			u.UNI_NAME AS uniName, 
-			u.UNI_DATE AS uniDate, 
-			u.UNI_MAJOR AS uniMajor,
-			u.UNI_POINT AS uniPoint
-		FROM 
-			RESUME_UNIVERSITY u
-			INNER JOIN RESUME_UNI_INFO i ON u.UNI_EDU_NO = i.UNI_EDU_NO
-			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE 
-			u.USER_ID = #{userId}
-		GROUP BY
-			u.UNI_EDU_NO, u.UNI_ACT, u.UNI_CATEGORY, u.UNI_NAME, u.UNI_DATE, u.UNI_MAJOR, u.UNI_POINT
-		ORDER BY
-			u.UNI_DATE DESC
-	</select>
-
-
- 	<select id="selectListGrad" resultType="gdto">
-		SELECT 
-			rg.GRAD_EDU_NO AS gradEduNo, 
-			rg.GRAD_ACT as gradAct, 
-			rg.GRAD_CATEGORY as gradCategory,
-			rg.GRAD_NAME AS gradName, 
-			rg.GRAD_DATE AS gradDate,
-			rg.GRAD_MAJOR AS gradMajor, 
-			rg.GRAD_POINT as gradPoint
-		FROM 
-			RESUME_GRADSCHOOL rg
-			INNER JOIN RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
-			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		SELECT
+		u.UNI_EDU_NO AS
+		uniEduNo,
+		u.UNI_ACT AS uniAct,
+		u.UNI_CATEGORY AS uniCategory,
+		u.UNI_NAME
+		AS uniName,
+		u.UNI_DATE AS uniDate,
+		u.UNI_MAJOR AS uniMajor,
+		u.UNI_POINT
+		AS uniPoint
+		FROM
+		RESUME_UNIVERSITY u
+		INNER JOIN RESUME_UNI_INFO i ON
+		u.UNI_EDU_NO = i.UNI_EDU_NO
+		INNER JOIN USER_RESUME u ON i.RESUME_NO =
+		u.RESUME_NO
 		WHERE
-			u.USER_ID = #{userId}
-		GROUP BY 
-			rg.GRAD_EDU_NO, rg.GRAD_ACT, rg.GRAD_CATEGORY, rg.GRAD_NAME, rg.GRAD_DATE, rg.GRAD_MAJOR, rg.GRAD_POINT
-		ORDER BY 
-			rg.GRAD_DATE DESC
+		u.USER_ID = #{userId}
+		GROUP BY
+		u.UNI_EDU_NO, u.UNI_ACT,
+		u.UNI_CATEGORY, u.UNI_NAME, u.UNI_DATE, u.UNI_MAJOR,
+		u.UNI_POINT
+		ORDER
+		BY
+		u.UNI_DATE DESC
 	</select>
-	
-	
+
+
+	<select id="selectListGrad" resultType="gdto">
+		SELECT
+		rg.GRAD_EDU_NO AS
+		gradEduNo,
+		rg.GRAD_ACT as gradAct,
+		rg.GRAD_CATEGORY as gradCategory,
+		rg.GRAD_NAME AS gradName,
+		rg.GRAD_DATE AS gradDate,
+		rg.GRAD_MAJOR AS
+		gradMajor,
+		rg.GRAD_POINT as gradPoint
+		FROM
+		RESUME_GRADSCHOOL rg
+		INNER JOIN
+		RESUME_GRAD_INFO i ON rg.GRAD_EDU_NO = i.GRAD_EDU_NO
+		INNER JOIN
+		USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
+		WHERE
+		u.USER_ID = #{userId}
+		GROUP BY
+		rg.GRAD_EDU_NO, rg.GRAD_ACT, rg.GRAD_CATEGORY, rg.GRAD_NAME,
+		rg.GRAD_DATE,
+		rg.GRAD_MAJOR, rg.GRAD_POINT
+		ORDER BY
+		rg.GRAD_DATE DESC
+	</select>
+
+
 	<select id="selectListCareer" resultType="careerdto">
 		SELECT
-			rc.CAR_NO AS carNo,
-			rc.CAR_NAME AS carName,
-			rc.CAR_DATE AS carDate,
-			rc.CAR_POSITION AS carPosition,
-			rc.CAR_DEPT AS carDept,
-			rc.CAR_RESP AS carResp,
-			rc.CAR_SALARY AS carSalary
-		FROM 
-			RESUME_CAREER rc
-			INNER JOIN RESUME_CAR_INFO i ON rc.CAR_NO = i.CAR_NO
-			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE 
-			u.USER_ID = #{userId}
-		GROUP BY 
-			rc.CAR_NO, rc.CAR_NAME, rc.CAR_DATE, rc.CAR_POSITION, rc.CAR_DEPT, rc.CAR_RESP, rc.CAR_SALARY
-		ORDER BY 
-			rc.CAR_DATE DESC
+		rc.CAR_NO AS
+		carNo,
+		rc.CAR_NAME AS carName,
+		rc.CAR_DATE AS carDate,
+		rc.CAR_POSITION AS
+		carPosition,
+		rc.CAR_DEPT AS carDept,
+		rc.CAR_RESP AS carResp,
+		rc.CAR_SALARY AS carSalary
+		FROM
+		RESUME_CAREER rc
+		INNER JOIN
+		RESUME_CAR_INFO i ON rc.CAR_NO = i.CAR_NO
+		INNER JOIN USER_RESUME u ON
+		i.RESUME_NO = u.RESUME_NO
+		WHERE
+		u.USER_ID = #{userId}
+		GROUP BY
+		rc.CAR_NO,
+		rc.CAR_NAME, rc.CAR_DATE, rc.CAR_POSITION, rc.CAR_DEPT, rc.CAR_RESP,
+		rc.CAR_SALARY
+		ORDER BY
+		rc.CAR_DATE DESC
 	</select>
 
 
 	<select id="selectListCerti" resultType="certidto">
-			SELECT
-			rc.CERTI_NO AS certiNo,
-			rc.CERTI_NAME AS certiName,
-			rc.CERTI_PUB AS certiPub,
-			to_char(rc.CERTI_DATE, 'YYYY-MM-DD') AS certiDate
-		FROM 
-			RESUME_CERTI RC
-			INNER JOIN RESUME_CERTI_INFO i ON rc.CERTI_NO = i.CERTI_NO
-			INNER JOIN USER_RESUME u ON i.RESUME_NO = u.RESUME_NO
-		WHERE 
-			u.USER_ID = #{userId}
-		GROUP BY 
-			rc.CERTI_NO, rc.CERTI_NAME, rc.CERTI_PUB, rc.CERTI_DATE
-		ORDER BY 
-			rc.CERTI_DATE DESC
+		SELECT
+		rc.CERTI_NO AS
+		certiNo,
+		rc.CERTI_NAME AS certiName,
+		rc.CERTI_PUB AS certiPub,
+		to_char(rc.CERTI_DATE, 'YYYY-MM-DD') AS certiDate
+		FROM RESUME_CERTI rc
+		where rc.CERTI_NO in (
+		select CERTI_NO
+		from RESUME_CERTI_INFO i
+		INNER JOIN (select resume_no,USER_ID from USER_RESUME WHERE USER_ID =
+		#{userId}) u using(resume_no)
+		)
+		ORDER BY rc.CERTI_NO DESC
 	</select>
 
 
 	<select id="selectListCl" resultType="cldto">
-		SELECT 
-			cl.CL_NO AS clNo,
-			cl.CL_FILE AS clFile, 
-			cl.CL_GROWTH AS clGrowth,
-			cl.CL_MOTIVE AS clMotive, 
-			cl.CL_ADV AS clAdv, 
-			cl.CL_ASP AS clAsp
+		SELECT
+		cl.CL_NO AS clNo,
+		cl.CL_FILE AS clFile,
+		cl.CL_GROWTH AS clGrowth,
+		cl.CL_MOTIVE AS
+		clMotive,
+		cl.CL_ADV AS clAdv,
+		cl.CL_ASP AS clAsp
 		FROM RESUME_CL cl
-		INNER JOIN RESUME_CL_INFO i on cl.CL_NO = i.CL_NO
-		INNER JOIN USER_RESUME u on i.RESUME_NO = u.RESUME_NO
-		WHERE u.USER_ID = #{userId}
+		where
+		cl.CL_NO in (
+		select CL_NO
+		from RESUME_CL_INFO i
+		INNER JOIN (select
+		resume_no,USER_ID from USER_RESUME WHERE USER_ID =
+		#{userId}) u
+		using(resume_no)
+		)
 		ORDER BY cl.CL_NO DESC
+
 	</select>
 
 	<update id="deleteClFile" parameterType="String">

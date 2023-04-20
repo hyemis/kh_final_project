@@ -154,9 +154,10 @@ public class PsResumeController {
 		Map<String, Object> infoMap = new HashMap<>();
 		infoMap.put("userId", userId);
 		infoMap.put("resumeNo", resumeNo);
-		PsResumeDto dto = rservice.rselectOne(infoMap);
+		PsResumeDto resume = rservice.rselectOne(infoMap);
 		
 		// 학력사항 정보 출력 
+		PsHschoolDto high = rservice.highselectOne(infoMap);
 		
 		// 경력사항 정보 출력 
 		
@@ -164,7 +165,8 @@ public class PsResumeController {
 		
 		// 자기소개서 정보 출력
 		
-		mv.addObject("resume", dto);
+		mv.addObject("resume", resume);
+		mv.addObject("high", high);
 		mv.setViewName("person/resume/read");
 		return mv;
 	}
