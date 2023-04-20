@@ -22,6 +22,8 @@
 	<!-- 회원정보 수정하기 -->
     <update id="updateAccount">
         UPDATE USER_TABLE SET
+           USER_EMAIL = #{userEmail},
+           USER_PIC = #{userPic},
 	       BS_LICENSE = #{bsLicense},
 	       BS_MAIN_PHONE = #{bsMainPhone},
 	       ADDRESS_POSTCODE = #{addressPostcode},
