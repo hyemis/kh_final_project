@@ -137,10 +137,9 @@
 	<update id="updateHigh" parameterType="hdto">
 		UPDATE RESUME_HIGHSCHOOL SET
 		HIGH_EDU_NO = #{highEduNo},
-		GED = #{ged},
 		HIGH_NAME = #{highName},
 		HIGH_DATE = #{highDate},
-		HIGH_MAJOR = #{highMajor},
+		HIGH_MAJOR = #{highMajor}
 		WHERE HIGH_EDU_NO = #{highEduNo}
 	</update>
 
@@ -286,6 +285,16 @@
 		FROM USER_RESUME
 		WHERE USER_ID = #{userId}
 	</insert>
+	
+	<delete id="deleteInfoHigh" parameterType="hinfodto">
+		DELETE FROM
+		RESUME_HIGH_INFO
+		WHERE HIGH_EDU_NO = #{highEduNo}
+		AND RESUME_NO = (SELECT
+		NVL(Max(RESUME_NO), 1)
+		FROM USER_RESUME
+		WHERE USER_ID = #{userId})
+	</delete>
 
 	<insert id="insertUniInfo" parameterType="uinfodto">
 		INSERT INTO
@@ -308,7 +317,7 @@
 		FROM USER_RESUME
 		WHERE USER_ID = #{userId}
 	</insert>
-
+	
 	<delete id="deleteInfoUni" parameterType="uinfodto">
 		DELETE FROM
 		RESUME_UNI_INFO

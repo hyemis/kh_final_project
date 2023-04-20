@@ -270,28 +270,22 @@ public class PsResumeController {
 		return result;
 	}
 	
-	//TODO 하는중
 	// 고등학교 테이블 수정
 	@PostMapping("updateHigh")
 	@ResponseBody
-	public int updateHigh(@RequestParam("uniEduNo") Integer uniEduNo, @RequestParam("uniNewAct") String uniAct,
-			@RequestParam("uniNewCategory") String uniCategory, @RequestParam("uniNewName") String uniName,
-			@RequestParam("uniNewDate") String uniDate, @RequestParam("uniNewMajor") String uniMajor,
-			@RequestParam("uniNewPoint") Double uniPoint)
+	public int updateHigh(@RequestParam("highEduNo") Integer highEduNo, @RequestParam("highNewName") String highName, 
+			@RequestParam("highNewDate") String highDate, @RequestParam("highNewMajor") String highMajor)
 			throws Exception {
 
 		int result = -1;
 
-		Map<String, Object> updateUni = new HashMap<>();
-		updateUni.put("uniEduNo", uniEduNo);
-		updateUni.put("uniAct", uniAct);
-		updateUni.put("uniCategory", uniCategory);
-		updateUni.put("uniName", uniName);
-		updateUni.put("uniDate", uniDate);
-		updateUni.put("uniMajor", uniMajor);
-		updateUni.put("uniPoint", uniPoint);
-		
-		result = rservice.updateUni(updateUni);
+		Map<String, Object> updateHigh = new HashMap<>();
+		updateHigh.put("highEduNo", highEduNo);
+		updateHigh.put("highName", highName);
+		updateHigh.put("highDate", highDate);
+		updateHigh.put("highMajor", highMajor);
+
+		result = rservice.updateHigh(updateHigh);
 		return result;
 	}
 

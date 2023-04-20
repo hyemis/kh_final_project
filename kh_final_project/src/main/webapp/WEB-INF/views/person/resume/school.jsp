@@ -144,7 +144,6 @@
 																			<th>학교명</th>
 																			<th>졸업일자</th>
 																			<th>전공</th>
-																			<th>학점</th>
 																		</tr>
 																	</thead>
 																	<tbody id="highSchoolList">
@@ -892,11 +891,15 @@ highSaveButton.addEventListener("click", function() {
 	      
 	   
  	   //if (hschool.ged == 'Y') {
- 		  if  ${hschool.ged == 'Y'}{
- 	    	  highNewForm.elements["highNewGed"].checked = true;
-    	}
-	    
-	    
+/*  		if ("${hschool.ged}" == "Y") {
+		  highNewForm.elements["highNewGed"].checked = true;
+		} */
+ 		
+ 		
+ 		  if (highData[1].textContent === "Y") {
+ 			    highNewForm.elements["highNewGed"].checked = true;
+ 			  }
+
 	    highNewForm.elements["highNewName"].value = highData[2].textContent;
 	    highNewForm.elements["highNewDate"].value = highData[3].textContent;
 	    highNewForm.elements["highNewMajor"].value = highData[4].textContent;
@@ -947,14 +950,12 @@ function highDeleteHandler(highFormContainer, highDeleteBtn, highEduNo){
 
 //new form 수정 버튼 
  function highUpdateHandler(highNewForm,highEduNo) {
-	const highNewAct = highNewForm.elements["highNewAct"].value;
 	const highNewName = highNewForm.elements["highNewName"].value;
 	const highNewDate = highNewForm.elements["highNewDate"].value;
 	const highNewMajor = highNewForm.elements["highNewMajor"].value;
 
 	const data = {
 		highEduNo: highEduNo,
-		highNewAct: highNewAct,
 		highNewName: highNewName,
 		highNewDate: highNewDate,
 		highNewMajor: highNewMajor
@@ -979,7 +980,7 @@ function highDeleteHandler(highFormContainer, highDeleteBtn, highEduNo){
 
 
 
-/* //대학원 모달창에서 체크한 사항 순서대로 표시
+//고등학교 모달창에서 체크한 사항 순서대로 표시
 $(document).ready(function() {
 	$('input[name="selectedHigh"]').change(function() {
 	// 선택된 체크박스를 담을 배열을 초기화
@@ -993,60 +994,47 @@ $(document).ready(function() {
 			highName: $(this).closest('tr').find('td:eq(2)').text(),
 			highDate: $(this).closest('tr').find('td:eq(3)').text(),
 			highMajor: $(this).closest('tr').find('td:eq(4)').text(),
+			highNumber: index + 1
 	};
 
 	// 배열에 추가
-	selectedHighs.push(gschool);
+	selectedHighs.push(hschool);
 		}); 	
 
 	// 선택된 값을 테이블 형태로 출력
 	var html = '<table class="table">';
-	html += '<thead><tr><th>순서</th><th>졸업상태</th><th>대학원카테고리</th><th>학교명</th><th>졸업일자</th><th>전공</th></tr></thead>';
+	html += '<thead><tr><th>순서</th><th>졸업상태</th><th>학교명</th><th>졸업일자</th><th>전공</th></tr></thead>';
 	html += '<tbody>';
 	
 	for (var i = 0; i < selectedHighs.length; i++) {
 	html += '<tr>';
-	html += '<td>' + selectedHighs[i].gradNumber + '</td>';
-	html += '<td>' + selectedHighs[i].gradAct + '</td>';
-	html += '<td>' + selectedHighs[i].gradCategory + '</td>';
-	html += '<td>' + selectedHighs[i].gradName + '</td>';
-	html += '<td>' + selectedGschools[i].gradDate + '</td>';
-	html += '<td>' + selectedGschools[i].gradMajor + '</td>';
-	html += '<td>' + selectedGschools[i].gradPoint + '</td>';
+	html += '<td>' + selectedHighs[i].highNumber + '</td>';
+	html += '<td>' + selectedHighs[i].ged + '</td>';
+	html += '<td>' + selectedHighs[i].highName + '</td>';
+	html += '<td>' + selectedHighs[i].highDate + '</td>';
+	html += '<td>' + selectedHighs[i].highMajor + '</td>';
 	html += '</tr>';
 	}
-
+	
 	html += '</tbody></table>';
 	
-	$('#selectedGradList').html(html);
+	$('#selectedHighList').html(html);
 	});
 });
 
 
+
 //모달창 닫으면 표 초기화
-$('#viewGrad').on('hidden.bs.modal', function () {
-	$('#selectedGradList').html('');
-	$('input[name="selectedGrad"]').prop('checked', false);
-}); */
+$('#viewHigh').on('hidden.bs.modal', function () {
+	$('#selectedHighList').html('');
+	$('input[name="selectedHigh"]').prop('checked', false);
+}); 
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//----------------------------
 
 
 //대학원 DB 낀테이블 insert - success - ok -> new form create - btn event handler
