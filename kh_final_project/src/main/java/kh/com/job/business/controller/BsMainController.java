@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAboutUsService;
+import kh.com.job.business.model.service.BsAccountService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingInfoDto;
 
 @Controller
 @RequestMapping("/business")
@@ -19,6 +22,9 @@ public class BsMainController {
 	
 	@Autowired
 	private BsAboutUsService auservice;
+	
+	@Autowired
+	private BsAccountService buservice;
 	
 	//메인창
 	@GetMapping("/main")
@@ -59,6 +65,7 @@ public class BsMainController {
 		
 //		mv.addObject("boards", bdto);
 		mv.addObject("news", news);
+		mv.addObject("userinfo",buservice.viewAccount(principal.getName()));
 		
 		return mv;
 	}

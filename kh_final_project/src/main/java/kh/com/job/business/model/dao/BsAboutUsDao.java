@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsUserDto;
+import kh.com.job.common.page.PagingInfoDto;
 
 @Repository
 public class BsAboutUsDao {
@@ -28,7 +29,8 @@ public class BsAboutUsDao {
 		int boardNum = dto.getBoardNum();
 		return boardNum;
 	}
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	
+	
 	
 	//뉴스레터 업데이트
 	public int updateNewsLetter(BoardDto dto) {
@@ -41,12 +43,12 @@ public class BsAboutUsDao {
 		// TODO Auto-generated method stub
 	}
 
-	public BoardDto NewsLetterOne(String boardNum) {
+	public BoardDto NewsLetterOne(int boardNum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void updateReadCount(String boardNum) {
+	public void updateReadCount(int boardNum) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -60,6 +62,23 @@ public class BsAboutUsDao {
 	public List<BoardDto> listAll(String userId) {
 		return sqlSession.selectList("boards.listAll", userId);
 	}
+	
+	// 회사소개 
+	public int insertCompanyInfo(BoardDto dto) {
+		return sqlSession.insert("boards.insertCompanyInfo", dto);
+	}
+
+	public int updateCompanyInfo(BoardDto dto) {
+		return sqlSession.update("boards.updateCompanyInfo", dto);
+	}
+
+	public BoardDto viewCompanyInfo(String userId) {
+		return sqlSession.selectOne("boards.viewCompanyInfo", userId);
+	}
+
+
+
+
 	
 	
 	

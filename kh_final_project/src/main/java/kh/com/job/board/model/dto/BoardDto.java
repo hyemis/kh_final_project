@@ -62,4 +62,5 @@ public class BoardDto {
 			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 			this.updateDate = format.format(updateDate);
 		}
+	
 }

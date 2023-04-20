@@ -40,6 +40,8 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	public BsUserDto viewAccount(String userId) {
 		return dao.viewAccount(userId);
 	}
+	
+
 
 	//BOARD
 	@Override
@@ -48,6 +50,8 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 		return dao.insertNewsletter(dto);
 	}
 
+	
+	
 	@Override
 	public int updateNewsLetter(BoardDto dto) {
 		return dao.updateNewsLetter(dto);
@@ -59,7 +63,7 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	}
 
 	@Override
-	public BoardDto NewsLetterOne(String boardNum, String userId) {
+	public BoardDto NewsLetterOne(int boardNum, String userId) {
 		BoardDto result = dao.NewsLetterOne(boardNum);
 		if(result!=null && !result.getUserId().equals(userId)) {
 			dao.updateReadCount(boardNum);	
@@ -96,6 +100,28 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	public List<BoardDto> listAll(String userId) {
 		return dao.listAll(userId);
 	}
+
+
+	//회사소개 
+	@Override
+	public int insertCompanyInfo(BoardDto dto) {
+		return dao.insertCompanyInfo(dto);
+	}
+
+	@Override
+	public int updateCompanyInfo(BoardDto dto) {
+		return dao.updateCompanyInfo(dto);
+	}
+
+
+
+	@Override
+	public BoardDto viewCompanyInfo(String userId) {
+		return dao.viewCompanyInfo(userId);
+	}
+
+	
+
 	
 
 

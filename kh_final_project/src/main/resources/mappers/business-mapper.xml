@@ -22,20 +22,20 @@
 	<!-- 회원정보 수정하기 -->
     <update id="updateAccount">
         UPDATE USER_TABLE SET
-	       BS_LICENSE = #{bsLicense},
-	       BS_MAIN_PHONE = #{bsMainPhone},
-	       ADDRESS_POSTCODE = #{addressPostcode},
-	       ADDRESS_ROAD = #{addressRoad},
-	       ADDRESS_JIBUN = #{addressJibun},
-	       ADDRESS_DETAIL = #{addressDetail}
-        WHERE USER_ID = #{userId}
+		       BS_LICENSE = #{bsLicense},
+		       BS_MAIN_PHONE = #{bsMainPhone},
+		       ADDRESS_POSTCODE = #{addressPostcode},
+		       ADDRESS_ROAD = #{addressRoad},
+		       ADDRESS_JIBUN = #{addressJibun},
+		       ADDRESS_DETAIL = #{addressDetail}
+        WHERE  USER_ID = #{userId}
     </update>
     
     <!-- //todo비밀번호 수정하기-->
     <update id="updatePassword">
         UPDATE USER_TABLE SET
-        USER_PW = #{userPw}
-        WHERE USER_ID = #{userId}
+        	   USER_PW = #{userPw}
+        WHERE  USER_ID = #{userId}
     </update>    
     
     <!-- //todo 회원 프로필 이미지 수정하기 -->
