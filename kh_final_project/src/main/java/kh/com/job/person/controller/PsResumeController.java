@@ -157,16 +157,26 @@ public class PsResumeController {
 		PsResumeDto resume = rservice.rselectOne(infoMap);
 		
 		// 학력사항 정보 출력 
-		PsHschoolDto high = rservice.highselectOne(infoMap);
+		List<PsHschoolDto> high = rservice.highSelectList(infoMap);
+		List<PsUnivDto> uni = rservice.uniSelectList(infoMap);
+		List<PsGschoolDto> grad = rservice.gradSelectList(infoMap);
 		
 		// 경력사항 정보 출력 
+		List<PsCareerDto> career = rservice.carSelectList(infoMap);
 		
 		// 자격증 정보 출력
+		List<PsCertiDto> certi = rservice.certiSelectList(infoMap);
 		
 		// 자기소개서 정보 출력
+		List<PsClDto> cl = rservice.clSelectList(infoMap);
 		
 		mv.addObject("resume", resume);
 		mv.addObject("high", high);
+		mv.addObject("uni", uni);
+		mv.addObject("grad", grad);
+		mv.addObject("career", career);
+		mv.addObject("certi", certi);
+		mv.addObject("cl", cl);
 		mv.setViewName("person/resume/read");
 		return mv;
 	}

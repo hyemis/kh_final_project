@@ -20,7 +20,12 @@ public interface PsResumeService {
 
 	// 이력서 상세보기 - 이력서 정보
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception;
-	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception;
+	public List<PsHschoolDto> highSelectList(Map<String, Object> infoMap) throws Exception;
+	public List<PsUnivDto> uniSelectList(Map<String, Object> infoMap) throws Exception;
+	public List<PsGschoolDto> gradSelectList(Map<String, Object> infoMap) throws Exception;
+	public List<PsCareerDto> carSelectList(Map<String, Object> infoMap) throws Exception;
+	public List<PsCertiDto> certiSelectList(Map<String, Object> infoMap) throws Exception;
+	public List<PsClDto> clSelectList(Map<String, Object> infoMap) throws Exception;
 
 	// 이력서 리스트
 	public List<PsResumeDto> selectList(String userId) throws Exception;
