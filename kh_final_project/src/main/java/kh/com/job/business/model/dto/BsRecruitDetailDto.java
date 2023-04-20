@@ -27,7 +27,7 @@ public class BsRecruitDetailDto {
     , RR.RA_ADMISSION
  * 
  */
-	
+	private String userId;
 	private String userPhone;
 	private String userEmail;
 	private String userName;

@@ -27,5 +27,7 @@ public interface BsRecruitService {
 
 	public int updateRecruit(BsRecruitDto dto);
 
+	public int deleteRecruit(BsRecruitDto dto);
+
 
 }

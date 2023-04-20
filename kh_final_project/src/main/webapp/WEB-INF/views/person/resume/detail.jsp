@@ -93,11 +93,11 @@
 							<h3 class="mb-3">자기소개서</h3>
 						</div>
 					</div>
-					 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-								<button type="button" class="btn btn-outline-dark" id="deleteInfo">
-								  <i class="fa fa-minus"></i>
-								</button>
-								</div>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+						<button type="button" class="btn btn-outline-dark" id="deleteInfo">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
 
 					<!-- 성장과정 내용 -->
 					<div class="bg-gray p-4 mb-3">
@@ -151,10 +151,14 @@
 							<c:if test="${not empty cl.clFile}">
 								<div class="row">
 									<div class="input-group">
-										<input type="text" class="form-control" id="uploadCl2"
+										<input type="text" class="form-control" id="originPath"
 											value="${cl.clFile}"> <span class="input-group-btn">
 											<button type="button" id="deleteFile" class="btn btn-primary">기존
 												파일 삭제</button>
+											<button class="btn btn-primary" onclick="clFileCheck()">자기소개서 
+												확인하기</button>
+											<button class="btn btn-primary" onclick="clFileDown()">자기소개서
+												다운하기</button> 
 										</span>
 									</div>
 								</div>
@@ -201,6 +205,7 @@
 	
 	// 수정 버튼 
 	let updateBtn = document.querySelector("#update");
+	
 	updateBtn.addEventListener("click", function() {
 	  let formdata = new FormData();
 	  formdata.append("No", parseInt(window.location.href.split('/').pop()));
@@ -211,17 +216,30 @@
 	    formdata.append("updateClFile", clFile);
 	    formdata.append("curPath", ""); // 기존 경로는 없음
 	  } else {
-	    const uploadCl2Val = $('#uploadCl2').val();
-	    if (uploadCl2Val !== null && uploadCl2Val !== '') {
-	      formdata.append("updateClFile", uploadCl2Val);
-	      formdata.append("curPath", curPath); // 기존 경로
-	    }
+		  const curPath = $('#originPath').val();
+		  if (curPath !== null && curPath !== '') {
+		      formdata.append("updateClFile", curPath);
+		      formdata.append("curPath", curPath); // 기존 경로
+		    }
 	  }
 
-	  formdata.append("growth", document.querySelector("#growth").value);
-	  formdata.append("motive", document.querySelector("#motive").value);
-	  formdata.append("adv", document.querySelector("#adv").value);
-	  formdata.append("asp", document.querySelector("#asp").value);
+	  const growthEditor = CKEDITOR.instances['growth'];
+	  const growthText = growthEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("growth", growthText);
+	  
+	  const motiveEditor = CKEDITOR.instances['motive'];
+	  const motiveText = motiveEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("motive", motiveText);
+	  
+	  
+	  const advEditor = CKEDITOR.instances['adv'];
+	  const advText = advEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("adv", advText);
+	  
+	  
+	  const aspEditor = CKEDITOR.instances['asp'];
+	  const aspText = aspEditor.getData().replace(/(<([^>]+)>)/gi, '');
+	  formdata.append("asp", aspText);
 
 	  $.ajax({
 	    type: 'POST',
@@ -243,7 +261,7 @@
 	
 	// 기존 파일 삭제 버튼 
 	$(document).on('click', '#deleteFile', function() {
-    var fileUrl = $('#uploadCl2').val();
+    var fileUrl =dd$('#ㅐ').val();
     $.ajax({
         type: 'POST',
         url: '${pageContext.request.contextPath}/person/resume/deleteClFile',
@@ -272,6 +290,8 @@
 		    success: function(result) {
 		      if(result > 0) {
 		        alert('작성 중인 이력서에서 해당 자기소개서가 삭제되었습니다.');
+		        window.close();
+		        
 		      } else {
 		        alert('작성 중인 이력서에서 해당 자기소개서 삭제에 실패했습니다.');
 		      }
@@ -280,6 +300,16 @@
 	    
 	    
 	  });
+		
+		// 파일 viewer 로 
+		function clFileCheck() {
+			  window.open("https://drive.google.com/viewerng/viewer?embedded=true&url=${cl.clFile}");
+			}
+			
+		// 파일 다운 
+			function clFileDown() {
+				 window.location.href = "${cl.clFile}";
+			}
 			
 		</script>
 </body>

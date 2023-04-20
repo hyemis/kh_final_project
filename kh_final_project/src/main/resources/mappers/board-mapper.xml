@@ -2,113 +2,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boards">
 
-	<select id="listAll"
-		resultType="kh.com.job.board.model.dto.BoardDto">
-		SELECT *
-		FROM BOARD
+	<select id="listAll" resultType="kh.com.job.board.model.dto.BoardDto">
+		SELECT * 
+		FROM BOARD 
 		WHERE USER_ID =#{userId}
 	</select>
 
-	<!-- business -->
+<!-- business -->
 	<select id="getBoardNum">
 		SELECT BOARD_NO FROM BOARD
 	</select>
 
 
 	<!-- 회사소개 -->
-	<insert id="insertCompanyInfo">
-		INSERT INTO
-		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE)
-		VALUES(${boardNum},#{userId},'UDB06',#{userName},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
-		<selectKey keyProperty="boardNum" resultType="String"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
+	<insert id="insertInfo">
+		INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,TAG,SALARY_AVG,EMPLOYEE) 
+		  	 VALUES(#{boardNum},#{userId},UDB06,#{userName},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{tag},#{salaryAvg},#{employee})
+	<selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+		SELECT MAX(BOARD_NO) +1 FROM BOARD
+	</selectKey>
 	</insert>
-
-	<update id="updateCompanyInfo">
-		UPDATE USER_TABLE SET
-			BOARD_NO = ${boardNum},
-			BOARD_CONTENT = #{boardContent},
-			UPDATE_DATE = CURRENT_TIMESTAMP,
-			TAG = #{tag},
-			SALARY_AVG = #{salaryAvg},
-			EMPLOYEE = #{employee}
-		WHERE USER_ID = #{userId}
-		<selectKey keyProperty="boardNum" resultType="String"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
-	</update>
 	
-	<select id="viewCompanyInfo" resultType="budto">
-        SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE
-        FROM BOARD
-        WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
-    </select>
-
-
-
-
-
+	
+	
+	
+	
+	
+	
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
-		INSERT INTO
-		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,LINK)
-		VALUES(${boardNum},#{userId},'UDB05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
-		<selectKey keyProperty="boardNum" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
+		INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
+		   	 VALUES(${boardNum},#{userId},'UDB05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	<selectKey keyProperty="boardNum" resultType="_int" order="BEFORE" >
+		SELECT MAX(BOARD_NO) +1 FROM BOARD
+	</selectKey>	
 	</insert>
-
+	
 	<update id="updateNewsletter">
 		UPDATE BOARD SET
-		BOARD_NO = #{boardNum}
-		UPDATE_DATE = CURRENT_TIMESTAMP
-		BOARD_CONTENT = #{boardContent}
-		BOARD_TITLE = #{boardTitle}
-		LINK = #{link}
-		<selectKey keyProperty="boardNum" resultType="String"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
+	    BOARD_NO = #{boardNum}
+	    UPDATE_DATE = CURRENT_TIMESTAMP
+	    BOARD_CONTENT = #{boardContent}
+	    BOARD_TITLE = #{boardTitle}
+	    LINK = #{link}
+    <selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+		SELECT MAX(BOARD_NO) +1 FROM BOARD
+	</selectKey>
 	</update>
-
-	<select id="newsLetterList"
-		resultType="kh.com.job.board.model.dto.BoardDto">
+	
+	<select id="newsLetterList" resultType="kh.com.job.board.model.dto.BoardDto">
 		SELECT *
-		FROM BOARD
+		FROM BOARD 
 		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
 	</select>
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
 	<!-- qna -->
 	<insert id="insertQnA">
-		INSERT INTO
-		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,LINK)
-		VALUES(${boardNum},#{userId},'UDB04',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
-		<selectKey keyProperty="boardNum" resultType="String"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
-	</insert>
-
+		INSERT INTO BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,BOARD_ORIGINAL_FILENAME,BOARD_RENAME_FILENAME,LINK) 
+		  	 VALUES(#{boardNum},#{userId},UDB04,#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{boardOriginalFilename},#{boardRenameFilename},#{link})
+	<selectKey keyProperty="boardNum" resultType="String" order="BEFORE" >
+		SELECT MAX(BOARD_NO) +1 FROM BOARD
+	</selectKey>	
+	</insert>	
+	<!-- 임시 select 할 항목 선택 후 수정 -->
 	<select id="qnaList">
-		SELECT UDB04
-		FROM BOARD
+		SELECT UDB04 
+		FROM BOARD 
 		WHERE USER_ID= #{userId}
 	</select>
+	
+	   
+		   
 
-
-
-
-
-
-
+	
+	
+	
 </mapper>

@@ -67,8 +67,17 @@ public class BsAccountController {
 	
 	//회원정보 수정
 	@PostMapping("/info")
-	public ModelAndView update(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr)  {
+	public ModelAndView update(ModelAndView mv, BsUserDto dto
+						, Principal principal, RedirectAttributes rttr
+						,@RequestParam(name = "userImage", required = false) MultipartFile userImage)  {
 		dto.setUserId(principal.getName()); 
+		
+		//이력서 사진 업로드
+		if(userImage != null && !userImage.isEmpty()) {
+			String reportUrl = service.uploadUserPic(userImage, principal.getName());
+		    dto.setUserPic(reportUrl);
+		}
+		
 		service.updateAccount(dto);
 		mv.setViewName("redirect:/business/account/info");
 		rttr.addFlashAttribute("msg", "회원정보 수정에 성공했습니다.");

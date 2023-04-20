@@ -122,5 +122,10 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 		return dao.updateRecruit(dto);
 	}
 
+	@Override
+	public int deleteRecruit(BsRecruitDto dto) {
+		return dao.deleteRecruit(dto);
+	}
+
 
 }

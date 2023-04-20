@@ -58,5 +58,9 @@ public class BsRecruitDao {
 		return sqlSession.update("business.updateRecruit", dto);
 	}
 
+	public int deleteRecruit(BsRecruitDto dto) {
+		return sqlSession.delete("business.deleteRecruit", dto);
+	}
+
 
 }

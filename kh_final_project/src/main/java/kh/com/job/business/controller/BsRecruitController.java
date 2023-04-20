@@ -228,7 +228,7 @@ public class BsRecruitController {
 		//우대조건
 		mv.addObject("SClist", service.getCateList("SC"));
 		
-		
+		mv.addObject("member", principal.getName());
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
@@ -287,7 +287,7 @@ public class BsRecruitController {
 			mv.addObject("ctList", ctList);
 		}
 		
-		
+		mv.addObject("member", principal.getName());
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
@@ -343,6 +343,21 @@ public class BsRecruitController {
 		return mv;
 	}
 	
+	//채용 공고 삭제
+	@PostMapping("/deleteRecruit")
+	@ResponseBody
+	public int deleteRecruit(BsRecruitDto dto
+			, Principal principal
+			){
+		int result = -1;
+		if(principal.getName().equals(dto.getUserId())) {
+			result = service.deleteRecruit(dto);
+		}else {
+			result = -2;
+		}
+		
+		return result;
+	}
 
 
 }

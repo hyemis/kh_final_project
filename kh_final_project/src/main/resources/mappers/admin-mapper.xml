@@ -29,8 +29,10 @@
 	
 	<!-- 관리자 계정 생성 -->
 	<insert id="insertAccount">
-		INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_NAME, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
-		VALUES (#{userId}, #{userPw}, #{userPhone}, CURRENT_TIMESTAMP, #{userEmail}, #{userName}, #{userRole}, 'Y', CURRENT_TIMESTAMP, 60)
+		INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, USER_NAME
+								, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
+		VALUES (#{userId}, #{userPw}, #{userPhone}, CURRENT_TIMESTAMP, #{userEmail}, #{userName}
+				, #{userRole}, 'Y', CURRENT_TIMESTAMP, 60)
 	</insert>
 		
 	<delete id="deleteAccount">
@@ -163,7 +165,7 @@
 	
 	<!-- 게시글 상세 -->
 	<select id="viewDetail" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
-		SELECT UT.USER_PHONE, UT.USER_EMAIL, UT.USER_NAME, UT.USER_PIC, UT.BS_MAIN_PHONE
+		SELECT RR.USER_ID, UT.USER_PHONE, UT.USER_EMAIL, UT.USER_NAME, UT.USER_PIC, UT.BS_MAIN_PHONE
 	    , UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
 	    , RR.RA_NUM
 	    , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.RECRUIT_TYPE) AS RECRUIT_NAME

@@ -18,8 +18,9 @@ public interface PsResumeService {
 	// TODO: userid 수정 - 사용할 때 수정하기
 	public PsResumeDto selectOne(String userId) throws Exception;
 
-	// 이력서 상세보기
+	// 이력서 상세보기 - 이력서 정보
 	public PsResumeDto rselectOne(Map<String, Object> infoMap) throws Exception;
+	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception;
 
 	// 이력서 리스트
 	public List<PsResumeDto> selectList(String userId) throws Exception;
@@ -83,6 +84,8 @@ public interface PsResumeService {
 	public int deleteHigh(int highEduNo) throws Exception;
 	
 	public int deleteInfoHigh(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateHigh(Map<String, Object> updateHigh) throws Exception;
 
 	// uniInfo
 	public int getMaxUniNo() throws Exception;
@@ -92,6 +95,8 @@ public interface PsResumeService {
 	public int deleteUni(int uniEduNo) throws Exception;
 	
 	public int deleteInfoUni(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateUni(Map<String, Object> updateUni) throws Exception;
 
 	// gradInfo
 	public int getMaxGradNo() throws Exception;
@@ -101,6 +106,8 @@ public interface PsResumeService {
 	public int deleteGrad(int gradEduNo) throws Exception;
 	
 	public int deleteInfoGrad(Map<String, Object> InfoNo) throws Exception;
+	
+	public int updateGrad(Map<String, Object> updateGrad) throws Exception;
 
 
 	// CareerInfo
@@ -123,6 +130,8 @@ public interface PsResumeService {
 	public int getMaxClNo() throws Exception;
 
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception;
+	
+	public int deleteInfoCl(Map<String, Object> InfoNo) throws Exception;
 
 	// 고등학교 학력사항 보기
 	public List<PsHschoolDto> selectListHigh(String userId) throws Exception;
