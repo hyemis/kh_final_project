@@ -16,37 +16,75 @@
 
 	<!-- 이력서 상세보기 - 이력서 정보 -->
 	<select id="rselectOne" resultType="rdto">
-		select RESUME_NO,
-		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE FROM
-		USER_RESUME
-		where USER_ID=#{userId} and RESUME_NO=#{resumeNo}
+		SELECT RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE
+		FROM USER_RESUME
+		WHERE USER_ID=#{userId} AND RESUME_NO=#{resumeNo}
 	</select>
 
 	<!-- 이력서 상세보기 - 고등학교 정보 -->
-	<select id="highselectOne" resultType="hdto">
+	<select id="highSelectList" resultType="hdto">
 		SELECT
-		rh.*
-		FROM
-		RESUME_HIGHSCHOOL rh
-		INNER JOIN RESUME_HIGH_INFO rhi ON rh.HIGH_EDU_NO
-		= rhi.HIGH_EDU_NO
-		INNER JOIN USER_RESUME ur ON rhi.RESUME_NO =
-		ur.RESUME_NO
+		rh.HIGH_EDU_NO, rh.GED, rh.HIGH_NAME, rh.HIGH_DATE, rh.HIGH_MAJOR
+		FROM RESUME_HIGHSCHOOL rh
+		INNER JOIN RESUME_HIGH_INFO rhi ON rh.HIGH_EDU_NO = rhi.HIGH_EDU_NO
+		INNER JOIN USER_RESUME ur ON rhi.RESUME_NO = ur.RESUME_NO
 		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
 	</select>
 
 	<!-- 이력서 상세보기 - 대학교 정보 -->
-	<select id="uniselectOne" resultType="udto">
+	<select id="uniSelectList" resultType="udto">
 		SELECT
-		ru.*
-		FROM
-		RESUME_UNIVERSITYL ru
-		INNER JOIN RESUME_UNI_INFO rui ON ru.UNI_EDU_NO =
-		rui.UNI_EDU_NO
-		INNER JOIN USER_RESUME ur ON rui.RESUME_NO =
-		ur.RESUME_NO
+		ru.UNI_EDU_NO, ru.UNI_ACT, ru.UNI_CATEGORY, ru.UNI_NAME, ru.UNI_DATE, ru.UNI_MAJOR, ru.UNI_POINT 
+		FROM RESUME_UNIVERSITY ru
+		INNER JOIN RESUME_UNI_INFO rui ON ru.UNI_EDU_NO = rui.UNI_EDU_NO
+		INNER JOIN USER_RESUME ur ON rui.RESUME_NO = ur.RESUME_NO
 		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
 	</select>
+	
+	<!-- 이력서 상세보기 - 대학원 정보 -->
+	<select id="gradSelectList" resultType="gdto">
+		SELECT
+		rg.GRAD_EDU_NO, rg.GRAD_ACT, rg.GRAD_NAME, rg.GRAD_CATEGORY, rg.GRAD_DATE, rg.GRAD_MAJOR, rg.GRAD_POINT 
+		FROM RESUME_GRADSCHOOL rg
+		INNER JOIN RESUME_GRAD_INFO rgi ON rg.GRAD_EDU_NO = rgi.GRAD_EDU_NO
+		INNER JOIN USER_RESUME ur ON rgi.RESUME_NO = ur.RESUME_NO
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 경력사항 정보 -->
+	<select id="carSelectList" resultType="careerdto">
+		SELECT
+		rc.CAR_NO, rc.CAR_NAME, rc.CAR_DATE, rc.CAR_POSITION, rc.CAR_DEPT, rc.CAR_DEPT, rc.CAR_RESP, rc.CAR_SALARY 
+		FROM RESUME_CAREER rc
+		INNER JOIN RESUME_CAR_INFO rci ON rc.CAR_NO = rci.CAR_NO
+		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 자격증 정보 -->
+	<select id="certiSelectList" resultType="certidto">
+		SELECT
+		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
+		FROM RESUME_CL rc
+		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
+		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 자기소개서 정보 -->
+	<select id="clSelectList" resultType="cldto">
+		SELECT
+		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
+		FROM RESUME_CL rc
+		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
+		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE ur.USER_ID ='user11' AND ur.RESUME_NO ='106'
+	</select>
+	
+	
+	
+	
+	
 
 	<select id="selectList" resultType="rdto">
 		select RESUME_NO,

@@ -345,6 +345,8 @@
 			success : function(result) {
 				if (result == 1) {
 					alert("자기소개서가 등록되었습니다.");
+					alert("최종 이력서 등록이 완료되었습니다.");
+					
 					location.href = "/job/person/resume/list";
 				} else {
 					alert("자기소개서 등록에 실패했습니다.");

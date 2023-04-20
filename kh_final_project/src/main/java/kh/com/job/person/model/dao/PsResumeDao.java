@@ -31,10 +31,30 @@ public class PsResumeDao {
 		return sqlSession.selectOne("resume.rselectOne", infoMap);
 	}
 	
-	public PsHschoolDto highselectOne(Map<String, Object> infoMap) throws Exception {
-		return sqlSession.selectOne("resume.highselectOne", infoMap);
+	public List<PsHschoolDto> highSelectList(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectList("resume.highSelectList", infoMap);
 	}
 
+	public  List<PsUnivDto> uniSelectList(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectList("resume.uniSelectList", infoMap);
+	}
+	
+	public  List<PsGschoolDto> gradSelectList(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectList("resume.gradSelectList", infoMap);
+	}
+	
+	public List<PsCareerDto> carSelectList(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectList("resume.carSelectList", infoMap);
+	}
+	
+	public List<PsCertiDto> certiSelectList(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectList("resume.certiSelectList", infoMap);
+	}
+	
+	public List<PsClDto> clSelectList(Map<String, Object> infoMap) throws Exception { 
+		return sqlSession.selectList("resume.clSelectList", infoMap);
+	}
+	
 	// 이력서 출력
 	public List<PsResumeDto> selectList(String userId) throws Exception {
 		return sqlSession.selectList("resume.selectList", userId);

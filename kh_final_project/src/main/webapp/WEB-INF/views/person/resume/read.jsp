@@ -96,6 +96,8 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
+									<%-- <span id="resumeNo">${resume.resumeNo }</span> --%>
+								<input type="hidden" id="resumeNo" value="${resume.resumeNo}" />
 										<h1 class="mb-3">${resume.resumeTitle }</h1>
 										작성일시 : ${resume.resumeDate }
 										<div class="row g-5 mt-2 align-items-center">
@@ -119,28 +121,6 @@
 
 										<div class="row g-5 mt-2 align-items-center">
 											<div class="mb-4">
-												<div class="h3 pb-2 ">학력사항</div>
-													<div class="h5 pb-2 border-bottom">고등학교 학력사항</div>
-												<div>
-													<c:choose>
-														<c:when test="${high eq null}">
-															<span>입력된 고등학교 학력사항이 존재하지 않습니다.</span>
-														</c:when>
-														<c:otherwise>
-															<span>${high.highName }</span>
-															<span>${high.ged }</span>
-															<span>${high.highDate }</span>
-															<span>${high.highMajor }</span>
-														</c:otherwise>
-													</c:choose>
-												</div>
-											</div>
-										</div>
-
-
-
-										<div class="row g-5 mt-2 align-items-center">
-											<div class="mb-4">
 												<div class="h3 pb-2 border-bottom">포트폴리오</div>
 												<div>
 													<c:choose>
@@ -157,6 +137,222 @@
 												</div>
 											</div>
 										</div>
+
+										<div class="row g-5 mt-2 align-items-center">
+											<div class="mb-4">
+												<div class="h3 pb-2 ">학력사항</div>
+
+												<div class="h5 pb-2 border-bottom">고등학교 학력사항</div>
+												<div class="pb-5">
+													<c:choose>
+														<c:when test="${empty high}">
+															<span>입력된 고등학교 학력사항이 존재하지 않습니다.</span>
+														</c:when>
+														<c:otherwise>
+															<table class="table table-hover">
+																<thead>
+																	<tr>
+																		<th>구분</th>
+																		<th>졸업상태</th>
+																		<th>학교명(소재지)</th>
+																		<th>졸업일자</th>
+																		<th>전공</th>
+																		<th>학점</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${high}" var="h">
+																		<tr>
+																			<td>${h.highName }</td>
+																			<td>${h.ged }</td>
+																			<td>${h.highDate }</td>
+																			<td>${h.highMajor }</td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</c:otherwise>
+													</c:choose>
+												</div>
+
+												<div class="h5 pb-2 border-bottom">대학교 학력사항</div>
+												<div class="pb-5">
+													<c:choose>
+														<c:when test="${empty uni}">
+															<span>입력된 대학교 학력사항이 존재하지 않습니다.</span>
+														</c:when>
+														<c:otherwise>
+															<table class="table table-hover">
+																<thead>
+																	<tr>
+																		<th>구분</th>
+																		<th>졸업상태</th>
+																		<th>학교명(소재지)</th>
+																		<th>졸업일자</th>
+																		<th>전공</th>
+																		<th>학점</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${uni}" var="u">
+																		<tr>
+																			<td>${u.uniAct }</td>
+																			<td>${u.uniCategory }</td>
+																			<td>${u.uniName }</td>
+																			<td>${u.uniDate }</td>
+																			<td>${u.uniMajor }</td>
+																			<td>${u.uniPoint }</td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</c:otherwise>
+													</c:choose>
+												</div>
+
+												<div class="h5 pb-2 border-bottom">대학원 학력사항</div>
+												<div class="pb-5">
+													<c:choose>
+														<c:when test="${empty grad}">
+															<span>입력된 대학원 학력사항이 존재하지 않습니다.</span>
+														</c:when>
+														<c:otherwise>
+															<table class="table table-hover">
+																<thead>
+																	<tr>
+																		<th>졸업상태</th>
+																		<th>대학카테고리</th>
+																		<th>학교명(소재지)</th>
+																		<th>졸업일자</th>
+																		<th>전공</th>
+																		<th>학점</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${grad}" var="g">
+																		<tr>
+																			<td>${g.gradAct }</td>
+																			<td>${g.gradCategory }</td>
+																			<td>${g.gradName }</td>
+																			<td>${g.gradDate }</td>
+																			<td>${g.gradMajor }</td>
+																			<td>${g.gradPoint }</td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</c:otherwise>
+													</c:choose>
+												</div>
+
+
+											</div>
+										</div>
+
+										<div class="row g-5 mt-2 align-items-center">
+											<div class="mb-4">
+												<div class="h3 pb-2 border-bottom">경력사항</div>
+												<div class="pb-5">
+													<c:choose>
+														<c:when test="${empty career}">
+															<span>입력된 경력사항이 존재하지 않습니다.</span>
+														</c:when>
+														<c:otherwise>
+															<table class="table table-hover">
+																<thead>
+																	<tr>
+																		<th>회사명</th>
+																		<th>재직기간</th>
+																		<th>직급/직책</th>
+																		<th>근무부서</th>
+																		<th>담당업무</th>
+																		<th>연봉</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${career}" var="c">
+																		<tr>
+																			<td>${c.carName }</td>
+																			<td>${c.carDate }</td>
+																			<td>${c.carPosition }</td>
+																			<td>${c.carDept }</td>
+																			<td>${c.carResp }</td>
+																			<td>${c.carSalary }</td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</c:otherwise>
+													</c:choose>
+												</div>
+
+
+
+
+
+											</div>
+										</div>
+
+										<div class="row g-5 mt-2 align-items-center">
+											<div class="mb-4">
+												<div class="h3 pb-2 border-bottom">자격증</div>
+												<div class="pb-5">
+													<c:choose>
+														<c:when test="${empty career}">
+															<span>입력된 경력사항이 존재하지 않습니다.</span>
+														</c:when>
+														<c:otherwise>
+															<table class="table table-hover">
+																<thead>
+																	<tr>
+																		<th>자격증명</th>
+																		<th>발행처</th>
+																		<th>취득일자</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${certi}" var="ct">
+																		<tr>
+																			<td>${ct.certiName }</td>
+																			<td>${ct.certiPub }</td>
+																			<td>${ct.certiDate }</td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</c:otherwise>
+													</c:choose>
+												</div>
+
+
+
+
+											</div>
+										</div>
+
+										<div class="row g-5 mt-2 align-items-center">
+											<div class="mb-4">
+												<div class="h3 pb-2 border-bottom">자기소개서</div>
+												<div class="pb-5">
+													<c:choose>
+														<c:when test="${empty cl}">
+															<span>입력된 자기소개서가 존재하지 않습니다.</span>
+														</c:when>
+														<c:otherwise>
+															<button id="view-cl" type="button">작성한 자기소개서 확인</button>
+														</c:otherwise>
+													</c:choose>
+												</div>
+
+
+
+
+											</div>
+										</div>
+
+
+
+
 
 									</div>
 								</div>
@@ -180,6 +376,32 @@
 		function portfFileDown() {
 			window.location.href = "${resume.portfFile}";
 		}
+		
+		
+/* 		$(document).ready(function() {
+		    $('#view-cl').on('click', function() {
+		        var resumeNo = document.getElementById('resumeNo').value;
+
+		        $.ajax({
+		            url: '',
+		            type: 'POST',
+		            data: { resumeNo: resumeNo },
+		            dataType: 'json',
+		            success: function(response) {
+		                // 서버로부터 응답으로 받은 자기소개서 정보를 이용하여 새 창에 자기소개서를 보여줍니다.
+		                var newWindow = window.open('', '_blank');
+		                newWindow.document.write('<html><head><title>자기소개서 확인</title></head><body>');
+		                newWindow.document.write('<h1>' + response.title + '</h1>');
+		                newWindow.document.write('<p>' + response.content + '</p>');
+		                newWindow.document.write('</body></html>');
+		            },
+		            error: function(error) {
+		                console.log(error);
+		            }
+		        });
+		    });
+		}); */
+
 	</script>
 
 
