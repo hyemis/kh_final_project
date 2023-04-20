@@ -614,7 +614,7 @@
 
 
 			
-	// 선택 완료 버튼 클릭 시
+// 선택 완료 버튼 클릭 시
 	function completeCheck() {
 	  var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
 	  
@@ -812,7 +812,7 @@ let highSaveButton = document.getElementById("selectHighBtn");
 //event
 highSaveButton.addEventListener("click", function() {
 	// 체크된 데이터를 가져와서 form에 추가
-	let selectedHighList = document.querySelectorAll('input[name="selectedHigh]:checked');
+	let selectedHighList = document.querySelectorAll('input[name="selectedHigh"]:checked');
 
 	let highNewFormHTML =	`
 		<form name="rHSchool" action="rHSchool" method="post">
@@ -881,22 +881,26 @@ highSaveButton.addEventListener("click", function() {
 	  		success : function(result) {
 	  			if(result > 0) {
 	  				highNewForm = document.createElement("form");
-		  			let highFormContainer = document.getElementById("highFormContainer");
+		  			let highFormContainer = document.getElementById("HighFormContainer");
 		  			highNewForm.id = "high-form-"+i; // 각각의 폼에 대해 고유한 id 값 부여
 		  			highNewForm.innerHTML = highNewFormHTML;
 		  			highFormContainer.appendChild(highNewForm);
+		  			
  
 	    // 기존 form 뒤에 새로운 form 추가
 	    let highData = selectedHighList[i].closest("tr").getElementsByTagName("td");
 	      
-	    if (hschool.ged == 'Y') {
-	    	  highNewForm.elements["highNewGed"].checked = true;
-	    	}
+	   
+ 	   //if (hschool.ged == 'Y') {
+ 		  if  ${hschool.ged == 'Y'}{
+ 	    	  highNewForm.elements["highNewGed"].checked = true;
+    	}
 	    
-	    highNewForm.elements["highName"].value = highData[2].textContent;
+	    
+	    highNewForm.elements["highNewName"].value = highData[2].textContent;
 	    highNewForm.elements["highNewDate"].value = highData[3].textContent;
 	    highNewForm.elements["highNewMajor"].value = highData[4].textContent;
-	    
+
 	    
 	    // new form delete 버튼 -
 	    let highDeleteBtn = highNewForm.querySelector("#deleteHighInfo");
