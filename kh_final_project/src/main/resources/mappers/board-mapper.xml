@@ -99,12 +99,12 @@
 		</selectKey>
 	</insert>
 
-	<select id="qnaList">
+<!-- 	<select id="qnaList">
 		SELECT UDB04
 		FROM BOARD
 		WHERE USER_ID= #{userId}
 	</select>
-
+ -->
 
 
 
