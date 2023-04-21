@@ -61,8 +61,57 @@
 			<div class="p-2 col-9">
 				<div class="recruitlist p-2">
 					<h3 class="my-2">지원자 현황</h3>
-					<div class="bg-dark border" style="height: 150px;">
+					<div class="bg-dark border">
+						<table class="table table-borderless">
+							<thead>
+								<tr class="text-white h4">
+									<th>총 지원자</th>
+									<th>서류 합격</th>
+									<th>최종 합격</th>
+									<th> 불합격 </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center">
+									<td>
+										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+											<span class="h1">2</span>								
+										</div>
+									</td>
+									<td>
+										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+											<span class="h1">3</span>								
+										</div>
+									</td>
+									<td>
+										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+											<span class="h1">4</span>								
+										</div>
+									</td>
+									<td>
+										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+											<span class="h1">5</span>								
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
 					</div>
+<!-- 					<div class="bg-dark border d-flex justify-content-center align-items-center" style="height: 150px;"> -->
+<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
+<!-- 							<span class="h1">1</span>								 -->
+<!-- 						</div> -->
+<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
+<!-- 							<span class="h1">2</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
+<!-- 							<span class="h1">3</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
+<!-- 							<span class="h1">4</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<h3 class="my-2 mt-4">지원자 조회</h3>
 					<div class="bg-white border">
 						<div class="m-2 d-flex align-middle">
@@ -75,6 +124,13 @@
 									</c:forEach>
 								</select>
 							</div>
+						</div>
+						<!-- 위의 select 박스가 바뀌면 아래 새로 그려짐  start-->
+						<!-- 쿼리스트링으로 공고 번호 들어오면 먼저 그려줄수 있어야함 공고 검색 후 값이 없으면
+						안그려져야됨-->
+						<div class="m-2 d-flex align-middle">
+							<p class="mx-2">지원자</p>
+							<p>지원자수</p>
 						</div>
 						<table class="table">
 							<thead>
@@ -89,6 +145,7 @@
 								
 							</tbody>
 						</table>
+						<!-- 위의 select 박스가 바뀌면 아래 새로 그려짐  end-->
 					</div>
 				</div>
 			</div>
