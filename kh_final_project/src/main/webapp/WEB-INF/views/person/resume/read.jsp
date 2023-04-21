@@ -344,15 +344,19 @@
 															<span>입력된 자기소개서가 존재하지 않습니다.</span>
 														</c:when>
 														<c:otherwise>
+														<div class="pt-2">
 															<a
 																href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}/${cl.clNo}"
 																target="_blank">작성한 자기소개서 확인</a>
+														</div>
 															<c:if test="${not empty cl.clFile }">
 																<c:set var="clFile" value="${cl.clFile}" />
-																<button class="btn btn-primary" onclick="clFileCheck()">등록한
-																	자기소개서 파일 확인하기</button>
-																<button class="btn btn-primary" onclick="clFileDown()">등록한
-																	자기소개서 파일 다운하기</button>
+																<div class="pt-2">
+																	<button class="btn btn-primary" onclick="clFileCheck()">등록한
+																		자기소개서 파일 확인하기</button>
+																	<button class="btn btn-primary" onclick="clFileDown()">등록한
+																		자기소개서 파일 다운하기</button>
+																</div>
 															</c:if>
 														</c:otherwise>
 													</c:choose>
