@@ -1,15 +1,8 @@
 package kh.com.job.person.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.security.Principal;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -23,21 +16,28 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import kh.com.job.admin.model.service.AdCategotyService;
+=======
+import kh.com.job.admin.model.service.AdBusinessService;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
+>>>>>>> e836b198633b2c45843ed794822d748f3f3252d9
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
+import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsUserDto;
+import kh.com.job.person.model.service.PsResumeService;
 import kh.com.job.person.model.service.PsService;
 
 @Controller
@@ -49,6 +49,10 @@ public class PsMainController {
 	
 	@Autowired
 	private AdCategotyService Cservice;
+	private PsResumeService rservice;
+	
+	@Autowired
+	private AdBusinessService abs;
 	
 	@Autowired
 	@Qualifier("fileUtil")
@@ -501,6 +505,7 @@ public class PsMainController {
 		return mv;
 	}
 	
+
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code, RedirectAttributes rttr) throws Throwable {
@@ -553,6 +558,31 @@ public class PsMainController {
 	
 	
 	
+	// 구인공고 확인 화면 
+	@GetMapping("/viewrecruit/{raNum}")
+	public ModelAndView viewRecruit(ModelAndView mv, 
+			@PathVariable String raNum, 
+			Principal principal) {
+		
+		try {
+		// 공고 정보 출력
+		BsRecruitDetailDto redto = abs.viewDetail(raNum);		
+		PsUserDto result = service.selectOne(principal.getName());
+		List<PsResumeDto> resume = rservice.selectList(principal.getName());
+		
+		
+		if (result != null) {
+			mv.addObject("redto", redto);
+			mv.addObject("resumelist", resume);
+			mv.setViewName("person/viewrecruit");
+		} else {
+			mv.setViewName("redirect:/");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return mv;
+}
 	
 	// 예외처리는 프로젝트 후반에 작성 
 	@ExceptionHandler

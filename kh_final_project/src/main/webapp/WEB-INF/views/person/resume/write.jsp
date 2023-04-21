@@ -124,7 +124,7 @@
 														enctype="multipart/form-data">
 														<!-- file upload : multiple 하지 않음-->
 														<input type="file" name="report" placeholder="첨부파일"><br>
-														<button class="btn btn-outline-dark m-2" type="submit">게시글
+														<button class="btn btn-outline-dark m-2" type="submit">사진
 															등록</button>
 													</form>
 												</div>
