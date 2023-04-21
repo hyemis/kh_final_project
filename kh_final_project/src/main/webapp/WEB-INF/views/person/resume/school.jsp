@@ -58,19 +58,11 @@
 	display: none;
 }
 
-.deleteHigh {
-	width: 60px;
-}
-
-.deleteUni {
-	width: 60px;
-}
 
 .parent {
 	display: flex;
 	justify-content: flex-end;
 }
-</style>
 </style>
 
 </head>
@@ -151,7 +143,7 @@
 																			<tr>
 																			
 																				<td><input type="checkbox" name="selectedHigh" /></td>
-																				<td><c:choose>
+																				<td data-hschoolged="${hschool.ged}"><c:choose>
 																						<c:when test="${hschool.ged == 'Y'}">
 																							<c:set var="gedName" value="검정고시" />
 																						</c:when>
@@ -889,18 +881,13 @@ highSaveButton.addEventListener("click", function() {
 	    // 기존 form 뒤에 새로운 form 추가
 	    let highData = selectedHighList[i].closest("tr").getElementsByTagName("td");
 	      
-	   
- 	   //if (hschool.ged == 'Y') {
-/*  		if ("${hschool.ged}" == "Y") {
-		  highNewForm.elements["highNewGed"].checked = true;
-		} */
- 		
- 		
- 		  if (highData[1].textContent === "Y") {
- 			    highNewForm.elements["highNewGed"].checked = true;
- 			  }
+	    var hschoolged = highData[1].dataset.hschoolged;
+	    if(hschoolged=="Y"){
+	    	highNewForm.elements["highNewGed"].checked = true;
+	    }
 
-	    highNewForm.elements["highNewName"].value = highData[2].textContent;
+ 	 
+		highNewForm.elements["highNewName"].value = highData[2].textContent;
 	    highNewForm.elements["highNewDate"].value = highData[3].textContent;
 	    highNewForm.elements["highNewMajor"].value = highData[4].textContent;
 
@@ -921,6 +908,7 @@ highSaveButton.addEventListener("click", function() {
 	    }
 	}); 
 
+		
 alert('작성 중인 이력서에서 해당 경력 정보가 입력되었습니다.');
 
 }			
@@ -1240,6 +1228,8 @@ $(document).ready(function() {
 			gradCategory: $(this).closest('tr').find('td:eq(2)').text(),
 			gradName: $(this).closest('tr').find('td:eq(3)').text(),
 			gradDate: $(this).closest('tr').find('td:eq(4)').text(),
+			gradMajor: $(this).closest('tr').find('td:eq(5)').text(),
+			gradPoint: $(this).closest('tr').find('td:eq(6)').text(),
 			gradNumber: index + 1
 	};
 

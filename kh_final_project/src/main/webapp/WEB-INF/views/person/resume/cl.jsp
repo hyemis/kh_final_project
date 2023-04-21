@@ -210,17 +210,12 @@
 								</div>
 							</div>
 
-							<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-								<button type="button" class="btn btn-primary"
-									onclick="fn_clWrite(); return false;">저장</button>
-							</div>
-
 							<div
 								class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+								<button type="button" class="btn btn-primary"
+									onclick="fn_clWrite(); return false;">저장</button>
 								<a class="btn btn-primary"
 									href="${pageContext.request.contextPath}/person/resume/list">취소</a>
-								<a class="btn btn-primary"
-									href="${pageContext.request.contextPath}/person/resume/list">다음</a>
 							</div>
 						</div>
 					</div>

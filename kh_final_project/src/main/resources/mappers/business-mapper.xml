@@ -92,15 +92,8 @@
  			        , #{raExtraDocument}, 'N', 'N')
 	</insert>
 	
-	<!-- 채용공고 미승인 리스트 -->
-	<select id="recruitAdmission" resultType="kh.com.job.business.model.dto.BsRecruitDto">
-		SELECT * FROM RECRUIT_REGIST
-		WHERE USER_ID = #{userId} 
-		AND RA_ADMISSION = 'N'
-		AND CLOSE_DATE > SYSDATE
-	</select>
 	<!-- 채용공고 등록 리스트 -->
-	<select id="recruitProgress" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+	<select id="recruitAdmission" resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
 		WHERE USER_ID = #{userId} 
 		AND RA_ADMISSION IN ('P', 'Y')

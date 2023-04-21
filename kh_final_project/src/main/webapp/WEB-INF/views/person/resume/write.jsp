@@ -84,7 +84,7 @@
 							<div class="invalid-feedback mb-3">이력서 제목을 입력하세요.</div>
 							<div class="form-check ms-3">
 								<input class="form-check-input" type="checkbox" value="Y"
-									id="flexCheckChecked" checked> <label
+									id="flexCheckChecked"> <label
 									class="form-check-label" for="flexCheckChecked"> 이력서
 									공개여부 </label>
 							</div>

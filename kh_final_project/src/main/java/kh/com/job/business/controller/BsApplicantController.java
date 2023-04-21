@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
+import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 
 @Controller
@@ -20,9 +22,31 @@ public class BsApplicantController {
 	
 	@Autowired
 	private BsApplicantService service;
+	
+	@Autowired
+	private BsAccountService acservice;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	//합격자관리
+	@GetMapping("/main")
+	public ModelAndView main(ModelAndView mv, Principal principal) {
+		
+		if(principal == null) {
+			mv.setViewName("redirect:/person/login");
+			return mv;
+		}
+		
+		List<BsRecruitDto> recruitlist = service.recruitList(principal.getName());
+		
+		BsUserDto dto = acservice.viewAccount(principal.getName());
+		mv.addObject("recruitlist", recruitlist);
+		mv.addObject("userinfo", dto);
+		
+		return mv;
+	}
+	
 
 	//합격자관리
 	@GetMapping("/pass")

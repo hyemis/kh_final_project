@@ -60,14 +60,12 @@ public class BsRecruitController {
 		
 		BsUserDto dto = acservice.viewAccount(principal.getName());
 		
+		
 		//메인 진행중인 리스트
-		List<BsRecruitDto> reCruitDto = service.recruitProgress(principal.getName());
-		//관리자 미승인 리스트
-		List<BsRecruitDto> admissionDto = service.recruitAdmission(principal.getName());
+		List<BsRecruitDto> reCruitDto = service.recruitAdmission(principal.getName());
 		
 		mv.addObject("userinfo", dto);
 		mv.addObject("recruitList", reCruitDto);
-		mv.addObject("admissionList", admissionDto);
 		
 		return mv;
 	}
@@ -228,7 +226,7 @@ public class BsRecruitController {
 		//우대조건
 		mv.addObject("SClist", service.getCateList("SC"));
 		
-		mv.addObject("member", principal.getName());
+		mv.addObject("member", redto.getUserId());
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
@@ -287,7 +285,7 @@ public class BsRecruitController {
 			mv.addObject("ctList", ctList);
 		}
 		
-		mv.addObject("member", principal.getName());
+		mv.addObject("member", redto.getUserId());
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
