@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <html>
 <head>
@@ -96,8 +97,7 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
-									<%-- <span id="resumeNo">${resume.resumeNo }</span> --%>
-								<input type="hidden" id="resumeNo" value="${resume.resumeNo}" />
+										<input type="hidden" id="resumeNo" value="${resume.resumeNo}" />
 										<h1 class="mb-3">${resume.resumeTitle }</h1>
 										작성일시 : ${resume.resumeDate }
 										<div class="row g-5 mt-2 align-items-center">
@@ -152,20 +152,25 @@
 															<table class="table table-hover">
 																<thead>
 																	<tr>
-																		<th>구분</th>
-																		<th>졸업상태</th>
+																		<th>검정고시 유무</th>
 																		<th>학교명(소재지)</th>
 																		<th>졸업일자</th>
 																		<th>전공</th>
-																		<th>학점</th>
 																	</tr>
 																</thead>
 																<tbody>
 																	<c:forEach items="${high}" var="h">
 																		<tr>
+																			<c:choose>
+																				<c:when test="${h.ged eq 'Y'}">
+																					<td>검정고시</td>
+																				</c:when>
+																				<c:otherwise>
+																					<td></td>
+																				</c:otherwise>
+																			</c:choose>
 																			<td>${h.highName }</td>
-																			<td>${h.ged }</td>
-																			<td>${h.highDate }</td>
+																			<td>${fn:substring(h.highDate, 0, 10)}</td>
 																			<td>${h.highMajor }</td>
 																		</tr>
 																	</c:forEach>
@@ -185,8 +190,8 @@
 															<table class="table table-hover">
 																<thead>
 																	<tr>
-																		<th>구분</th>
 																		<th>졸업상태</th>
+																		<th>대학교 카테고리</th>
 																		<th>학교명(소재지)</th>
 																		<th>졸업일자</th>
 																		<th>전공</th>
@@ -196,10 +201,10 @@
 																<tbody>
 																	<c:forEach items="${uni}" var="u">
 																		<tr>
-																			<td>${u.uniAct }</td>
-																			<td>${u.uniCategory }</td>
+																			<td>${u.uniAct eq 'Y' ? '졸업' : u.uniAct eq 'N' ? '재학 중' : '휴학'}</td>
+																			<td>${u.uniCategory eq 'T' ? '2,3년제' : '4년제'}</td>
 																			<td>${u.uniName }</td>
-																			<td>${u.uniDate }</td>
+																			<td>${fn:substring(u.uniDate, 0, 10)}</td>
 																			<td>${u.uniMajor }</td>
 																			<td>${u.uniPoint }</td>
 																		</tr>
@@ -231,10 +236,10 @@
 																<tbody>
 																	<c:forEach items="${grad}" var="g">
 																		<tr>
-																			<td>${g.gradAct }</td>
-																			<td>${g.gradCategory }</td>
+																			<td>${g.gradAct eq 'Y' ? '졸업' : g.gradAct eq 'N' ? '재학 중' : '휴학'}</td>
+																			<td>${g.gradCategory eq 'D' ? '박사' : '석사'}</td>
 																			<td>${g.gradName }</td>
-																			<td>${g.gradDate }</td>
+																			<td>${fn:substring(g.gradDate, 0, 10)}</td>
 																			<td>${g.gradMajor }</td>
 																			<td>${g.gradPoint }</td>
 																		</tr>
@@ -273,7 +278,7 @@
 																	<c:forEach items="${career}" var="c">
 																		<tr>
 																			<td>${c.carName }</td>
-																			<td>${c.carDate }</td>
+																			<td>${fn:substring(c.carDate, 0, 10)}</td>
 																			<td>${c.carPosition }</td>
 																			<td>${c.carDept }</td>
 																			<td>${c.carResp }</td>
@@ -298,7 +303,7 @@
 												<div class="h3 pb-2 border-bottom">자격증</div>
 												<div class="pb-5">
 													<c:choose>
-														<c:when test="${empty career}">
+														<c:when test="${empty certi}">
 															<span>입력된 경력사항이 존재하지 않습니다.</span>
 														</c:when>
 														<c:otherwise>
@@ -315,7 +320,7 @@
 																		<tr>
 																			<td>${ct.certiName }</td>
 																			<td>${ct.certiPub }</td>
-																			<td>${ct.certiDate }</td>
+																			<td>${fn:substring(ct.certiDate, 0, 10)}</td>
 																		</tr>
 																	</c:forEach>
 																</tbody>
@@ -339,14 +344,19 @@
 															<span>입력된 자기소개서가 존재하지 않습니다.</span>
 														</c:when>
 														<c:otherwise>
-															<button id="view-cl" type="button">작성한 자기소개서 확인</button>
+															<a
+																href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}/${cl.clNo}"
+																target="_blank">작성한 자기소개서 확인</a>
+															<c:if test="${not empty cl.clFile }">
+																<c:set var="clFile" value="${cl.clFile}" />
+																<button class="btn btn-primary" onclick="clFileCheck()">등록한
+																	자기소개서 파일 확인하기</button>
+																<button class="btn btn-primary" onclick="clFileDown()">등록한
+																	자기소개서 파일 다운하기</button>
+															</c:if>
 														</c:otherwise>
 													</c:choose>
 												</div>
-
-
-
-
 											</div>
 										</div>
 
@@ -357,6 +367,15 @@
 									</div>
 								</div>
 							</div>
+
+
+
+
+						</div>
+
+						<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+							<a class="btn btn-primary"
+								href="${pageContext.request.contextPath}/person/resume/list">목록</a>
 						</div>
 					</div>
 				</div>
@@ -376,32 +395,39 @@
 		function portfFileDown() {
 			window.location.href = "${resume.portfFile}";
 		}
-		
-		
-/* 		$(document).ready(function() {
-		    $('#view-cl').on('click', function() {
-		        var resumeNo = document.getElementById('resumeNo').value;
 
-		        $.ajax({
-		            url: '',
-		            type: 'POST',
-		            data: { resumeNo: resumeNo },
-		            dataType: 'json',
-		            success: function(response) {
-		                // 서버로부터 응답으로 받은 자기소개서 정보를 이용하여 새 창에 자기소개서를 보여줍니다.
-		                var newWindow = window.open('', '_blank');
-		                newWindow.document.write('<html><head><title>자기소개서 확인</title></head><body>');
-		                newWindow.document.write('<h1>' + response.title + '</h1>');
-		                newWindow.document.write('<p>' + response.content + '</p>');
-		                newWindow.document.write('</body></html>');
-		            },
-		            error: function(error) {
-		                console.log(error);
-		            }
-		        });
-		    });
-		}); */
+		function clFileCheck() {
+			window
+					.open(`https://drive.google.com/viewerng/viewer?embedded=true&url=${ clFile }`);
+		}
 
+		function clFileDown() {
+			window.location.href = clFile;
+		}
+
+		/* $(document).ready(function() {
+		 $('#view-cl').on('click', function() {
+		 var resumeNo = document.getElementById('resumeNo').value;
+
+		 $.ajax({
+		 url: '',
+		 type: 'POST',
+		 data: { resumeNo: resumeNo },
+		 dataType: 'json',
+		 success: function(response) {
+		 // 서버로부터 응답으로 받은 자기소개서 정보를 이용하여 새 창에 자기소개서를 보여줍니다.
+		 var newWindow = window.open('', '_blank');
+		 newWindow.document.write('<html><head><title>자기소개서 확인</title></head><body>');
+		 newWindow.document.write('<h1>' + response.title + '</h1>');
+		 newWindow.document.write('<p>' + response.content + '</p>');
+		 newWindow.document.write('</body></html>');
+		 },
+		 error: function(error) {
+		 console.log(error);
+		 }
+		 });
+		 });
+		 });  */
 	</script>
 
 

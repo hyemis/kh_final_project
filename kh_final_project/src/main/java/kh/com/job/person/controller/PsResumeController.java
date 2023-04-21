@@ -143,7 +143,11 @@ public class PsResumeController {
 	@GetMapping("/read/{resumeNo}")
 	public ModelAndView viewReadResume(ModelAndView mv, Principal principal, @PathVariable int resumeNo)
 			throws Exception {
+		
 		String userId = principal.getName();
+		Map<String, Object> infoMap = new HashMap<>();
+		infoMap.put("userId", userId);
+		infoMap.put("resumeNo", resumeNo);
 
 
 		// user 정보 출력 
@@ -151,9 +155,6 @@ public class PsResumeController {
 		mv.addObject("userinfo", result);
 
 		// 이력서 정보 출력 
-		Map<String, Object> infoMap = new HashMap<>();
-		infoMap.put("userId", userId);
-		infoMap.put("resumeNo", resumeNo);
 		PsResumeDto resume = rservice.rselectOne(infoMap);
 		
 		// 학력사항 정보 출력 
@@ -168,7 +169,7 @@ public class PsResumeController {
 		List<PsCertiDto> certi = rservice.certiSelectList(infoMap);
 		
 		// 자기소개서 정보 출력
-		List<PsClDto> cl = rservice.clSelectList(infoMap);
+		PsClDto cl = rservice.clSelectOne(infoMap);
 		
 		mv.addObject("resume", resume);
 		mv.addObject("high", high);
@@ -180,9 +181,37 @@ public class PsResumeController {
 		mv.setViewName("person/resume/read");
 		return mv;
 	}
+	
+	// 이력서 상세보기 화면 > 자기소개서 화면
+	@GetMapping("/read/{resumeNo}/{clNo}")
+	public ModelAndView viewReadResumeCl(ModelAndView mv, Principal principal, @PathVariable Integer resumeNo, Integer clNo)
+			throws Exception {
+		
+		String userId = principal.getName();
+		Map<String, Object> infoMap = new HashMap<>();
+		infoMap.put("userId", userId);
+		infoMap.put("resumeNo", resumeNo);
+		
+		// user 정보 출력 
+		PsUserDto result = pservice.selectOne(userId);
+		mv.addObject("userinfo", result);
+		
+		// 이력서 정보 출력 
+		PsResumeDto resume = rservice.rselectOne(infoMap);
+		mv.addObject("resume", resume);
+		
+		
+		// 자기소개서 정보 출력
+		PsClDto cl = rservice.clSelectOne(infoMap);
+		mv.addObject("cl", cl);
+		
+		mv.setViewName("person/resume/readcl");
+		return mv;
+	}
+	
+	
 
 	// 학력사항 페이지
-	@GetMapping("school")
 	public ModelAndView viewSchool(ModelAndView mv, Principal principal) throws Exception {
 
 		// 고등학교 학력정보 불러오기
@@ -251,41 +280,6 @@ public class PsResumeController {
 		InfoNo.put("userId", principal.getName());
 
 		result = rservice.deleteInfoHigh(InfoNo);
-		return result;
-	}
-	
-	// 고등학교 불러올때 낀테이블 insert
-	@PostMapping("insertInfoHigh")
-	@ResponseBody
-	public int insertInfoHigh(Principal principal, @RequestParam("highEduNo") Integer highEduNo) throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("highEduNo", highEduNo);
-		InfoNo.put("userId", principal.getName());
-
-		result = rservice.insertHighInfo(InfoNo);
-
-		return result;
-	}
-	
-	// 고등학교 테이블 수정
-	@PostMapping("updateHigh")
-	@ResponseBody
-	public int updateHigh(@RequestParam("highEduNo") Integer highEduNo, @RequestParam("highNewName") String highName, 
-			@RequestParam("highNewDate") String highDate, @RequestParam("highNewMajor") String highMajor)
-			throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> updateHigh = new HashMap<>();
-		updateHigh.put("highEduNo", highEduNo);
-		updateHigh.put("highName", highName);
-		updateHigh.put("highDate", highDate);
-		updateHigh.put("highMajor", highMajor);
-
-		result = rservice.updateHigh(updateHigh);
 		return result;
 	}
 
@@ -357,30 +351,6 @@ public class PsResumeController {
 		result = rservice.deleteInfoUni(InfoNo);
 		return result;
 	}
-	
-	// 대학교 테이블 수정
-	@PostMapping("updateUni")
-	@ResponseBody
-	public int updateUni(@RequestParam("uniEduNo") Integer uniEduNo, @RequestParam("uniNewAct") String uniAct,
-			@RequestParam("uniNewCategory") String uniCategory, @RequestParam("uniNewName") String uniName,
-			@RequestParam("uniNewDate") String uniDate, @RequestParam("uniNewMajor") String uniMajor,
-			@RequestParam("uniNewPoint") Double uniPoint)
-			throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> updateUni = new HashMap<>();
-		updateUni.put("uniEduNo", uniEduNo);
-		updateUni.put("uniAct", uniAct);
-		updateUni.put("uniCategory", uniCategory);
-		updateUni.put("uniName", uniName);
-		updateUni.put("uniDate", uniDate);
-		updateUni.put("uniMajor", uniMajor);
-		updateUni.put("uniPoint", uniPoint);
-		
-		result = rservice.updateUni(updateUni);
-		return result;
-	}
 
 	// 대학원 입력
 	@PostMapping("rGSchool")
@@ -416,27 +386,11 @@ public class PsResumeController {
 	public int deleteGrad(@RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
 
 		int result = -1;
-		result = rservice.deleteGrad(gradEduNo);
-		return result;
-	}
-	
-	// 대학교 불러올때 낀테이블 insert
-	@PostMapping("insertInfoGrad")
-	@ResponseBody
-	public int insertInfoGrad(Principal principal, @RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("gradEduNo", gradEduNo);
-		InfoNo.put("userId", principal.getName());
-
-		result = rservice.insertGradInfo(InfoNo);
-
+		result = rservice.deleteUni(gradEduNo);
 		return result;
 	}
 
-	// 대학원 끼인 테이블 삭제
+	// 대학교 끼인 테이블 삭제
 	@PostMapping("deleteInfoGrad")
 	@ResponseBody
 	public int deleteInfoGrad(Principal principal, @RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
@@ -451,31 +405,29 @@ public class PsResumeController {
 		return result;
 	}
 	
-	// 대학교 테이블 수정
-	@PostMapping("updateGrad")
+	// 자격증 테이블 수정
+	@PostMapping("updateUni")
 	@ResponseBody
-	public int updateGrad(@RequestParam("gradEduNo") Integer gradEduNo, @RequestParam("gradNewAct") String gradAct,
-			@RequestParam("gradNewCategory") String gradCategory, @RequestParam("gradNewName") String gradName,
-			@RequestParam("gradNewDate") String gradDate, @RequestParam("gradNewMajor") String gradMajor,
-			@RequestParam("gradNewPoint") Double gradPoint)
+	public int updateUni(@RequestParam("uniEduNo") Integer uniEduNo, @RequestParam("uniNewAct") String uniAct,
+			@RequestParam("uniNewCategory") String uniCategory, @RequestParam("uniNewName") String uniName,
+			@RequestParam("uniNewDate") String uniDate, @RequestParam("uniNewMajor") String uniMajor,
+			@RequestParam("uniNewPoint") Double uniPoint)
 			throws Exception {
 
 		int result = -1;
 
-		Map<String, Object> updateGrad = new HashMap<>();
-		updateGrad.put("gradEduNo", gradEduNo);
-		updateGrad.put("gradAct", gradAct);
-		updateGrad.put("gradCategory", gradCategory);
-		updateGrad.put("gradName", gradName);
-		updateGrad.put("gradDate", gradDate);
-		updateGrad.put("gradMajor", gradMajor);
-		updateGrad.put("gradPoint", gradPoint);
+		Map<String, Object> updateUni = new HashMap<>();
+		updateUni.put("uniEduNo", uniEduNo);
+		updateUni.put("uniAct", uniAct);
+		updateUni.put("uniCategory", uniCategory);
+		updateUni.put("uniName", uniName);
+		updateUni.put("uniDate", uniDate);
+		updateUni.put("uniMajor", uniMajor);
+		updateUni.put("uniPoint", uniPoint);
 		
-		result = rservice.updateGrad(updateGrad);
+		result = rservice.updateUni(updateUni);
 		return result;
 	}
-	
-
 
 	// 경력사항 페이지
 	@GetMapping("career")

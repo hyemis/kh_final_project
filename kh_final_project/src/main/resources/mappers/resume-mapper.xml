@@ -64,28 +64,33 @@
 	<!-- 이력서 상세보기 - 자격증 정보 -->
 	<select id="certiSelectList" resultType="certidto">
 		SELECT
-		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
-		FROM RESUME_CL rc
-		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
+		rc.CERTI_NO, rc.CERTI_NAME, rc.CERTI_PUB, rc.CERTI_DATE 
+		FROM RESUME_CERTI rc
+		INNER JOIN RESUME_CERTI_INFO rci ON rc.CERTI_NO = rci.CERTI_NO
 		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
 		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
 	</select>
 	
 	<!-- 이력서 상세보기 - 자기소개서 정보 -->
-	<select id="clSelectList" resultType="cldto">
+<!--  	<select id="clSelectList" resultType="cldto">
 		SELECT
 		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
 		FROM RESUME_CL rc
 		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
 		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
-		WHERE ur.USER_ID ='user11' AND ur.RESUME_NO ='106'
-	</select>
-	
-	
-	
-	
-	
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
+	</select>  -->
 
+
+ 	<select id="clSelectOne" resultType="cldto">
+		SELECT
+		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
+		FROM RESUME_CL rc
+		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
+		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
+	</select> 
+	
 	<select id="selectList" resultType="rdto">
 		select RESUME_NO,
 		RESUME_TITLE, RESUME_DATE, PORTF_FILE FROM USER_RESUME
@@ -338,10 +343,6 @@
 		WHERE USER_ID =
 		#{userId})
 	</delete>
-
-
-
-
 
 	<insert id="insertCareerInfo" parameterType="carinfodto">
 		INSERT INTO

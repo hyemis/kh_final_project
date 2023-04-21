@@ -138,8 +138,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
-	public List<PsClDto> clSelectList(Map<String, Object> infoMap) throws Exception {
-		return dao.clSelectList(infoMap);
+	public PsClDto clSelectOne(Map<String, Object> infoMap) throws Exception {
+		return dao.clSelectOne(infoMap);
 	}
 	
 	@Override

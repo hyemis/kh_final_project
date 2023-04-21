@@ -25,7 +25,7 @@ public interface PsResumeService {
 	public List<PsGschoolDto> gradSelectList(Map<String, Object> infoMap) throws Exception;
 	public List<PsCareerDto> carSelectList(Map<String, Object> infoMap) throws Exception;
 	public List<PsCertiDto> certiSelectList(Map<String, Object> infoMap) throws Exception;
-	public List<PsClDto> clSelectList(Map<String, Object> infoMap) throws Exception;
+	public PsClDto clSelectOne(Map<String, Object> infoMap) throws Exception;
 
 	// 이력서 리스트
 	public List<PsResumeDto> selectList(String userId) throws Exception;

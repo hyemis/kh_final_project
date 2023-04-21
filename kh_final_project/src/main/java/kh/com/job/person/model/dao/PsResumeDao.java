@@ -51,8 +51,8 @@ public class PsResumeDao {
 		return sqlSession.selectList("resume.certiSelectList", infoMap);
 	}
 	
-	public List<PsClDto> clSelectList(Map<String, Object> infoMap) throws Exception { 
-		return sqlSession.selectList("resume.clSelectList", infoMap);
+	public PsClDto clSelectOne(Map<String, Object> infoMap) throws Exception { 
+		return sqlSession.selectOne("resume.clSelectOne", infoMap);
 	}
 	
 	// 이력서 출력
