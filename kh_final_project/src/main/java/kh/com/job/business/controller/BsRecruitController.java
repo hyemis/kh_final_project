@@ -226,7 +226,7 @@ public class BsRecruitController {
 		//우대조건
 		mv.addObject("SClist", service.getCateList("SC"));
 		
-		mv.addObject("member", principal.getName());
+		mv.addObject("member", redto.getUserId());
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
@@ -285,7 +285,7 @@ public class BsRecruitController {
 			mv.addObject("ctList", ctList);
 		}
 		
-		mv.addObject("member", principal.getName());
+		mv.addObject("member", redto.getUserId());
 		mv.addObject("pidto", pidto);
 		mv.addObject("redto", redto);
 		
