@@ -34,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -45,6 +46,9 @@ public class PsMainController {
 	
 	@Autowired
 	private PsService service;
+	
+	@Autowired
+	private AdCategotyService Cservice;
 	
 	@Autowired
 	@Qualifier("fileUtil")
@@ -537,9 +541,18 @@ public class PsMainController {
 
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {
-		
 		return mv;
 	}
+	
+	// 채용정보 페이지 
+	@GetMapping("/recruit/info")
+	public ModelAndView viewRecruitInfo(ModelAndView mv) {
+		mv.addObject("fdeptList", Cservice.cateFdeptList());
+		return mv;
+	}
+	
+	
+	
 	
 	// 예외처리는 프로젝트 후반에 작성 
 	@ExceptionHandler

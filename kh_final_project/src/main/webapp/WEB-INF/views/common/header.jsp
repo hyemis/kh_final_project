@@ -25,9 +25,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link me-3" href="#">채용정보</a> <a
-							class="nav-link me-3" href="#">인재 검색</a> <a class="nav-link me-3"
-							href="#">커뮤니티</a>
+						<a class="nav-link me-3"href="${pageContext.request.contextPath}/person/recruit/info">채용정보</a> 
+						<a class="nav-link me-3" href="#">인재 검색</a> 
+						<a class="nav-link me-3" href="#">커뮤니티</a>
 					</div>
 				</div>
 			</div>

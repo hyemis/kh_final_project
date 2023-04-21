@@ -151,6 +151,7 @@
             let id = $(this).find('.categoryId').val(); 
             let type = $(this).find('.categoryType').val(); 
             let reqid = $(this).find('.reqCategoryId').val(); 
+            
             //다음 단계나오게
     		$.ajax({ 
     			url: "${pageContext.request.contextPath}/admin/category/listmcate"

@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>채용 정보</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -38,6 +38,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 
+
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
@@ -62,6 +63,36 @@
 
 	<!-- page section -->
 	<section>
+		<div class="container-fluid p-5" style="background-color: #f2f2f2;">
+			<div class="d-grid col-12 col-md-4 col-lg-3 mx-auto">
+				<button class="btn btn-outline-primary dropdown-toggle fcateinfo"
+					type="button" data-bs-toggle="dropdown" data-bs-auto-close="inside"
+					aria-expanded="false" value="JN">직종 · 직무선택</button>
+				<c:forEach var="fList" items="${fdeptList}">
+					<input type="hidden" class="categoryId" name="categoryId"
+						value="${fList.categoryId}">
+					<input type="hidden" class="categoryName" name="categoryName"
+						value="${fList.categoryName}">
+					<input type="hidden" class="categoryType" name="categoryType"
+						value="${fList.categoryType}">
+					<input type="hidden" class="reqCategoryId" name="reqCategoryId"
+						value="${fList.categoryId}">
+
+
+				</c:forEach>
+
+				<ul class="dropdown-menu">
+
+				</ul>
+			</div>
+
+
+		</div>
+
+
+
+
+
 		<div class="container-fluid bg-white p-5">이 영역에 작성하시면 됩니다.</div>
 	</section>
 
@@ -70,6 +101,41 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<!-- page script -->
+	<script type="text/javascript">
+		$('.fcateinfo')
+				.on(
+						'click',
+						function() {
+							let type = $(this).val();
 
+							$
+									.ajax({
+										url : "${pageContext.request.contextPath}/admin/category/listmcate",
+										type : "post",
+										data : {
+											categoryId : "",
+											categoryType : type
+										},
+										dataType : "json",
+										success : function(result) {
+											let htmlVal = '';
+											for (let i = 0; i < result.length; i++) {
+												let list = result[i];
+												htmlVal += '<li class="mx-2 mcateinfo">';
+												htmlVal += '<input type="hidden" class="categoryId" name="categoryId" value="' + list.categoryId + '">';
+												htmlVal += '<input type="hidden" class="categoryName" name="categoryName" value="' + list.categoryName + '">';
+												htmlVal += '<a href="#">'
+														+ list.categoryName
+														+ '</a>';
+												htmlVal += '</li>';
+											}
+											$('.dropdown-menu').html(htmlVal);
+										},
+										error : function(e) {
+											alert(e + " : 오류")
+										}
+									});
+						});
+	</script>
 </body>
 </html>
