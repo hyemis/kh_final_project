@@ -79,8 +79,6 @@
 				<div class="bg-white rounded p-4"
 					style="border: 1px dashed rgba(0, 185, 142, .3)">
 					<div class="row g-5 align-items-center">
-						<div class="mb-4">
-							<div class="row align-items-center">
 								<div class="col">
 									<h3 class="mb-3">학력사항</h3>
 								</div>
@@ -573,23 +571,16 @@
 							<div class="accordion accordion-flush" id="accordionFlushNew"></div>
 
 						</div>
-					</div>
-				</div>
 			</div>
 
+		</div>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/career">다음</a>
 				<a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/person/resume/list">취소</a>
 			</div>
-
-
-
-
-
-
-		</div>
+	</div>
 	</div>
 
 	<!-- footer -->

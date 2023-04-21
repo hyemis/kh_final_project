@@ -212,6 +212,7 @@ public class PsResumeController {
 	
 
 	// 학력사항 페이지
+	@GetMapping("school")
 	public ModelAndView viewSchool(ModelAndView mv, Principal principal) throws Exception {
 
 		// 고등학교 학력정보 불러오기
