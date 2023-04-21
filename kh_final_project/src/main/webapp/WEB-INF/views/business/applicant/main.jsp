@@ -98,20 +98,6 @@
 						</table>
 						
 					</div>
-<!-- 					<div class="bg-dark border d-flex justify-content-center align-items-center" style="height: 150px;"> -->
-<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
-<!-- 							<span class="h1">1</span>								 -->
-<!-- 						</div> -->
-<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
-<!-- 							<span class="h1">2</span> -->
-<!-- 						</div> -->
-<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
-<!-- 							<span class="h1">3</span> -->
-<!-- 						</div> -->
-<!-- 						<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center mx-4" style="width: 100px; height: 100px;"> -->
-<!-- 							<span class="h1">4</span> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 					<h3 class="my-2 mt-4">지원자 조회</h3>
 					<div class="bg-white border">
 						<div class="m-2 d-flex align-middle">
