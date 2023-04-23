@@ -15,26 +15,22 @@ public interface BsAboutUsService {
 	
 	//회원정보불러오기
 	public BsUserDto viewAccount(String userId); 
+	
 	//게시판리스트전부
 	public List<BoardDto> listAll(String userId);
 
-	//글쓰기
-	public int insertNewsletter(BoardDto dto);
-	//수정
-	public int updateNewsLetter(BoardDto dto); 
-	//삭제
-	public int deleteNewsLetter(BoardDto dto); 
-	//하나읽기
-	public BoardDto NewsLetterOne(int boardNum, String userId) ; 
-	//뉴스레터 리스트
-	public List<BoardDto> newsLetterList(String userId);
-	//이미지 업로드
-	public String uploadDocument(MultipartFile uploadReport, String userId);
-	
-	
 	//회사소개
 	public int insertCompanyInfo(BoardDto dto);
 	public int updateCompanyInfo(BoardDto dto);
 	public BoardDto viewCompanyInfo(String userId);
+	
+	//뉴스레터
+	public int insertNewsletter(BoardDto dto);
+	public int updateNewsLetter(BoardDto dto); 
+	public int deleteNewsLetter(BoardDto dto); 
+	public BoardDto newsLetterOne(int boardNum, String userId) ; 
+	public List<BoardDto> newsLetterList(String userId);
 
+	//이미지 업로드
+	public String uploadDocument(MultipartFile uploadReport, String userId);
 }

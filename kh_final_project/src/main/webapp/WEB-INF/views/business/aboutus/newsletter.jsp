@@ -71,29 +71,36 @@
 			</div>
 
 			<!-- 목록 -->
-			<c:forEach items="${news}" var="news">
-			<div class="row row-cols-1 row-cols-md-2 g-4 wow fadeInDown">
-				<div class="col p-3">
-					<div class="card">
-					<a class="cat-item d-block " href="view=${news.boardNum}">
-						<img src="https://dummyimage.com/500x250/000/fff" class="card-img-top img-fluid" alt="..." style="height: 250px;">
-						<div class="card-body">
-							<p class="card-title fs-3">${news.boardTitle }</p>
-							<p class="card-text text-end link-dark">${news.updateDate }</p>
-						</div>
-					</a>	
-					</div>
-				</div>
-			</div>	
-			</c:forEach>
+			<div class="table-responsive ">
+				<table class="table table-hover">
+					  <thead>
+					    <tr>
+					      <th scope="col" class="col-1">No.</th>
+					      <th scope="col" class="col-7">제목</th>
+					      <th scope="col" class="col-2">작성일</th>
+					    </tr>
+					  </thead>
+					  <c:forEach items="${news}" var="news">
+					  <tbody>
+					    <tr>
+					      <th scope="row">${news.boardNum}</th>
+					      <td><a href="view?no=${news.boardNum}">${news.boardTitle }</a></td>
+					      <td>${news.updateDate }</td>
+					    </tr>
+					   </tbody>
+						</c:forEach>
+			   </table> 
+			</div>
+			
+			
+			
+			
 
 
 		</div>
 	</section>
 
 	<!-- Modal -->
-
-	<!-- newsletter -->
 	<div class="modal fade" id="newsletter" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -137,11 +144,9 @@
 								<h4>내용작성</h4>
 							</div>
 							<div class="col-10 ">
-								<div class="mb-3">
-									<textarea id="newsLetterContent" name="boardContent"
-										style="height: 300px;"></textarea>
+								<div class="mb-3" >
+									<textarea id="newsLetterContent" name="boardContent" style="height: 500px;"></textarea>
 								</div>
-								<div class="text-end ">작성일자</div>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -160,6 +165,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<!-- ckeditor5 -->
+	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	<script>
 	class UploadAdapter {
 	    constructor(loader) {
@@ -211,22 +217,6 @@
 	
 	
     
-    ClassicEditor
-    .create( document.querySelector ('#infoContent'),{
-    	language: "ko"
-    	, extraPlugins: [MyCustomUploadAdapterPlugin]
-		, simpleUpload :{
-			uploadUrl : 'imageUpload',
-		}
-    	
-    	, config : {
-    		height:'400px;'
-	   		, width:'100%'
-    	}
-    })
-    .catch( error => {
-        console.error( error );
-    });
     
     ClassicEditor
     .create( document.querySelector ('#newsLetterContent'),{
@@ -245,7 +235,6 @@
         console.error( error );
     });
 	</script>
-
 
 </body>
 </html>

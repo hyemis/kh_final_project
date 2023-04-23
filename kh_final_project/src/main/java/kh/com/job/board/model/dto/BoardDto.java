@@ -1,6 +1,5 @@
 package kh.com.job.board.model.dto;
 
-import java.sql.Clob;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -55,11 +54,11 @@ public class BoardDto {
 		
 		//시간 형태 변경
 		public void setboardDate(java.sql.Timestamp boardDate) {
-			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 			this.boardDate = format.format(boardDate);
 		}
 		public void setupdatedDate(java.sql.Timestamp updateDate) {
-			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 			this.updateDate = format.format(updateDate);
 		}
 	

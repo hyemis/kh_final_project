@@ -63,8 +63,8 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	}
 
 	@Override
-	public BoardDto NewsLetterOne(int boardNum, String userId) {
-		BoardDto result = dao.NewsLetterOne(boardNum);
+	public BoardDto newsLetterOne(int boardNum, String userId) {
+		BoardDto result = dao.newsLetterOne(boardNum);
 		if(result!=null && !result.getUserId().equals(userId)) {
 			dao.updateReadCount(boardNum);	
 		}

@@ -60,10 +60,8 @@ public class BsMainController {
 	public ModelAndView aboutUs(ModelAndView mv, BoardDto dto, Principal principal) {
 		System.out.println("로그인한 아이디" + principal.getName());
 		
-//		List<BoardDto> bdto = auservice.listAll(principal.getName());
 		List<BoardDto> news = auservice.newsLetterList(principal.getName());
 		
-//		mv.addObject("boards", bdto);
 		mv.addObject("news", news);
 		mv.addObject("userinfo",buservice.viewAccount(principal.getName()));
 		

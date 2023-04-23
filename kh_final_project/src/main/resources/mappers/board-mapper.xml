@@ -35,7 +35,7 @@
 			SALARY_AVG = #{salaryAvg},
 			EMPLOYEE = #{employee}
 		WHERE USER_ID = #{userId}
-		<selectKey keyProperty="boardNum" resultType="String"
+		<selectKey keyProperty="boardNum" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
@@ -69,14 +69,19 @@
 		BOARD_CONTENT = #{boardContent}
 		BOARD_TITLE = #{boardTitle}
 		LINK = #{link}
-		<selectKey keyProperty="boardNum" resultType="String"
+		<selectKey keyProperty="boardNum" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
 	</update>
+	
+	<select id="newsLetterOne" resultType="bdto" >
+		SELECT *
+		FROM BOARD
+		WHERE BOARD_NO = #{boardNum}
+	</select>
 
-	<select id="newsLetterList"
-		resultType="kh.com.job.board.model.dto.BoardDto">
+	<select id="newsLetterList" resultType="bdto">
 		SELECT *
 		FROM BOARD
 		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
@@ -99,12 +104,7 @@
 		</selectKey>
 	</insert>
 
-<!-- 	<select id="qnaList">
-		SELECT UDB04
-		FROM BOARD
-		WHERE USER_ID= #{userId}
-	</select>
- -->
+
 
 
 

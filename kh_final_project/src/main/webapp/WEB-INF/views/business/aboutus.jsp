@@ -69,7 +69,7 @@
 
 	<!-- page section -->
 	<section>
-		<div class="container-fluid bg-white p-5">
+		<div class="container-fluid  p-5">
 			<h1>회사소개</h1>
 
 			<div class="row">
@@ -218,7 +218,7 @@
 								<h4>평균연봉</h4>
 							</div>
 							<div class="col-10 ">
-								<p>회사의 평균 연봉을 백만원 단위까지 숫자로 입력해주세요</p>
+								<p>회사의 평균 연봉을 입력해주세요</p>
 								<input type="text"
 									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500"> 만원
 								<hr>

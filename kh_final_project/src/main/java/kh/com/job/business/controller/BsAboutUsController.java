@@ -2,6 +2,7 @@ package kh.com.job.business.controller;
 
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +23,6 @@ import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.service.BsAboutUsService;
-import kh.com.job.common.page.Paging;
-import kh.com.job.common.page.PagingInfoDto;
 
 @Controller
 @RequestMapping("/business/aboutus")
@@ -32,22 +30,24 @@ public class BsAboutUsController {
 
 	@Autowired
 	private BsAboutUsService service;
-
+	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
-	// 뉴스레터 페이지 불러오기
-	@GetMapping("/newsletter")
-	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
-		List<BoardDto> news = service.newsLetterList(principal.getName());
+
+	// 회사소개작성
+		@PostMapping("/infoform")
+		public ModelAndView insertCompanyInfo(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
+			dto.setUserId(principal.getName()); 
+			service.insertCompanyInfo(dto);
+			mv.setViewName("redirect:/business/aboutus");
+			rttr.addFlashAttribute("msg", "성공적으로 등록되었습니다.");
+			System.out.println(dto);
+			return mv;
+		}
 		
-		mv.addObject("news", news);
-		
-		return mv;
-	}
 	
-	
-	// 회사소개 페이지
+	// 회사소개 보기
 	@GetMapping("/companyinfo")
 	public ModelAndView companyinfo(ModelAndView mv, BoardDto dto, Principal principal) {
 	    System.out.println(principal.getName());
@@ -65,25 +65,6 @@ public class BsAboutUsController {
 	}
 
 	
-	// 회사소개작성
-	@PostMapping("/infoform")
-	public ModelAndView insertCompanyInfo(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
-		dto.setUserId(principal.getName()); 
-		service.insertCompanyInfo(dto);
-		mv.setViewName("redirect:/business/aboutus");
-		rttr.addFlashAttribute("msg", "성공적으로 등록되었습니다.");
-		System.out.println(dto);
-		return mv;
-	}
-	
-
-	// Q&A 페이지 불러오기
-	@GetMapping("/qna")
-	public ModelAndView qna(ModelAndView mv) {
-		return mv;
-	}
-	
-	//회사소개작성 todo
 
 	
 	
@@ -97,6 +78,54 @@ public class BsAboutUsController {
 		System.out.println(dto);
 		return mv;
 	}
+	
+	//뉴스레터 수정
+	@PostMapping("/newsletterupdate")
+	public ModelAndView update(ModelAndView mv, BoardDto dto , Principal principal, RedirectAttributes rttr) {
+						
+		dto.setUserId(principal.getName()); 
+		
+		service.updateNewsLetter(dto);
+		mv.setViewName("redirect:/business/aboutus/newsletter");
+		rttr.addFlashAttribute("msg", "뉴스레터 수정 완료");
+		return mv;
+	}
+	
+	// 뉴스레터 페이지 불러오기
+	@GetMapping("/newsletter")
+	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
+		List<BoardDto> list = service.newsLetterList(principal.getName());
+		
+		mv.addObject("news", list);
+		
+		return mv;
+	}
+	
+	// 뉴스레터 상세보기
+	@GetMapping("/newsletter/view")
+	public ModelAndView viewReadBoard(
+			ModelAndView mv
+			, @RequestParam(name = "no", required = false) int boardNum
+			, Principal principal
+			) {
+		
+		String userId = principal.getName(); ;
+		
+		BoardDto dto = service.newsLetterOne(boardNum,userId);
+		mv.addObject("news", dto);
+		
+		return mv;
+	}
+	
+
+	
+	
+	// Q&A 페이지 불러오기
+	@GetMapping("/qna")
+	public ModelAndView qna(ModelAndView mv) {
+		return mv;
+	}
+	
 	
 	//이미지 업로드
 	@PostMapping("/imageUpload")
@@ -113,25 +142,6 @@ public class BsAboutUsController {
 
 		return new Gson().toJson(map);
 	}
-	
-	//상세보기
-	@GetMapping("/view")
-	public ModelAndView viewReadBoard(
-			ModelAndView mv
-			, @PathVariable int boardNum 
-			, Principal principal
-			) {
-		
-		String userId = principal.getName(); ;
-		
-		BoardDto dto = service.NewsLetterOne(boardNum,userId);
-		mv.addObject("news", dto);
-		
-		return mv;
-	}
-	
-	
-
 
 
 //	

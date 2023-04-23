@@ -23,29 +23,29 @@ public class BsAboutUsDao {
 		return sqlSession.selectOne("business.viewAccount", userId);
 	}
 	
-	// 뉴스레터 쓰기
+	//board table 게시글 전부
+		public List<BoardDto> listAll(String userId) {
+			return sqlSession.selectList("boards.listAll", userId);
+		}
+	
+	// 뉴스레터 
 	public int insertNewsletter(BoardDto dto) {
 		sqlSession.insert("boards.insertNewsletter", dto);
 		int boardNum = dto.getBoardNum();
 		return boardNum;
 	}
 	
-	
-	
-	//뉴스레터 업데이트
 	public int updateNewsLetter(BoardDto dto) {
 		return sqlSession.update("boards.updateNewsLetter", dto);
 	}
 	
-	//뉴스레터 삭제
 	public int deleteNewsLetter(BoardDto dto) {
 		return sqlSession.delete("boards.deleteNewsLetter", dto);
 		// TODO Auto-generated method stub
 	}
 
-	public BoardDto NewsLetterOne(int boardNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardDto newsLetterOne(int boardNum) {
+		return sqlSession.selectOne("boards.newsLetterOne",boardNum);
 	}
 
 	public void updateReadCount(int boardNum) {
@@ -53,15 +53,11 @@ public class BsAboutUsDao {
 		
 	}
 	
-	//뉴스레터 리스트
 	public List<BoardDto> newsLetterList(String userId) {
 		return sqlSession.selectList("boards.newsLetterList", userId);
 	}
 
-	//board table 게시글 전부
-	public List<BoardDto> listAll(String userId) {
-		return sqlSession.selectList("boards.listAll", userId);
-	}
+	
 	
 	// 회사소개 
 	public int insertCompanyInfo(BoardDto dto) {
