@@ -1,6 +1,7 @@
 package kh.com.job.person.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import kh.com.job.admin.model.service.AdCategotyService;
-=======
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
->>>>>>> e836b198633b2c45843ed794822d748f3f3252d9
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -43,70 +42,70 @@ import kh.com.job.person.model.service.PsService;
 @Controller
 @RequestMapping("/person")
 public class PsMainController {
-	
+
 	@Autowired
 	private PsService service;
-	
+
 	@Autowired
-	private AdCategotyService Cservice;
+	private AdCategotyService cateservice;
 	private PsResumeService rservice;
-	
+
 	@Autowired
 	private AdBusinessService abs;
-	
+
 	@Autowired
 	@Qualifier("fileUtil")
 	private FileUtil fileUtil;
-	
+
 	private final static String UPLOAD_FOLDER = "\\resources\\uploadfiles";
-	
-	//암호화 기능 가지고 있는 클래스 자동주입
+
+	// 암호화 기능 가지고 있는 클래스 자동주입
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
 
 	// 메인화면
 	@GetMapping("/main")
 	public ModelAndView viewmain(ModelAndView mv) {
 		return mv;
 	}
-	
-	// 아이디 찾기 
+
+	// 아이디 찾기
 	@GetMapping("/findid")
 	public ModelAndView viewfindId(ModelAndView mv) {
 		mv.setViewName("person/findid");
 		return mv;
 	}
-	
-	// 아이디 찾기 
+
+	// 아이디 찾기
 	@PostMapping("/findid")
 	@ResponseBody
-	public String dofindId(ModelAndView mv, @RequestParam("name") String nameParam, @RequestParam("birth") String birthParam, @RequestParam("email") String email
-			, @RequestParam("phone") String phone) throws Exception {
-		
+	public String dofindId(ModelAndView mv, @RequestParam("name") String nameParam,
+			@RequestParam("birth") String birthParam, @RequestParam("email") String email,
+			@RequestParam("phone") String phone) throws Exception {
+
 		Object birth = birthParam.replaceAll("[^0-9]", "");
 		Object name = nameParam.replace(",", "");
-		
-		Map<String,Object> findId = new HashMap<>();
+
+		Map<String, Object> findId = new HashMap<>();
 		findId.put("userName", name);
 		findId.put("userBirth", birth);
 		findId.put("userEmail", email);
 		findId.put("userPhone", phone);
-		
-		System.out.println("map 저장 값 "+findId);
-		
+
+		System.out.println("map 저장 값 " + findId);
+
 		PsUserDto userId = service.findId(findId);
 		String findUserId = userId.getUserId();
 		return findUserId;
 	}
-	
+
 	// 비밀번호 찾기
 	@GetMapping("/findpw")
 	public ModelAndView viewfindPw(ModelAndView mv) {
 		mv.setViewName("person/findpw");
 		return mv;
 	}
-	
+
 //	// 비밀번호 찾기 	
 //	@PostMapping("/findpw")
 //	@ResponseBody
@@ -164,110 +163,100 @@ public class PsMainController {
 //		
 //		return update;
 //	}
-		
-	// 비밀번호 찾기 	
+
+	// 비밀번호 찾기
 	@PostMapping("/findpw")
 	@ResponseBody
-	public int dofindPw(ModelAndView mv, 
-			@RequestParam("id") String id,
-			@RequestParam("pid") String pid,
-			@RequestParam("name") String name,
-			@RequestParam("pname") String pname,
-			@RequestParam("birth") String birth,
-			@RequestParam("pbirth") String pbirth,
-			@RequestParam("email") String email,
-			@RequestParam("phone") String phone
-			) throws Exception {
-		
-		
-		Map<String,Object> findPw = new HashMap<>();
+	public int dofindPw(ModelAndView mv, @RequestParam("id") String id, @RequestParam("pid") String pid,
+			@RequestParam("name") String name, @RequestParam("pname") String pname, @RequestParam("birth") String birth,
+			@RequestParam("pbirth") String pbirth, @RequestParam("email") String email,
+			@RequestParam("phone") String phone) throws Exception {
+
+		Map<String, Object> findPw = new HashMap<>();
 		if (!id.isEmpty()) {
-		    findPw.put("userId", id);
+			findPw.put("userId", id);
 		} else if (!pid.isEmpty()) {
-		    findPw.put("userId", pid);
+			findPw.put("userId", pid);
 		}
-		
+
 		if (!name.isEmpty()) {
-		    findPw.put("userName", name);
+			findPw.put("userName", name);
 		} else if (!pname.isEmpty()) {
-		    findPw.put("userName", pname);
+			findPw.put("userName", pname);
 		}
 
 		if (!birth.isEmpty()) {
-		    findPw.put("userBirth", birth);
+			findPw.put("userBirth", birth);
 		} else if (!pbirth.isEmpty()) {
-		    findPw.put("userBirth", pbirth);
+			findPw.put("userBirth", pbirth);
 		}
 
 		findPw.put("userEmail", email);
 		findPw.put("userPhone", phone);
-		
+
 		System.out.println("map 저장 값" + findPw);
-		
+
 		PsUserDto dto = service.findPw(findPw);
-		
+
 		// TODO: 임시 비밀번호 만들기
 		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		Random random = new Random();
-	    int length = random.nextInt(9) + 8; // 8~16 사이의 길이
-	    StringBuilder sb = new StringBuilder();
-	    for (int i = 0; i < length; i++) {
-            int index = random.nextInt(chars.length());
-            sb.append(chars.charAt(index));
-        }
-	    String newpassword = sb.toString();
-	    dto.setUserPw(passwordEncoder.encode(newpassword)); //패스워드암호화 
-	    
-	    // TODO:비밀번호 update 
-	    int update = service.update(dto);
-	    System.out.println(dto);
-	    dto.getUserEmail();
-	    
-	    // TODO: 찾은 이메일로 메일 발송 
-	    String title = "job-a 임시 비밀번호입니다.";
+		int length = random.nextInt(9) + 8; // 8~16 사이의 길이
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			int index = random.nextInt(chars.length());
+			sb.append(chars.charAt(index));
+		}
+		String newpassword = sb.toString();
+		dto.setUserPw(passwordEncoder.encode(newpassword)); // 패스워드암호화
+
+		// TODO:비밀번호 update
+		int update = service.update(dto);
+		System.out.println(dto);
+		dto.getUserEmail();
+
+		// TODO: 찾은 이메일로 메일 발송
+		String title = "job-a 임시 비밀번호입니다.";
 		String from = "tkdtlrdl07@gmail.com";
-		String text = "<h1>job-a 임시 비밀번호입니다.</h1><br>회원님의 임시 비밀번호는 " + newpassword + " 입니다. <br>해당 비밀번호로 로그인 후 회원정보 수정 페이지에서 새로운 비밀번호로 변경하세요.";
-		String to = dto.getUserEmail(); 
-		String[]  cc = new String[0];
+		String text = "<h1>job-a 임시 비밀번호입니다.</h1><br>회원님의 임시 비밀번호는 " + newpassword
+				+ " 입니다. <br>해당 비밀번호로 로그인 후 회원정보 수정 페이지에서 새로운 비밀번호로 변경하세요.";
+		String to = dto.getUserEmail();
+		String[] cc = new String[0];
 		int ccNum = cc.length;
 		MailUtil.mailSend(title, from, text, to, cc, ccNum);
-		
+
 		return update;
 	}
-	
+
 	@GetMapping("/findFail")
 	public ModelAndView findFail(ModelAndView mv) {
-		
+
 		return mv;
 	}
-	
-	// 회원가입 화면 
+
+	// 회원가입 화면
 	@GetMapping("/signUp")
 	public ModelAndView viewsignUp(ModelAndView mv) {
 		mv.setViewName("person/signUp");
 		return mv;
 	}
-	
-	// 회원가입 작성 
+
+	// 회원가입 작성
 	@PostMapping("/signUp")
-	public ModelAndView dosignUp(ModelAndView mv
-			, PsUserDto dto
-			, RedirectAttributes rttr
-			, HttpServletRequest request) {
-		
-	
-		  int result = -1;
-		
+	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr, HttpServletRequest request) {
+
+		int result = -1;
+
 		try {
-			
+
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 			result = service.insert(dto);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		if(result > 0 ) {
+
+		if (result > 0) {
 			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
 			mv.setViewName("redirect:/");
 			return mv;
@@ -276,28 +265,26 @@ public class PsMainController {
 			mv.setViewName("redirect:/person/signUp");
 			return mv;
 		}
-		
+
 	}
-	//기업 회원가입
+
+	// 기업 회원가입
 	@PostMapping("/bsSignUp")
-	public ModelAndView doBsSignUp(ModelAndView mv
-			, PsUserDto dto
-			, RedirectAttributes rttr
-			, HttpServletRequest request) {
-		
-	
-		  int result = -1;
-		
+	public ModelAndView doBsSignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr,
+			HttpServletRequest request) {
+
+		int result = -1;
+
 		try {
-			
+
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 			result = service.businessInsert(dto);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		if(result > 0 ) {
+
+		if (result > 0) {
 			rttr.addFlashAttribute("msg", "JOB-A 기업 회원가입에 성공하였습니다.");
 			mv.setViewName("redirect:/");
 			return mv;
@@ -306,17 +293,17 @@ public class PsMainController {
 			mv.setViewName("redirect:/person/signUp");
 			return mv;
 		}
-		
+
 	}
 
-	// 아이디 중복 체크 
-	@PostMapping("/idChk") 
+	// 아이디 중복 체크
+	@PostMapping("/idChk")
 	@ResponseBody
 	public String idChk(String userId) throws Exception {
 		System.out.println("회원아이디: " + userId);
 		int result = service.idChk(userId);
 		String data = "N";
-		if(result == 1) {
+		if (result == 1) {
 			data = "Y";
 			return data;
 		} else {
@@ -324,267 +311,263 @@ public class PsMainController {
 		}
 	}
 
-	
-	
 	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")
-	public ModelAndView viewMyPage(ModelAndView mv, Principal principal) throws Exception{
-		System.out.println("로그인정보: "+principal.getName());
-		
-		if(principal.getName() != null) {
+	public ModelAndView viewMyPage(ModelAndView mv, Principal principal) throws Exception {
+		System.out.println("로그인정보: " + principal.getName());
+
+		if (principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
 			mv.setViewName("person/mypage");
-		}else {
+		} else {
 			mv.setViewName("redirect:/");
 		}
 		return mv;
 	}
-	
-	
+
 	// 마이페이지에서 회원 비밀번호 확인
-	@PostMapping("/pwChk") 
-	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) throws Exception{
-		
+	@PostMapping("/pwChk")
+	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) throws Exception {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PsUserDto pdto = service.selectOne(auth.getName());
-				
-		if(passwordEncoder.matches(confirmPw, pdto.getUserPw())) {
+
+		if (passwordEncoder.matches(confirmPw, pdto.getUserPw())) {
 			mv.setViewName("redirect:/person/update");
-		}else {
+		} else {
 			rttr.addFlashAttribute("msg", "비밀번호가 틀렸습니다. 다시 확인해주세요.");
 			mv.setViewName("redirect:/person/mypage");
 		}
-			
+
 		return mv;
-		}
-	
-	
+	}
+
 	// 회원정보 업데이트 화면
 	@GetMapping("/update")
 	public ModelAndView viewUpdate(ModelAndView mv, Principal principal) throws Exception {
-		System.out.println("로그인정보: "+principal.getName());
-		
-		if(principal.getName() != null) {
+		System.out.println("로그인정보: " + principal.getName());
+
+		if (principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
 			mv.setViewName("person/update");
-		}else {
+		} else {
 			mv.setViewName("redirect:/");
 		}
 		return mv;
 	}
-	
-	
+
 	// 회원정보 업데이트
 	@PostMapping("/update")
-	public ModelAndView update(ModelAndView mv, PsUserDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
+	public ModelAndView update(ModelAndView mv, PsUserDto dto, Principal principal, RedirectAttributes rttr)
+			throws Exception {
 
-		if(principal.getName()!= null) {
+		if (principal.getName() != null) {
 			dto.setUserId(principal.getName());
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw())); // 패스워드 암호화
 			service.update(dto);
 			mv.setViewName("redirect:/person/mypage");
 			rttr.addFlashAttribute("msg", "회원정보 수정에 성공했습니다.");
-		}else {
+		} else {
 			mv.setViewName("redirect:/");
 			rttr.addFlashAttribute("msg", "회원정보 수정에 실패했습니다.");
 		}
-		
 
 		return mv;
 	}
-	
+
 	// 회원탈퇴 화면
 	@GetMapping("/delete")
 	public ModelAndView viewDelete(ModelAndView mv, Principal principal) throws Exception {
-		System.out.println("로그인정보: "+principal.getName());
-		
-		if(principal.getName() != null) {
+		System.out.println("로그인정보: " + principal.getName());
+
+		if (principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
 			mv.setViewName("person/delete");
-		}else {
+		} else {
 			mv.setViewName("redirect:/");
 		}
 		return mv;
 	}
-	
+
 	// 회원탈퇴 화면 - 비밀번호 확인 화면
 	@GetMapping("/deletepw")
 	public ModelAndView viewDeletepw(ModelAndView mv, Principal principal) throws Exception {
-		System.out.println("로그인정보: "+principal.getName());
-		
-		if(principal.getName() != null) {
+		System.out.println("로그인정보: " + principal.getName());
+
+		if (principal.getName() != null) {
 			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
 			mv.setViewName("person/deletepw");
-		}else {
+		} else {
 			mv.setViewName("redirect:/");
 		}
 		return mv;
 	}
-	
-	
+
 	// 회원탈퇴
 	@PostMapping("/deletepw")
-	public ModelAndView delete(ModelAndView mv, 
-								String userId, 
-								String userPw,
-								RedirectAttributes rttr) throws Exception {
-		
+	public ModelAndView delete(ModelAndView mv, String userId, String userPw, RedirectAttributes rttr)
+			throws Exception {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PsUserDto pdto = service.selectOne(auth.getName());
 
-		if(passwordEncoder.matches(userPw, pdto.getUserPw())) {
+		if (passwordEncoder.matches(userPw, pdto.getUserPw())) {
 			service.delete(userId);
 			SecurityContextHolder.clearContext();
 			mv.setViewName("redirect:/person/main");
-			
-		}else {
+
+		} else {
 			mv.setViewName("redirect:/person/deletepw");
 			rttr.addFlashAttribute("msg", "회원탈퇴에 실패하였습니다. 비밀번호를 다시 확인해주세요");
 		}
-		
 
 		return mv;
 	}
-	
-	
+
 	// 마이페이지 - 입사지원현황 화면
 	@GetMapping("/applylist")
 	public ModelAndView viewApplyList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
 		try {
 			PsUserDto result = service.selectOne(userId);
-		
-			if(result != null) {
-				mv.addObject("userinfo",result);
+
+			if (result != null) {
+				mv.addObject("userinfo", result);
 				mv.setViewName("person/applylist");
-			}else {
+			} else {
 				mv.setViewName("redirect:/");
 			}
-		} 
-			catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	
-	
+
 	// 마이페이지 - 관심기업정보 화면
 	@GetMapping("/scrapcompany")
 	public ModelAndView viewScrapCompany(ModelAndView mv, @RequestParam(name = "userId") String userId) {
 		try {
 			PsUserDto result = service.selectOne(userId);
-		
-			if(result != null) {
-				mv.addObject("userinfo",result);
+
+			if (result != null) {
+				mv.addObject("userinfo", result);
 				mv.setViewName("person/scrapcompany");
-			}else {
+			} else {
 				mv.setViewName("redirect:/");
 			}
-		} 
-			catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	
+
 	// 마이페이지 - 스크랩한 채용공고 화면
 	@GetMapping("/scrapjob")
 	public ModelAndView viewScrapJob(ModelAndView mv, @RequestParam(name = "userId") String userId) {
 		try {
 			PsUserDto result = service.selectOne(userId);
-		
-			if(result != null) {
-				mv.addObject("userinfo",result);
+
+			if (result != null) {
+				mv.addObject("userinfo", result);
 				mv.setViewName("person/scrapjob");
-			}else {
+			} else {
 				mv.setViewName("redirect:/");
 			}
-		} 
-			catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	
 
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code, RedirectAttributes rttr) throws Throwable {
+	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code,
+			RedirectAttributes rttr) throws Throwable {
 
 		// 1번
 		System.out.println("code : " + code);
-		
+
 		// code Null 인 경우 실행하지 않음
-		if(code == null) {
+		if (code == null) {
 			return mv;
 		}
-				
-		// 2번 
+
+		// 2번
 		String access_Token = service.getAccessToken(code);
 		System.out.println("###access_Token#### : " + access_Token);
-				
-		// 3번 
+
+		// 3번
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
-		
+
 		// 사용자 이메일 정보 조회
-		String userEmail = (String)userInfo.get("email");
+		String userEmail = (String) userInfo.get("email");
 		PsUserDto user = service.selectUserEmail(userEmail);
-		
-		
+
 		// 이메일 정보가 일치하는 사용자가 존재할 경우 로그인 처리
-		if(user!=null && user.getUserEmail().equals(userEmail)) {
-			// 로그인 
+		if (user != null && user.getUserEmail().equals(userEmail)) {
+			// 로그인
 			mv.setViewName("redirect:/");
 		} else {
-			 // 이메일 정보가 일치하지 않는 경우 로그인 실패 처리
+			// 이메일 정보가 일치하지 않는 경우 로그인 실패 처리
 			rttr.addFlashAttribute("msg", "이메일 정보가 일치하지 않습니다.");
-	        mv.setViewName("person/login");
+			mv.setViewName("person/login");
 		}
-		return mv;	
+		return mv;
 	}
 
 	@GetMapping("/resume")
 	public ModelAndView resume(ModelAndView mv) {
 		return mv;
 	}
-	
-	// 채용정보 페이지 
+
+	// 채용정보 페이지
 	@GetMapping("/recruit/info")
 	public ModelAndView viewRecruitInfo(ModelAndView mv) {
-		mv.addObject("fdeptList", Cservice.cateFdeptList());
+		List<AdCategoryDto> fdeptList = cateservice.cateFdeptList();
+		List<Map<String, Object>> resultList = new ArrayList<>();
+
+		for (AdCategoryDto dto : fdeptList) {
+			String categoryId = dto.getCategoryId();
+			String categoryName = dto.getCategoryName();
+
+			if ("LO".equals(categoryId) || "JN".equals(categoryId)) {
+				Map<String, Object> resultMap = new HashMap<>();
+				resultMap.put("categoryId", categoryId);
+				resultMap.put("categoryName", categoryName);
+				resultList.add(resultMap);
+			}
+		}
+
+		mv.addObject("fdeptList", resultList);
+
 		return mv;
 	}
-	
-	
-	
-	// 구인공고 확인 화면 
+
+	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")
-	public ModelAndView viewRecruit(ModelAndView mv, 
-			@PathVariable String raNum, 
-			Principal principal) {
-		
+	public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String raNum, Principal principal) {
+
 		try {
-		// 공고 정보 출력
-		BsRecruitDetailDto redto = abs.viewDetail(raNum);		
-		PsUserDto result = service.selectOne(principal.getName());
-		List<PsResumeDto> resume = rservice.selectList(principal.getName());
-		
-		
-		if (result != null) {
-			mv.addObject("redto", redto);
-			mv.addObject("resumelist", resume);
-			mv.setViewName("person/viewrecruit");
-		} else {
-			mv.setViewName("redirect:/");
+			// 공고 정보 출력
+			BsRecruitDetailDto redto = abs.viewDetail(raNum);
+			PsUserDto result = service.selectOne(principal.getName());
+			List<PsResumeDto> resume = rservice.selectList(principal.getName());
+
+			if (result != null) {
+				mv.addObject("redto", redto);
+				mv.addObject("resumelist", resume);
+				mv.setViewName("person/viewrecruit");
+			} else {
+				mv.setViewName("redirect:/");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
+		return mv;
 	}
-	return mv;
-}
-	
-	// 예외처리는 프로젝트 후반에 작성 
+
+	// 예외처리는 프로젝트 후반에 작성
 	@ExceptionHandler
 	public void exception(Exception e) {
 		e.printStackTrace();

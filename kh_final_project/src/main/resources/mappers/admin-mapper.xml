@@ -97,6 +97,7 @@
 		SELECT COUNT(CATEGORY_ID) FROM JA_CATEGORY
 		WHERE REQ_CATEGORY_ID = #{categoryId} 
 	</select>
+	
 	<!-- 카테고리 삭제 -->
 	<delete id="delFirstCategory">
 		DELETE FROM JA_CATEGORY
