@@ -37,8 +37,38 @@
 
 <!-- page section -->	
 <section>
-<div class="container-fluid bg-white p-5">
-	이 영역에 작성하시면 됩니다.
+<div class="container-fluid p-5">
+	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
+	<h2>열람한 인재</h2>
+	<div class="text-end">
+	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search/suggest" role="button">인재추천</a>
+	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/applicant" role="button">지원자 관리 페이지</a>
+	</div><br>
+	<div class="table-responsive ">
+		<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th scope="col">No.</th>
+			      <th scope="col">열람한 날짜</th>
+			      <th scope="col">직군</th>
+			      <th scope="col">이름</th>
+			      <th scope="col">이력서</th>
+			      <th scope="col">면접제의</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <th scope="row">1</th>
+			      <td>date</td>
+			      <td>ex</td>
+			      <td>ex</td>
+			      <td>ex</td>
+			      <td><input type="checkbox" value="Y"></td>
+			    </tr>
+			   </tbody>
+	   </table> 
+	
+	</div>
 </div>
 </section>
 
