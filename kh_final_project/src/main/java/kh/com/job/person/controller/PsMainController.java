@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.gson.Gson;
 
 import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.admin.model.dto.AdCategoryDto;
@@ -521,7 +522,7 @@ public class PsMainController {
 		return mv;
 	}
 
-	// 채용정보 페이지
+	// 채용정보 페이지 - 1단계 
 	@GetMapping("/recruit/info")
 	public ModelAndView viewRecruitInfo(ModelAndView mv) {
 		List<AdCategoryDto> fdeptList = cateservice.cateFdeptList();
@@ -543,6 +544,36 @@ public class PsMainController {
 
 		return mv;
 	}
+	
+	
+	// 채용정보 페이지- 2단계 
+	@PostMapping("/listmcate")
+	@ResponseBody
+	public String listMiddleCate(ModelAndView mv, String categoryId){
+		
+		List<AdCategoryDto> mlist = null;
+		
+		if(!categoryId.isEmpty() && !categoryId.equals("")){
+			mlist = cateservice.cateMdeptList(categoryId);
+		}
+
+		return new Gson().toJson(mlist);
+	}
+	
+	//채용정보 페이지- 3단계 
+		@PostMapping("/listlcate")
+		@ResponseBody
+		public String listLastCate(ModelAndView mv, String categoryId){
+			
+			List<AdCategoryDto> llist = null;
+			
+			if(!categoryId.isEmpty() && !categoryId.equals("")){
+				llist = cateservice.cateMdeptList(categoryId);
+			}
+
+			return new Gson().toJson(llist);
+		}
+	
 
 	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")

@@ -38,20 +38,20 @@
 	
 	<!-- Category Start -->
 	<div class="container-xxl py-5">
-		<div>로고 위치</div>
 		<!-- 상단 start -->
 		<div class="text-center mx-auto mb-5 wow fadeInUp"
 			data-wow-delay="0.1s" style="max-width: 600px;">
 			<h1 class="mb-3">안녕하세요</h1>
-			
-			<div class="mb-3">
-				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal.username" var="user_id" />
-						<span class="fs-3" id="user_id">${user_id }</span>
-				</sec:authorize>
-			</div>
-			
-			<h3 class="mb-3">님 반갑습니다</h3>
+				<div class="mb-3">
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.username" var="user_id" />
+							<span class="fs-3" id="user_id">${user_id } 님 반갑습니다</span>
+					</sec:authorize>
+					<sec:authorize access="isAnonymous()">
+							<span class="fs-3" id="user_id">반갑습니다.<br> 
+							<a href="<%=request.getContextPath()%>/person/login">로그인</a>하시면 더 많은 정보를 볼 수 있습니다.</span>
+					</sec:authorize>
+				</div>
 			<br>
 			<p>차곡차곡 한걸음씩, </br>JOB-A와 함께 해요!</p>
 		</div>
@@ -64,7 +64,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/mypage">
 					<div class="rounded p-4">
 						<h5>회원정보관리</h5>
-						<span></span>
+						<p>회원 정보 수정<br>이용 현황</p>
 					</div>
 				</a>
 			</div>
@@ -74,7 +74,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/resume/list">
 					<div class="rounded p-4">
 						<h5>이력서 관리</h5>
-						<span></span>
+						<p>이력서 생성 / 삭제 <br>이력서 목록<br></p>
 					</div>
 				</a>
 			</div>
