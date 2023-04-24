@@ -46,6 +46,9 @@
 			alias="certiinfodto" />
 		<typeAlias type="kh.com.job.person.model.dto.PsClInfoDto"
 			alias="clinfodto" />
+			
+		<typeAlias type="kh.com.job.person.model.dto.PsScrapInfoDto"
+			alias="scrapdto" />
 		
 	<!-- business -->		
 		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"

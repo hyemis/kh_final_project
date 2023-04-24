@@ -26,12 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.Gson;
 
-import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
+import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsRecruitService;
@@ -587,24 +586,20 @@ public class PsMainController {
 
 	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")
-	public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String raNum, Principal principal) {
+	public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String raNum,
+									String userId) {
 
-		try {
-			// 공고 정보 출력
-			BsRecruitDetailDto redto = abs.viewDetail(raNum);
-			PsUserDto result = service.selectOne(principal.getName());
-			List<PsResumeDto> resume = rservice.selectList(principal.getName());
-
-			if (result != null) {
+			try {
+				// 공고 정보 출력
+				BsRecruitDetailDto redto = abs.viewDetail(raNum);
+				List<PsResumeDto> resume = rservice.selectList(userId);
 				mv.addObject("redto", redto);
 				mv.addObject("resumelist", resume);
 				mv.setViewName("person/viewrecruit");
-			} else {
-				mv.setViewName("redirect:/");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 		return mv;
 	}
 	

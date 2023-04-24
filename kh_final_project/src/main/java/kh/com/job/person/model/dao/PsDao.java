@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Repository
@@ -75,6 +76,12 @@ public class PsDao {
 	public int businessInsert(PsUserDto dto) {
 		return sqlSession.insert("person.businessInsert", dto);
 	}
+	
+	// 공고, 회사 스크랩하기
+	public int scrapInfo(PsScrapInfoDto dto) throws Exception{
+		return sqlSession.insert("person.scrapInfo",dto);
+	}
+	
 
 
 }
