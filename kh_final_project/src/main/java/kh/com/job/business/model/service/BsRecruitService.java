@@ -22,6 +22,8 @@ public interface BsRecruitService {
 	public List<BsRecruitDto> recruitAdmission(String userId);
 	
 	public List<BsRecruitDto> recruitYAdmission();
+	
+	public List<BsRecruitDto> lCateRecruit(String categoryId);
 
 	public int changeAdmission(BsRecruitDto dto);
 

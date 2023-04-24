@@ -72,6 +72,9 @@
   	TERMS_PERIOD=#{termsPeriod}
   	where USER_ID = #{userId}
   </update>
+  
+  
+ 
 	
 
 </mapper>

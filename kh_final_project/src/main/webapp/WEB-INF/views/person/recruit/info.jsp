@@ -137,11 +137,11 @@
 						<td><a
 							href="${pageContext.request.contextPath}/person/recruit/viewrecruit/${recruit.raNum}"
 							target="_blank"> <span class="bold">${recruit.companyName}</span><br>
-							<br> ${recruit.raTitle}
+								<br> ${recruit.raTitle}
 						</a></td>
 					</tr>
 					<tr>
-						<td class="far fa-star"> ~${fn:substring(recruit.closeDate, 5, 7)}.${fn:substring(recruit.closeDate, 8, 10)}
+						<td class="far fa-star">~${fn:substring(recruit.closeDate, 10, 12)}.${fn:substring(recruit.closeDate, 13, 15)}
 						</td>
 
 					</tr>
@@ -159,6 +159,12 @@
 
 	<!-- page script -->
 	<script type="text/javascript">
+		var msg = "${msg}";
+		if (msg) {
+			alert(msg);
+		}
+		
+		
 		$('.fcateinfo')
 				.on(
 						'click',
@@ -239,6 +245,29 @@
 										}
 									});
 
+						});
+
+		// 카테고리에 맞는 채용공고 출력  
+		$(document)
+				.on(
+						'click',
+						'.lcateinfo',
+						function() {
+							var categoryId = $(this).find('.categoryId').val();
+							$
+									.ajax({
+										type : 'POST',
+										url : "${pageContext.request.contextPath}/person/caterecruit",
+										data : {
+											categoryId : categoryId
+										},
+										success: function(result) {
+							                // 이전에 있던 내용 삭제
+							                $('#recruitContainer').empty();
+							                // 새로운 내용 출력
+							                $('#recruitContainer').append(result);
+							            }
+									});
 						});
 	</script>
 </body>

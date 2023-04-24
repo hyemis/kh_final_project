@@ -45,6 +45,10 @@ public class BsRecruitDao {
 	public List<BsRecruitDto> recruitYAdmission() {
 		return sqlSession.selectList("business.recruitYAdmission");
 	}
+	
+	public List<BsRecruitDto> lCateRecruit(String categoryId) {
+		return sqlSession.selectList("business.lCateRecruit");
+	}
 
 	public int changeAdmission(BsRecruitDto dto) {
 		return sqlSession.update("business.changeAdmission", dto);

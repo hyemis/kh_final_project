@@ -89,6 +89,11 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	public List<BsRecruitDto> recruitYAdmission() {
 		return  dao.recruitYAdmission();
 	}
+	
+	// 3단계
+	public List<BsRecruitDto> lCateRecruit(String categoryId) {
+		return  dao.lCateRecruit(categoryId);
+	}
 
 	@Override
 	public int changeAdmission(BsRecruitDto dto) {

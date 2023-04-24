@@ -607,6 +607,28 @@ public class PsMainController {
 		}
 		return mv;
 	}
+	
+	// 카테고리에 맞는 채용공고 출력 
+	@PostMapping("/caterecruit")
+	@ResponseBody
+	public ModelAndView lCateRecruit(ModelAndView mv,
+				@RequestParam String categoryId
+				) {	
+		
+		List<BsRecruitDto> llist = null;
+
+		if (!categoryId.isEmpty() && !categoryId.equals("")) {
+		    llist = brservice.lCateRecruit(categoryId);
+		}
+
+		if (llist != null && llist.size() > 0) {
+		    mv.addObject("recruitList", llist);
+		} else {
+		    mv.addObject("msg", "현재 채용 중인 공고가 없습니다.");
+		}
+
+		return mv;
+	}
 
 	// 예외처리는 프로젝트 후반에 작성
 	@ExceptionHandler
