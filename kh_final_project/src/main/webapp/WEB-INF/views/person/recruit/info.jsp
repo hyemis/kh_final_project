@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,6 +36,10 @@
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 
@@ -75,14 +80,17 @@
 	border-radius: 5px;
 	padding: 30px;
 	margin-right: 10px;
-	
 }
 
 .recruit-table a {
 	text-decoration: underline;
-	 color: black !important;
+	color: black !important;
 }
 
+.recruit-table a span.bold {
+	display: inline;
+	font-weight: bold;
+}
 </style>
 
 </head>
@@ -126,13 +134,18 @@
 			<c:forEach var="recruit" items="${recruitList}">
 				<table class="recruit-table">
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/business/recruit/view?id=${recruit.raNum}" target="_blank">
-								 <span class="bold">${recruit.companyName}</span><br> ${recruit.raTitle} </a></td>
+						<td><a
+							href="${pageContext.request.contextPath}/person/recruit/viewrecruit/${recruit.raNum}"
+							target="_blank"> <span class="bold">${recruit.companyName}</span><br>
+							<br> ${recruit.raTitle}
+						</a></td>
 					</tr>
 					<tr>
-						<td>${recruit.closeDate}</td>
+						<td class="far fa-star"> ~${fn:substring(recruit.closeDate, 5, 7)}.${fn:substring(recruit.closeDate, 8, 10)}
+						</td>
+
 					</tr>
-					
+
 				</table>
 			</c:forEach>
 		</div>
