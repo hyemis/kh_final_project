@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsAccountService;
+import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
 
@@ -24,7 +26,10 @@ public class BsMainController {
 	private BsAboutUsService auservice;
 	
 	@Autowired
-	private BsAccountService buservice;
+	private BsAccountService acservice;
+	
+	@Autowired
+	private BsApplicantService apservice;
 	
 	//메인창
 	@GetMapping("/main")
@@ -42,7 +47,18 @@ public class BsMainController {
 	
 	//지원자관리
 	@GetMapping("/applicant")
-	public ModelAndView applicant(ModelAndView mv) {
+	public ModelAndView applicant(ModelAndView mv, Principal principal) {
+		
+		if(principal == null) {
+			mv.setViewName("redirect:/person/login");
+			return mv;
+		}
+		
+		List<BsRecruitDto> recruitlist = apservice.recruitList(principal.getName());
+		
+		BsUserDto dto = acservice.viewAccount(principal.getName());
+		mv.addObject("recruitlist", recruitlist);
+		mv.addObject("userinfo", dto);
 		
 		return mv;
 	}
@@ -63,7 +79,7 @@ public class BsMainController {
 		List<BoardDto> news = auservice.newsLetterList(principal.getName());
 		
 		mv.addObject("news", news);
-		mv.addObject("userinfo",buservice.viewAccount(principal.getName()));
+		mv.addObject("userinfo",acservice.viewAccount(principal.getName()));
 		
 		return mv;
 	}

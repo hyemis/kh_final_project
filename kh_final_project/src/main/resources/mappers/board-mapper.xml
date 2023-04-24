@@ -10,7 +10,7 @@
 	</select>
 
 	<!-- business -->
-	<select id="getBoardNum">
+	<select id="getboardNo">
 		SELECT BOARD_NO FROM BOARD
 	</select>
 
@@ -19,8 +19,8 @@
 	<insert id="insertCompanyInfo">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE)
-		VALUES(${boardNum},#{userId},'UDB06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
-		<selectKey keyProperty="boardNum" resultType="_int"
+		VALUES(${boardNo},#{userId},'UDB06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
+		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
@@ -28,14 +28,14 @@
 
 	<update id="updateCompanyInfo">
 		UPDATE USER_TABLE SET
-			BOARD_NO = ${boardNum},
+			BOARD_NO = ${boardNo},
 			BOARD_CONTENT = #{boardContent},
 			UPDATE_DATE = CURRENT_TIMESTAMP,
 			TAG = #{tag},
 			SALARY_AVG = #{salaryAvg},
 			EMPLOYEE = #{employee}
 		WHERE USER_ID = #{userId}
-		<selectKey keyProperty="boardNum" resultType="_int"
+		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
@@ -55,21 +55,23 @@
 	<insert id="insertNewsletter">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,LINK)
-		VALUES(${boardNum},#{userId},'UDB05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
-		<selectKey keyProperty="boardNum" resultType="_int"
+		VALUES(${boardNo},#{userId},'UDB05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
+		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
 	</insert>
 
-	<update id="updateNewsletter">
+	<update id="updateNewsLetter">
 		UPDATE BOARD SET
-		BOARD_NO = #{boardNum}
-		UPDATE_DATE = CURRENT_TIMESTAMP
-		BOARD_CONTENT = #{boardContent}
-		BOARD_TITLE = #{boardTitle}
+		BOARD_NO = #{boardNo},
+		UPDATE_DATE = CURRENT_TIMESTAMP,
+		BOARD_CONTENT = #{boardContent},
+		BOARD_TITLE = #{boardTitle},
 		LINK = #{link}
-		<selectKey keyProperty="boardNum" resultType="_int"
+		WHERE BOARD_NO = #{boardNo}
+		AND USER_ID = #{userId}	
+		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>
@@ -78,7 +80,7 @@
 	<select id="newsLetterOne" resultType="bdto" >
 		SELECT *
 		FROM BOARD
-		WHERE BOARD_NO = #{boardNum}
+		WHERE BOARD_NO = #{boardNo}
 	</select>
 
 	<select id="newsLetterList" resultType="bdto">
@@ -97,8 +99,8 @@
 	<insert id="insertQnA">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,LINK)
-		VALUES(${boardNum},#{userId},'UDB04',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
-		<selectKey keyProperty="boardNum" resultType="String"
+		VALUES(${boardNo},#{userId},'UDB04',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
+		<selectKey keyProperty="boardNo" resultType="String"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
 		</selectKey>

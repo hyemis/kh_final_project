@@ -36,7 +36,7 @@ public class BoardDto {
 //	EMPLOYEE                         VARCHAR2(100) 
 //	LINK                             VARCHAR2(100) 
 	
-		private int boardNum;
+		private int boardNo;
 		private String userId;
 		private String categoryId;
 		private String boardTitle;
@@ -45,8 +45,8 @@ public class BoardDto {
 		private String updateDate;
 		private String boardOriginalFilename;
 		private String boardRenameFilename;
-		private Number boardRead;
-		private Number boardLike;
+		private int boardRead;
+		private int boardLike;
 		private String tag;
 		private String salaryAvg;
 		private String employee;
