@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8">
@@ -28,6 +28,10 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
     <!-- css file link part end -->
     <title>JOB-A 입사지원</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -83,6 +87,7 @@
 		 	<div>
 		 		<h5 class="mb-5 ms-3">모집 분야 : ${redto.recruitName}</h5>
 		 		<button class="btn btn-primary" onclick="scrapJob()">공고 스크랩하기</button>
+		 		<i class="far fa-star"></i>
 		 	</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">
@@ -217,9 +222,11 @@
                 </div>
             </div>
 		 </div>
-		 <div class="container mb-5">
-			 <button type="button" class="btn btn-primary" id="applyBtn" data-bs-toggle="modal" data-bs-target="#apply">지원하기</button>
-		</div>
+		<%--  <c:if test="${isAuthenticated}"> --%>
+   			 <div class="container mb-5">
+       		 <button type="button" class="btn btn-primary" id="applyBtn" data-bs-toggle="modal" data-bs-target="#apply">지원하기</button>
+   			 </div>
+	<%-- 	</c:if> --%>
 
 		<!-- 지원하기 모달 창 -->
 		<div class="modal fade" id="apply" tabindex="-1"
@@ -238,8 +245,8 @@
 						<p><strong>해당 공고에 지원할 이력서를 선택하세요.</strong></p>
 						<div class="selectbox-wrapper">
 						<select name="selectbox">
-							<c:forEach items="${resumelist}" var="resume">
-								<option value="${resume.resumeNo}">${resume.resumeTitle}</option>
+							<c:forEach items="${resume}" var="resumeList">
+								<option value="${resumeList.resumeNo}">${resumeList.resumeTitle}</option>
 							</c:forEach>
 						</select>
 						</div><br><hr>
@@ -251,7 +258,7 @@
 
 							<button type="button" data-bs-dismiss="modal"
 								class="btn btn-primary mx-auto d-block" type="submit"
-								data-carNo="${resume.resumeNo}">입사지원하기</button>
+								data-carNo="${resumeList.resumeNo}">입사지원하기</button>
 						</form>
 					</div>
 					</div>
@@ -337,17 +344,11 @@
 	    
 	    
 	   // 비로그인시, 지원하기 버튼 클릭->로그인 화면으로 이동
-	   document.getElementById("applyBtn").addEventListener("click", function() {
-  			if (!isLoggedIn()) {
-    			window.location.href = "${pageContext.request.contextPath}/person.login";
-  			} else {
-  			$('#apply').modal('show')
-  		});
-
-		function isLoggedIn() {
-		  // 로그인 체크 로직 구현
-		  return false; // 임시로 false 반환
+	   public boolean isAuthenticated() {
+		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		    return authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
 		}
+
 </script>
 
 

@@ -106,7 +106,7 @@
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
-		AND CLOSE_DATE > SYSDATE
+		AND TO_DATE(REGEXP_REPLACE(CLOSE_DATE, '채용시까지\s*', ''), 'YY-MM-DD') > SYSDATE
 		ORDER BY REGIST_DATE DESC
 	</select>
 
@@ -192,5 +192,15 @@
 	<delete id="deleteRecruit">
 		delete from RECRUIT_REGIST RR where ra_num = #{raNum}
 	</delete>
+	
+	 <!--  3단계 선택 후 채용공고출력 --> 
+	  <select id="lCateRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+	  	SELECT *
+		FROM RECRUIT_REGIST
+		WHERE RECRUIT_TYPE = #{recruitType}
+		AND TO_DATE(REGEXP_REPLACE(CLOSE_DATE, '채용시까지\s*', ''), 'YY-MM-DD') > SYSDATE
+		AND RA_ADMISSION IN ('Y')
+		ORDER BY REGIST_DATE DESC
+	  </select>
 
 </mapper>

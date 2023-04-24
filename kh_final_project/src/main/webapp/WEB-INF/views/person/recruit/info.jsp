@@ -137,11 +137,11 @@
 						<td><a
 							href="${pageContext.request.contextPath}/person/recruit/viewrecruit/${recruit.raNum}"
 							target="_blank"> <span class="bold">${recruit.companyName}</span><br>
-							<br> ${recruit.raTitle}
+								<br> ${recruit.raTitle}
 						</a></td>
 					</tr>
 					<tr>
-						<td class="far fa-star"> ~${fn:substring(recruit.closeDate, 5, 7)}.${fn:substring(recruit.closeDate, 8, 10)}
+						<td class="far fa-star">~${fn:substring(recruit.closeDate, 10, 12)}.${fn:substring(recruit.closeDate, 13, 15)}
 						</td>
 
 					</tr>
@@ -159,6 +159,12 @@
 
 	<!-- page script -->
 	<script type="text/javascript">
+		var msg = "${msg}";
+		if (msg) {
+			alert(msg);
+		}
+		
+		
 		$('.fcateinfo')
 				.on(
 						'click',
@@ -240,6 +246,36 @@
 									});
 
 						});
+
+		// 카테고리에 맞는 채용공고 출력  
+$(document).on('click','.lcateinfo',function() {
+    var categoryId = $(this).find('.categoryId').val();
+    $.ajax({
+        type : 'POST',
+        url : "${pageContext.request.contextPath}/person/caterecruit",
+        data : {categoryId : categoryId},
+        success: function(result) {
+        	if(result.indexOf("현재 채용 중인 공고가 없습니다.") <= -1) {
+                alert('현재 채용 중인 공고가 없습니다.');
+            } else {
+                // 이전에 있던 내용 삭제
+                // 새로운 내용 출력
+                var recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
+                $.each(result, function(index, recruit) {
+                    recruitTable += '<table class="recruit-table">';
+                    recruitTable += '<tr>';
+                    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/recruit/viewrecruit/' + recruit.raNum + '" target="_blank">';
+                    recruitTable += '<span class="bold">' + recruit.companyName + '</span><br><br>' + recruit.raTitle;
+                    recruitTable += '</a></td></tr><tr><td class="far fa-star">~' + recruit.closeDate.substring(10, 12) + '.' + recruit.closeDate.substring(13, 15) + '</td></tr>';
+                    recruitTable += '</table>';
+                });
+                recruitTable += '</div>';
+                $('#recruit-Container').append(recruitTable);
+            }
+        }
+    });
+});
+
 	</script>
 </body>
 </html>

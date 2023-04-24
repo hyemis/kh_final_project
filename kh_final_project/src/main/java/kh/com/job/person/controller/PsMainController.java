@@ -589,9 +589,9 @@ public class PsMainController {
 	public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String raNum,
 									String userId) {
 
-			// 공고 정보 출력
-			BsRecruitDetailDto redto = abs.viewDetail(raNum);
 			try {
+				// 공고 정보 출력
+				BsRecruitDetailDto redto = abs.viewDetail(raNum);
 				List<PsResumeDto> resume = rservice.selectList(userId);
 				mv.addObject("redto", redto);
 				mv.addObject("resumelist", resume);
@@ -599,6 +599,24 @@ public class PsMainController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+		return mv;
+	}
+	
+	// 카테고리에 맞는 채용공고 출력 
+	@PostMapping("/caterecruit")
+	@ResponseBody
+	public ModelAndView lCateRecruit(ModelAndView mv,
+				@RequestParam String categoryId
+				) {	
+		
+		List<BsRecruitDto> llist = null;
+
+		if (!categoryId.isEmpty() && !categoryId.equals("")) {
+		    llist = brservice.lCateRecruit(categoryId);
+		    mv.addObject("recruitList", llist);
+		}
+
 
 		return mv;
 	}
