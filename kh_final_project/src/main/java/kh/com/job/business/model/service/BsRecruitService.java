@@ -20,6 +20,8 @@ public interface BsRecruitService {
 	public List<BsRecruitDto> recruitProgress(String userId);
 
 	public List<BsRecruitDto> recruitAdmission(String userId);
+	
+	public List<BsRecruitDto> recruitYAdmission();
 
 	public int changeAdmission(BsRecruitDto dto);
 

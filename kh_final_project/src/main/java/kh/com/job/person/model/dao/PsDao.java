@@ -1,5 +1,6 @@
 package kh.com.job.person.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +18,17 @@ public class PsDao {
 
 	// 회원 정보 읽어오기 
 	public PsUserDto selectOne(String userId) throws Exception {
-		return sqlSession.selectOne("person.selectOne", userId);
-	}
+		PsUserDto user = sqlSession.selectOne("person.selectOne", userId);
+		
+		String dateString = user.getUserBirth();
+		if (dateString != null) {
+		    LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+		        user.setUserBirth(date.toString());
+		    }
+		    return user;
+		}
+	
+		
 	
 	// 카카오 로그인 
 	public PsUserDto selectUserEmail(String userEmail) throws Exception {

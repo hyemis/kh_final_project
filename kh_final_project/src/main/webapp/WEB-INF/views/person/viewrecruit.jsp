@@ -29,7 +29,7 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     <!-- css file link part end -->
-    <title>채용공고 목록</title>
+    <title>JOB-A 입사지원</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -55,6 +55,24 @@
 
 </head>
 
+<style>
+
+#applyBtn {
+  position: fixed;
+  top: 50%;
+  right: 100px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  padding: 15px 30px;
+}
+
+#buttonContainer{
+	text-align: center;
+}
+
+
+</style>
+
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	
@@ -64,6 +82,7 @@
 		 	<h3 class="my-5">채용공고 상세 내역</h3>
 		 	<div>
 		 		<h5 class="mb-5 ms-3">모집 분야 : ${redto.recruitName}</h5>
+		 		<button class="btn btn-primary" onclick="scrapRecruit()">공고 스크랩하기</button>
 		 	</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">
@@ -199,7 +218,7 @@
             </div>
 		 </div>
 		 <div class="container mb-5">
-			 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#apply">지원하기</button>
+			 <button type="button" class="btn btn-primary" id="applyBtn" data-bs-toggle="modal" data-bs-target="#apply">지원하기</button>
 		</div>
 
 		<!-- 지원하기 모달 창 -->
@@ -232,16 +251,16 @@
 
 							<button type="button" data-bs-dismiss="modal"
 								class="btn btn-primary mx-auto d-block" type="submit"
-								data-carNo="${resume.resumeNo}">입사지원</button>
+								data-carNo="${resume.resumeNo}">입사지원하기</button>
 						</form>
 					</div>
 					</div>
 				</div>
 			</div>
 			 
-			 <div>
+			 <div id="buttonContainer">
 			 <!-- TODO : 주소수정예정 -->
-			<a href="recruitAll?pnum=${pidto.pnum}&search=${pidto.search}" class="btn btn-dark py-3 px-4">목록으로</a>
+			<a href="${pageContext.request.contextPath}/person/resume/list" class="btn btn-dark py-3 px-4">목록으로</a>
 		 </div>
 
         <!-- Back to Top -->
@@ -315,9 +334,13 @@
 	        position: new kakao.maps.LatLng(37.537187, 127.005476),
 	        map: map
 	    });
+	    
+	   
+
+
 	</script>
 	
-<!-- 	<script type="text/javascript">
+	<script type="text/javascript">
 	
     ClassicEditor
     .create( document.querySelector( '#raContent' ),{
@@ -333,7 +356,7 @@
     .catch( error => {
         console.error( error );
     });
-	</script> -->
+	</script> 
 	
 	
 	
