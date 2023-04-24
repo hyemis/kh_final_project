@@ -245,8 +245,8 @@
 						<p><strong>해당 공고에 지원할 이력서를 선택하세요.</strong></p>
 						<div class="selectbox-wrapper">
 						<select name="selectbox">
-							<c:forEach items="${resumelist}" var="resume">
-								<option value="${resume.resumeNo}">${resume.resumeTitle}</option>
+							<c:forEach items="${resume}" var="resumeList">
+								<option value="${resumeList.resumeNo}">${resumeList.resumeTitle}</option>
 							</c:forEach>
 						</select>
 						</div><br><hr>
@@ -258,7 +258,7 @@
 
 							<button type="button" data-bs-dismiss="modal"
 								class="btn btn-primary mx-auto d-block" type="submit"
-								data-carNo="${resume.resumeNo}">입사지원하기</button>
+								data-carNo="${resumeList.resumeNo}">입사지원하기</button>
 						</form>
 					</div>
 					</div>
