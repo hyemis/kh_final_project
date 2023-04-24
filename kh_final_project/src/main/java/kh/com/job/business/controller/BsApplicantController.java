@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,12 +38,13 @@ public class BsApplicantController {
 		return mv;
 	}
 	
-	//면접일정관리
-	@GetMapping("/interview")
-	public ModelAndView calander(ModelAndView mv) {
-		
-		return mv;
-	}
+	//캘린더
+	   @GetMapping("/interview")
+	    public String calendarPage(Model model) {
+	        List<InterviewDto> events = apservice.getEvents();
+	        model.addAttribute("events", events);
+	        return "interview";
+	    }
 	
 
 	

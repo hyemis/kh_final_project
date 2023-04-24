@@ -9,8 +9,6 @@ import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
 
-
-
 public interface BsAboutUsService {
 	
 	//회원정보불러오기

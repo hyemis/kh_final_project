@@ -21,8 +21,6 @@ import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dao.BsAboutUsDao;
 import kh.com.job.business.model.dto.BsUserDto;
 
-
-
 @Service
 public class BsAboutUsServiceImpl implements BsAboutUsService{
 	

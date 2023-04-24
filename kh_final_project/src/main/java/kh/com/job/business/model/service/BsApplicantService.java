@@ -7,8 +7,8 @@ import kh.com.job.business.model.dto.InterviewDto;
 
 public interface BsApplicantService {
 	
-	public List<InterviewDto> interviewList(String userId);
-
 	public List<BsRecruitDto> recruitList(String userId);
+	
+	public List<InterviewDto> getEvents();
 
 }

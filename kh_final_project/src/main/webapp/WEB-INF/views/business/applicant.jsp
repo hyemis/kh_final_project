@@ -55,7 +55,7 @@
 				</div>
 				<div>
 					<a href="insert" class="btn btn-dark mb-1">지원자 관리</a>
-					<a href="recruitAll" class="btn btn-dark mb-1">합격자 관리</a>					
+					<a href="<%=request.getContextPath()%>/business/applicant/pass" class="btn btn-dark mb-1">합격자 관리</a>					
 				</div>
 			</div>
 			<div class="p-2 col-9">

@@ -16,13 +16,13 @@ public class BsApplicantDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<InterviewDto> interviewList(String userId)  {
-		return sqlSession.selectList("business.interviewList", userId);
-		
-	}
-
 	public List<BsRecruitDto> recruitList(String userId) {
 		return sqlSession.selectList("aplicant.recruitList", userId);
+	}
+
+	public List<InterviewDto> getEvents() {
+		List<InterviewDto> events = sqlSession.selectList("getEvents");
+        return events;
 	}
 	
 	

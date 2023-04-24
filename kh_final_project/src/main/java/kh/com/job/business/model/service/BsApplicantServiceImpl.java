@@ -16,15 +16,16 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 	private BsApplicantDao dao;
 
 	@Override
-	public List<InterviewDto> interviewList(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<BsRecruitDto> recruitList(String userId) {
 		return dao.recruitList(userId);
 	}
+
+	@Override
+	public List<InterviewDto> getEvents() {
+		return dao.getEvents();
+	}
+	
+	
 	
 	
 

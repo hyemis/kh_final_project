@@ -13,10 +13,13 @@ public class BsServiceImpl implements BsService{
 	
 	@Autowired
 	private BsRecruitDao dao;
-
+	
 	@Override
 	public int apiInsert(List<BsRecruitDto> bsList) throws Exception {
 		return dao.apiInsert(bsList);
 	}
+	
+	
+
 
 }
