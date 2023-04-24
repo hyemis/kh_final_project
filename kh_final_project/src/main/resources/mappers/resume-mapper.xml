@@ -658,6 +658,13 @@
 	</update>
 
 
+	<insert id="scrapInfo" parameterType="scrapdto">
+		INSERT INTO
+		SCRAP_INFO(COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM)
+		VALUES (#{companyName}, #{raTitle}, #{closeDate}, #{raNum})
+		WHERE USER_ID = #{userId}
+	</insert>
+
 
 
 </mapper>

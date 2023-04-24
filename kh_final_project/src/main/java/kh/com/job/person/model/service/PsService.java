@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dto.TempDto;
 
@@ -18,6 +19,7 @@ public interface PsService {
 	public int delete(String userId) throws Exception;
 	public PsUserDto findId(Map<String, Object> findId) throws Exception;
 	public PsUserDto findPw(Map<String, Object> findPw) throws Exception;
+	public int scrapInfo(PsScrapInfoDto dto) throws Exception;
 	
 	// 카카오 로그인 
 	String getAccessToken(String authorize_code) throws Throwable;

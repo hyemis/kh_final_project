@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.com.job.person.model.dao.PsDao;
+import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Service
@@ -199,6 +200,11 @@ public class PsServiceImpl implements PsService {
 		public PsUserDto findPw(Map<String, Object> findPw) throws Exception {
 			return dao.findPw(findPw);
 				}
+
+		@Override
+		public int scrapInfo(PsScrapInfoDto dto) throws Exception {
+			return dao.scrapInfo(dto);
+		}
 
 
 	

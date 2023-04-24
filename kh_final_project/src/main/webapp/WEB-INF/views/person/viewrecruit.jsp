@@ -82,7 +82,7 @@
 		 	<h3 class="my-5">채용공고 상세 내역</h3>
 		 	<div>
 		 		<h5 class="mb-5 ms-3">모집 분야 : ${redto.recruitName}</h5>
-		 		<button class="btn btn-primary" onclick="scrapRecruit()">공고 스크랩하기</button>
+		 		<button class="btn btn-primary" onclick="scrapJob()">공고 스크랩하기</button>
 		 	</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">
@@ -335,7 +335,21 @@
 	        map: map
 	    });
 	    
-	   
+	    
+	   // 비로그인시, 지원하기 버튼 클릭->로그인 화면으로 이동
+	   document.getElementById("applyBtn").addEventListener("click", function() {
+  			if (!isLoggedIn()) {
+    			window.location.href = "${pageContext.request.contextPath}/person.login";
+  			} else {
+  			$('#apply').modal('show')
+  		});
+
+		function isLoggedIn() {
+		  // 로그인 체크 로직 구현
+		  return false; // 임시로 false 반환
+		}
+</script>
+
 
 
 	</script>
