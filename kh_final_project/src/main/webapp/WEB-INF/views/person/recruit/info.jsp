@@ -63,6 +63,26 @@
 	overflow-y: auto; /* 스크롤 생기도록 */
 }
 
+.recruit-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.recruit-table {
+	display: inline-block;
+	border: 1px solid #dcdcdc;
+	border-radius: 5px;
+	padding: 30px;
+	margin-right: 10px;
+	
+}
+
+.recruit-table a {
+	text-decoration: underline;
+	 color: black !important;
+}
+
 </style>
 
 </head>
@@ -74,8 +94,7 @@
 	<section>
 		<div class="container-fluid"
 			style="background-color: #f2f2f2; min-height: 300px;">
-			<div
-				class="d-flex justify-content-center align-items-center">
+			<div class="d-flex justify-content-center align-items-center">
 				<div class="fdept flex-grow-1" style="min-height: 300px;">
 					<div class="m-3 fdeptList" style="min-height: 300px;">
 						<c:forEach var="fList" items="${fdeptList}">
@@ -97,12 +116,26 @@
 			</div>
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end p-2">
-			<button class="btn btn-primary btn-lg me-md-2" type="button">검색 결과</button>
-		</div>
+				<button class="btn btn-primary btn-lg me-md-2" type="button">검색
+					결과</button>
+			</div>
 		</div>
 
 
-		<div class="container-fluid bg-white p-5">이 영역에 작성하시면 됩니다.</div>
+		<div class="container-fluid bg-white p-5 recruit-container">
+			<c:forEach var="recruit" items="${recruitList}">
+				<table class="recruit-table">
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/business/recruit/view?id=${recruit.raNum}" target="_blank">
+								 <span class="bold">${recruit.companyName}</span><br> ${recruit.raTitle} </a></td>
+					</tr>
+					<tr>
+						<td>${recruit.closeDate}</td>
+					</tr>
+					
+				</table>
+			</c:forEach>
+		</div>
 
 	</section>
 

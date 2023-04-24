@@ -33,6 +33,8 @@ import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -49,8 +51,12 @@ public class PsMainController {
 
 	@Autowired
 	private AdCategotyService cateservice;
+
 	@Autowired
 	private PsResumeService rservice;
+	
+	@Autowired
+	private BsRecruitService brservice;
 
 	@Autowired
 	private AdBusinessService abs;
@@ -525,7 +531,7 @@ public class PsMainController {
 
 	// 채용정보 페이지 - 1단계 
 	@GetMapping("/recruit/info")
-	public ModelAndView viewRecruitInfo(ModelAndView mv) {
+	public ModelAndView viewRecruitInfo(ModelAndView mv, Principal principal) {
 		List<AdCategoryDto> fdeptList = cateservice.cateFdeptList();
 		List<Map<String, Object>> resultList = new ArrayList<>();
 
@@ -540,8 +546,11 @@ public class PsMainController {
 				resultList.add(resultMap);
 			}
 		}
+		
+		List<BsRecruitDto> reCruitDto = brservice.recruitYAdmission();
 
 		mv.addObject("fdeptList", resultList);
+		mv.addObject("recruitList", reCruitDto);
 
 		return mv;
 	}

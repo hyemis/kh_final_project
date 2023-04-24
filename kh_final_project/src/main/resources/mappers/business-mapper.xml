@@ -2,107 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="business">
 
-<!-- 회원정보 불러오기 -->
-    <select id="viewAccount" resultType="budto">
-        SELECT *
-        FROM USER_TABLE
-        WHERE USER_ID = #{userId}
-    </select>
-    
-<!-- applicant -->
-
-	<!-- <select id="interviewList" resultType="">
-		SELECT * 
-		FROM INTERVIEW
+	<!-- 회원정보 불러오기 -->
+	<select id="viewAccount" resultType="budto">
+		SELECT *
+		FROM USER_TABLE
 		WHERE USER_ID = #{userId}
-	</select>  -->
-	
-<!-- account -->
-    
+	</select>
+
+	<!-- applicant -->
+
+	<!-- <select id="interviewList" resultType=""> SELECT * FROM INTERVIEW WHERE 
+		USER_ID = #{userId} </select> -->
+
+	<!-- account -->
+
 	<!-- 회원정보 수정하기 -->
-    <update id="updateAccount">
-        UPDATE USER_TABLE SET
-           USER_EMAIL = #{userEmail},
-           USER_PIC = #{userPic},
-	       BS_LICENSE = #{bsLicense},
-	       BS_MAIN_PHONE = #{bsMainPhone},
-	       ADDRESS_POSTCODE = #{addressPostcode},
-	       ADDRESS_ROAD = #{addressRoad},
-	       ADDRESS_JIBUN = #{addressJibun},
-	       ADDRESS_DETAIL = #{addressDetail}
-        WHERE USER_ID = #{userId}
-    </update>
-    
-    <!-- //todo비밀번호 수정하기-->
-    <update id="updatePassword">
-        UPDATE USER_TABLE SET
-        USER_PW = #{userPw}
-        WHERE USER_ID = #{userId}
-    </update>    
-    
-    <!-- //todo 회원 프로필 이미지 수정하기 -->
-    <update id="updateUimage" >
-        UPDATE tb_user SET
-        USER_PIC = #{userPic}
-        WHERE user_id = #{userId}
-    </update>
-	
-    <!-- //todo회원비밀번호  불러오기-->
-    <select id="getUserPw" resultType="budto">
-        SELECT USER_ID, USER_PW
-        FROM USER_TABLE
-        WHERE USER_ID = #{userId}
-    </select>
-    
-      
-    
- <!-- 워크넷API data insert -->
-   	<insert id="apiInsert" parameterType="brdto">
-			insert INTO RECRUIT_REGIST
-			(RA_NUM, RECRUIT_TYPE, COMPANY_NAME, BUSINO, USER_EDUCATION
-					, SALARY, MIN_SALARY, MAX_SALARY
-					, REGIST_DATE, CLOSE_DATE, RA_TITLE
-					, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE) 
-			VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{recruitType}, #{companyName}, #{busino}, #{userEducation}
-					, #{salary}, #{minSalary}, #{maxSalary}
- 			        , #{registDate}, #{closeDate}, #{raTitle}
- 			        , #{career}, #{holidayType}, #{empTypeCode})
+	<update id="updateAccount">
+		UPDATE USER_TABLE SET
+		USER_EMAIL = #{userEmail},
+		USER_PIC = #{userPic},
+		BS_LICENSE = #{bsLicense},
+		BS_MAIN_PHONE = #{bsMainPhone},
+		ADDRESS_POSTCODE = #{addressPostcode},
+		ADDRESS_ROAD = #{addressRoad},
+		ADDRESS_JIBUN = #{addressJibun},
+		ADDRESS_DETAIL = #{addressDetail}
+		WHERE USER_ID = #{userId}
+	</update>
+
+	<!-- //todo비밀번호 수정하기 -->
+	<update id="updatePassword">
+		UPDATE USER_TABLE SET
+		USER_PW = #{userPw}
+		WHERE USER_ID = #{userId}
+	</update>
+
+	<!-- //todo 회원 프로필 이미지 수정하기 -->
+	<update id="updateUimage">
+		UPDATE tb_user SET
+		USER_PIC = #{userPic}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- //todo회원비밀번호 불러오기 -->
+	<select id="getUserPw" resultType="budto">
+		SELECT USER_ID, USER_PW
+		FROM USER_TABLE
+		WHERE USER_ID = #{userId}
+	</select>
+
+
+
+	<!-- 워크넷API data insert -->
+	<insert id="apiInsert" parameterType="brdto">
+		insert INTO RECRUIT_REGIST
+		(RA_NUM, RECRUIT_TYPE, COMPANY_NAME, BUSINO, USER_EDUCATION
+		, SALARY, MIN_SALARY, MAX_SALARY
+		, REGIST_DATE, CLOSE_DATE, RA_TITLE
+		, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE)
+		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{recruitType}, #{companyName},
+		#{busino}, #{userEducation}
+		, #{salary}, #{minSalary}, #{maxSalary}
+		, #{registDate}, #{closeDate}, #{raTitle}
+		, #{career}, #{holidayType}, #{empTypeCode})
 	</insert>
-	
+
 	<!-- 직업 카테고리 항목 가져오기 -->
-	<select id="getCateList" parameterType="string" resultType="kh.com.job.admin.model.dto.AdCategoryDto">
-		SELECT * FROM JA_CATEGORY 
+	<select id="getCateList" parameterType="string"
+		resultType="kh.com.job.admin.model.dto.AdCategoryDto">
+		SELECT * FROM JA_CATEGORY
 		WHERE CATEGORY_TYPE = #{categoryType} AND CATEGORY_DEPT ='2'
 	</select>
-	
+
 	<!-- 채용공고 작성 -->
 	<insert id="insertRecruit">
 		insert INTO RECRUIT_REGIST
-			(RA_NUM, COMPANY_NAME, RECRUIT_TYPE,CONDITION_TYPE, USER_EDUCATION, USER_ID
-					, SALARY, MIN_SALARY, MAX_SALARY
-					, REGIST_DATE, CLOSE_DATE
-					, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE
-					, RA_TITLE, RA_CONTENT
-					, RA_EXTRA_DOCUMENT,RA_PROGRESS, RA_ADMISSION) 
-			VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName}, #{recruitType}, #{conditionType},  #{userEducation}, #{userId}
-					, #{salary}, #{minSalary}, #{maxSalary}
- 			        , #{registDate}, #{closeDate}
- 			        , #{career}, #{holidayType}, #{empTypeCode}
- 			        , #{raTitle}, #{raContent}
- 			        , #{raExtraDocument}, 'N', 'N')
+		(RA_NUM, COMPANY_NAME, RECRUIT_TYPE,CONDITION_TYPE, USER_EDUCATION, USER_ID
+		, SALARY, MIN_SALARY, MAX_SALARY
+		, REGIST_DATE, CLOSE_DATE
+		, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE
+		, RA_TITLE, RA_CONTENT
+		, RA_EXTRA_DOCUMENT,RA_PROGRESS, RA_ADMISSION)
+		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName}, #{recruitType},
+		#{conditionType}, #{userEducation}, #{userId}
+		, #{salary}, #{minSalary}, #{maxSalary}
+		, #{registDate}, #{closeDate}
+		, #{career}, #{holidayType}, #{empTypeCode}
+		, #{raTitle}, #{raContent}
+		, #{raExtraDocument}, 'N', 'N')
 	</insert>
-	
+
 	<!-- 채용공고 등록 리스트 -->
-	<select id="recruitAdmission" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+	<select id="recruitAdmission"
+		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
-		WHERE USER_ID = #{userId} 
+		WHERE USER_ID = #{userId}
 		AND RA_ADMISSION IN ('P', 'Y')
 		AND CLOSE_DATE > SYSDATE
 	</select>
-	
+
+	<!-- 공개된 채용 공고 리스트 -->
+	<select id="recruitYAdmission"
+		resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT * FROM RECRUIT_REGIST
+		WHERE RA_ADMISSION IN ('Y')
+		AND CLOSE_DATE > SYSDATE
+	</select>
+
 	<!-- 게시글 공개 여부 버튼 -->
 	<update id="changeAdmission">
-		UPDATE RECRUIT_REGIST 
+		UPDATE RECRUIT_REGIST
 		<set>
 			<choose>
 				<when test=' raAdmission eq "P"'>
@@ -115,10 +124,36 @@
 		</set>
 		WHERE RA_NUM = #{raNum}
 	</update>
-	
+
 	<!-- 기업회원 등록한 전체 공고 리스트 글 개수 -->
 	<select id="recruitAllCount" resultType="_int">
-		SELECT COUNT(*) AS CNT 
+		SELECT COUNT(*) AS CNT
+		FROM RECRUIT_REGIST
+		WHERE USER_ID = #{userId}
+		<if test="search != null and search neq ''">
+			AND RA_TITLE like '%'||#{search}||'%'
+			or RA_CONTENT like
+			'%'||#{search}||'%'
+			or COMPANY_NAME like '%'||#{search}||'%'
+		</if>
+	</select>
+
+	<!-- 기업회원 등록한 전체 공고 리스트 -->
+	<select id="recruitAll"
+		resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE,
+		RA_TITLE
+		, RA_CONTENT, RA_EXTRA_DOCUMENT
+		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
+		FROM(
+		SELECT ROWNUM AS NUM , A.*
+		FROM (
+		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE,
+		RA_TITLE
+		, RA_CONTENT, RA_EXTRA_DOCUMENT
+		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
 		FROM RECRUIT_REGIST
 		WHERE USER_ID = #{userId}
 		<if test="search != null and search neq ''">
@@ -126,49 +161,35 @@
 			or RA_CONTENT like '%'||#{search}||'%'
 			or COMPANY_NAME like '%'||#{search}||'%'
 		</if>
-	</select>
-	
-	<!-- 기업회원 등록한 전체 공고 리스트 -->
-	<select id="recruitAll" resultType="kh.com.job.business.model.dto.BsRecruitDto">
-		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
-		   , CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
-		   , RA_CONTENT, RA_EXTRA_DOCUMENT
-		   , CAREER, HOLIDAY_TYPE, RA_ADMISSION
-		FROM(
-			SELECT ROWNUM AS NUM , A.*
-			FROM (
-				SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
-				   , CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
-				   , RA_CONTENT, RA_EXTRA_DOCUMENT
-				   , CAREER, HOLIDAY_TYPE, RA_ADMISSION
-				FROM RECRUIT_REGIST
-				WHERE USER_ID = #{userId}
-					<if test="search != null and search neq ''">
-						AND RA_TITLE like '%'||#{search}||'%'
-						or RA_CONTENT like '%'||#{search}||'%'
-						or COMPANY_NAME like '%'||#{search}||'%'
-					</if>
-				ORDER BY RA_NUM DESC
-			) A
-			)
+		ORDER BY RA_NUM DESC
+		) A
+		)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
-		
+
 	</select>
-	
+
 	<!-- 업데이트 채용공고 -->
 	<update id="updateRecruit">
-		UPDATE RECRUIT_REGIST SET COMPANY_NAME = #{companyName}, RECRUIT_TYPE =#{recruitType}
-		, USER_EDUCATION=#{userEducation},CONDITION_TYPE=#{conditionType}, SALARY= #{salary}, MIN_SALARY=#{minSalary}
-		, MAX_SALARY=#{maxSalary}, REGIST_DATE= #{registDate},CLOSE_DATE=#{closeDate}
-		, CAREER=#{career}, HOLIDAY_TYPE=#{holidayType}, EMP_TYPE_CODE=#{empTypeCode}
-		, RA_TITLE=#{raTitle}, RA_CONTENT=#{raContent}
-		, RA_EXTRA_DOCUMENT=#{raExtraDocument}
+		UPDATE RECRUIT_REGIST SET COMPANY_NAME =
+		#{companyName}, RECRUIT_TYPE =#{recruitType}
+		,
+		USER_EDUCATION=#{userEducation},CONDITION_TYPE=#{conditionType},
+		SALARY= #{salary}, MIN_SALARY=#{minSalary}
+		, MAX_SALARY=#{maxSalary},
+		REGIST_DATE= #{registDate},CLOSE_DATE=#{closeDate}
+		, CAREER=#{career},
+		HOLIDAY_TYPE=#{holidayType}, EMP_TYPE_CODE=#{empTypeCode}
+		,
+		RA_TITLE=#{raTitle}, RA_CONTENT=#{raContent}
+		,
+		RA_EXTRA_DOCUMENT=#{raExtraDocument}
 		WHERE RA_NUM = #{raNum}
-		AND USER_ID = #{userId}		
+		AND USER_ID
+		= #{userId}
 	</update>
-	
+
 	<delete id="deleteRecruit">
 		delete from RECRUIT_REGIST RR where ra_num = #{raNum}
 	</delete>
-	
+
 </mapper>
