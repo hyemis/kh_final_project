@@ -51,7 +51,7 @@
 				</div>
 				<div class="col-10 was-validated">
 					<input type="text" class="form-control is-invalid"
-						name="boardTitle" placeholder="${news.boardTitle}" required>
+						name="boardTitle" value="${news.boardTitle}" required>
 					<hr>
 				</div>
 			</div>
@@ -61,7 +61,7 @@
 				</div>
 				<div class="col-10 ">
 					<input type="text" class="form-control" name="link"
-						placeholder="${news.link }">
+						value="${news.link }">
 					<hr>
 				</div>
 			</div>
@@ -86,6 +86,14 @@
 
 </div>       
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
+
+	<script>
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	
+	</script>
 
 	<!-- ckeditor5 -->
 

@@ -88,6 +88,10 @@ public class BsAboutUsController {
 		service.updateNewsLetter(dto);
 		mv.setViewName("redirect:/business/aboutus/newsletter");
 		rttr.addFlashAttribute("msg", "뉴스레터 수정 완료");
+		
+		List<BoardDto> list = service.newsLetterList(principal.getName());
+		
+		mv.addObject("news", list);
 		return mv;
 	}
 	
@@ -105,13 +109,13 @@ public class BsAboutUsController {
 	@GetMapping("/newsletter/view")
 	public ModelAndView viewReadBoard(
 			ModelAndView mv
-			, @RequestParam(name = "no", required = false) int boardNum
+			, @RequestParam(name = "no", required = false) int boardNo
 			, Principal principal
 			) {
 		
 		String userId = principal.getName(); ;
 		
-		BoardDto dto = service.newsLetterOne(boardNum,userId);
+		BoardDto dto = service.newsLetterOne(boardNo,userId);
 		mv.addObject("news", dto);
 		
 		return mv;

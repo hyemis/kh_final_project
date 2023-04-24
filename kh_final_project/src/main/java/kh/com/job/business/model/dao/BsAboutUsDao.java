@@ -31,7 +31,7 @@ public class BsAboutUsDao {
 	// 뉴스레터 
 	public int insertNewsletter(BoardDto dto) {
 		sqlSession.insert("boards.insertNewsletter", dto);
-		int boardNum = dto.getBoardNum();
+		int boardNum = dto.getBoardNo();
 		return boardNum;
 	}
 	
@@ -44,11 +44,11 @@ public class BsAboutUsDao {
 		// TODO Auto-generated method stub
 	}
 
-	public BoardDto newsLetterOne(int boardNum) {
-		return sqlSession.selectOne("boards.newsLetterOne",boardNum);
+	public BoardDto newsLetterOne(int boardNo) {
+		return sqlSession.selectOne("boards.newsLetterOne",boardNo);
 	}
 
-	public void updateReadCount(int boardNum) {
+	public void updateReadCount(int boardNo) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -62,8 +62,8 @@ public class BsAboutUsDao {
 	// 회사소개 
 	public int insertCompanyInfo(BoardDto dto) {
 		sqlSession.insert("boards.insertCompanyInfo", dto);
-		int boardNum = dto.getBoardNum();
-		return boardNum;
+		int boardNo = dto.getBoardNo();
+		return boardNo;
 	}
 
 	public int updateCompanyInfo(BoardDto dto) {

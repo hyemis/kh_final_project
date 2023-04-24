@@ -83,8 +83,8 @@
 					  <c:forEach items="${news}" var="news">
 					  <tbody>
 					    <tr>
-					      <th scope="row">${news.boardNum}</th>
-					      <td><a href="view?no=${news.boardNum}">${news.boardTitle }</a></td>
+					      <th scope="row">${news.boardNo}</th>
+					      <td><a href="${pageContext.request.contextPath}/business/aboutus/newsletter/view?no=${news.boardNo}">${news.boardTitle }</a></td>
 					      <td>${news.updateDate }</td>
 					    </tr>
 					   </tbody>

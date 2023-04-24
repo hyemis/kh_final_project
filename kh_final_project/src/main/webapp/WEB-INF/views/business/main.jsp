@@ -75,7 +75,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.3s"
 					style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/applicant/main">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/applicant">
 						<div class="rounded p-4">
 							<h5>지원자관리</h5>
 							<p>합격자 관리</br>면접일정 관리</p>
