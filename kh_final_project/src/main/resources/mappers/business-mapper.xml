@@ -106,7 +106,7 @@
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
-			AND TO_DATE(REGEXP_REPLACE(CLOSE_DATE, '채용시까지\s*', ''), 'YY-MM-DD') > SYSDATE
+		AND TO_DATE(REGEXP_REPLACE(CLOSE_DATE, '채용시까지\s*', ''), 'YY-MM-DD') > SYSDATE
 		ORDER BY REGIST_DATE DESC
 	</select>
 

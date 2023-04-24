@@ -614,13 +614,9 @@ public class PsMainController {
 
 		if (!categoryId.isEmpty() && !categoryId.equals("")) {
 		    llist = brservice.lCateRecruit(categoryId);
+		    mv.addObject("recruitList", llist);
 		}
 
-		if (llist != null && llist.size() > 0) {
-		    mv.addObject("recruitList", llist);
-		} else {
-		    mv.addObject("msg", "현재 채용 중인 공고가 없습니다.");
-		}
 
 		return mv;
 	}
