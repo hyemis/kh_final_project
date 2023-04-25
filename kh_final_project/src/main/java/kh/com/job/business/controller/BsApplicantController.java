@@ -87,22 +87,15 @@ public class BsApplicantController {
 		return mv;
 	}
 	
-	//지원자관리 리스트
-	//다른걸로 변경 필요
-	@PostMapping("/recruitList")
-	@ResponseBody
-	public String recruitList(ModelAndView mv
-			, @RequestParam(name = "id", required = false) int raNum
-			, @RequestParam(name = "pnum", defaultValue = "1") int pnum
-			, @RequestParam(name = "searchNum", required = false) String searchNum
-			, @RequestParam(name = "searchResult", required = false) String searchResult) {
-		
-		List<BsAplicantDto> apList = apservice.aplicantList(raNum);
+	@GetMapping("/resume")
+	public ModelAndView aplicantResume(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto) {
 		
 		
 		
-		return new Gson().toJson(apList);
+		return mv;
 	}
+
 	
 
 
