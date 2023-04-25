@@ -25,7 +25,7 @@
 	where ba.ra_num = #{raNum}
 	</select> -->
 	
-	<select id="recruitList" resultType="kh.com.job.business.model.dto.BsAplicantRecruitDto">
+	<!-- <select id="recruitList" resultType="kh.com.job.business.model.dto.BsAplicantRecruitDto">
 	select rr.ra_num
 		, rr.ra_title
 		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'N') as failconut
@@ -33,7 +33,7 @@
 		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num ) as aplicount
 	from recruit_regist rr
 	where rr.user_id = #{userId}
-	</select>
+	</select> -->
 	
 	<!-- 캘린더 -->	
 	<select id="viewInterview" resultType="indto">

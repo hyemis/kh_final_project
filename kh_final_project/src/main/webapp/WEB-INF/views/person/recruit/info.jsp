@@ -387,7 +387,7 @@
 		});
 		
 		
-			
+		/* 	
 			function handleStarClick(event) {
 				  const raNum = event.target.closest('.star-icon').getAttribute('data-raNum');
 				  console.log(raNum);
@@ -404,7 +404,51 @@
 				      alert("스크랩에 실패하였습니다.");
 				    },
 				  });
-				}
+				} */
+				
+				function handleStarClick(event) {
+					  const raNum = event.target.closest('.star-icon').getAttribute('data-raNum');
+					  console.log(raNum);
+
+					  // checkScrap를 호출하여 현재 스크랩 여부를 확인합니다.
+					  $.ajax({
+					    type: "POST",
+					    url: "${pageContext.request.contextPath}/person/checkScrap",
+					    data: { raNum: raNum },
+					    success: function (result) {
+					      
+					      // 스크랩 여부에 따라 deleteJob 또는 scrapJob을 호출합니다.
+					      if (result === 1) {
+					        $.ajax({
+					          type: "POST",
+					          url: "${pageContext.request.contextPath}/person/deleteJob",
+					          data: { raNum: raNum },
+					          success: function (result) {
+					            $(event.target).toggleClass("far fas").toggleClass("text-warning");
+					          },
+					          error: function () {
+					            alert("스크랩 삭제에 실패하였습니다.");
+					          },
+					        });
+					      } else {
+					        $.ajax({
+					          type: "POST",
+					          url: "${pageContext.request.contextPath}/person/scrapJob",
+					          data: { raNum: raNum },
+					          success: function (result) {
+					            $(event.target).toggleClass("far fas").toggleClass("text-warning");
+					          },
+					          error: function () {
+					            alert("스크랩에 실패하였습니다.");
+					          },
+					        });
+					      }
+					    },
+					    error: function () {
+					      alert("스크랩 여부 확인에 실패하였습니다.");
+					    },
+					  });
+					}
 
 
 
