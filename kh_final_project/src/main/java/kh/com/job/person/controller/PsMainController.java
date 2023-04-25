@@ -650,6 +650,7 @@ public class PsMainController {
 	}
 	
 	
+	// 채용공고 스크랩
 	@PostMapping("scrapJob")
 	@ResponseBody
 	public int scrapJob(Principal principal, @RequestParam("raNum") Integer raNum) throws Exception {
