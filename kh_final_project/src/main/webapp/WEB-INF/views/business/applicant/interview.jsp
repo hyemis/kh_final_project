@@ -44,11 +44,11 @@
 <!-- page section -->	
 <section>
 <div class="container-fluid bg-white p-5">
-
-<!-- 캘린더 -->
-<div id='calendar'></div>
-
 <!--  test -->
+    
+    
+<!-- 캘린더-->
+<div id='calendar'></div>  
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -62,18 +62,6 @@
 	          <div class="form-group">
 	            <label for="event-title">일정제목</label>
 	            <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-	          </div>
-	          <div class="form-group">
-	            <label for="start-time">시작 시간</label>
-	            <input type="text" class="form-control" id="start-time"  placeholder="시작 시간을 입력하세요">
-	          </div>
-	          <div class="form-group">
-	            <label for="end-time">종료 시간</label>
-	            <input type="text" class="form-control" id="end-time" placeholder="종료 시간을 입력하세요">
-	          </div>
-	          <div class="form-check">
-	            <input type="checkbox" class="form-check-input" id="all-day">
-	            <label class="form-check-label" for="all-day">하루 종일</label>
 	          </div>
 	          <div class="form-group">
 	            <label for="end-time">면접장소</label>
@@ -106,7 +94,7 @@
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-<!-- page script -->
+
 <!-- 캘린더 -->
  <script>
  
@@ -134,19 +122,17 @@
 	    	    var title = $('#title').val();
 	    	    var start = arg.startStr;
 	    	    var end = arg.endStr;
-	    	    var allDay = arg.allDay;
 	    	    var location = $('#location').val();
 	    	    var interviewer = $('#interviewer').val();
 	    	    var memo = $('#memo').val();
 	    	    // 새로운 이벤트 생성
 	    	    var eventData = {
 	    	      caTitle: title,
-	    	      interviewDateStart: start,
-	    	      interviewDateEnd: end,
-	    	      allDay: allDay,
-	    	      interviewLocation: location,
+	    	      dateStart: start,
+	    	      dateEnd: end,
+	    	      location: location,
 	    	      interviewer: interviewer,
-	    	      caMemo: memo
+	    	      memo: memo
 	    	    };
 	    	    console.log(eventData);
 

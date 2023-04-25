@@ -75,7 +75,7 @@
 								<tr class="text-center">
 									<td>
 										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
-											<span class="h1">2</span>								
+											<span class="h1">${aplicantAll }</span>								
 										</div>
 									</td>
 									<td>
@@ -100,37 +100,28 @@
 					</div>
 					<h3 class="my-2 mt-4">지원자 조회</h3>
 					<div class="bg-white border">
-						<div class="m-2 d-flex align-middle">
-							<label for="aplicantList" class="col-auto h5 text-align-middle ">지원 공고  : </label>
-							<div class="col-auto">
-								<select id="aplicantList" class="form-select aplicantList " name="aplicantList" style="width: 500px;">
-										<option>선택안함</option>
-									<c:forEach items="${recruitlist}" var="list">
-										<option value="${list.raNum }">${list.raTitle }</option>								
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<!-- 위의 select 박스가 바뀌면 아래 새로 그려짐  start-->
-						<!-- 쿼리스트링으로 공고 번호 들어오면 먼저 그려줄수 있어야함 공고 검색 후 값이 없으면
-						안그려져야됨-->
-						<div class="m-2 d-flex align-middle">
-							<p class="mx-2">지원자</p>
-							<p>지원자수</p>
-						</div>
 						<table class="table">
 							<thead>
 								<tr>
-									<th>지원자</th>
-									<th>지원 이력서</th>
-									<th>지원 날짜</th>
-									<th>합격여부</th>
+									<th>공고</th>
+									<th>지원자 인원</th>
+									<th>합격 인원</th>
+									<th>불합격 인원</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="apliTbody">
+							<c:forEach items="${recruitlist }" var="list">
+								<tr>
+									<td>${list.raTitle }</td>
+									<td>${list.aplicount }</td>
+									<td>${list.passcount }</td>
+									<td>${list.failcount }</td>
+								</tr>
+							</c:forEach>
 								
 							</tbody>
 						</table>
+
 						<!-- 위의 select 박스가 바뀌면 아래 새로 그려짐  end-->
 					</div>
 				</div>
@@ -148,9 +139,50 @@
 
 <script type="text/javascript">
 	$(document).on('change','.aplicantList', function(){
-		/* 여기서 선택된 공고 마다의 지원자 리스트 불러오기  */
-		alert("변경");
-	} )
+		
+		let raNum = $(this).val();
+		aplicantPaging(raNum);
+		$("#aplicantResult option:eq(0)").prop("selected", true);
+	})
+	
+	$(document).on('change','.aplicantResult', function(){
+		
+		let raNum = $('.aplicantList').val();
+		let search = $('.aplicantResult').val();
+		aplicantPaging(raNum, search);
+		
+		
+	})
+	
+	function aplicantPaging(raNum, search){
+		$.ajax({ 
+			url: "${pageContext.request.contextPath}/business/applicant/aplicantList"
+			, type: "post"
+			, data:  {raNum : raNum
+					 , search : search}
+			, dataType:"json"
+			, success: function(result){
+
+    				let htmlVal = '';
+    				for(i = 0; i< result.length; i++){
+    					let list = result[i];
+    					htmlVal += '<tr>';
+    					htmlVal += '<td>'+list.userId+'</td>';
+    					htmlVal += '<td>'+list.resumeTitle+'</td>';
+    					htmlVal += '<td>'+list.applyDate+'</td>';
+    					htmlVal += '<td>'+list.resultType+'</td>';
+	    				htmlVal += '</tr>';
+    				}
+    				$(".apliTbody").html(htmlVal);
+    				$(".aplicantConut").html(result.length);
+
+			}
+			, error: function(e){
+				alert(e +" : 오류")
+			}
+		});
+		
+	}
 </script>
 	
 </body>

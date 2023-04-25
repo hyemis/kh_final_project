@@ -77,9 +77,9 @@ public class PsDao {
 		return sqlSession.insert("person.businessInsert", dto);
 	}
 	
-	// 공고, 회사 스크랩하기
-	public int scrapInfo(PsScrapInfoDto dto) throws Exception{
-		return sqlSession.insert("person.scrapInfo",dto);
+	// 공고 스크랩하기
+	public int scrapJob(Map<String, Object> InfoNo) throws Exception{
+		return sqlSession.insert("person.scrapJob",InfoNo);
 	}
 	
 

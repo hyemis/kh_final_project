@@ -202,9 +202,11 @@ public class PsServiceImpl implements PsService {
 				}
 
 		@Override
-		public int scrapInfo(PsScrapInfoDto dto) throws Exception {
-			return dao.scrapInfo(dto);
+		public int scrapJob(Map<String, Object> InfoNo) throws Exception {
+			return dao.scrapJob(InfoNo);
 		}
+
+
 
 
 	

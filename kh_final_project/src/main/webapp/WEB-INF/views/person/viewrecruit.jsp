@@ -75,6 +75,26 @@
 }
 
 
+.icon-container {
+  width: 50px;
+  height: 50px; 
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.fa-star {
+  font-size: 24px; 
+}
+
+.icon-container i.fas {
+  color: gold;
+}
+
+
+
 </style>
 
 <body>
@@ -86,9 +106,16 @@
 		 	<h3 class="my-5">채용공고 상세 내역</h3>
 		 	<div>
 		 		<h5 class="mb-5 ms-3">모집 분야 : ${redto.recruitName}</h5>
-		 		<button class="btn btn-primary" onclick="scrapJob()">공고 스크랩하기</button>
-		 		<i class="far fa-star"></i>
-		 	</div>
+		 		
+		 		<!-- 채용공고 스크랩 -->
+				<sec:authorize access="hasRole('ROLE_P')">
+					<div class="icon-container">
+						<i class="far fa-star" onclick="toggleStar(this)"></i>
+					</div>
+				</sec:authorize>
+
+
+			</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">
                     <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
@@ -105,6 +132,7 @@
 												<th scope="col"></th>
 												<th scope="col"></th>
 												<th scope="col"></th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -122,6 +150,10 @@
 												<td>담당자 E-mail</td>
 												<td><b> : </b></td>
 												<td>${redto.userEmail}</td>
+											</tr>
+											<tr>
+												<td><input type="hidden" name="raNum"
+													value="${redto.raNum}" required>
 											</tr>
 										</tbody>
 									</table>
@@ -222,18 +254,19 @@
                 </div>
             </div>
 		 </div>
-		<%--  <c:if test="${isAuthenticated}"> --%>
+		<sec:authorize access="hasRole('ROLE_P')">
    			 <div class="container mb-5">
        		 <button type="button" class="btn btn-primary" id="applyBtn" data-bs-toggle="modal" data-bs-target="#apply">지원하기</button>
    			 </div>
-	<%-- 	</c:if> --%>
-
+		</sec:authorize>
+		
 		<!-- 지원하기 모달 창 -->
 		<div class="modal fade" id="apply" tabindex="-1"
 			role="dialog" aria-labelledby="uploadModalLabel"
 			aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered"
 				role="document">
+				
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="uploadModalLabel">${redto.raTitle} 입사지원</h5>
@@ -245,8 +278,8 @@
 						<p><strong>해당 공고에 지원할 이력서를 선택하세요.</strong></p>
 						<div class="selectbox-wrapper">
 						<select name="selectbox">
-							<c:forEach items="${resume}" var="resumeList">
-								<option value="${resumeList.resumeNo}">${resumeList.resumeTitle}</option>
+							<c:forEach items="${resumelist}" var="resume">
+								<option value="${resume.resumeNo}">${resume.resumeTitle}</option>
 							</c:forEach>
 						</select>
 						</div><br><hr>
@@ -258,7 +291,7 @@
 
 							<button type="button" data-bs-dismiss="modal"
 								class="btn btn-primary mx-auto d-block" type="submit"
-								data-carNo="${resumeList.resumeNo}">입사지원하기</button>
+								data-carNo="${resume.resumeNo}">입사지원하기</button>
 						</form>
 					</div>
 					</div>
@@ -267,8 +300,12 @@
 			 
 			 <div id="buttonContainer">
 			 <!-- TODO : 주소수정예정 -->
-			<a href="${pageContext.request.contextPath}/person/resume/list" class="btn btn-dark py-3 px-4">목록으로</a>
-		 </div>
+			<div class="button-container">
+				<button class="btn btn-primary" onclick="scrapJob()">공고 스크랩</button>
+				<a href="${pageContext.request.contextPath}/person/resume/list"	class="btn btn-primary">목록으로</a>
+			</div>
+
+		</div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -342,18 +379,46 @@
 	        map: map
 	    });
 	    
+		 // alert
+	    var msg = "${msg}";
+	    if (msg) {
+	    	alert(msg);
+	    }
 	    
-	   // 비로그인시, 지원하기 버튼 클릭->로그인 화면으로 이동
-	   public boolean isAuthenticated() {
-		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		    return authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
-		}
+	    
+ // 별 클릭 - 채용공고 스크랩 ajax
+ function toggleStar(icon) {
+const isFilled = icon.classList.contains('fas');
+
+var raNum = '${redto.raNum}';
+ 	
+   $.ajax({
+    type: 'POST',
+    url: '${pageContext.request.contextPath}/person/scrapJob',
+    data: {raNum : raNum},
+    success: function (result) {
+      // 색칠 상태를 변경
+      if (isFilled) {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        alert('해당 공고를 스크랩하였습니다.');
+      } else {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+      }
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+		    
+	    
 
 </script>
 
 
 
-	</script>
 	
 	<script type="text/javascript">
 	
