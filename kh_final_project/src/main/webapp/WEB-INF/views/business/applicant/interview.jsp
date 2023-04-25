@@ -98,9 +98,10 @@
 <!-- 캘린더 -->
  <script>
  
+ let events;
  document.addEventListener('DOMContentLoaded', function() {
+	 getEvents();
 	    var calendarEl = document.getElementById('calendar');
-
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
 	      headerToolbar: {
 	        left: 'prev,next today',
@@ -110,6 +111,8 @@
 	      navLinks: true, // can click day/week names to navigate views
 	      selectable: true,
 	      selectMirror: true,
+	      
+	      //클릭시 event
 	      select: function(arg) {
 	    	  // 모달창 띄우기
 	    	  $('#modal').modal('show');
@@ -141,20 +144,30 @@
 	    	      type: "POST",
 	    	      url: "${pageContext.request.contextPath}/business/applicant/calendar",
 	    	      data: eventData,
+	    	        dataType:'json',
 	    	      success: function(response) {
 	    	        // 서버로부터 응답이 성공적으로 수신되었을 때
 	    	        console.log("이벤트 저장 완료");
 	    	        alert("일정이 추가되었습니다");
 	    	        
-	    	        // 모달창 닫기
-	    	        $('#modal').hide();
+	    	        // 모달창 닫기 todo
+	    	        $('#modal').modal('hide');
 
-	    	        // 선택 해제
-	    	        calendar.unselect();
 
 	    	        // FullCalendar에 이벤트 추가
-	    	        eventData.id = response.eventId;
-	    	        calendar.addEvent(eventData);
+	    	        console.log(response);
+	    	      	  for(var i=0; i<response.length;i++){
+	    	      	   calendar.addEvent({
+	    	      		   title: response[i]['caTitle'],
+	    	      		   start: response[i]['dateStart'],
+	    	      		   end: response[i]['dateEnd']
+	    	      	   })
+	    	      	  }
+	    	        //calendar.addEvent(eventData);
+	    	        
+		    	        // 선택 해제
+		    	        calendar.unselect();
+		    	        calendar.render();
 	    	      },
 	    	      error: function() {
 	    	        // 서버와 통신 중 에러 발생 시
@@ -173,17 +186,33 @@
 	      editable: true,
 	      dayMaxEvents: true, // allow "more" link when too many events
 	      
-	      events: [
-	        {
-	          title: 'All Day Event',
-	          start: '2023-01-01'
-	        }
-	      ]
-	    });
+	      
+	      events:  events
+         }  //FullCalendar.Calendar
+	    );// FullCalendar.Calendar
 
 	    calendar.render();
-	  });
-
+	  });  // document load
+function getEvents(){
+	events = [];
+	$.ajax({
+        url: '${pageContext.request.contextPath}/business/applicant/interview',
+        type: 'POST',
+        async: false,
+        dataType:'json',
+        success:function(result){
+      	  console.log(result);
+      	  //events = result;
+      	  for(var i=0; i<result.length;i++){
+      		events.push({
+      		   title: result[i]['caTitle'],
+      		   start: result[i]['dateStart'],
+      		   end: result[i]['dateEnd']
+      	   })
+      	  }
+        }
+	 });
+}
 </script>
 </body>
 </html>
