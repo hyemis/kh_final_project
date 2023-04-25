@@ -19,15 +19,15 @@ public class BsApplicantDao {
 	private SqlSession sqlSession;
 	
 	public List<BsRecruitAplicantDto> recruitList(String userId) {
-		return sqlSession.selectList("aplicant.recruitList", userId);
+		return sqlSession.selectList("applicant.recruitList", userId);
 	}
 
 	public int insertInterview(InterviewDto dto) {
-		return sqlSession.insert("aplicant.insertInterview", dto);
+		return sqlSession.insert("applicant.insertInterview", dto);
 	}
 
 	public int aplicantAll(String userId) {
-		return sqlSession.selectOne("aplicant.aplicantAll", userId);
+		return sqlSession.selectOne("applicant.aplicantAll", userId);
 	}
 
 	public List<BsAplicantDto> aplicantList(int raNum) {

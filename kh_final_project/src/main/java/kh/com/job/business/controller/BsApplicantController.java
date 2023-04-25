@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
@@ -44,11 +45,12 @@ public class BsApplicantController {
 		return mv;
 	}
 	
-	//면접일정
+	//면접 캘린더 보기
 	@GetMapping("/interview")
-	public ModelAndView interview(ModelAndView mv, InterviewDto dto, Principal principal) {
-
-		mv.addObject(dto);
+	public ModelAndView calendar(ModelAndView mv, InterviewDto dto, Principal principal) {
+		List<InterviewDto> list = apservice.viewInterview(principal.getName());
+		
+		mv.addObject("view", list);
 		return mv;
 	}
 
