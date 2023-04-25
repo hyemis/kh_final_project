@@ -74,7 +74,13 @@
   </update>
   
   
- 
+  <!-- 채용공고 스크랩 기능 -->
+  	<insert id="scrapJob" parameterType="map">
+	INSERT ALL
+	INTO SCRAP_INFO(USER_ID, COMPANY_NAME, RA_TITLE, CLOSE_DATE,	RA_NUM)
+	VALUES ( #{userId} , A, B, C, #{raNum} )
+	SELECT COMPANY_NAME AS A, RA_TITLE AS B, CLOSE_DATE AS C	FROM RECRUIT_REGIST	WHERE RA_NUM = #{raNum}
+	</insert>
 	
 
 </mapper>

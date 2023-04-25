@@ -222,7 +222,7 @@
 
 <script>
 
-// alret
+// alert
 var msg = "${msg}";
 if (msg) {
 	alert(msg);
