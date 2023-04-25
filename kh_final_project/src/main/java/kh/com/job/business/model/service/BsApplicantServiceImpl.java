@@ -20,10 +20,6 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return dao.recruitList(userId);
 	}
 
-	@Override
-	public List<InterviewDto> getEvents() {
-		return dao.getEvents();
-	}
 	
 	
 	

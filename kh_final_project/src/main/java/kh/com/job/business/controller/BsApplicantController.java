@@ -38,14 +38,12 @@ public class BsApplicantController {
 		return mv;
 	}
 	
-	//캘린더
-	   @GetMapping("/interview")
-	    public String calendarPage(Model model) {
-	        List<InterviewDto> events = apservice.getEvents();
-	        model.addAttribute("events", events);
-	        return "interview";
-	    }
-	
+	//합격자관리
+		@GetMapping("/interview")
+		public ModelAndView interview(ModelAndView mv) {
+				
+			return mv;
+		}
 
 	
 }

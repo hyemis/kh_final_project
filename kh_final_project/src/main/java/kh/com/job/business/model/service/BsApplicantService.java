@@ -9,6 +9,5 @@ public interface BsApplicantService {
 	
 	public List<BsRecruitDto> recruitList(String userId);
 	
-	public List<InterviewDto> getEvents();
 
 }
