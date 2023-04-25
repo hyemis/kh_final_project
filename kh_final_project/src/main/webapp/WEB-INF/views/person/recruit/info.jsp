@@ -308,7 +308,10 @@
 												    recruitTable += '</a></td></tr>';
 												    recruitTable += '<tr>';
 												    <sec:authorize access="isAuthenticated()">
-												        recruitTable += '<td class="far fa-star">~' + result[i].closeDate + '</td>';
+												     recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+													 recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+												 	 recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+													 recruitTable += '</td>';
 												    </sec:authorize>
 												    <sec:authorize access="!isAuthenticated()">
 												        recruitTable += '<td>~' + result[i].closeDate + '</td>';
@@ -342,7 +345,6 @@
 			  data: {keyword: searchKeyword},
 			  success : function(result) {
 					if (!result || result.length === 0) {
-						console.log("비어있음", result);
 						let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
 						$(".recruit-Container").html(
 								htmlVal);
@@ -350,8 +352,7 @@
 						let totalCount = 0; // 검색 결과 총 개수
 						$('#total-count').text("0");
 					} else {
-						// 이전에 있던 내용 삭제
-						console.log("받아옴", result);
+						
 
 						// 새로운 내용 출력
 						let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
@@ -363,7 +364,10 @@
 						    recruitTable += '</a></td></tr>';
 						    recruitTable += '<tr>';
 						    <sec:authorize access="isAuthenticated()">
-						        recruitTable += '<td class="far fa-star">~' + result[i].closeDate + '</td>';
+						      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+							  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+							  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+							  recruitTable += '</td>';
 						    </sec:authorize>
 						    <sec:authorize access="!isAuthenticated()">
 						        recruitTable += '<td>~' + result[i].closeDate + '</td>';
@@ -387,25 +391,7 @@
 		});
 		
 		
-		/* 	
-			function handleStarClick(event) {
-				  const raNum = event.target.closest('.star-icon').getAttribute('data-raNum');
-				  console.log(raNum);
-
-				  $.ajax({
-				    type: "POST",
-				    url: "${pageContext.request.contextPath}/person/scrapJob",
-				    data: { raNum: raNum },
-				    success: function (result) {
-				      console.log("성공");
-				      $(event.target).toggleClass("far fas").toggleClass("text-warning");
-				    },
-				    error: function () {
-				      alert("스크랩에 실패하였습니다.");
-				    },
-				  });
-				} */
-				
+				// 스크랩 
 				function handleStarClick(event) {
 					  const raNum = event.target.closest('.star-icon').getAttribute('data-raNum');
 					  console.log(raNum);
