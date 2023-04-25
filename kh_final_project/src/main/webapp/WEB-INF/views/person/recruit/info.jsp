@@ -250,11 +250,13 @@
 		        url : "${pageContext.request.contextPath}/person/recruit/info",
 		        data : {categoryId : categoryId},
 		        success: function(result) {
-		        	if (!result || (result && Array.isArray(result.recruitList) && result.recruitList.length === 0)) {
-		                $('#recruit-Container').empty().append('<p>현재 채용 중인 공고가 없습니다.</p>');
-		            } else {
+		        	if (!result || result.length === 0) {
+		        	    console.log("비어있음", result);
+		        	    $('#recruit-Container').empty().append('<p>현재 채용 중인 공고가 없습니다.</p>');
+		        	} else {
 		        	    // 이전에 있던 내용 삭제
-		        	    $('#recruit-container').empty();
+		        	    console.log("받아옴", result);
+		        	    $('#recruit-Container').empty();
 
 		        	    // 새로운 내용 출력
 		        	    var recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
