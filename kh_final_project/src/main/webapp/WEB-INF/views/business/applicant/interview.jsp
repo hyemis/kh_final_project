@@ -48,6 +48,57 @@
 <!-- 캘린더 -->
 <div id='calendar'></div>
 
+<!--  test -->
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">일정추가</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	       <form>
+	          <div class="form-group">
+	            <label for="event-title">일정제목</label>
+	            <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+	          </div>
+	          <div class="form-group">
+	            <label for="start-time">시작 시간</label>
+	            <input type="text" class="form-control" id="start-time"  placeholder="시작 시간을 입력하세요">
+	          </div>
+	          <div class="form-group">
+	            <label for="end-time">종료 시간</label>
+	            <input type="text" class="form-control" id="end-time" placeholder="종료 시간을 입력하세요">
+	          </div>
+	          <div class="form-check">
+	            <input type="checkbox" class="form-check-input" id="all-day">
+	            <label class="form-check-label" for="all-day">하루 종일</label>
+	          </div>
+	          <div class="form-group">
+	            <label for="end-time">면접장소</label>
+	            <input type="text" class="form-control" id="location" placeholder="면접장소를 입력하세요">
+	          </div>
+	          <div class="form-group">
+	            <label for="end-time">면접관</label>
+	            <input type="text" class="form-control" id="interviewer" placeholder="담당 면접관을 입력하세요">
+	          </div>
+	          <div class="form-group">
+	            <label for="end-time">메모</label>
+	            <input type="text" class="form-control" id="memo" >
+	          </div>
+	        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </div>
 </section>
 
@@ -69,22 +120,60 @@
 	        center: 'title',
 	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
 	      },
-	      initialDate: '2023-04-24',
 	      navLinks: true, // can click day/week names to navigate views
 	      selectable: true,
 	      selectMirror: true,
 	      select: function(arg) {
-	        var title = prompt('Event Title:');
-	        if (title) {
-	          calendar.addEvent({
-	            title: title,
-	            start: arg.start,
-	            end: arg.end,
-	            allDay: arg.allDay
-	          })
-	        }
-	        calendar.unselect()
-	      },
+
+	    	  // 모달창 띄우기
+	    	  $('#Modal').modal('show');
+
+	    	  // 모달창에서 저장 버튼 클릭 시 이벤트 처리
+	    	  $('#Modal').on('click', '#saveButton', function() {
+	    	    // 입력된 값 가져오기
+	    	    var title = $('#title').val();
+	    	    var start = arg.start.format('YYYY-MM-DD HH:mm:ss');
+	    	    var end = arg.end.format('YYYY-MM-DD HH:mm:ss');
+	    	    var allDay = arg.allDay;
+				var location = $('#location').val();
+				var interviewer = $('#interviewer').val();
+				var memo  = $('#memo').val();
+	    	    // 새로운 이벤트 생성
+	    	    var eventData = {
+	    	      title: title,
+	    	      start: arg.start,
+	    	      end: arg.end,
+	    	      allDay: arg.allDay,
+	    	    };
+
+	    	    // 서버로 데이터 전송
+	    	    $.ajax({
+	    	      type: "POST",
+	    	      url: "/calendar",
+	    	      data: eventData,
+	    	      success: function(response) {
+	    	        // 서버로부터 응답이 성공적으로 수신되었을 때
+	    	        console.log("이벤트 저장 완료");
+
+	    	        // 모달창 닫기
+	    	        $('#modal').hide();
+
+	    	        // 선택 해제
+	    	        calendar.unselect();
+
+	    	        // FullCalendar에 이벤트 추가
+	    	        eventData.id = response.eventId;
+	    	        calendar.addEvent(eventData);
+	    	      },
+	    	      error: function() {
+	    	        // 서버와 통신 중 에러 발생 시
+	    	        console.log("서버 에러");
+	    	      }
+	    	    });
+	    	  });
+	    	},
+
+	     
 	      eventClick: function(arg) {
 	        if (confirm('Are you sure you want to delete this event?')) {
 	          arg.event.remove()

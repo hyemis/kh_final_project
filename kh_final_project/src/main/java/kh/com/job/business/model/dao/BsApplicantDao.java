@@ -20,10 +20,6 @@ public class BsApplicantDao {
 		return sqlSession.selectList("aplicant.recruitList", userId);
 	}
 
-	public List<InterviewDto> getEvents() {
-		List<InterviewDto> events = sqlSession.selectList("getEvents");
-        return events;
-	}
 	
 	
 
