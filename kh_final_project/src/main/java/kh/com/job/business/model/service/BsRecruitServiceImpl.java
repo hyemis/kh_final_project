@@ -104,6 +104,11 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	public int lCatecountYAdmission() {
 		return  dao.lCatecountYAdmission();
 	}
+	
+	// 검색 
+	public List<BsRecruitDto> searchList(String keyword){
+		return  dao.searchList(keyword);
+	}
 
 	@Override
 	public int changeAdmission(BsRecruitDto dto) {

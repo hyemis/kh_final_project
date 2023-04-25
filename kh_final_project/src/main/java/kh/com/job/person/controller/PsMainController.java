@@ -588,7 +588,21 @@ public class PsMainController {
 
 			return new Gson().toJson(llist);
 		}
-	
+		
+	// 검색 
+	@PostMapping("/search")
+	@ResponseBody
+	public  List<BsRecruitDto> search(ModelAndView mv, String keyword){
+		System.out.println(keyword);
+		
+		 List<BsRecruitDto> searchList = null;
+		 
+		 if (!keyword.isEmpty() && !keyword.equals("")) {
+			 searchList = brservice.searchList(keyword);
+		 }
+
+		    return searchList;
+	}
 
 	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")
@@ -625,6 +639,8 @@ public class PsMainController {
 		    return recruitList;
 
 	}
+	
+	
 
 	// 예외처리는 프로젝트 후반에 작성
 	@ExceptionHandler
