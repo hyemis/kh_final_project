@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsRecruitAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAboutUsService;
@@ -54,9 +55,12 @@ public class BsMainController {
 			return mv;
 		}
 		
-		List<BsRecruitDto> recruitlist = apservice.recruitList(principal.getName());
+		List<BsRecruitAplicantDto> recruitlist = apservice.recruitList(principal.getName());
 		
 		BsUserDto dto = acservice.viewAccount(principal.getName());
+		int aplicantAll = apservice.aplicantAll(principal.getName());
+		
+		mv.addObject("aplicantAll", aplicantAll);
 		mv.addObject("recruitlist", recruitlist);
 		mv.addObject("userinfo", dto);
 		
