@@ -72,15 +72,27 @@
   	TERMS_PERIOD=#{termsPeriod}
   	where USER_ID = #{userId}
   </update>
+
+	<!-- 채용공고 스크랩여부 확인 -->  
+	<select id="checkScrap" parameterType="map" resultType="_int">
+ 	 SELECT COUNT(*) FROM SCRAP_INFO 
+ 	 WHERE RA_NUM = #{raNum} AND USER_ID = #{userId}
+	</select>
   
-  
-  <!-- 채용공고 스크랩 기능 -->
+  	<!-- 채용공고 스크랩 기능 -->
   	<insert id="scrapJob" parameterType="map">
 	INSERT ALL
-	INTO SCRAP_INFO(USER_ID, COMPANY_NAME, RA_TITLE, CLOSE_DATE,	RA_NUM)
+	INTO SCRAP_INFO(USER_ID, COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM)
 	VALUES ( #{userId} , A, B, C, #{raNum} )
-	SELECT COMPANY_NAME AS A, RA_TITLE AS B, CLOSE_DATE AS C	FROM RECRUIT_REGIST	WHERE RA_NUM = #{raNum}
+	SELECT COMPANY_NAME AS A, RA_TITLE AS B, CLOSE_DATE AS C FROM RECRUIT_REGIST WHERE RA_NUM = #{raNum}
 	</insert>
+	
+	<!-- 채용공고 스크랩 삭제 기능 -->
+  	<delete id="deleteJob" parameterType="map">
+  	DELETE FROM
+  	SCRAP_INFO
+  	WHERE USER_ID = #{userId} AND RA_NUM = #{raNum}
+	</delete>
 	
 
 </mapper>

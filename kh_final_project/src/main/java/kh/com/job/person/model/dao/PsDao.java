@@ -1,6 +1,7 @@
 package kh.com.job.person.model.dao;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Repository
@@ -77,9 +77,20 @@ public class PsDao {
 		return sqlSession.insert("person.businessInsert", dto);
 	}
 	
+	// 공고 스크랩 확인
+	public int checkScrap(Map<String, Object> InfoNo) throws Exception {
+		int result = sqlSession.selectOne("person.checkScrap", InfoNo);
+		return result;
+	}
+
 	// 공고 스크랩하기
 	public int scrapJob(Map<String, Object> InfoNo) throws Exception{
 		return sqlSession.insert("person.scrapJob",InfoNo);
+	}
+	
+	// 공고 스크랩 삭제
+	public int deleteJob(Map<String, Object> InfoNo) throws Exception{
+		return sqlSession.delete("person.deleteJob",InfoNo);
 	}
 	
 

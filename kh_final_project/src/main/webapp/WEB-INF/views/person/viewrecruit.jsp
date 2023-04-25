@@ -132,7 +132,6 @@
 												<th scope="col"></th>
 												<th scope="col"></th>
 												<th scope="col"></th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -151,10 +150,7 @@
 												<td><b> : </b></td>
 												<td>${redto.userEmail}</td>
 											</tr>
-											<tr>
-												<td><input type="hidden" name="raNum"
-													value="${redto.raNum}" required>
-											</tr>
+
 										</tbody>
 									</table>
                                 </div>
@@ -301,7 +297,6 @@
 			 <div id="buttonContainer">
 			 <!-- TODO : 주소수정예정 -->
 			<div class="button-container">
-				<button class="btn btn-primary" onclick="scrapJob()">공고 스크랩</button>
 				<a href="${pageContext.request.contextPath}/person/resume/list"	class="btn btn-primary">목록으로</a>
 			</div>
 
@@ -386,7 +381,7 @@
 	    }
 	    
 	    
- // 별 클릭 - 채용공고 스크랩 ajax
+/*  // 별 클릭 - 채용공고 스크랩 ajax
  function toggleStar(icon) {
 const isFilled = icon.classList.contains('fas');
 
@@ -401,7 +396,6 @@ var raNum = '${redto.raNum}';
       if (isFilled) {
         icon.classList.remove('fas');
         icon.classList.add('far');
-        alert('해당 공고를 스크랩하였습니다.');
       } else {
         icon.classList.remove('far');
         icon.classList.add('fas');
@@ -411,8 +405,56 @@ var raNum = '${redto.raNum}';
       console.log(error);
     }
   });
+} */
+		   
+
+// 별 클릭 - 채용공고 스크랩 ajax
+ function toggleStar(icon) {
+const isFilled = icon.classList.contains('fas');
+
+var raNum = '${redto.raNum}';
+
+ $.ajax({
+    type: 'POST',
+    url: '${pageContext.request.contextPath}/person/checkScrap',
+    data: {raNum : raNum},
+    success: function(data) {
+      if (data == 0 ) {
+    	  //스크랩 정보 추가
+        $.ajax({
+            type: 'POST',
+            url: '${pageContext.request.contextPath}/person/scrapJob',
+            data: {raNum : raNum},
+            success: function() {
+              icon.classList.remove('far');
+              icon.classList.add('fas');
+            },
+            error: function(error) {
+              console.log(error);
+            }
+          });
+      } else {   	  
+        // 스크랩 정보 삭제
+        $.ajax({
+          type: 'POST',
+          url: '${pageContext.request.contextPath}/person/deleteJob',
+          data: {raNum : raNum},
+          success: function() {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+
+      }
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  });
 }
-		    
 	    
 
 </script>

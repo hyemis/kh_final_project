@@ -649,7 +649,29 @@ public class PsMainController {
 
 	}
 	
-	
+
+	//채용공고 스크랩 여부 확인
+	@PostMapping("/checkScrap")
+	@ResponseBody
+	public int checkScrap(@RequestParam("raNum") int raNum, Principal principal) throws Exception{
+		
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("raNum", raNum);
+		InfoNo.put("userId", principal.getName());
+
+		int result = service.checkScrap(InfoNo);
+		int data = 0;
+		if(result > 0) { //스크랩 돼있으면
+			data = 1; // 데이터=1
+			return data;
+		} else { //스크랩 안 돼있으면 데이터=0
+			return data;
+		}
+
+	}
+
+
 	// 채용공고 스크랩
 	@PostMapping("scrapJob")
 	@ResponseBody
@@ -665,6 +687,24 @@ public class PsMainController {
 
 		return result;
 	}
+	
+	
+	// 채용공고 스크랩 삭제
+	@PostMapping("deleteJob")
+	@ResponseBody
+	public int deleteJob(Principal principal, @RequestParam("raNum") Integer raNum) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("raNum", raNum);
+		InfoNo.put("userId", principal.getName());
+
+		result = service.deleteJob(InfoNo);
+
+		return result;
+	}
+	
 
 	// 예외처리는 프로젝트 후반에 작성
 	@ExceptionHandler
