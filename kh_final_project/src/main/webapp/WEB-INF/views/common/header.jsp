@@ -16,7 +16,7 @@
 			</a>
 			<!-- 좌측 메뉴 -->
 			<div class="container-fluid ms-auto">
-				<a class="nav-link me-3" href="#">menu</a>
+				<a class="nav-link me-3" href="${pageContext.request.contextPath}/person/main">menu</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false"
