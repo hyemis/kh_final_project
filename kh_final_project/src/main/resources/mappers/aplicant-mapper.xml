@@ -9,7 +9,7 @@
 		where rr.user_id = #{userId}
 	</select>
 	
-	<select id="aplicantList" resultType="kh.com.job.business.model.dto.BsAplicantDto">
+<!-- 	<select id="aplicantList" resultType="kh.com.job.business.model.dto.BsAplicantDto">
 	select  ba.ba_num, ba.user_id, ba.resume_no
         , ur.resume_title, ur.resume_act,  ua.apply_date
         , ba.result_type
@@ -17,7 +17,7 @@
 	join user_resume ur ON ba.RESUME_NO = ur.RESUME_NO
 	join user_apply ua ON ba.ba_num = ua.ba_num
 	where ba.ra_num = #{raNum}
-	</select>
+	</select> -->
 	
 	<select id="recruitList" resultType="kh.com.job.business.model.dto.BsRecruitAplicantDto">
 	select rr.ra_num
