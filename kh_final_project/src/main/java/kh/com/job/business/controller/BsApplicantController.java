@@ -44,11 +44,24 @@ public class BsApplicantController {
 		return mv;
 	}
 	
-	//합격자관리
+	//면접일정
 	@GetMapping("/interview")
-	public ModelAndView interview(ModelAndView mv) {
-			
+	public ModelAndView interview(ModelAndView mv, InterviewDto dto, Principal principal) {
+
+		mv.addObject(dto);
 		return mv;
+	}
+
+	//일정 등록
+	@PostMapping("/calendar")
+	@ResponseBody
+	public String insertInterview(InterviewDto dto, Principal principal) {
+
+		dto.setUserId(principal.getName());
+		apservice.insertInterview(dto);
+
+		return "redirect:/business/applicant/interview";
+
 	}
 	
 	//지원자관리 리스트

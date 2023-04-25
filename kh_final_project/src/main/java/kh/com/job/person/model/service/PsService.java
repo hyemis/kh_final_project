@@ -20,6 +20,8 @@ public interface PsService {
 	public PsUserDto findId(Map<String, Object> findId) throws Exception;
 	public PsUserDto findPw(Map<String, Object> findPw) throws Exception;
 	public int scrapJob(Map<String, Object> InfoNo) throws Exception;
+	public int deleteJob(Map<String, Object> InfoNo) throws Exception;
+	public int checkScrap(Map<String, Object> InfoNo) throws Exception;
 	
 	// 카카오 로그인 
 	String getAccessToken(String authorize_code) throws Throwable;

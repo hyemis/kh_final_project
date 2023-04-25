@@ -29,4 +29,21 @@
 	where rr.user_id = #{userId}
 	</select>
 	
+	<!-- 캘린더 -->	
+	<select id="viewInterview" resultType="indto">
+		SELECT CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID
+		FROM INTERVIEW
+		WHERE USER_ID = #{userId}
+	</select>
+
+	<insert id="insertInterview" parameterType="indto">
+	INSERT INTO
+	INTERVIEW (CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID)
+	VALUES (#{caNum},#{caTitle},#{dateStart},#{dateEnd},#{location},#{interviewer},#{memo},#{userId})
+		<selectKey keyProperty="caNum" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(CA_NUM) +1 FROM INTERVIEW
+		</selectKey>
+	</insert>
+	
 </mapper>

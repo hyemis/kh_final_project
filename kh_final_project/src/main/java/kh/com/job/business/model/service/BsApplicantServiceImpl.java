@@ -31,6 +31,16 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 	public List<BsAplicantDto> aplicantList(int raNum) {
 		return dao.aplicantList(raNum);
 	}
+	
+	@Override
+	public int insertInterview(InterviewDto dto) {
+	return dao.insertInterview(dto);
+	}
+
+	@Override
+	public List<InterviewDto> viewInterview(String userId) {
+		return dao.viewInterview(userId);
+	}
 
 
 

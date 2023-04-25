@@ -206,6 +206,18 @@ public class PsServiceImpl implements PsService {
 			return dao.scrapJob(InfoNo);
 		}
 
+		@Override
+		public int deleteJob(Map<String, Object> InfoNo) throws Exception {
+			return dao.deleteJob(InfoNo);
+		}
+
+		@Override
+		public int checkScrap(Map<String, Object> InfoNo) throws Exception {
+			return dao.checkScrap(InfoNo);
+		}
+
+
+
 
 
 

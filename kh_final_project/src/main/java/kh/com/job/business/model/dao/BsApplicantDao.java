@@ -35,7 +35,10 @@ public class BsApplicantDao {
 		return null;
 	}
 
-	
+
+	public List<InterviewDto> viewInterview(String userId) {
+		return sqlSession.selectList("applicant.viewInterview", userId);
+		}
 	
 
 }
