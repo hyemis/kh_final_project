@@ -94,6 +94,16 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	public List<BsRecruitDto> lCateRecruit(String categoryId) {
 		return  dao.lCateRecruit(categoryId);
 	}
+	
+	// 공개된 채용 공고 수 
+	public int countYAdmission() {
+		return  dao.countYAdmission();
+	}
+	
+	// 3단계 클릭시 공개된 채용 공고 수 
+	public int lCatecountYAdmission() {
+		return  dao.lCatecountYAdmission();
+	}
 
 	@Override
 	public int changeAdmission(BsRecruitDto dto) {

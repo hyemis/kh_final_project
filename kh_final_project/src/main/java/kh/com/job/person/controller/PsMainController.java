@@ -547,9 +547,15 @@ public class PsMainController {
 		}
 		
 		List<BsRecruitDto> reCruitDto = brservice.recruitYAdmission();
+		
+	    
+		int countYAdmission = brservice.countYAdmission();
+		int lCatecountYAdmission = brservice.lCatecountYAdmission();
 
 		mv.addObject("fdeptList", resultList);
 		mv.addObject("recruitList", reCruitDto);
+		mv.addObject("countYAdmission", countYAdmission);
+		mv.addObject("lCatecountYAdmission", lCatecountYAdmission);
 
 		return mv;
 	}

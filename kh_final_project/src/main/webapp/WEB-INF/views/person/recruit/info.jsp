@@ -91,6 +91,13 @@
 	display: inline;
 	font-weight: bold;
 }
+
+.d-grid {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: auto;
+}
 </style>
 
 </head>
@@ -124,8 +131,9 @@
 			</div>
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end p-2">
-				<button class="btn btn-primary btn-lg me-md-2" type="button">검색
-					결과</button>
+				<span class="ml-auto">총 <span id="total-count">${countYAdmission }</span>
+					개
+				</span>
 			</div>
 		</div>
 
@@ -135,15 +143,18 @@
 				<table class="recruit-table">
 					<tr>
 						<td><a
-							href="${pageContext.request.contextPath}/person/recruit/viewrecruit/${recruit.raNum}"
+							href="${pageContext.request.contextPath}/person/viewrecruit/${recruit.raNum}"
 							target="_blank"> <span class="bold">${recruit.companyName}</span><br>
 								<br> ${recruit.raTitle}
 						</a></td>
 					</tr>
 					<tr>
-						<td class="far fa-star">~${fn:substring(recruit.closeDate, 10, 12)}.${fn:substring(recruit.closeDate, 13, 15)}
-						</td>
-
+						<sec:authorize access="isAuthenticated()">
+							<td class="far fa-star" onclick="handleStarClick('${recruit.raNum}')">~${recruit.closeDate}</td>
+						</sec:authorize>
+						<sec:authorize access="!isAuthenticated()">
+						<td>~${recruit.closeDate}</td>
+						</sec:authorize>
 					</tr>
 
 				</table>
@@ -159,7 +170,6 @@
 
 	<!-- page script -->
 	<script type="text/javascript">
-		
 		$('.fcateinfo')
 				.on(
 						'click',
@@ -242,42 +252,63 @@
 
 						});
 
-		// 카테고리에 맞는 채용공고 출력  
-		$(document).on('click','.lcateinfo',function() {
-		    var categoryId = $(this).find('.categoryId').val();
-		    $.ajax({
-		        type : 'POST',
-		        url : "${pageContext.request.contextPath}/person/recruit/info",
-		        data : {categoryId : categoryId},
-		        success: function(result) {
-		        	if (!result || result.length === 0) {
-		        	    console.log("비어있음", result);
-		        	    $('#recruit-Container').empty().append('<p>현재 채용 중인 공고가 없습니다.</p>');
-		        	} else {
-		        	    // 이전에 있던 내용 삭제
-		        	    console.log("받아옴", result);
-		        	    $('#recruit-Container').empty();
+		$(document)
+				.on(
+						'click',
+						'.lcateinfo',
+						function() {
+							var categoryId = $(this).find('.categoryId').val();
+							$
+									.ajax({
+										type : 'POST',
+										url : "${pageContext.request.contextPath}/person/recruit/info",
+										data : {
+											categoryId : categoryId
+										},
+										success : function(result) {
+											if (!result || result.length === 0) {
+												console.log("비어있음", result);
+												let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
+												$(".recruit-Container").html(
+														htmlVal);
 
-		        	    // 새로운 내용 출력
-		        	    var recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
-		        	    $.each(result.recruitList, function (index, recruit) {
-		        	        recruitTable += '<table class="recruit-table">';
-		        	        recruitTable += '<tr>';
-		        	        recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/recruit/viewrecruit/' + recruit.raNum + '" target="_blank">';
-		        	        recruitTable += '<span class="bold">' + recruit.companyName + '</span><br><br>' + recruit.raTitle;
-		        	        recruitTable += '</a></td></tr><tr><td class="far fa-star">~' + recruit.closeDate.substring(10, 12) + '.' + recruit.closeDate.substring(13, 15) + '</td></tr>';
-		        	        recruitTable += '</table>';
-		        	    });
-		        	    recruitTable += '</div>';
-		        	    $('#recruit-container').append(recruitTable);
-		        	}
-		        },
-		        error: function() {
-		            alert('채용 정보를 가져오는데 실패하였습니다.');
-		        }
-		    });
-		});
+												let totalCount = 0; // 검색 결과 총 개수
+												$('#total-count').text("0");
+											} else {
+												// 이전에 있던 내용 삭제
+												console.log("받아옴", result);
 
+												// 새로운 내용 출력
+												let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
+												for (i = 0; i < result.length; i++) {
+												    recruitTable += '<table class="recruit-table">';
+												    recruitTable += '<tr>';
+												    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
+												    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+												    recruitTable += '</a></td></tr>';
+												    recruitTable += '<tr>';
+												    <sec:authorize access="isAuthenticated()">
+												        recruitTable += '<td class="far fa-star">~' + result[i].closeDate + '</td>';
+												    </sec:authorize>
+												    <sec:authorize access="!isAuthenticated()">
+												        recruitTable += '<td>~' + result[i].closeDate + '</td>';
+												    </sec:authorize>
+												    recruitTable += '</tr></table>';
+												}
+												recruitTable += '</div>';
+												$('.recruit-Container').html(
+														recruitTable);
+
+												let totalCount = result.length; // 검색 결과 총 개수
+												$("#total-count").text(
+														totalCount); // 검색 결과 총 개수 출력
+											}
+										},
+										error : function() {
+											alert('채용 정보를 가져오는데 실패하였습니다.');
+										}
+									});
+						});
 	</script>
 </body>
 </html>
