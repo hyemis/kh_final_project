@@ -78,10 +78,10 @@
 									alt="">
 							</div>
 							<div class="">
-								<span>이름   : </span> <span>${userinfo.userName }</span><br> 
-								<span>전화번호 : </span> <span>${userinfo.userPhone }</span><br> 
-								<span>생년월일 : </span> <span>${userinfo.userBirth }</span><br> 
-								<span>이메일  : </span> <span>${userinfo.userEmail }</span><br>
+								<span>이름   : </span> <span>${resume.userName }</span><br> 
+								<span>전화번호 : </span> <span>${resume.userPhone }</span><br> 
+								<span>생년월일 : </span> <span>${resume.userBirth }</span><br> 
+								<span>이메일  : </span> <span>${resume.userEmail }</span><br>
 							</div>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 									<div class="mb-4">
 										<input type="hidden" id="resumeNo" value="${resume.resumeNo}" />
 										<h1 class="mb-3">${resume.resumeTitle }</h1>
-										작성일시 : ${resume.resumeDate }
+										<%-- 작성일시 : ${resume.resumeDate } --%>
 										<div class="row g-5 mt-2 align-items-center">
 											<div class="mb-4">
 												<div class="h3 pb-2 border-bottom">이력서 사진</div>

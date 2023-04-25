@@ -91,6 +91,13 @@
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
-
+	
+	<select id="applicantResume" resultType="kh.com.job.business.model.dto.BsApplicantResumeDto">
+		SELECT ur.RESUME_NO, ur.RESUME_TITLE, ur.RESUME_PHOTO, ur.RESUME_DATE, ur.PORTF_FILE
+			, ut.USER_NAME, ut.USER_PHONE, ut.USER_BIRTH, ut.USER_EMAIL 
+		FROM USER_RESUME ur 
+		JOIN USER_TABLE ut ON UR.USER_ID = UT.USER_ID
+		WHERE ur.RESUME_NO = #{resnumeNo}
+	</select>
 	
 </mapper>

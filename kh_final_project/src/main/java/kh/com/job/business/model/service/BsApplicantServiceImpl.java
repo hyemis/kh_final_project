@@ -9,6 +9,7 @@ import kh.com.job.business.model.dao.BsApplicantDao;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
+import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.common.page.Paging;
@@ -76,6 +77,11 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		//로 생성한다.
 		
 		return list;
+	}
+
+	@Override
+	public BsApplicantResumeDto applicantResume(int resumeNo) {
+		return dao.applicantResume(resumeNo);
 	}
 
 

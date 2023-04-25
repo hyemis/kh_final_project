@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
@@ -88,10 +89,13 @@ public class BsApplicantController {
 	}
 	
 	@GetMapping("/resume")
-	public ModelAndView aplicantResume(ModelAndView mv, Principal principal
-			, PagingAplicantDto pdto) {
+	public ModelAndView applicantResume(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto
+			, @RequestParam(name = "resumeNo", required = false) int resumeNo) {
 		
+		BsApplicantResumeDto ardto = apservice.applicantResume(resumeNo);
 		
+		mv.addObject("resume", ardto);
 		
 		return mv;
 	}

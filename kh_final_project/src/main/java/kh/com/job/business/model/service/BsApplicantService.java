@@ -5,6 +5,7 @@ import java.util.List;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
+import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.common.page.Paging;
@@ -25,6 +26,8 @@ public interface BsApplicantService {
 	//캘린더
 	public List<InterviewDto> viewInterview(String userId);
 	public int insertInterview(InterviewDto dto);
+
+	public BsApplicantResumeDto applicantResume(int resumeNo);
 	
 
 }
