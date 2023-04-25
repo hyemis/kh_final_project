@@ -473,9 +473,11 @@ public class PsMainController {
 	public ModelAndView viewScrapJob(ModelAndView mv, Principal principal) {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
+			List<PsScrapInfoDto> scrap = service.selectListScrap(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
+				mv.addObject("scraplist", scrap);
 				mv.setViewName("person/scrapjob");
 			} else {
 				mv.setViewName("redirect:/");

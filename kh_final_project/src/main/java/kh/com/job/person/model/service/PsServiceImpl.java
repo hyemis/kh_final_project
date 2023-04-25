@@ -216,6 +216,11 @@ public class PsServiceImpl implements PsService {
 			return dao.checkScrap(InfoNo);
 		}
 
+		@Override
+		public List<PsScrapInfoDto> selectListScrap(String userId) throws Exception {
+			return dao.selectListScrap(userId);
+		}
+
 
 
 
