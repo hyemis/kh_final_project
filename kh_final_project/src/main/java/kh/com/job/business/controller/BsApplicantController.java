@@ -39,11 +39,12 @@ public class BsApplicantController {
 	}
 	
 	//합격자관리
-		@GetMapping("/interview")
-		public ModelAndView interview(ModelAndView mv) {
-				
-			return mv;
-		}
+			@GetMapping("/interview")
+			public ModelAndView interview(ModelAndView mv) {
+					
+				return mv;
+			}
+	
 
 	
 }

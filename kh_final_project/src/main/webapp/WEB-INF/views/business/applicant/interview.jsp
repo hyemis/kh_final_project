@@ -50,7 +50,7 @@
 
 <!--  test -->
 <!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -105,7 +105,6 @@
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-</div>	
 
 <!-- page script -->
 <!-- 캘린더 -->
@@ -124,35 +123,41 @@
 	      selectable: true,
 	      selectMirror: true,
 	      select: function(arg) {
-
 	    	  // 모달창 띄우기
-	    	  $('#Modal').modal('show');
+	    	  $('#modal').modal('show');
 
 	    	  // 모달창에서 저장 버튼 클릭 시 이벤트 처리
-	    	  $('#Modal').on('click', '#saveButton', function() {
+	    	  console.log(arg);
+	    	  $('#modal').on('click', '#saveButton', function() {
+	    		  console.log(arg);
 	    	    // 입력된 값 가져오기
 	    	    var title = $('#title').val();
-	    	    var start = arg.start.format('YYYY-MM-DD HH:mm:ss');
-	    	    var end = arg.end.format('YYYY-MM-DD HH:mm:ss');
+	    	    var start = arg.startStr;
+	    	    var end = arg.endStr;
 	    	    var allDay = arg.allDay;
-				var location = $('#location').val();
-				var interviewer = $('#interviewer').val();
-				var memo  = $('#memo').val();
+	    	    var location = $('#location').val();
+	    	    var interviewer = $('#interviewer').val();
+	    	    var memo = $('#memo').val();
 	    	    // 새로운 이벤트 생성
 	    	    var eventData = {
-	    	      title: title,
-	    	      start: arg.start,
-	    	      end: arg.end,
-	    	      allDay: arg.allDay,
+	    	      caTitle: title,
+	    	      interviewDateStart: start,
+	    	      interviewDateEnd: end,
+	    	      allDay: allDay,
+	    	      interviewLocation: location,
+	    	      interviewer: interviewer,
+	    	      caMemo: memo
 	    	    };
+	    	    console.log(eventData);
 
 	    	    // 서버로 데이터 전송
 	    	    $.ajax({
 	    	      type: "POST",
-	    	      url: "/calendar",
+	    	      url: "${pageContext.request.contextPath}/business/applicant/calendar",
 	    	      data: eventData,
 	    	      success: function(response) {
 	    	        // 서버로부터 응답이 성공적으로 수신되었을 때
+	    	        console.log(response);
 	    	        console.log("이벤트 저장 완료");
 
 	    	        // 모달창 닫기
