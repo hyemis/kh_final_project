@@ -36,7 +36,8 @@ public class InterviewDto {
 	private int caNum;
 	private String caTitle;
 	private String caMemo;
-	private String interviewDate;
+	private String interviewDateStart;
+	private String interviewDateEnd;
 	private String interviewTime;
 	private String interviewLocation;
 	private String interviewer;
@@ -46,5 +47,13 @@ public class InterviewDto {
 	private int apNum;
 	
 	
-	
+//	   var eventData = {
+//	    	      title: title,
+//	    	      start: arg.start,
+//	    	      end: arg.end,
+//	    	      allDay: arg.allDay,
+//	    	      location: location,
+//	    	      interviewer: interviewer,
+//	    	      memo: memo
+//	    	    };
 }
