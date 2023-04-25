@@ -19,11 +19,14 @@ import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingAplicantDto;
 
 @Controller
 @RequestMapping("/business/applicant")
@@ -70,19 +73,37 @@ public class BsApplicantController {
 		return new Gson().toJson(interviewList);
 	}
 	
-	//지원자관리 리스트
-	//다른걸로 변경 필요
-	@PostMapping("/recruitList")
-	@ResponseBody
-	public String recruitList(ModelAndView mv
-			, @RequestParam(name = "raNum", required = false) int raNum) {
+	//지원자관리
+	@GetMapping("/view")
+	public ModelAndView aplicantview(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto) {
 		
-		List<BsAplicantDto> apList = apservice.aplicantList(raNum);
+		List<BsRecruitDto> recruitTitle = apservice.recruitTitle(principal.getName());
+		if(pdto.getPnum() == 0) {
+			pdto.setPnum(1);
+		}
 		
+		Paging list = apservice.pageList(pdto);
 		
+		mv.addObject("title", recruitTitle);
+		mv.addObject("list", list);
+		mv.addObject("pdto", pdto);
 		
-		return new Gson().toJson(apList);
+		return mv;
 	}
+	
+	@GetMapping("/resume")
+	public ModelAndView applicantResume(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto
+			, @RequestParam(name = "resumeNo", required = false) int resumeNo) {
+		
+		BsApplicantResumeDto ardto = apservice.applicantResume(resumeNo);
+		
+		mv.addObject("resume", ardto);
+		
+		return mv;
+	}
+
 	
 
 

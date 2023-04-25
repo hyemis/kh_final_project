@@ -144,8 +144,8 @@
 						<div class="col-md-10">
 							<div class="row g-2">
 								<div class="col-md-12">
-									<input type="text" class="form-control border-1 py-3" id="search"
-										placeholder="원하는 조건을 검색해보세요.">
+									<input type="text" class="form-control border-1 py-3"
+										id="search" placeholder="원하는 조건을 검색해보세요.">
 								</div>
 							</div>
 						</div>
@@ -171,8 +171,10 @@
 					</tr>
 					<tr>
 						<sec:authorize access="isAuthenticated()">
-							<td class="far fa-star"
-								onclick="handleStarClick('${recruit.raNum}')">~${recruit.closeDate}</td>
+							<td class="star-icon" data-raNum="${recruit.raNum}"
+								onclick="handleStarClick(event)"><span class="far fa-star"
+								aria-hidden="true"></span> <span class="date">~${recruit.closeDate}</span>
+							</td>
 						</sec:authorize>
 						<sec:authorize access="!isAuthenticated()">
 							<td>~${recruit.closeDate}</td>
@@ -289,7 +291,6 @@
 										},
 										success : function(result) {
 											if (!result || result.length === 0) {
-												console.log("비어있음", result);
 												let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
 												$(".recruit-Container").html(
 														htmlVal);
@@ -297,9 +298,6 @@
 												let totalCount = 0; // 검색 결과 총 개수
 												$('#total-count').text("0");
 											} else {
-												// 이전에 있던 내용 삭제
-												console.log("받아옴", result);
-
 												// 새로운 내용 출력
 												let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
 												for (i = 0; i < result.length; i++) {
@@ -310,7 +308,10 @@
 												    recruitTable += '</a></td></tr>';
 												    recruitTable += '<tr>';
 												    <sec:authorize access="isAuthenticated()">
-												        recruitTable += '<td class="far fa-star">~' + result[i].closeDate + '</td>';
+												     recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+													 recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+												 	 recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+													 recruitTable += '</td>';
 												    </sec:authorize>
 												    <sec:authorize access="!isAuthenticated()">
 												        recruitTable += '<td>~' + result[i].closeDate + '</td>';
@@ -344,7 +345,6 @@
 			  data: {keyword: searchKeyword},
 			  success : function(result) {
 					if (!result || result.length === 0) {
-						console.log("비어있음", result);
 						let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
 						$(".recruit-Container").html(
 								htmlVal);
@@ -352,8 +352,7 @@
 						let totalCount = 0; // 검색 결과 총 개수
 						$('#total-count').text("0");
 					} else {
-						// 이전에 있던 내용 삭제
-						console.log("받아옴", result);
+						
 
 						// 새로운 내용 출력
 						let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
@@ -365,7 +364,10 @@
 						    recruitTable += '</a></td></tr>';
 						    recruitTable += '<tr>';
 						    <sec:authorize access="isAuthenticated()">
-						        recruitTable += '<td class="far fa-star">~' + result[i].closeDate + '</td>';
+						      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+							  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+							  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+							  recruitTable += '</td>';
 						    </sec:authorize>
 						    <sec:authorize access="!isAuthenticated()">
 						        recruitTable += '<td>~' + result[i].closeDate + '</td>';
@@ -388,6 +390,56 @@
 		  });
 		});
 		
+		
+				// 스크랩 
+				function handleStarClick(event) {
+					  const raNum = event.target.closest('.star-icon').getAttribute('data-raNum');
+					  console.log(raNum);
+
+					  // checkScrap를 호출하여 현재 스크랩 여부를 확인합니다.
+					  $.ajax({
+					    type: "POST",
+					    url: "${pageContext.request.contextPath}/person/checkScrap",
+					    data: { raNum: raNum },
+					    success: function (result) {
+					      
+					      // 스크랩 여부에 따라 deleteJob 또는 scrapJob을 호출합니다.
+					      if (result === 1) {
+					        $.ajax({
+					          type: "POST",
+					          url: "${pageContext.request.contextPath}/person/deleteJob",
+					          data: { raNum: raNum },
+					          success: function (result) {
+					            $(event.target).toggleClass("far fas").toggleClass("text-warning");
+					          },
+					          error: function () {
+					            alert("스크랩 삭제에 실패하였습니다.");
+					          },
+					        });
+					      } else {
+					        $.ajax({
+					          type: "POST",
+					          url: "${pageContext.request.contextPath}/person/scrapJob",
+					          data: { raNum: raNum },
+					          success: function (result) {
+					            $(event.target).toggleClass("far fas").toggleClass("text-warning");
+					          },
+					          error: function () {
+					            alert("스크랩에 실패하였습니다.");
+					          },
+					        });
+					      }
+					    },
+					    error: function () {
+					      alert("스크랩 여부 확인에 실패하였습니다.");
+					    },
+					  });
+					}
+
+
+
+
+
 
 
 	</script>

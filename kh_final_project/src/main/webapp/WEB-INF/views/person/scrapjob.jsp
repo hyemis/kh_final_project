@@ -86,8 +86,11 @@
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
-										<h1 class="mb-3">스크랩 정보</h1>
-										<p>스크랩한 채용공고는 공고 마감과 상관없이 스크랩일로부터 90일 동안 보관됩니다.</p>	
+										<h1 class="mb-3">스크랩 정보</h1><br>
+										<p>
+											1. 스크랩한 채용공고는 공고 마감과 상관없이 스크랩일로부터 90일 동안 보관됩니다.<br> 2.
+											입사지원을 클릭하면 해당 공고 페이지로 이동합니다.<br>
+										</p>
 										<br>	
 										<br>
 										<br>
@@ -100,13 +103,17 @@
 										     <th scope="col" class="center">입사지원</th>											   </tr>
 										  </thead>
 										  <tbody class="table-group-divider">
-<%-- 			수정예정							  <c:forEach items="${resumelist }" var="resume">
+										  <c:forEach items="${scraplist }" var="scrap">
 										    <tr>
-										      <td><a href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}">${resume.resumeTitle }</a></td>
-										      <td>${resume.resumeDate }</td>
-										      <td>${resume.portfFile }</td>
-										    </tr>
-										  </c:forEach> --%>
+										      <td>${scrap.companyName }</td>
+										      <td><a href="${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}">${scrap.raTitle }</a></td>
+										      <td>${scrap.closeDate }</td>
+												<td><button type="submit"
+														class="btn btn-outline-dark"
+														onclick="location.href='${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}'">입사지원</button>
+												</td>
+											</tr>
+										  </c:forEach>
 										  </tbody>
 										</table>
 										

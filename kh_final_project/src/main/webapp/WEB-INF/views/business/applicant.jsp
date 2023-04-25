@@ -54,7 +54,7 @@
 					</div>
 				</div>
 				<div>
-					<a href="insert" class="btn btn-dark mb-1">지원자 관리</a>
+					<a href="${pageContext.request.contextPath}/business/applicant/view" class="btn btn-dark mb-1">지원자 관리</a>
 					<a href="<%=request.getContextPath()%>/business/applicant/pass" class="btn btn-dark mb-1">합격자 관리</a>					
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 							<tbody class="apliTbody">
 							<c:forEach items="${recruitlist }" var="list">
 								<tr>
-									<td>${list.raTitle }</td>
+									<td><a href="${pageContext.request.contextPath}/business/applicant/view?searchNum=${list.raNum}">${list.raTitle }</a></td>
 									<td>${list.aplicount }</td>
 									<td>${list.passcount }</td>
 									<td>${list.failcount }</td>

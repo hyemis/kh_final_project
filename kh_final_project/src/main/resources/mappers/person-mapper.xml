@@ -94,5 +94,12 @@
   	WHERE USER_ID = #{userId} AND RA_NUM = #{raNum}
 	</delete>
 	
+	<!-- 스크랩 조회 -->
+	<select id="selectListScrap" resultType="scrapdto">
+	SELECT DISTINCT COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM
+	FROM SCRAP_INFO
+	WHERE USER_ID = #{userId}
+	</select>
+	
 
 </mapper>
