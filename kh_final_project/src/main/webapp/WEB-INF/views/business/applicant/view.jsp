@@ -102,11 +102,11 @@
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }&search=${search}">prev</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }&searchNum=${searchNum}&searchResult=${searchResult}">prev</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum}&search=${search}">${pNum }</a></li>
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum}&searchNum=${searchNum}&searchResult=${searchResult}">${pNum }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -114,7 +114,7 @@
 						<li class="page-item disabled"><a class="page-link">next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }&search=${search}">next</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }&searchNum=${searchNum}&searchResult=${searchResult}">next</a></li>
 					</c:otherwise>
 				</c:choose>					
 			</ul>
@@ -126,7 +126,9 @@
 	</div>
 </section>
 
-<script type="text/javascript"></script>
+<script type="text/javascript">
+	
+</script>
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

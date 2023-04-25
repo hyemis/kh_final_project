@@ -80,12 +80,9 @@ public class BsApplicantController {
 		
 		Paging list = apservice.pageList(pdto);
 		
-		System.out.println("@@!!!!!!!!!!!!!!!!");
-		System.out.println(list.getPage());
-		System.out.println("@@!!!!!!!!!!!!!!!!");
-		
 		mv.addObject("title", recruitTitle);
 		mv.addObject("list", list);
+		mv.addObject("pdto", pdto);
 		
 		return mv;
 	}
