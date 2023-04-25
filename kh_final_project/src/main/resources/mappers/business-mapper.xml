@@ -11,15 +11,7 @@
 
 	<!-- applicant -->
 
-	<insert id="insertInterview" parameterType="indto">
-	INSERT INTO 
-	INTERVIEW (CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID)
-	VALUES (#{caNum},#{caTitle},#{dateStart},#{dateEnd},#{location},#{interviewer},,#{memo},#{userId})
-		<selectKey keyProperty="caNum" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(CA_NUM) +1 FROM INTERVIEW
-		</selectKey>
-	</insert>
+
 
 	<!-- account -->
 

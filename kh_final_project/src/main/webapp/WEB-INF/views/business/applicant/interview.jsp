@@ -143,9 +143,9 @@
 	    	      data: eventData,
 	    	      success: function(response) {
 	    	        // 서버로부터 응답이 성공적으로 수신되었을 때
-	    	        console.log(response);
 	    	        console.log("이벤트 저장 완료");
-
+	    	        alert("일정이 추가되었습니다");
+	    	        
 	    	        // 모달창 닫기
 	    	        $('#modal').hide();
 
@@ -164,7 +164,7 @@
 	    	  });
 	    	},
 
-	     
+	      // 이벤트 클릭해서 삭제
 	      eventClick: function(arg) {
 	        if (confirm('Are you sure you want to delete this event?')) {
 	          arg.event.remove()
@@ -172,6 +172,7 @@
 	      },
 	      editable: true,
 	      dayMaxEvents: true, // allow "more" link when too many events
+	      
 	      events: [
 	        {
 	          title: 'All Day Event',

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
@@ -43,8 +44,10 @@ public class BsApplicantController {
 	
 	//합격자관리
 	@GetMapping("/interview")
-	public ModelAndView interview(ModelAndView mv) {
-			
+	public String interview(ModelAndView mv, InterviewDto dto, Principal principal) {
+		List<InterviewDto> list = apservice.viewInterview(principal.getName());
+		
+		mv.addObject("view", list);	
 		return mv;
 	}
 			

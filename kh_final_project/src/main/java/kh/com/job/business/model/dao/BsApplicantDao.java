@@ -17,11 +17,15 @@ public class BsApplicantDao {
 	private SqlSession sqlSession;
 	
 	public List<BsRecruitDto> recruitList(String userId) {
-		return sqlSession.selectList("aplicant.recruitList", userId);
+		return sqlSession.selectList("applicant.recruitList", userId);
 	}
 
 	public int insertInterview(InterviewDto dto) {
-		return sqlSession.insert("aplicant.insertInterview", dto);
+		return sqlSession.insert("applicant.insertInterview", dto);
+	}
+
+	public List<InterviewDto> viewInterview(String userId) {
+		return sqlSession.selectList("applicant.viewInterview", userId);
 	}
 
 	

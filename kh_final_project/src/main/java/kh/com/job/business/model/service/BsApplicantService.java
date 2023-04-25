@@ -9,5 +9,8 @@ public interface BsApplicantService {
 	
 	public List<BsRecruitDto> recruitList(String userId);
 	
+	
+	//캘린더
+	public List<InterviewDto> viewInterview(String userId);
 	public int insertInterview(InterviewDto dto);
 }

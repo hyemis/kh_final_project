@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="aplicant">
+<mapper namespace="applicant">
 
 	<select id="recruitList" resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT RA_NUM, RA_TITLE 
 		FROM RECRUIT_REGIST
 		WHERE USER_ID = #{userId}
 	</select>
+	
+	
+	
+<!-- 캘린더 -->	
+	<select id="viewInterview" resultType="indto">
+		SELECT CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID 
+		FROM INTERVIEW
+		WHERE USER_ID = #{userId}
+	</select>
+
+	<insert id="insertInterview" parameterType="indto">
+	INSERT INTO 
+	INTERVIEW (CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID)
+	VALUES (#{caNum},#{caTitle},#{dateStart},#{dateEnd},#{location},#{interviewer},#{memo},#{userId})
+		<selectKey keyProperty="caNum" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(CA_NUM) +1 FROM INTERVIEW
+		</selectKey>
+	</insert>
 	
 </mapper>
