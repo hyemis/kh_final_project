@@ -112,9 +112,8 @@
 					<div class="icon-container">
 						<i class="far fa-star" onclick="toggleStar(this)"></i>
 					</div>
-				</sec:authorize>
-
-
+				</sec:authorize> 
+				
 			</div>
 		 	<div class="container mb-5">
                 <div class="bg-light rounded">
@@ -297,7 +296,7 @@
 			 <div id="buttonContainer">
 			 <!-- TODO : 주소수정예정 -->
 			<div class="button-container">
-				<a href="${pageContext.request.contextPath}/person/resume/list"	class="btn btn-primary">목록으로</a>
+				<a href="${pageContext.request.contextPath}/person/recruit/info" class="btn btn-primary">목록으로</a>
 			</div>
 
 		</div>
@@ -380,33 +379,7 @@
 	    	alert(msg);
 	    }
 	    
-	    
-/*  // 별 클릭 - 채용공고 스크랩 ajax
- function toggleStar(icon) {
-const isFilled = icon.classList.contains('fas');
-
-var raNum = '${redto.raNum}';
- 	
-   $.ajax({
-    type: 'POST',
-    url: '${pageContext.request.contextPath}/person/scrapJob',
-    data: {raNum : raNum},
-    success: function (result) {
-      // 색칠 상태를 변경
-      if (isFilled) {
-        icon.classList.remove('fas');
-        icon.classList.add('far');
-      } else {
-        icon.classList.remove('far');
-        icon.classList.add('fas');
-      }
-    },
-    error: function (error) {
-      console.log(error);
-    }
-  });
-} */
-		   
+	    	   
 
 // 별 클릭 - 채용공고 스크랩 ajax
  function toggleStar(icon) {
@@ -455,6 +428,29 @@ var raNum = '${redto.raNum}';
     }
   });
 }
+
+
+ // 페이지 로드 시 실행되는 함수
+ window.onload = function() {
+     // raNum 값 가져오기
+     var raNum = ${raNum};
+     // AJAX를 이용해 스크랩 여부 확인
+     $.ajax({
+         type: 'POST',
+         url: '${pageContext.request.contextPath}/person/checkScrap',
+         data: {raNum: raNum},
+         success: function(data) {
+             // 스크랩 여부에 따라 별 상태 변경
+             if(data == 1) {
+                 $(".icon-container i").removeClass("far").addClass("fas");
+             } else {
+                 $(".icon-container i").removeClass("fas").addClass("far");
+             }
+         }
+     });
+ }
+
+
 	    
 
 </script>
