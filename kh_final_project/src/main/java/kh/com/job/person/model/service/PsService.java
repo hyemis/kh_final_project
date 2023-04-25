@@ -22,6 +22,7 @@ public interface PsService {
 	public int scrapJob(Map<String, Object> InfoNo) throws Exception;
 	public int deleteJob(Map<String, Object> InfoNo) throws Exception;
 	public int checkScrap(Map<String, Object> InfoNo) throws Exception;
+	public List<PsScrapInfoDto> selectListScrap(String userId) throws Exception;
 	
 	// 카카오 로그인 
 	String getAccessToken(String authorize_code) throws Throwable;

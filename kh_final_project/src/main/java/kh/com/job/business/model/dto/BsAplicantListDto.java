@@ -1,6 +1,7 @@
 package kh.com.job.business.model.dto;
 
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
@@ -15,17 +16,18 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BsRecruitAplicantDto {
+public class BsAplicantListDto {
 //BUSINESS_RECRUIT_ANNOUNCEMENT
-	
+/*
+ * ba.user_id, ba.resume_no, ba.RESULT_TYPE
+	,rr.ra_num   , rr.ra_title, ua.apply_date
+ */	
 	private String raNum;
 	private String userId;
-	private String registDate;
-	private String closeDate;
+	private String resumeNo;
+	private String resultType;
 	private String raTitle;	
-	private int aplicount;
-	private int passcount;
-	private int failcount;
+	private Date applyDate;
 	
 	
 	

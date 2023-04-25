@@ -14,9 +14,9 @@
 		<security:intercept-url pattern="/person/**" access="permitAll"/>        
         <security:intercept-url pattern="/admin/account/manage" access="hasRole('ROLE_AM')"/>
         <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_AM','ROLE_A')"/>
-		<!-- <security:intercept-url pattern="/person/mapage/**" access="hasRole('ROLE_P')"/> -->
-		<!-- <security:intercept-url pattern="/business/**" access="hasRole('ROLE_B')"/> -->
-        <!-- <security:intercept-url pattern="/business/newletter/**" access="permitAll"/>-->
+		<security:intercept-url pattern="/person/mapage/**" access="hasRole('ROLE_P')"/>
+		<security:intercept-url pattern="/business/**" access="hasRole('ROLE_B')"/>
+        <security:intercept-url pattern="/business/newletter/**" access="permitAll"/>
         
         <security:form-login 
         	login-page="/person/login" 
