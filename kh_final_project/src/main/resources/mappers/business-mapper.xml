@@ -113,8 +113,15 @@
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
-		AND TO_DATE(REGEXP_REPLACE(CLOSE_DATE, '채용시까지\s*', ''), 'YY-MM-DD') > SYSDATE
+		AND CLOSE_DATE > SYSDATE
 		ORDER BY REGIST_DATE DESC
+	</select>
+	
+	<!-- 공개된 채용 공고 수 -->
+	<select id="countYAdmission" resultType="_int">
+		SELECT COUNT(*)  FROM RECRUIT_REGIST
+		WHERE RA_ADMISSION IN ('Y')
+		AND CLOSE_DATE > SYSDATE
 	</select>
 
 	<!-- 게시글 공개 여부 버튼 -->
@@ -201,13 +208,21 @@
 	</delete>
 	
 	 <!--  3단계 선택 후 채용공고출력 --> 
-	  <select id="lCateRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+	 <select id="lCateRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDto">
 	  	SELECT *
 		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE = #{recruitType}
-		AND TO_DATE(REGEXP_REPLACE(CLOSE_DATE, '채용시까지\s*', ''), 'YY-MM-DD') > SYSDATE
+		AND CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 		ORDER BY REGIST_DATE DESC
-	  </select>
+	 </select>
+	  
+	 <!--  3단계 선택 후 채용공고 개수 --> 
+	 <select id="lCatecountYAdmission" resultType="_int">
+	  	SELECT COUNT(*)  FROM RECRUIT_REGIST
+		WHERE RECRUIT_TYPE IN #{recruitType}
+		AND CLOSE_DATE > SYSDATE
+		AND RA_ADMISSION IN ('Y')
+	 </select>
 
 </mapper>

@@ -37,6 +37,7 @@ import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.person.model.dto.PsResumeDto;
+import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.person.model.service.PsResumeService;
 import kh.com.job.person.model.service.PsService;
@@ -547,9 +548,15 @@ public class PsMainController {
 		}
 		
 		List<BsRecruitDto> reCruitDto = brservice.recruitYAdmission();
+		
+	    
+		int countYAdmission = brservice.countYAdmission();
+		int lCatecountYAdmission = brservice.lCatecountYAdmission();
 
 		mv.addObject("fdeptList", resultList);
 		mv.addObject("recruitList", reCruitDto);
+		mv.addObject("countYAdmission", countYAdmission);
+		mv.addObject("lCatecountYAdmission", lCatecountYAdmission);
 
 		return mv;
 	}
@@ -586,23 +593,31 @@ public class PsMainController {
 
 	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")
-	public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String raNum,
-									String userId) {
-
-			try {
-				// 공고 정보 출력
-				BsRecruitDetailDto redto = abs.viewDetail(raNum);
-				List<PsResumeDto> resume = rservice.selectList(userId);
-				mv.addObject("redto", redto);
-				mv.addObject("resumelist", resume);
-				mv.setViewName("person/viewrecruit");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
+	public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String raNum, 
+									Principal principal) {
+		
+		try {
+			
+		PsUserDto result = service.selectOne(principal.getName());
+		List<PsResumeDto> resume = rservice.selectList(principal.getName());
+		// 공고 정보 출력
+		BsRecruitDetailDto redto = abs.viewDetail(raNum);	
+		
+		
+		if (result != null) {
+			mv.addObject("redto", redto);
+			mv.addObject("resumelist", resume);
+			mv.setViewName("person/viewrecruit");
+		} else {
+			mv.setViewName("redirect:/");
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
-	
+
+
 	// 카테고리에 맞는 채용공고 출력 
 	@PostMapping("/recruit/info")
 	@ResponseBody
@@ -618,6 +633,22 @@ public class PsMainController {
 
 		    return recruitList;
 
+	}
+	
+	// 채용공고 스크랩
+	@PostMapping("scrapJob")
+	@ResponseBody
+	public int scrapJob(Principal principal, @RequestParam("raNum") Integer raNum) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("raNum", raNum);
+		InfoNo.put("userId", principal.getName());
+
+		result = service.scrapJob(InfoNo);
+
+		return result;
 	}
 
 	// 예외처리는 프로젝트 후반에 작성
