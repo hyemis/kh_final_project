@@ -23,6 +23,8 @@ import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingAplicantDto;
 
 @Controller
 @RequestMapping("/business/applicant")
@@ -66,12 +68,37 @@ public class BsApplicantController {
 
 	}
 	
+	//지원자관리
+	@GetMapping("/view")
+	public ModelAndView aplicantview(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto) {
+		
+		List<BsRecruitDto> recruitTitle = apservice.recruitTitle(principal.getName());
+		if(pdto.getPnum() == 0) {
+			pdto.setPnum(1);
+		}
+		
+		Paging list = apservice.pageList(pdto);
+		
+		System.out.println("@@!!!!!!!!!!!!!!!!");
+		System.out.println(list.getPage());
+		System.out.println("@@!!!!!!!!!!!!!!!!");
+		
+		mv.addObject("title", recruitTitle);
+		mv.addObject("list", list);
+		
+		return mv;
+	}
+	
 	//지원자관리 리스트
 	//다른걸로 변경 필요
 	@PostMapping("/recruitList")
 	@ResponseBody
 	public String recruitList(ModelAndView mv
-			, @RequestParam(name = "raNum", required = false) int raNum) {
+			, @RequestParam(name = "id", required = false) int raNum
+			, @RequestParam(name = "pnum", defaultValue = "1") int pnum
+			, @RequestParam(name = "searchNum", required = false) String searchNum
+			, @RequestParam(name = "searchResult", required = false) String searchResult) {
 		
 		List<BsAplicantDto> apList = apservice.aplicantList(raNum);
 		
