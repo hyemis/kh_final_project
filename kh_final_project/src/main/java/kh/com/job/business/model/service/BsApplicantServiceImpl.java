@@ -20,6 +20,11 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return dao.recruitList(userId);
 	}
 
+	@Override
+	public int insertInterview(InterviewDto dto) {
+		return dao.insertInterview(dto);
+	}
+
 	
 	
 	

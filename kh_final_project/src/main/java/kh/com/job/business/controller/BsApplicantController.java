@@ -8,7 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.business.model.dto.BsRecruitDto;
@@ -39,11 +42,23 @@ public class BsApplicantController {
 	}
 	
 	//합격자관리
-			@GetMapping("/interview")
-			public ModelAndView interview(ModelAndView mv) {
-					
-				return mv;
-			}
+	@GetMapping("/interview")
+	public ModelAndView interview(ModelAndView mv) {
+			
+		return mv;
+	}
+			
+	//일정 등록
+	@PostMapping("/calendar")
+	@ResponseBody
+	public String insertInterview(InterviewDto dto, Principal principal) {
+		
+		dto.setUserId(principal.getName()); 
+		apservice.insertInterview(dto);
+				
+		return "redirect:/business/applicant/interview";
+
+	}		
 	
 
 	

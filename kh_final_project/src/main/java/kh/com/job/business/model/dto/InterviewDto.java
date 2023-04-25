@@ -20,40 +20,31 @@ import lombok.ToString;
 public class InterviewDto {
 // 	DESC INTERVIEW;
 //	
-//	CA_NUM               NOT NULL NUMBER        
-//	CA_TITLE             NOT NULL VARCHAR2(300) 
-//	CA_MEMO                       VARCHAR2(500) 
-//	INTERVIEW_DATE_START NOT NULL DATE          
-//	INTERVIEW_DATE_END   NOT NULL DATE          
-//	INTERVIEW_TIME       NOT NULL VARCHAR2(50) 
-//	INTERVIEW_LOCATION   NOT NULL VARCHAR2(100) 
-//	INTERVIEWER                   VARCHAR2(50)  
-//	ALARM_TYPE                    VARCHAR2(10)  
-//	USER_NAME                     VARCHAR2(50)  
-//	USER_ID                       VARCHAR2(50)  
-//	AP_NUM                        NUMBER       
+//	CA_NUM         NOT NULL NUMBER        
+//	CA_TITLE       NOT NULL VARCHAR2(300) 
+//	DATE_START     NOT NULL VARCHAR2(50)  
+//	DATE_END       NOT NULL VARCHAR2(50)  
+//	INTERVIEW_TIME          VARCHAR2(50)  
+//	LOCATION                VARCHAR2(100) 
+//	INTERVIEWER             VARCHAR2(50)  
+//	MEMO                    VARCHAR2(500) 
+//	ALARM_TYPE              VARCHAR2(10)  
+//	USER_NAME               VARCHAR2(50)  
+//	USER_ID                 VARCHAR2(50)  
+//	AP_NUM                  NUMBER 
 	
 	private int caNum;
 	private String caTitle;
-	private String caMemo;
-	private String interviewDateStart;
-	private String interviewDateEnd;
+	private String dateStart;
+	private String dateEnd;
 	private String interviewTime;
-	private String interviewLocation;
+	private String location;
 	private String interviewer;
+	private String memo;
 	private String alramType;
 	private String userName;
 	private String userId;
 	private int apNum;
 	
 	
-//	   var eventData = {
-//	    	      title: title,
-//	    	      start: arg.start,
-//	    	      end: arg.end,
-//	    	      allDay: arg.allDay,
-//	    	      location: location,
-//	    	      interviewer: interviewer,
-//	    	      memo: memo
-//	    	    };
 }

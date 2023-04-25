@@ -20,6 +20,10 @@ public class BsApplicantDao {
 		return sqlSession.selectList("aplicant.recruitList", userId);
 	}
 
+	public int insertInterview(InterviewDto dto) {
+		return sqlSession.insert("aplicant.insertInterview", dto);
+	}
+
 	
 	
 
