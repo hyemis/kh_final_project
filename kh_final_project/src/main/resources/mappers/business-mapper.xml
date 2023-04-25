@@ -216,5 +216,19 @@
 		AND CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 	 </select>
-
+	 
+	 <!-- 채용공고 검색 -->
+	 <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+	  SELECT *
+      FROM RECRUIT_REGIST
+      WHERE (COMPANY_NAME LIKE '%' || #{keyword} || '%'
+      OR RA_TITLE LIKE '%' || #{keyword} || '%'
+      OR RA_CONTENT LIKE '%' || #{keyword} || '%'
+      OR SALARY LIKE '%' || #{keyword} || '%'
+      OR MIN_SALARY LIKE '%' || #{keyword} || '%'
+      OR MAX_SALARY LIKE '%' || #{keyword} || '%')
+      AND CLOSE_DATE > SYSDATE
+      AND RA_ADMISSION IN ('Y')
+     </select>
+	 
 </mapper>

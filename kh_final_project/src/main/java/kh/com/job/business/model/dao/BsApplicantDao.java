@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsRecruitAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.InterviewDto;
 
@@ -16,16 +18,21 @@ public class BsApplicantDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<BsRecruitDto> recruitList(String userId) {
-		return sqlSession.selectList("applicant.recruitList", userId);
+	public List<BsRecruitAplicantDto> recruitList(String userId) {
+		return sqlSession.selectList("aplicant.recruitList", userId);
 	}
 
 	public int insertInterview(InterviewDto dto) {
-		return sqlSession.insert("applicant.insertInterview", dto);
+		return sqlSession.insert("aplicant.insertInterview", dto);
 	}
 
-	public List<InterviewDto> viewInterview(String userId) {
-		return sqlSession.selectList("applicant.viewInterview", userId);
+	public int aplicantAll(String userId) {
+		return sqlSession.selectOne("aplicant.aplicantAll", userId);
+	}
+
+	public List<BsAplicantDto> aplicantList(int raNum) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

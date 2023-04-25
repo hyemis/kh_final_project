@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.com.job.board.model.dto.BoardDto;
+import com.google.gson.Gson;
+
+import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
@@ -44,25 +46,26 @@ public class BsApplicantController {
 	
 	//합격자관리
 	@GetMapping("/interview")
-	public String interview(ModelAndView mv, InterviewDto dto, Principal principal) {
-		List<InterviewDto> list = apservice.viewInterview(principal.getName());
-		
-		mv.addObject("view", list);	
+	public ModelAndView interview(ModelAndView mv) {
+			
 		return mv;
 	}
-			
-	//일정 등록
-	@PostMapping("/calendar")
-	@ResponseBody
-	public String insertInterview(InterviewDto dto, Principal principal) {
-		
-		dto.setUserId(principal.getName()); 
-		apservice.insertInterview(dto);
-				
-		return "redirect:/business/applicant/interview";
-
-	}		
 	
+	//지원자관리 리스트
+	//다른걸로 변경 필요
+	@PostMapping("/recruitList")
+	@ResponseBody
+	public String recruitList(ModelAndView mv
+			, @RequestParam(name = "raNum", required = false) int raNum) {
+		
+		List<BsAplicantDto> apList = apservice.aplicantList(raNum);
+		
+		
+		
+		return new Gson().toJson(apList);
+	}
+	
+
 
 	
 }
