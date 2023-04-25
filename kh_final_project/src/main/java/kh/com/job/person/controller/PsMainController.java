@@ -604,21 +604,20 @@ public class PsMainController {
 	}
 	
 	// 카테고리에 맞는 채용공고 출력 
-	@PostMapping("/caterecruit")
+	@PostMapping("/recruit/info")
 	@ResponseBody
-	public ModelAndView lCateRecruit(ModelAndView mv,
+	public List<BsRecruitDto> lCateRecruit(ModelAndView mv,
 				@RequestParam String categoryId
 				) {	
 		
-		List<BsRecruitDto> llist = null;
+		 List<BsRecruitDto> recruitList = null;
 
-		if (!categoryId.isEmpty() && !categoryId.equals("")) {
-		    llist = brservice.lCateRecruit(categoryId);
-		    mv.addObject("recruitList", llist);
-		}
+		    if (!categoryId.isEmpty() && !categoryId.equals("")) {
+		        recruitList = brservice.lCateRecruit(categoryId);
+		    }
 
+		    return recruitList;
 
-		return mv;
 	}
 
 	// 예외처리는 프로젝트 후반에 작성
