@@ -44,15 +44,15 @@
 				<select id="searchNum" class="form-select searchNum" name="searchNum">
 					<option value="">선택안함</option>
 					<c:forEach items="${title }" var="title">
-						<option value="${title.raNum }" >${title.raTitle }</option>
+						<option value="${title.raNum }" ${title.raNum == pdto.searchNum? 'selected':'' }>${title.raTitle }</option>
 					</c:forEach>
 				</select>
 			</div>
 			<div class="">
 				<select id="searchResult" class="form-select searchResult" name="searchResult">
 					<option value="">선택안함</option>
-					<option value="Y">합격</option>
-					<option value="N">불합격</option>
+					<option value="Y" ${pdto.searchResult=='Y'?'selected':''}>합격</option>
+					<option value="N" ${pdto.searchResult=='N'?'selected':''}>불합격</option>
 				</select>
 			</div>
 		</div>
@@ -64,9 +64,9 @@
 		 	<table class="table">
 		 		<thead>
 		 			<tr>
-		 				<th scope="col">공고이름</th>
-		 				<th scope="col">지원자 이이다</th>
 		 				<th scope="col">이력서번호</th>
+		 				<th scope="col">지원자 이이다</th>
+		 				<th scope="col">공고이름</th>
 		 				<th scope="col">등록</th>
 		 				<th scope="col">합격</th>
 		 			</tr>
@@ -82,9 +82,9 @@
 							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
 							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
 								<tr>
-									<td>${list.raTitle }</td>
+									<td><a href="${pageContext.request.contextPath}/business/applicant/view?id=${list.resumeNo}">${list.resumeNo }</a></td>									
 									<td>${list.userId}</td>
-									<td><a class="" href="${pageContext.request.contextPath}/admin/business/view?id=">${list.resumeNo }</a></td>
+									<td>${list.raTitle }</td>
 									<td> ${list.applyDate}</td>
 									<td>
 									<c:choose>
@@ -114,11 +114,11 @@
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.prevPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">prev</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/view?pnum=${list.prevPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">prev</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${pNum}&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">${pNum }</a></li>
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/view?pnum=${pNum}&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">${pNum }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -126,27 +126,32 @@
 						<li class="page-item disabled"><a class="page-link">next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/business/main?pnum=${list.nextPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">next</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/applicant/view?pnum=${list.nextPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">next</a></li>
 					</c:otherwise>
 				</c:choose>					
 			</ul>
 		 </div>
 		</div>
 		<!-- 리스트 영역 end-->
-		
+		<div>
+			<a class="btn btn-primary returnMain" href="${pageContext.request.contextPath}/business/applicant">지원자 메인</a>
+		</div>
 		
 	</div>
 </section>
-
-<script type="text/javascript">
-	
-</script>
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </div>	
 
 <!-- page script -->
-	
+<script type="text/javascript">
+	$(document).on('change','select', function(){
+		let searchNum = $('.searchNum').val();
+		let searchResult = $('.searchResult').val();
+		
+		location.href = '${pageContext.request.contextPath}/business/applicant/view?pnum=${pageNumber}&searchNum='+searchNum+'&searchResult='+searchResult;
+	});	
+</script>	
 </body>
 </html>

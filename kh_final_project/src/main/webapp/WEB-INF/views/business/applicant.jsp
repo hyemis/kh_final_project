@@ -112,7 +112,7 @@
 							<tbody class="apliTbody">
 							<c:forEach items="${recruitlist }" var="list">
 								<tr>
-									<td>${list.raTitle }</td>
+									<td><a href="${pageContext.request.contextPath}/business/applicant/view?searchNum=${list.raNum}">${list.raTitle }</a></td>
 									<td>${list.aplicount }</td>
 									<td>${list.passcount }</td>
 									<td>${list.failcount }</td>

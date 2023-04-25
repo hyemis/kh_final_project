@@ -19,9 +19,10 @@ import lombok.ToString;
 public class BsAplicantListDto {
 //BUSINESS_RECRUIT_ANNOUNCEMENT
 /*
- * ba.user_id, ba.resume_no, ba.RESULT_TYPE
+ *ba.baNum ba.user_id, ba.resume_no, ba.RESULT_TYPE
 	,rr.ra_num   , rr.ra_title, ua.apply_date
  */	
+	private int baNum;
 	private String raNum;
 	private String userId;
 	private String resumeNo;
