@@ -184,11 +184,6 @@ public class BsApplicantController {
 		//기업 회원 계정 정보
 		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
 		
-		System.out.println(adto.getUserName());
-		System.out.println(adto.getUserEmail());
-		System.out.println(adto.getPassType());
-		System.out.println(bdto.getUserEmail());
-		
 		int result = -1;
 		
 		result = apservice.resultInsert(adto);
@@ -201,10 +196,29 @@ public class BsApplicantController {
 			int updateSucc = apservice.updateResultType(adto);
 			
 		}
-		
-		
-		
+
 		mv.setViewName("redirect:view");
+		return mv;
+	}
+	
+	//합격자 관리
+	@GetMapping("/passview")
+	public ModelAndView applicantPassView(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto) {
+		
+		List<BsRecruitDto> recruitTitle = apservice.recruitTitle(principal.getName());
+		if(pdto.getPnum() == 0) {
+			pdto.setPnum(1);
+		}
+		
+		Paging list = apservice.passPageList(pdto);
+		//경력 카테고리
+		mv.addObject("PTlist", rcservice.getCateList("PT"));
+		
+		mv.addObject("title", recruitTitle);
+		mv.addObject("list", list);
+		mv.addObject("pdto", pdto);
+		
 		return mv;
 	}
 	

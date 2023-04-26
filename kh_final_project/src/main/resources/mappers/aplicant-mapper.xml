@@ -223,4 +223,51 @@
 		WHERE BA_NUM = #{baNum}  
 	</select>
 	
+	
+		<!--합격자 페이지 리스트 카운트 -->
+	<select id="passPageListCount" resultType="_int">
+		select count(*)
+			from business_applicant_pass bap
+			join business_applicant ba ON bap.ba_num = ba.ba_num
+			join recruit_regist rr ON rr.ra_num = ba.ra_num
+			join user_apply ua ON ba.ba_num = ua.ba_num
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="searchNum != null and searchNum neq ''">
+				ba.RA_NUM like '%'||#{searchNum}||'%'
+			</if>
+			<if test="searchResult != null and searchResult neq ''">
+				AND bap.pass_type like '%'||#{searchResult}||'%'
+			</if>
+		</trim>
+	</select>
+	
+	<select id="passPageList" resultType="kh.com.job.business.model.dto.BsPassApplicantDto">
+		select  ap_num, user_id, pass_type
+				, resume_no, ba_num
+				, ra_title
+				, (select category_name from ja_category where category_id = pass_type) as pass_name
+		FROM(
+			SELECT ROWNUM AS NUM , A.*
+			FROM (
+					select bap.ap_num, bap.user_id, bap.pass_type
+					    , ba.resume_no, ba.ba_num
+					    , rr.ra_title
+					from business_applicant_pass bap
+					join business_applicant ba ON bap.ba_num = ba.ba_num
+					join recruit_regist rr ON rr.ra_num = ba.ra_num
+					join user_apply ua ON ba.ba_num = ua.ba_num
+			<trim prefix="where" prefixOverrides="AND|OR">
+				<if test="searchNum != null and searchNum neq ''">
+					ba.RA_NUM like '%'||#{searchNum}||'%'
+				</if>
+				<if test="searchResult != null and searchResult neq ''">
+					AND bap.pass_type like '%'||#{searchResult}||'%'
+				</if>
+			</trim>
+				ORDER BY ua.apply_date DESC
+			) A
+			)
+		WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
 </mapper>

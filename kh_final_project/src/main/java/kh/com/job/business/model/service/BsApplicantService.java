@@ -57,6 +57,8 @@ public interface BsApplicantService {
 
 	public BsAplicantDto reseltView(int baNum);
 
+	public Paging passPageList(PagingAplicantDto pdto);
+
 	
 	
 

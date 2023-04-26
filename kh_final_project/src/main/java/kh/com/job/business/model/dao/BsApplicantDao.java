@@ -107,6 +107,14 @@ public class BsApplicantDao {
 		return sqlSession.selectOne("applicant.reseltView", baNum);
 	}
 
+	public int passPageListCount(PagingAplicantDto pdto) {
+		return sqlSession.selectOne("applicant.passPageListCount", pdto);
+	}
+
+	public Object passPageList(PagingAplicantDto pdto) {
+		return sqlSession.selectList("applicant.passPageList", pdto);
+	}
+
 
 	
 

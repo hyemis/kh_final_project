@@ -55,7 +55,8 @@
 				</div>
 				<div>
 					<a href="${pageContext.request.contextPath}/business/applicant/view" class="btn btn-dark mb-1">지원자 관리</a>
-					<a href="<%=request.getContextPath()%>/business/applicant/pass" class="btn btn-dark mb-1">합격자 관리</a>					
+					<a href="${pageContext.request.contextPath}/business/applicant/passview" class="btn btn-dark mb-1">합격자 관리</a>					
+					<a href="${pageContext.request.contextPath}/business/applicant/interview" class="btn btn-dark mb-1">면접 일정 관리</a>					
 				</div>
 			</div>
 			<div class="p-2 col-9">
