@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -97,6 +98,12 @@ public class PsDao {
 	public List<PsScrapInfoDto> selectListScrap(String userId) throws Exception {
 		return sqlSession.selectList("person.selectListScrap", userId);
 	}
+	
+	// 입사지원
+	public int applyJob(BsAplicantDto dto) throws Exception {
+		return sqlSession.insert("person.applyJob", dto);
+	}
+	
 
 
 }

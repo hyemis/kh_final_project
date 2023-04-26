@@ -673,6 +673,7 @@ public class PsResumeController {
 		int result = -1;
 
 		try {
+			//TODO: insert 전에 있는 정보인지 확인하고 있으면 insert 안하고 없으면 insert 하도록 해야함 
 			result = rservice.insertCl(dto);
 			if (result > 0) {
 				int clNo = rservice.getMaxClNo();
@@ -758,12 +759,24 @@ public class PsResumeController {
 	@PostMapping("insertInfoCl")
 	@ResponseBody
 	public int insertInfoCl(Principal principal, @RequestParam("clNo") Integer clNo) throws Exception {
-		int result = -1;
-		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("clNo", clNo);
-		InfoNo.put("userId", principal.getName());
-		result = rservice.insertClInfo(InfoNo);
-		return result;
+	    int result = -1;
+	    int check = -1;
+	    Map<String, Object> InfoNo = new HashMap<>();
+	    InfoNo.put("clNo", clNo);
+	    InfoNo.put("userId", principal.getName());
+	    
+	    // 자기소개서 존재 여부 확인 
+	    check = rservice.checkClInfo(clNo);
+	    if (check == 0) {
+	        result = rservice.insertClInfo(InfoNo);
+	        if (result > 0) {
+	            return result;
+	        }
+	    }
+	    else if (check > 0) {
+	        return 1;
+	    }
+	    return -1;
 	}
 	
 	// 자소서 끼인 테이블 delete

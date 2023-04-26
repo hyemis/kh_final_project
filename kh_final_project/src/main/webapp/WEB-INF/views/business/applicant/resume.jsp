@@ -65,33 +65,11 @@
 		<div class="text-start mx-5 mt-5">
 			<h1>나의 이력서</h1>
 		</div>
-		<div class="row">
-			<!-- 좌측 프로필 영역 -->
-			<div class="col-3">
-				<div class="container-xxl py-5">
-					<div class="container border border-primary">
-						<div class="bg-light p-3">
-							<div class="bg-white rounded p-4 row"
-								style="border: 1px dashed rgba(0, 185, 142, .3)">
-								<img class="object-fit-sm-contain border"
-									src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200"
-									alt="">
-							</div>
-							<div class="">
-								<span>이름   : </span> <span>${resume.userName }</span><br> 
-								<span>전화번호 : </span> <span>${resume.userPhone }</span><br> 
-								<span>생년월일 : </span> <span>${resume.userBirth }</span><br> 
-								<span>이메일  : </span> <span>${resume.userEmail }</span><br>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
+		<div class="row justify-content-center align-items-center">
 			<!-- 우측 조회 영역 -->
-			<div class="col-9">
+			<div class="col-9 ">
 				<div class="container-xxl py-5">
-					<div class="container">
+					<div class="container ">
 						<div class="bg-light rounded p-3">
 							<div class="bg-white rounded p-4"
 								style="border: 1px dashed rgba(0, 185, 142, .3)">
@@ -101,9 +79,9 @@
 										<h1 class="mb-3">${resume.resumeTitle }</h1>
 										<%-- 작성일시 : ${resume.resumeDate } --%>
 										<div class="row g-5 mt-2 align-items-center">
-											<div class="mb-4">
+											<div class="mb-3">
 												<div class="h3 pb-2 border-bottom">이력서 사진</div>
-												<div>
+												<div class="d-flex">
 													<c:choose>
 														<c:when test="${resume.resumePhoto == 'undefined'}">
 															<img
@@ -115,6 +93,12 @@
 																alt="resumePhoto">
 														</c:otherwise>
 													</c:choose>
+													<div class="ms-5 mt-3 ">
+														<span>이름   : </span> <span>${resume.userName }</span><br> 
+														<span>전화번호 : </span> <span>${resume.userPhone }</span><br> 
+														<span>생년월일 : </span> <span>${resume.userBirth }</span><br> 
+														<span>이메일  : </span> <span>${resume.userEmail }</span><br>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -345,9 +329,23 @@
 														</c:when>
 														<c:otherwise>
 														<div class="pt-2">
-															<a
-																href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}/${cl.clNo}"
-																target="_blank">작성한 자기소개서 확인</a>
+															<h1 class="mb-3">${resume.resumeTitle }</h1>
+															<div class="h3 pt-4 ">성장과정</div>
+															<div class="card">
+																<div class="card-body ">${cl.clGrowth }</div>
+															</div>
+															<div class="h3 pt-4 ">지원동기</div>
+															<div class="card">
+																<div class="card-body">${cl.clMotive }</div>
+															</div>
+															<div class="h3 pt-4 ">장단점</div>
+															<div class="card">
+																<div class="card-body">${cl.clAdv }</div>
+															</div>
+															<div class="h3 pt-4 ">입사 후 포부</div>
+															<div class="card">
+																<div class="card-body">${cl.clAsp }</div>
+															</div>
 														</div>
 															<c:if test="${not empty cl.clFile }">
 																<c:set var="clFile" value="${cl.clFile}" />
@@ -363,23 +361,31 @@
 												</div>
 											</div>
 										</div>
-
-
-
-
-
 									</div>
 								</div>
 							</div>
-
-
-
-
 						</div>
 
 						<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
-							<a class="btn btn-primary"
-								href="${pageContext.request.contextPath}/person/resume/list">목록</a>
+							<div>
+								<a class="btn btn-primary" href="${pageContext.request.contextPath}/business/applicant/view">지원자 목록</a>
+							</div>
+							<div>
+								<form action="passresume" method="get">
+									<input type="hidden" name="applicantId" value="${resume.userId }" />
+									<input type="hidden" name="applicantResume" value="${resume.resumeNo}" />
+									<input type="hidden" name="applicantNo" value="${badto.baNum}" />
+									<c:choose>
+										<c:when test="${badto.resultType == 'Y'}">
+											<a class="btn btn-primary" href="${pageContext.request.contextPath}/business/applicant/passview">합격자 목록</a>
+										</c:when>
+										<c:otherwise>
+											<button type="submit" class="btn btn-primary" >결과 발표</button>
+										</c:otherwise>
+									</c:choose>	
+																
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>

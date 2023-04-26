@@ -417,6 +417,11 @@
 		FROM USER_RESUME
 		WHERE USER_ID = #{userId})
 	</delete>
+	
+	<!-- 존재하는 cl 확인 -->
+	<select id="checkClInfo" resultType="_int">
+	SELECT COUNT(*) FROM RESUME_CL_INFO WHERE CL_NO = #{clNo}
+	</select>
 
 	<insert id="insertClInfo" parameterType="clinfodto">
 		INSERT INTO

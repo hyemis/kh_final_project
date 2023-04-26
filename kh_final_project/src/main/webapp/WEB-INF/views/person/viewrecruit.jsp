@@ -70,7 +70,7 @@
   padding: 15px 30px;
 }
 
-#buttonContainer{
+.buttonContainer{
 	text-align: center;
 }
 
@@ -293,13 +293,9 @@
 				</div>
 			</div>
 			 
-			 <div id="buttonContainer">
-			 <!-- TODO : 주소수정예정 -->
-			<div class="button-container">
+			 <div class="buttonContainer">
 				<a href="${pageContext.request.contextPath}/person/recruit/info" class="btn btn-primary">목록으로</a>
 			</div>
-
-		</div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -403,7 +399,7 @@ var raNum = '${redto.raNum}';
               icon.classList.add('fas');
             },
             error: function(error) {
-              console.log(error);
+            	alert("스크랩에 실패하였습니다.");
             }
           });
       } else {   	  
@@ -417,7 +413,7 @@ var raNum = '${redto.raNum}';
             icon.classList.add('far');
           },
           error: function(error) {
-            console.log(error);
+       		alert("스크랩 삭제에 실패하였습니다.");
           }
         });
 

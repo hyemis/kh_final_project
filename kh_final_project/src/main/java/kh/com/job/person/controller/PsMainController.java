@@ -633,7 +633,10 @@ public class PsMainController {
 		return mv;
 	}
 
-
+	
+	// 입사지원하기
+	
+	
 	// 카테고리에 맞는 채용공고 출력 
 	@PostMapping("/recruit/info")
 	@ResponseBody
@@ -670,7 +673,6 @@ public class PsMainController {
 		} else { //스크랩 안 돼있으면 데이터=0
 			return data;
 		}
-
 	}
 
 
@@ -708,6 +710,11 @@ public class PsMainController {
 	}
 	
 
+	
+
+	
+	
+	
 	// 예외처리는 프로젝트 후반에 작성
 	@ExceptionHandler
 	public void exception(Exception e) {

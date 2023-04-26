@@ -200,7 +200,7 @@
 	</delete>
 	
 	 <!--  3단계 선택 후 채용공고출력 --> 
-	 <select id="lCateRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+	 <select id="lCateRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
 	  	SELECT *
 		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE = #{recruitType}
@@ -218,17 +218,26 @@
 	 </select>
 	 
 	 <!-- 채용공고 검색 -->
-	 <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDto">
-	  SELECT *
-      FROM RECRUIT_REGIST
-      WHERE (COMPANY_NAME LIKE '%' || #{keyword} || '%'
-      OR RA_TITLE LIKE '%' || #{keyword} || '%'
-      OR RA_CONTENT LIKE '%' || #{keyword} || '%'
-      OR SALARY LIKE '%' || #{keyword} || '%'
-      OR MIN_SALARY LIKE '%' || #{keyword} || '%'
-      OR MAX_SALARY LIKE '%' || #{keyword} || '%')
-      AND CLOSE_DATE > SYSDATE
-      AND RA_ADMISSION IN ('Y')
-     </select>
-	 
+ 	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+	    SELECT *
+	    FROM RECRUIT_REGIST r
+	    JOIN USER_TABLE u ON r.user_id = u.user_id
+	    WHERE CLOSE_DATE > SYSDATE
+	    AND RA_ADMISSION IN ('Y')
+	    <if test="keyword != null and keyword != ''">
+	        AND (r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
+	        OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
+	        OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
+	        OR r.SALARY LIKE '%' || #{keyword} || '%'
+	        OR r.MIN_SALARY LIKE '%' || #{keyword} || '%'
+	        OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
+	        OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
+	        OR r.CAREER_TYPE LIKE  '%' || #{keyword} || '%'
+	        OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
+	        OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
+	        OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
+	    </if>
+	</select> 
+	
+
 </mapper>

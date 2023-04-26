@@ -257,6 +257,11 @@ public class PsResumeDao {
 	public int deleteInfoCerti(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.delete("resume.deleteInfoCerti", InfoNo);
 	}
+	
+	// ClInfo - 확인
+	public int checkClInfo(int clNo) throws Exception{
+		return sqlSession.selectOne("resume.checkClInfo", clNo);
+	}
 
 	// ClInfo - 입력
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception {

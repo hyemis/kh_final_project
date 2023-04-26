@@ -82,8 +82,8 @@
   	<!-- 채용공고 스크랩 기능 -->
   	<insert id="scrapJob" parameterType="map">
 	INSERT ALL
-	INTO SCRAP_INFO(USER_ID, COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM)
-	VALUES ( #{userId} , A, B, C, #{raNum} )
+	INTO SCRAP_INFO(USER_ID, COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM, INSERT_DATE)
+	VALUES ( #{userId} , A, B, C, #{raNum}, current_timestamp)
 	SELECT COMPANY_NAME AS A, RA_TITLE AS B, CLOSE_DATE AS C FROM RECRUIT_REGIST WHERE RA_NUM = #{raNum}
 	</insert>
 	
@@ -101,5 +101,12 @@
 	WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 입사지원 -->
+	<insert id="applyJob" parameterType="apdto">
+	INSERT INTO BUSINESS_APPLICANT 
+	(BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
+	VALUES (BUSINESS_APPLICANT_SEQ.NEXTVAL, #{userId}, #{resumeNo}, 'A', #{raNum})
+	</insert>
+		
 
 </mapper>
