@@ -91,21 +91,24 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	}
 	
 	// 3단계
+	@Override
 	public List<BsRecruitDto> lCateRecruit(String categoryId) {
 		return  dao.lCateRecruit(categoryId);
 	}
 	
 	// 공개된 채용 공고 수 
+	@Override
 	public int countYAdmission() {
 		return  dao.countYAdmission();
 	}
 	
 	// 3단계 클릭시 공개된 채용 공고 수 
+	@Override
 	public int lCatecountYAdmission() {
 		return  dao.lCatecountYAdmission();
 	}
 	
-	// 검색 
+	// 검색 @Override
 	public List<BsRecruitDto> searchList(String keyword){
 		return  dao.searchList(keyword);
 	}

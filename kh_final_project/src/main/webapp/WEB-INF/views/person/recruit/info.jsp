@@ -99,7 +99,7 @@
 	margin-left: auto;
 }
 
-.ED, .CA {
+.ED, .CA, .SC, .ET, .HT {
 	display: flex;
 	flex-direction: row;
 }
@@ -147,6 +147,7 @@
 
 			<!-- Check Start -->
 			<div style="border: 1px solid gray; padding: 10px;">
+
 				<div class="ED">
 					<span class="p-2">학력 : </span>
 					<div class="checkbox">
@@ -187,6 +188,52 @@
 					<div class="checkbox">
 						<input type="checkbox" value="CA02"> <label for="CA02">경력</label>
 					</div>
+				</div>
+
+				<div class="SC">
+					<span class="p-2">우대조건 : </span>
+					<div class="checkbox">
+						<input type="checkbox" value="SC01"> <label for="SC01">국가유공자</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="SC02"> <label for="SC02">보훈대상자</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="SC03"> <label for="SC03">취업보호대상자</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="SC04"> <label for="SC04">병역특례</label>
+					</div>
+				</div>
+
+				<div class="ET">
+					<span class="p-2">고용형태 : </span>
+					<div class="checkbox">
+						<input type="checkbox" value="ET10"> <label for="ET10">정규직</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="ET11"> <label for="ET11">시간제정규직</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="ET20"> <label for="ET20">계약직</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="ET21"> <label for="ET21">시간제계약직</label>
+					</div>
+				</div>
+
+				<div class="HT">
+					<span class="p-2">근무형태 : </span>
+					<div class="checkbox">
+						<input type="checkbox" value="HT01"> <label for="HT01">주5일근무</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="HT02"> <label for="HT02">주5일근무</label>
+					</div>
+
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button class="btn btn-outline-dark btn-reset">초기화</button>
 				</div>
 			</div>
 			<!-- Check End -->
@@ -415,7 +462,7 @@
 						let totalCount = 0; // 검색 결과 총 개수
 						$('#total-count').text("0");
 					} else {
-						
+						$('.recruit-Container').empty(); // 이전 결과 지우기
 
 						// 새로운 내용 출력
 						let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
@@ -438,8 +485,9 @@
 						    recruitTable += '</tr></table>';
 						}
 						recruitTable += '</div>';
-						$('.recruit-Container').html(
-								recruitTable);
+						
+						
+						$('.recruit-Container').html(recruitTable);
 
 						let totalCount = result.length; // 검색 결과 총 개수
 						$("#total-count").text(
@@ -498,6 +546,13 @@
 					    },
 					  });
 					}
+				
+				
+				// 
+				$('.btn-reset').click(function() {
+  					$('input[type="checkbox"]').prop('checked', false);
+ 					$('#search').val('');
+				});
 
 
 

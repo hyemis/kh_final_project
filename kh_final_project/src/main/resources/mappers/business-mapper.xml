@@ -218,7 +218,7 @@
 	 </select>
 	 
 	 <!-- 채용공고 검색 -->
- 	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+  	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
 	    SELECT *
 	    FROM RECRUIT_REGIST r
 	    JOIN USER_TABLE u ON r.user_id = u.user_id
@@ -237,7 +237,7 @@
 	        OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
 	        OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
 	    </if>
-	</select> 
-	
+	</select>
+
 
 </mapper>

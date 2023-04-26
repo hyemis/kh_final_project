@@ -2,6 +2,7 @@ package kh.com.job.person.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -541,7 +542,7 @@ public class PsMainController {
 			String categoryId = dto.getCategoryId();
 			String categoryName = dto.getCategoryName();
 
-			if ("LO".equals(categoryId) || "JN".equals(categoryId)) {
+			if ("LO".equals(categoryId) || "JN".equals(categoryId) ||"SC".equals(categoryId)) {
 				Map<String, Object> resultMap = new HashMap<>();
 				resultMap.put("categoryId", categoryId);
 				resultMap.put("categoryName", categoryName);
@@ -579,9 +580,9 @@ public class PsMainController {
 	}
 	
 	//채용정보 페이지- 3단계 
-		@PostMapping("/listlcate")
-		@ResponseBody
-		public String listLastCate(ModelAndView mv, String categoryId){
+	@PostMapping("/listlcate")
+	@ResponseBody
+	public String listLastCate(ModelAndView mv, String categoryId){
 			
 			List<AdCategoryDto> llist = null;
 			
@@ -592,20 +593,22 @@ public class PsMainController {
 			return new Gson().toJson(llist);
 		}
 		
-	// 검색 
+	// 검색
 	@PostMapping("/search")
 	@ResponseBody
-	public  List<BsRecruitDto> search(ModelAndView mv, String keyword){
-		System.out.println(keyword);
-		
-		 List<BsRecruitDto> searchList = null;
-		 
-		 if (!keyword.isEmpty() && !keyword.equals("")) {
-			 searchList = brservice.searchList(keyword);
-		 }
-
+	public List<BsRecruitDto> search(ModelAndView mv, @RequestParam("keyword") String keyword) {
+		    String[] keywordArr = keyword.split(",");
+		    List<BsRecruitDto> searchList = new ArrayList<>();
+		    for (String key : keywordArr) {
+		        if (!key.isEmpty() && !key.equals("")) {
+		            List<BsRecruitDto> result = brservice.searchList(key);
+		            searchList.addAll(result);
+		        }
+		    }
 		    return searchList;
-	}
+		}
+
+
 
 	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")

@@ -174,11 +174,11 @@
 		WHERE ur.RESUME_NO =#{resumeNo}
 	</select> 
 	
-	<select id="userInfo" resultType="kh.com.job.business.model.dto.BsAppInfoDto">
+	<!-- <select id="userInfo" resultType="kh.com.job.business.model.dto.BsAppInfoDto">
 		SELECT *
 		FROM USER_TABLE
 		WHERE USER_ID = #{userId}
-	</select>
+	</select> -->
 	
 	<insert id="resultInsert">
 		INSERT INTO business_applicant_pass

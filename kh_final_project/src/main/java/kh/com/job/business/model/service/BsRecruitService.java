@@ -30,6 +30,7 @@ public interface BsRecruitService {
 	public int lCatecountYAdmission();
 	
 	public List<BsRecruitDto> searchList(String keyword);
+
 	
 
 	public int changeAdmission(BsRecruitDto dto);
