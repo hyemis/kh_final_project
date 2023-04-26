@@ -98,6 +98,15 @@
 	align-items: center;
 	margin-left: auto;
 }
+
+.ED, .CA {
+	display: flex;
+	flex-direction: row;
+}
+
+.checkbox {
+	padding: 0.5rem;
+}
 </style>
 
 </head>
@@ -135,6 +144,52 @@
 					개
 				</span>
 			</div>
+
+			<!-- Check Start -->
+			<div style="border: 1px solid gray; padding: 10px;">
+				<div class="ED">
+					<span class="p-2">학력 : </span>
+					<div class="checkbox">
+						<input type="checkbox" value="ED01"> <label for="ED01">관계
+							없음</label>
+					</div>
+
+					<div class="checkbox">
+						<input type="checkbox" value="ED02"> <label for="ED02">고졸</label>
+					</div>
+
+					<div class="checkbox">
+						<input type="checkbox" value="ED03"> <label for="ED03">대졸(2~3년)</label>
+					</div>
+
+					<div class="checkbox">
+						<input type="checkbox" value="ED04"> <label for="ED04">대졸(4년)</label>
+					</div>
+
+					<div class="checkbox">
+						<input type="checkbox" value="ED05"> <label for="ED05">석사</label>
+					</div>
+
+					<div class="checkbox">
+						<input type="checkbox" value="ED06"> <label for="ED06">박사</label>
+					</div>
+				</div>
+
+				<div class="CA">
+					<span class="p-2">경력 : </span>
+					<div class="checkbox">
+						<input type="checkbox" value="CA03"> <label for="CA03">관계
+							없음</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="CA01"> <label for="CA01">신입</label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" value="CA02"> <label for="CA02">경력</label>
+					</div>
+				</div>
+			</div>
+			<!-- Check End -->
 
 			<!-- Search Start -->
 			<div class="container-fluid  wow fadeIn" data-wow-delay="0.1s"
@@ -337,7 +392,15 @@
 		//search 
 		$(function() {
 		  $('.search-button').click(function() {
-		    var searchKeyword = $('#search').val();
+		
+   			 
+   			 var searchKeyword = $('#search').val(); // 검색창에 입력한 검색어를 가져옴
+   			$('input[type="checkbox"]:checked').each(function() {
+   			  searchKeyword += ',' + $(this).val(); // 체크박스에 체크된 값들을 가져와서 검색어에 더해줌
+   			});
+   			searchKeyword = searchKeyword.replace(/^,/, ''); // 첫번째 문자가 콤마인 경우 제거 
+   	
+
 		    
 		    $.ajax({
 		      type : 'POST',
