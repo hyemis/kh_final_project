@@ -55,6 +55,8 @@ public interface BsApplicantService {
 
 	public int updateResultType(BsAnnounceDto adto);
 
+	public BsAplicantDto reseltView(int baNum);
+
 	
 	
 

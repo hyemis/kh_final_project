@@ -217,4 +217,10 @@
 		WHERE BA_NUM = #{baNum}
 	</update>
 	
+	<select id="reseltView" resultType="kh.com.job.business.model.dto.BsAplicantDto">
+		select * 
+		from BUSINESS_APPLICANT
+		WHERE BA_NUM = #{baNum}  
+	</select>
+	
 </mapper>

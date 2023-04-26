@@ -374,8 +374,8 @@
 								<form action="passresume" method="get">
 									<input type="hidden" name="applicantId" value="${resume.userId }" />
 									<input type="hidden" name="applicantResume" value="${resume.resumeNo}" />
-									<input type="hidden" name="applicantNo" value="${baNum}" />	
-									<button type="submit" class="btn btn-primary">합격</button>							
+									<input type="hidden" name="applicantNo" value="${badto.baNum}" />	
+									<button type="submit" class="btn btn-primary" ${badto.resultType == 'Y'?'disabled':'' }>결과 발표</button>							
 								</form>
 							</div>
 						</div>

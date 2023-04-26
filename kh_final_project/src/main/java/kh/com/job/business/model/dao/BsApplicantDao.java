@@ -103,6 +103,10 @@ public class BsApplicantDao {
 		return sqlSession.update("applicant.updateResultType", adto);
 	}
 
+	public BsAplicantDto reseltView(int baNum) {
+		return sqlSession.selectOne("applicant.reseltView", baNum);
+	}
+
 
 	
 

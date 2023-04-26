@@ -120,6 +120,7 @@ public class BsApplicantController {
 		}
 		
 		BsApplicantResumeDto ardto = apservice.applicantResume(resumeNo);
+		BsAplicantDto badto = apservice.reseltView(baNum);
 		// 학력사항 정보 출력 
 		List<PsHschoolDto> high = apservice.highSelectList(resumeNo);
 		List<PsUnivDto> uni = apservice.uniSelectList(resumeNo);
@@ -141,7 +142,7 @@ public class BsApplicantController {
 		mv.addObject("career", career);
 		mv.addObject("certi", certi);
 		mv.addObject("cl", cl);
-		mv.addObject("baNum", baNum);
+		mv.addObject("badto", badto);
 		
 		return mv;
 	}

@@ -137,6 +137,11 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return dao.updateResultType(adto);
 	}
 
+	@Override
+	public BsAplicantDto reseltView(int baNum) {
+		return dao.reseltView(baNum);
+	}
+
 
 
 
