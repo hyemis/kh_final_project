@@ -270,4 +270,30 @@
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
+	<select id="passCount" resultType="_int">
+		select count(*) 
+		from BUSINESS_APPLICANT ba 
+		join RECRUIT_REGIST rr on ba.ra_num = rr.ra_num
+        join business_applicant_pass bap on bap.ba_num = ba.ba_num
+		where rr.user_id = #{userId}
+        and bap.pass_type ='PT04'
+	</select>
+	
+	<select id="failCount" resultType="_int">
+		select count(*) 
+		from BUSINESS_APPLICANT ba 
+		join RECRUIT_REGIST rr on ba.ra_num = rr.ra_num
+        join business_applicant_pass bap on bap.ba_num = ba.ba_num
+		where rr.user_id = #{userId}
+        and bap.pass_type = 'PT05'
+	</select>
+	
+	<select id="proceedCount" resultType="_int">
+		select count(*) 
+		from BUSINESS_APPLICANT ba 
+		join RECRUIT_REGIST rr on ba.ra_num = rr.ra_num
+        join business_applicant_pass bap on bap.ba_num = ba.ba_num
+		where rr.user_id = #{userId}
+        and bap.pass_type NOT IN ('PT05','PT04')
+	</select>
 </mapper>

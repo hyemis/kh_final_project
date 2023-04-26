@@ -59,9 +59,19 @@ public class BsMainController {
 		List<BsAplicantRecruitDto> recruitlist = apservice.recruitList(principal.getName());
 		
 		BsUserDto dto = acservice.viewAccount(principal.getName());
+		//총지원자
 		int aplicantAll = apservice.aplicantAll(principal.getName());
+		//합격
+		int passCount = apservice.passCount(principal.getName());
+		//불합격
+		int failCount = apservice.failCount(principal.getName());
+		//진행중
+		int proceedCount = apservice.proceedCount(principal.getName());
 		
 		mv.addObject("aplicantAll", aplicantAll);
+		mv.addObject("passCount", passCount);
+		mv.addObject("failCount", failCount);
+		mv.addObject("proceedCount", proceedCount);
 		mv.addObject("recruitlist", recruitlist);
 		mv.addObject("userinfo", dto);
 		

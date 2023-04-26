@@ -169,6 +169,23 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return list;
 	}
 
+	@Override
+	public int passCount(String userId) {
+		return dao.passCount(userId);
+	}
+
+	@Override
+	public int failCount(String name) {
+		// TODO Auto-generated method stub
+		return dao.failCount(name);
+	}
+
+	@Override
+	public int proceedCount(String name) {
+		// TODO Auto-generated method stub
+		return dao.proceedCount(name);
+	}
+
 
 
 
