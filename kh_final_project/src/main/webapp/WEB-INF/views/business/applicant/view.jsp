@@ -65,7 +65,7 @@
 		 		<thead>
 		 			<tr>
 		 				<th scope="col">이력서번호</th>
-		 				<th scope="col">지원자 이이다</th>
+		 				<th scope="col">지원자 아이디</th>
 		 				<th scope="col">공고이름</th>
 		 				<th scope="col">등록</th>
 		 				<th scope="col">합격</th>
