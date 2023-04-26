@@ -358,6 +358,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int updateGrad(Map<String, Object> updateGrad) throws Exception {
 		return dao.updateGrad(updateGrad);
 	}
+	
+	@Override
+	public int checkClInfo(int clNo) throws Exception{
+		return dao.checkClInfo(clNo);
+	}
 
 	
 

@@ -133,6 +133,8 @@ public interface PsResumeService {
 
 	// ClInfo
 	public int getMaxClNo() throws Exception;
+	
+	public int checkClInfo(int clNo) throws Exception;
 
 	public int insertClInfo(Map<String, Object> InfoNo) throws Exception;
 	

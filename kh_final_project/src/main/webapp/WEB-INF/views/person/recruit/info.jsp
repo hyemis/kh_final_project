@@ -145,7 +145,7 @@
 							<div class="row g-2">
 								<div class="col-md-12">
 									<input type="text" class="form-control border-1 py-3"
-										id="search" placeholder="원하는 조건을 검색해보세요.">
+										id="search" placeholder="찾으시는 회사명, 연봉 등 원하는 조건을 검색해보세요.">
 								</div>
 							</div>
 						</div>
