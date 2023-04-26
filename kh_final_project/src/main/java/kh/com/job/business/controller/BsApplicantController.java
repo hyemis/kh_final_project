@@ -15,18 +15,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.collect.Sets.SetView;
 import com.google.gson.Gson;
 
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsAppInfoDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
+import kh.com.job.business.model.service.BsRecruitService;
+import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
+import kh.com.job.person.model.dto.PsCareerDto;
+import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
+import kh.com.job.person.model.dto.PsUnivDto;
+import kh.com.job.person.model.dto.PsUserDto;
 
 @Controller
 @RequestMapping("/business/applicant")
@@ -37,6 +50,9 @@ public class BsApplicantController {
 	
 	@Autowired
 	private BsAccountService acservice;
+	
+	@Autowired
+	private BsRecruitService rcservice;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -91,18 +107,107 @@ public class BsApplicantController {
 		
 		return mv;
 	}
-	
+	//지원자 이력서 확인
 	@GetMapping("/resume")
 	public ModelAndView applicantResume(ModelAndView mv, Principal principal
 			, PagingAplicantDto pdto
-			, @RequestParam(name = "resumeNo", required = false) int resumeNo) {
+			, @RequestParam(name = "resumeNo", required = false, defaultValue = "0") Integer resumeNo
+			, @RequestParam(name = "id", required = false, defaultValue = "0") Integer baNum) {
+		
+		if(resumeNo == 0 || resumeNo == null) {
+			mv.setViewName("redirect:view");
+			return mv;
+		}
 		
 		BsApplicantResumeDto ardto = apservice.applicantResume(resumeNo);
+		BsAplicantDto badto = apservice.reseltView(baNum);
+		// 학력사항 정보 출력 
+		List<PsHschoolDto> high = apservice.highSelectList(resumeNo);
+		List<PsUnivDto> uni = apservice.uniSelectList(resumeNo);
+		List<PsGschoolDto> grad = apservice.gradSelectList(resumeNo);
+		
+		// 경력사항 정보 출력 
+		List<PsCareerDto> career = apservice.carSelectList(resumeNo);
+		
+		// 자격증 정보 출력
+		List<PsCertiDto> certi = apservice.certiSelectList(resumeNo);
+		
+		// 자기소개서 정보 출력
+		PsClDto cl = apservice.clSelectOne(resumeNo);
 		
 		mv.addObject("resume", ardto);
+		mv.addObject("high", high);
+		mv.addObject("uni", uni);
+		mv.addObject("grad", grad);
+		mv.addObject("career", career);
+		mv.addObject("certi", certi);
+		mv.addObject("cl", cl);
+		mv.addObject("badto", badto);
 		
 		return mv;
 	}
+	
+	@GetMapping("/passresume")
+	public ModelAndView passResume(ModelAndView mv, Principal principal
+			, PagingAplicantDto pdto
+			, @RequestParam(name = "applicantResume", required = false, defaultValue = "0") Integer resumeNo
+			, @RequestParam(name = "applicantNo", required = false, defaultValue = "0") Integer baNum
+			, @RequestParam(name = "applicantId", required = false) String passUserId) {
+		
+		//기업 회원 계정 정보
+		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
+		//지원자 회원 정보
+		BsAppInfoDto pudto = apservice.userInfo(passUserId);
+		
+		//경력 카테고리
+		mv.addObject("PTlist", rcservice.getCateList("PT"));
+		
+		mv.addObject("bdto", bdto);
+		mv.addObject("pudto", pudto);
+		mv.addObject("resumeNo", resumeNo);
+		mv.addObject("baNum", baNum);
+		mv.addObject("passUserId", passUserId);
+		
+		return mv;
+	}
+	
+	@PostMapping("/passresume")
+	public ModelAndView announceResult(ModelAndView mv, Principal principal
+			, BsAnnounceDto adto
+			, @RequestParam(name = "applicantResume", required = false, defaultValue = "0") Integer resumeNo
+			, @RequestParam(name = "applicantNo", required = false, defaultValue = "0") Integer baNum
+			, @RequestParam(name = "applicantId", required = false) String passUserId
+			) {
+		
+		adto.setBaNum(baNum);
+		adto.setUserId(passUserId);
+		//기업 회원 계정 정보
+		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
+		
+		System.out.println(adto.getUserName());
+		System.out.println(adto.getUserEmail());
+		System.out.println(adto.getPassType());
+		System.out.println(bdto.getUserEmail());
+		
+		int result = -1;
+		
+		result = apservice.resultInsert(adto);
+		
+		if(result>0) {
+			int ccNum = 0;
+			String[] cc = new String[ccNum]; 
+			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
+			
+			int updateSucc = apservice.updateResultType(adto);
+			
+		}
+		
+		
+		
+		mv.setViewName("redirect:view");
+		return mv;
+	}
+	
 
 	
 

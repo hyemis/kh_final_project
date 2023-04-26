@@ -7,13 +7,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
+import kh.com.job.business.model.dto.BsAppInfoDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.common.page.PagingAplicantDto;
+import kh.com.job.person.model.dto.PsCareerDto;
+import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 
 @Repository
 public class BsApplicantDao {
@@ -57,6 +65,46 @@ public class BsApplicantDao {
 
 	public BsApplicantResumeDto applicantResume(int resumeNo) {
 		return sqlSession.selectOne("applicant.applicantResume", resumeNo);
+	}
+
+	public List<PsHschoolDto> highSelectList(int resumeNo) {
+		return sqlSession.selectList("applicant.highSelectList", resumeNo);		
+	}
+
+	public List<PsUnivDto> uniSelectList(int resumeNo) {
+		return sqlSession.selectList("applicant.uniSelectList", resumeNo);		
+	}
+
+	public List<PsGschoolDto> gradSelectList(int resumeNo) {
+		return sqlSession.selectList("applicant.gradSelectList", resumeNo);		
+	}
+
+	public List<PsCareerDto> carSelectList(int resumeNo) {
+		return sqlSession.selectList("applicant.carSelectList", resumeNo);		
+	}
+
+	public List<PsCertiDto> certiSelectList(int resumeNo) {
+		return sqlSession.selectList("applicant.certiSelectList", resumeNo);		
+	}
+
+	public PsClDto clSelectOne(int resumeNo) {
+		return sqlSession.selectOne("applicant.clSelectOne", resumeNo);
+	}
+
+	public BsAppInfoDto userInfo(String userId) {
+		return sqlSession.selectOne("applicant.userInfo", userId);
+	}
+
+	public int resultInsert(BsAnnounceDto adto) {
+		return sqlSession.insert("applicant.resultInsert", adto);
+	}
+
+	public int updateResultType(BsAnnounceDto adto) {
+		return sqlSession.update("applicant.updateResultType", adto);
+	}
+
+	public BsAplicantDto reseltView(int baNum) {
+		return sqlSession.selectOne("applicant.reseltView", baNum);
 	}
 
 

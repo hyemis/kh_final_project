@@ -94,10 +94,133 @@
 	
 	<select id="applicantResume" resultType="kh.com.job.business.model.dto.BsApplicantResumeDto">
 		SELECT ur.RESUME_NO, ur.RESUME_TITLE, ur.RESUME_PHOTO, ur.RESUME_DATE, ur.PORTF_FILE
-			, ut.USER_NAME, ut.USER_PHONE, ut.USER_BIRTH, ut.USER_EMAIL 
+			, ut.USER_NAME, ut.USER_PHONE, ut.USER_BIRTH, ut.USER_EMAIL,UR.USER_ID 
 		FROM USER_RESUME ur 
 		JOIN USER_TABLE ut ON UR.USER_ID = UT.USER_ID
 		WHERE ur.RESUME_NO = #{resnumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 고등학교 정보 -->
+	<select id="highSelectList" resultType="hdto">
+		SELECT DISTINCT
+		rh.HIGH_EDU_NO, rh.GED, rh.HIGH_NAME, rh.HIGH_DATE, rh.HIGH_MAJOR
+		FROM RESUME_HIGHSCHOOL rh
+		INNER JOIN 
+		RESUME_HIGH_INFO rhi ON rh.HIGH_EDU_NO = rhi.HIGH_EDU_NO
+		INNER JOIN 
+		USER_RESUME ur ON rhi.RESUME_NO = ur.RESUME_NO
+		WHERE
+		ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 대학교 정보 -->
+	<select id="uniSelectList" resultType="udto">
+		SELECT DISTINCT
+		ru.UNI_EDU_NO, ru.UNI_ACT, ru.UNI_CATEGORY, ru.UNI_NAME, ru.UNI_DATE, ru.UNI_MAJOR, ru.UNI_POINT 
+		FROM RESUME_UNIVERSITY ru
+		INNER JOIN 
+		RESUME_UNI_INFO rui ON ru.UNI_EDU_NO = rui.UNI_EDU_NO
+		INNER JOIN 
+		USER_RESUME ur ON rui.RESUME_NO = ur.RESUME_NO
+		WHERE 
+		ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 대학원 정보 -->
+	<select id="gradSelectList" resultType="gdto">
+		SELECT DISTINCT
+		rg.GRAD_EDU_NO, rg.GRAD_ACT, rg.GRAD_NAME, rg.GRAD_CATEGORY, rg.GRAD_DATE, rg.GRAD_MAJOR, rg.GRAD_POINT 
+		FROM RESUME_GRADSCHOOL rg
+		INNER JOIN 
+		RESUME_GRAD_INFO rgi ON rg.GRAD_EDU_NO = rgi.GRAD_EDU_NO
+		INNER JOIN 
+		USER_RESUME ur ON rgi.RESUME_NO = ur.RESUME_NO
+		WHERE 
+		ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 경력사항 정보 -->
+	<select id="carSelectList" resultType="careerdto">
+		SELECT DISTINCT
+		rc.CAR_NO, rc.CAR_NAME, rc.CAR_DATE, rc.CAR_POSITION, rc.CAR_DEPT, rc.CAR_DEPT, rc.CAR_RESP, rc.CAR_SALARY 
+		FROM RESUME_CAREER rc
+		INNER JOIN 
+		RESUME_CAR_INFO rci ON rc.CAR_NO = rci.CAR_NO
+		INNER JOIN 
+		USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE 
+		ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<!-- 이력서 상세보기 - 자격증 정보 -->
+	<select id="certiSelectList" resultType="certidto">
+		SELECT DISTINCT
+		rc.CERTI_NO, rc.CERTI_NAME, rc.CERTI_PUB, rc.CERTI_DATE 
+		FROM RESUME_CERTI rc
+		INNER JOIN 
+		RESUME_CERTI_INFO rci ON rc.CERTI_NO = rci.CERTI_NO
+		INNER JOIN 
+		USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE 
+		ur.RESUME_NO =#{resumeNo}
+	</select>
+	
+	<select id="clSelectOne" resultType="cldto">
+		SELECT
+		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
+		FROM RESUME_CL rc
+		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
+		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
+		WHERE ur.RESUME_NO =#{resumeNo}
+	</select> 
+	
+	<select id="userInfo" resultType="kh.com.job.business.model.dto.BsAppInfoDto">
+		SELECT *
+		FROM USER_TABLE
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<insert id="resultInsert">
+		INSERT INTO business_applicant_pass
+            (ap_num,
+             user_id,
+             user_name,
+             pass_type,
+             result_title,
+             result_content,
+             ba_num)
+		VALUES     
+			(business_ap_seq.nextval,
+            #{userId},
+            #{userName},
+            #{passType},
+            #{resultTitle},
+            #{resultContent},
+            #{baNum}) 
+	</insert>
+	
+	<update id="updateResultType">
+		UPDATE BUSINESS_APPLICANT
+		<set>
+			<choose>
+				<when test="passType == 'PT05'">
+				RESULT_TYPE = 'N'
+				</when>
+				<when test="passType eq null or passType eq''">
+				RESULT_TYPE = 'A'
+				</when>
+				<otherwise>
+				RESULT_TYPE = 'Y'
+				</otherwise>
+			</choose>
+		</set>
+		WHERE BA_NUM = #{baNum}
+	</update>
+	
+	<select id="reseltView" resultType="kh.com.job.business.model.dto.BsAplicantDto">
+		select * 
+		from BUSINESS_APPLICANT
+		WHERE BA_NUM = #{baNum}  
 	</select>
 	
 </mapper>

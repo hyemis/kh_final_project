@@ -1,6 +1,4 @@
-package kh.com.job.person.model.dto;
-
-import java.sql.Timestamp;
+package kh.com.job.business.model.dto;
 
 import org.springframework.stereotype.Component;
 
@@ -16,11 +14,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PsScrapInfoDto {
+public class BsAnnounceDto {
+	
 	private String userId;
-	private String companyName;
-	private String raTitle;
-	private String closeDate;
-	private int raNum;
-	private Timestamp insertDate;
+	private String userPhone;
+	private String userBirth;
+	private String userEmail;
+	private String userName;
+	private String passType;
+	private String resultTitle;
+	private String resultContent;
+	private int baNum;
+
+
 }

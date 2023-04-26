@@ -403,7 +403,7 @@ var raNum = '${redto.raNum}';
               icon.classList.add('fas');
             },
             error: function(error) {
-              console.log(error);
+            	alert("스크랩에 실패하였습니다.");
             }
           });
       } else {   	  
@@ -417,7 +417,7 @@ var raNum = '${redto.raNum}';
             icon.classList.add('far');
           },
           error: function(error) {
-            console.log(error);
+       		alert("스크랩 삭제에 실패하였습니다.");
           }
         });
 
