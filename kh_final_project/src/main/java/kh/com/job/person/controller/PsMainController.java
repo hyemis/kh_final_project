@@ -85,27 +85,61 @@ public class PsMainController {
 		return mv;
 	}
 
-	// 아이디 찾기
+//	// 아이디 찾기
+//	@PostMapping("/findid")
+//	@ResponseBody
+//	public String dofindId(ModelAndView mv, @RequestParam("name") String nameParam,
+//			@RequestParam("birth") String birthParam, @RequestParam("email") String email,
+//			@RequestParam("phone") String phone) throws Exception {
+//
+//		Object birth = birthParam.replaceAll("[^0-9]", "");
+//		Object name = nameParam.replace(",", "");
+//
+//		Map<String, Object> findId = new HashMap<>();
+//		findId.put("userName", name);
+//		findId.put("userBirth", birth);
+//		findId.put("userEmail", email);
+//		findId.put("userPhone", phone);
+//
+//		System.out.println("map 저장 값 " + findId);
+//
+//		PsUserDto userId = service.findId(findId);
+//		String findUserId = userId.getUserId();
+//		return findUserId;
+//	}
+	
 	@PostMapping("/findid")
 	@ResponseBody
 	public String dofindId(ModelAndView mv, @RequestParam("name") String nameParam,
-			@RequestParam("birth") String birthParam, @RequestParam("email") String email,
-			@RequestParam("phone") String phone) throws Exception {
+	        @RequestParam("birth") String birthParam, @RequestParam("email") String email,
+	        @RequestParam("phone") String phone) throws Exception {
 
-		Object birth = birthParam.replaceAll("[^0-9]", "");
-		Object name = nameParam.replace(",", "");
+	    Object birth = birthParam.replaceAll("[^0-9]", "");
+	    Object name = nameParam.replace(",", "");
 
-		Map<String, Object> findId = new HashMap<>();
-		findId.put("userName", name);
-		findId.put("userBirth", birth);
-		findId.put("userEmail", email);
-		findId.put("userPhone", phone);
+	    Map<String, Object> findId = new HashMap<>();
+	    findId.put("userName", name);
+	    findId.put("userBirth", birth);
+	    findId.put("userEmail", email);
+	    findId.put("userPhone", phone);
 
-		System.out.println("map 저장 값 " + findId);
+	    System.out.println("map 저장 값 " + findId);
 
-		PsUserDto userId = service.findId(findId);
-		String findUserId = userId.getUserId();
-		return findUserId;
+//	    PsUserDto userId = service.findId(findId);
+//	    String findUserId = userId.getUserId();
+//	    
+//	    if (findUserId == null) {
+//	        findUserId = "";
+//	        System.out.println("null 일 때 " + findUserId);
+//	    }
+	    
+	    PsUserDto userId = service.findId(findId);
+	    String findUserId = "";
+	    if (userId != null) {
+	        findUserId = userId.getUserId();
+	    }
+	    
+	    return findUserId;
 	}
 
 	// 비밀번호 찾기
@@ -237,9 +271,9 @@ public class PsMainController {
 		return update;
 	}
 
-	@GetMapping("/findFail")
+	// 찾기 실패
+	@GetMapping("/findfail")
 	public ModelAndView findFail(ModelAndView mv) {
-
 		return mv;
 	}
 

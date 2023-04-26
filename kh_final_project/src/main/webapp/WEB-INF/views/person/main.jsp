@@ -64,7 +64,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/mypage">
 					<div class="rounded p-4">
 						<h5>회원정보관리</h5>
-						<p>회원 정보 수정<br>이용 현황</p>
+						<p>회원정보수정<br>이용현황</p>
 					</div>
 				</a>
 			</div>
@@ -74,7 +74,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/resume/list">
 					<div class="rounded p-4">
 						<h5>이력서 관리</h5>
-						<p>이력서 생성 / 삭제 <br>이력서 목록<br></p>
+						<p>이력서생성 / 삭제 <br>이력서목록<br></p>
 					</div>
 				</a>
 			</div>
@@ -94,7 +94,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapjob">
 					<div class="rounded p-4">
 						<h5>스크랩한 채용공고</h5>
-						<span href="/"></span>
+						<p>스크랩한공고목록 <br>입사지원<br></p>
 					</div>
 				</a>
 			</div>
@@ -104,7 +104,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapcompany">
 					<div class="rounded p-4">
 						<h5>관심기업정보</h5>
-						<span href="/"></span>
+						<p>관심기업목록 <br>입사 지원<br></p>
 					</div>
 				</a>
 			</div>

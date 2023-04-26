@@ -128,7 +128,7 @@
 	      
 	    } 
 	
-	// email로 id 찾기
+	 // email로 id 찾기
  	 function findId() {
 		let formdata = new FormData();
 		formdata.append("name", $('#personal-e-name').val());
@@ -138,31 +138,30 @@
 		formdata.append("email", $('#personal-email').val());
 		formdata.append("phone", $('#personal-phone').val());
 
-		
-		/* if(!formdata) {
-			alert("입력값을 모두 입력해주세요.");
-			return;
-		} */
-	
 	
 		$.ajax({
-		url : "${pageContext.request.contextPath}/person/findid",
-		type : "post",
-		contentType: false, 
-		processData: false,
-		data: formdata, 
-		success: function(data){
-				if (data != null) {
-				alert("회원님의 아이디는"+ data + "입니다.");
-				location.href="/job/person/login";
-			}	else {
-				alert("입력하신 정보가 올바르지 않습니다. 회원가입 후 job-a 를 이용해주세요.");
-				location.href="/job/person/signUp";
-			}
-		}
-
+		    url: "${pageContext.request.contextPath}/person/findid",
+		    type: "post",
+		    contentType: false,
+		    processData: false,
+		    data: formdata,
+		    success: function(data) {
+		        if (data != null && data !== "") {
+		            alert("회원님의 아이디는 " + data + "입니다.");
+		            location.href = "/job/person/login";
+		        } else {
+		            alert("입력하신 정보가 올바르지 않습니다. 정보를 확인한 후 다시 시도해주세요.");
+		            location.href = "/job/person/findid";
+		            return;
+		        }
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		        alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+		        location.href = "/job/person/findid";
+		        return;
+		    }
 		});
-	} 
+	}  
 	
 	
  	 </script>

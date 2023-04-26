@@ -7,7 +7,7 @@
 	<!-- Navbar Start -->
 	<div class="container-fluid nav-bar ">
 		<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-			<a href="${pageContext.request.contextPath}/person/main"
+			<a href="${pageContext.request.contextPath}/"
 				class="navbar-brand d-flex align-items-center text-center">
 				<div class="icon p-2 me-2">
 					<img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
@@ -16,8 +16,7 @@
 			</a>
 			<!-- 좌측 메뉴 -->
 			<div class="container-fluid ms-auto">
-				<a class="nav-link me-3" href="${pageContext.request.contextPath}/person/main">menu</a>
-				<button class="navbar-toggler" type="button"
+					<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false"
 					aria-label="Toggle navigation">
@@ -27,7 +26,7 @@
 					<div class="navbar-nav">
 						<a class="nav-link me-3"href="${pageContext.request.contextPath}/person/recruit/info">채용정보</a> 
 						<a class="nav-link me-3" href="#">인재 검색</a> 
-						<a class="nav-link me-3" href="#">커뮤니티</a>
+						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
 					</div>
 				</div>
 			</div>
@@ -36,8 +35,7 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav ms-auto">
 					<!-- 메뉴 구분 -->
-					<a href="${pageContext.request.contextPath}/"
-						class="nav-item nav-link active">Home</a>
+					<a href="${pageContext.request.contextPath}/person/main" class="nav-item nav-link active">Home</a>
 
 					<!-- 개인 / 기업 -->
 					<sec:authorize access="hasRole('ROLE_P')">
@@ -53,18 +51,13 @@
 							<a href="#" class="nav-link dropdown-toggle m-1"
 								data-bs-toggle="dropdown">개인서비스</a>
 							<div class="dropdown-menu rounded-0 ">
-								<a
-									href="${pageContext.request.contextPath}/person/main"
-									class="dropdown-item">MY 홈</a> <a
-									href="${pageContext.request.contextPath}/person/resume/list"
-									class="dropdown-item">이력서 관리</a> <a href="property-agent.html"
-									class="dropdown-item">입사지원 현황</a> <a href="property-agent.html"
-									class="dropdown-item">스크랩한 채용공고</a> <a
-									href="property-agent.html" class="dropdown-item">관심기업 정보</a>
+								<a href="${pageContext.request.contextPath}/person/main" class="dropdown-item">MY 홈</a> 
+								<a href="${pageContext.request.contextPath}/person/resume/list" class="dropdown-item">이력서 관리</a> 
+								<a href="property-agent.html" class="dropdown-item">입사지원 현황</a> 
+								<a href="${pageContext.request.contextPath}/person/scrapjob" class="dropdown-item">스크랩한 채용공고</a> 
+								<a href="${pageContext.request.contextPath}/person/scrapcompany"  class="dropdown-item">관심기업 정보</a>
 								<hr class="dropdown-divider">
-								<a
-									href="${pageContext.request.contextPath}/person/mypage"
-									class="dropdown-item" class="dropdown-item">회원정보 관리</a>
+								<a href="${pageContext.request.contextPath}/person/mypage" class="dropdown-item" class="dropdown-item">회원정보 관리</a>
 							</div>
 						</div>
 					</sec:authorize>

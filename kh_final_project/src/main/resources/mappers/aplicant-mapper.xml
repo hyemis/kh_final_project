@@ -241,7 +241,7 @@
 		</trim>
 	</select>
 	
-	<select id="passPageList" resultType="kh.com.job.business.model.dto.BsPassApplicantDto">
+<!-- 	<select id="passPageList" resultType="kh.com.job.business.model.dto.BsPassApplicantDto">
 		select  ap_num, user_id, pass_type
 				, resume_no, ba_num
 				, ra_title
@@ -269,7 +269,7 @@
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
-	
+	 -->
 	<select id="passCount" resultType="_int">
 		select count(*) 
 		from BUSINESS_APPLICANT ba 
