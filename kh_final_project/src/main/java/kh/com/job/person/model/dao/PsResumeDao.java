@@ -72,14 +72,19 @@ public class PsResumeDao {
 		}
 		return resumeNo;
 	}
-
+	
+	//이력서 수정
+	public int update(PsResumeDto dto) throws Exception {
+		return sqlSession.update("resume.update", dto);
+	}
+	
+	public int updateResume(PsResumeDto dto) {
+		return sqlSession.update("resume.updateResume", dto);
+	}
+	
 	// 이력서 삭제
 	public int delete(int resumeNo) throws Exception {
 		return sqlSession.delete("resume.delete", resumeNo);
-	}
-
-	public int update(PsResumeDto dto) throws Exception {
-		return sqlSession.update("resume.update", dto);
 	}
 
 	// 이력서-고등학교입력
@@ -353,6 +358,8 @@ public class PsResumeDao {
 	public int deleteInfoCl(Map<String, Object> InfoNo) throws Exception {
 		return sqlSession.update("resume.deleteInfoCl", InfoNo);
 		
-	};
+	}
+
+	
 
 }
