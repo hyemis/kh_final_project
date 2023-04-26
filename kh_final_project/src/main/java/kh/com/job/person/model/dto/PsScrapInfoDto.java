@@ -1,5 +1,7 @@
 package kh.com.job.person.model.dto;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -20,4 +22,5 @@ public class PsScrapInfoDto {
 	private String raTitle;
 	private String closeDate;
 	private int raNum;
+	private Timestamp insertDate;
 }
