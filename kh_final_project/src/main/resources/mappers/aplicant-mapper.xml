@@ -180,4 +180,41 @@
 		WHERE USER_ID = #{userId}
 	</select>
 	
+	<insert id="resultInsert">
+		INSERT INTO business_applicant_pass
+            (ap_num,
+             user_id,
+             user_name,
+             pass_type,
+             result_title,
+             result_content,
+             ba_num)
+		VALUES     
+			(business_ap_seq.nextval,
+            #{userId},
+            #{userName},
+            #{passType},
+            #{resultTitle},
+            #{resultContent},
+            #{baNum}) 
+	</insert>
+	
+	<update id="updateResultType">
+		UPDATE BUSINESS_APPLICANT
+		<set>
+			<choose>
+				<when test="passType == 'PT05'">
+				RESULT_TYPE = 'N'
+				</when>
+				<when test="passType eq null or passType eq''">
+				RESULT_TYPE = 'A'
+				</when>
+				<otherwise>
+				RESULT_TYPE = 'Y'
+				</otherwise>
+			</choose>
+		</set>
+		WHERE BA_NUM = #{baNum}
+	</update>
+	
 </mapper>

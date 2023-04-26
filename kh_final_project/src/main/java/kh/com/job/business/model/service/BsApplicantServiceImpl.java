@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.business.model.dao.BsApplicantDao;
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
@@ -124,6 +125,16 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 	@Override
 	public BsAppInfoDto userInfo(String userId) {
 		return dao.userInfo(userId);
+	}
+
+	@Override
+	public int resultInsert(BsAnnounceDto adto) {
+		return dao.resultInsert(adto);
+	}
+
+	@Override
+	public int updateResultType(BsAnnounceDto adto) {
+		return dao.updateResultType(adto);
 	}
 
 

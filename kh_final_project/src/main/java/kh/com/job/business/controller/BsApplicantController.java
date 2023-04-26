@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAppInfoDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
@@ -29,6 +30,7 @@ import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
+import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
 import kh.com.job.person.model.dto.PsCareerDto;
@@ -165,6 +167,43 @@ public class BsApplicantController {
 		mv.addObject("baNum", baNum);
 		mv.addObject("passUserId", passUserId);
 		
+		return mv;
+	}
+	
+	@PostMapping("/passresume")
+	public ModelAndView announceResult(ModelAndView mv, Principal principal
+			, BsAnnounceDto adto
+			, @RequestParam(name = "applicantResume", required = false, defaultValue = "0") Integer resumeNo
+			, @RequestParam(name = "applicantNo", required = false, defaultValue = "0") Integer baNum
+			, @RequestParam(name = "applicantId", required = false) String passUserId
+			) {
+		
+		adto.setBaNum(baNum);
+		adto.setUserId(passUserId);
+		//기업 회원 계정 정보
+		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
+		
+		System.out.println(adto.getUserName());
+		System.out.println(adto.getUserEmail());
+		System.out.println(adto.getPassType());
+		System.out.println(bdto.getUserEmail());
+		
+		int result = -1;
+		
+		result = apservice.resultInsert(adto);
+		
+		if(result>0) {
+			int ccNum = 0;
+			String[] cc = new String[ccNum]; 
+			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
+			
+			int updateSucc = apservice.updateResultType(adto);
+			
+		}
+		
+		
+		
+		mv.setViewName("redirect:view");
 		return mv;
 	}
 	

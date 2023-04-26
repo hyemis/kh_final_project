@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
@@ -92,6 +93,14 @@ public class BsApplicantDao {
 
 	public BsAppInfoDto userInfo(String userId) {
 		return sqlSession.selectOne("applicant.userInfo", userId);
+	}
+
+	public int resultInsert(BsAnnounceDto adto) {
+		return sqlSession.insert("applicant.resultInsert", adto);
+	}
+
+	public int updateResultType(BsAnnounceDto adto) {
+		return sqlSession.update("applicant.updateResultType", adto);
 	}
 
 

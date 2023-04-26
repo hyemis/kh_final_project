@@ -44,7 +44,10 @@
 	<div class="container-fluid bg-white p-5">
 		<div>
 		<h3>결과 발표</h3>
-			<form action="" method="get">
+			<form action="passresume" method="post">
+				<input type="hidden" name="applicantResume" value="${resumeNo }" />
+				<input type="hidden" name="applicantNo" value="${baNum }" />
+				<input type="hidden" name="applicantId" value="${passUserId }" />
 				<table class="table table-borderless">
 					<thead>
 						<tr>
@@ -57,11 +60,15 @@
 					<tbody>
 						<tr>
 							<td><label for="userName">지원자 이름</label></td>
-							<td><input type="text" id="userName" class="userName form-control" name="userName" value="${pudto.userName }" disabled></td>
+							<td><input type="text" id="userName" class="userName form-control" name="userName" value="${pudto.userName }" readonly></td>
 						</tr>
 						<tr>
-							<td><label for="userName">지원자 연락처</label></td>
-							<td><input type="text" id="userPhone" class="userPhone form-control" name="userPhone" value="${pudto.userPhone }" disabled></td>
+							<td><label for="userPhone">지원자 연락처</label></td>
+							<td><input type="text" id="userPhone" class="userPhone form-control" name="userPhone" value="${pudto.userPhone }" readonly></td>
+						</tr>
+						<tr>
+							<td><label for="userEmail">지원자 이메일</label></td>
+							<td><input type="text" id="userEmail" class="userEmail form-control" name="userEmail" value="${pudto.userEmail }" readonly></td>
 						</tr>
 						<tr>
 							<td><label for="passType">합격 단계</label></td>

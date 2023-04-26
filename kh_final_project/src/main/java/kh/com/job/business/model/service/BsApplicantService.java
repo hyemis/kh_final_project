@@ -2,6 +2,7 @@ package kh.com.job.business.model.service;
 
 import java.util.List;
 
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
@@ -49,6 +50,12 @@ public interface BsApplicantService {
 	public PsClDto clSelectOne(int resumeNo);
 
 	public BsAppInfoDto userInfo(String userId);
+
+	public int resultInsert(BsAnnounceDto adto);
+
+	public int updateResultType(BsAnnounceDto adto);
+
+	
 	
 
 }
