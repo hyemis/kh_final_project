@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.person.model.dto.PsCareerDto;
 import kh.com.job.person.model.dto.PsCertiDto;
 import kh.com.job.person.model.dto.PsClDto;
@@ -39,6 +40,8 @@ public class PsResumeController {
 	private PsResumeService rservice;
 	@Autowired
 	private PsService pservice;
+	@Autowired
+	private BsRecruitService bservice;
 
 	// 이력서관리 페이지 열기
 	@GetMapping("/list")
@@ -76,6 +79,9 @@ public class PsResumeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		mv.addObject("JNlist", bservice.getCateList("JN"));
+		
 		return mv;
 	}
 

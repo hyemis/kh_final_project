@@ -55,7 +55,8 @@
 				</div>
 				<div>
 					<a href="${pageContext.request.contextPath}/business/applicant/view" class="btn btn-dark mb-1">지원자 관리</a>
-					<a href="<%=request.getContextPath()%>/business/applicant/pass" class="btn btn-dark mb-1">합격자 관리</a>					
+					<a href="${pageContext.request.contextPath}/business/applicant/passview" class="btn btn-dark mb-1">합격자 관리</a>					
+					<a href="${pageContext.request.contextPath}/business/applicant/interview" class="btn btn-dark mb-1">면접 일정 관리</a>					
 				</div>
 			</div>
 			<div class="p-2 col-9">
@@ -66,7 +67,7 @@
 							<thead>
 								<tr class="text-white h4">
 									<th>총 지원자</th>
-									<th>서류 합격</th>
+									<th>진행 인원</th>
 									<th>최종 합격</th>
 									<th> 불합격 </th>
 								</tr>
@@ -79,18 +80,18 @@
 										</div>
 									</td>
 									<td>
-										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
-											<span class="h1">3</span>								
+										<div class="passCount bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+											<span class="h1">${proceedCount }</span>								
 										</div>
 									</td>
 									<td>
 										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
-											<span class="h1">4</span>								
+											<span class="h1">${passCount }</span>								
 										</div>
 									</td>
 									<td>
 										<div class="aplicantAll bg-white rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
-											<span class="h1">5</span>								
+											<span class="h1">${failCount }</span>								
 										</div>
 									</td>
 								</tr>

@@ -107,6 +107,26 @@ public class BsApplicantDao {
 		return sqlSession.selectOne("applicant.reseltView", baNum);
 	}
 
+	public int passPageListCount(PagingAplicantDto pdto) {
+		return sqlSession.selectOne("applicant.passPageListCount", pdto);
+	}
+
+	public Object passPageList(PagingAplicantDto pdto) {
+		return sqlSession.selectList("applicant.passPageList", pdto);
+	}
+
+	public int passCount(String userId) {
+		return sqlSession.selectOne("applicant.passCount", userId);
+	}
+
+	public int failCount(String name) {
+		return sqlSession.selectOne("applicant.failCount", name);
+	}
+
+	public int proceedCount(String name) {
+		return sqlSession.selectOne("applicant.proceedCount", name);
+	}
+
 
 	
 

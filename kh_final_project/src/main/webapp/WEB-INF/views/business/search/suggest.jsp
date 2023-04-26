@@ -63,8 +63,67 @@
 	<div class="container-fluid bg-white p-5">
 	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">열람한 인재</a>
-	<!-- 검색창 -->
-	<div></div>	
+		
+		<!-- 검색창 -->
+		<form action="search" method="post" id="searchForm">
+		<div class="container-fluid row mt-3">
+			<select class="col m-3 form-select">
+				<option selected>직종</option>
+				<option value="0">선택안함</option>
+				<c:forEach items="${JNlist}" var="categoryJN">
+				<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
+				</c:forEach>
+			</select>
+			<select class="col m-3 form-select">
+				<option selected>경력</option>
+				<option value="0">선택안함</option>
+				<c:forEach items="${CAlist}" var="categoryCA">
+				<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+				</c:forEach>
+			</select>
+			<select class="col m-3 form-select">
+				<option selected>학력</option>
+				<option value="0">선택안함</option>
+				<c:forEach items="${EDlist}" var="categoryCA">
+				<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
+				</c:forEach>
+			</select>
+			<select class="col m-3 form-select">
+				<option selected>성별</option>
+				<c:forEach items="${SElist}" var="categoryCA">
+				<option value="${categorySE.categoryId }">${categorySE.categoryName}</option>
+				</c:forEach>
+			</select>
+			<button class="col-1 m-3 btn btn-primary" id="btn-search" type="submit">검색</button>
+		</div>	
+		</form>
+		
+		<!-- 목록 -->
+		<div class="table-responsive mt-5">
+		<table class="table table-hover">
+			  <thead>
+			    <tr class="text-center">
+			      <th scope="col">이름</th>
+			      <th scope="col">직종</th>
+			      <th scope="col">경력</th>
+			      <th scope="col">학력</th>
+			      <th scope="col">성별</th>
+			      <th scope="col">면접제안하기</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr class="text-center">
+			      <td>d</td>
+			      <td>d</td>
+			      <td>d</td>
+			      <td>d</td>
+			      <td>d</td>
+			      <td><a type="button" class="btn btn-light">면접제안</a></td>
+			    </tr>
+			   </tbody>
+	   </table> 
+	
+	</div>
 		
 		
 	</div>

@@ -57,6 +57,14 @@ public interface BsApplicantService {
 
 	public BsAplicantDto reseltView(int baNum);
 
+	public Paging passPageList(PagingAplicantDto pdto);
+
+	public int passCount(String userId);
+
+	public int failCount(String name);
+
+	public int proceedCount(String name);
+
 	
 	
 

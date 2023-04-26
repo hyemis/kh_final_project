@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>지원자 관리</title>
+<title>합격자관리</title>
 <!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 <!-- page section -->	
 <section>
 	<div class="container-fluid bg-white p-5">
-		<h3 class="m-3"><a href="view">지원자 관리</a></h3>
+		<h3 class="m-3"><a href="passview">합격자 관리</a></h3>
 		<div class="container-xl px-5 d-flex">
 			<div class="container-lg">
 				<select id="searchNum" class="form-select searchNum" name="searchNum">
@@ -50,9 +50,10 @@
 			</div>
 			<div class="">
 				<select id="searchResult" class="form-select searchResult" name="searchResult">
-					<option value="">선택안함</option>
-					<option value="Y" ${pdto.searchResult=='Y'?'selected':''}>합격</option>
-					<option value="N" ${pdto.searchResult=='N'?'selected':''}>불합격</option>
+					<option value="0">선택안함</option>
+					<c:forEach items="${PTlist }" var="cate">
+						<option value="${cate.categoryId }">${cate.categoryName }</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -67,15 +68,15 @@
 		 				<th scope="col">이력서번호</th>
 		 				<th scope="col">지원자 아이디</th>
 		 				<th scope="col">공고이름</th>
-		 				<th scope="col">등록</th>
-		 				<th scope="col">합격</th>
+		 				<th scope="col">결과</th>
+		 				<th scope="col">결과수정</th>
 		 			</tr>
 		 		</thead>
 		 		<tbody>
 		 			<c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="5">지원자가 없습니다.</td>
+								<td colspan="5">합격자가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -85,20 +86,8 @@
 									<td><a href="${pageContext.request.contextPath}/business/applicant/resume?id=${list.baNum}&resumeNo=${list.resumeNo}">${list.resumeNo }</a></td>									
 									<td>${list.userId}</td>
 									<td>${list.raTitle }</td>
-									<td> ${list.applyDate}</td>
-									<td>
-									<c:choose>
-										<c:when test="${list.resultType eq 'Y'}">
-											합격
-										</c:when>
-										<c:when test="${list.resultType eq 'N'}">
-											불합격
-										</c:when>
-										<c:otherwise>
-											심사중
-										</c:otherwise>
-									</c:choose>
-									</td>
+									<td>${list.passName }</td>
+									<td><a class="btn btn-primary" href="${pageContext.request.contextPath }/business/applicant/passupdate?user=${list.userId}">결과 수정</a></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -114,11 +103,11 @@
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/view?pnum=${list.prevPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">prev</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/passview?pnum=${list.prevPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">prev</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/view?pnum=${pNum}&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">${pNum }</a></li>
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/passview?pnum=${pNum}&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">${pNum }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -126,7 +115,7 @@
 						<li class="page-item disabled"><a class="page-link">next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/applicant/view?pnum=${list.nextPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">next</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/applicant/passview?pnum=${list.nextPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">next</a></li>
 					</c:otherwise>
 				</c:choose>					
 			</ul>
@@ -150,7 +139,7 @@
 		let searchNum = $('.searchNum').val();
 		let searchResult = $('.searchResult').val();
 		
-		location.href = '${pageContext.request.contextPath}/business/applicant/view?pnum=${pageNumber}&searchNum='+searchNum+'&searchResult='+searchResult;
+		location.href = '${pageContext.request.contextPath}/business/applicant/passview?pnum=${pageNumber}&searchNum='+searchNum+'&searchResult='+searchResult;
 	});	
 </script>	
 </body>

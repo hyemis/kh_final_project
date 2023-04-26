@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.person.model.dao.PsDao;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -219,6 +220,11 @@ public class PsServiceImpl implements PsService {
 		@Override
 		public List<PsScrapInfoDto> selectListScrap(String userId) throws Exception {
 			return dao.selectListScrap(userId);
+		}
+
+		@Override
+		public int applyJob(BsAplicantDto dto) throws Exception {
+			return dao.applyJob(dto);
 		}
 
 

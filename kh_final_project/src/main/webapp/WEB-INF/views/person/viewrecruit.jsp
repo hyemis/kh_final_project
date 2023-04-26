@@ -70,7 +70,7 @@
   padding: 15px 30px;
 }
 
-#buttonContainer{
+.buttonContainer{
 	text-align: center;
 }
 
@@ -293,13 +293,9 @@
 				</div>
 			</div>
 			 
-			 <div id="buttonContainer">
-			 <!-- TODO : 주소수정예정 -->
-			<div class="button-container">
+			 <div class="buttonContainer">
 				<a href="${pageContext.request.contextPath}/person/recruit/info" class="btn btn-primary">목록으로</a>
 			</div>
-
-		</div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

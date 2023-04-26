@@ -83,10 +83,22 @@
 							</div>
 							<div class="invalid-feedback mb-3">이력서 제목을 입력하세요.</div>
 							<div class="form-check ms-3">
-								<input class="form-check-input" type="checkbox" value="Y"
-									id="flexCheckChecked"> <label
-									class="form-check-label" for="flexCheckChecked"> 이력서
-									공개여부 </label>
+								희망직종 
+								<select class="form-select form-select-sm">
+									<option selected value="0">선택안함</option>
+									<c:forEach items="${JNlist}" var="categoryJN">
+									<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
+									</c:forEach>
+								</select>
+								성별
+								<select class="form-select form-select-sm">
+								  <option selected value="0">선택안함</option>
+								  <option value="W">남자</option>
+								  <option value="M">여자</option>
+								</select>
+								<input class="form-check-input" type="checkbox" value="Y" id="flexCheckChecked">
+								<label class="form-check-label" for="flexCheckChecked"> 이력서 공개여부 </label>
+								
 							</div>
 						</div>
 					</div>

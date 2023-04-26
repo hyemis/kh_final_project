@@ -56,6 +56,11 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int update(PsResumeDto dto) throws Exception {
 		return dao.update(dto);
 	}
+	
+	@Override
+	public int updateResume(PsResumeDto dto) throws Exception {
+		return dao.updateResume(dto);
+	}
 
 	@Override
 	public int delete(int resumeNo) throws Exception {
@@ -363,6 +368,8 @@ public class PsResumeServieImpl implements PsResumeService {
 	public int checkClInfo(int clNo) throws Exception{
 		return dao.checkClInfo(clNo);
 	}
+
+	
 
 	
 
