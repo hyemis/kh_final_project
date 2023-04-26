@@ -101,5 +101,12 @@
 	WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 입사지원 -->
+	<insert id="applyJob" parameterType="apdto">
+	INSERT INTO BUSINESS_APPLICANT 
+	(BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
+	VALUES (BUSINESS_APPLICANT_SEQ.NEXTVAL, #{userId}, #{resumeNo}, 'A', #{raNum})
+	</insert>
+		
 
 </mapper>
