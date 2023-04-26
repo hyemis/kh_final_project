@@ -38,7 +38,7 @@
 <!-- page section -->	
 <section>
 	<div class="container-fluid bg-white p-5">
-		<h3 class="m-3"><a href="view">합격자 관리</a></h3>
+		<h3 class="m-3"><a href="passview">합격자 관리</a></h3>
 		<div class="container-xl px-5 d-flex">
 			<div class="container-lg">
 				<select id="searchNum" class="form-select searchNum" name="searchNum">
@@ -83,7 +83,7 @@
 							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
 							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
 								<tr>
-									<td>${list.resumeNo }</td>									
+									<td><a href="${pageContext.request.contextPath}/business/applicant/resume?id=${list.baNum}&resumeNo=${list.resumeNo}">${list.resumeNo }</a></td>									
 									<td>${list.userId}</td>
 									<td>${list.raTitle }</td>
 									<td>${list.passName }</td>

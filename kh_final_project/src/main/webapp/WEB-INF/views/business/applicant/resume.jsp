@@ -368,14 +368,22 @@
 
 						<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
 							<div>
-								<a class="btn btn-primary" href="${pageContext.request.contextPath}/business/applicant/view">목록</a>
+								<a class="btn btn-primary" href="${pageContext.request.contextPath}/business/applicant/view">지원자 목록</a>
 							</div>
 							<div>
 								<form action="passresume" method="get">
 									<input type="hidden" name="applicantId" value="${resume.userId }" />
 									<input type="hidden" name="applicantResume" value="${resume.resumeNo}" />
-									<input type="hidden" name="applicantNo" value="${badto.baNum}" />	
-									<button type="submit" class="btn btn-primary" ${badto.resultType == 'Y'?'disabled':'' }>결과 발표</button>							
+									<input type="hidden" name="applicantNo" value="${badto.baNum}" />
+									<c:choose>
+										<c:when test="${badto.resultType == 'Y'}">
+											<a class="btn btn-primary" href="${pageContext.request.contextPath}/business/applicant/passview">합격자 목록</a>
+										</c:when>
+										<c:otherwise>
+											<button type="submit" class="btn btn-primary" >결과 발표</button>
+										</c:otherwise>
+									</c:choose>	
+																
 								</form>
 							</div>
 						</div>
