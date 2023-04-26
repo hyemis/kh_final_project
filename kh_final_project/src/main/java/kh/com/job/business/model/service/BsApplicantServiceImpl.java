@@ -9,12 +9,19 @@ import kh.com.job.business.model.dao.BsApplicantDao;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
+import kh.com.job.business.model.dto.BsAppInfoDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
 import kh.com.job.common.page.PagingInfoDto;
+import kh.com.job.person.model.dto.PsCareerDto;
+import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 
 @Service
 public class BsApplicantServiceImpl implements BsApplicantService {
@@ -82,6 +89,41 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 	@Override
 	public BsApplicantResumeDto applicantResume(int resumeNo) {
 		return dao.applicantResume(resumeNo);
+	}
+
+	@Override
+	public List<PsHschoolDto> highSelectList(int resumeNo) {
+		return dao.highSelectList(resumeNo);
+	}
+
+	@Override
+	public List<PsUnivDto> uniSelectList(int resumeNo) {
+		return dao.uniSelectList(resumeNo);
+	}
+
+	@Override
+	public List<PsGschoolDto> gradSelectList(int resumeNo) {
+		return dao.gradSelectList(resumeNo);
+	}
+
+	@Override
+	public List<PsCareerDto> carSelectList(int resumeNo) {
+		return dao.carSelectList(resumeNo);
+	}
+
+	@Override
+	public List<PsCertiDto> certiSelectList(int resumeNo) {
+		return dao.certiSelectList(resumeNo);
+	}
+
+	@Override
+	public PsClDto clSelectOne(int resumeNo) {
+		return dao.clSelectOne(resumeNo);
+	}
+
+	@Override
+	public BsAppInfoDto userInfo(String userId) {
+		return dao.userInfo(userId);
 	}
 
 
