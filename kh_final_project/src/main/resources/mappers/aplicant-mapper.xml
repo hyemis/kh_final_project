@@ -28,8 +28,8 @@
 	<select id="recruitList" resultType="kh.com.job.business.model.dto.BsAplicantRecruitDto">
 	select rr.ra_num
 		, rr.ra_title
-		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'N') as failconut
-		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'Y') as passconut
+		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'N') as failcount
+		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'Y') as passcount
 		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num ) as aplicount
 	from recruit_regist rr
 	where rr.user_id = #{userId}
