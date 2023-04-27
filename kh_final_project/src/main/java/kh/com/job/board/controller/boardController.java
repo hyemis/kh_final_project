@@ -48,7 +48,7 @@ public class boardController {
 			}		
 			
 		// 게시판 - 뉴스레터
-			@GetMapping("/companynews")
+			@GetMapping("/newsletter")
 			public ModelAndView companynews(ModelAndView mv) {
 				return mv;
 		}
@@ -65,7 +65,8 @@ public class boardController {
 			
 			
 
-		
+
+ 
 		//이거 매핑 주소 post 말고 다른걸로 해주실 수 있나요???
 		// 게시글 
 			@GetMapping("/post")
