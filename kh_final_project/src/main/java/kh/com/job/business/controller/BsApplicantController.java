@@ -225,19 +225,22 @@ public class BsApplicantController {
 	@GetMapping("/passupdate")
 	public ModelAndView applicantPassUpdate(ModelAndView mv, Principal principal
 			, PagingAplicantDto pdto
+			, BsAnnounceDto adto
 			, @RequestParam(name = "user", required = false) String userId
+			, @RequestParam(name = "id", required = false) Integer bnum
 			) {
 		
+		adto.setUserId(userId);
+		adto.setBaNum(bnum);
 		//기업 회원 계정 정보
 		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
-		//지원자 회원 정보
-		BsAppInfoDto pudto = apservice.userInfo(userId);
 		
+		adto = apservice.announceView(adto);
 		//경력 카테고리
 		mv.addObject("PTlist", rcservice.getCateList("PT"));
 		
 		mv.addObject("bdto", bdto);
-		mv.addObject("pudto", pudto);
+		mv.addObject("adto", adto);
 		
 		
 		return mv;

@@ -25,6 +25,9 @@ public class BsAnnounceDto {
 	private String resultTitle;
 	private String resultContent;
 	private int baNum;
+	private int raNum;
+	private int apNum;
+	private int resumeNo;
 
 
 }

@@ -469,9 +469,9 @@ public class PsMainController {
 
 	// 마이페이지 - 입사지원현황 화면
 	@GetMapping("/applylist")
-	public ModelAndView viewApplyList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) {
 		try {
-			PsUserDto result = service.selectOne(userId);
+			PsUserDto result = service.selectOne(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);

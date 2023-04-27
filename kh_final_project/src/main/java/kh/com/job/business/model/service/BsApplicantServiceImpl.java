@@ -186,6 +186,11 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return dao.proceedCount(name);
 	}
 
+	@Override
+	public BsAnnounceDto announceView(BsAnnounceDto adto) {
+		return dao.announceView(adto);
+	}
+
 
 
 
