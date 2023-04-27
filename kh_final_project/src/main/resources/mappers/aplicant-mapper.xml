@@ -308,4 +308,13 @@
 		where ba.user_id = #{userId}
 		and ba.ba_num = #{baNum}
 	</select>
+	
+	<update id="resultUpdate">
+		update business_applicant_pass 
+		set pass_type = #{passType}
+		    , result_title=#{resultTitle}
+		    , result_content=#{resultContent}
+		where ap_num = #{apNum}
+	</update>
+	
 </mapper>

@@ -198,6 +198,17 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return dao.announceView(adto);
 	}
 
+	@Override
+	@Transactional
+	public int resultUpdate(BsAnnounceDto adto) {
+		int result = -1 ;
+		int scresult = dao.resultUpdate(adto);
+		if(scresult == 1) {
+			result = dao.updateResultType(adto);
+		}
+		return result;
+	}
+
 
 
 
