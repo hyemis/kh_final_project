@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.job.business.model.dao.BsApplicantDao;
 import kh.com.job.business.model.dto.BsAnnounceDto;
@@ -128,8 +129,14 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 	}
 
 	@Override
+	@Transactional
 	public int resultInsert(BsAnnounceDto adto) {
-		return dao.resultInsert(adto);
+		int result = -1 ;
+		int scresult = dao.resultInsert(adto);
+		if(scresult == 1) {
+			result = dao.updateResultType(adto);
+		}
+		return result;
 	}
 
 	@Override
