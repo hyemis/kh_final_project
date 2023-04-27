@@ -127,6 +127,10 @@ public class BsApplicantDao {
 		return sqlSession.selectOne("applicant.proceedCount", name);
 	}
 
+	public BsAnnounceDto announceView(BsAnnounceDto adto) {
+		return sqlSession.selectOne("applicant.announceView", adto);
+	}
+
 
 	
 
