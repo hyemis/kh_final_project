@@ -84,6 +84,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/applylist">
 					<div class="rounded p-4">
 						<h5>입사지원현황</h5>
+						<p>입사지원목록<br>입사지원 취소<br></p>
 						<span></span>
 					</div>
 				</a>
@@ -94,7 +95,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapjob">
 					<div class="rounded p-4">
 						<h5>스크랩한 채용공고</h5>
-						<p>스크랩한공고목록 <br>입사지원<br></p>
+						<p>스크랩한 공고목록 <br>입사지원<br></p>
 					</div>
 				</a>
 			</div>
@@ -104,7 +105,7 @@
 				<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapcompany">
 					<div class="rounded p-4">
 						<h5>관심기업정보</h5>
-						<p>관심기업목록 <br>입사 지원<br></p>
+						<p>관심기업목록 <br>입사지원<br></p>
 					</div>
 				</a>
 			</div>

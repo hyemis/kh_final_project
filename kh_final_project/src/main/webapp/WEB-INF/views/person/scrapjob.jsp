@@ -94,13 +94,42 @@
 										<br>	
 										<br>
 										<br>
-										<table class="table table-hover">
+										 <table class="table table-hover"> 
+ 											<thead>
+												<tr>
+													<th scope="col" class="center"></th>
+													<th scope="col" class="center">회사명</th>
+													<th scope="col" class="center">공고명</th>
+													<th scope="col" class="center">마감일</th>
+													<th scope="col" class="center">입사지원</th>
+												</tr>
+											</thead>
+											<tbody class="table-group-divider">
+												<c:forEach items="${scraplist }" var="scrap">
+													<tr>
+														<td><input type="checkbox" name="scrapCheckBox"
+															value="${scrap.raNum }" /></td>
+														<td>${scrap.companyName }</td>
+														<td><a
+															href="${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}">${scrap.raTitle }</a></td>
+														<td>${scrap.closeDate }</td>
+														<td><button type="submit"
+																class="btn btn-outline-dark"
+																onclick="location.href='${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}'">지원</button></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table> 
+										
+<%-- 										 <table class="table table-hover">
 										  <thead>
 										    <tr>
 											 <th scope="col" class="center">회사명</th>
 										     <th scope="col" class="center">공고명</th>
 										     <th scope="col" class="center">마감일</th>	
-										     <th scope="col" class="center">입사지원</th>											   </tr>
+										     <th scope="col" class="center">입사지원</th>
+										     <th></th>											   
+										     </tr>
 										  </thead>
 										  <tbody class="table-group-divider">
 										  <c:forEach items="${scraplist }" var="scrap">
@@ -110,13 +139,18 @@
 										      <td>${scrap.closeDate }</td>
 												<td><button type="submit"
 														class="btn btn-outline-dark"
-														onclick="location.href='${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}'">입사지원</button>
+														onclick="location.href='${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}'">지원</button>
 												</td>
+												<td><button type="submit" class="btn btn-outline-dark"onclick="deleteJob(); return false;">삭제</button></td>
 											</tr>
 										  </c:forEach>
 										  </tbody>
-										</table>
-										
+										</table>  --%>
+										<div
+											class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+											<button class="btn btn-primary me-md-2" type="button"
+												id="deleteJob" onclick="deleteJob(); return false;">스크랩삭제</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -140,6 +174,43 @@
 	if(msg) {
 		alert(msg);
 	}
+	
+	// 스크랩 삭제
+	function deleteJob() {
+    // 체크된 raNum 값을 가져오기
+    var raNumList = [];
+    $("input[name='scrapCheckBox']:checked").each(function() {
+        raNumList.push($(this).val());
+    });
+    
+    // 체크된 항목이 없는 경우
+    if (raNumList.length == 0) {
+        alert("선택된 채용공고가 없습니다.");
+        return;
+    }
+
+    // 각각의 raNum을 전달하며 ajax 호출하기
+    for (var i = 0; i < raNumList.length; i++) {
+        var raNum = raNumList[i];
+
+        $.ajax({
+            type: 'POST',
+            url: '${pageContext.request.contextPath}/person/deleteJob',
+            data: {raNum : raNum},
+            success: function() {
+                alert('스크랩 삭제에 성공했습니다.');
+            },
+            error: function(error) {
+                alert("스크랩 삭제에 실패하였습니다.");
+            }
+        });
+    }
+}
+
+	
+	
+	
+	
 	</script>
 </body>
 </html>
