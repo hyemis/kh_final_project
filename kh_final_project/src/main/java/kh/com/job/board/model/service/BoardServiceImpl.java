@@ -13,30 +13,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private BoardDao dao;
+
+	@Override
+	public BoardDto viewDetail(String boardNo) {
+		return dao.viewDetail(boardNo);
+	}
 	
-	@Override
-	public BoardDto selectOne(String userId) throws Exception {
-		return dao.selectOne(userId);
-	}
 
-	@Override
-	public List<BoardDto> selectList() throws Exception {
-		return dao.selectList();
-	}
-
-	@Override
-	public int insert(BoardDto dto) throws Exception {
-		return dao.insert(dto);
-	}
-
-	@Override
-	public int update(BoardDto dto) throws Exception {
-		return dao.update(dto);
-	}
-
-	@Override
-	public int delete(String userId) throws Exception {
-		return dao.delete(userId);
-	}
 	
 }
