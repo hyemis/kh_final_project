@@ -278,16 +278,10 @@
 							</c:forEach>
 						</select>
 						</div><br><hr>
-						<p><strong>추가 첨부할 파일을 업로드해주세요.</strong></p>
-						<form action="fileupload" method="post"
-							enctype="multipart/form-data">
-							<!-- file upload : multiple 하지 않음-->
-							<input type="file" name="report" placeholder="첨부파일"><br><br><br>
 
 							<button type="button" data-bs-dismiss="modal"
-								class="btn btn-primary mx-auto d-block" type="submit"
+								class="btn btn-primary mx-auto d-block" type="submit" id="applyJobBtn"
 								data-carNo="${resume.resumeNo}">입사지원하기</button>
-						</form>
 					</div>
 					</div>
 				</div>
@@ -445,6 +439,29 @@ var raNum = '${redto.raNum}';
          }
      });
  }
+ 
+ 
+ // 입사지원 ajax
+ $(document).ready(function() {
+    $("#applyJobBtn").click(function() {
+        var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
+        var raNum = "${redto.raNum}"; // 지원 공고 번호
+
+        $.ajax({
+            url: '${pageContext.request.contextPath}/person/applyJob',
+            type: "POST",
+            data: { resumeNo: resumeNo, raNum: raNum },
+            success: function(response) {
+                $("#apply").modal("hide");
+                alert("입사지원이 완료되었습니다.");
+            },
+            error: function(error) {
+                alert("입사지원에 실패하였습니다.");
+            }
+        });
+    });
+});
+
 
 
 	    

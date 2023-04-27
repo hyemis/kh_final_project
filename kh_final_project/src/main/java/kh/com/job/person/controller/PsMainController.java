@@ -2,7 +2,6 @@ package kh.com.job.person.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +31,7 @@ import com.google.gson.Gson;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.admin.model.service.AdCategotyService;
+import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsRecruitService;
@@ -484,6 +484,12 @@ public class PsMainController {
 		}
 		return mv;
 	}
+	
+	// TODO : 입사지원 취소
+	
+	
+	
+	
 
 	// 마이페이지 - 관심기업정보 화면
 	@GetMapping("/scrapcompany")
@@ -671,7 +677,23 @@ public class PsMainController {
 	}
 
 	
-	// 입사지원하기
+	// TODO 입사지원하기
+	@PostMapping("applyJob")
+	@ResponseBody
+	public int applyJob(Principal principal, BsAplicantDto dto){
+		
+		int result = -1;
+		
+		dto.setUserId(principal.getName());
+		try {
+			result = service.applyJob(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	
 	
 	// 카테고리에 맞는 채용공고 출력 

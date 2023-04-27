@@ -103,10 +103,22 @@
 	
 	<!-- 입사지원 -->
 	<insert id="applyJob" parameterType="apdto">
-	INSERT INTO BUSINESS_APPLICANT 
-	(BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
-	VALUES (BUSINESS_APPLICANT_SEQ.NEXTVAL, #{userId}, #{resumeNo}, 'A', #{raNum})
+	INSERT ALL
+		INTO BUSINESS_APPLICANT 
+		(BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
+		VALUES (BUSINESS_APPLICANT_SEQ.NEXTVAL, #{userId}, #{resumeNo}, 'A', #{raNum})
+		INTO USER_APPLY
+		(USER_ID, BA_NUM, APPLY_DATE, RESUME_NO)
+		VALUES (#{userId}, BUSINESS_APPLICANT_SEQ.NEXTVAL, current_timestamp, #{resumeNo})
+		SELECT * FROM DUAL
 	</insert>
+	
+	<!-- 입사지원 취소 -->
+<!-- 	DELETE FROM BUSINESS_APPLICANT
+	WHERE BA_NUM = {baNum} AND RA_NUM = {raNum}
+	
+	DELETE FROM USER_APPLY -->
+	
 		
 
 </mapper>
