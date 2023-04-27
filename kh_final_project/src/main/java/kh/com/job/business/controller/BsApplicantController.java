@@ -2,7 +2,9 @@ package kh.com.job.business.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.collect.Sets.SetView;
@@ -53,7 +56,7 @@ public class BsApplicantController {
 	
 	@Autowired
 	private BsRecruitService rcservice;
-
+	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
@@ -193,8 +196,6 @@ public class BsApplicantController {
 			String[] cc = new String[ccNum]; 
 			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
 			
-			int updateSucc = apservice.updateResultType(adto);
-			
 		}
 
 		mv.setViewName("redirect:view");
@@ -225,25 +226,72 @@ public class BsApplicantController {
 	@GetMapping("/passupdate")
 	public ModelAndView applicantPassUpdate(ModelAndView mv, Principal principal
 			, PagingAplicantDto pdto
+			, BsAnnounceDto adto
 			, @RequestParam(name = "user", required = false) String userId
+			, @RequestParam(name = "id", required = false) Integer bnum
 			) {
 		
+		adto.setUserId(userId);
+		adto.setBaNum(bnum);
 		//기업 회원 계정 정보
 		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
-		//지원자 회원 정보
-		BsAppInfoDto pudto = apservice.userInfo(userId);
 		
+		adto = apservice.announceView(adto);
 		//경력 카테고리
 		mv.addObject("PTlist", rcservice.getCateList("PT"));
 		
 		mv.addObject("bdto", bdto);
-		mv.addObject("pudto", pudto);
+		mv.addObject("adto", adto);
 		
 		
 		return mv;
 	}
+	//이미지 업로드
+	@PostMapping("/imageUpload")
+	@ResponseBody
+	public String imageUpload(@RequestParam("upload") MultipartFile file
+			, Principal principal
+			){
+		Map<String, Object> map = new HashMap<>();
+		 
+		String url = rcservice.uploadDocument(file, principal.getName());		
+
+		map.put("uploaded", 1);
+		map.put("url", url);
+
+		return new Gson().toJson(map);
+	}
 	
+	
+	@PostMapping("/passupdate")
+	public ModelAndView announceUpdate(ModelAndView mv, Principal principal
+			, BsAnnounceDto adto
+			, @RequestParam(name = "applicantResume", required = false, defaultValue = "0") Integer resumeNo
+			, @RequestParam(name = "applicantNo", required = false, defaultValue = "0") Integer baNum
+			, @RequestParam(name = "applicantId", required = false) Integer apNum
+			) {
 		
+		adto.setBaNum(baNum);
+		adto.setApNum(apNum);
+		
+		//기업 회원 계정 정보
+		BsAppInfoDto bdto = apservice.userInfo(principal.getName());
+		
+		int result = -1;
+		
+		result = apservice.resultUpdate(adto);
+		
+		if(result>0) {
+			int ccNum = 0;
+			String[] cc = new String[ccNum]; 
+			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
+			
+		}
+
+		mv.setViewName("redirect:passview");
+		return mv;
+	}
+
 
 
 	

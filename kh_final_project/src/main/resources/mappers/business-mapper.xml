@@ -9,13 +9,30 @@
 		WHERE USER_ID = #{userId}
 	</select>
 
-	<!-- applicant -->
+<!-- search -->
+
+	<select id="searchResume" resultType="rdto">
+		SELECT DISTINCT RESUME_NO, USER_ID
+		FROM USER_RESUME
+		WHERE 1=1
+	    <if test="jobType != null and jobType != 0">
+	        AND JOB_TYPE = #{jobType}
+	    </if>
+	    <if test="career != null and career != 0">
+	        AND CAREER = #{career}
+	    </if>
+	    <if test="education != null and education != 0">
+	        AND EDUCATION = #{education}
+	    </if>
+	    <if test="gender != null and gender != 0">
+	        AND GENDER = #{gender}
+	    </if>
+	    AND RESUME_ACT = 'Y'
+	</select>
 
 
 
-	<!-- account -->
-
-	<!-- 회원정보 수정하기 -->
+<!-- 회원정보 수정하기 -->
 	<update id="updateAccount">
 		UPDATE USER_TABLE SET
 		USER_EMAIL = #{userEmail},

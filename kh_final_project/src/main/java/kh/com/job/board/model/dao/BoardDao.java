@@ -40,5 +40,11 @@ public class BoardDao {
 	public int update(BoardDto dto)  throws Exception {
 		return sqlSession.update("boards.update", dto);
 	}
+	//상세보기
+	public BoardDto viewDetail(String boardNo) {
+		return sqlSession.selectOne("boards.viewDetail", boardNo);
+	}
+	
+
 	
 }

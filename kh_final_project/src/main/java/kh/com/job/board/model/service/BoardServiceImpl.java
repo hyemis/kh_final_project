@@ -14,6 +14,11 @@ public  class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao dao;
+
+	@Override
+	public BoardDto viewDetail(String boardNo) {
+		return dao.viewDetail(boardNo);
+	}
 	
 	@Override
 	public BoardDto detailBoard(Map<String, Object> infoMap) throws Exception {
@@ -39,5 +44,6 @@ public  class BoardServiceImpl implements BoardService {
 	public int delete(String userId) throws Exception {
 		return dao.delete(userId);
 	}
+
 	
 }

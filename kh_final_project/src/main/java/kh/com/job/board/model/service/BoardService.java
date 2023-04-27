@@ -21,5 +21,6 @@ public interface BoardService {
 	
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
+	public BoardDto viewDetail(String boardNo);
 
 }

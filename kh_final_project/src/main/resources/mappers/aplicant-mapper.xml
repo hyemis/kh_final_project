@@ -28,8 +28,8 @@
 	<select id="recruitList" resultType="kh.com.job.business.model.dto.BsAplicantRecruitDto">
 	select rr.ra_num
 		, rr.ra_title
-		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'N') as failconut
-		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'Y') as passconut
+		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'N') as failcount
+		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num and result_type = 'Y') as passcount
 		, (select count(*) from BUSINESS_APPLICANT ba where ba.ra_num = rr.ra_num ) as aplicount
 	from recruit_regist rr
 	where rr.user_id = #{userId}
@@ -174,11 +174,11 @@
 		WHERE ur.RESUME_NO =#{resumeNo}
 	</select> 
 	
-	<!-- <select id="userInfo" resultType="kh.com.job.business.model.dto.BsAppInfoDto">
+	<select id="userInfo" resultType="kh.com.job.business.model.dto.BsAppInfoDto">
 		SELECT *
 		FROM USER_TABLE
 		WHERE USER_ID = #{userId}
-	</select> -->
+	</select>
 	
 	<insert id="resultInsert">
 		INSERT INTO business_applicant_pass
@@ -196,7 +196,8 @@
             #{passType},
             #{resultTitle},
             #{resultContent},
-            #{baNum}) 
+            #{baNum})
+             
 	</insert>
 	
 	<update id="updateResultType">
@@ -241,7 +242,7 @@
 		</trim>
 	</select>
 	
-<!-- 	<select id="passPageList" resultType="kh.com.job.business.model.dto.BsPassApplicantDto">
+ 	<select id="passPageList" resultType="kh.com.job.business.model.dto.BsPassApplicantDto">
 		select  ap_num, user_id, pass_type
 				, resume_no, ba_num
 				, ra_title
@@ -269,7 +270,7 @@
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
-	 -->
+	
 	<select id="passCount" resultType="_int">
 		select count(*) 
 		from BUSINESS_APPLICANT ba 
@@ -296,4 +297,24 @@
 		where rr.user_id = #{userId}
         and bap.pass_type NOT IN ('PT05','PT04')
 	</select>
+	
+	<select id="announceView" resultType="kh.com.job.business.model.dto.BsAnnounceDto">
+		select ba.ba_num, ba.ra_num, ba.resume_no, ba.USER_ID
+		    , ap_num ,bap.pass_type, bap.result_title, bap.RESULT_CONTENT
+		    , ut.user_phone, ut.user_name, ut.user_email, ut.user_birth
+		from BUSINESS_APPLICANT ba
+		join business_applicant_pass bap on ba.ba_num = bap.ba_num
+		join user_table ut on ba.user_id = ut.user_id
+		where ba.user_id = #{userId}
+		and ba.ba_num = #{baNum}
+	</select>
+	
+	<update id="resultUpdate">
+		update business_applicant_pass 
+		set pass_type = #{passType}
+		    , result_title=#{resultTitle}
+		    , result_content=#{resultContent}
+		where ap_num = #{apNum}
+	</update>
+	
 </mapper>

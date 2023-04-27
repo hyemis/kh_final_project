@@ -65,6 +65,10 @@ public interface BsApplicantService {
 
 	public int proceedCount(String name);
 
+	public BsAnnounceDto announceView(BsAnnounceDto adto);
+
+	public int resultUpdate(BsAnnounceDto adto);
+
 	
 	
 

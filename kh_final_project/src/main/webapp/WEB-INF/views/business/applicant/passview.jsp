@@ -87,7 +87,7 @@
 									<td>${list.userId}</td>
 									<td>${list.raTitle }</td>
 									<td>${list.passName }</td>
-									<td><a class="btn btn-primary" href="${pageContext.request.contextPath }/business/applicant/passupdate?user=${list.userId}">결과 수정</a></td>
+									<td><a class="btn btn-primary" href="${pageContext.request.contextPath }/business/applicant/passupdate?user=${list.userId}&id=${list.baNum}">결과 수정</a></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

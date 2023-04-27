@@ -2,7 +2,6 @@ package kh.com.job.person.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +31,7 @@ import com.google.gson.Gson;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.admin.model.service.AdCategotyService;
+import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsRecruitService;
@@ -439,9 +439,9 @@ public class PsMainController {
 
 	// 마이페이지 - 입사지원현황 화면
 	@GetMapping("/applylist")
-	public ModelAndView viewApplyList(ModelAndView mv, @RequestParam(name = "userId") String userId) {
+	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) {
 		try {
-			PsUserDto result = service.selectOne(userId);
+			PsUserDto result = service.selectOne(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
@@ -454,6 +454,12 @@ public class PsMainController {
 		}
 		return mv;
 	}
+	
+	// TODO : 입사지원 취소
+	
+	
+	
+	
 
 	// 마이페이지 - 관심기업정보 화면
 	@GetMapping("/scrapcompany")
@@ -479,11 +485,13 @@ public class PsMainController {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
 			List<PsScrapInfoDto> scrap = service.selectListScrap(principal.getName());
+			List<PsResumeDto> resume = rservice.selectList(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.addObject("scraplist", scrap);
 				mv.setViewName("person/scrapjob");
+				mv.addObject("resumelist", resume);
 			} else {
 				mv.setViewName("redirect:/");
 			}
@@ -642,6 +650,22 @@ public class PsMainController {
 
 	
 	// 입사지원하기
+	@PostMapping("applyJob")
+	@ResponseBody
+	public int applyJob(Principal principal, BsAplicantDto dto){
+		
+		int result = -1;
+		
+		dto.setUserId(principal.getName());
+		try {
+			result = service.applyJob(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	
 	
 	// 카테고리에 맞는 채용공고 출력 

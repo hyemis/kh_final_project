@@ -44,10 +44,10 @@
 	<div class="container-fluid bg-white p-5">
 		<div>
 		<h3>결과 발표</h3>
-			<form action="passresume" method="post">
-				<input type="hidden" name="applicantResume" value="${resumeNo }" />
-				<input type="hidden" name="applicantNo" value="${baNum }" />
-				<input type="hidden" name="applicantId" value="${passUserId }" />
+			<form action="passupdate" method="post" onsubmit="return passcheck()">
+				<input type="hidden" name="applicantResume" value="${adto.resumeNo }" />
+				<input type="hidden" name="applicantNo" value="${adto.baNum }" />
+				<input type="hidden" name="applicantId" value="${adto.apNum }" />
 				<table class="table table-borderless">
 					<thead>
 						<tr>
@@ -60,30 +60,31 @@
 					<tbody>
 						<tr>
 							<td><label for="userName">지원자 이름</label></td>
-							<td><input type="text" id="userName" class="userName form-control" name="userName" value="${pudto.userName }" readonly></td>
+							<td><input type="text" id="userName" class="userName form-control" name="userName" value="${adto.userName }" readonly></td>
 						</tr>
 						<tr>
 							<td><label for="userEmail">지원자 이메일</label></td>
-							<td><input type="text" id="userEmail" class="userEmail form-control" name="userEmail" value="${pudto.userEmail }" readonly></td>
+							<td><input type="text" id="userEmail" class="userEmail form-control" name="userEmail" value="${adto.userEmail }" readonly></td>
 						</tr>
 						<tr>
 							<td><label for="passType">합격 단계</label></td>
 							<td>
 								<select class="form-select passType" id="passType" name="passType">
+									<option value="">선택안함</option>
 									<c:forEach items="${PTlist }" var="list">
-										<option value="${list.categoryId }">${list.categoryName}</option>
+										<option value="${list.categoryId }" ${list.categoryId == adto.passType? 'hidden':''}>${list.categoryName}</option>
 									</c:forEach>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td><label for="resultTitle">결과 발표 제목</label></td>
-							<td colspan="2"><input type="text" id="resultTitle" class="resultTitle form-control" name="resultTitle"></td>
+							<td colspan="2"><input type="text" id="resultTitle" class="resultTitle form-control" name="resultTitle" value="${adto.resultTitle}"></td>
 						</tr>
 						<tr>
 							<td><label for="resultContent">결과 상세 내용</label></td>
 							<td colspan="3"><textarea id="resultContent" class="resultContent form-control" name="resultContent">
-							
+							${adto.resultContent }
 							</textarea></td>
 						</tr>
 					</tbody>
@@ -103,7 +104,24 @@
 </div>	
 
 <!-- page script -->
-		<!-- ckeditor5 이미지 업로드를 위한 업로드 어뎁터 추가  -->
+	<script type="text/javascript">
+	
+	function passcheck(){
+		let passType = "${adto.passType}";
+		let selectType = $(".passType").val();
+		
+		if(passType == selectType){
+			return false;
+		}else if(selectType =="" || selectType == null){
+			alert("합격단계를 선택해주세요.");
+			return false;
+		}
+		return true;
+	}
+	
+	</script>
+	
+	<!-- ckeditor5 이미지 업로드를 위한 업로드 어뎁터 추가  -->
 	<script type="text/javascript">
 	class UploadAdapter {
 	    constructor(loader) {

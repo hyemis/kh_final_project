@@ -65,32 +65,33 @@
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">열람한 인재</a>
 		
 		<!-- 검색창 -->
-		<form action="search" method="post" id="searchForm">
+		<form action="search" method="post" id="searchForm" >
 		<div class="container-fluid row mt-3">
-			<select class="col m-3 form-select">
+			<select class="col m-3 form-select" name="jobType">
 				<option selected>직종</option>
 				<option value="0">선택안함</option>
 				<c:forEach items="${JNlist}" var="categoryJN">
 				<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
 				</c:forEach>
 			</select>
-			<select class="col m-3 form-select">
+			<select class="col m-3 form-select" name="career">
 				<option selected>경력</option>
 				<option value="0">선택안함</option>
 				<c:forEach items="${CAlist}" var="categoryCA">
 				<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
 				</c:forEach>
 			</select>
-			<select class="col m-3 form-select">
+			<select class="col m-3 form-select" name="education">
 				<option selected>학력</option>
 				<option value="0">선택안함</option>
-				<c:forEach items="${EDlist}" var="categoryCA">
+				<c:forEach items="${EDlist}" var="categoryED">
 				<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
 				</c:forEach>
 			</select>
-			<select class="col m-3 form-select">
+			<select class="col m-3 form-select" name="gender">
 				<option selected>성별</option>
-				<c:forEach items="${SElist}" var="categoryCA">
+				<option value="0">선택안함</option>
+				<c:forEach items="${SElist}" var="categorySE">
 				<option value="${categorySE.categoryId }">${categorySE.categoryName}</option>
 				</c:forEach>
 			</select>
@@ -113,12 +114,9 @@
 			  </thead>
 			  <tbody>
 			    <tr class="text-center">
-			      <td>d</td>
-			      <td>d</td>
-			      <td>d</td>
-			      <td>d</td>
-			      <td>d</td>
-			      <td><a type="button" class="btn btn-light">면접제안</a></td>
+			      <td>이름</td>
+			      <td>이력서</td>
+			      <td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
 			    </tr>
 			   </tbody>
 	   </table> 
@@ -128,6 +126,57 @@
 		
 	</div>
 </section>
+
+	<!-- Modal -->
+	<div class="modal fade" id="interview" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div
+			class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title text-center" id="staticBackdropLabel">면접 제안
+						작성</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form
+						action="${pageContext.request.contextPath }/business/"
+						method="post">
+
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>제목</h4>
+							</div>
+							<div class="col-10 was-validated">
+								<input type="text" class="form-control is-invalid"
+									name="boardTitle" placeholder="제목을 입력해주세요" required>
+								<hr>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>내용</h4>
+							</div>
+							<div class="col-10 was-validated">
+								<input type="text" class="form-control is-invalid"
+									name="boardTitle" placeholder="내용을 입력해주세요" required>
+								<hr>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light"
+								data-bs-dismiss="modal">취소</button>
+							<button type="reset" class="btn btn-light">초기화</button>	
+							<button type="submit" class="btn btn-primary">등록</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- footer  -->
