@@ -515,11 +515,13 @@ public class PsMainController {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
 			List<PsScrapInfoDto> scrap = service.selectListScrap(principal.getName());
+			List<PsResumeDto> resume = rservice.selectList(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.addObject("scraplist", scrap);
 				mv.setViewName("person/scrapjob");
+				mv.addObject("resumelist", resume);
 			} else {
 				mv.setViewName("redirect:/");
 			}

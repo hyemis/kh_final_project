@@ -89,7 +89,7 @@
 										<h1 class="mb-3">스크랩 정보</h1><br>
 										<p>
 											1. 스크랩한 채용공고는 공고 마감과 상관없이 스크랩일로부터 90일 동안 보관됩니다.<br> 2.
-											입사지원을 클릭하면 해당 공고 페이지로 이동합니다.<br>
+											'지원'을 클릭하면 해당 공고에 바로 입사지원 하실 수 있습니다.<br>
 										</p>
 										<br>	
 										<br>
@@ -113,14 +113,51 @@
 														<td><a
 															href="${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}">${scrap.raTitle }</a></td>
 														<td>${scrap.closeDate }</td>
-														<td><button type="submit"
-																class="btn btn-outline-dark"
-																onclick="location.href='${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}'">지원</button></td>
+														<td>
+														<button type="button" class="btn btn-outline-dark" id="applyBtn" data-bs-toggle="modal" data-bs-target="#apply">지원</button>
+														</td>
 													</tr>
 												</c:forEach>
 											</tbody>
-										</table> 
-									
+										</table>
+
+										<!-- 지원하기 모달 창 -->
+										<div class="modal fade" id="apply" tabindex="-1" role="dialog"
+											aria-labelledby="uploadModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered"
+												role="document">
+
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="uploadModalLabel">${redto.raTitle}
+															입사지원</h5>
+
+														<button type="button" class="btn-close"
+															data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<p>
+															<strong>해당 공고에 지원할 이력서를 선택하세요.</strong>
+														</p>
+														<div class="selectbox-wrapper">
+															<select name="selectbox">
+																<c:forEach items="${resumelist}" var="resume">
+																	<option value="${resume.resumeNo}">${resume.resumeTitle}</option>
+																</c:forEach>
+															</select>
+														</div>
+														<br>
+														<hr>
+
+														<button type="button" data-bs-dismiss="modal"
+															class="btn btn-primary mx-auto d-block" type="submit"
+															id="applyJobBtn" data-raNum="${scrap.raNum}">입사지원하기</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
 										<div
 											class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 											<button class="btn btn-primary me-md-2" type="button"
@@ -181,25 +218,47 @@
         });
     }
 }
-	
 	// '지원' 버튼 클릭 이벤트 처리
-	document.getElementById('apply').addEventListener('click', function() {
-	  // 마감일 정보 가져오기
-	  const closeDate = document.querySelector('td:nth-child(4)').textContent;
-	  
-	  // 마감일과 현재 날짜 비교
-	  const today = new Date();
-	  const closeDateObj = new Date(closeDate);
-	  
-	  if (closeDateObj < today) {
-	    // 마감일이 지난 경우 알림창 띄우기
-	    alert('공고 마감일이 지났습니다.');
-	  } else {
-	    // 마감일이 지나지 않은 경우 이동 처리
-	    location.href = '${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}';
-	  }
+	document.querySelectorAll('#applyBtn').forEach(function(button) {
+	  button.addEventListener('click', function() {
+	    // 마감일 정보 가져오기
+	    const row = this.closest('tr');
+	    const closeDate = row.querySelector('td:nth-child(4)').textContent;
+
+	    // 마감일과 현재 날짜 비교
+	    const today = new Date();
+	    const closeDateObj = new Date(closeDate);
+
+	    if (closeDateObj < today) {
+	      // 마감일이 지난 경우 알림창 띄우기
+	      alert('공고 마감일이 지났습니다.');
+	    } else {
+	      // 마감일이 지나지 않은 경우 모달창 띄우기
+	      $('#apply').modal('show');
+	    }
+	  });
 	});
 
+	 // 입사지원 ajax
+	 $(document).ready(function() {
+	    $("#applyJobBtn").click(function() {
+	        var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
+	        const raNum = $('#applyBtn').data('raNum'); // 지원 공고 번호
+
+	        $.ajax({
+	            url: '${pageContext.request.contextPath}/person/applyJob',
+	            type: "POST",
+	            data: { resumeNo: resumeNo, raNum: raNum },
+	            success: function(response) {
+	                $("#apply").modal("hide");
+	                alert("입사지원이 완료되었습니다.");
+	            },
+	            error: function(error) {
+	                alert("입사지원에 실패하였습니다.");
+	            }
+	        });
+	    });
+	});
 
 
 	
