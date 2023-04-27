@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 
 @Repository
@@ -14,8 +15,16 @@ public class BsSearchDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<PsResumeDto> searchResume(String resumeNo) {
-		return sqlSession.selectList("business.searchResume",resumeNo);
+//	public List<PsResumeDto> searchResume() {
+//		return sqlSession.selectList("business.searchResume");
+//	}
+
+	public Object resumePageList(BsSearchDto sdto) {
+		return sqlSession.selectList("business.searchResume", sdto);
+	}
+
+	public int resumePageListCount(BsSearchDto sdto) {
+		return sqlSession.selectOne("business.resumePageListCount", sdto);
 	}
 
 	

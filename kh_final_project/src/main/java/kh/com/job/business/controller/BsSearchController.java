@@ -9,13 +9,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsApplicantResumeDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.business.model.dto.BsSearchDto;
+import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.business.model.service.BsSearchService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingAplicantDto;
+import kh.com.job.person.model.dto.PsCareerDto;
+import kh.com.job.person.model.dto.PsCertiDto;
+import kh.com.job.person.model.dto.PsClDto;
+import kh.com.job.person.model.dto.PsGschoolDto;
+import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsResumeDto;
+import kh.com.job.person.model.dto.PsUnivDto;
 
 @Controller
 @RequestMapping("/business/search")
@@ -27,8 +41,11 @@ public class BsSearchController {
 	@Autowired
 	private BsSearchService bsservice;
 	
+	@Autowired
+	private BsApplicantService apservice;
+	
 	@GetMapping("/suggest")
-	public ModelAndView category(ModelAndView mv) {
+	public ModelAndView category(ModelAndView mv, BsSearchDto sdto) {
 		
 		//직종선택 :직업코드('JN')가져오기
 		mv.addObject("JNlist", brservice.getCateList("JN"));
@@ -39,18 +56,30 @@ public class BsSearchController {
 		//성별선택
 		mv.addObject("SElist", brservice.getCateList("SE"));
 		
+		
+		
 		return mv;
 	}
 	
-	@PostMapping("/suggest")
-	public ModelAndView search(ModelAndView mv, PsResumeDto dto, String resumeNo) {
-//		List<PsResumeDto> list = bsservice.searchResume;
+	//검색결과
+	@GetMapping("/suggest/view")
+	public ModelAndView applicantPassView(ModelAndView mv, BsSearchDto sdto) {
+		mv.addObject("JNlist", brservice.getCateList("JN"));
+		mv.addObject("CAlist", brservice.getCateList("CA"));
+		mv.addObject("EDlist", brservice.getCateList("ED"));
+		mv.addObject("SElist", brservice.getCateList("SE"));	
+		if(sdto.getPnum() == 0) {
+			sdto.setPnum(1);
+		}
+		Paging list = bsservice.resumePageList(sdto);
 		
-//		mv.addObject("search", list);
+		mv.addObject("list", list);
+		mv.addObject("pdto", sdto);
 		
-		
-    return mv;
-}
+		return mv;
+	}
 
 
+
 }
+

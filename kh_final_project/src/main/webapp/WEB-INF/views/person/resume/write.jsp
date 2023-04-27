@@ -92,7 +92,7 @@
 								</select>
 								성별
 								<select class="form-select form-select-sm">
-								  <option selected value="0">선택안함</option>
+								  <option selected value="N">선택안함</option>
 								  <option value="W">남자</option>
 								  <option value="M">여자</option>
 								</select>
