@@ -120,32 +120,7 @@
 												</c:forEach>
 											</tbody>
 										</table> 
-										
-<%-- 										 <table class="table table-hover">
-										  <thead>
-										    <tr>
-											 <th scope="col" class="center">회사명</th>
-										     <th scope="col" class="center">공고명</th>
-										     <th scope="col" class="center">마감일</th>	
-										     <th scope="col" class="center">입사지원</th>
-										     <th></th>											   
-										     </tr>
-										  </thead>
-										  <tbody class="table-group-divider">
-										  <c:forEach items="${scraplist }" var="scrap">
-										    <tr>
-										      <td>${scrap.companyName }</td>
-										      <td><a href="${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}">${scrap.raTitle }</a></td>
-										      <td>${scrap.closeDate }</td>
-												<td><button type="submit"
-														class="btn btn-outline-dark"
-														onclick="location.href='${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}'">지원</button>
-												</td>
-												<td><button type="submit" class="btn btn-outline-dark"onclick="deleteJob(); return false;">삭제</button></td>
-											</tr>
-										  </c:forEach>
-										  </tbody>
-										</table>  --%>
+									
 										<div
 											class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
 											<button class="btn btn-primary me-md-2" type="button"
@@ -206,6 +181,26 @@
         });
     }
 }
+	
+	// '지원' 버튼 클릭 이벤트 처리
+	document.getElementById('apply').addEventListener('click', function() {
+	  // 마감일 정보 가져오기
+	  const closeDate = document.querySelector('td:nth-child(4)').textContent;
+	  
+	  // 마감일과 현재 날짜 비교
+	  const today = new Date();
+	  const closeDateObj = new Date(closeDate);
+	  
+	  if (closeDateObj < today) {
+	    // 마감일이 지난 경우 알림창 띄우기
+	    alert('공고 마감일이 지났습니다.');
+	  } else {
+	    // 마감일이 지나지 않은 경우 이동 처리
+	    location.href = '${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}';
+	  }
+	});
+
+
 
 	
 	

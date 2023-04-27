@@ -67,6 +67,8 @@ public interface BsApplicantService {
 
 	public BsAnnounceDto announceView(BsAnnounceDto adto);
 
+	public int resultUpdate(BsAnnounceDto adto);
+
 	
 	
 
