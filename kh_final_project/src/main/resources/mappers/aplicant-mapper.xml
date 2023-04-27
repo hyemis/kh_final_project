@@ -196,7 +196,8 @@
             #{passType},
             #{resultTitle},
             #{resultContent},
-            #{baNum}) 
+            #{baNum})
+             
 	</insert>
 	
 	<update id="updateResultType">

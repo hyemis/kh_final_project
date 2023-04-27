@@ -170,7 +170,7 @@ public class BsApplicantController {
 		
 		return mv;
 	}
-	
+	//트랜젝션 추가 고민
 	@PostMapping("/passresume")
 	public ModelAndView announceResult(ModelAndView mv, Principal principal
 			, BsAnnounceDto adto
@@ -192,8 +192,6 @@ public class BsApplicantController {
 			int ccNum = 0;
 			String[] cc = new String[ccNum]; 
 			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
-			
-			int updateSucc = apservice.updateResultType(adto);
 			
 		}
 
