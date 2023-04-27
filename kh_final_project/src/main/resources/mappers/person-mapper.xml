@@ -114,11 +114,14 @@
 	</insert>
 	
 	<!-- 입사지원 취소 -->
-<!-- 	DELETE FROM BUSINESS_APPLICANT
-	WHERE BA_NUM = {baNum} AND RA_NUM = {raNum}
-	
-	DELETE FROM USER_APPLY -->
-	
-		
-
+<!-- 	<delete id="cancelApply">
+	DELETE ba, ua
+	FROM BUSINESS_APPLICANT AS ba
+	INNER JOIN USER_APPLY AS ua
+	ON ba.USER_ID = ua.USER_ID
+	AND ba.RA_NUM = #{raNum}
+	AND ua.BA_NUM = #{baNum}
+	AND ba.USER_ID = #{userId}
+	AND ua.USER_ID = #{userId}
+	</delete> -->
 </mapper>

@@ -677,7 +677,7 @@ public class PsMainController {
 	}
 
 	
-	// TODO 입사지원하기
+	// 입사지원하기
 	@PostMapping("applyJob")
 	@ResponseBody
 	public int applyJob(Principal principal, BsAplicantDto dto){
