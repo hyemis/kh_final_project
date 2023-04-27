@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>게시글 상세조회</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -37,6 +37,9 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	rel="stylesheet">
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -52,6 +55,8 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+
+
 
 <style>
 .s {
@@ -70,54 +75,25 @@
 	<section>
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
-				<div class="d-flex justify-content-between align-items-center p-4">
-					<h2 class="mb-0">커뮤니티</h2>
-					<div>
-						<button class="btn btn-outline-dark" type="button"
-							onclick="writePost()">게시글 작성</button>
-					</div>
-				</div>
-
-				<div class="s d-flex justify-content-between align-items-center">
-					<h5>이번 주 전체 인기글</h5>
-
+				<div class="pb-4">
+					<a href="${pageContext.request.contextPath}/board/postall"
+						class="btn btn-outline-dark mx-1">전체글</a>
 				</div>
 
 				<div class="s">
-					<div class="d-flex align-items-center p-2">
-						<h5>주제별 커뮤니티</h5>
+					<h2>${detailBoard.boardTitle}</h2>
+					<div class="d-flex justify-content-between">
+						<div class="pe-3">${detailBoard.userId}</div>
+						<div>${detailBoard.updateDate}</div>
+						<div class="d-flex align-items-end ms-auto">
+							<div class="fas fa-eye pe-3">  ${detailBoard.boardRead}  </div>
+							<div class="fas fa-heart">  ${detailBoard.boardLike}  </div>
+						</div>
 					</div>
-					<div class="d-grid gap-2 d-md-block">
-						<a href="${pageContext.request.contextPath}/board/postall" class="btn btn-outline-dark mx-1">전체글</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">신입</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">취준</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">qna</a>
-					</div>
+
 				</div>
-
-				<div class="s">
-					<div class="row">
-						<div class="col-sm-6 s">d</div>
-						<div class="col-sm-6 s">d</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6 s">d</div>
-						<div class="col-sm-6 s">d</div>
-					</div>
-				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+				<hr>
+				<div class="s">댓글</div>
 
 			</div>
 		</div>
@@ -129,9 +105,8 @@
 
 	<!-- page script -->
 	<script>
-	function writePost() {
-		  location.href = "${pageContext.request.contextPath}/board/writepost";
-		}
+		
 	</script>
+
 </body>
 </html>

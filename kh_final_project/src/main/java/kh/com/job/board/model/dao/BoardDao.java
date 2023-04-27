@@ -18,18 +18,19 @@ public class BoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public BoardDto selectOne(String userId) throws Exception {
-		return sqlSession.selectOne("boards.selectOne", userId);
+	// 게시글 상세조회 
+	public BoardDto detailBoard(Map<String, Object> infoMap) throws Exception {
+		return sqlSession.selectOne("boards.detailBoard", infoMap);
 	}
 	
-	public List<BoardDto> selectList() throws Exception {
-		return sqlSession.selectList("boards.selectList");
+	// 게시글 목록
+	public List<BoardDto> boardList() throws Exception {
+		return sqlSession.selectList("boards.boardList");
 	}
 	
-	public int insert(BoardDto dto) throws Exception {
-		int result = -1;
-		result = sqlSession.insert("boards.insert", dto);
-		return result;
+	// 게시글 등록
+	public int insertBoard(BoardDto dto) throws Exception {
+		return sqlSession.insert("boards.insertBoard", dto);
 	}
 	
 	public int delete(String userId)  throws Exception {

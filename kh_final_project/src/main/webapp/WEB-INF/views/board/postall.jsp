@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>전체글</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -37,6 +37,9 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	rel="stylesheet">
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -59,6 +62,12 @@
 	border-radius: 5px;
 	padding: 30px;
 }
+
+.board-table {
+	width: 100%;
+	table-layout: fixed;
+	border-bottom: 1px solid gray;
+}
 </style>
 
 </head>
@@ -70,54 +79,48 @@
 	<section>
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
-				<div class="d-flex justify-content-between align-items-center p-4">
-					<h2 class="mb-0">커뮤니티</h2>
-					<div>
-						<button class="btn btn-outline-dark" type="button"
-							onclick="writePost()">게시글 작성</button>
-					</div>
+				<div class="pb-4">
+					<h2>게시글전체 검색결과</h2>
+					<span>현재까지 등록된 전체 게시글입니다.</span>
 				</div>
-
-				<div class="s d-flex justify-content-between align-items-center">
-					<h5>이번 주 전체 인기글</h5>
-
-				</div>
-
+				<div class="s">조회 수 출력</div>
+				<hr>
 				<div class="s">
-					<div class="d-flex align-items-center p-2">
-						<h5>주제별 커뮤니티</h5>
+					<c:forEach items="${boardList}" var="board">
+					<div class="p-4">
+						<table class="board-table">
+							<tr>
+								<td class="fs-5 pb-3 fw-semibold">
+								<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank"> 
+								${board.boardTitle}
+								</td>
+								
+							</tr>
+							<tr>
+								<td class="pb-3 fw-light">${board.boardContent}</td>
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex justify-content-between">
+										<div>
+											<span class="fas fa-eye">  ${board.boardRead}  </span> 
+											<span class="fas fa-heart">  ${board.boardLike}  </span>
+										</div>
+										<div>
+											<span>${board.userId}</span> 님이 <span>${board.updateDate}</span>
+											에 작성
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+					
+					
 					</div>
-					<div class="d-grid gap-2 d-md-block">
-						<a href="${pageContext.request.contextPath}/board/postall" class="btn btn-outline-dark mx-1">전체글</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">신입</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">취준</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">qna</a>
-					</div>
+					</c:forEach>
 				</div>
-
-				<div class="s">
-					<div class="row">
-						<div class="col-sm-6 s">d</div>
-						<div class="col-sm-6 s">d</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6 s">d</div>
-						<div class="col-sm-6 s">d</div>
-					</div>
-				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			</div>
 		</div>
@@ -129,9 +132,9 @@
 
 	<!-- page script -->
 	<script>
-	function writePost() {
-		  location.href = "${pageContext.request.contextPath}/board/writepost";
-		}
-	</script>
+	
+	
+	    </script>
+
 </body>
 </html>

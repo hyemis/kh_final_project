@@ -548,7 +548,7 @@
 					}
 				
 				
-				// 
+				// 초기화 버튼
 				$('.btn-reset').click(function() {
   					$('input[type="checkbox"]').prop('checked', false);
  					$('#search').val('');
