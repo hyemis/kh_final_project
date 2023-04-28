@@ -96,3 +96,7 @@ VALUES ('user11', '$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu'
 /* #이력서 테이블 */
 INSERT INTO USER_RESUME (RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) VALUES(USER_RESUME_SEQ.NEXTVAL, '최선을 다하는 계발자가 되겠습니다.', '', sysdate, '', 'user11' );
 
+--배너 테이블 컬럼 3개 고정
+INSERT INTO BANNER VALUES('1','첫번 째 배너','','','1', SYSDATE, 'admin');
+INSERT INTO BANNER VALUES('2','두번 째 배너','','','2', SYSDATE, 'admin');
+INSERT INTO BANNER VALUES('3','세번 째 배너','','','3', SYSDATE, 'admin');
