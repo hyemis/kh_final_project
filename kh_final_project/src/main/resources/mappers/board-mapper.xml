@@ -87,7 +87,6 @@
         WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
     </select>
     
-<<<<<<< HEAD
     <!--  게시글  -->
     <insert id="insertBoard">
     	INSERT INTO
@@ -145,8 +144,6 @@
 	</select>
 
 
-=======
->>>>>>> 490244e155da6577524cec79b4420a379937f967
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
 		INSERT INTO
