@@ -65,6 +65,10 @@
 			alias="apdto" /> 	
 			
 			
+	<!--  board -->
+	<typeAlias type="kh.com.job.board.model.dto.ReplyDto" alias="redto" />
+		
+			
 	
 
 

@@ -410,7 +410,6 @@ ALTER TABLE "BANNER" ADD CONSTRAINT "PK_BANNER" PRIMARY KEY (
 );
 
 
-
 ---------------------------------
 
 
