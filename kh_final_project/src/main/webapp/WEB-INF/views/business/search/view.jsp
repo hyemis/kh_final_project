@@ -75,27 +75,26 @@
 						<option selected value="">직종</option>
 						<option value="">선택안함</option>
 						<c:forEach items="${JNlist}" var="categoryJN">
-							<option value="${categoryJN.categoryId }"
-								${categoryJN.categoryId == pdto.searchNum? 'selected':'' }>${categoryJN.categoryName}</option>
+							<option value="${categoryJN.categoryId }" ${categoryJN.categoryId == pdto.searchNum? 'selected':'' }>${categoryJN.categoryName}</option>
 						</c:forEach>
 					</select> <select class="col m-3 form-select" id="career" name="career">
 						<option selected value="">경력</option>
 						<option value="">선택안함</option>
 						<c:forEach items="${CAlist}" var="categoryCA">
-							<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+							<option value="${categoryCA.categoryId }" ${categoryCA.categoryId == pdto.searchNum? 'selected':'' }>${categoryCA.categoryName}</option>
 						</c:forEach>
 					</select> <select class="col m-3 form-select" id="education"
 						name="education">
 						<option selected value="">학력</option>
 						<option value="">선택안함</option>
 						<c:forEach items="${EDlist}" var="categoryED">
-							<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
+							<option value="${categoryED.categoryId }" ${categoryED.categoryId == pdto.searchNum? 'selected':'' }>${categoryED.categoryName}</option>
 						</c:forEach>
 					</select> <select class="col m-3 form-select" id="gender" name="gender">
 						<option selected value="">성별</option>
 						<option value="">선택안함</option>
 						<c:forEach items="${SElist}" var="categorySE">
-							<option value="${categorySE.categoryId }">${categorySE.categoryName}</option>
+							<option value="${categorySE.categoryId }" ${categorySE.categoryId == pdto.searchNum? 'selected':'' }>${categorySE.categoryName}</option>
 						</c:forEach>
 					</select>
 					<button class="col-1 m-3 btn btn-primary" id="btn-search"
