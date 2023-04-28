@@ -15,9 +15,7 @@ public class BsSearchDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-//	public List<PsResumeDto> searchResume() {
-//		return sqlSession.selectList("business.searchResume");
-//	}
+
 
 	public Object resumePageList(BsSearchDto sdto) {
 		return sqlSession.selectList("business.searchResume", sdto);

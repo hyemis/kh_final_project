@@ -65,7 +65,6 @@
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">열람한 인재</a>
 		
 		<!-- 검색창 -->
-		<form action="${pageContext.request.contextPath }/business/search/suggest/view" method="get" id="searchForm" >
 		<div class="container-fluid row mt-3">
 			<select class="col m-3 form-select" id="jobType" name="jobType">
 				<option selected value="">직종</option>
@@ -95,9 +94,8 @@
 				<option value="${categorySE.categoryId }">${categorySE.categoryName}</option>
 				</c:forEach>
 			</select>
-			<button class="col-1 m-3 btn btn-primary" id="btn-search" type="submit">검색</button>
+			<button class="col-1 m-3 btn btn-primary" id="btn-search" type="button">검색</button>
 		</div>	
-		</form>
 		
 		<!-- 목록 -->
 		<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
@@ -115,19 +113,19 @@
 			  <c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="5" class="text-center">검색결과가 없습니다</td>
+							<td colspan="5" class="text-center">검색결과가 없습니다</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
 							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
-			    <tr class="text-center">
-			      <td>${list.userName}</td>
-			      <td><a href="${pageContext.request.contextPath}/business/suggest/resume?no=${list.resumeNo}">${list.resumeTitle }</a></td>	
-			      <td>${list.userEmail}</td>
-			      <td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
-			    </tr>
-			    </c:forEach>
+						    <tr class="text-center">
+						      <td>${list.userName}</td>
+						      <td><a href="${pageContext.request.contextPath}/business/suggest/resume?no=${list.resumeNo}">${list.resumeTitle }</a></td>	
+						      <td>${list.userEmail}</td>
+						      <td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
+						    </tr>
+						    </c:forEach>
 						</c:otherwise>
 					</c:choose>
 			   </tbody>
@@ -153,8 +151,6 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form action="${pageContext.request.contextPath }/business/"
-						method="post">
 
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
@@ -193,6 +189,43 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<!-- page script -->
+	<script>
+<!--	$(document).ready(function() {
+		  $('#btn-search').click(function() {
+		    var jobType = $('#jobType').val();
+		    var career = $('#career').val();
+		    var education = $('#education').val();
+		    var gender = $('#gender').val();
+
+		    $.ajax({
+		      url: '${pageContext.request.contextPath}/business/search/suggest',
+		      type: 'POST',
+		      data: {
+		        jobType: jobType,
+		        career: career,
+		        education: education,
+		        gender: gender
+		      },
+		      success: function(result) {
+		        // Ajax 요청이 성공했을 때 실행할 코드
+		        console.log(result); // 콘솔에 응답 출력하기
+		      },
+		      error: function(xhr) {
+		        // Ajax 요청이 실패했을 때 실행할 코드
+		    	alert('검색실패');
+		      }
+		    });
+		  });
+		});-->
+		
+		$(document).on('click', '#btn-search', function() {
+				let jobType = $('#jobType').val();
+				let career = $('#career').val();
+				let education = $('#education').val();
+				let gender = $('#gender').val();
+				location.href = '${pageContext.request.contextPath}/business/search/suggest?pnum=${pageNumber}&jobType='+jobType+'&career='+career'&education='+education+'&gender='+gender;
+			});
+	</script>
 	
 </body>
 </html>

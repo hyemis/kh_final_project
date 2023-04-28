@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,8 +42,6 @@ public class BsSearchController {
 	@Autowired
 	private BsSearchService bsservice;
 	
-	@Autowired
-	private BsApplicantService apservice;
 	
 	@GetMapping("/suggest")
 	public ModelAndView category(ModelAndView mv, BsSearchDto sdto) {
@@ -56,29 +55,33 @@ public class BsSearchController {
 		//성별선택
 		mv.addObject("SElist", brservice.getCateList("SE"));
 		
-		
-		
-		return mv;
-	}
-	
-	//검색결과
-	@GetMapping("/suggest/view")
-	public ModelAndView applicantPassView(ModelAndView mv, BsSearchDto sdto) {
-		mv.addObject("JNlist", brservice.getCateList("JN"));
-		mv.addObject("CAlist", brservice.getCateList("CA"));
-		mv.addObject("EDlist", brservice.getCateList("ED"));
-		mv.addObject("SElist", brservice.getCateList("SE"));	
 		if(sdto.getPnum() == 0) {
 			sdto.setPnum(1);
 		}
 		Paging list = bsservice.resumePageList(sdto);
 		
 		mv.addObject("list", list);
-		mv.addObject("pdto", sdto);
+		mv.addObject("sdto", sdto);
 		
 		return mv;
 	}
-
+	
+/*	//검색결과
+	@PostMapping("/suggest")
+	public ModelAndView findResume(ModelAndView mv, BsSearchDto sdto) {
+		
+		if(sdto.getPnum() == 0) {
+			sdto.setPnum(1);
+		}
+		Paging list = bsservice.resumePageList(sdto);
+		
+		mv.addObject("list", list);
+		mv.addObject("sdto", sdto);
+		
+		return mv;
+	}
+	
+*/
 
 
 }

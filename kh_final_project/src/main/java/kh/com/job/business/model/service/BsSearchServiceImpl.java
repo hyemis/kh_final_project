@@ -17,10 +17,7 @@ public class BsSearchServiceImpl implements BsSearchService{
 	@Autowired
 	private BsSearchDao dao;
 
-//	@Override
-//	public List<PsResumeDto> searchResume() {
-//		return dao.searchResume();
-//	}
+
 
 	@Override
 	public Paging resumePageList(BsSearchDto sdto) {

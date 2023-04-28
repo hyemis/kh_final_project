@@ -9,9 +9,7 @@ import kh.com.job.person.model.dto.PsResumeDto;
 public interface BsSearchService {
 
 	
-//	public List<PsResumeDto> searchResume();
 	
 	public Paging resumePageList(BsSearchDto sdto);
-
 
 }
