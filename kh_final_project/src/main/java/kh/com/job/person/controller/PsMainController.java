@@ -459,7 +459,7 @@ public class PsMainController {
 	}
 	
 	
-	// TODO : 입사지원 취소
+	// 입사지원 취소
 	@PostMapping("cancelApply")
 	@ResponseBody
 	public int cancelApply(Principal principal, @RequestParam("raNum") Integer raNum) throws Exception {

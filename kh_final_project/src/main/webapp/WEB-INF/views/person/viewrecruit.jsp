@@ -469,7 +469,7 @@ $(document).ready(function() {
           });
         } else {   	  
           // 입사 지원 불가
-          alert("이미 입사지원한 공고입니다.");
+          alert("이미 입사 지원한 공고입니다.");
         }
       },
       error: function(error) {

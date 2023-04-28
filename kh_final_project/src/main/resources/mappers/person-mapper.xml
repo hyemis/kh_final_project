@@ -107,7 +107,6 @@
  	 WHERE RA_NUM = #{raNum} AND USER_ID = #{userId}
 	</select>
 	
-	
 	<!-- 입사지원 -->
 	<insert id="applyJob" parameterType="apdto">
 	INSERT ALL
@@ -119,7 +118,6 @@
 		VALUES (#{userId}, BUSINESS_APPLICANT_SEQ.NEXTVAL, current_timestamp, #{resumeNo})
 		SELECT * FROM DUAL
 	</insert>
-	
 	
 	<!-- 입사지원 조회 -->
 	<select id="selectListApply" resultType="applydto">
@@ -134,8 +132,8 @@
 	
 	<!-- 입사지원 취소 -->
 	<delete id="cancelApply" parameterType="map">
-	 DELETE FROM
-  	SCRAP_INFO
+	DELETE FROM
+  	BUSINESS_APPLICANT
   	WHERE USER_ID = #{userId} AND RA_NUM = #{raNum}
 	</delete>	
 </mapper>
