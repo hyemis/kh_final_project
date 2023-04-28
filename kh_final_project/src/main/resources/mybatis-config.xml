@@ -11,8 +11,8 @@
 
 	<typeAliases>
 	<!-- board -->
-		<typeAlias type="kh.com.job.board.model.dto.BoardDto"
-			alias="bdto" />
+		<typeAlias type="kh.com.job.board.model.dto.BoardDto" alias="bdto" />
+		<typeAlias type="kh.com.job.board.model.dto.ReplyDto" alias="redto" />
 		
 			
 	<!-- person -->	
@@ -60,13 +60,11 @@
 			alias="brdto" />
 	 	<typeAlias type="kh.com.job.business.model.dto.InterviewDto"
 			alias="indto" /> 
-			
 		 <typeAlias type="kh.com.job.business.model.dto.BsAplicantDto"
 			alias="apdto" /> 	
 			
 			
-	<!--  board -->
-	<typeAlias type="kh.com.job.board.model.dto.ReplyDto" alias="redto" />
+	
 		
 			
 	

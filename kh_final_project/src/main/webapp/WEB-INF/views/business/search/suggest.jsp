@@ -116,15 +116,7 @@
 			        <th scope="col">면접제안하기</th>
 			    </tr>
 			  </thead> 
-			  <tbody>
-			  <c:forEach items="${list }" var="list" varStatus="i">
-			  	<tr>
-			  		<td>${list.userName}</td>
-			  		<td>${list.resumeTitle }</td>
-			  		<td>${list.userEmail}</td>
-			  		<td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
-			  	</tr>
-			  </c:forEach>	
+			  <tbody id="result-body">
 			  </tbody>
 	   </table> 
 	
@@ -133,6 +125,7 @@
 		
 	</div>
 </section>
+
 
 	<!-- Modal -->
 	<div class="modal fade" id="interview" data-bs-backdrop="static"
@@ -204,13 +197,26 @@
 		        education: education,
 		        gender: gender
 		      },
-		      success: function(result) {
-		        // Ajax 요청이 성공했을 때 실행할 코드
-		        console.log(result); // 콘솔에 응답 출력하기
+		      success: function(data) {
+		    	  if (data.length === 0) {
+		              $('#result-body').html('<tr><td colspan="4" class="text-center">이력서 정보가 없습니다</td></tr>');
+		          } else {
+		    	  var html = '';
+                  for (var i = 0; i < data.length; i++) {
+                      var resume = data[i];
+                      html += '<tr>';
+                      html += '<td class="text-center">' + resume.userName + '</td>';
+                      html += '<td class="text-center">' + resume.resumeTitle + '</td>';
+                      html += '<td class="text-center">' + resume.userEmail + '</td>';
+                      html += '<td class="text-center"><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>';
+                      html += '</tr>';
+                  }
+                  $('#result-body').html(html);
+		         }
 		      },
 		      error: function(xhr) {
 		        // Ajax 요청이 실패했을 때 실행할 코드
-		    	alert('검색실패');
+		    	console.log('검색 실패');
 		      }
 		    });
 		  });
