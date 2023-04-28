@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,7 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     <!-- css file link part end -->
-    <title>관리자 메인페이지</title>
+    <title>배너상세</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -55,33 +56,56 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 <div class="container-xl px-5">
-		 	<table class="table">
-		 		<thead>
-		 			<tr>
-		 				<th scope="col">1</th>
-		 				<th scope="col">2</th>
-		 				<th scope="col">3</th>
-		 			</tr>
-		 		</thead>
-		 		<tbody>
-		 			<tr>
-		 				<td>a</td>
-		 				<td>b</td>
-		 				<td>c</td>
-		 			</tr>
-		 			<tr>
-		 				<td>a1</td>
-		 				<td>b1</td>
-		 				<td>c1</td>
-		 			</tr>
-		 		</tbody>
-		 	</table>
+			
+				<form action="update" method="post" >
+				<table class="my-5 table table-borderless">
+					<thead>
+						<tr>
+							<th scope="col" class="col-4"></th>
+							<th scope="col" class="col-auto"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>미리보기</td>
+							<td>
+								<img alt="${detail.bannerSub }" src="${detail.bannerThum eq null? 'https://dummyimage.com/100x100/000000/ffffff.png&text=No+Image' : detail.bannerThum}" style="width: 100px; height: 100px;">
+							</td>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td>
+								<input type="text" name="bannerSub" class="bannerSub form-control" value="${detail.bannerSub }"> 
+							</td>
+						</tr>
+						<tr>
+							<td>배너 링크</td>
+							<td>
+								<input type="text" name="bannerLink" class="bannerLink form-control" value="${detail.bannerLink}"> 
+							</td>
+						</tr>
+						<tr>
+							<td>배너 순서</td>
+							<td>
+								<input type="text" name="bannerSeq" class="bannerSeq form-control" value="${detail.bannerSeq }">
+							</td>
+						</tr>
+						<tr>
+							<td>마지막 수정자</td>
+							<td>${detail.userId }</td>
+						</tr>
+						<tr>
+							<td>마지막 수정일</td>
+							<td>${detail.registDate}</td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="button" class="btn btn-primary">수정</button>
+				</form>
+					 	
 		 </div>
 
-		 
 
-        
-		<%-- <%@ include file="../common/footer.jsp" %> --%>
 
 
         <!-- Back to Top -->
