@@ -112,7 +112,9 @@
 																<c:when	test="${apply.resultType == 'Y' || apply.resultType == 'N'}">열람완료</c:when>
 																<c:when test="${apply.resultType == 'A'}">
 																	<button type="button" class="btn btn-outline-dark"
-																		id="cancelBtn" onclick="cancelApply(); return false;">지원취소</button>
+																		id="cancelBtn"
+																		onclick="cancelApply(${apply.raNum}); return false;">지원취소</button>
+
 																</c:when>
 															</c:choose></td>
 												</c:forEach>
@@ -145,21 +147,21 @@
 	}
 	
 	// 지원 취소 ajax
-	var raNum = ${apply.raNum}
-	
+	function cancelApply(raNum) {
     $.ajax({
-        type: 'POST',
+        type: "POST",
         url: '${pageContext.request.contextPath}/person/cancelApply',
         data: {raNum : raNum},
         success: function() {
-            alert('해당 입사공고 지원이 취소됐습니다.');
+            // 지원취소 완료
+            alert("입사 지원이 취소됐습니다.");
         },
         error: function(error) {
-            alert("지원취소에 실패했습니다.");
+            alert("입사 지원 취소에 실패하였습니다.");
         }
     });
 }
-}
+
 	
 	
 	

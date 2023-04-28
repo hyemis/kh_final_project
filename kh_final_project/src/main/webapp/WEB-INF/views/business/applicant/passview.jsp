@@ -50,7 +50,7 @@
 			</div>
 			<div class="">
 				<select id="searchResult" class="form-select searchResult" name="searchResult">
-					<option value="0">선택안함</option>
+					<option value="">선택안함</option>
 					<c:forEach items="${PTlist }" var="cate">
 						<option value="${cate.categoryId }">${cate.categoryName }</option>
 					</c:forEach>

@@ -114,7 +114,7 @@
 															href="${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}">${scrap.raTitle }</a></td>
 														<td>${scrap.closeDate }</td>
 														<td>
-														<button type="button" class="btn btn-outline-dark" id="applyBtn" data-bs-toggle="modal" data-bs-target="#apply">지원</button>
+														<button type="button" class="btn btn-outline-dark apply-btn" data-bs-toggle="modal" data-bs-target="#apply">지원</button>
 														</td>
 													</tr>
 												</c:forEach>
@@ -219,28 +219,30 @@
     }
 }
 	// '지원' 버튼 클릭 이벤트 처리
-	document.querySelectorAll('#applyBtn').forEach(function(button) {
+	const applyButtons = document.querySelectorAll('.apply-btn');
+	applyButtons.forEach(button => {
 	  button.addEventListener('click', function() {
 	    // 마감일 정보 가져오기
 	    const row = this.closest('tr');
 	    const closeDate = row.querySelector('td:nth-child(4)').textContent;
-
+	
 	    // 마감일과 현재 날짜 비교
 	    const today = new Date();
 	    const closeDateObj = new Date(closeDate);
-
+	
 	    if (closeDateObj < today) {
 	      // 마감일이 지난 경우 알림창 띄우기
 	      alert('공고 마감일이 지났습니다.');
 	    } else {
 	      // 마감일이 지나지 않은 경우 모달창 띄우기
-	      $('#apply').modal('show');
+	      $('.apply').modal('show');
 	    }
 	  });
 	});
 
+
 	 // 입사지원 ajax
-	 $(document).ready(function() {
+ 	 $(document).ready(function() {
 	    $("#applyJobBtn").click(function() {
 	        var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
 	        const raNum = $('#applyBtn').data('raNum'); // 지원 공고 번호
