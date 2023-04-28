@@ -26,3 +26,18 @@
 	        color : red;
 	        display : none;    
 	} 
+	
+	/* 슬라이드 배너 */
+	.carousel-item img {
+	  height: 300px;
+	  object-fit: cover;
+	  width: 100%;
+	  margin: 0 auto;
+	}
+	.carousel-indicators li {
+	  background-color: #000;
+	  opacity: 0.5;
+	}
+	.carousel-indicators li.active {
+	  opacity: 1;
+	}

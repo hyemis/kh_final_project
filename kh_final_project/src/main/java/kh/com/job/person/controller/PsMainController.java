@@ -778,6 +778,12 @@ public class PsMainController {
 		return result;
 	}
 	
+	
+	@GetMapping("/index")
+	public ModelAndView index(ModelAndView mv) {
+		
+		return mv;
+	}
 
 	
 

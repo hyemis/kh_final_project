@@ -210,6 +210,15 @@
 		WHERE BANNER_ID = #{id}
 	</select>
 	
-	
+	<update id="bannerUpdate">
+		update BANNER 
+	    set BANNER_SUB = #{bannerSub}
+		    , BANNER_LINK = #{bannerLink}
+		    , BANNER_THUM = #{bannerThum}
+		    , BANNER_SEQ = #{bannerSeq}
+		    , USER_ID = #{userId}
+		    ,REGIST_DATE = SYSDATE
+	    where banner_id = #{bannerId}
+	</update>
 	
 </mapper>

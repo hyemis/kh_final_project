@@ -22,4 +22,8 @@ public class AdDao {
 		return sqlsession.selectOne("admin.bannerDetail", id);
 	}
 
+	public int bannerUpdate(AdBannerDto dto) {
+		return sqlsession.update("admin.bannerUpdate", dto);
+	}
+
 }
