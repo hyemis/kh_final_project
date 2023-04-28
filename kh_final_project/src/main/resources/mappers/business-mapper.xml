@@ -10,6 +10,26 @@
 	</select>
 
 <!-- search -->
+	<select id="resumeList" resultType="kh.com.job.board.model.dto.BsSearchDto">
+		SELECT UT.USER_NAME, UT.USER_EMAIL, 
+	       UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		FROM USER_RESUME UR
+		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		WHERE	
+				<if test="jobType != ''">
+			        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
+			    </if>
+			    <if test="career != ''">
+			        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
+			    </if>
+			    <if test="education != ''">
+			        EDUCATION = #{education} <if test="gender != ''"> AND </if>
+			    </if>
+			    <if test="gender != ''">
+			        GENDER = #{gender} 
+			    </if>
+		AND RESUME_ACT = 'Y' 
+	</select>
 
 	<select id="resumePageList" resultType="kh.com.job.business.model.dto.BsSearchDto">
 		SELECT DISTINCT RESUME_NO, USER_ID, USER_NAME, USER_EMAIL,  
@@ -21,22 +41,23 @@
 			      	  	   UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
 				      FROM USER_RESUME UR
 				      JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				      WHERE	    
+					   <if test="jobType != ''">
+					        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
+					    </if>
+					    <if test="career != ''">
+					        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
+					    </if>
+					    <if test="education != ''">
+					        EDUCATION = #{education} <if test="gender != ''"> AND </if>
+					    </if>
+					    <if test="gender != ''">
+					        GENDER = #{gender} 
+					    </if>
+					    AND RESUME_ACT = 'Y'
 				    ) A
 			 ) 
-		WHERE	    
-	   <if test="jobType != ''">
-	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
-	    </if>
-	    <if test="career != ''">
-	        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
-	    </if>
-	    <if test="education != ''">
-	        EDUCATION = #{education} <if test="gender != ''"> AND </if>
-	    </if>
-	    <if test="gender != ''">
-	        GENDER = #{gender} 
-	    </if>
-	    AND RESUME_ACT = 'Y' AND NUM BETWEEN #{startNum} AND #{endNum}
+		WHERE  NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
 	<!-- 이력서 페이지 카운트 -->
@@ -46,21 +67,11 @@
 		       		 UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, 
 		      		 UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
 			    FROM USER_RESUME UR
-			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID)
-		WHERE	    
-		<if test="jobType != ''">
-	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
-	    </if>
-	    <if test="career != ''">
-	        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
-	    </if>
-	    <if test="education != ''">
-	        EDUCATION = #{education} <if test="gender != ''"> AND </if>
-	    </if>
-	    <if test="gender != ''">
-	        GENDER = #{gender} 
-	    </if>
-	    AND RESUME_ACT = 'Y'
+			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+			    WHERE	    
+			    AND RESUME_ACT = 'Y'
+			)
+	
 	</select>
 
 

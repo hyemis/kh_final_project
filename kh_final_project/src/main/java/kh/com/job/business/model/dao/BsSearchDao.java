@@ -25,6 +25,10 @@ public class BsSearchDao {
 		return sqlSession.selectOne("business.resumePageListCount", sdto);
 	}
 
+	public List<BsSearchDto> resumeList(BsSearchDto sdto) {
+		return sqlSession.selectList("business.resumeList", sdto);
+	}
+
 	
 	
 	
