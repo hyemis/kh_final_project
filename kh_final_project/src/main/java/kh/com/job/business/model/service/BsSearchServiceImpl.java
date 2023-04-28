@@ -48,4 +48,11 @@ public class BsSearchServiceImpl implements BsSearchService{
 
 
 
+	@Override
+	public List<BsSearchDto> resumeList(BsSearchDto sdto) {
+		return dao.resumeList(sdto);
+	}
+
+
+
 }

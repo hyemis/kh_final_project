@@ -77,58 +77,55 @@
 				<option selected value="">경력</option>
 				<option value="">선택안함</option>
 				<c:forEach items="${CAlist}" var="categoryCA">
+				<c:if test="${categoryCA.categoryId != 'CA03'}">
 				<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
+				</c:if>
 				</c:forEach>
 			</select>
 			<select class="col m-3 form-select" id="education" name="education">
 				<option selected value="" >학력</option>
 				<option value="">선택안함</option>
 				<c:forEach items="${EDlist}" var="categoryED">
+				<c:if test="${categoryED.categoryId != 'ED01'}">
 				<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
+				</c:if>
 				</c:forEach>
 			</select>
 			<select class="col m-3 form-select" id="gender" name="gender">
 				<option selected value="">성별</option>
 				<option value="">선택안함</option>
 				<c:forEach items="${SElist}" var="categorySE">
+				<c:if test="${categorySE.categoryId != 'SE03'}">
 				<option value="${categorySE.categoryId }">${categorySE.categoryName}</option>
+				</c:if>	
 				</c:forEach>
 			</select>
 			<button class="col-1 m-3 btn btn-primary" id="btn-search" type="button">검색</button>
 		</div>	
-		
+	
+
 		<!-- 목록 -->
 		<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
 		<div class="table-responsive mt-5">
 		<table class="table table-hover">
 			  <thead>
 			    <tr class="text-center">
-			      <th scope="col">이름</th>
-			      <th scope="col">이력서</th>
-			      <th scope="col">이메일</th>
-			      <th scope="col">면접제안하기</th>
+			        <th scope="col">이름</th>
+			        <th scope="col">이력서</th>
+			        <th scope="col">이메일</th>
+			        <th scope="col">면접제안하기</th>
 			    </tr>
-			  </thead>
+			  </thead> 
 			  <tbody>
-			  <c:choose>
-						<c:when test="${empty list}">
-							<tr>
-							<td colspan="5" class="text-center">검색결과가 없습니다</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
-							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
-						    <tr class="text-center">
-						      <td>${list.userName}</td>
-						      <td><a href="${pageContext.request.contextPath}/business/suggest/resume?no=${list.resumeNo}">${list.resumeTitle }</a></td>	
-						      <td>${list.userEmail}</td>
-						      <td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
-						    </tr>
-						    </c:forEach>
-						</c:otherwise>
-					</c:choose>
-			   </tbody>
+			  <c:forEach items="${list }" var="list" varStatus="i">
+			  	<tr>
+			  		<td>${list.userName}</td>
+			  		<td>${list.resumeTitle }</td>
+			  		<td>${list.userEmail}</td>
+			  		<td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
+			  	</tr>
+			  </c:forEach>	
+			  </tbody>
 	   </table> 
 	
 	</div>
@@ -191,14 +188,33 @@
 	<!-- page script -->
 	<script>
 
-		
-		$(document).on('click', '#btn-search', function() {
-				let jobType = $('#jobType').val();
-				let career = $('#career').val();
-				let education = $('#education').val();
-				let gender = $('#gender').val();
-				location.href = '${pageContext.request.contextPath}/business/search/suggest?pnum=${pageNumber}&jobType='+jobType+'&career='+career'&education='+education+'&gender='+gender;
-			});
+	$(document).ready(function() {
+		  $('#btn-search').click(function() {
+		    var jobType = $('#jobType').val();
+		    var career = $('#career').val();
+		    var education = $('#education').val();
+		    var gender = $('#gender').val();
+
+		    $.ajax({
+		      url: '${pageContext.request.contextPath}/business/search/suggest',
+		      type: 'POST',
+		      data: {
+		        jobType: jobType,
+		        career: career,
+		        education: education,
+		        gender: gender
+		      },
+		      success: function(result) {
+		        // Ajax 요청이 성공했을 때 실행할 코드
+		        console.log(result); // 콘솔에 응답 출력하기
+		      },
+		      error: function(xhr) {
+		        // Ajax 요청이 실패했을 때 실행할 코드
+		    	alert('검색실패');
+		      }
+		    });
+		  });
+		});
 	</script>
 	
 </body>

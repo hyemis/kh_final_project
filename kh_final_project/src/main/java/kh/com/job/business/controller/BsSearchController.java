@@ -37,51 +37,47 @@ import kh.com.job.person.model.dto.PsUnivDto;
 public class BsSearchController {
 	
 	@Autowired
-	private BsRecruitService brservice;
+	private BsRecruitService brService;
 	
 	@Autowired
-	private BsSearchService bsservice;
+	private BsSearchService bsService;
 	
 	
 	@GetMapping("/suggest")
 	public ModelAndView category(ModelAndView mv, BsSearchDto sdto) {
 		
 		//직종선택 :직업코드('JN')가져오기
-		mv.addObject("JNlist", brservice.getCateList("JN"));
+		mv.addObject("JNlist", brService.getCateList("JN"));
 		//경력선택
-		mv.addObject("CAlist", brservice.getCateList("CA"));
+		mv.addObject("CAlist", brService.getCateList("CA"));
 		//학력선택
-		mv.addObject("EDlist", brservice.getCateList("ED"));
+		mv.addObject("EDlist", brService.getCateList("ED"));
 		//성별선택
-		mv.addObject("SElist", brservice.getCateList("SE"));
-		
-		if(sdto.getPnum() == 0) {
-			sdto.setPnum(1);
-		}
-		Paging list = bsservice.resumePageList(sdto);
-		
-		mv.addObject("list", list);
-		mv.addObject("sdto", sdto);
+		mv.addObject("SElist", brService.getCateList("SE"));
 		
 		return mv;
 	}
 	
-/*	//검색결과
+	//검색결과
 	@PostMapping("/suggest")
-	public ModelAndView findResume(ModelAndView mv, BsSearchDto sdto) {
-		
-		if(sdto.getPnum() == 0) {
-			sdto.setPnum(1);
-		}
-		Paging list = bsservice.resumePageList(sdto);
-		
-		mv.addObject("list", list);
-		mv.addObject("sdto", sdto);
-		
-		return mv;
-	}
-	
-*/
+	@ResponseBody
+	public List<BsSearchDto> searchResume(
+	       @RequestParam(name = "jobType", required = false, defaultValue = "") String jobType,
+	       @RequestParam(name = "career", required = false, defaultValue = "") String career,
+	       @RequestParam(name = "education", required = false, defaultValue = "") String education,
+	       @RequestParam(name = "gender", required = false, defaultValue = "") String gender) {
+
+	        BsSearchDto dto = new BsSearchDto();
+	        dto.setJobType(jobType);
+	        dto.setCareer(career);
+	        dto.setEducation(education);
+	        dto.setGender(gender);
+
+	        List<BsSearchDto> list = bsService.resumeList(dto);
+	        
+	        return list;
+	    }
+
 
 
 }
