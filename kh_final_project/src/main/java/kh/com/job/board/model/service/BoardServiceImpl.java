@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kh.com.job.board.model.dao.BoardDao;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.ReplyDto;
 
 @Service
 public  class BoardServiceImpl implements BoardService {
@@ -20,9 +21,29 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.viewDetail(boardNo);
 	}
 	
+
 	@Override
-	public BoardDto detailBoard(Map<String, Object> infoMap) throws Exception {
-		return dao.detailBoard(infoMap);
+	public BoardDto detailBoard(String readUser, int boardNo) throws Exception {
+		BoardDto result = dao.detailBoard(boardNo);
+		if(!result.getUserId().equals(readUser)) {
+			dao.updateRead(boardNo);
+		}
+		return result;
+	}
+	
+	@Override
+	public int updateLike(String readUser, int boardNo) throws Exception{
+	    BoardDto userId = dao.detailBoard(boardNo);
+	    if(!userId.getUserId().equals(readUser)) {
+	        int result = dao.updateLike(boardNo);
+	        return result;
+	    }
+	    return 0;
+	}
+	
+	@Override
+	public List<ReplyDto> replyList(int boardNo) throws Exception {
+		return dao.replyList(boardNo);
 	}
 
 	@Override

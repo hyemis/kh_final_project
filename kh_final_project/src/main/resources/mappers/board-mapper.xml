@@ -73,7 +73,6 @@
    	<select id="detailBoard" resultType="bdto">
    	SELECT * FROM BOARD 
 	WHERE BOARD_NO = #{boardNo}
-	AND USER_ID = #{userId}
    	</select>
 
 	<!--  게시글 목록 -->
@@ -83,7 +82,37 @@
 	ORDER BY UPDATE_DATE desc
 	</select>
 	
-	<!-- 게시글 조회 순으로 조회 -->
+	<!-- 게시글 조회 수 증가 -->
+	<update id="updateRead">
+	UPDATE BOARD 
+	SET BOARD_READ = BOARD_READ + 1 
+	WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 게시글 좋아요 증가 -->
+	<update id="updateLike">
+	UPDATE BOARD 
+	SET BOARD_LIKE = BOARD_LIKE  + 1 
+	WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply">
+	INSERT INTO REPLY (REPLY_ID, BOARD_NO, USER_ID, REPLY_CONTENT, REPLY_CREATE_DATE, REPLY_LEVEL, REPLY_SEQ)
+	VALUES (${replySeq}, #{boardNo}, #{userId}, #{replyContent}, SYSDATE, 1, ${replySeq})
+	<selectKey keyProperty="replySeq" resultType="_int" order="BEFORE">
+			SELECT MAX(REPLY_ID) +1 FROM REPLY
+	</selectKey>
+	</insert>
+	
+	
+	<!-- 댓글 조회 -->
+	<select id="replyList" resultType="redto">
+	SELECT * FROM REPLY 
+	WHERE BOARD_NO = #{boardNo}
+	AND REPLY_LEVEL IN ('0','1')
+	ORDER BY REPLY_CREATE_DATE ASC
+	</select>
 
 
 	<!-- 뉴스레터 -->

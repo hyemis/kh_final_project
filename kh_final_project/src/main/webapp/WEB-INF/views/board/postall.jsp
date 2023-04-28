@@ -132,9 +132,7 @@
 
 	<!-- page script -->
 	<script>
-	
-	
-	    </script>
+	</script>
 
 </body>
 </html>

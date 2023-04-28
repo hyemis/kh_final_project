@@ -20,12 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.service.BsRecruitService;
 
 @Controller
 @RequestMapping("/board")
-public class boardController {
+public class BoardController {
 	
 	@Autowired
 	private BoardService service;
@@ -128,6 +129,7 @@ public class boardController {
 		// 게시글 전체 조회 페이지
 		@GetMapping("/postall")
 		public ModelAndView viewPostAll(ModelAndView mv) throws Exception {
+			
 			// 게시글 목록
 			List<BoardDto> boardList = service.boardList();
 			// updateDate를 시분까지 잘라서 저장 및 boardContent 제거
@@ -143,49 +145,66 @@ public class boardController {
 			return mv;
 		}	
 		
-		// 게시글 상세 조회 
+		// 게시글 상세 조회 + 조회 수 증가 
 		@GetMapping("/detail/{boardNo}")
-		public ModelAndView viewRecruit(ModelAndView mv, @PathVariable String boardNo, Principal principal) throws Exception {
+		public ModelAndView viewRecruit(ModelAndView mv, @PathVariable Integer boardNo, Principal principal) throws Exception {
 			
-			Map<String, Object> infoMap = new HashMap<>();
-			infoMap.put("userId", principal.getName());
-			infoMap.put("boardNo", boardNo);
-			
-			BoardDto detail = service.detailBoard(infoMap);
+
+			BoardDto detail = service.detailBoard(principal.getName(), boardNo);
 			
 			// updateDate 문자열에서 시분초까지 자르기
 		    String updateDate = detail.getUpdateDate().substring(0, 19);
-
-		    // BoardDto 객체에 자른 updateDate 문자열을 다시 저장
 		    detail.setUpdateDate(updateDate);
+		    
+		    
+		    // 댓글 목록
+		    List<ReplyDto> reply = service.replyList(boardNo);
+		    
+		    
 			
 			
 			mv.addObject("detailBoard", detail);
-			
+			mv.addObject("replyList", reply);
 			mv.setViewName("board/detail");
 			return mv;
 		}
+		
+		// 게시글 좋아요 
+		@PostMapping("/updatelike")
+		@ResponseBody
+		public Map<String, Object> updateLike(int boardNo, Principal principal) throws Exception {
+			
+		    int result = service.updateLike(principal.getName(), boardNo);
+		    Map<String, Object> response = new HashMap<>();
+		    if (result > 0) {
+		        response.put("result", "success");
+		    } else {
+		        response.put("result", "fail");
+		    }
+		    return response;
+		}
+		
+		// 댓글 등록 
+		@PostMapping("/writereply")
+		@ResponseBody
+		public  Map<String, Object> writereply(ModelAndView mv,ReplyDto dto) throws Exception {
+			
+			int result = -1;
+			 Map<String, Object> response = new HashMap<>();
+			    if (result > 0) {
+			        response.put("result", "success");
+			    } else {
+			        response.put("result", "fail");
+			    }
+			    return response;
+		}
+		
+	
+		
 			
 	
 			
 			
-
-
- 
-		//이거 매핑 주소 post 말고 다른걸로 해주실 수 있나요???
-		// 게시글 
-			@GetMapping("/post")
-			public ModelAndView post(ModelAndView mv) {
-				return mv;
-		}
-			
-		// 이거 매핑 주소 post 말고 다른걸로 해주실 수 있나요???	
-		// 게시글 등록 
-			@GetMapping("/postinsert")
-			public ModelAndView postinsert(ModelAndView mv) {
-				return mv;
-
-		}
 			
 			
 }
