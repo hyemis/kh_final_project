@@ -135,7 +135,7 @@ public class BoardController {
 			// updateDate를 시분까지 잘라서 저장 및 boardContent 제거
 			for (BoardDto board : boardList) {
 			    String updateDate = board.getUpdateDate();
-			    board.setUpdateDate(updateDate.substring(11, 16)); // 11번째 문자부터 16번째 문자 전까지 잘라서 저장
+			    board.setUpdateDate(updateDate.substring(0, 16)); 
 
 			    // boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
 			    String boardContent = board.getBoardContent().replaceAll("<img[^>]*>","").replaceAll("\\<.*?>","");
@@ -162,7 +162,6 @@ public class BoardController {
 		    
 		    
 			
-			
 			mv.addObject("detailBoard", detail);
 			mv.addObject("replyList", reply);
 			mv.setViewName("board/detail");
@@ -187,17 +186,38 @@ public class BoardController {
 		// 댓글 등록 
 		@PostMapping("/writereply")
 		@ResponseBody
-		public  Map<String, Object> writereply(ModelAndView mv,ReplyDto dto) throws Exception {
+		public  Map<String, Object>  writereply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
 			
-			int result = -1;
-			 Map<String, Object> response = new HashMap<>();
-			    if (result > 0) {
-			        response.put("result", "success");
-			    } else {
-			        response.put("result", "fail");
-			    }
-			    return response;
+			dto.setUserId(principal.getName());
+			int result = service.insertReply(dto);
+			
+			Map<String, Object> response = new HashMap<>();
+			if (result > 0) {
+			     response.put("result", "success");
+			} else {
+			      response.put("result", "fail");
+			}
+			return response;
 		}
+		
+		// 댓글 삭제 
+		@PostMapping("/deletereply")
+		@ResponseBody
+		public  Map<String, Object>  deletereply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
+			
+			dto.setUserId(principal.getName());
+			int result = service.deleteReply(dto);
+			
+			Map<String, Object> response = new HashMap<>();
+			if (result > 0) {
+			     response.put("result", "success");
+			} else {
+			      response.put("result", "fail");
+			}
+			return response;
+		}
+		
+		// 댓글 수정 
 		
 	
 		

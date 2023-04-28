@@ -24,7 +24,11 @@ public interface BoardService {
 	// 댓글 목록 
 	public List<ReplyDto> replyList(int boardNo) throws Exception;
 	
+	// 댓글 등록
+	public int insertReply(ReplyDto dto) throws Exception;
 	
+	// 댓글 삭제 
+	public int deleteReply(ReplyDto dto) throws Exception;
 	
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;

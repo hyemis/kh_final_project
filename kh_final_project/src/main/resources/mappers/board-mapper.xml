@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="boards">
 
-	<select id="listAll"
-		resultType="kh.com.job.board.model.dto.BoardDto">
+	<select id="listAll" resultType="kh.com.job.board.model.dto.BoardDto">
 		SELECT *
 		FROM BOARD
 		WHERE USER_ID =#{userId}
@@ -24,12 +23,40 @@
 		JOIN BOARD BD ON UT.USER_ID = BD.USER_ID
 		WHERE BD.BOARD_NO = #{boardNo}
 	</select>
-
-
-	
+    
 	<!-- 게시글 조회 순으로 조회 -->
 
+	<!-- 회사소개 -->
+	<insert id="insertCompanyInfo">
+		INSERT INTO
+		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE)
+		VALUES(${boardNo},#{userId},'UDB06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
+		<selectKey keyProperty="boardNo" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(BOARD_NO) +1 FROM BOARD
+		</selectKey>
+	</insert>
+
+	<update id="updateCompanyInfo">
+		UPDATE USER_TABLE SET
+			BOARD_NO = ${boardNo},
+			BOARD_CONTENT = #{boardContent},
+			UPDATE_DATE = CURRENT_TIMESTAMP,
+			TAG = #{tag},
+			SALARY_AVG = #{salaryAvg},
+			EMPLOYEE = #{employee}
+		WHERE USER_ID = #{userId}
+		<selectKey keyProperty="boardNo" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(BOARD_NO) +1 FROM BOARD
+		</selectKey>
+	</update>
 	
+	<select id="viewCompanyInfo" resultType="bdto">
+        SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE
+        FROM BOARD
+        WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
+    </select>
     
     <!--  게시글  -->
     <insert id="insertBoard">
@@ -72,12 +99,11 @@
 	<!-- 댓글 등록 -->
 	<insert id="insertReply">
 	INSERT INTO REPLY (REPLY_ID, BOARD_NO, USER_ID, REPLY_CONTENT, REPLY_CREATE_DATE, REPLY_LEVEL, REPLY_SEQ)
-	VALUES (${replySeq}, #{boardNo}, #{userId}, #{replyContent}, SYSDATE, 1, ${replySeq})
+	VALUES (${replySeq}, #{boardNo}, #{userId}, #{replyContent}, SYSDATE, 1, 0)
 	<selectKey keyProperty="replySeq" resultType="_int" order="BEFORE">
 			SELECT MAX(REPLY_ID) +1 FROM REPLY
 	</selectKey>
 	</insert>
-	
 	
 	<!-- 댓글 조회 -->
 	<select id="replyList" resultType="redto">
@@ -86,39 +112,15 @@
 	AND REPLY_LEVEL IN ('0','1')
 	ORDER BY REPLY_CREATE_DATE ASC
 	</select>
-
-	<!-- 회사소개 -->
-	<insert id="insertCompanyInfo">
-		INSERT INTO
-		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE)
-		VALUES(${boardNo},#{userId},'UDB06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
-		<selectKey keyProperty="boardNo" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
-	</insert>
-
-	<update id="updateCompanyInfo">
-		UPDATE USER_TABLE SET
-			BOARD_NO = ${boardNo},
-			BOARD_CONTENT = #{boardContent},
-			UPDATE_DATE = CURRENT_TIMESTAMP,
-			TAG = #{tag},
-			SALARY_AVG = #{salaryAvg},
-			EMPLOYEE = #{employee}
-		WHERE USER_ID = #{userId}
-		<selectKey keyProperty="boardNo" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
-	</update>
 	
-	<select id="viewCompanyInfo" resultType="bdto">
-        SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE
-        FROM BOARD
-        WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
-    </select>
-    
+	<!-- 댓글 삭제  -->
+	<delete id="deleteReply">
+	DELETE REPLY 
+	WHERE REPLY_ID = #{replyId}
+	AND USER_ID= #{userId}
+	</delete>
+
+
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
 		INSERT INTO
@@ -156,6 +158,12 @@
 		FROM BOARD
 		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
 	</select>
+
+
+
+
+
+
 
 	<!-- qna -->
 	<insert id="insertQnA">

@@ -92,7 +92,7 @@ img {
 						<div>${detailBoard.updateDate}</div>
 						<div class="d-flex align-items-end ms-auto">
 							<div class="fas fa-eye pe-3">조회 ${detailBoard.boardRead}</div>
-							<div class="fas fa-heart" onclick="handleLikeClick()">좋아요
+							<div class="fas fa-heart" onclick="handleLike()">좋아요
 								${detailBoard.boardLike}</div>
 						</div>
 					</div>
@@ -108,10 +108,9 @@ img {
 								<td class="pb-3" style="white-space: nowrap; overflow: hidden;">${reply.replyContent}</td>
 								<td>
 									<div class="d-flex justify-content-end align-items-center">
-										<sec:authorize
-											access="hasRole('ROLE_P') and #reply.userId == authentication.name">
-											<a href="" class="">수정</a>
-											<a href="" class="me-2">삭제</a>
+										 <sec:authorize access="hasRole('ROLE_P') and #reply.userId == authentication.name">
+											<a class="" onclick="handleUpdateReply()">수정</a>
+											<a class="me-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
 										</sec:authorize>
 									</div>
 								</td>
@@ -136,7 +135,7 @@ img {
 						<input type="text" style="width: 100%;" 
 							placeholder="위 고민과 같은 경험이 있거나, 알고 계신 정보가 있다면 조언 부탁드려요!">
 						<div class="px-3">
-							<button class="btn btn-outline-dark" type="button" onclick="handleReplyClick">댓글
+							<button class="btn btn-outline-dark" type="button" onclick="handleReply()">댓글
 								등록</button>
 						</div>
 					</div>
@@ -157,7 +156,7 @@ img {
 	<!-- page script -->
 	<script>
 		// 좋아요 증가 
-		function handleLikeClick() {
+		function handleLike() {
 			const boardNo = ${detailBoard.boardNo};
 
 			$.ajax({
@@ -182,13 +181,12 @@ img {
 		
 		
 		// 댓글 작성
-		function handleReplyClick() {
-		  var replyContent = $("input[type='text']").val();
-		  var userId = '${reply.userId}';
-		  var boardNo = '${detailBoard.boardNo}';
+		function handleReply() {
+		  const replyContent = $("input[type='text']").val();
+		  const boardNo = ${detailBoard.boardNo};
+		  
 		  var params = {
 		    replyContent: replyContent,
-		    userId: userId,
 		    boardNo: boardNo
 		  };
 		  
@@ -196,17 +194,45 @@ img {
 		    type: "POST",
 		    url: "${pageContext.request.contextPath}/board/writereply",
 		    data: params,
-		    success: function(response) {
+		    success : function(response) {
+				if (response.result === 'success') {
+					location.reload();
+				} else {
+					alert('댓글 등록에 실패했습니다.');
+				}
+			},
+			error : function(xhr, status, error) {
+				alert("에러 발생 : " + error);
+			}
+		  });
+		}
+		
+		// 댓글 삭제 
+		function handleDeleteReply(element) {
+			  const replyId = element.dataset.replyId;
+
+		  
+		  
+		  $.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/board/deletereply",
+		    data: {replyId:replyId},
+		    success : function(response) {
 		      if (response.result === 'success') {
 		        location.reload();
 		      } else {
-		        alert('댓글 작성에 실패했습니다.');
+		        alert('댓글 삭제에 실패했습니다.');
 		      }
 		    },
-		    error: function(xhr, status, error) {
+		    error : function(xhr, status, error) {
 		      alert("에러 발생 : " + error);
 		    }
 		  });
+		}
+		
+		// 댓글 수정 
+		function handleUpdateReply() {
+			
 		}
 	</script>
 

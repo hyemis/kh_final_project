@@ -57,6 +57,7 @@ public class BoardDto {
 			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 			this.boardDate = format.format(boardDate);
 		}
+		
 		public void setupdatedDate(java.sql.Timestamp updateDate) {
 			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 			this.updateDate = format.format(updateDate);
