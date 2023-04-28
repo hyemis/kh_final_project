@@ -45,6 +45,17 @@ public  class BoardServiceImpl implements BoardService {
 	public List<ReplyDto> replyList(int boardNo) throws Exception {
 		return dao.replyList(boardNo);
 	}
+	
+	@Override
+	public int insertReply(ReplyDto dto) throws Exception {
+		return dao.insertReply(dto);
+	}
+	
+	@Override
+	public int deleteReply(ReplyDto dto) throws Exception {
+		return dao.deleteReply(dto);
+	}
+	
 
 	@Override
 	public List<BoardDto> boardList() throws Exception {

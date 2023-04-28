@@ -49,9 +49,9 @@
 			
 		<typeAlias type="kh.com.job.person.model.dto.PsScrapInfoDto"
 			alias="scrapdto" />
-		<typeAlias type="kh.com.job.person.model.dto.PsApplyDto"
+		<!-- <typeAlias type="kh.com.job.person.model.dto.PsApplyDto"
 			alias="applydto" />
-			
+			 -->
 		
 	<!-- business -->		
 		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"
