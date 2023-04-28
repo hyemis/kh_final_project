@@ -87,7 +87,7 @@
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
 										<h1 class="mb-3">입사지원 목록</h1>
-										<p>열람한 이력서는 입사지원 취소가 불가능합니다.</p>
+										<p>기업이 열람한 이력서는 입사지원 취소가 불가능합니다.</p>
 										<br>	
 										<br>
 										<br>
@@ -101,14 +101,23 @@
 										   </tr>
 										  </thead>
 										  <tbody class="table-group-divider">
-<%-- 			수정예정							  <c:forEach items="${resumelist }" var="resume">
-										    <tr>
-										      <td><a href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}">${resume.resumeTitle }</a></td>
-										      <td>${resume.resumeDate }</td>
-										      <td>${resume.portfFile }</td>
-										    </tr>
-										  </c:forEach> --%>
+												<c:forEach items="${applylist}" var="apply">
+													<tr>
+														<td>${apply.applyDate}</td>
+														<td>${apply.companyName}</td>
+														<td><a
+															href="${pageContext.request.contextPath}/person/viewrecruit/${apply.raNum}">
+																${apply.raTitle} </a></td>
+														<td class="text-center"><c:choose>
+																<c:when	test="${apply.resultType == 'Y' || apply.resultType == 'N'}">열람완료</c:when>
+																<c:when test="${apply.resultType == 'A'}">
+																	<button type="button" class="btn btn-outline-dark"
+																		id="cancelBtn" onclick="cancelApply(); return false;">지원취소</button>
+																</c:when>
+															</c:choose></td>
+												</c:forEach>
 										  </tbody>
+										
 										</table>
 										
 									</div>
@@ -134,6 +143,26 @@
 	if(msg) {
 		alert(msg);
 	}
+	
+	// 지원 취소 ajax
+	var raNum = ${apply.raNum}
+	
+    $.ajax({
+        type: 'POST',
+        url: '${pageContext.request.contextPath}/person/cancelApply',
+        data: {raNum : raNum},
+        success: function() {
+            alert('해당 입사공고 지원이 취소됐습니다.');
+        },
+        error: function(error) {
+            alert("지원취소에 실패했습니다.");
+        }
+    });
+}
+}
+	
+	
+	
 	</script>
 </body>
 </html>

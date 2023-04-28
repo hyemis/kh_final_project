@@ -442,25 +442,43 @@ var raNum = '${redto.raNum}';
  
  
  // 입사지원 ajax
- $(document).ready(function() {
-    $("#applyJobBtn").click(function() {
-        var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
-        var raNum = "${redto.raNum}"; // 지원 공고 번호
-
-        $.ajax({
+$(document).ready(function() {
+  $("#applyJobBtn").click(function() {
+    var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
+    var raNum = "${redto.raNum}"; // 지원 공고 번호
+        
+    // checkApply 호출해 지원 여부 확인
+    $.ajax({
+      type: "POST",
+      url: "${pageContext.request.contextPath}/person/checkApply",
+      data: { raNum: raNum },
+      success: function (data) {  	
+        if (data == 0 ) {
+          // 입사지원
+          $.ajax({
             url: '${pageContext.request.contextPath}/person/applyJob',
             type: "POST",
             data: { resumeNo: resumeNo, raNum: raNum },
             success: function(response) {
-                $("#apply").modal("hide");
-                alert("입사지원이 완료되었습니다.");
+              $("#apply").modal("hide");
+              alert("입사지원이 완료되었습니다.");
             },
             error: function(error) {
-                alert("입사지원에 실패하였습니다.");
+              alert("입사지원에 실패하였습니다.");
             }
-        });
+          });
+        } else {   	  
+          // 입사 지원 불가
+          alert("이미 입사지원한 공고입니다.");
+        }
+      },
+      error: function(error) {
+        console.log(error);
+      }
     });
+  });
 });
+
 
 
 

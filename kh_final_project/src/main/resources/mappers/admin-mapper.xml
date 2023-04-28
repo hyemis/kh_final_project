@@ -199,4 +199,26 @@
 		SELECT * FROM JA_CATEGORY
 		WHERE CATEGORY_ID = #{recruitType}
 	</select>
+	
+	<!-- 배너리스트 -->
+	<select id="bannerList" resultType="kh.com.job.admin.model.dto.AdBannerDto">
+		SELECT * FROM BANNER
+	</select>
+	
+	<select id="bannerDetail" resultType="kh.com.job.admin.model.dto.AdBannerDto">
+		SELECT * FROM BANNER
+		WHERE BANNER_ID = #{id}
+	</select>
+	
+	<update id="bannerUpdate">
+		update BANNER 
+	    set BANNER_SUB = #{bannerSub}
+		    , BANNER_LINK = #{bannerLink}
+		    , BANNER_THUM = #{bannerThum}
+		    , BANNER_SEQ = #{bannerSeq}
+		    , USER_ID = #{userId}
+		    ,REGIST_DATE = SYSDATE
+	    where banner_id = #{bannerId}
+	</update>
+	
 </mapper>
