@@ -38,7 +38,7 @@ public class BsSearchServiceImpl implements BsSearchService{
 		int pageCount = count/pageLimit + mod;
 		
 		//new Paging(게시글정보, 현재페이지, 페이지네이션 된 마지막 숫자 (<,1,2,3,4,5,> 여기서는 5))
-		Paging list = new Paging(dao.resumePageListCount(sdto), sdto.getPnum(), pageCount);
+		Paging list = new Paging(dao.resumePageList(sdto), sdto.getPnum(), pageCount);
 		//만약 게시글이 표시될 개수와 페이지를 표시할 개수를 바꾸고 싶으면  new Paging
 		//(게시글정보, 현재페이지, 페이지네이션 된 마지막 숫자, int 게시글이 표시될 개 수, listLimit)
 		//로 생성한다.

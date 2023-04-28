@@ -14,11 +14,15 @@
 	<select id="resumePageList" resultType="kh.com.job.business.model.dto.BsSearchDto">
 		SELECT DISTINCT RESUME_NO, USER_ID, USER_NAME, USER_EMAIL,  
 			   JOB_TYPE, CAREER,EDUCATION, GENDER, RESUME_ACT
-		FROM (SELECT UT.USER_ID, UT.USER_NAME, UT.USER_EMAIL, 
-		       		 UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, 
-		      		 UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
-			    FROM USER_RESUME UR
-			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID)
+		FROM( 
+			  SELECT ROWNUM AS NUM , A.*
+			  FROM (SELECT UT.USER_ID, UT.USER_NAME, UT.USER_EMAIL, 
+			         	   UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, 
+			      	  	   UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
+				      FROM USER_RESUME UR
+				      JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				    ) A
+			 ) 
 		WHERE	    
 	   <if test="jobType != ''">
 	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>

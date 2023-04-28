@@ -18,7 +18,7 @@ public class BsSearchDao {
 
 
 	public Object resumePageList(BsSearchDto sdto) {
-		return sqlSession.selectList("business.searchResume", sdto);
+		return sqlSession.selectList("business.resumePageList", sdto);
 	}
 
 	public int resumePageListCount(BsSearchDto sdto) {
