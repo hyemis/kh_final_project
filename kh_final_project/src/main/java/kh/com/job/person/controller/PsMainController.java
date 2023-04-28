@@ -28,9 +28,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import kh.com.job.admin.model.dto.AdBannerDto;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.admin.model.service.AdCategotyService;
+import kh.com.job.admin.model.service.AdService;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
@@ -62,6 +64,9 @@ public class PsMainController {
 
 	@Autowired
 	private AdBusinessService abs;
+	
+	@Autowired
+	private AdService adservice;
 
 	@Autowired
 	@Qualifier("fileUtil")
@@ -781,6 +786,10 @@ public class PsMainController {
 	
 	@GetMapping("/index")
 	public ModelAndView index(ModelAndView mv) {
+		
+		List<AdBannerDto> bList = adservice.bannerList();
+		
+		mv.addObject("bList", bList);
 		
 		return mv;
 	}
