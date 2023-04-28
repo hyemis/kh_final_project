@@ -48,15 +48,13 @@
 		    <li data-bs-target="#carouselCantent" data-bs-slide-to="2"></li>
 		  </ol>
 		  <div class="carousel-inner">
-		    <div class="carousel-item active">
-		      <img src="${pageContext.request.contextPath}/resources/template/makaan/img/testimonial-1.jpg" class="d-block w-50 h-50" alt="...">
+		  <c:forEach items="${bList }" var="list" varStatus="i">
+		  	<div class="carousel-item ${i.count ==1?'active':'' }">
+			  	<a href="${pageContext.request.contextPath}/${list.bannerLink }">
+			      <img src="${list.bannerThum eq null? 'https://dummyimage.com/200x200/000000/ffffff.png&text=No+Image' : list.bannerThum}" class="d-block" alt="..." style="width: 800px; height: 500px;">
+			    </a>
 		    </div>
-		    <div class="carousel-item">
-		      <img src="${pageContext.request.contextPath}/resources/template/makaan/img/testimonial-2.jpg" class="d-block w-50 h-50" alt="...">
-		    </div>
-		    <div class="carousel-item">
-		      <img src="${pageContext.request.contextPath}/resources/template/makaan/img/testimonial-3.jpg" class="d-block w-50 h-50" alt="...">
-		    </div>
+		  </c:forEach>
 		  </div>
 		  <a class="carousel-control-prev " href="#carouselCantent" role="button" data-bs-slide="prev">
 		    <span class="carousel-control-prev-icon" aria-hidden="flas"></span>
