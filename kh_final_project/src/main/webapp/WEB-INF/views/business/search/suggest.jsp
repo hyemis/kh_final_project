@@ -190,33 +190,7 @@
 
 	<!-- page script -->
 	<script>
-<!--	$(document).ready(function() {
-		  $('#btn-search').click(function() {
-		    var jobType = $('#jobType').val();
-		    var career = $('#career').val();
-		    var education = $('#education').val();
-		    var gender = $('#gender').val();
 
-		    $.ajax({
-		      url: '${pageContext.request.contextPath}/business/search/suggest',
-		      type: 'POST',
-		      data: {
-		        jobType: jobType,
-		        career: career,
-		        education: education,
-		        gender: gender
-		      },
-		      success: function(result) {
-		        // Ajax 요청이 성공했을 때 실행할 코드
-		        console.log(result); // 콘솔에 응답 출력하기
-		      },
-		      error: function(xhr) {
-		        // Ajax 요청이 실패했을 때 실행할 코드
-		    	alert('검색실패');
-		      }
-		    });
-		  });
-		});-->
 		
 		$(document).on('click', '#btn-search', function() {
 				let jobType = $('#jobType').val();
