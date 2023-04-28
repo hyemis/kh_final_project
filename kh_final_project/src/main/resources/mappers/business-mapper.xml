@@ -20,19 +20,18 @@
 			    FROM USER_RESUME UR
 			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID)
 		WHERE	    
-	    <if test="jobType != null">
-	        JOB_TYPE = #{jobType}
+	   <if test="jobType != ''">
+	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
 	    </if>
-	    <if test="career != null">
-	        AND CAREER = #{career}
+	    <if test="career != ''">
+	        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
 	    </if>
-	    <if test="education != null">
-	        AND EDUCATION = #{education}
+	    <if test="education != ''">
+	        EDUCATION = #{education} <if test="gender != ''"> AND </if>
 	    </if>
-	    <if test="gender != null">
-	        AND GENDER = #{gender}
+	    <if test="gender != ''">
+	        GENDER = #{gender} 
 	    </if>
-	    
 	    AND RESUME_ACT = 'Y' AND NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
@@ -46,16 +45,16 @@
 			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID)
 		WHERE	    
 		<if test="jobType != ''">
-	        JOB_TYPE = #{jobType}
+	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
 	    </if>
 	    <if test="career != ''">
-	        AND CAREER = #{career}
+	        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
 	    </if>
 	    <if test="education != ''">
-	        AND EDUCATION = #{education}
+	        EDUCATION = #{education} <if test="gender != ''"> AND </if>
 	    </if>
 	    <if test="gender != ''">
-	        AND GENDER = #{gender}
+	        GENDER = #{gender} 
 	    </if>
 	    AND RESUME_ACT = 'Y'
 	</select>
