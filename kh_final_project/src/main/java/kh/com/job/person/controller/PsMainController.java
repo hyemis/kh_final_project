@@ -37,6 +37,7 @@ import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
+import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -442,9 +443,11 @@ public class PsMainController {
 	public ModelAndView viewApplyList(ModelAndView mv, Principal principal) {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
+			List<PsApplyDto> apply = service.selectListApply(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
+				mv.addObject("applylist",apply);
 				mv.setViewName("person/applylist");
 			} else {
 				mv.setViewName("redirect:/");
@@ -455,7 +458,22 @@ public class PsMainController {
 		return mv;
 	}
 	
+	
 	// TODO : 입사지원 취소
+	@PostMapping("cancelApply")
+	@ResponseBody
+	public int cancelApply(Principal principal, @RequestParam("raNum") Integer raNum) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("raNum", raNum);
+		InfoNo.put("userId", principal.getName());
+
+		result = service.cancelApply(InfoNo);
+
+		return result;
+	}
 	
 	
 	
@@ -667,6 +685,26 @@ public class PsMainController {
 	}
 	
 	
+	// 입사지원 여부 체크
+	@PostMapping("checkApply")
+	@ResponseBody
+	public int checkApply(@RequestParam("raNum") int raNum, Principal principal) throws Exception{
+		
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("raNum", raNum);
+		InfoNo.put("userId", principal.getName());
+
+		int result = service.checkApply(InfoNo);
+		int data = 0;
+		if(result > 0) { //지원 돼있으면
+			data = 1; // 데이터=1
+			return data;
+		} else { //안 돼있으면 데이터=0
+			return data;
+		}
+	}
+
 	
 	// 카테고리에 맞는 채용공고 출력 
 	@PostMapping("/recruit/info")
