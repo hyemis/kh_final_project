@@ -26,6 +26,35 @@
 	</select>
 
 
+	
+    
+    <!--  게시글  -->
+    <insert id="insertBoard">
+    	INSERT INTO
+		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE)
+		VALUES(${boardNo},#{userId},#{categoryId},#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+		<selectKey keyProperty="boardNo" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(BOARD_NO) +1 FROM BOARD
+		</selectKey>
+    </insert>
+    
+    <!-- 게시글 상세조회  -->
+   	<select id="detailBoard" resultType="bdto">
+   	SELECT * FROM BOARD 
+	WHERE BOARD_NO = #{boardNo}
+	AND USER_ID = #{userId}
+   	</select>
+
+	<!--  게시글 목록 -->
+	<select id="boardList" resultType="bdto">
+	SELECT * FROM BOARD 
+	WHERE CATEGORY_ID IN ('UBD01', 'UBD02','UBD03','UBD04' ) 
+	ORDER BY UPDATE_DATE desc
+	</select>
+	
+	<!-- 게시글 조회 순으로 조회 -->
+
 	<!-- 회사소개 -->
 	<insert id="insertCompanyInfo">
 		INSERT INTO
@@ -58,6 +87,7 @@
         WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
     </select>
     
+<<<<<<< HEAD
     <!--  게시글  -->
     <insert id="insertBoard">
     	INSERT INTO
@@ -115,6 +145,8 @@
 	</select>
 
 
+=======
+>>>>>>> 490244e155da6577524cec79b4420a379937f967
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
 		INSERT INTO

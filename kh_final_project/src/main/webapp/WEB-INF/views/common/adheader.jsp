@@ -17,17 +17,15 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">개인</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시글</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">개인 회원 관리</a>
+                                <a href="${pageContext.request.contextPath}/admin/banner" class="dropdown-item">배너 관리</a>
                                 <a href="property-type.html" class="dropdown-item">게시판 관리</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">채용 공고 관리</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">기업 회원 관리</a>
                                 <a href="${pageContext.request.contextPath}/admin/business/main" class="dropdown-item">채용 공고 관리</a>
                             </div>
                         </div>

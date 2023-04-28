@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -104,6 +105,20 @@ public class PsDao {
 		return sqlSession.insert("person.applyJob", dto);
 	}
 	
-
+	// 입사지원 조회
+	public List<PsApplyDto> selectListApply(String userId) throws Exception {
+		return sqlSession.selectList("person.selectListApply", userId);
+	}
+	
+	// 입사지원 취소
+	public int cancelApply(Map<String, Object> InfoNo) throws Exception{
+		return sqlSession.delete("person.cancelApply",InfoNo);
+	}
+	
+	// 입사지원 체크
+	public int checkApply(Map<String, Object> InfoNo) throws Exception {
+		int result = sqlSession.selectOne("person.checkApply", InfoNo);
+		return result;
+	}
 
 }

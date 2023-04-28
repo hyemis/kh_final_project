@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 import kh.com.job.temp.model.dto.TempDto;
@@ -24,9 +25,14 @@ public interface PsService {
 	public int deleteJob(Map<String, Object> InfoNo) throws Exception;
 	public int checkScrap(Map<String, Object> InfoNo) throws Exception;
 	public List<PsScrapInfoDto> selectListScrap(String userId) throws Exception;
-	
+	public List<PsApplyDto> selectListApply(String userId) throws Exception;
+	public int checkApply(Map<String, Object> InfoNo) throws Exception;
+	 
 	//입사지원
 	public int applyJob(BsAplicantDto dto) throws Exception;
+	//입사지원 취소
+	public int cancelApply(Map<String, Object> InfoNo) throws Exception;
+	
 	
 	// 카카오 로그인 
 	String getAccessToken(String authorize_code) throws Throwable;

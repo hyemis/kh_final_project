@@ -11,21 +11,54 @@
 
 <!-- search -->
 
-	<select id="searchResume" resultType="rdto">
-		SELECT DISTINCT RESUME_NO, USER_ID
-		FROM USER_RESUME
-		WHERE 1=1
-	    <if test="jobType != null and jobType != 0">
-	        AND JOB_TYPE = #{jobType}
+	<select id="resumePageList" resultType="kh.com.job.business.model.dto.BsSearchDto">
+		SELECT DISTINCT RESUME_NO, USER_ID, USER_NAME, USER_EMAIL,  
+			   JOB_TYPE, CAREER,EDUCATION, GENDER, RESUME_ACT
+		FROM( 
+			  SELECT ROWNUM AS NUM , A.*
+			  FROM (SELECT UT.USER_ID, UT.USER_NAME, UT.USER_EMAIL, 
+			         	   UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, 
+			      	  	   UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
+				      FROM USER_RESUME UR
+				      JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				    ) A
+			 ) 
+		WHERE	    
+	   <if test="jobType != ''">
+	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
 	    </if>
-	    <if test="career != null and career != 0">
-	        AND CAREER = #{career}
+	    <if test="career != ''">
+	        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
 	    </if>
-	    <if test="education != null and education != 0">
-	        AND EDUCATION = #{education}
+	    <if test="education != ''">
+	        EDUCATION = #{education} <if test="gender != ''"> AND </if>
 	    </if>
-	    <if test="gender != null and gender != 0">
-	        AND GENDER = #{gender}
+	    <if test="gender != ''">
+	        GENDER = #{gender} 
+	    </if>
+	    AND RESUME_ACT = 'Y' AND NUM BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<!-- 이력서 페이지 카운트 -->
+	<select id="resumePageListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT UT.USER_ID, UT.USER_NAME, UT.USER_EMAIL, 
+		       		 UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, 
+		      		 UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
+			    FROM USER_RESUME UR
+			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID)
+		WHERE	    
+		<if test="jobType != ''">
+	        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
+	    </if>
+	    <if test="career != ''">
+	        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
+	    </if>
+	    <if test="education != ''">
+	        EDUCATION = #{education} <if test="gender != ''"> AND </if>
+	    </if>
+	    <if test="gender != ''">
+	        GENDER = #{gender} 
 	    </if>
 	    AND RESUME_ACT = 'Y'
 	</select>

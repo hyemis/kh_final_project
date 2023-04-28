@@ -59,83 +59,91 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 	<!-- page section -->
-<section>
-	<div class="container-fluid bg-white p-5">
-	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
-	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">열람한 인재</a>
-		
-		<!-- 검색창 -->
-		<div class="container-fluid row mt-3">
-			<select class="col m-3 form-select" id="jobType" name="jobType">
-				<option selected value="">직종</option>
-				<option value="">선택안함</option>
-				<c:forEach items="${JNlist}" var="categoryJN">
-				<option value="${categoryJN.categoryId }" ${categoryJN.categoryId == pdto.searchNum? 'selected':'' }>${categoryJN.categoryName}</option>
-				</c:forEach>
-			</select>
-			<select class="col m-3 form-select" id="career" name="career">
-				<option selected value="">경력</option>
-				<option value="">선택안함</option>
-				<c:forEach items="${CAlist}" var="categoryCA">
-				<option value="${categoryCA.categoryId }">${categoryCA.categoryName}</option>
-				</c:forEach>
-			</select>
-			<select class="col m-3 form-select" id="education" name="education">
-				<option selected value="" >학력</option>
-				<option value="">선택안함</option>
-				<c:forEach items="${EDlist}" var="categoryED">
-				<option value="${categoryED.categoryId }">${categoryED.categoryName}</option>
-				</c:forEach>
-			</select>
-			<select class="col m-3 form-select" id="gender" name="gender">
-				<option selected value="">성별</option>
-				<option value="">선택안함</option>
-				<c:forEach items="${SElist}" var="categorySE">
-				<option value="${categorySE.categoryId }">${categorySE.categoryName}</option>
-				</c:forEach>
-			</select>
-			<button class="col-1 m-3 btn btn-primary" id="btn-search" type="button">검색</button>
-		</div>	
-		
-		<!-- 목록 -->
-		<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
-		<div class="table-responsive mt-5">
-		<table class="table table-hover">
-			  <thead>
-			    <tr class="text-center">
-			      <th scope="col">이름</th>
-			      <th scope="col">이력서</th>
-			      <th scope="col">이메일</th>
-			      <th scope="col">면접제안하기</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  <c:choose>
-						<c:when test="${empty list}">
-							<tr>
-							<td colspan="5" class="text-center">검색결과가 없습니다</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
-							<c:forEach items="${list.getPage() }" var="list" varStatus="i">
-						    <tr class="text-center">
-						      <td>${list.userName}</td>
-						      <td><a href="${pageContext.request.contextPath}/business/suggest/resume?no=${list.resumeNo}">${list.resumeTitle }</a></td>	
-						      <td>${list.userEmail}</td>
-						      <td><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
-						    </tr>
-						    </c:forEach>
-						</c:otherwise>
-					</c:choose>
-			   </tbody>
-	   </table> 
-	
-	</div>
-		
-		
-	</div>
-</section>
+	<section>
+		<div class="container-fluid bg-white p-5">
+			<h4>기업회원을 위한 맞춤형 인재 추천</h4>
+			<a class="btn btn-primary"
+				href="<%=request.getContextPath()%>/business/search" role="button">열람한
+				인재</a>
+
+			<!-- 검색창 -->
+			<form
+				action="${pageContext.request.contextPath }/business/search/suggest/view"
+				method="get" id="searchForm">
+				<div class="container-fluid row mt-3">
+					<select class="col m-3 form-select" id="jobType" name="jobType">
+						<option selected value="">직종</option>
+						<option value="">선택안함</option>
+						<c:forEach items="${JNlist}" var="categoryJN">
+							<option value="${categoryJN.categoryId }" ${categoryJN.categoryId == pdto.searchNum? 'selected':'' }>${categoryJN.categoryName}</option>
+						</c:forEach>
+					</select> <select class="col m-3 form-select" id="career" name="career">
+						<option selected value="">경력</option>
+						<option value="">선택안함</option>
+						<c:forEach items="${CAlist}" var="categoryCA">
+							<option value="${categoryCA.categoryId }" ${categoryCA.categoryId == pdto.searchNum? 'selected':'' }>${categoryCA.categoryName}</option>
+						</c:forEach>
+					</select> <select class="col m-3 form-select" id="education"
+						name="education">
+						<option selected value="">학력</option>
+						<option value="">선택안함</option>
+						<c:forEach items="${EDlist}" var="categoryED">
+							<option value="${categoryED.categoryId }" ${categoryED.categoryId == pdto.searchNum? 'selected':'' }>${categoryED.categoryName}</option>
+						</c:forEach>
+					</select> <select class="col m-3 form-select" id="gender" name="gender">
+						<option selected value="">성별</option>
+						<option value="">선택안함</option>
+						<c:forEach items="${SElist}" var="categorySE">
+							<option value="${categorySE.categoryId }" ${categorySE.categoryId == pdto.searchNum? 'selected':'' }>${categorySE.categoryName}</option>
+						</c:forEach>
+					</select>
+					<button class="col-1 m-3 btn btn-primary" id="btn-search"
+						type="submit">검색</button>
+				</div>
+			</form>
+
+			<!-- 목록 -->
+			<c:set var="pageNumber" value="${empty pnum ? 1 : pnum }" />
+			<div class="table-responsive mt-5">
+				<table class="table table-hover">
+					<thead>
+						<tr class="text-center">
+							<th scope="col">이름</th>
+							<th scope="col">이력서</th>
+							<th scope="col">이메일</th>
+							<th scope="col">면접제안하기</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${empty list}">
+								<tr>
+									<td colspan="5">지원자가 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<!-- Paging 에서 getPage()로 해당 페이지에 맞는 게시글 리스트 가져오기 -->
+								<c:forEach items="${list.getPage() }" var="list" varStatus="i">
+									<tr class="text-center">
+										<td>${list.userName}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/business/suggest/resume?no=${list.resumeNo}">
+											${list.resumeTitle }</a></td>
+										<td>${list.userEmail}</td>
+										<td><a type="button" class="btn btn-light"
+											data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+
+			</div>
+
+
+		</div>
+	</section>
 
 	<!-- Modal -->
 	<div class="modal fade" id="interview" data-bs-backdrop="static"
@@ -145,12 +153,14 @@
 			class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title text-center" id="staticBackdropLabel">면접 제안
-						작성</h3>
+					<h3 class="modal-title text-center" id="staticBackdropLabel">면접
+						제안 작성</h3>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
+					<form action="${pageContext.request.contextPath }/business/"
+						method="post">
 
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
@@ -176,7 +186,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="reset" class="btn btn-light">초기화</button>	
+							<button type="reset" class="btn btn-light">초기화</button>
 							<button type="submit" class="btn btn-primary">등록</button>
 						</div>
 				</div>
@@ -189,17 +199,6 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<!-- page script -->
-	<script>
 
-		
-		$(document).on('click', '#btn-search', function() {
-				let jobType = $('#jobType').val();
-				let career = $('#career').val();
-				let education = $('#education').val();
-				let gender = $('#gender').val();
-				location.href = '${pageContext.request.contextPath}/business/search/suggest?pnum=${pageNumber}&jobType='+jobType+'&career='+career'&education='+education+'&gender='+gender;
-			});
-	</script>
-	
 </body>
 </html>

@@ -101,6 +101,12 @@
 	WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 입사지원 여부 확인 -->
+	<select id="checkApply" parameterType="map" resultType="_int">
+ 	 SELECT COUNT(*) FROM BUSINESS_APPLICANT 
+ 	 WHERE RA_NUM = #{raNum} AND USER_ID = #{userId}
+	</select>
+	
 	<!-- 입사지원 -->
 	<insert id="applyJob" parameterType="apdto">
 	INSERT ALL
@@ -113,15 +119,21 @@
 		SELECT * FROM DUAL
 	</insert>
 	
+	<!-- 입사지원 조회 -->
+	<select id="selectListApply" resultType="applydto">
+	SELECT rr.COMPANY_NAME, rr.RA_TITLE, ua.APPLY_DATE, ba.RESULT_TYPE, ba.RA_NUM
+	FROM BUSINESS_APPLICANT  ba
+	JOIN RECRUIT_REGIST  rr
+	ON ba.RA_NUM = rr.RA_NUM
+	JOIN USER_APPLY  ua
+	ON ba.BA_NUM = ua.BA_NUM
+	WHERE ba.USER_ID = #{userId}
+	</select>
+	
 	<!-- 입사지원 취소 -->
-<!-- 	<delete id="cancelApply">
-	DELETE ba, ua
-	FROM BUSINESS_APPLICANT AS ba
-	INNER JOIN USER_APPLY AS ua
-	ON ba.USER_ID = ua.USER_ID
-	AND ba.RA_NUM = #{raNum}
-	AND ua.BA_NUM = #{baNum}
-	AND ba.USER_ID = #{userId}
-	AND ua.USER_ID = #{userId}
-	</delete> -->
+	<delete id="cancelApply" parameterType="map">
+	DELETE FROM
+  	BUSINESS_APPLICANT
+  	WHERE USER_ID = #{userId} AND RA_NUM = #{raNum}
+	</delete>	
 </mapper>

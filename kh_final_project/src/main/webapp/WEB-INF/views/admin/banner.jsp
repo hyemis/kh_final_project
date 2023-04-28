@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,7 @@
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
     <!-- css file link part end -->
-    <title>관리자 메인페이지</title>
+    <title>배너관리</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -58,22 +59,23 @@
 		 	<table class="table">
 		 		<thead>
 		 			<tr>
-		 				<th scope="col">1</th>
-		 				<th scope="col">2</th>
-		 				<th scope="col">3</th>
+		 				<th scope="col">배너  사진</th>
+		 				<th scope="col">제목</th>
+		 				<th scope="col">등록일</th>
+		 				<th scope="col">순서</th>
 		 			</tr>
 		 		</thead>
 		 		<tbody>
-		 			<tr>
-		 				<td>a</td>
-		 				<td>b</td>
-		 				<td>c</td>
-		 			</tr>
-		 			<tr>
-		 				<td>a1</td>
-		 				<td>b1</td>
-		 				<td>c1</td>
-		 			</tr>
+		 			<c:forEach items="${bList }" var="list">
+		 				<tr>
+			 				<td>
+			 					<img alt="${list.bannerSub }" src="${list.bannerThum eq null? 'https://dummyimage.com/100x100/000000/ffffff.png&text=No+Image' : list.bannerThum}" style="width: 100px; height: 100px;">
+			 				</td>
+			 				<td><a href="${pageContext.request.contextPath}/admin/banner/detail?id=${list.bannerId}">${list.bannerSub }</a> </td>
+			 				<td>${list.registDate }</td>
+			 				<td>${list.bannerSeq}</td>
+		 				</tr>
+		 			</c:forEach>
 		 		</tbody>
 		 	</table>
 		 </div>

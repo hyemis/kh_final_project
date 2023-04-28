@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.person.model.dao.PsDao;
+import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -225,6 +226,21 @@ public class PsServiceImpl implements PsService {
 		@Override
 		public int applyJob(BsAplicantDto dto) throws Exception {
 			return dao.applyJob(dto);
+		}
+
+		@Override
+		public List<PsApplyDto> selectListApply(String userId) throws Exception {
+			return dao.selectListApply(userId);
+		}
+
+		@Override
+		public int cancelApply(Map<String, Object> InfoNo) throws Exception {
+			return dao.cancelApply(InfoNo);
+		}
+
+		@Override
+		public int checkApply(Map<String, Object> InfoNo) throws Exception {
+			return dao.checkApply(InfoNo);
 		}
 
 
