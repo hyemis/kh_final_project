@@ -9,6 +9,12 @@ import kh.com.job.person.model.dto.PsCertiDto;
 
 public interface BoardService {
 	
+	// 게시글 등록 
+	public int insertPost(BoardDto dto) throws Exception;
+	
+	// 게시글 수정
+	public int updatePost(BoardDto dto) throws Exception;
+	
 	// 게시글 상세 조회 + 조회 수 증가
 	public BoardDto detailBoard(String readUser, int boardNo) throws Exception;
 	
@@ -18,8 +24,6 @@ public interface BoardService {
 	// 게시글 목록
 	public List<BoardDto> boardList() throws Exception;
 	
-	// 게시글 등록 
-	public int insertBoard(BoardDto dto) throws Exception;
 	
 	// 댓글 목록 
 	public List<ReplyDto> replyList(int boardNo) throws Exception;

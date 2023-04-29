@@ -30,8 +30,13 @@ public class BoardDao {
 	}
 	
 	// 게시글 등록
-	public int insertBoard(BoardDto dto) throws Exception {
-		return sqlSession.insert("boards.insertBoard", dto);
+	public int insertPost(BoardDto dto) throws Exception {
+		return sqlSession.insert("boards.insertPost", dto);
+	}
+	
+	// 게시글 수정 
+	public int updatePost(BoardDto dto) throws Exception{
+		return sqlSession.update("boards.updatePost", dto);
 	}
 	
 	// 게시글 조회 수 증가 

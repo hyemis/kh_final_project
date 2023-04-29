@@ -17,11 +17,15 @@ public  class BoardServiceImpl implements BoardService {
 	private BoardDao dao;
 
 	@Override
-	public BoardDto viewDetail(String boardNo) {
-		return dao.viewDetail(boardNo);
+	public int insertPost(BoardDto dto) throws Exception {
+		return dao.insertPost(dto);
 	}
 	
-
+	@Override
+	public int updatePost(BoardDto dto) throws Exception{
+		return dao.updatePost(dto);
+	}
+	
 	@Override
 	public BoardDto detailBoard(String readUser, int boardNo) throws Exception {
 		BoardDto result = dao.detailBoard(boardNo);
@@ -33,12 +37,17 @@ public  class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int updateLike(String readUser, int boardNo) throws Exception{
-	    BoardDto userId = dao.detailBoard(boardNo);
-	    if(!userId.getUserId().equals(readUser)) {
-	        int result = dao.updateLike(boardNo);
-	        return result;
-	    }
-	    return 0;
+		BoardDto userId = dao.detailBoard(boardNo);
+		if(!userId.getUserId().equals(readUser)) {
+			int result = dao.updateLike(boardNo);
+			return result;
+		}
+		return 0;
+	}
+	
+	@Override
+	public List<BoardDto> boardList() throws Exception {
+		return dao.boardList();
 	}
 	
 	@Override
@@ -61,16 +70,18 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.updateReply(dto);
 	}
 	
-
 	@Override
-	public List<BoardDto> boardList() throws Exception {
-		return dao.boardList();
+	public BoardDto viewDetail(String boardNo) {
+		return dao.viewDetail(boardNo);
 	}
+	
 
-	@Override
-	public int insertBoard(BoardDto dto) throws Exception {
-		return dao.insertBoard(dto);
-	}
+	
+	
+	
+	
+
+
 
 	@Override
 	public int update(BoardDto dto) throws Exception {

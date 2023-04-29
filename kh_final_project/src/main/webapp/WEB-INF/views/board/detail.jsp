@@ -56,7 +56,9 @@
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
-
+<!-- ckeditor5 -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 <style>
 .s {
@@ -100,7 +102,13 @@ img {
 						class="btn btn-outline-dark mx-1">전체글</a>
 				</div>
 
-				<div class="s">
+				<div class="s originPost">
+					<div class="d-flex justify-content-end align-items-center">
+						<sec:authorize access="hasRole('ROLE_P') and #detailBoard.userId == authentication.name">
+								<a class="pe-2" onclick="handleUpdatePost()">수정</a>
+								<a class="" onclick="handleDeletePost()">삭제</a>
+						</sec:authorize>
+					</div> 
 					<h2>${detailBoard.boardTitle}</h2>
 					<div class="d-flex justify-content-between">
 						<div class="pe-3">${detailBoard.userId}</div>
@@ -120,7 +128,7 @@ img {
 					<c:forEach items="${replyList}" var="reply">
 						<table class="reply-table">
 							<tr>
-								<td class="pb-3 originReply reply-cell" >${reply.replyContent}</td>
+								<td class="pb-3 originReply reply-cell">${reply.replyContent}</td>
 								<td class="text-end">
 									<div class="d-flex justify-content-end align-items-center">
 										<sec:authorize
@@ -142,19 +150,22 @@ img {
 				</div>
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex pt-3">
-						<input type="text" style="width: 100%;" placeholder="위 고민과 같은 경험이 있거나, 알고 계신 정보가 있다면 조언 부탁드려요!">
+						<input type="text" style="width: 100%;"
+							placeholder="위 고민과 같은 경험이 있거나, 알고 계신 정보가 있다면 조언 부탁드려요!">
 						<div class="ps-3">
 							<button class="btn btn-outline-dark" type="button"
 								onclick="handleReply()">댓글 등록</button>
 						</div>
 					</div>
 				</sec:authorize>
-				<div class="pt-5 d-flex justify-content-center">
-					<a href="${pageContext.request.contextPath}/board/postall"
-						class="btn btn-outline-dark mx-1">목록</a>
-				</div>
+					<div class="pt-5 d-flex justify-content-center">
+						<a href="${pageContext.request.contextPath}/board/postall"
+							class="btn btn-outline-dark">목록</a>
+					</div>
+				<div>
 
 			</div>
+		</div>
 		</div>
 	</section>
 
@@ -166,11 +177,7 @@ img {
 	<script>
 		// 좋아요 증가 
 		function handleLike() {
-			const boardNo = $
-			{
-				detailBoard.boardNo
-			}
-			;
+			const boardNo = ${detailBoard.boardNo};
 
 			$.ajax({
 				type : "POST",
@@ -191,6 +198,87 @@ img {
 			});
 
 		}
+		
+		// 글 삭제 
+		function handleDeletePost() {
+			const boardNo = ${detailBoard.boardNo};
+
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/board/deletepost",
+				data : {boardNo : boardNo},
+				success : function(response) {
+					if (response.result === 'success') {
+						location.reload();
+					} else {
+						alert('게시글 삭제에 실패했습니.');
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("에러 발생 : " + error);
+				}
+			});
+
+		}
+		
+		// 게시글 수정 
+		function handleUpdatePost() {
+        const boardNo = ${detailBoard.boardNo};
+
+        // 게시글 수정 영역 생성
+        const updateDiv = document.createElement("div");
+        updateDiv.innerHTML = `
+        	<hr>
+        	<div class="p-3">
+            <div class="mb-3">
+                <label for="boardTitle" class="form-label">제목</label>
+                <input type="text" class="form-control" id="boardTitle" value="${detailBoard.boardTitle}">
+            </div>
+            <div class="mb-3">
+                <label for="boardContent" class="form-label">내용</label>
+                <div id="editor">${detailBoard.boardContent}</div>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="updatePost(${boardNo})">수정</button>
+            </div>
+        `;
+        document.querySelector(".originPost").appendChild(updateDiv);
+
+	        // CKEditor 초기화
+	        ClassicEditor.create(document.querySelector("#editor"))
+	        .then(editor => {
+	            window.editor = editor;
+	        })
+	        .catch(error => {
+	            console.error(error);
+	        });
+	    }
+	
+	    function updatePost(boardNo) {
+	        const boardTitle = document.querySelector("#boardTitle").value;
+	        const boardContent = window.editor.getData();
+	
+	        const params = {
+	            boardNo: boardNo,
+	            boardTitle: boardTitle,
+	            boardContent: boardContent
+	        };
+	
+	        $.ajax({
+	            type : "POST",
+	            url : "${pageContext.request.contextPath}/board/updatepost",
+	            data : params,
+	            success : function(response) {
+	                if (response.result === 'success') {
+	                    location.reload();
+	                } else {
+	                    alert('게시글 수정에 실패했습니다.');
+	                }
+	            },
+	            error : function(xhr, status, error) {
+	                alert("에러 발생 : " + error);
+	            }
+	        });
+	    }
 
 		// 댓글 작성
 		function handleReply() {
@@ -251,7 +339,7 @@ img {
 			const replyId = element.dataset.replyId;
 			const oldContent = element.closest(".reply-table").querySelector(
 					".originReply").innerText; // 기존 댓글 내용 가져오기
-			
+
 			const htmlVal = '<div class="m-3 mdeptList" style="min-height: 200px;">'
 					+ '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
 					+ '<div class="d-flex justify-content-between">'
@@ -290,6 +378,8 @@ img {
 				}
 			});
 		}
+		
+	
 	</script>
 
 </body>

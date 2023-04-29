@@ -100,7 +100,7 @@ public class BoardController {
 				dto.setUserId(principal.getName());
 			}
 			
-			result = service.insertBoard(dto);
+			result = service.insertPost(dto);
 			
 			if(result == 1) {
 				mv.setViewName("redirect:/board/main");
@@ -185,6 +185,39 @@ public class BoardController {
 		    return response;
 		}
 		
+		// 게시글 삭제 
+		// TODO: 쿼리문 제약 조건 설정이 안되어서 추후에 다시 시도 예정 
+		@PostMapping("/deletepost")
+		@ResponseBody
+		public Map<String, Object> deletePost(int boardNo, Principal principal) throws Exception {
+			
+			int result = -1;
+			 Map<String, Object> response = new HashMap<>();
+			 if (result > 0) {
+			      response.put("result", "success");
+			} else {
+			    response.put("result", "fail");
+			}
+			    return response;
+		}
+		
+		// 게시글 수정
+		@PostMapping("/updatepost")
+		@ResponseBody
+		public Map<String, Object> updatePost(int boardNo, BoardDto dto, Principal principal) throws Exception {
+			
+			dto.setUserId(principal.getName());
+			int result = service.updatePost(dto);
+			 Map<String, Object> response = new HashMap<>();
+			 if (result > 0) {
+			      response.put("result", "success");
+			} else {
+			    response.put("result", "fail");
+			}
+			    return response;
+		}
+		
+		
 		// 댓글 등록 
 		@PostMapping("/writereply")
 		@ResponseBody
@@ -202,6 +235,7 @@ public class BoardController {
 			return response;
 		}
 		
+		
 		// 댓글 삭제 
 		@PostMapping("/deletereply")
 		@ResponseBody
@@ -218,6 +252,8 @@ public class BoardController {
 			}
 			return response;
 		}
+		
+		// 
 		
 		// 댓글 수정 
 		@PostMapping("/updatereply")

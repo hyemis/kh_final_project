@@ -27,3 +27,4 @@ alter table RECRUIT_REGIST modify REGIST_DATE varchar2(30);
 /* # 자기소개서 테이블 */
 ALTER TABLE RESUME_CL_INFO ADD CONSTRAINT UC_CL_NO UNIQUE(CL_NO);
 
+/* # 게시글 테이블 */
