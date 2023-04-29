@@ -10,7 +10,7 @@
 	</select>
 
 <!-- search -->
-	<select id="resumeList" resultType="kh.com.job.board.model.dto.BsSearchDto">
+<!-- 	<select id="resumeList" resultType="kh.com.job.board.model.dto.BsSearchDto">
 		SELECT UT.USER_NAME, UT.USER_EMAIL, 
 	       UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
 		FROM USER_RESUME UR
@@ -58,7 +58,7 @@
 				    ) A
 			 ) 
 		WHERE  NUM BETWEEN #{startNum} AND #{endNum}
-	</select>
+	</select> -->
 	
 	<!-- 이력서 페이지 카운트 -->
 	<select id="resumePageListCount" resultType="_int">

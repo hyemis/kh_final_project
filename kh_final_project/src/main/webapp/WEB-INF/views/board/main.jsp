@@ -73,8 +73,10 @@
 				<div class="d-flex justify-content-between align-items-center p-4">
 					<h2 class="mb-0">커뮤니티</h2>
 					<div>
-						<button class="btn btn-outline-dark" type="button"
-							onclick="writePost()">게시글 작성</button>
+						<sec:authorize access="isAuthenticated()">
+							<button class="btn btn-outline-dark" type="button"
+								onclick="writePost()">게시글 작성</button>
+						</sec:authorize>
 					</div>
 				</div>
 

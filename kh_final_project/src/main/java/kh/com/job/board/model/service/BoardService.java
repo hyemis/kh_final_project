@@ -30,6 +30,9 @@ public interface BoardService {
 	// 댓글 삭제 
 	public int deleteReply(ReplyDto dto) throws Exception;
 	
+	// 댓글 수정 
+	public int updateReply(ReplyDto dto) throws Exception;
+	
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
 	public BoardDto viewDetail(String boardNo);

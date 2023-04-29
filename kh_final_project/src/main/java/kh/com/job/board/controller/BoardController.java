@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -149,8 +150,9 @@ public class BoardController {
 		@GetMapping("/detail/{boardNo}")
 		public ModelAndView viewRecruit(ModelAndView mv, @PathVariable Integer boardNo, Principal principal) throws Exception {
 			
-
-			BoardDto detail = service.detailBoard(principal.getName(), boardNo);
+			// principal이 null인 경우 username은 null로 설정
+			String readUser = principal != null ? principal.getName() : null; 
+			BoardDto detail = service.detailBoard(readUser, boardNo);
 			
 			// updateDate 문자열에서 시분초까지 자르기
 		    String updateDate = detail.getUpdateDate().substring(0, 19);
@@ -186,7 +188,7 @@ public class BoardController {
 		// 댓글 등록 
 		@PostMapping("/writereply")
 		@ResponseBody
-		public  Map<String, Object>  writereply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
+		public  Map<String, Object>  writeReply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
 			
 			dto.setUserId(principal.getName());
 			int result = service.insertReply(dto);
@@ -203,7 +205,7 @@ public class BoardController {
 		// 댓글 삭제 
 		@PostMapping("/deletereply")
 		@ResponseBody
-		public  Map<String, Object>  deletereply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
+		public  Map<String, Object>  deleteReply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
 			
 			dto.setUserId(principal.getName());
 			int result = service.deleteReply(dto);
@@ -218,7 +220,21 @@ public class BoardController {
 		}
 		
 		// 댓글 수정 
-		
+		@PostMapping("/updatereply")
+		@ResponseBody
+		public  Map<String, Object>  updateReply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
+			
+			dto.setUserId(principal.getName());
+			int result = service.updateReply(dto);
+			
+			Map<String, Object> response = new HashMap<>();
+			if (result > 0) {
+			     response.put("result", "success");
+			} else {
+			      response.put("result", "fail");
+			}
+			return response;
+		}
 	
 		
 			

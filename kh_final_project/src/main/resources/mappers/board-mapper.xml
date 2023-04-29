@@ -114,11 +114,22 @@
 	</select>
 	
 	<!-- 댓글 삭제  -->
-	<delete id="deleteReply">
-	DELETE REPLY 
-	WHERE REPLY_ID = #{replyId}
-	AND USER_ID= #{userId}
-	</delete>
+	<update id="deleteReply">
+	UPDATE REPLY
+	SET REPLY_CONTENT = '삭제된 댓글입니다.',
+    REPLY_CREATE_DATE = SYSDATE,
+    REPLY_LEVEL = '0'
+	WHERE REPLY_ID = #{replyId} AND USER_ID =  #{userId}
+	</update>
+	
+	<!--  댓글 수정 -->
+	<update id="updateReply">
+	UPDATE REPLY
+	SET REPLY_CONTENT =  #{replyContent},
+    REPLY_CREATE_DATE = SYSDATE
+	WHERE REPLY_ID = #{replyId} AND USER_ID =  #{userId}
+	
+	</update>
 
 
 	<!-- 뉴스레터 -->

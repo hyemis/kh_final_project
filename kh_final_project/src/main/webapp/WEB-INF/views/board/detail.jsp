@@ -69,6 +69,21 @@ img {
 	width: 500px;
 	height: 300px;
 }
+
+.reply-table {
+	table-layout: fixed;
+}
+
+.originReply {
+	max-width: 90%;
+	text-overflow: ellipsis;
+	white-space: normal;
+	display: inline-block;
+}
+
+.reply-cell {
+	vertical-align: top;
+}
 </style>
 
 </head>
@@ -101,42 +116,36 @@ img {
 				</div>
 				<hr>
 
-				<div class="s viewReply">
+				<div class="viewReply">
 					<c:forEach items="${replyList}" var="reply">
-						<table class="reply-table" style="width: 100%;">
+						<table class="reply-table">
 							<tr>
-								<td class="pb-3" style="white-space: nowrap; overflow: hidden;">${reply.replyContent}</td>
-								<td>
+								<td class="pb-3 originReply reply-cell" >${reply.replyContent}</td>
+								<td class="text-end">
 									<div class="d-flex justify-content-end align-items-center">
-										 <sec:authorize access="hasRole('ROLE_P') and #reply.userId == authentication.name">
-											<a class="" onclick="handleUpdateReply()">수정</a>
-											<a class="me-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
+										<sec:authorize
+											access="hasRole('ROLE_P') and #reply.userId == authentication.name">
+											<a class="" onclick="handleUpdateReply(this)"
+												data-reply-id="${reply.replyId}">수정</a>
+											<a class="ms-2" onclick="handleDeleteReply(this)"
+												data-reply-id="${reply.replyId}">삭제</a>
 										</sec:authorize>
 									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div class="d-flex justify-content-end ">
-										<div class="ms-auto fw-light">
-											<span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에
-											작성
-										</div>
+									<div class="text-muted small">
+										<span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에
+										작성
 									</div>
 								</td>
-							</tr>
 						</table>
-
 						<hr>
 					</c:forEach>
 				</div>
 				<sec:authorize access="isAuthenticated()">
-					<div class="d-flex">
-						<input type="text" style="width: 100%;" 
-							placeholder="위 고민과 같은 경험이 있거나, 알고 계신 정보가 있다면 조언 부탁드려요!">
-						<div class="px-3">
-							<button class="btn btn-outline-dark" type="button" onclick="handleReply()">댓글
-								등록</button>
+					<div class="d-flex pt-3">
+						<input type="text" style="width: 100%;" placeholder="위 고민과 같은 경험이 있거나, 알고 계신 정보가 있다면 조언 부탁드려요!">
+						<div class="ps-3">
+							<button class="btn btn-outline-dark" type="button"
+								onclick="handleReply()">댓글 등록</button>
 						</div>
 					</div>
 				</sec:authorize>
@@ -157,7 +166,11 @@ img {
 	<script>
 		// 좋아요 증가 
 		function handleLike() {
-			const boardNo = ${detailBoard.boardNo};
+			const boardNo = $
+			{
+				detailBoard.boardNo
+			}
+			;
 
 			$.ajax({
 				type : "POST",
@@ -178,61 +191,104 @@ img {
 			});
 
 		}
-		
-		
+
 		// 댓글 작성
 		function handleReply() {
-		  const replyContent = $("input[type='text']").val();
-		  const boardNo = ${detailBoard.boardNo};
-		  
-		  var params = {
-		    replyContent: replyContent,
-		    boardNo: boardNo
-		  };
-		  
-		  $.ajax({
-		    type: "POST",
-		    url: "${pageContext.request.contextPath}/board/writereply",
-		    data: params,
-		    success : function(response) {
-				if (response.result === 'success') {
-					location.reload();
-				} else {
-					alert('댓글 등록에 실패했습니다.');
-				}
-			},
-			error : function(xhr, status, error) {
-				alert("에러 발생 : " + error);
+			const replyContent = $("input[type='text']").val();
+			const boardNo = $
+			{
+				detailBoard.boardNo
 			}
-		  });
+			;
+
+			var params = {
+				replyContent : replyContent,
+				boardNo : boardNo
+			};
+
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/board/writereply",
+				data : params,
+				success : function(response) {
+					if (response.result === 'success') {
+						location.reload();
+					} else {
+						alert('댓글 등록에 실패했습니다.');
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("에러 발생 : " + error);
+				}
+			});
 		}
-		
+
 		// 댓글 삭제 
 		function handleDeleteReply(element) {
-			  const replyId = element.dataset.replyId;
+			const replyId = element.dataset.replyId;
 
-		  
-		  
-		  $.ajax({
-		    type: "POST",
-		    url: "${pageContext.request.contextPath}/board/deletereply",
-		    data: {replyId:replyId},
-		    success : function(response) {
-		      if (response.result === 'success') {
-		        location.reload();
-		      } else {
-		        alert('댓글 삭제에 실패했습니다.');
-		      }
-		    },
-		    error : function(xhr, status, error) {
-		      alert("에러 발생 : " + error);
-		    }
-		  });
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/board/deletereply",
+				data : {
+					replyId : replyId
+				},
+				success : function(response) {
+					if (response.result === 'success') {
+						location.reload();
+					} else {
+						alert('댓글 삭제에 실패했습니다.');
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("에러 발생 : " + error);
+				}
+			});
 		}
-		
+
 		// 댓글 수정 
-		function handleUpdateReply() {
+		function handleUpdateReply(element) {
+			const replyId = element.dataset.replyId;
+			const oldContent = element.closest(".reply-table").querySelector(
+					".originReply").innerText; // 기존 댓글 내용 가져오기
 			
+			const htmlVal = '<div class="m-3 mdeptList" style="min-height: 200px;">'
+					+ '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
+					+ '<div class="d-flex justify-content-between">'
+					+ '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
+					+ oldContent
+					+ '">'
+					+ '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitUpdate()">수정</button>'
+					+ '</div>' + '</div>';
+
+			// 새로운 input 태그를 추가한 후 기존 댓글 대신에 보여주기
+			element.closest(".reply-table").innerHTML = htmlVal;
+		}
+
+		function submitUpdate() {
+			const replyId = document.getElementById("replyId").value;
+			const newContent = document.getElementById("newContent").value;
+
+			const params = {
+				replyId : replyId,
+				replyContent : newContent
+			};
+
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/board/updatereply",
+				data : params,
+				success : function(response) {
+					if (response.result === 'success') {
+						location.reload();
+					} else {
+						alert('댓글 수정에 실패했습니다.');
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("에러 발생 : " + error);
+				}
+			});
 		}
 	</script>
 
