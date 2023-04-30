@@ -155,6 +155,7 @@
         success: function() {
             // 지원취소 완료
             alert("입사 지원이 취소됐습니다.");
+            location.reload();
         },
         error: function(error) {
             alert("입사 지원 취소에 실패하였습니다.");

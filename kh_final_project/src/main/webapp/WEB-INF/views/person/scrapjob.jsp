@@ -211,6 +211,7 @@
             data: {raNum : raNum},
             success: function() {
                 alert('스크랩 삭제에 성공했습니다.');
+                location.reload();
             },
             error: function(error) {
                 alert("스크랩 삭제에 실패하였습니다.");
@@ -218,6 +219,8 @@
         });
     }
 }
+	
+	
 	// '지원' 버튼 클릭 이벤트 처리
 	const applyButtons = document.querySelectorAll('.apply-btn');
 	applyButtons.forEach(button => {
@@ -241,6 +244,7 @@
 	});
 
 
+	
 	 // 입사지원 ajax
 	 $(".apply-btn").click(function() {
 	  var raNum = $(this).closest("tr").find("input[name=scrapCheckBox]").val(); // 해당 행의 raNum 값을 가져옴

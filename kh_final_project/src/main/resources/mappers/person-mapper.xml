@@ -120,7 +120,7 @@
 	</insert>
 	
 	<!-- 입사지원 조회 -->
-	<!-- <select id="selectListApply" resultType="applydto">
+	<select id="selectListApply" resultType="applydto">
 	SELECT rr.COMPANY_NAME, rr.RA_TITLE, ua.APPLY_DATE, ba.RESULT_TYPE, ba.RA_NUM
 	FROM BUSINESS_APPLICANT  ba
 	JOIN RECRUIT_REGIST  rr
@@ -128,7 +128,8 @@
 	JOIN USER_APPLY  ua
 	ON ba.BA_NUM = ua.BA_NUM
 	WHERE ba.USER_ID = #{userId}
-	</select>  -->
+	ORDER BY ua.APPLY_DATE DESC
+	</select>
 	
 	<!-- 입사지원 취소 -->
 	<delete id="cancelApply" parameterType="map">
