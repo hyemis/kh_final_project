@@ -109,6 +109,8 @@
 							data-bs-toggle="modal" data-bs-target="#companyinfo">등록 및 수정</button>
 						<a class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/companyinfo" role="button">회사소개 페이지로 이동</a>
 					</div>
+					
+					
 					<!-- 뉴스레터 -->
 					<div class="border border-secondary">
 						<h1>뉴스레터</h1>
@@ -118,9 +120,7 @@
 							<button type="button" class="btn btn-primary"
 								data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
 						</div>
-
-
-						<!-- 뉴스레터 보기 -->
+						<!-- 뉴스레터 보기 
 						<div class="container">
 							<c:forEach items="${news}" var="news">
 								<div class="row">
@@ -145,7 +145,9 @@
 								</div>
 							</c:forEach>
 						</div>
-					</div>
+					</div> -->
+					
+					
 					<!-- Q&A -->
 					<div class="border border-secondary">
 						<h1>Q&A</h1>

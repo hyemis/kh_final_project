@@ -185,23 +185,19 @@
 	</insert>
 
 	<update id="updateNewsLetter">
-		UPDATE BOARD SET
-		BOARD_NO = #{boardNo},
-		UPDATE_DATE = CURRENT_TIMESTAMP,
-		BOARD_CONTENT = #{boardContent},
-		BOARD_TITLE = #{boardTitle},
-		LINK = #{link}
-		WHERE BOARD_NO = #{boardNo}
-		AND USER_ID = #{userId}	
-		<selectKey keyProperty="boardNo" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
+		UPDATE BOARD 
+		   SET UPDATE_DATE = CURRENT_TIMESTAMP,
+			   BOARD_CONTENT = #{boardContent},
+			   BOARD_TITLE = #{boardTitle},
+			   LINK = #{link}
+		 WHERE BOARD_NO = #{boardNo}
+		   AND USER_ID = #{userId}	
 	</update>
 	
 	<select id="newsLetterOne" resultType="bdto" >
-		SELECT *
-		FROM BOARD
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, TAG, USER_NAME
+		FROM BOARD BD
+		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 
@@ -209,9 +205,12 @@
 		SELECT *
 		FROM BOARD
 		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
+		ORDER BY BOARD_NO DESC
 	</select>
 
-
+	<delete id="deleteNewsLetter">
+		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
+	</delete>
 
 
 

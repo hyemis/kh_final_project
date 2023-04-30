@@ -41,7 +41,6 @@ public class BsAboutUsDao {
 	
 	public int deleteNewsLetter(BoardDto dto) {
 		return sqlSession.delete("boards.deleteNewsLetter", dto);
-		// TODO Auto-generated method stub
 	}
 
 	public BoardDto newsLetterOne(int boardNo) {

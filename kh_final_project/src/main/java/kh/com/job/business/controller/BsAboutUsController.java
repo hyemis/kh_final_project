@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 
 @Controller
@@ -79,21 +82,6 @@ public class BsAboutUsController {
 		return mv;
 	}
 	
-	//뉴스레터 수정
-	@PostMapping("/newsletterupdate")
-	public ModelAndView update(ModelAndView mv, BoardDto dto , Principal principal, RedirectAttributes rttr) {
-						
-		dto.setUserId(principal.getName()); 
-		
-		service.updateNewsLetter(dto);
-		mv.setViewName("redirect:/business/aboutus/newsletter");
-		rttr.addFlashAttribute("msg", "뉴스레터 수정 완료");
-		
-		List<BoardDto> list = service.newsLetterList(principal.getName());
-		
-		mv.addObject("news", list);
-		return mv;
-	}
 	
 	// 뉴스레터 페이지 불러오기
 	@GetMapping("/newsletter")
@@ -107,19 +95,58 @@ public class BsAboutUsController {
 	
 	// 뉴스레터 상세보기
 	@GetMapping("/newsletter/view")
-	public ModelAndView viewReadBoard(
+	public ModelAndView viewNewsletter(
 			ModelAndView mv
 			, @RequestParam(name = "no", required = false) int boardNo
 			, Principal principal
 			) {
 		
-		String userId = principal.getName(); ;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserId = auth.getName();
 		
-		BoardDto dto = service.newsLetterOne(boardNo,userId);
+		BoardDto dto = service.newsLetterOne(boardNo);
+		mv.addObject("news", dto);
+		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"+currentUserId);
+		return mv;
+	}
+	
+	//뉴스레터 수정페이지
+	@GetMapping("/newsletter/update")
+	public ModelAndView updateNewsletter(
+			ModelAndView mv
+			, @RequestParam(name = "no", required = false) int boardNo
+			, Principal principal
+			) {
+		
+		BoardDto dto = service.newsLetterOne(boardNo);
 		mv.addObject("news", dto);
 		
 		return mv;
 	}
+	
+	//뉴스레터 수정
+	@PostMapping("/updateNewsletter")
+	public ModelAndView updateNewsletter(ModelAndView mv, String boardNo, BoardDto dto, Principal principal ) {
+		dto.setUserId(principal.getName()); 
+		service.updateNewsLetter(dto);
+		mv.setViewName("redirect:/business/aboutus/newsletter/view?no=" + boardNo);
+		return mv;
+	}
+	
+	//뉴스레터 삭제
+	@PostMapping("/deleteNewsletter")
+	@ResponseBody
+	public int deleteNewsletter(BoardDto dto, Principal principal ){
+		dto.setUserId(principal.getName()); 
+		int result = -1;
+		if(principal.getName().equals(dto.getUserId())) {
+			result = service.deleteNewsLetter(dto);
+		}else {
+			result = -2;
+		}
+		return result;
+	}
+
 	
 
 	
