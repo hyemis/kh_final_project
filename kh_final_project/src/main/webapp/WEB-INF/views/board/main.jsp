@@ -90,10 +90,14 @@
 						<h5>주제별 커뮤니티</h5>
 					</div>
 					<div class="d-grid gap-2 d-md-block">
-						<a href="${pageContext.request.contextPath}/board/postall" class="btn btn-outline-dark mx-1">전체글</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">신입</a> 
+						<a href="${pageContext.request.contextPath}/board/postall"
+							class="btn btn-outline-dark mx-1">전체글</a>
+						<!-- <a href="#" class="btn btn-outline-dark mx-1">신입</a> 
 						<a href="#" class="btn btn-outline-dark mx-1">취준</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">qna</a>
+						<a href="#" class="btn btn-outline-dark mx-1">qna</a> -->
+						<c:forEach var="cate" items="${UBDlist}">
+							<a href="${pageContext.request.contextPath}/board/postall?cate=${cate.categoryId}"class="btn btn-outline-dark mx-1">${cate.categoryName}</a>
+						</c:forEach>
 					</div>
 				</div>
 
@@ -107,20 +111,6 @@
 						<div class="col-sm-6 s">d</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</section>
@@ -131,8 +121,8 @@
 
 	<!-- page script -->
 	<script>
-	function writePost() {
-		  location.href = "${pageContext.request.contextPath}/board/writepost";
+		function writePost() {
+			location.href = "${pageContext.request.contextPath}/board/writepost";
 		}
 	</script>
 </body>

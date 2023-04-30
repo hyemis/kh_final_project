@@ -58,6 +58,20 @@
         WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
     </select>
     
+    <!-- 커뮤니티 게시판 카테고리 -->
+    <select id="getBoardCate" resultType="kh.com.job.admin.model.dto.AdCategoryDto" >
+	SELECT *
+	FROM JA_CATEGORY
+	WHERE CATEGORY_TYPE = 'UBD'
+	AND CATEGORY_DEPT = '2'
+	AND CATEGORY_ID NOT IN ('UBD05', 'UBD06')
+	</select>
+	
+	<!--  카테고리 이름 -->
+	<select id="getCateName" resultType="String">
+	SELECT CATEGORY_NAME FROM JA_CATEGORY WHERE CATEGORY_ID = #{categoryId}
+	</select>
+    
     <!--  게시글  등록-->
     <insert id="insertPost">
     	INSERT INTO
@@ -83,12 +97,19 @@
    	SELECT * FROM BOARD 
 	WHERE BOARD_NO = #{boardNo}
    	</select>
+   	
 
-	<!--  게시글 목록 -->
-	<select id="boardList" resultType="bdto">
+	<!-- 전체 게시글 목록 -->
+	<select id="postList" resultType="bdto">
 	SELECT * FROM BOARD 
 	WHERE CATEGORY_ID IN ('UBD01', 'UBD02','UBD03','UBD04' ) 
 	ORDER BY UPDATE_DATE desc
+	</select>
+	
+	<!-- 카테고리별 게시글 목록 -->
+	<select id="postListByCate" resultType="bdto">
+	SELECT * FROM BOARD 
+	WHERE CATEGORY_ID = #{categoryId} ORDER BY UPDATE_DATE DESC
 	</select>
 	
 	<!-- 게시글 조회 수 증가 -->

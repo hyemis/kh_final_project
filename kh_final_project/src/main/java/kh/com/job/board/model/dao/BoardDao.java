@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.controller.BoardController;
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.ReplyDto;
@@ -19,14 +20,29 @@ public class BoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 커뮤니티 게시판 카테고리 
+	public List<AdCategoryDto> getBoardCate() throws Exception {
+		return sqlSession.selectList("boards.getBoardCate");
+	}
+	
+	// 카테고리 이름 
+	public String getCateName(String categoryId) throws Exception {
+		return sqlSession.selectOne("boards.getCateName", categoryId);
+	}
+	
 	// 게시글 상세조회 
 	public BoardDto detailBoard(int boardNo) throws Exception {
 		return sqlSession.selectOne("boards.detailBoard", boardNo);
 	}
 	
 	// 게시글 목록
-	public List<BoardDto> boardList() throws Exception {
-		return sqlSession.selectList("boards.boardList");
+	public List<BoardDto> postList() throws Exception {
+		return sqlSession.selectList("boards.postList");
+	}
+	
+	// 카테고리 별 게시글 목록 
+	public List<BoardDto> postListByCate(String cate) throws Exception {
+		return sqlSession.selectList("boards.postListByCate", cate);
 	}
 	
 	// 게시글 등록

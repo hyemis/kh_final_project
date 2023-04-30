@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dao.BoardDao;
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.ReplyDto;
@@ -15,6 +16,16 @@ public  class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao dao;
+	
+	@Override
+	public List<AdCategoryDto> getBoardCate() throws Exception {
+		return dao.getBoardCate();
+	}
+	
+	@Override
+	public String getCateName(String categoryId) throws Exception {
+		return dao.getCateName(categoryId);
+	}
 
 	@Override
 	public int insertPost(BoardDto dto) throws Exception {
@@ -46,8 +57,13 @@ public  class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardDto> boardList() throws Exception {
-		return dao.boardList();
+	public List<BoardDto> postList() throws Exception {
+		return dao.postList();
+	}
+	
+	@Override
+	public List<BoardDto> postListByCate(String cate) throws Exception {
+		return dao.postListByCate(cate);
 	}
 	
 	@Override
