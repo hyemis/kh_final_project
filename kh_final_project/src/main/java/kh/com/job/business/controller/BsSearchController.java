@@ -41,8 +41,7 @@ public class BsSearchController {
 	
 	@Autowired
 	private BsSearchService bsService;
-	
-	
+
 	@GetMapping("/suggest")
 	public ModelAndView category(ModelAndView mv, BsSearchDto sdto) {
 		
@@ -77,6 +76,34 @@ public class BsSearchController {
 	        
 	        return list;
 	    }
+
+//	@GetMapping("/suggest")
+//	@ResponseBody
+//	public List<BsSearchDto> searchResume( 
+//			ModelAndView mv, BsSearchDto sdto,
+//			@RequestParam(name = "jobType", required = false, defaultValue = "") String jobType,
+//			@RequestParam(name = "career", required = false, defaultValue = "") String career,
+//			@RequestParam(name = "education", required = false, defaultValue = "") String education,
+//			@RequestParam(name = "gender", required = false, defaultValue = "") String gender) {
+//		
+//		mv.addObject("JNlist", brService.getCateList("JN"));
+//		mv.addObject("CAlist", brService.getCateList("CA"));
+//		mv.addObject("EDlist", brService.getCateList("ED"));
+//		mv.addObject("SElist", brService.getCateList("SE"));
+//		
+//		BsSearchDto dto = new BsSearchDto();
+//		dto.setJobType(jobType);
+//		dto.setCareer(career);
+//		dto.setEducation(education);
+//		dto.setGender(gender);
+//		
+//		List<BsSearchDto> list = bsService.resumeList(dto);
+//		
+//		return list;
+//	}
+	
+	
+	
 
 
 

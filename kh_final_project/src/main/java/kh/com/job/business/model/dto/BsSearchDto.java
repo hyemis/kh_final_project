@@ -15,13 +15,12 @@ public class BsSearchDto {
 	
 	private int startNum;
 	private int endNum;
-	private int pnum;
+	
 	private String jobType;
 	private String career;
 	private String education;
 	private String gender;
 	private String resumeAct;
-	
 	private int resumeNo;
 	private String userId;
 	private String userName;
