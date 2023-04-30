@@ -73,13 +73,29 @@
 				<div class="d-flex justify-content-between align-items-center p-4">
 					<h2 class="mb-0">커뮤니티</h2>
 					<div>
-						<button class="btn btn-outline-dark" type="button"
-							onclick="writePost()">게시글 작성</button>
+						<sec:authorize access="isAuthenticated()">
+							<button class="btn btn-outline-dark" type="button"
+								onclick="writePost()">게시글 작성</button>
+						</sec:authorize>
 					</div>
 				</div>
 
-				<div class="s d-flex justify-content-between align-items-center">
-					<h5>이번 주 전체 인기글</h5>
+				<div class="s justify-content-between align-items-center">
+					<h5>TOP5 인기글</h5>
+					
+						<div class="p-3">
+						<table class="board-table">
+							<c:forEach var="board" items="${topReadPost}">
+								<tr>
+									<td>
+										<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank"> 
+											${board.boardTitle}
+										</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+						</div>
 
 				</div>
 
@@ -88,10 +104,11 @@
 						<h5>주제별 커뮤니티</h5>
 					</div>
 					<div class="d-grid gap-2 d-md-block">
-						<a href="${pageContext.request.contextPath}/board/postall" class="btn btn-outline-dark mx-1">전체글</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">신입</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">취준</a> 
-						<a href="#" class="btn btn-outline-dark mx-1">qna</a>
+						<a href="${pageContext.request.contextPath}/board/postall"
+							class="btn btn-outline-dark mx-1">전체글</a>
+						<c:forEach var="cate" items="${UBDlist}">
+							<a href="${pageContext.request.contextPath}/board/postall?cate=${cate.categoryId}"class="btn btn-outline-dark mx-1">${cate.categoryName}</a>
+						</c:forEach>
 					</div>
 				</div>
 
@@ -105,20 +122,6 @@
 						<div class="col-sm-6 s">d</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</section>
@@ -129,8 +132,8 @@
 
 	<!-- page script -->
 	<script>
-	function writePost() {
-		  location.href = "${pageContext.request.contextPath}/board/writepost";
+		function writePost() {
+			location.href = "${pageContext.request.contextPath}/board/writepost";
 		}
 	</script>
 </body>

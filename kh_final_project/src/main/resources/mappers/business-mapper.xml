@@ -10,95 +10,27 @@
 	</select>
 
 <!-- search -->
-	<!-- 인재찾기 이력서검색 -->
-	<select id="resumeList" resultType="kh.com.job.board.model.dto.BsSearchDto">
-		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-	           UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-		  FROM ( USER_RESUME UR
-		         JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-		  	     <where>
-				 <if test="jobType != ''">
+<!-- 	<select id="resumeList" resultType="kh.com.job.board.model.dto.BsSearchDto">
+		SELECT UT.USER_NAME, UT.USER_EMAIL, 
+	       UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		FROM USER_RESUME UR
+		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		WHERE	
+				<if test="jobType != ''">
 			        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
-			     </if>
-			     <if test="career != ''">
+			    </if>
+			    <if test="career != ''">
 			        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
-			     </if>
-			     <if test="education != ''">
+			    </if>
+			    <if test="education != ''">
 			        EDUCATION = #{education} <if test="gender != ''"> AND </if>
-			     </if>
-			     <if test="gender != ''">
+			    </if>
+			    <if test="gender != ''">
 			        GENDER = #{gender} 
-			     </if>
-		         </where>	
-		 	     AND RESUME_ACT = 'Y' 
-		 	   )
+			    </if>
+		AND RESUME_ACT = 'Y' 
 	</select>
-	
-	<!-- 이력서 페이지 카운트 -->
-	<select id="resumeListCount" resultType="_int">
-		SELECT COUNT(RESUME_NO)
-		FROM ( SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-	                  UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-		       FROM ( USER_RESUME UR
-			          JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-					  <where>
-							<if test="jobType != ''">
-						        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
-						    </if>
-						    <if test="career != ''">
-						        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
-						    </if>
-						    <if test="education != ''">
-						        EDUCATION = #{education} <if test="gender != ''"> AND </if>
-						    </if>
-						    <if test="gender != ''">
-						        GENDER = #{gender} 
-						    </if>
-					 </where>	
-			 	     AND RESUME_ACT = 'Y' 
-			 	    )
-			)
-	
-	</select>
-	
-	<select id="resumePagingList" parameterType="hashMap">
-		SELECT USER_NAME, USER_EMAIL, RESUME_TITLE,
-	           RESUME_NO, JOB_TYPE, CAREER, GENDER, EDUCATION
-		FROM( 
-			  SELECT ROWNUM AS NUM , A.*
-			  FROM ( 
-			  		 SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-	          				UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-					 FROM ( USER_RESUME UR
-					         JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-					  	     <where>
-							 <if test="jobType != ''">
-						        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
-						     </if>
-						     <if test="career != ''">
-						        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
-						     </if>
-						     <if test="education != ''">
-						        EDUCATION = #{education} <if test="gender != ''"> AND </if>
-						     </if>
-						     <if test="gender != ''">
-						        GENDER = #{gender} 
-						     </if>
-					         </where>	
-					 	     AND RESUME_ACT = 'Y' 
-					 	   )  
-					 	     ORDER BY UR.RESUME_NO DESC
-					) A
-			  )
-		WHERE NUM BETWEEN #{startNum} AND #{endNum}	  
-		
-		
-		
 
-	
-	</select>
-	
-<!-- 
 	<select id="resumePageList" resultType="kh.com.job.business.model.dto.BsSearchDto">
 		SELECT DISTINCT RESUME_NO, USER_ID, USER_NAME, USER_EMAIL,  
 			   JOB_TYPE, CAREER,EDUCATION, GENDER, RESUME_ACT
@@ -126,9 +58,21 @@
 				    ) A
 			 ) 
 		WHERE  NUM BETWEEN #{startNum} AND #{endNum}
+	</select> -->
+	
+	<!-- 이력서 페이지 카운트 -->
+	<select id="resumePageListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT UT.USER_ID, UT.USER_NAME, UT.USER_EMAIL, 
+		       		 UR.RESUME_TITLE, UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, 
+		      		 UR.GENDER, UR.EDUCATION, UR.RESUME_ACT
+			    FROM USER_RESUME UR
+			    JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+			    WHERE	    
+			    AND RESUME_ACT = 'Y'
+			)
+	
 	</select>
- -->
-
 
 
 
@@ -146,21 +90,21 @@
 		WHERE USER_ID = #{userId}
 	</update>
 
-	<!-- 비밀번호 수정하기 -->
+	<!-- //todo비밀번호 수정하기 -->
 	<update id="updatePassword">
 		UPDATE USER_TABLE SET
 		USER_PW = #{userPw}
 		WHERE USER_ID = #{userId}
 	</update>
 
-	<!-- 회원 프로필 이미지 수정하기 -->
+	<!-- //todo 회원 프로필 이미지 수정하기 -->
 	<update id="updateUimage">
 		UPDATE tb_user SET
 		USER_PIC = #{userPic}
 		WHERE user_id = #{userId}
 	</update>
 
-	<!-- 회원비밀번호 불러오기 -->
+	<!-- //todo회원비밀번호 불러오기 -->
 	<select id="getUserPw" resultType="budto">
 		SELECT USER_ID, USER_PW
 		FROM USER_TABLE

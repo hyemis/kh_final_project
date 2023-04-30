@@ -211,6 +211,7 @@
             data: {raNum : raNum},
             success: function() {
                 alert('스크랩 삭제에 성공했습니다.');
+                location.reload();
             },
             error: function(error) {
                 alert("스크랩 삭제에 실패하였습니다.");
@@ -218,6 +219,8 @@
         });
     }
 }
+	
+	
 	// '지원' 버튼 클릭 이벤트 처리
 	const applyButtons = document.querySelectorAll('.apply-btn');
 	applyButtons.forEach(button => {
@@ -241,26 +244,48 @@
 	});
 
 
+	
 	 // 입사지원 ajax
- 	 $(document).ready(function() {
-	    $("#applyJobBtn").click(function() {
-	        var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
-	        const raNum = $('#applyBtn').data('raNum'); // 지원 공고 번호
-
-	        $.ajax({
-	            url: '${pageContext.request.contextPath}/person/applyJob',
-	            type: "POST",
-	            data: { resumeNo: resumeNo, raNum: raNum },
-	            success: function(response) {
-	                $("#apply").modal("hide");
-	                alert("입사지원이 완료되었습니다.");
-	            },
-	            error: function(error) {
-	                alert("입사지원에 실패하였습니다.");
-	            }
-	        });
-	    });
+	 $(".apply-btn").click(function() {
+	  var raNum = $(this).closest("tr").find("input[name=scrapCheckBox]").val(); // 해당 행의 raNum 값을 가져옴
+	  $("#applyJobBtn").data("raNum", raNum); // 모달 내부의 지원하기 버튼에 raNum 값을 저장함
 	});
+	
+	$("#applyJobBtn").click(function() {
+	  var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
+	  var raNum = $(this).data("raNum"); // 모달 내부에서 저장한 raNum 값을 가져옴
+	
+	  // checkApply 호출해 지원 여부 확인
+	  $.ajax({
+	    type: "POST",
+	    url: "${pageContext.request.contextPath}/person/checkApply",
+	    data: { raNum: raNum },
+	    success: function (data) {  	
+	      if (data == 0 ) {
+	        // 입사지원
+	        $.ajax({
+	          url: '${pageContext.request.contextPath}/person/applyJob',
+	          type: "POST",
+	          data: { resumeNo: resumeNo, raNum: raNum },
+	          success: function(response) {
+	            $("#apply").modal("hide");
+	            alert("입사지원이 완료되었습니다.");
+	          },
+	          error: function(error) {
+	            alert("입사지원에 실패하였습니다.");
+	          }
+	        });
+	      } else {   	  
+	        // 입사 지원 불가
+	        alert("이미 입사 지원한 공고입니다.");
+	      }
+	    },
+	    error: function(error) {
+	      console.log(error);
+	    }
+	  });
+	});
+
 
 
 	

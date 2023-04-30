@@ -80,8 +80,10 @@
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
 				<div class="pb-4">
-					<h2>게시글전체 검색결과</h2>
-					<span>현재까지 등록된 전체 게시글입니다.</span>
+					<div class="pb-4">
+					    <h2>${searchResult}</h2>
+					    <span>현재까지 등록된 ${searchResult} 입니다.</span>
+					</div>
 				</div>
 				<div class="s">조회 수 출력</div>
 				<hr>
