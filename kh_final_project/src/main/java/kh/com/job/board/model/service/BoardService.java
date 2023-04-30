@@ -47,6 +47,9 @@ public interface BoardService {
 	// 댓글 수정 
 	public int updateReply(ReplyDto dto) throws Exception;
 	
+	// 인기글
+	public  List<BoardDto> topReadPost() throws Exception;
+	
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
 	public BoardDto viewDetail(String boardNo);

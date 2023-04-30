@@ -158,8 +158,19 @@
 	SET REPLY_CONTENT =  #{replyContent},
     REPLY_CREATE_DATE = SYSDATE
 	WHERE REPLY_ID = #{replyId} AND USER_ID =  #{userId}
-	
 	</update>
+	
+	<!--  인기글 top 5 -->
+	<select id="topReadPost" resultType="bdto">
+	SELECT * 
+	FROM (
+  	SELECT *
+  	FROM BOARD
+  	WHERE CATEGORY_ID NOT IN ('UDB05', 'UDB06')
+  	ORDER BY BOARD_READ DESC
+	)
+	WHERE ROWNUM &lt;= 5
+	</select>
 
 
 	<!-- 뉴스레터 -->

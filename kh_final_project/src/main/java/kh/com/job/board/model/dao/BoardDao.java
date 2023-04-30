@@ -87,6 +87,11 @@ public class BoardDao {
 		return sqlSession.update("boards.updateReply", dto);
 	}
 	
+	// 인기글
+	public  List<BoardDto> topReadPost() throws Exception {
+		return sqlSession.selectList("boards.topReadPost");
+	}
+	
 	public int delete(String userId)  throws Exception {
 		return sqlSession.delete("boards.delete", userId);
 	}

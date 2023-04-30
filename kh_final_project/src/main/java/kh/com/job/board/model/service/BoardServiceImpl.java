@@ -91,6 +91,11 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.viewDetail(boardNo);
 	}
 	
+	@Override
+	public  List<BoardDto> topReadPost() throws Exception {
+		return dao.topReadPost();
+	}
+	
 
 	
 	

@@ -40,6 +40,7 @@ public class BoardController {
 	@GetMapping("/main")
 	public ModelAndView boardmain(ModelAndView mv) throws Exception {
 		mv.addObject("UBDlist", service.getBoardCate());
+		mv.addObject("topReadPost", service.topReadPost());
 		return mv;
 	}
 
@@ -135,6 +136,8 @@ public class BoardController {
 			String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
 			board.setBoardContent(boardContent);
 		}
+		
+		// TODO: 전체 count 출력
 
 		mv.addObject("boardList", postList);
 		return mv;
