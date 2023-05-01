@@ -38,7 +38,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	href="${pageContext.request.contextPath}/resources/css/board.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -56,20 +56,6 @@
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
-<style>
-.s {
-	border: 1px solid gray;
-	border-radius: 5px;
-	padding: 30px;
-}
-
-.board-table {
-	width: 100%;
-	table-layout: fixed;
-	border-bottom: 1px solid gray;
-}
-</style>
-
 </head>
 <body>
 	<!-- header  -->
@@ -85,7 +71,15 @@
 					    <span>현재까지 등록된 ${searchResult} 입니다.</span>
 					</div>
 				</div>
-				<div class="s">조회 수 출력</div>
+				
+				<!-- 숫자 인덱스	 -->
+				<div class="num-container row" id="num-container">
+					<div class="col num-item">
+						<h4 class="in-title">게시글 수</h4>
+						<span class="nums" data-count="${totalCount }">0</span><span id="num-unit">개</span><br>
+					</div>
+				</div>
+				
 				<hr>
 				<div class="s">
 					<c:forEach items="${boardList}" var="board">
@@ -95,6 +89,7 @@
 								<td class="fs-5 pb-3 fw-semibold">
 								<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank"> 
 								${board.boardTitle}
+								</a>
 								</td>
 								
 							</tr>
@@ -134,6 +129,27 @@
 
 	<!-- page script -->
 	<script>
+	$(document).ready(function () {
+	    $('.nums').each(function () {
+	        const $this = $(this),
+	            countTo = $this.attr('data-count');
+	        $({
+	            countNum: $this.text()
+	        }).animate({
+	            countNum: countTo
+	        }, {
+	            duration: 3000,
+	            easing: 'linear',
+	            step: function () {
+	                $this.text(Math.floor(this.countNum));
+	            },
+	            complete: function () {
+	                $this.text(this.countNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+	                //3자리 마다 콤마 표시 적용
+	            }
+	        });
+	    });
+	});
 	</script>
 
 </body>

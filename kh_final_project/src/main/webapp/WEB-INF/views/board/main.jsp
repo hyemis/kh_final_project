@@ -59,6 +59,10 @@
 	border-radius: 5px;
 	padding: 30px;
 }
+
+.s1 {
+	padding: 30px;
+}
 </style>
 
 </head>
@@ -98,8 +102,10 @@
 						</div>
 
 				</div>
-
-				<div class="s">
+				
+				
+				<div style="padding-top: 100px;">
+				<div class="s1" style="padding-bottom: 2px;">
 					<div class="d-flex align-items-center p-2">
 						<h5>주제별 커뮤니티</h5>
 					</div>
@@ -112,16 +118,53 @@
 					</div>
 				</div>
 
-				<div class="s">
+				<div class="s1">
 					<div class="row">
-						<div class="col-sm-6 s">d</div>
-						<div class="col-sm-6 s">d</div>
+						<div class="col-sm-6 s">
+							<h5>취업준비방</h5>
+							<c:forEach var="board" items="${UBD01}">
+								<div>
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									</a>
+								</div>
+							</c:forEach>
+							
+						</div>
+						<div class="col-sm-6 s">
+						<h5>신입방</h5>
+							<c:forEach var="board" items="${UBD02}">
+								<div>
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									</a>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6 s">d</div>
-						<div class="col-sm-6 s">d</div>
+						<div class="col-sm-6 s">
+						<h5>면접방</h5>
+							<c:forEach var="board" items="${UBD03}">
+								<div>
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									</a>
+								</div>
+							</c:forEach>
+							</div>
+						<div class="col-sm-6 s">
+						<h5>질문게시판 </h5>
+							<c:forEach var="board" items="${UBD04}">
+								<div>
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									</a>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
+				</div>
+				
+				
+				
 			</div>
 		</div>
 	</section>
