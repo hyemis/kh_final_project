@@ -100,21 +100,6 @@
 		  <button type="button" class="btn btn-outline-primary delete">삭제</button>
 		</c:if>
 		</div>
-		
-		
-		
-			
-			
-
-
-
-
-
-
-
-
-
-
 
 		
 	</div>
@@ -176,6 +161,8 @@
 
 	<!-- ckeditor5 -->
 	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+	<script>
+	
 	
 	ClassicEditor
     .create( document.querySelector( '#boardContent' ),{
@@ -191,6 +178,7 @@
     .catch( error => {
         console.error( error );
     });
+	</script>
 
 </body>
 </html>
