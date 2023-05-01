@@ -39,9 +39,9 @@
 
 <!-- page section -->	
 <section>
-<div class="container-fluid  p-5">
+<div class="container-fluid  p-5 pt-0">
 <!-- Category Start -->
-		<div class="container-xxl py-5">
+		<div class="container-xxl py-5 pt-2">
 			<!-- 상단 start -->
 			<div class="text-center mx-auto mb-5 wow fadeInUp"
 				data-wow-delay="0.1s" style="max-width: 600px;">
@@ -49,7 +49,7 @@
 				<div class="mb-3">
 					<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal.username" var="user_id" />
-							<span class="fs-3" id="user_id">${user_id } 님 반갑습니다</span>
+							<span class="fs-3 active" id="user_id">${user_id } 님 반갑습니다</span>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
 							<span class="fs-3" id="user_id">반갑습니다.<br> 
@@ -73,7 +73,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
-					data-wow-delay="0.3s"
+					data-wow-delay="0.2s"
 					style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/applicant">
 						<div class="rounded p-4">
@@ -83,7 +83,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
-					data-wow-delay="0.5s"
+					data-wow-delay="0.3s"
 					style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/search/suggest">
 						<div class="rounded p-4">
@@ -93,7 +93,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
-					data-wow-delay="0.7s"
+					data-wow-delay="0.4s"
 					style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/aboutus">
 						<div class="rounded p-4">
@@ -103,7 +103,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
-					data-wow-delay="0.1s"
+					data-wow-delay="0.5s"
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/account/info">
 						<div class="rounded p-4">

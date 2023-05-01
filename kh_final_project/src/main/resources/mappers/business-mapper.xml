@@ -9,94 +9,105 @@
 		WHERE USER_ID = #{userId}
 	</select>
 
-<!-- search -->
+	<!-- search -->
 	<!-- 인재찾기 이력서검색 -->
-	<select id="resumeList" resultType="kh.com.job.board.model.dto.BsSearchDto">
+	<select id="resumeList"
+		resultType="kh.com.job.board.model.dto.BsSearchDto">
 		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-	           UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-		  FROM USER_RESUME UR
-		       JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-		 WHERE RESUME_ACT = 'Y' 
-				 <if test="jobType != ''">
-			       AND JOB_TYPE = #{jobType} 
-			     </if>
-			     <if test="career != ''">
-			       AND CAREER = #{career} 
-			     </if>
-			     <if test="education != ''">
-			       AND EDUCATION = #{education} 
-			     </if>
-			     <if test="gender != ''">
-			       AND GENDER = #{gender} 
-			     </if>
-		 	   
+		UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		FROM USER_RESUME UR
+		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		WHERE RESUME_ACT = 'Y'
+		<if test="jobType != ''">
+			AND JOB_TYPE = #{jobType}
+		</if>
+		<if test="career != ''">
+			AND CAREER = #{career}
+		</if>
+		<if test="education != ''">
+			AND EDUCATION = #{education}
+		</if>
+		<if test="gender != ''">
+			AND GENDER = #{gender}
+		</if>
+
 	</select>
-	
+
 	<!-- 이력서 페이지 카운트 -->
 	<select id="resumeListCount" resultType="_int">
 		SELECT COUNT(RESUME_NO)
-		FROM ( SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-	           		  UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-		  		FROM USER_RESUME UR
-		      		 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-			   WHERE RESUME_ACT = 'Y' 
-				 <if test="jobType != ''">
-			       AND JOB_TYPE = #{jobType} 
-			     </if>
-			     <if test="career != ''">
-			       AND CAREER = #{career} 
-			     </if>
-			     <if test="education != ''">
-			       AND EDUCATION = #{education} 
-			     </if>
-			     <if test="gender != ''">
-			       AND GENDER = #{gender} 
-			     </if>
-			 )
+		FROM ( SELECT UT.USER_NAME, UT.USER_EMAIL,
+		UR.RESUME_TITLE,
+		UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		FROM USER_RESUME UR
+		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		WHERE RESUME_ACT = 'Y'
+		<if test="jobType != ''">
+			AND JOB_TYPE = #{jobType}
+		</if>
+		<if test="career != ''">
+			AND CAREER = #{career}
+		</if>
+		<if test="education != ''">
+			AND EDUCATION = #{education}
+		</if>
+		<if test="gender != ''">
+			AND GENDER = #{gender}
+		</if>
+		)
 	</select>
-	
-<!-- 	<select id="resumePagingList" parameterType="kh.com.job.common.page.Criteria">
-		SELECT USER_NAME, USER_EMAIL, RESUME_TITLE, RESUME_NO, JOB_TYPE, CAREER, GENDER, EDUCATION
-		  FROM ( 
-			  SELECT ROWNUM AS NUM , A.*
-			  FROM ( 
-			  		 SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-	          				UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-					 FROM ( USER_RESUME UR
-					         JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-					  	     <where>
-							 <if test="jobType != ''">
-						        JOB_TYPE = #{jobType} <if test="career != '' or education != '' or gender != ''"> AND </if>
-						     </if>
-						     <if test="career != ''">
-						        CAREER = #{career} <if test="education != '' or gender != ''"> AND </if>
-						     </if>
-						     <if test="education != ''">
-						        EDUCATION = #{education} <if test="gender != ''"> AND </if>
-						     </if>
-						     <if test="gender != ''">
-						        GENDER = #{gender} 
-						     </if>
-					         </where>	
-					 	     AND RESUME_ACT = 'Y' 
-					 	   )  
-					 	     ORDER BY UR.RESUME_NO DESC
-					) A
-			  )
-		WHERE NUM BETWEEN #{startNum} AND #{endNum}	  
+
+	<select id="pagingResumeList">
+		SELECT USER_NAME, USER_EMAIL, RESUME_TITLE, RESUME_NO, JOB_TYPE,
+		CAREER, GENDER, EDUCATION
+		FROM (
+		SELECT ROWNUM AS NUM , A.*
+		FROM (
+		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE, UR.RESUME_NO,
+		    UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		        FROM USER_RESUME UR
+		        JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		        WHERE RESUME_ACT = 'Y'
+		               
+		<if test="jobType != ''">
+			            AND JOB_TYPE = #{jobType}
+			           
+		</if>
+		           
+		<if test="career != ''">
+			            AND CAREER = #{career}
+			           
+		</if>
+		           
+		<if test="education != ''">
+			            AND EDUCATION = #{education}
+			           
+		</if>
+		           
+		<if test="gender != ''">
+			            AND GENDER = #{gender}
+			           
+		</if>
+		ORDER BY UR.RESUME_NO DESC
+		) A
+		)
+		WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
- -->
-<!-- 회원정보 수정하기 -->
+
+	<!-- 회원정보 수정하기 -->
 	<update id="updateAccount">
 		UPDATE USER_TABLE SET
 		USER_EMAIL = #{userEmail},
 		USER_PIC = #{userPic},
 		BS_LICENSE = #{bsLicense},
-		BS_MAIN_PHONE = #{bsMainPhone},
+		BS_MAIN_PHONE =
+		#{bsMainPhone},
 		ADDRESS_POSTCODE = #{addressPostcode},
-		ADDRESS_ROAD = #{addressRoad},
+		ADDRESS_ROAD =
+		#{addressRoad},
 		ADDRESS_JIBUN = #{addressJibun},
-		ADDRESS_DETAIL = #{addressDetail}
+		ADDRESS_DETAIL =
+		#{addressDetail}
 		WHERE USER_ID = #{userId}
 	</update>
 
@@ -104,20 +115,23 @@
 	<update id="updatePassword">
 		UPDATE USER_TABLE SET
 		USER_PW = #{userPw}
-		WHERE USER_ID = #{userId}
+		WHERE USER_ID
+		= #{userId}
 	</update>
 
 	<!-- 회원 프로필 이미지 수정하기 -->
 	<update id="updateUimage">
 		UPDATE tb_user SET
 		USER_PIC = #{userPic}
-		WHERE user_id = #{userId}
+		WHERE user_id
+		= #{userId}
 	</update>
 
 	<!-- 회원비밀번호 불러오기 -->
 	<select id="getUserPw" resultType="budto">
 		SELECT USER_ID, USER_PW
-		FROM USER_TABLE
+		FROM
+		USER_TABLE
 		WHERE USER_ID = #{userId}
 	</select>
 
@@ -127,39 +141,53 @@
 	<insert id="apiInsert" parameterType="brdto">
 		insert INTO RECRUIT_REGIST
 		(RA_NUM, RECRUIT_TYPE, COMPANY_NAME, BUSINO, USER_EDUCATION
-		, SALARY, MIN_SALARY, MAX_SALARY
+		, SALARY,
+		MIN_SALARY, MAX_SALARY
 		, REGIST_DATE, CLOSE_DATE, RA_TITLE
-		, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE)
-		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{recruitType}, #{companyName},
+		, CAREER,
+		HOLIDAY_TYPE, EMP_TYPE_CODE)
+		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL,
+		#{recruitType}, #{companyName},
 		#{busino}, #{userEducation}
-		, #{salary}, #{minSalary}, #{maxSalary}
+		, #{salary},
+		#{minSalary}, #{maxSalary}
 		, #{registDate}, #{closeDate}, #{raTitle}
-		, #{career}, #{holidayType}, #{empTypeCode})
+		,
+		#{career}, #{holidayType}, #{empTypeCode})
 	</insert>
 
 	<!-- 직업 카테고리 항목 가져오기 -->
 	<select id="getCateList" parameterType="string"
 		resultType="kh.com.job.admin.model.dto.AdCategoryDto">
 		SELECT * FROM JA_CATEGORY
-		WHERE CATEGORY_TYPE = #{categoryType} AND CATEGORY_DEPT ='2'
+		WHERE CATEGORY_TYPE =
+		#{categoryType} AND CATEGORY_DEPT ='2'
 	</select>
 
 	<!-- 채용공고 작성 -->
 	<insert id="insertRecruit">
 		insert INTO RECRUIT_REGIST
-		(RA_NUM, COMPANY_NAME, RECRUIT_TYPE,CONDITION_TYPE, USER_EDUCATION, USER_ID
-		, SALARY, MIN_SALARY, MAX_SALARY
+		(RA_NUM, COMPANY_NAME,
+		RECRUIT_TYPE,CONDITION_TYPE, USER_EDUCATION, USER_ID
+		, SALARY,
+		MIN_SALARY, MAX_SALARY
 		, REGIST_DATE, CLOSE_DATE
-		, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE
+		, CAREER, HOLIDAY_TYPE,
+		EMP_TYPE_CODE
 		, RA_TITLE, RA_CONTENT
-		, RA_EXTRA_DOCUMENT,RA_PROGRESS, RA_ADMISSION)
-		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName}, #{recruitType},
+		, RA_EXTRA_DOCUMENT,RA_PROGRESS,
+		RA_ADMISSION)
+		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName},
+		#{recruitType},
 		#{conditionType}, #{userEducation}, #{userId}
-		, #{salary}, #{minSalary}, #{maxSalary}
+		,
+		#{salary}, #{minSalary}, #{maxSalary}
 		, #{registDate}, #{closeDate}
-		, #{career}, #{holidayType}, #{empTypeCode}
+		,
+		#{career}, #{holidayType}, #{empTypeCode}
 		, #{raTitle}, #{raContent}
-		, #{raExtraDocument}, 'N', 'N')
+		,
+		#{raExtraDocument}, 'N', 'N')
 	</insert>
 
 	<!-- 채용공고 등록 리스트 -->
@@ -167,7 +195,8 @@
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
 		WHERE USER_ID = #{userId}
-		AND RA_ADMISSION IN ('P', 'Y')
+		AND
+		RA_ADMISSION IN ('P', 'Y')
 		AND CLOSE_DATE > SYSDATE
 	</select>
 
@@ -176,13 +205,15 @@
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT * FROM RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
-		AND CLOSE_DATE > SYSDATE
+		AND
+		CLOSE_DATE > SYSDATE
 		ORDER BY REGIST_DATE DESC
 	</select>
-	
+
 	<!-- 공개된 채용 공고 수 -->
 	<select id="countYAdmission" resultType="_int">
-		SELECT COUNT(*)  FROM RECRUIT_REGIST
+		SELECT COUNT(*) FROM
+		RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
 		AND CLOSE_DATE > SYSDATE
 	</select>
@@ -220,23 +251,31 @@
 	<select id="recruitAll"
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
-		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE,
+		, CAREER_TYPE,
+		USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE,
 		RA_TITLE
-		, RA_CONTENT, RA_EXTRA_DOCUMENT
+		, RA_CONTENT,
+		RA_EXTRA_DOCUMENT
 		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
 		FROM(
-		SELECT ROWNUM AS NUM , A.*
+		SELECT
+		ROWNUM AS NUM , A.*
 		FROM (
-		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
-		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE,
+		SELECT RA_NUM,
+		RECRUIT_TYPE,USER_ID,COMPANY_NAME
+		, CAREER_TYPE, USER_EDUCATION,
+		SALARY, REGIST_DATE, CLOSE_DATE,
 		RA_TITLE
-		, RA_CONTENT, RA_EXTRA_DOCUMENT
+		, RA_CONTENT,
+		RA_EXTRA_DOCUMENT
 		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
-		FROM RECRUIT_REGIST
+		FROM
+		RECRUIT_REGIST
 		WHERE USER_ID = #{userId}
 		<if test="search != null and search neq ''">
 			AND RA_TITLE like '%'||#{search}||'%'
-			or RA_CONTENT like '%'||#{search}||'%'
+			or RA_CONTENT like
+			'%'||#{search}||'%'
 			or COMPANY_NAME like '%'||#{search}||'%'
 		</if>
 		ORDER BY RA_NUM DESC
@@ -269,45 +308,49 @@
 	<delete id="deleteRecruit">
 		delete from RECRUIT_REGIST RR where ra_num = #{raNum}
 	</delete>
-	
-	 <!--  3단계 선택 후 채용공고출력 --> 
-	 <select id="lCateRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
-	  	SELECT *
+
+	<!-- 3단계 선택 후 채용공고출력 -->
+	<select id="lCateRecruit"
+		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+		SELECT *
 		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE = #{recruitType}
-		AND CLOSE_DATE > SYSDATE
+		AND CLOSE_DATE
+		> SYSDATE
 		AND RA_ADMISSION IN ('Y')
 		ORDER BY REGIST_DATE DESC
-	 </select>
-	  
-	 <!--  3단계 선택 후 채용공고 개수 --> 
-	 <select id="lCatecountYAdmission" resultType="_int">
-	  	SELECT COUNT(*)  FROM RECRUIT_REGIST
+	</select>
+
+	<!-- 3단계 선택 후 채용공고 개수 -->
+	<select id="lCatecountYAdmission" resultType="_int">
+		SELECT COUNT(*) FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE IN #{recruitType}
-		AND CLOSE_DATE > SYSDATE
+		AND
+		CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
-	 </select>
-	 
-	 <!-- 채용공고 검색 -->
-  	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
-	    SELECT *
-	    FROM RECRUIT_REGIST r
-	    JOIN USER_TABLE u ON r.user_id = u.user_id
-	    WHERE CLOSE_DATE > SYSDATE
-	    AND RA_ADMISSION IN ('Y')
-	    <if test="keyword != null and keyword != ''">
-	        AND (r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
-	        OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
-	        OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
-	        OR r.SALARY LIKE '%' || #{keyword} || '%'
-	        OR r.MIN_SALARY LIKE '%' || #{keyword} || '%'
-	        OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
-	        OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
-	        OR r.CAREER_TYPE LIKE  '%' || #{keyword} || '%'
-	        OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
-	        OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
-	        OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
-	    </if>
+	</select>
+
+	<!-- 채용공고 검색 -->
+	<select id="searchList"
+		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+		SELECT *
+		FROM RECRUIT_REGIST r
+		JOIN USER_TABLE u ON r.user_id = u.user_id
+		WHERE CLOSE_DATE > SYSDATE
+		AND RA_ADMISSION IN ('Y')
+		<if test="keyword != null and keyword != ''">
+			AND (r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
+			OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
+			OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
+			OR r.SALARY LIKE '%' || #{keyword} || '%'
+			OR r.MIN_SALARY LIKE '%' || #{keyword} || '%'
+			OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
+			OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
+			OR r.CAREER_TYPE LIKE '%' || #{keyword} || '%'
+			OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
+			OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
+			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
+		</if>
 	</select>
 
 
