@@ -96,8 +96,8 @@ public class BoardDao {
 	}
 	
 	// 개인회원사용 카테고리 총 게시글 수 
-	public int getCountByPs() throws Exception {
-		return sqlSession.selectOne("boards.countByPs");
+	public int getCountByPs(PagingBoardDto bdto) throws Exception {
+		return sqlSession.selectOne("boards.countByPs", bdto);
 	}
 	
 	// 카테고리 별 게시글 수 

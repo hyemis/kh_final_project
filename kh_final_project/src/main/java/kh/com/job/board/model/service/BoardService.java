@@ -55,7 +55,7 @@ public interface BoardService {
 	public  List<BoardDto> topReadPost() throws Exception;
 	
 	// 개인 카테고리 총 게시글 수 
-	public int getCountByPs() throws Exception;
+	public int getCountByPs(PagingBoardDto bdto) throws Exception;
 	
 	// 카테고리 별 게시글 수 
 	public int countByCate(String cate) throws Exception;

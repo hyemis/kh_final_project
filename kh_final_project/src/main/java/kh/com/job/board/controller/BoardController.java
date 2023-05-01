@@ -137,47 +137,76 @@ public class BoardController {
 	}
 
 	// 게시판별 게시글 출력 
+//	@GetMapping("/postall")
+//	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate, PagingBoardDto bdto)
+//	        throws Exception {
+//
+//	    if (cate == null) {
+//	        // 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
+//	        mv.addObject("searchResult", "게시글 전체 검색결과");
+//	        mv.addObject("totalCount", service.getCountByPs(bdto));
+//
+//	        if (bdto.getPnum() <= 0) {
+//	            bdto.setPnum(1);
+//	        }
+//	        
+//	        Paging list = service.pageList(bdto);
+//	        preprocessBoardList(list.getPage());
+//	        mv.addObject("boardList", list);
+//
+//	    } else {
+//	        // 카테고리 파라미터가 있는 경우, 해당 카테고리에 해당하는 게시글만 가져옴
+//	        
+//	        String categoryName = service.getCateName(cate);
+//	        mv.addObject("searchResult", categoryName + "  검색결과");
+//	        mv.addObject("totalCount", service.countByCate(cate));
+//	        
+//	        if (bdto.getPnum() <= 0) {
+//	            bdto.setPnum(1);
+//	        }
+//	        
+//	        bdto.setCategoryId(cate);
+//	        Paging list = service.pageList(bdto);
+//	        preprocessBoardList(list.getPage());
+//	        mv.addObject("boardList", list);
+//	    }
+//	    return mv;
+//	    }
+	
 	@GetMapping("/postall")
 	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate, PagingBoardDto bdto)
-			throws Exception {
-		List<BoardDto> postList;
+	        throws Exception {
 
-		if (cate == null) {
-			// 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
-//			postList = service.postList(bdto);
-			mv.addObject("searchResult", "게시글 전체 검색결과");
-			mv.addObject("totalCount", service.getCountByPs());
-			
-			if(bdto.getPnum() == 0) {
-				bdto.setPnum(1);
-			}
-			
-			Paging list = service.pageList(bdto);
-			mv.addObject("boardList", list);
-		
-			
-		} else {
-			// 카테고리 파라미터가 있는 경우, 해당 카테고리에 해당하는 게시글만 가져옴
-			Paging list = service.pageList(bdto);
-			String categoryName = service.getCateName(cate);
-			mv.addObject("searchResult", categoryName + "  검색결과");
-			mv.addObject("totalCount", service.countByCate(cate));
-			mv.addObject("boardList", list);
-		}
+	    if (cate == null) {
+	        // 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
+	        mv.addObject("searchResult", "게시글 전체 검색결과");
+	        mv.addObject("totalCount", service.getCountByPs(bdto));
 
-//		// updateDate를 시분까지 잘라서 저장 및 boardContent 제거
-//		for (BoardDto board : postList) {
-//			String updateDate = board.getUpdateDate();
-//			board.setUpdateDate(updateDate.substring(0, 16));
-//
-//			// boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
-//			String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
-//			board.setBoardContent(boardContent);
-//		}
-//
-//
-//		mv.addObject("boardList", postList);
-		return mv;
+	        if (bdto.getPnum() < 1) {
+	            bdto.setPnum(1);
+	        }
+
+	        Paging list = service.pageList(bdto);
+	        preprocessBoardList(list.getPage(), bdto.getCategoryId());
+	        mv.addObject("boardList", list);
+
+	    } else {
+	        // 카테고리 파라미터가 있는 경우, 해당 카테고리에 해당하는 게시글만 가져옴
+
+	        String categoryName = service.getCateName(cate);
+	        mv.addObject("searchResult", categoryName + "  검색결과");
+	        mv.addObject("totalCount", service.countByCate(cate));
+
+	        if (bdto.getPnum() < 1) {
+	            bdto.setPnum(1);
+	        }
+
+	        bdto.setCategoryId(cate);
+	        Paging list = service.pageList(bdto);
+	        preprocessBoardList(list.getPage(), bdto.getCategoryId());
+	        mv.addObject("boardList", list);
+	    }
+	    return mv;
 	}
 
 	// 게시글 상세 조회 + 조회 수 증가
@@ -300,6 +329,45 @@ public class BoardController {
 			response.put("result", "fail");
 		}
 		return response;
+	}
+	
+//	//커뮤니티 게시글 출력 
+//	private void preprocessBoardList(Object obj) {
+//		List<BoardDto> boardList = (List<BoardDto>) obj;
+//		
+//	    // updateDate를 시분까지 잘라서 저장
+//	    for (BoardDto board : boardList) {
+//	        String updateDate = board.getUpdateDate();
+//	        board.setUpdateDate(updateDate.substring(0, 16));
+//	    }
+//
+//	    // boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
+//	    boardList.forEach(board -> {
+//	        String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
+//	        board.setBoardContent(boardContent.length() > 20 ? boardContent.substring(0, 20) : boardContent);
+//	    });
+//	    
+//	}
+	
+	private void preprocessBoardList(Object obj, String categoryId) {
+	    List<BoardDto> boardList = (List<BoardDto>) obj;
+	    
+	    // updateDate를 시분까지 잘라서 저장
+	    for (BoardDto board : boardList) {
+	        String updateDate = board.getUpdateDate();
+	        board.setUpdateDate(updateDate.substring(0, 16));
+	    }
+
+	    // boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
+	    boardList.forEach(board -> {
+	        String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
+	        board.setBoardContent(boardContent.length() > 20 ? boardContent.substring(0, 20) : boardContent);
+	    });
+
+	    // categoryId 값이 null이 아닌 경우, 해당 카테고리에 속하지 않는 게시글은 리스트에서 제외
+	    if (categoryId != null) {
+	        boardList.removeIf(board -> !board.getCategoryId().equals(categoryId));
+	    }
 	}
 
 }

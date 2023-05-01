@@ -37,8 +37,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/board.css"
+<link href="${pageContext.request.contextPath}/resources/css/board.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -67,81 +66,87 @@
 			<div class="container bg-white p-5">
 				<div class="pb-4">
 					<div class="pb-4">
-					    <h2>${searchResult}</h2>
-					    <span>현재까지 등록된 ${searchResult} 입니다.</span>
+						<h2>${searchResult}</h2>
+						<span>현재까지 등록된 ${searchResult} 입니다.</span>
 					</div>
 				</div>
-				
+
 				<!-- 숫자 인덱스	 -->
 				<div class="num-container row" id="num-container">
 					<div class="col num-item">
 						<h4 class="in-title">게시글 수</h4>
-						<span class="nums" data-count="${totalCount }">0</span><span id="num-unit">개</span><br>
+						<span class="nums" data-count="${totalCount }">0</span><span
+							id="num-unit">개</span><br>
 					</div>
 				</div>
-				
+
 				<hr>
 				<div class="s">
-					<c:forEach items="${boardList}" var="board">
-					<div class="p-4">
-						<table class="board-table">
-							<tr>
-								<td class="fs-5 pb-3 fw-semibold">
-								<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank"> 
-								${board.boardTitle}
-								</a>
-								</td>
-								
-							</tr>
-							<tr>
-								<td class="pb-3 fw-light">${board.boardContent}</td>
-								
-							</tr>
-							<tr>
-								<td>
-									<div class="d-flex justify-content-between">
-										<div>
-											<span class="fas fa-eye">  ${board.boardRead}  </span> 
-											<span class="fas fa-heart">  ${board.boardLike}  </span>
+					<c:forEach items="${boardList.getPage()}" var="board">
+						<div class="p-4">
+							<table class="board-table">
+								<tr>
+									<td class="fs-5 pb-3 fw-semibold"><a
+										href="${pageContext.request.contextPath}/board/detail/${board.boardNo}"
+										target="_blank"> ${board.boardTitle} </a></td>
+
+								</tr>
+								<tr>
+									<td class="pb-3 fw-light">${board.boardContent}</td>
+
+								</tr>
+								<tr>
+									<td>
+										<div class="d-flex justify-content-between">
+											<div>
+												<span class="fas fa-eye"> ${board.boardRead} </span> <span
+													class="fas fa-heart"> ${board.boardLike} </span>
+											</div>
+											<div>
+												<span>${board.userId}</span> 님이 <span>${board.updateDate}</span>
+												에 작성
+											</div>
 										</div>
-										<div>
-											<span>${board.userId}</span> 님이 <span>${board.updateDate}</span>
-											에 작성
-										</div>
-									</div>
-								</td>
-							</tr>
-						</table>
-					
-					
-					
-					</div>
+									</td>
+								</tr>
+							</table>
+
+
+
+						</div>
 					</c:forEach>
 				</div>
-				
-			<!-- 페이지네이션  -->
-		 	<ul class = "pagination text-center justify-content-center">
-				<c:choose>
-					<c:when test="${list.prevPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">prev</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${list.prevPage }">prev</a></li>
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${pNum}">${pNum }</a></li>
-				</c:forEach>
-				
-				<c:choose>
-					<c:when test="${list.nextPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">next</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}//board/postall?pnum=${list.nextPage }">next</a></li>
-					</c:otherwise>
-				</c:choose>					
-			</ul>
+
+				<!-- 페이지네이션 -->
+				<ul class="pagination text-center justify-content-center">
+  <c:choose>
+    <c:when test="${boardList.prevPage eq -1}">
+      <li class="page-item disabled"><a class="page-link">prev</a></li>
+    </c:when>
+    <c:otherwise>
+      <li class="page-item">
+        <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${boardList.prevPage}${not empty bdto.categoryId ? '&cate=' + bdto.categoryId : ''}">prev</a>
+      </li>
+    </c:otherwise>
+  </c:choose>
+
+  <c:forEach var="pNum" items="${boardList.pageList}">
+    <li class="page-item ${pNum eq pageNumber ? 'active' : '' }">
+      <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${pNum}${not empty bdto.categoryId ? '&cate=' + bdto.categoryId : ''}">${pNum}</a>
+    </li>
+  </c:forEach>
+
+  <c:choose>
+    <c:when test="${boardList.nextPage eq -1}">
+      <li class="page-item disabled"><a class="page-link">next</a></li>
+    </c:when>
+    <c:otherwise>
+      <li class="page-item">
+        <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${boardList.nextPage}${not empty bdto.categoryId ? '&cate=' + bdto.categoryId : ''}">next</a>
+      </li>
+    </c:otherwise>
+  </c:choose>
+</ul>
 
 			</div>
 		</div>
@@ -153,27 +158,41 @@
 
 	<!-- page script -->
 	<script>
-	$(document).ready(function () {
-	    $('.nums').each(function () {
-	        const $this = $(this),
-	            countTo = $this.attr('data-count');
-	        $({
-	            countNum: $this.text()
-	        }).animate({
-	            countNum: countTo
-	        }, {
-	            duration: 3000,
-	            easing: 'linear',
-	            step: function () {
-	                $this.text(Math.floor(this.countNum));
-	            },
-	            complete: function () {
-	                $this.text(this.countNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-	                //3자리 마다 콤마 표시 적용
-	            }
-	        });
-	    });
-	});
+		$(document)
+				.ready(
+						function() {
+							$('.nums')
+									.each(
+											function() {
+												const $this = $(this), countTo = $this
+														.attr('data-count');
+												$({
+													countNum : $this.text()
+												})
+														.animate(
+																{
+																	countNum : countTo
+																},
+																{
+																	duration : 3000,
+																	easing : 'linear',
+																	step : function() {
+																		$this
+																				.text(Math
+																						.floor(this.countNum));
+																	},
+																	complete : function() {
+																		$this
+																				.text(this.countNum
+																						.toString()
+																						.replace(
+																								/\B(?=(\d{3})+(?!\d))/g,
+																								','));
+																		//3자리 마다 콤마 표시 적용
+																	}
+																});
+											});
+						});
 	</script>
 
 </body>

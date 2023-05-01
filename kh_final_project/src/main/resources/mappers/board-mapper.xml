@@ -116,24 +116,6 @@
 	WHERE BOARD_NO = #{boardNo}
    	</select>
    	
-
-	<!-- 전체 게시글 목록 -->
-	<!-- <select id="postList" resultType="bdto">
-	SELECT * FROM BOARD 
-	WHERE CATEGORY_ID IN ('UBD01', 'UBD02','UBD03','UBD04' ) 
-	ORDER BY UPDATE_DATE desc
-	</select>
-	
-	<select id="postList" resultType="bdto">
-	SELECT  *
-	FROM(
-			SELECT ROWNUM AS NUM , A.*
-			FROM (	SELECT * FROM BOARD 
-					WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06') 
-					ORDER BY UPDATE_DATE DESC) A
-		)
-	WHERE NUM BETWEEN  #{startNum} AND #{endNum}
-	</select> -->
 	
  	<!-- 카테고리별 게시글 목록 -->
 	<select id="postListByCate" resultType="bdto">
@@ -141,41 +123,31 @@
 	WHERE CATEGORY_ID = #{categoryId} ORDER BY UPDATE_DATE DESC
 	</select>  
 	 
-<!-- 
-	 <select id="postListByCate" resultType="bdto">
-	SELECT  *
-		FROM(
-			SELECT ROWNUM AS NUM , A.*
-			FROM ( SELECT * FROM BOARD 
-	WHERE CATEGORY_ID = #{categoryId} ORDER BY UPDATE_DATE DESC	) A
-			)
-	WHERE NUM BETWEEN  #{startNum} AND #{endNum}
-	</select>  --> 
-	
+	<!--  페이징 게시글 목록 -->
 	<select id="postList" resultType="bdto">
-	<choose>
-		<when test="categoryId == null">
-			SELECT  *
-			FROM(
-				SELECT ROWNUM AS NUM , A.*
-				FROM (SELECT * FROM BOARD 
-					  WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06') 
-					  ORDER BY UPDATE_DATE DESC) A
-			)
-			WHERE NUM BETWEEN #{startNum} AND #{endNum}
-		</when>
-		<otherwise>
-			SELECT  *
-			FROM(
-				SELECT ROWNUM AS NUM , A.*
-				FROM ( SELECT * FROM BOARD 
-					  WHERE CATEGORY_ID = #{categoryId} 
-					  ORDER BY UPDATE_DATE DESC) A
-			)
-			WHERE NUM BETWEEN #{startNum} AND #{endNum}
-		</otherwise>
-	</choose>
-</select>
+		<choose>
+			<when test="categoryId == null">
+				SELECT  *
+				FROM(
+					SELECT ROWNUM AS NUM , A.*
+					FROM (SELECT * FROM BOARD 
+						  WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06') 
+						  ORDER BY UPDATE_DATE DESC) A
+				)
+				WHERE NUM BETWEEN #{startNum} AND #{endNum}
+			</when>
+			<otherwise>
+				SELECT  *
+				FROM(
+					SELECT ROWNUM AS NUM , A.*
+					FROM ( SELECT * FROM BOARD 
+						  WHERE CATEGORY_ID = #{categoryId} 
+						  ORDER BY UPDATE_DATE DESC) A
+				)
+				WHERE NUM BETWEEN #{startNum} AND #{endNum}
+			</otherwise>
+		</choose>
+	</select>
 	
 	
 	
@@ -240,18 +212,34 @@
 	</select>
 	
 	<!-- 전체 게시글 수 -->
-	<select id="countByPs" resultType="_int">
+	<!-- <select id="countByPs" resultType="_int">
 	SELECT COUNT(*) AS count
 	FROM BOARD
 	WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06')
-	</select>
+	</select> -->
 	
 	<!-- 카테고리 별 게시글 수  -->
 	<select id="countByCate" resultType="_int">
 	SELECT COUNT(*) AS count
 	FROM BOARD 
-	WHERE CATEGORY_ID = #{cate}
+	WHERE CATEGORY_ID = #{categoryId}
 	GROUP BY CATEGORY_ID
+	</select> 
+	
+	<select id="countByPs" resultType="_int">
+		SELECT COUNT(*) AS count
+	    FROM BOARD
+	    <choose>
+	        <when test="categoryId == null">
+	            WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06')
+	        </when>
+	        <otherwise>
+	            WHERE CATEGORY_ID = #{categoryId}
+	        </otherwise>
+	    </choose>
+	    <if test="categoryId != null">
+	        GROUP BY CATEGORY_ID
+	    </if>
 	</select>
 
 

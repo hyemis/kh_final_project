@@ -110,6 +110,7 @@ public class BsApplicantController {
 		
 		return mv;
 	}
+	
 	//지원자 이력서 확인
 	@GetMapping("/resume")
 	public ModelAndView applicantResume(ModelAndView mv, Principal principal
