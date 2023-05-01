@@ -69,10 +69,7 @@
 	<section>
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
-				<div class="pb-4">
-					<a href="${pageContext.request.contextPath}/board/postall"
-						class="btn btn-outline-dark mx-1">전체글</a>
-				</div>
+				
 
 				<div class="s originPost">
 					<div class="d-flex justify-content-end align-items-center">
@@ -130,10 +127,7 @@
 						</div>
 					</div>
 				</sec:authorize>
-					<div class="pt-5 d-flex justify-content-center">
-						<a href="${pageContext.request.contextPath}/board/postall"
-							class="btn btn-outline-dark">목록</a>
-					</div>
+					
 				<div>
 
 			</div>
