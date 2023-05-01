@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.controller.BoardController;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
@@ -113,6 +114,14 @@ public class BoardDao {
 	//상세보기
 	public BoardDto viewDetail(String boardNo) {
 		return sqlSession.selectOne("boards.viewDetail", boardNo);
+	}
+
+	public List<CompanyInfoDto> companyInfoList(int boardNo) {
+		return sqlSession.selectList("boards.companyInfoList",boardNo);
+	}
+
+	public CompanyInfoDto companyInfoOne(int boardNo) {
+		return sqlSession.selectOne("boards.companyInfoOne",boardNo);
 	}
 	
 

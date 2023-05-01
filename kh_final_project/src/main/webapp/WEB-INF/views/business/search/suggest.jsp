@@ -173,8 +173,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
@@ -206,7 +204,7 @@
                       var resume = data[i];
                       html += '<tr>';
                       html += '<td class="text-center">' + resume.userName + '</td>';
-                      html += '<td class="text-center">' + resume.resumeTitle + '</td>';
+                      html += '<td class="text-center"><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=' + resume.resumeNo +'">' + resume.resumeTitle + '</a></td>';
                       html += '<td class="text-center">' + resume.userEmail + '</td>';
                       html += '<td class="text-center"><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>';
                       html += '</tr>';

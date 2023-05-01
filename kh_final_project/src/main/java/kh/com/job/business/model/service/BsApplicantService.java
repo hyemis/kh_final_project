@@ -31,10 +31,6 @@ public interface BsApplicantService {
 
 	public Paging pageList(PagingAplicantDto pdto);
 	
-	//캘린더
-	public List<InterviewDto> viewInterview(String userId);
-	public int insertInterview(InterviewDto dto);
-
 	public BsApplicantResumeDto applicantResume(int resumeNo);
 
 	public List<PsHschoolDto> highSelectList(int resumeNo);
@@ -68,6 +64,10 @@ public interface BsApplicantService {
 	public BsAnnounceDto announceView(BsAnnounceDto adto);
 
 	public int resultUpdate(BsAnnounceDto adto);
+	
+	//캘린더
+	public List<InterviewDto> viewInterview(String userId);
+	public int insertInterview(InterviewDto dto);
 
 	
 	

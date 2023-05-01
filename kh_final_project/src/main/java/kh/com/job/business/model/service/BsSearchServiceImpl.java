@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import kh.com.job.business.model.dao.BsSearchDao;
 import kh.com.job.business.model.dto.BsSearchDto;
+import kh.com.job.common.page.Criteria;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
-import kh.com.job.person.model.dto.PsResumeDto;
 
 @Service
 public class BsSearchServiceImpl implements BsSearchService{
@@ -18,7 +18,7 @@ public class BsSearchServiceImpl implements BsSearchService{
 	private BsSearchDao dao;
 
 
-
+/*
 	@Override
 	public Paging resumePageList(BsSearchDto sdto) {
 		//게시글이 표시될 개 수
@@ -27,7 +27,7 @@ public class BsSearchServiceImpl implements BsSearchService{
 		int listLimit = 5;
 		
 		//총 게시글 개수
-		int count = dao.resumePageListCount(sdto);
+		int count = dao.resumeListCount(sdto);
 
 		//나타날 페이지의 첫번 째 글의 ra_num
 		sdto.setStartNum((sdto.getPnum() -1)*pageLimit +1);
@@ -45,7 +45,7 @@ public class BsSearchServiceImpl implements BsSearchService{
 		
 		return list;
 	}
-
+*/
 
 
 	@Override
@@ -53,6 +53,11 @@ public class BsSearchServiceImpl implements BsSearchService{
 		return dao.resumeList(sdto);
 	}
 
+
+	@Override
+	public List<BsSearchDto> resumePagingList(Criteria cri) {
+		return dao.resumePagingList(cri);
+	}
 
 
 }

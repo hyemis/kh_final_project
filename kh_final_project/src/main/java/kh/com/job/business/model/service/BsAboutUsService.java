@@ -26,9 +26,10 @@ public interface BsAboutUsService {
 	public int insertNewsletter(BoardDto dto);
 	public int updateNewsLetter(BoardDto dto); 
 	public int deleteNewsLetter(BoardDto dto); 
-	public BoardDto newsLetterOne(int boardNo, String userId) ; 
+	public BoardDto newsLetterOne(int boardNo) ; 
 	public List<BoardDto> newsLetterList(String userId);
 
 	//이미지 업로드
 	public String uploadDocument(MultipartFile uploadReport, String userId);
+
 }

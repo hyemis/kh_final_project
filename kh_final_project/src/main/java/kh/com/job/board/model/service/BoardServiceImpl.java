@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dao.BoardDao;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
 
 @Service
@@ -121,6 +122,16 @@ public  class BoardServiceImpl implements BoardService {
 	@Override
 	public int delete(String userId) throws Exception {
 		return dao.delete(userId);
+	}
+
+	@Override
+	public List<CompanyInfoDto> companyInfoList(int boardNo) {
+		return dao.companyInfoList(boardNo);
+	}
+
+	@Override
+	public CompanyInfoDto companyInfoOne(int boardNo) {
+		return dao.companyInfoOne(boardNo);
 	}
 
 	

@@ -133,7 +133,7 @@
 								<h4>관련링크</h4>
 							</div>
 							<div class="col-10 ">
-								<input type="text" class="form-control" name="link"
+								<input type="text" class="form-control" id="link" name="link"
 									placeholder="링크를 입력해주세요">
 								<hr>
 							</div>
@@ -163,6 +163,37 @@
 
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<!-- 링크 
+	<script>
+	const linkInput = $('#link');
+	const linkTitle = '';
+	
+	linkInput.addEventListener('change', () => {
+	  const url = linkInput.value;
+	  if (url.startsWith('http')) { // http 또는 https로 시작하는지 검사
+	    getArticleTitle(url).then(title => {
+	      linkTitle = title;
+	    }).catch(error => {
+	      console.error(error);
+	      alart("htttp 혹은 https로 시작되는 링크를 입력해 주세요")
+	    });
+	  }
+	});
+	
+	//뉴스제목을  linkTitle에 저장
+	function getArticleTitle(url) {
+	  return fetch(url)
+	    .then(response => response.text())
+	    .then(data => {
+	      const parser = new DOMParser();
+	      const htmlDoc = parser.parseFromString(data, 'text/html');
+	      const title = htmlDoc.querySelector('title').textContent;
+	      return title;
+	    })
+	    .catch(error => console.error(error));
+	}
+	</script>-->
 
 	<!-- ckeditor5 -->
 	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>

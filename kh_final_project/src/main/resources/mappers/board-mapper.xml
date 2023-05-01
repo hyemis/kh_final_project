@@ -58,6 +58,24 @@
         WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
     </select>
     
+    <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
+		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
+		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
+		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
+		FROM BOARD BD
+		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
+		WHERE BD.CATEGORY_ID = 'UDB06'
+    </select>
+    
+    <select id="companyInfoOne" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
+		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
+		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
+		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
+		FROM BOARD BD
+		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
+		WHERE BD.CATEGORY_ID = 'UDB06' AND BD.BOARD_NO = #{boardNo}
+    </select>
+    
     <!-- 커뮤니티 게시판 카테고리 -->
     <select id="getBoardCate" resultType="kh.com.job.admin.model.dto.AdCategoryDto" >
 	SELECT *
@@ -200,23 +218,19 @@
 	</insert>
 
 	<update id="updateNewsLetter">
-		UPDATE BOARD SET
-		BOARD_NO = #{boardNo},
-		UPDATE_DATE = CURRENT_TIMESTAMP,
-		BOARD_CONTENT = #{boardContent},
-		BOARD_TITLE = #{boardTitle},
-		LINK = #{link}
-		WHERE BOARD_NO = #{boardNo}
-		AND USER_ID = #{userId}	
-		<selectKey keyProperty="boardNo" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
+		UPDATE BOARD 
+		   SET UPDATE_DATE = CURRENT_TIMESTAMP,
+			   BOARD_CONTENT = #{boardContent},
+			   BOARD_TITLE = #{boardTitle},
+			   LINK = #{link}
+		 WHERE BOARD_NO = #{boardNo}
+		   AND USER_ID = #{userId}	
 	</update>
 	
 	<select id="newsLetterOne" resultType="bdto" >
-		SELECT *
-		FROM BOARD
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, TAG, USER_NAME
+		FROM BOARD BD
+		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 
@@ -224,9 +238,12 @@
 		SELECT *
 		FROM BOARD
 		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
+		ORDER BY BOARD_NO DESC
 	</select>
 
-
+	<delete id="deleteNewsLetter">
+		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
+	</delete>
 
 
 

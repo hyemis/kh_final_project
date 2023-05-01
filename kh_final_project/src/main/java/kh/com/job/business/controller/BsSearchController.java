@@ -41,8 +41,7 @@ public class BsSearchController {
 	
 	@Autowired
 	private BsSearchService bsService;
-	
-	
+
 	@GetMapping("/suggest")
 	public ModelAndView category(ModelAndView mv, BsSearchDto sdto) {
 		
@@ -77,6 +76,10 @@ public class BsSearchController {
 	        
 	        return list;
 	    }
+
+
+	
+	
 
 
 
