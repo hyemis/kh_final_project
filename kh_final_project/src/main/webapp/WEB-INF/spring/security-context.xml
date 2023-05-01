@@ -23,11 +23,11 @@
         	login-page="/person/login" 
 			 username-parameter="userId"
 			 password-parameter="userPw"
-			 default-target-url="/person/main"
+			 default-target-url="/"
 			 authentication-success-handler-ref="loginSuccessHandler"	
 		/>
 		<security:logout
-			logout-success-url="/person/main"
+			logout-success-url="/"
 		/>        					 
     </security:http>
         

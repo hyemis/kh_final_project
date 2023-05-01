@@ -88,10 +88,12 @@
 		  </a>
 		</div> 
     </div>
-	</div>
+	
+	
 	<div class="container-fluid bg-white p-5">
 		회사 공고 
 	</div>
+	
 	</section>
 
 

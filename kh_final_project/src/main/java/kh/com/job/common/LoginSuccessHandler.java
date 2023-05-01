@@ -36,7 +36,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		}else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_P"))) {
 			response.sendRedirect("person/main");
 		}else {
-			response.sendRedirect("person/mai");
+			response.sendRedirect("/");
 		}
 		
 	}
