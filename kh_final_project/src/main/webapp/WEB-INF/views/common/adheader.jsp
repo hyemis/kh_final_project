@@ -20,7 +20,6 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시글</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="${pageContext.request.contextPath}/admin/banner" class="dropdown-item">배너 관리</a>
-                                <a href="property-type.html" class="dropdown-item">게시판 관리</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
