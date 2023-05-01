@@ -72,7 +72,7 @@
 		  <div class="carousel-inner">
 		  <c:forEach items="${bList }" var="list" varStatus="i">
 		  	<div class="carousel-item ${i.count ==1?'active':'' }">
-			  	<a href="${pageContext.request.contextPath}/${list.bannerLink }">
+			  	<a href="${pageContext.request.contextPath}${list.bannerLink }">
 			      <img src="${list.bannerThum eq null? 'https://dummyimage.com/200x200/000000/ffffff.png&text=No+Image' : list.bannerThum}" class="d-block" alt="..." style="width: 600px; height: 400px;">
 			    </a>
 		    </div>
@@ -92,6 +92,9 @@
 	
 	<div class="container-fluid bg-white p-5">
 		회사 공고 
+	</div>
+	<div class="container-fluid p-5" style="background-color:primary; min-height: 300px;">
+		커뮤니티 
 	</div>
 	
 	</section>

@@ -91,9 +91,11 @@
 								class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공고
 								관리</a>
 							<div class="dropdown-menu rounded-0 m-0">
-								<a href="${pageContext.request.contextPath}/business/insert"
-									class="dropdown-item">채용공고등록</a> <a
-									href="${pageContext.request.contextPath}/business/"
+								<a href="${pageContext.request.contextPath}/business/recruit/main"
+									class="dropdown-item">채용공고메인</a> 
+								<a href="${pageContext.request.contextPath}/business/recruit/insert"
+									class="dropdown-item">채용공고등록</a> 
+								<a href="${pageContext.request.contextPath}/business/recruit/recruitAll"
 									class="dropdown-item">등록된 공고 관리</a>
 							</div>
 						</div>
@@ -102,9 +104,11 @@
 								class="nav-link dropdown-toggle" data-bs-toggle="dropdown">지원자
 								관리</a>
 							<div class="dropdown-menu rounded-0 m-0">
-								<a href="${pageContext.request.contextPath}/business/"
-									class="dropdown-item">합격자 관리</a> <a
-									href="${pageContext.request.contextPath}/business/"
+								<a href="${pageContext.request.contextPath}/business/applicant/view"
+									class="dropdown-item">지원자 관리</a> 
+								<a href="${pageContext.request.contextPath}/business/applicant/passview"
+									class="dropdown-item">합격자 관리</a> 
+								<a href="${pageContext.request.contextPath}/business/applicant/interview"
 									class="dropdown-item">면접 일정 관리</a>
 							</div>
 						</div>

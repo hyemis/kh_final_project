@@ -159,7 +159,7 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		//총 게시글 개수
 		int count = dao.passPageListCount(pdto);
 
-		//나타날 페이지의 첫번 째 글의 ra_num
+		//나타날 페이지의 첫번 째 글의 글번호
 		pdto.setStartNum((pdto.getPnum() -1)*pageLimit +1);
 		//나타날 페이지의 마지막 글의 ra_num
 		pdto.setEndNum(pdto.getPnum() * pageLimit);

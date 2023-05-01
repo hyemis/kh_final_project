@@ -30,7 +30,7 @@
 	<insert id="insertCompanyInfo">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE)
-		VALUES(${boardNo},#{userId},'UDB06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
+		VALUES(${boardNo},#{userId},'UBD06',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{tag},#{salaryAvg},#{employee})
 		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
@@ -55,7 +55,7 @@
 	<select id="viewCompanyInfo" resultType="bdto">
         SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE
         FROM BOARD
-        WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
+        WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UBD06'
     </select>
     
      <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
@@ -64,7 +64,7 @@
 		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
 		FROM BOARD BD
 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
-		WHERE BD.CATEGORY_ID = 'UDB06'
+		WHERE BD.CATEGORY_ID = 'UBD06'
     </select>
     
     <select id="companyInfoOne" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
@@ -73,7 +73,7 @@
 		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
 		FROM BOARD BD
 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
-		WHERE BD.CATEGORY_ID = 'UDB06' AND BD.BOARD_NO = #{boardNo}
+		WHERE BD.CATEGORY_ID = 'UBD06' AND BD.BOARD_NO = #{boardNo}
     </select>
     
     <!-- 커뮤니티 게시판 카테고리 -->
@@ -233,7 +233,7 @@
 	FROM (
   	SELECT *
   	FROM BOARD
-  	WHERE CATEGORY_ID NOT IN ('UDB05', 'UDB06')
+  	WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06')
   	ORDER BY BOARD_READ DESC
 	)
 	WHERE ROWNUM &lt;= 5
@@ -243,7 +243,7 @@
 	<select id="countByPs" resultType="_int">
 	SELECT COUNT(*) AS count
 	FROM BOARD
-	WHERE CATEGORY_ID NOT IN ('UDB05', 'UDB06')
+	WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06')
 	</select>
 	
 	<!-- 카테고리 별 게시글 수  -->
@@ -259,7 +259,7 @@
 	<insert id="insertNewsletter">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,LINK)
-		VALUES(${boardNo},#{userId},'UDB05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
+		VALUES(${boardNo},#{userId},'UBD05',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
 		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
@@ -286,7 +286,7 @@
 	<select id="newsLetterList" resultType="bdto">
 		SELECT *
 		FROM BOARD
-		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UDB05'
+		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UBD05'
 		ORDER BY BOARD_NO DESC
 	</select>
 
@@ -302,7 +302,7 @@
 	<insert id="insertQnA">
 		INSERT INTO
 		BOARD(BOARD_NO,USER_ID,CATEGORY_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_DATE,LINK)
-		VALUES(${boardNo},#{userId},'UDB04',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
+		VALUES(${boardNo},#{userId},'UBD04',#{boardTitle},#{boardContent},CURRENT_TIMESTAMP,#{link})
 		<selectKey keyProperty="boardNo" resultType="String"
 			order="BEFORE">
 			SELECT MAX(BOARD_NO) +1 FROM BOARD
