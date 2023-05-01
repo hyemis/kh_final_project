@@ -333,14 +333,9 @@ public class PsMainController {
 	// 마이페이지 홈-회원정보 확인 화면
 	@GetMapping("/mypage")
 	public ModelAndView viewMyPage(ModelAndView mv, Principal principal) throws Exception {
-		System.out.println("로그인정보: " + principal.getName());
 
-		if (principal.getName() != null) {
-			mv.addObject("PsUserDto", service.selectOne(principal.getName()));
-			mv.setViewName("person/mypage");
-		} else {
-			mv.setViewName("redirect:/");
-		}
+		mv.addObject("PsUserDto", service.selectOne(principal.getName()));
+			
 		return mv;
 	}
 
