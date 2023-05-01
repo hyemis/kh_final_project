@@ -192,6 +192,20 @@
 	    .catch( error => {
 	        console.error( error );
 	    });
+	    
+	    // 제목 글자 수 
+	    $(document).ready(function() {
+	    	 $('#boardTitle').keyup(function() {
+	    	        var byteLength = (function(s,b,i,c){
+	    	            for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+	    	            return b
+	    	        })(this.value);
+	    	        if (byteLength > 100) {
+	    	            alert('제목은 50자 이내로 입력해주세요.');
+	    	            $(this).val('');
+	    	        }
+	    	    });
+	    });
 	    </script>
 
 </body>

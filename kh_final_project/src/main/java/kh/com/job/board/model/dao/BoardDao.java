@@ -40,6 +40,7 @@ public class BoardDao {
 		return sqlSession.selectList("boards.postList");
 	}
 	
+	
 	// 카테고리 별 게시글 목록 
 	public List<BoardDto> postListByCate(String cate) throws Exception {
 		return sqlSession.selectList("boards.postListByCate", cate);
@@ -90,6 +91,16 @@ public class BoardDao {
 	// 인기글
 	public  List<BoardDto> topReadPost() throws Exception {
 		return sqlSession.selectList("boards.topReadPost");
+	}
+	
+	// 개인회원사용 카테고리 총 게시글 수 
+	public int getCountByPs() throws Exception {
+		return sqlSession.selectOne("boards.countByPs");
+	}
+	
+	// 카테고리 별 게시글 수 
+	public int countByCate(String cate) throws Exception{
+		return sqlSession.selectOne("boards.countByCate", cate);
 	}
 	
 	public int delete(String userId)  throws Exception {

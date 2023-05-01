@@ -171,6 +171,21 @@
 	)
 	WHERE ROWNUM &lt;= 5
 	</select>
+	
+	<!-- 전체 게시글 수 -->
+	<select id="countByPs" resultType="_int">
+	SELECT COUNT(*) AS count
+	FROM BOARD
+	WHERE CATEGORY_ID NOT IN ('UDB05', 'UDB06')
+	</select>
+	
+	<!-- 카테고리 별 게시글 수  -->
+	<select id="countByCate" resultType="_int">
+	SELECT COUNT(*) AS count
+	FROM BOARD 
+	WHERE CATEGORY_ID = #{cate}
+	GROUP BY CATEGORY_ID
+	</select>
 
 
 	<!-- 뉴스레터 -->

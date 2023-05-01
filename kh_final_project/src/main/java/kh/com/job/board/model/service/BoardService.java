@@ -50,6 +50,12 @@ public interface BoardService {
 	// 인기글
 	public  List<BoardDto> topReadPost() throws Exception;
 	
+	// 개인회원사용 카테고리 총 게시글 수 
+	public int getCountByPs() throws Exception;
+	
+	// 카테고리 별 게시글 수 
+	public int countByCate(String cate) throws Exception;
+	
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
 	public BoardDto viewDetail(String boardNo);

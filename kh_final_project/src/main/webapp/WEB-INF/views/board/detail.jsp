@@ -38,7 +38,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	href="${pageContext.request.contextPath}/resources/css/board.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -59,34 +59,6 @@
 <!-- ckeditor5 -->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-
-<style>
-.s {
-	border: 1px solid gray;
-	border-radius: 5px;
-	padding: 30px;
-}
-
-img {
-	width: 500px;
-	height: 300px;
-}
-
-.reply-table {
-	table-layout: fixed;
-}
-
-.originReply {
-	max-width: 90%;
-	text-overflow: ellipsis;
-	white-space: normal;
-	display: inline-block;
-}
-
-.reply-cell {
-	vertical-align: top;
-}
-</style>
 
 </head>
 <body>

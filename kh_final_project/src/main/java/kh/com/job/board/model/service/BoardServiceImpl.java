@@ -96,8 +96,17 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.topReadPost();
 	}
 	
-
+	@Override
+	public int getCountByPs() throws Exception {
+		return dao.getCountByPs();
+	}
 	
+	
+	@Override
+	public int countByCate(String cate) throws Exception{
+		return dao.countByCate(cate);
+	}
+
 	
 	
 	

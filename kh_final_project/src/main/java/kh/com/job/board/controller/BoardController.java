@@ -41,6 +41,11 @@ public class BoardController {
 	public ModelAndView boardmain(ModelAndView mv) throws Exception {
 		mv.addObject("UBDlist", service.getBoardCate());
 		mv.addObject("topReadPost", service.topReadPost());
+		
+		mv.addObject("UBD01", service.postListByCate("UBD01").stream().limit(5).collect(Collectors.toList()));
+		mv.addObject("UBD02", service.postListByCate("UBD02").stream().limit(5).collect(Collectors.toList()));
+		mv.addObject("UBD03", service.postListByCate("UBD03").stream().limit(5).collect(Collectors.toList()));
+		mv.addObject("UBD04", service.postListByCate("UBD04").stream().limit(5).collect(Collectors.toList()));
 		return mv;
 	}
 
@@ -111,6 +116,7 @@ public class BoardController {
 		return new Gson().toJson(map);
 	}
 
+	// 게시판별 게시글 출력 
 	@GetMapping("/postall")
 	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate)
 			throws Exception {
@@ -120,11 +126,14 @@ public class BoardController {
 			// 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
 			postList = service.postList();
 			mv.addObject("searchResult", "게시글 전체 검색결과");
+			mv.addObject("totalCount", service.getCountByPs());
+			
 		} else {
 			// 카테고리 파라미터가 있는 경우, 해당 카테고리에 해당하는 게시글만 가져옴
 			postList = service.postListByCate(cate);
 			String categoryName = service.getCateName(cate);
 			mv.addObject("searchResult", categoryName + "  검색결과");
+			mv.addObject("totalCount", service.countByCate(cate));
 		}
 
 		// updateDate를 시분까지 잘라서 저장 및 boardContent 제거
