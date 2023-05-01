@@ -58,7 +58,7 @@
         WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UDB06'
     </select>
     
-    <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
+     <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
 		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
 		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
 		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
@@ -118,17 +118,66 @@
    	
 
 	<!-- 전체 게시글 목록 -->
-	<select id="postList" resultType="bdto">
+	<!-- <select id="postList" resultType="bdto">
 	SELECT * FROM BOARD 
 	WHERE CATEGORY_ID IN ('UBD01', 'UBD02','UBD03','UBD04' ) 
 	ORDER BY UPDATE_DATE desc
 	</select>
 	
-	<!-- 카테고리별 게시글 목록 -->
+	<select id="postList" resultType="bdto">
+	SELECT  *
+	FROM(
+			SELECT ROWNUM AS NUM , A.*
+			FROM (	SELECT * FROM BOARD 
+					WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06') 
+					ORDER BY UPDATE_DATE DESC) A
+		)
+	WHERE NUM BETWEEN  #{startNum} AND #{endNum}
+	</select> -->
+	
+ 	<!-- 카테고리별 게시글 목록 -->
 	<select id="postListByCate" resultType="bdto">
 	SELECT * FROM BOARD 
 	WHERE CATEGORY_ID = #{categoryId} ORDER BY UPDATE_DATE DESC
-	</select>
+	</select>  
+	 
+<!-- 
+	 <select id="postListByCate" resultType="bdto">
+	SELECT  *
+		FROM(
+			SELECT ROWNUM AS NUM , A.*
+			FROM ( SELECT * FROM BOARD 
+	WHERE CATEGORY_ID = #{categoryId} ORDER BY UPDATE_DATE DESC	) A
+			)
+	WHERE NUM BETWEEN  #{startNum} AND #{endNum}
+	</select>  --> 
+	
+	<select id="postList" resultType="bdto">
+	<choose>
+		<when test="categoryId == null">
+			SELECT  *
+			FROM(
+				SELECT ROWNUM AS NUM , A.*
+				FROM (SELECT * FROM BOARD 
+					  WHERE CATEGORY_ID NOT IN ('UBD05', 'UBD06') 
+					  ORDER BY UPDATE_DATE DESC) A
+			)
+			WHERE NUM BETWEEN #{startNum} AND #{endNum}
+		</when>
+		<otherwise>
+			SELECT  *
+			FROM(
+				SELECT ROWNUM AS NUM , A.*
+				FROM ( SELECT * FROM BOARD 
+					  WHERE CATEGORY_ID = #{categoryId} 
+					  ORDER BY UPDATE_DATE DESC) A
+			)
+			WHERE NUM BETWEEN #{startNum} AND #{endNum}
+		</otherwise>
+	</choose>
+</select>
+	
+	
 	
 	<!-- 게시글 조회 수 증가 -->
 	<update id="updateRead">

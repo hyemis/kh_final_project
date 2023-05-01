@@ -13,6 +13,8 @@ import kh.com.job.board.controller.BoardController;
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
+import kh.com.job.common.page.PagingAplicantDto;
+import kh.com.job.common.page.PagingBoardDto;
 import kh.com.job.person.model.dto.PsUserDto;
 
 @Repository
@@ -37,10 +39,9 @@ public class BoardDao {
 	}
 	
 	// 게시글 목록
-	public List<BoardDto> postList() throws Exception {
-		return sqlSession.selectList("boards.postList");
+	public List<BoardDto> postList(PagingBoardDto bdto) throws Exception {
+		return sqlSession.selectList("boards.postList", bdto);
 	}
-	
 	
 	// 카테고리 별 게시글 목록 
 	public List<BoardDto> postListByCate(String cate) throws Exception {
@@ -103,6 +104,8 @@ public class BoardDao {
 	public int countByCate(String cate) throws Exception{
 		return sqlSession.selectOne("boards.countByCate", cate);
 	}
+	
+	
 	
 	public int delete(String userId)  throws Exception {
 		return sqlSession.delete("boards.delete", userId);

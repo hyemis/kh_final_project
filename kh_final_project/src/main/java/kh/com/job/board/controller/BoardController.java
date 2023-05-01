@@ -28,6 +28,8 @@ import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsRecruitService;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingBoardDto;
 
 @Controller
 @RequestMapping("/board")
@@ -92,9 +94,9 @@ public class BoardController {
 
 		// 카테고리 코드 타입 ('UBD')가져오기
 		mv.addObject("UBDlist", service.getBoardCate());
-		// 게시글 목록
-		List<BoardDto> boardList = service.postList();
-		mv.addObject("boardList", boardList);
+//		// 게시글 목록
+//		List<BoardDto> boardList = service.postList();
+//		mv.addObject("boardList", boardList);
 		return mv;
 	}
 
@@ -136,37 +138,45 @@ public class BoardController {
 
 	// 게시판별 게시글 출력 
 	@GetMapping("/postall")
-	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate)
+	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate, PagingBoardDto bdto)
 			throws Exception {
 		List<BoardDto> postList;
 
 		if (cate == null) {
 			// 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
-			postList = service.postList();
+//			postList = service.postList(bdto);
 			mv.addObject("searchResult", "게시글 전체 검색결과");
 			mv.addObject("totalCount", service.getCountByPs());
 			
+			if(bdto.getPnum() == 0) {
+				bdto.setPnum(1);
+			}
+			
+			Paging list = service.pageList(bdto);
+			mv.addObject("boardList", list);
+		
+			
 		} else {
 			// 카테고리 파라미터가 있는 경우, 해당 카테고리에 해당하는 게시글만 가져옴
-			postList = service.postListByCate(cate);
+			Paging list = service.pageList(bdto);
 			String categoryName = service.getCateName(cate);
 			mv.addObject("searchResult", categoryName + "  검색결과");
 			mv.addObject("totalCount", service.countByCate(cate));
+			mv.addObject("boardList", list);
 		}
 
-		// updateDate를 시분까지 잘라서 저장 및 boardContent 제거
-		for (BoardDto board : postList) {
-			String updateDate = board.getUpdateDate();
-			board.setUpdateDate(updateDate.substring(0, 16));
-
-			// boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
-			String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
-			board.setBoardContent(boardContent);
-		}
-
-		// TODO: 전체 count 출력
-
-		mv.addObject("boardList", postList);
+//		// updateDate를 시분까지 잘라서 저장 및 boardContent 제거
+//		for (BoardDto board : postList) {
+//			String updateDate = board.getUpdateDate();
+//			board.setUpdateDate(updateDate.substring(0, 16));
+//
+//			// boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
+//			String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
+//			board.setBoardContent(boardContent);
+//		}
+//
+//
+//		mv.addObject("boardList", postList);
 		return mv;
 	}
 

@@ -8,6 +8,9 @@ import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.common.page.Paging;
+import kh.com.job.common.page.PagingAplicantDto;
+import kh.com.job.common.page.PagingBoardDto;
 import kh.com.job.person.model.dto.PsCertiDto;
 
 public interface BoardService {
@@ -31,11 +34,10 @@ public interface BoardService {
 	public int updateLike(String readUser, int boardNo) throws Exception;
 	
 	// 게시글 목록
-	public List<BoardDto> postList() throws Exception;
+	public List<BoardDto> postList(PagingBoardDto bdto) throws Exception;
 	
 	// 카테고리별 게시글 목록 
 	public List<BoardDto> postListByCate(String cate) throws Exception;
-	
 	
 	// 댓글 목록 
 	public List<ReplyDto> replyList(int boardNo) throws Exception;
@@ -52,11 +54,14 @@ public interface BoardService {
 	// 인기글
 	public  List<BoardDto> topReadPost() throws Exception;
 	
-	// 개인회원사용 카테고리 총 게시글 수 
+	// 개인 카테고리 총 게시글 수 
 	public int getCountByPs() throws Exception;
 	
 	// 카테고리 별 게시글 수 
 	public int countByCate(String cate) throws Exception;
+	
+	// 페이징 
+	public Paging pageList(PagingBoardDto bdto) throws Exception;
 	
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;

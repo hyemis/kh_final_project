@@ -76,7 +76,7 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		//나타날 페이지의 마지막 글의 ra_num
 		pdto.setEndNum(pdto.getPnum() * pageLimit);
 		
-		int mod = count % pageLimit ==0? 0 : 1;
+		int mod = count % pageLimit == 0? 0 : 1;
 		int pageCount = count/pageLimit + mod;
 		
 		//new Paging(게시글정보, 현재페이지, 페이지네이션 된 마지막 숫자 (<,1,2,3,4,5,> 여기서는 5))
