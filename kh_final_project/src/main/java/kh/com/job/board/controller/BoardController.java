@@ -57,8 +57,11 @@ public class BoardController {
 	}
 
 	// 게시판 - 회사소개
-	@PostMapping("/companyinfo")
-	public ModelAndView companyinfo(ModelAndView mv) {
+	@GetMapping("/companyinfo/{boardNo}")
+	public ModelAndView companyinfo(
+				ModelAndView mv, 
+				@RequestParam(name = "no", required = false) int boardNo) {
+		
 		return mv;
 
 	}
@@ -136,7 +139,7 @@ public class BoardController {
 			String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
 			board.setBoardContent(boardContent);
 		}
-		
+
 		// TODO: 전체 count 출력
 
 		mv.addObject("boardList", postList);

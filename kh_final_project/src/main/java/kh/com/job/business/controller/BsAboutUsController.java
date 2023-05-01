@@ -106,7 +106,6 @@ public class BsAboutUsController {
 		
 		BoardDto dto = service.newsLetterOne(boardNo);
 		mv.addObject("news", dto);
-		System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"+currentUserId);
 		return mv;
 	}
 	

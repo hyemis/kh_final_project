@@ -85,7 +85,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.5s"
 					style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/search">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/search/suggest">
 						<div class="rounded p-4">
 							<h5>인재 찾기</h5>
 							<p>맞춤형 인재 추천</br>면접 제의</p>
