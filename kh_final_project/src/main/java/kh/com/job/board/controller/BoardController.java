@@ -22,8 +22,11 @@ import com.google.gson.Gson;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.board.model.service.BoardService;
+import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsRecruitService;
 
 @Controller
@@ -35,6 +38,9 @@ public class BoardController {
 
 	@Autowired
 	private BsRecruitService brservice;
+	
+	@Autowired
+	private BsAboutUsService baservice;
 
 	// 게시판 메인
 	@GetMapping("/main")
@@ -58,7 +64,20 @@ public class BoardController {
 
 	// 게시판 - 회사소개
 	@GetMapping("/companyinfo")
-	public ModelAndView companyinfo(ModelAndView mv) { 
+	public ModelAndView companyinfo(ModelAndView mv, CompanyInfoDto dto, Principal principal,
+									@RequestParam(name = "no", required = false) int boardNo) { 
+		
+		CompanyInfoDto idto = service.companyInfoOne(boardNo);
+		mv.addObject("info", idto);
+		
+		String userId = idto.getUserId();
+		//진행중인 공고리스트
+		List<BsRecruitDto> reCruitDto = brservice.recruitAdmission(userId);
+		mv.addObject("recruitList", reCruitDto);
+		
+		List<BoardDto> newsList = baservice.newsLetterList(userId);
+		mv.addObject("news", newsList);
+		
 		return mv;
 	}
 

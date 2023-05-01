@@ -7,6 +7,7 @@ import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.person.model.dto.PsCertiDto;
 
 public interface BoardService {
@@ -59,5 +60,6 @@ public interface BoardService {
 	public List<CompanyInfoDto> companyInfoList(int boardNo);
 	// 회사소개 상세보기
 	public CompanyInfoDto companyInfoOne(int boardNo);
+
 
 }

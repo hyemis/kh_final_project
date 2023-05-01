@@ -33,6 +33,9 @@
 <!-- ckeditor5 -->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<!-- map -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>	
  
  </head>
 
@@ -51,21 +54,22 @@
                     	</div>
                     </div>
                     <div class="col-11 ">
-                     <h1 class="mb-3 text-primary">${info.boardTitle}</h1>
+                     <h1 class="mb-3 text-primary">${info.userName}</h1>
                     </div>
                 </div>
                 
-                <div><a class="btn btn-primary">${info.tag}</a></div>
+               
 
                 
                 <br> 
                 
                 <!-- 회사소개  -->
-	            <div class="container wow fadeInUp">
-	            	<h1 class="mb-3">회사 소개</h1>
-	            	<div class="pt-3"> ${info.boardContent} </div>
-	            
-	         	</div>
+	         	<div class="text-start mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
+                	<h1 class="mb-3">회사 소개</h1>
+                	<div><a class="btn btn-primary">${info.tag}</a></div>
+                	<div>대표번호  ${info.bsMainPhone}</div>
+                	<div class="m-5"> ${info.boardContent} </div>
+                </div>
             </div>
         <br>        
          <!-- 채용중인 포지션 -->   
@@ -90,90 +94,24 @@
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
-                                   
+                        	<!-- 채용공고 -->
+                        	<c:forEach items="${recruitList}" var="recruit">
+                            <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden bg-white">
                                     <div class="p-4 pb-0">
-                                         <h5 class="text-primary mb-3">상시채용</h5>
-                                        <a class="d-block h5 mb-2" href="">개발자</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                         <h5 class="text-primary mb-3">${recruit.companyName }</h5>
+                                        <a class="d-block h5 mb-2" href="">${recruit.raTitle }</a>
+                                        <p>지원날짜 ${recruit.registDate } ~ ${recruit.closeDate }</p>
                                     </div>
                                     <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i> 
+                                       	<a href="/job/business/recruit/view?id=${recruit.raNum }">공고보기</a></small> 
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>
+                                        <a href="/job/business/recruit/view?id=${recruit.raNum }">지원하기</a></small>
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                   
-                                    <div class="p-4 pb-0">
-                                         <h5 class="text-primary mb-3">상시채용</h5>
-                                        <a class="d-block h5 mb-2" href="">개발자</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                   
-                                    <div class="p-4 pb-0">
-                                         <h5 class="text-primary mb-3">상시채용</h5>
-                                        <a class="d-block h5 mb-2" href="">개발자</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
-                                   
-                                    <div class="p-4 pb-0">
-                                         <h5 class="text-primary mb-3">상시채용</h5>
-                                        <a class="d-block h5 mb-2" href="">개발자</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                   
-                                    <div class="p-4 pb-0">
-                                         <h5 class="text-primary mb-3">상시채용</h5>
-                                        <a class="d-block h5 mb-2" href="">개발자</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                   
-                                    <div class="p-4 pb-0">
-                                         <h5 class="text-primary mb-3">상시채용</h5>
-                                        <a class="d-block h5 mb-2" href="">개발자</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>공고보기</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>지원하기</small>
-                                    </div>
-                                </div>
-                            </div>
+                 			</c:forEach>
                         </div>
                     </div>
                    </div>
@@ -184,89 +122,29 @@
            <!-- 오시는길 -->
                <div class="container">
                     <div class="col-12 row g-0 gx-5 align-items-end">
-                     	<div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                     	<div class="text-start mx-auto mb-5 wow fadeInleft" data-wow-delay="0.1s">
                             <h1 class="mb-3">오시는길</h1>
-                            <p>주소</p>
+                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${info.addressRoad}${bsinfo.addressJibun}  ${bsinfo.addressDetail}</p>
+                        	<div class="col-12 wow fadeInleft" data-wow-delay="0.2s">
+							<div id="map" class="text-center" style="width:800px;height:350px;margin-top:10px; "></div>
+		                    </div>
                         </div>
                     </div>
-                    <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                        <iframe class="position-relative rounded w-100 h-100"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                            frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                    </div>
+                   
                  </div>
                
  <!-- newsletter Start -->
             <div class="container">
                 <div class="pt-3 text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" >
-                    <h1 class="mb-3">이 회사의 뉴스레터</h1>
+                    <h1 class="mb-3">이 회사의 뉴스레터 </h1>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
+                	<c:forEach items="${news }" var="news">
+                    <div class="card col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+					      <a href="/job/business/aboutus/newsletter/view?no=${news.boardNo }">${news.boardTitle }</a>
+					</div>
+                  
+                    </c:forEach>
                 </div>
             </div>
         <!-- newsletter End -->
@@ -287,7 +165,77 @@
     .catch( error => {
         console.error( error );
     });
-	</script>
+</script>
+
+<!-- map start -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>
+
+<script>
+	//회원정보의 주소로 페이지 로딩하기
+	var roadAddress = "${info.addressRoad}";
+	var jibunAddress = "${info.addressJibun}";
+	var bsAddress = (roadAddress) ? roadAddress : jibunAddress;
+	   
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+    //지도를 미리 생성
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    
+ 	// 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(bsAddress, function(result, status) {
+        // 정상적으로 검색이 완료됐으면 
+         if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
+            });
+            infowindow.open(map, marker);
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        } 
+    });    
+ 	// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+    function setMapType(maptype) { 
+        var roadmapControl = document.getElementById('btnRoadmap');
+        var skyviewControl = document.getElementById('btnSkyview'); 
+        if (maptype === 'roadmap') {
+            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+            roadmapControl.className = 'selected_btn';
+            skyviewControl.className = 'btn';
+        } else {
+            map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+            skyviewControl.className = 'selected_btn';
+            roadmapControl.className = 'btn';
+        }
+    }
+    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+    function zoomIn() {
+        map.setLevel(map.getLevel() - 1);
+    }
+    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+    function zoomOut() {
+        map.setLevel(map.getLevel() + 1);
+    }
+    
+    //마커를 미리 생성
+    var marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+</script>
+<!-- map end -->
         
 </body>
 </html>
