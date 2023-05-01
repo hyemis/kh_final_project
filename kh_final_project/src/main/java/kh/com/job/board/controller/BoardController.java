@@ -57,13 +57,9 @@ public class BoardController {
 	}
 
 	// 게시판 - 회사소개
-	@GetMapping("/companyinfo/{boardNo}")
-	public ModelAndView companyinfo(
-				ModelAndView mv, 
-				@RequestParam(name = "no", required = false) int boardNo) {
-		
+	@GetMapping("/companyinfo")
+	public ModelAndView companyinfo(ModelAndView mv) { 
 		return mv;
-
 	}
 
 	// 게시글 작성

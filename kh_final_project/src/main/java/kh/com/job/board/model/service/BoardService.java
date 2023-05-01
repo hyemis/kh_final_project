@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.CompanyInfoDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.person.model.dto.PsCertiDto;
 
@@ -53,5 +54,10 @@ public interface BoardService {
 	public int update(BoardDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
 	public BoardDto viewDetail(String boardNo);
+	
+	// 회사소개리스트
+	public List<CompanyInfoDto> companyInfoList(int boardNo);
+	// 회사소개 상세보기
+	public CompanyInfoDto companyInfoOne(int boardNo);
 
 }
