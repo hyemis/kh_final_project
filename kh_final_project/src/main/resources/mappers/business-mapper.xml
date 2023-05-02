@@ -327,6 +327,34 @@
 			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
 		</if>
 	</select>
+	
+	<!-- 메인페이지 체용공고 최신 리스트 -->
+	<select id="recentRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+		select *
+		from(
+		    select rownum as num, A.* 
+		    from(
+		        SELECT RR.USER_ID, UT.USER_PHONE, UT.USER_EMAIL, UT.USER_NAME, UT.BS_MAIN_PHONE
+		            , UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
+		            , RR.RA_NUM, RR.COMPANY_NAME
+		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.RECRUIT_TYPE) AS RECRUIT_NAME
+		            , RR.RECRUIT_TYPE
+		            , RR.REGIST_DATE, RR.CLOSE_DATE
+		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.CAREER) AS CAREER
+		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.HOLIDAY_TYPE) AS HOLIDAY_TYPE
+		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.EMP_TYPE_CODE) AS EMP_TYPE_CODE
+		            , RR.RA_ADMISSION, RR.RA_TITLE
+				FROM USER_TABLE UT
+				JOIN RECRUIT_REGIST RR ON UT.USER_ID = RR.USER_ID
+		        where rr.close_date >= sysdate
+		        and rr.ra_admission = 'Y'
+		        order by rr.close_date desc, rr.regist_date asc
+		    ) A 
+		)
+		where num between 1 and 6
+	
+	</select>
+	
 
 
 </mapper>

@@ -90,11 +90,43 @@
     </div>
 	
 	
-	<div class="container-fluid bg-white p-5">
-		회사 공고 
-	</div>
-	<div class="container-fluid p-5" style="background-color:primary; min-height: 300px;">
-		커뮤니티 
+	<div class="container-xxl py-5">
+	    <div class="container">
+	        <div class="row g-0 gx-5 align-items-end">
+	            <div class="col-lg-6">
+	                <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+	                    <h1 class="mb-3">채용 공고</h1>
+	                    <p>최근에 올라온 공고들을 확인해 보세요</p>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="">
+	            <div id="tab-1" class="tab-pane fade show p-0">
+	                <div class="row g-4">
+	                <!-- start -->
+	                <c:forEach items="${recruitList }" var="list">
+	                    <div class="col-lg-4 col-md-6 wow fadeInUp">
+	                        <div class="property-item rounded overflow-hidden">
+	                            <div class="p-4 pb-0">
+	                                <h5 class="text-primary mb-3">${list.companyName }</h5>
+	                                <a class="d-block h5 mb-2" href="${pageContext.request.contextPath}/person/viewrecruit/${list.raNum }">${list.raTitle == null ? '제목 없음' : list.raTitle}</a>
+	                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${list.addressRoad == null ? list.addressJibun : list.addressRoad}</p>
+	                            </div>
+	                            <div class="d-flex border-top">
+	                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-phone-alt text-primary me-3"></i>${list.bsMainPhone}</small>
+	                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-envelope text-primary me-3"></i>${list.userEmail }</small>
+	                            </div>
+	                        </div>
+	                    </div>
+					</c:forEach>
+					<!-- end -->
+	                    <div class="col-12 text-center wow fadeInUp">
+	                        <a class="btn btn-primary py-3 px-5" href="${pageContext.request.contextPath}/person/recruit/info">채용공고 더보기</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 	</div>
 	
 	</section>
