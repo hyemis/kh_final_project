@@ -43,8 +43,14 @@ public class BoardController {
 	
 	@Autowired
 	private BsAboutUsService baservice;
-
-	// 게시판 메인
+	
+	// 회사정보
+		@GetMapping("/company")
+		public ModelAndView company(ModelAndView mv) {
+			return mv;
+		}
+		
+	// 커뮤니티 (게시판메인)
 	@GetMapping("/main")
 	public ModelAndView boardmain(ModelAndView mv) throws Exception {
 		mv.addObject("UBDlist", service.getBoardCate());
@@ -63,30 +69,8 @@ public class BoardController {
 		return mv;
 	}
 
-	// 게시판 - 뉴스레터
-	@GetMapping("/newsletter")
-	public ModelAndView companynews(ModelAndView mv) {
-		return mv;
-	}
+	
 
-	// 게시판 - 회사소개
-	@GetMapping("/companyinfo")
-	public ModelAndView companyinfo(ModelAndView mv, CompanyInfoDto dto, Principal principal,
-									@RequestParam(name = "no", required = false) int boardNo) { 
-		
-		CompanyInfoDto idto = service.companyInfoOne(boardNo);
-		mv.addObject("info", idto);
-		
-		String userId = idto.getUserId();
-		//진행중인 공고리스트
-		List<BsRecruitDto> reCruitDto = brservice.recruitAdmission(userId);
-		mv.addObject("recruitList", reCruitDto);
-		
-		List<BoardDto> newsList = baservice.newsLetterList(userId);
-		mv.addObject("news", newsList);
-		
-		return mv;
-	}
 
 	// 게시글 작성
 	@GetMapping("/writepost")
