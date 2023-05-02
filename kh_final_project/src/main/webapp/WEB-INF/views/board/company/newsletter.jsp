@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>뉴스레터</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -58,10 +58,52 @@
 	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-	<!-- page section -->
-	<section>
-		<div class="container-fluid bg-white p-5">이 영역에 작성하시면 됩니다.</div>
-	</section>
+<!-- page section -->
+<section>
+<div class="container-fluid bg-white p-5">
+뉴스레터 리스트
+<div class="row">
+	<c:forEach items="${news.getPage() }" var="news">
+	<div class="col-6 p-3">
+		<div class="card">
+		  <div class="card-header">
+		   <a>${news.userName }</a>
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">${news.boardTitle }</h5>
+		    <p class="card-text">${news.tag }</p>
+		    <a href="${pageContext.request.contextPath}/board/company/newsletter/view?no=${news.boardNo }" class="btn btn-primary">이동</a> 
+		  </div>
+		</div>
+	</div>
+	</c:forEach>
+</div>
+	 	<!-- 페이지네이션  -->
+		 	<ul class = "pagination text-center justify-content-center">
+				<c:choose>
+					<c:when test="${news.prevPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">prev</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/newsletter?p=${news.prevPage }">prev</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="pNum" items="${news.pageList }">
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/board/company/newsletter?p=${pNum}">${pNum }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${news.nextPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/newsletter?p=${news.nextPage }">next</a></li>
+					</c:otherwise>
+				</c:choose>					
+			</ul>	
+
+</div>
+</section>
 
 
 	<!-- footer  -->

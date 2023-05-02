@@ -85,11 +85,11 @@
 						<li class="page-item disabled"><a class="page-link">prev</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?pnum=${list.prevPage }">prev</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${list.prevPage }">prev</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="pNum" items="${info.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?pnum=${pNum}">${pNum }</a></li>
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${pNum}">${pNum }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -97,7 +97,7 @@
 						<li class="page-item disabled"><a class="page-link">next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?pnum=${list.nextPage }">next</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${list.nextPage }">next</a></li>
 					</c:otherwise>
 				</c:choose>					
 			</ul>	

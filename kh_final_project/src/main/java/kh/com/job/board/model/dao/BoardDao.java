@@ -128,12 +128,12 @@ public class BoardDao {
 	}
 	
 	//뉴스레터
-	public List<CompanyDto> newsletterAll(CompanyDto dto) {
-		return sqlSession.selectOne("boards.newsletterAll",dto);
+	public List<CompanyDto> newsLetterAll(CompanyDto dto) {
+		return sqlSession.selectList("boards.newsLetterAll",dto);
 	}
 
-	public CompanyDto newsletterOne(int boardNo) {
-		return sqlSession.selectOne("boards.newsletterOne",boardNo);
+	public CompanyDto newsLetterOne(int boardNo) {
+		return sqlSession.selectOne("boards.newsLetterOne",boardNo);
 	}
 	
 	//회사소개

@@ -5,6 +5,9 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +25,7 @@ import kh.com.job.common.page.Paging;
 @Controller
 @RequestMapping("/board/company")
 public class CompanyController {
-
+	
 	@Autowired
 	private BoardService service;
 	
@@ -68,18 +71,30 @@ public class CompanyController {
 	
 	//뉴스레터 리스트
 	@GetMapping("/newsletter")
-	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
-//		List<BoardDto> list = service.newsletterList(principal.getName());
-
-//		mv.addObject("newsletter", list);
-
+	public ModelAndView newsletter(ModelAndView mv, CompanyDto dto) {
+		//페이징 할 때 pnum값 0일 때, 기본값 1로 설정
+		if(dto.getPnum() < 1) {
+		dto.setPnum(1);
+		}
+		
+		Paging list = service.newsLetterAll(dto);
+		System.out.println(dto);
+		mv.addObject("news", list);
 		return mv;
 	}
 	
 	// 뉴스레터 상세보기
 		@GetMapping("/newsletter/view")
-		public ModelAndView newsletterOne(ModelAndView mv) {
-			return mv;
+		public ModelAndView newsletterOne(ModelAndView mv, Principal principal,
+										  @RequestParam(name = "no", required = false) int boardNo) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String currentUserId = auth.getName();
+		
+		CompanyDto dto = service.newsLetterOne(boardNo);
+		mv.addObject("news", dto);	
+		
+		return mv;
 		}
 
 }

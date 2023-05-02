@@ -72,9 +72,9 @@ public interface BoardService {
 	// 회사소개 상세보기
 	public CompanyDto companyInfoOne(int boardNo);
 	// 뉴스레터 리스트
-	public Paging newsletterAll(CompanyDto dto);
+	public Paging newsLetterAll(CompanyDto dto);
 	// 뉴스레터 상세보기
-	public CompanyDto newsletterOne(int boardNo);
+	public CompanyDto newsLetterOne(int boardNo);
 
 
 

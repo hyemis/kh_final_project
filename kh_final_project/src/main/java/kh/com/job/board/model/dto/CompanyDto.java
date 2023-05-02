@@ -28,6 +28,7 @@ public class CompanyDto {
 	private String boardTitle;
 	private String boardContent;
 	private String categoryId;
+	private String updateDate;
 	private int boardRead;
 	private int boardLike;
 	private String tag;
