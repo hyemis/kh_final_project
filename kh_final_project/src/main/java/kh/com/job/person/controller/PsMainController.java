@@ -2,7 +2,9 @@ package kh.com.job.person.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -124,64 +126,6 @@ public class PsMainController {
 		mv.setViewName("person/findpw");
 		return mv;
 	}
-
-//	// 비밀번호 찾기 	
-//	@PostMapping("/findpw")
-//	@ResponseBody
-//	public int dofindPw(ModelAndView mv,  HttpServletRequest request) throws Exception {
-//		
-//		Map<String,Object> findPw = new HashMap<>();
-//		
-//		if (request.getParameter("id") != null) {
-//		    findPw.put("userId", request.getParameter("id"));
-//		} else if (request.getParameter("p-id") != null) {
-//		    findPw.put("userId", request.getParameter("p-id"));
-//		}
-//		
-//		if (request.getParameter("name") != null) {
-//		    findPw.put("userId", request.getParameter("name"));
-//		} else if (request.getParameter("p-name") != null) {
-//		    findPw.put("userName", request.getParameter("p-name"));
-//		}
-//		findPw.put("userName", request.getParameter("name"));
-//		findPw.put("userBirth", request.getParameter("birth"));
-//		findPw.put("userEmail", request.getParameter("email"));
-//		findPw.put("userPhone", request.getParameter("phone"));
-//		
-//		System.out.println("map 저장 값" + findPw);
-//		
-//		PsUserDto dto = service.findPw(findPw);
-//		
-//		// TODO: 임시 비밀번호 만들기
-//		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//		Random random = new Random();
-//	    int length = random.nextInt(9) + 8; // 8~16 사이의 길이
-//	    StringBuilder sb = new StringBuilder();
-//	    for (int i = 0; i < length; i++) {
-//            int index = random.nextInt(chars.length());
-//            sb.append(chars.charAt(index));
-//        }
-//	    String newpassword = sb.toString();
-//	    dto.setUserPw(newpassword);
-//	    
-//	    
-//	    // TODO:비밀번호 update 
-//	    int update = service.update(dto);
-//	    System.out.println(dto);
-//	    dto.getUserEmail();
-//	    
-//	    
-//	    // TODO: 찾은 이메일로 메일 발송 
-//	    String title = "job-a 임시 비밀번호입니다.";
-//		String from = "tkdtlrdl07@gmail.com";
-//		String text = "<h1>job-a 임시 비밀번호입니다.</h1><br>회원님의 임시 비밀번호는 " + newpassword + " 입니다. <br>해당 비밀번호로 로그인 후 회원정보 수정 페이지에서 새로운 비밀번호로 변경하세요.";
-//		String to = dto.getUserEmail(); 
-//		String[]  cc = new String[0];
-//		int ccNum = cc.length;
-//		MailUtil.mailSend(title, from, text, to, cc, ccNum);
-//		
-//		return update;
-//	}
 
 	// 비밀번호 찾기
 	@PostMapping("/findpw")
@@ -590,6 +534,11 @@ public class PsMainController {
 		mv.addObject("recruitList", reCruitDto);
 		mv.addObject("countYAdmission", countYAdmission);
 		mv.addObject("lCatecountYAdmission", lCatecountYAdmission);
+		mv.addObject("edList",  brservice.getCateList("ED"));
+		mv.addObject("caList",  brservice.getCateList("CA"));
+		mv.addObject("scList",  brservice.getCateList("SC"));
+		mv.addObject("etList",  brservice.getCateList("ET"));
+		mv.addObject("htList",  brservice.getCateList("HT"));
 
 		return mv;
 	}
@@ -623,21 +572,106 @@ public class PsMainController {
 			return new Gson().toJson(llist);
 		}
 		
-	// 검색
+//	// 검색
+//	@PostMapping("/search")
+//	@ResponseBody
+//	public List<BsRecruitDto> search(ModelAndView mv, @RequestParam("keyword") String keyword) {
+//		    String[] keywordArr = keyword.split(",");
+//		    List<BsRecruitDto> searchList = new ArrayList<>();
+//		    for (String key : keywordArr) {
+//		        if (!key.isEmpty() && !key.equals("")) {
+//		            List<BsRecruitDto> result = brservice.searchList(key);
+//		            searchList.addAll(result);
+//		        }
+//		    }
+//		    return searchList;
+//		}
+	
 	@PostMapping("/search")
 	@ResponseBody
-	public List<BsRecruitDto> search(ModelAndView mv, @RequestParam("keyword") String keyword) {
-		    String[] keywordArr = keyword.split(",");
-		    List<BsRecruitDto> searchList = new ArrayList<>();
-		    for (String key : keywordArr) {
-		        if (!key.isEmpty() && !key.equals("")) {
-		            List<BsRecruitDto> result = brservice.searchList(key);
-		            searchList.addAll(result);
-		        }
-		    }
-		    return searchList;
-		}
-
+	public List<BsRecruitDto> search(ModelAndView mv,
+	        @RequestParam(value = "keyword", required = false) String keyword,
+	        @RequestParam(value = "checkedKeywords[]", required = false) String[] checkedKeywords) {
+		
+			if (checkedKeywords == null) {
+				checkedKeywords = new String[0];
+			}
+		
+			Map<String, Object> searchParams = new HashMap<>();
+		    searchParams.put("keyword", new String[] {keyword});
+		    searchParams.put("checkedKeywords", checkedKeywords);
+		    
+		    List<BsRecruitDto> result = brservice.searchList(searchParams);
+		    
+		    return result;
+	}
+	
+//	@PostMapping("/search")
+//	@ResponseBody
+//	public List<BsRecruitDto> search(ModelAndView mv,
+//	                                 @RequestParam(value = "keyword", required = false) String[] keyword,
+//	                                 @RequestParam(required = false) Map<String, String[]> checkedKeywords) {
+//	        
+//	    // 1. 검색어와 체크된 키워드가 없을 경우 전체 리스트를 조회
+//	    if (keyword == null && checkedKeywords == null) {
+//	        return brservice.searchList();
+//	    }
+//
+//	    // 2. 검색어 또는 체크된 키워드가 하나라도 존재할 경우 검색 수행
+//	    List<BsRecruitDto> searchList = new ArrayList<>();
+//	    if (checkedKeywords != null) {
+//	        for (String key : checkedKeywords.keySet()) {
+//	            for (String value : checkedKeywords.get(key)) {
+//	                if (!value.isEmpty() && !value.equals("")) {
+//	                    List<BsRecruitDto> result = brservice.searchList(value);
+//	                    searchList.addAll(result);
+//	                }
+//	            }
+//	        }
+//	    }
+//	    if (keyword != null) {
+//	        for (String key : keyword) {
+//	            if (!key.isEmpty() && !key.equals("")) {
+//	                List<BsRecruitDto> result = brservice.searchList(key);
+//	                searchList.addAll(result);
+//	            }
+//	        }
+//	    }
+//
+//	    // 2.1 검색어와 체크된 키워드가 모두 존재하는 경우, 결과를 교집합으로 변경
+//	    if (keyword != null && checkedKeywords != null) {
+//	        List<BsRecruitDto> keywordList = new ArrayList<>();
+//	        for (String key : keyword) {
+//	            if (!key.isEmpty() && !key.equals("")) {
+//	                List<BsRecruitDto> result = brservice.searchList(key);
+//	                keywordList.addAll(result);
+//	            }
+//	        }
+//	        List<BsRecruitDto> intersectionList = new ArrayList<>(searchList);
+//	        intersectionList.retainAll(keywordList);
+//	        searchList = intersectionList;
+//	    }
+//
+//	    // 2.2 검색 결과 중복 제거
+//	    Set<BsRecruitDto> searchSet = new LinkedHashSet<BsRecruitDto>(searchList);
+//	    searchList.clear();
+//	    searchList.addAll(searchSet);
+//
+//	    // 3. 검색어와 체크된 키워드가 둘 다 존재할 경우, 두 결과를 합쳐서 반환
+//	    if (keyword != null && checkedKeywords != null) {
+//	        List<BsRecruitDto> combinedList = new ArrayList<>(searchList);
+//	        for (String key : keyword) {
+//	            if (!key.isEmpty() && !key.equals("")) {
+//	                List<BsRecruitDto> result = brservice.searchList(key);
+//	                combinedList.addAll(result);
+//	            }
+//	        }
+//	        return combinedList;
+//	    }
+//
+//	    return searchList;
+//	}
+//	
 
 
 	// 구인공고 확인 화면
@@ -714,15 +748,14 @@ public class PsMainController {
 				) {	
 		
 		 List<BsRecruitDto> recruitList = null;
-
+		 
 		    if (!categoryId.isEmpty() && !categoryId.equals("")) {
 		        recruitList = brservice.lCateRecruit(categoryId);
-		    }
+		  }
 
 		    return recruitList;
 
-	}
-	
+	}	
 
 	//채용공고 스크랩 여부 확인
 	@PostMapping("/checkScrap")

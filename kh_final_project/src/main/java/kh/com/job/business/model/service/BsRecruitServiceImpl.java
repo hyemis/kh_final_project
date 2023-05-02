@@ -2,6 +2,7 @@ package kh.com.job.business.model.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
@@ -16,6 +17,7 @@ import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.business.model.dao.BsAccountDao;
 import kh.com.job.business.model.dao.BsRecruitDao;
 import kh.com.job.business.model.dto.BsRecruitDto;
@@ -108,9 +110,16 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 		return  dao.lCatecountYAdmission();
 	}
 	
-	// 검색 @Override
-	public List<BsRecruitDto> searchList(String keyword){
-		return  dao.searchList(keyword);
+	// 검색 
+	@Override
+	public List<BsRecruitDto> searchList(Map<String, Object> searchParams){
+		return  dao.searchList(searchParams);
+	}
+	
+	// 카테고리 타입 별 채용조건
+	@Override
+	public List<AdCategoryDto> cateForSearch(String categoryType) {
+		return  dao.cateForSearch(categoryType);
 	}
 
 	@Override

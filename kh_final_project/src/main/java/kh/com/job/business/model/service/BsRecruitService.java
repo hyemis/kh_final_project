@@ -1,9 +1,11 @@
 package kh.com.job.business.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
@@ -25,11 +27,16 @@ public interface BsRecruitService {
 	
 	public List<BsRecruitDto> lCateRecruit(String categoryId);
 	
+	public List<AdCategoryDto> cateForSearch(String categoryType);
+	
+	
 	public int countYAdmission();
 	
 	public int lCatecountYAdmission();
 	
-	public List<BsRecruitDto> searchList(String keyword);
+//	public List<BsRecruitDto> searchList(String searchWords);
+	
+	public List<BsRecruitDto> searchList(Map<String, Object> searchParams);
 
 	
 

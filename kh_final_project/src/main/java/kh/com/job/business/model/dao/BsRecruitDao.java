@@ -1,12 +1,14 @@
 package kh.com.job.business.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
@@ -58,8 +60,8 @@ public class BsRecruitDao {
 		return sqlSession.selectOne("business.lCatecountYAdmission");
 	}
 	
-	public List<BsRecruitDto> searchList(String keyword){
-		return sqlSession.selectList("business.searchList", keyword);
+	public List<BsRecruitDto> searchList(Map<String, Object> searchParams){
+		return sqlSession.selectList("business.searchList", searchParams);
 	}
 
 	public int changeAdmission(BsRecruitDto dto) {
@@ -80,6 +82,10 @@ public class BsRecruitDao {
 
 	public int deleteRecruit(BsRecruitDto dto) {
 		return sqlSession.delete("business.deleteRecruit", dto);
+	}
+	
+	public List<AdCategoryDto> cateForSearch(String categoryType) {
+		return sqlSession.selectList("business.cateForSearch", categoryType);
 	}
 
 

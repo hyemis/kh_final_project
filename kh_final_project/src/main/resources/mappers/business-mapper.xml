@@ -14,7 +14,8 @@
 	<select id="resumeList"
 		resultType="kh.com.job.board.model.dto.BsSearchDto">
 		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
-		UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		UR.RESUME_NO,
+		UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
 		FROM USER_RESUME UR
 		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
 		WHERE RESUME_ACT = 'Y'
@@ -38,9 +39,11 @@
 		SELECT COUNT(RESUME_NO)
 		FROM ( SELECT UT.USER_NAME, UT.USER_EMAIL,
 		UR.RESUME_TITLE,
-		UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER,
+		UR.EDUCATION
 		FROM USER_RESUME UR
-		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		JOIN USER_TABLE UT ON UR.USER_ID =
+		UT.USER_ID
 		WHERE RESUME_ACT = 'Y'
 		<if test="jobType != ''">
 			AND JOB_TYPE = #{jobType}
@@ -63,9 +66,12 @@
 		FROM (
 		SELECT ROWNUM AS NUM , A.*
 		FROM (
-		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE, UR.RESUME_NO,
-		    UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-		        FROM USER_RESUME UR
+		SELECT
+		UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE, UR.RESUME_NO,
+		   
+		UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+		        FROM
+		USER_RESUME UR
 		        JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
 		        WHERE RESUME_ACT = 'Y'
 		               
@@ -91,7 +97,8 @@
 		ORDER BY UR.RESUME_NO DESC
 		) A
 		)
-		WHERE NUM BETWEEN #{startNum} AND #{endNum}
+		WHERE NUM BETWEEN #{startNum} AND
+		#{endNum}
 	</select>
 
 	<!-- 회원정보 수정하기 -->
@@ -163,6 +170,8 @@
 		WHERE CATEGORY_TYPE =
 		#{categoryType} AND CATEGORY_DEPT ='2'
 	</select>
+
+
 
 	<!-- 채용공고 작성 -->
 	<insert id="insertRecruit">
@@ -251,20 +260,22 @@
 	<select id="recruitAll"
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
-			, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE
-			, CLOSE_DATE, RA_TITLE, RA_CONTENT,RA_EXTRA_DOCUMENT
-			, CAREER, HOLIDAY_TYPE, RA_ADMISSION
+		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE
+		, CLOSE_DATE, RA_TITLE, RA_CONTENT,RA_EXTRA_DOCUMENT
+		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
 		FROM(
 		SELECT
 		ROWNUM AS NUM , A.*
-		FROM (
+		FROM
+		(
 		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME, CAREER_TYPE
-			, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE
-			, RA_TITLE, RA_CONTENT, RA_EXTRA_DOCUMENT
-			, CAREER, HOLIDAY_TYPE, RA_ADMISSION
+		, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE
+		, RA_TITLE, RA_CONTENT, RA_EXTRA_DOCUMENT
+		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
 		FROM
 		RECRUIT_REGIST
-		WHERE USER_ID = #{userId}
+		WHERE USER_ID =
+		#{userId}
 		<if test="search != null and search neq ''">
 			AND RA_TITLE like '%'||#{search}||'%'
 			or RA_CONTENT like
@@ -307,44 +318,86 @@
 		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
 		SELECT *
 		FROM RECRUIT_REGIST
-		WHERE RECRUIT_TYPE = #{recruitType}
+		WHERE RECRUIT_TYPE =
+		#{recruitType}
 		AND CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
-		ORDER BY REGIST_DATE DESC
+		ORDER
+		BY REGIST_DATE DESC
 	</select>
 
 	<!-- 3단계 선택 후 채용공고 개수 -->
 	<select id="lCatecountYAdmission" resultType="_int">
-		SELECT COUNT(*) FROM RECRUIT_REGIST
+		SELECT COUNT(*)
+		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE IN #{recruitType}
 		AND
-		CLOSE_DATE > SYSDATE
+		CLOSE_DATE >
+		SYSDATE
 		AND RA_ADMISSION IN ('Y')
 	</select>
 
 	<!-- 채용공고 검색 -->
-	<select id="searchList"
-		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
-		SELECT *
-		FROM RECRUIT_REGIST r
-		JOIN USER_TABLE u ON r.user_id = u.user_id
-		WHERE CLOSE_DATE > SYSDATE
-		AND RA_ADMISSION IN ('Y')
-		<if test="keyword != null and keyword != ''">
-			AND (r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
-			OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
-			OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
-			OR r.SALARY LIKE '%' || #{keyword} || '%'
-			OR r.MIN_SALARY LIKE '%' || #{keyword} || '%'
-			OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
-			OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
-			OR r.CAREER_TYPE LIKE '%' || #{keyword} || '%'
-			OR r.CAREER LIKE '%' || #{keyword} || '%'
-			OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
-			OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
-			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
-		</if>
-	</select>
+	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
+		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
+		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
+		!= null and searchWords != ''"> AND (r.COMPANY_NAME LIKE '%' || #{keyword} 
+		|| '%' OR r.RA_TITLE LIKE '%' || #{keyword} || '%' OR r.RA_CONTENT LIKE '%' 
+		|| #{keyword} || '%' OR r.SALARY LIKE '%' || #{keyword} || '%' OR r.MIN_SALARY 
+		LIKE '%' || #{keyword} || '%' OR r.MAX_SALARY LIKE '%' || #{keyword} || '%' 
+		OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%' OR r.CAREER_TYPE LIKE '%' 
+		|| #{keyword} || '%' OR r.CAREER LIKE '%' || #{keyword} || '%' OR r.CONDITION_TYPE 
+		LIKE '%' || #{keyword} || '%' OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || 
+		'%' OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%') </if> </select> -->
+
+	<!-- 채용공고 검색 -->
+	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
+		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
+		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
+		!= null and searchWords != ''"> AND ( <foreach collection="searchWords.split(' 
+		')" item="keyword" separator=" AND "> r.COMPANY_NAME LIKE CONCAT('%', #{keyword}, 
+		'%') OR r.RA_TITLE LIKE CONCAT('%', #{keyword}, '%') OR r.RA_CONTENT LIKE 
+		CONCAT('%', #{keyword}, '%') OR r.SALARY LIKE CONCAT('%', #{keyword}, '%') 
+		OR r.MIN_SALARY LIKE CONCAT('%', #{keyword}, '%') OR r.MAX_SALARY LIKE CONCAT('%', 
+		#{keyword}, '%') OR r.USER_EDUCATION LIKE CONCAT('%', #{keyword}, '%') OR 
+		r.CAREER_TYPE LIKE CONCAT('%', #{keyword}, '%') OR r.CAREER LIKE CONCAT('%', 
+		#{keyword}, '%') OR r.CONDITION_TYPE LIKE CONCAT('%', #{keyword}, '%') OR 
+		r.EMP_TYPE_CODE LIKE CONCAT('%', #{keyword}, '%') OR r.HOLIDAY_TYPE LIKE 
+		CONCAT('%', #{keyword}, '%') </foreach> ) </if> </select> -->
+
+<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDto" parameterType="java.util.Map">
+  SELECT *
+  FROM RECRUIT_REGIST r
+  WHERE CLOSE_DATE > SYSDATE
+  AND RA_ADMISSION = 'Y'
+<if test="keyword != null">
+  AND (
+    <foreach collection="keyword" item="k" separator="OR">
+        <if test="k != null and k.trim().length() > 0">
+        r.COMPANY_NAME LIKE CONCAT('%', #{k}, '%')
+        OR r.RA_TITLE LIKE CONCAT('%', #{k}, '%')
+        OR r.RA_CONTENT LIKE CONCAT('%', #{k}, '%')
+      </if>
+    </foreach>
+  )
+</if>
+    <if test="checkedKeywords != null and checkedKeywords.length > 0">
+      AND (
+        <foreach collection="checkedKeywords" item="checkedKeyword" separator="OR">
+          r.SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.MIN_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.MAX_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.USER_EDUCATION LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.CAREER_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.CAREER LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.CONDITION_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.EMP_TYPE_CODE LIKE CONCAT('%', #{checkedKeyword}, '%')
+          OR r.HOLIDAY_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+        </foreach>
+      )
+    </if>
+</select>
+
 
 
 </mapper>

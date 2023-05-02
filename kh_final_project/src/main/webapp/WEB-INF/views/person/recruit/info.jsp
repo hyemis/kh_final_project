@@ -149,89 +149,58 @@
 			<div style="border: 1px solid gray; padding: 10px;">
 
 				<div class="ED">
-					<span class="p-2">학력 : </span>
-					<div class="checkbox">
-						<input type="checkbox" value="ED01"> <label for="ED01">관계
-							없음</label>
-					</div>
-
-					<div class="checkbox">
-						<input type="checkbox" value="ED02"> <label for="ED02">고졸</label>
-					</div>
-
-					<div class="checkbox">
-						<input type="checkbox" value="ED03"> <label for="ED03">대졸(2~3년)</label>
-					</div>
-
-					<div class="checkbox">
-						<input type="checkbox" value="ED04"> <label for="ED04">대졸(4년)</label>
-					</div>
-
-					<div class="checkbox">
-						<input type="checkbox" value="ED05"> <label for="ED05">석사</label>
-					</div>
-
-					<div class="checkbox">
-						<input type="checkbox" value="ED06"> <label for="ED06">박사</label>
-					</div>
+				  <span class="p-2">학력 : </span>
+				  <c:forEach var="category" items="${edList}">
+				    <div class="checkbox">
+				      <input type="checkbox" id="${category.categoryId}" name="userEducation" value="${category.categoryId}">
+				      <label for="${category.categoryId}"><c:out value="${category.categoryName}"/></label>
+				    </div>
+				  </c:forEach>
 				</div>
-
+				
 				<div class="CA">
-					<span class="p-2">경력 : </span>
-					<div class="checkbox">
-						<input type="checkbox" value="CA03"> <label for="CA03">관계
-							없음</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="CA01"> <label for="CA01">신입</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="CA02"> <label for="CA02">경력</label>
-					</div>
+				  <span class="p-2">경력 : </span>
+				  <c:forEach var="category" items="${caList}">
+				    <div class="checkbox">
+				      <input type="checkbox" id="${category.categoryId}" name="career" value="${category.categoryId}">
+				      <label for="${category.categoryId}"><c:out value="${category.categoryName}"/></label>
+				    </div>
+				  </c:forEach>
 				</div>
-
+				
 				<div class="SC">
-					<span class="p-2">우대조건 : </span>
-					<div class="checkbox">
-						<input type="checkbox" value="SC01"> <label for="SC01">국가유공자</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="SC02"> <label for="SC02">보훈대상자</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="SC03"> <label for="SC03">취업보호대상자</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="SC04"> <label for="SC04">병역특례</label>
-					</div>
+				  <span class="p-2">우대조건 : </span>
+				  <c:forEach var="category" items="${scList}">
+				    <div class="checkbox">
+				      <input type="checkbox" id="${category.categoryId}" name="conditionType" value="${category.categoryId}">
+				      <label for="${category.categoryId}"><c:out value="${category.categoryName}"/></label>
+				    </div>
+				  </c:forEach>
 				</div>
 
+				
 				<div class="ET">
-					<span class="p-2">고용형태 : </span>
-					<div class="checkbox">
-						<input type="checkbox" value="ET10"> <label for="ET10">정규직</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="ET11"> <label for="ET11">시간제정규직</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="ET20"> <label for="ET20">계약직</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="ET21"> <label for="ET21">시간제계약직</label>
-					</div>
+				  <span class="p-2">고용형태 : </span>
+				  <c:forEach var="category" items="${etList}">
+				    <div class="checkbox">
+				      <input type="checkbox" id="${category.categoryId}" name="empTypeCode" value="${category.categoryId}">
+				      <label for="${category.categoryId}"><c:out value="${category.categoryName}"/></label>
+				    </div>
+				  </c:forEach>
 				</div>
 
+				
 				<div class="HT">
-					<span class="p-2">근무형태 : </span>
-					<div class="checkbox">
-						<input type="checkbox" value="HT01"> <label for="HT01">주5일근무</label>
-					</div>
-					<div class="checkbox">
-						<input type="checkbox" value="HT02"> <label for="HT02">주5일근무</label>
-					</div>
-
+				  <span class="p-2">근무형태 : </span>
+				  <c:forEach var="category" items="${htList}">
+				    <div class="checkbox">
+				      <input type="checkbox" id="${category.categoryId}" name="holidayType" value="${category.categoryId}">
+				      <label for="${category.categoryId}"><c:out value="${category.categoryName}"/></label>
+				    </div>
+				  </c:forEach>
 				</div>
+				
+
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					<button class="btn btn-outline-dark btn-reset">초기화</button>
 				</div>
@@ -436,7 +405,7 @@
 						});
 		
 		
-		//search 
+		 /* //search 
 		$(function() {
 		  $('.search-button').click(function() {
 		
@@ -499,7 +468,80 @@
 				}
 		    });
 		  });
+		});  */
+		
+		
+		//search 
+		$(function() {
+			 $('.search-button').click(function() {
+				    var searchKeyword = $('#search').val(); // 검색창에 입력한 검색어를 가져옴
+				    
+				    var checkedKeywords = {};
+				    $('input[type="checkbox"]:checked').each(function() {
+				      var name = $(this).attr('name');
+				      var value = $(this).val();
+				      if (checkedKeywords[name]) {
+				        checkedKeywords[name].push(value); // 이미 해당 name으로 체크된 값이 있다면, 배열에 추가
+				      } else {
+				        checkedKeywords[name] = [value]; // 해당 name으로 체크된 값이 없다면, 새로운 배열 생성
+				      }
+				    });
+				    
+				    $.ajax({
+				      type : 'POST',
+				      url : "${pageContext.request.contextPath}/person/search",
+				      data: {
+				        keyword: searchKeyword,
+				        checkedKeywords: checkedKeywords
+				      },
+			  success : function(result) {
+					if (!result || result.length === 0) {
+						let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
+						$(".recruit-Container").html(
+								htmlVal);
+
+						let totalCount = 0; // 검색 결과 총 개수
+						$('#total-count').text("0");
+					} else {
+						$('.recruit-Container').empty(); // 이전 결과 지우기
+
+						// 새로운 내용 출력
+						let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
+						for (i = 0; i < result.length; i++) {
+						    recruitTable += '<table class="recruit-table">';
+						    recruitTable += '<tr>';
+						    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
+						    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+						    recruitTable += '</a></td></tr>';
+						    recruitTable += '<tr>';
+						    <sec:authorize access="isAuthenticated()">
+						      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+							  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+							  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+							  recruitTable += '</td>';
+						    </sec:authorize>
+						    <sec:authorize access="!isAuthenticated()">
+						        recruitTable += '<td>~' + result[i].closeDate + '</td>';
+						    </sec:authorize>
+						    recruitTable += '</tr></table>';
+						}
+						recruitTable += '</div>';
+						
+						
+						$('.recruit-Container').html(recruitTable);
+
+						let totalCount = result.length; // 검색 결과 총 개수
+						$("#total-count").text(
+								totalCount); // 검색 결과 총 개수 출력
+					}
+				},
+				error : function() {
+					alert('채용 정보를 가져오는데 실패하였습니다.');
+				}
+		    });
+		  });
 		});
+		
 		
 		
 				// 스크랩 
