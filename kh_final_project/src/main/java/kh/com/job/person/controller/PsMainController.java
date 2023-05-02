@@ -461,6 +461,43 @@ public class PsMainController {
 		return result;
 	}
 	
+	// 관심기업 여부 확인
+	@PostMapping("/checkComScrap")
+	@ResponseBody
+	public int checkComScrap(@RequestParam("companyName") String companyName, Principal principal) throws Exception{
+		
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("companyName", companyName);
+		InfoNo.put("userId", principal.getName());
+
+		int result = service.checkScrap(InfoNo);
+		int data = 0;
+		if(result > 0) { //스크랩 돼있으면
+			data = 1; // 데이터=1
+			return data;
+		} else { //스크랩 안 돼있으면 데이터=0
+			return data;
+		}
+	}
+
+
+	// 관심기업 등록
+	@PostMapping("scrapCompany")
+	@ResponseBody
+	public int scrapJob(Principal principal, @RequestParam("companyName") String companyName) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("companyName", companyName);
+		InfoNo.put("userId", principal.getName());
+
+		result = service.scrapJob(InfoNo);
+
+		return result;
+	}
+	
 
 	// 스크랩한 채용공고 화면
 	@GetMapping("/scrapjob")

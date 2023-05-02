@@ -81,12 +81,14 @@
 		  	<div>
 		  		<a>${info.userName }</a>
 		  	</div>
+		  	
    		 		<!-- 채용공고 스크랩 -->
 				<sec:authorize access="hasRole('ROLE_P')">
 				<div class="icon-container ml-auto" style="margin-left: 5px;">
 		  			<i class="far fa-heart" onclick="toggleHeart(this)"></i>
 				</div>
 				</sec:authorize> 
+				
 		  </div>
 		  <div class="card-body">
 		    <h5 class="card-title">${info.boardTitle }</h5>
@@ -136,6 +138,74 @@
 
 <script>
 
+// 페이지 로드 시 실행되는 함수
+window.onload = function() {
+    // companyName 값 가져오기
+    var companyName = ${info.userName };
+    // AJAX를 이용해 스크랩 여부 확인
+    $.ajax({
+        type: 'POST',
+        url: '${pageContext.request.contextPath}/person/checkComScrap',
+        data: {companyName: companyName},
+        success: function(data) {
+            // 스크랩 여부에 따라 하트 상태 변경
+            if(data == 1) {
+                $(".icon-container i").removeClass("far").addClass("fas");
+            } else {
+                $(".icon-container i").removeClass("fas").addClass("far");
+            }
+        }
+    });
+}
+
+
+//하트 클릭 - 관심기업 스크랩 ajax
+function toggleHeart(icon) {
+const isFilled = icon.classList.contains('fas');
+
+var companyName = '${info.userName }';
+
+$.ajax({
+   type: 'POST',
+   url: '${pageContext.request.contextPath}/person/checkComScrap',
+   data: {companyName : companyName},
+   success: function(data) {
+     if (data == 0 ) {
+   	  //스크랩 정보 추가
+       $.ajax({
+           type: 'POST',
+           url: '${pageContext.request.contextPath}/person/scrapCompany',
+           data: {companyName : companyName},
+           success: function() {
+             icon.classList.remove('far');
+             icon.classList.add('fas');
+           },
+           error: function(error) {
+           	alert("관심기업 등록에 실패하였습니다.");
+           }
+         });
+     } else {   	  
+       // 관심기업 삭제
+       $.ajax({
+         type: 'POST',
+         url: '${pageContext.request.contextPath}/person/deleteCompany',
+         data: {companyName : companyName},
+         success: function() {
+           icon.classList.remove('fas');
+           icon.classList.add('far');
+         },
+         error: function(error) {
+      		alert("관심기업 삭제에 실패하였습니다.");
+         }
+       });
+
+     }
+   },
+   error: function(error) {
+     console.log(error);
+   }
+ });
+}
 
 
 
