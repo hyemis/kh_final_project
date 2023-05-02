@@ -177,7 +177,7 @@ public  class BoardServiceImpl implements BoardService {
 
 	@Override
 	public CompanyDto companyInfoOne(int boardNo) {
-		return null;
+		return dao.companyInfoOne(boardNo);
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public  class BoardServiceImpl implements BoardService {
 
 	@Override
 	public CompanyDto newsletterOne(int boardNo) {
-		return null;
+		return dao.newsletterOne(boardNo);
 	}
 
 

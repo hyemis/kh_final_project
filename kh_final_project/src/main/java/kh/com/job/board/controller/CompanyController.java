@@ -49,8 +49,8 @@ public class CompanyController {
 
 	// 회사소개 상세보기
 	@GetMapping("/companyinfo/view")
-	public ModelAndView viewCompanyinfo(ModelAndView mv, Principal principal,
-			@RequestParam(name = "no", required = false) int boardNo) {
+	public ModelAndView viewCompanyinfo(ModelAndView mv,
+										@RequestParam(name = "no", required = false) int boardNo) {
 
 		CompanyDto dto = service.companyInfoOne(boardNo);
 		mv.addObject("info", dto);
@@ -60,8 +60,8 @@ public class CompanyController {
 		List<BsRecruitDto> reCruitDto = brservice.recruitAdmission(userId);
 		mv.addObject("recruitList", reCruitDto);
 
-		List<BoardDto> newsList = baservice.newsLetterList(userId);
-		mv.addObject("news", newsList);
+//			List<BoardDto> newsList = baservice.newsLetterList(userId);
+//			mv.addObject("news", newsList);
 
 		return mv;
 	}
