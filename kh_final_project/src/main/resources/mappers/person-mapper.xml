@@ -100,6 +100,30 @@
 	FROM SCRAP_INFO
 	WHERE USER_ID = #{userId}
 	</select>
+
+	
+	
+	<!-- 기업스크랩 확인 -->  
+	<select id="checkComScrap" parameterType="map" resultType="_int">
+ 	 SELECT COUNT(*) FROM SCRAP_INFO 
+ 	 WHERE COMPANY_NAME = #{companyName} AND USER_ID = #{userId}
+	</select>
+	
+	<!-- 기업 스크랩 기능 -->
+  	<insert id="scrapCompany" parameterType="map">
+	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_NAME)
+	VALUES ( #{userId} , #{companyName})
+	</insert>
+	
+	<!-- 관심기업 삭제 기능 -->
+  	<delete id="deleteCompany" parameterType="map">
+  	DELETE FROM
+  	SCRAP_INFO
+  	WHERE USER_ID = #{userId} AND COMPANY_NAME = #{companyName}
+	</delete>
+		
+	
+	
 	
 	<!-- 입사지원 여부 확인 -->
 	<select id="checkApply" parameterType="map" resultType="_int">
@@ -137,4 +161,14 @@
   	BUSINESS_APPLICANT
   	WHERE USER_ID = #{userId} AND RA_NUM = #{raNum}
 	</delete>	
+	
+	<!-- 마지막 로그인 일시, 총 방문횟수 -->
+	<update id="updateLoginRecord" >
+  	update USER_TABLE set 
+ 	  	USER_LAST_LOGIN = current_timestamp,
+ 	  	USER_COUNT = USER_COUNT + 1
+ 	where USER_ID = #{userId}
+	</update>
+
+
 </mapper>

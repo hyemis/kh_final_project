@@ -243,7 +243,25 @@ public class PsServiceImpl implements PsService {
 			return dao.checkApply(InfoNo);
 		}
 
+		@Override
+		public int updateLoginRecord(String userId) throws Exception {
+			return dao.updateLoginRecord(userId);
+		}
 
+		@Override
+		public int checkComScrap(Map<String, Object> InfoNo) throws Exception {
+			return dao.checkComScrap(InfoNo);
+		}
+
+		@Override
+		public int scrapCompany(Map<String, Object> InfoNo) throws Exception {
+			return dao.scrapCompany(InfoNo);
+		}
+
+		@Override
+		public int deleteCompany(Map<String, Object> InfoNo) throws Exception {
+			return dao.deleteCompany(InfoNo);
+		}
 
 
 

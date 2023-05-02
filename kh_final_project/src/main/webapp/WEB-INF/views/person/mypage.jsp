@@ -162,7 +162,13 @@
 							<div class="row g-5 align-items-center">
 								<div class="mb-4">
 									<h3 class="mb-3">이용현황</h3>
-									<div class=""></div>
+									<div class="pi-1">
+										<div id="userName">회원가입일 : ${PsUserDto.userCreatedAt}</div>
+
+										<div id="userPhone">최근 로그인 : ${PsUserDto.userPhone }</div>
+
+										<div id="userEmail">총 방문횟수 : ${PsUserDto.userEmail }</div>
+									</div>
 								</div>
 							</div>
 						</div>
