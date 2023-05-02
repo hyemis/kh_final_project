@@ -196,11 +196,11 @@
 						enctype="multipart/form-data">
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
-								<h4>기업이름</h4>
+								<h4>제목</h4>
 							</div>
 							<div class="col-10 ">
 								<input type="text" name="boardTitle"
-									style="width: 30%;" placeholder="기업이름을 적어주세요" > 
+									style="width: 30%;" placeholder="제목을적어주세요" > 
 								<hr>
 							</div>
 						</div>

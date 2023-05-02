@@ -21,16 +21,23 @@ public class PsDao {
 
 	// 회원 정보 읽어오기 
 	public PsUserDto selectOne(String userId) throws Exception {
-		PsUserDto user = sqlSession.selectOne("person.selectOne", userId);
-		
-		String dateString = user.getUserBirth();
-		if (dateString != null) {
-		    LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-		        user.setUserBirth(date.toString());
-		    }
-		    return user;
-		}
-	
+	    PsUserDto user = sqlSession.selectOne("person.selectOne", userId);
+
+	    String dateString = user.getUserBirth();
+	    if (dateString != null) {
+	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	        user.setUserBirth(date.toString());
+	    }
+
+	    dateString = user.getUserCreatedAt();
+	    if (dateString != null) {
+	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	        user.setUserCreatedAt(date.toString());
+	    }
+
+	    return user;
+	}
+
 		
 	
 	// 카카오 로그인 
@@ -119,6 +126,27 @@ public class PsDao {
 	public int checkApply(Map<String, Object> InfoNo) throws Exception {
 		int result = sqlSession.selectOne("person.checkApply", InfoNo);
 		return result;
+	}
+	
+	// 마지막 로그인
+	public int updateLoginRecord(String userId) throws Exception {
+		return sqlSession.update("person.updateLoginRecord", userId);
+	}
+	
+	// 기업 스크랩 확인
+	public int checkComScrap(Map<String, Object> InfoNo) throws Exception {
+		int result = sqlSession.selectOne("person.checkComScrap", InfoNo);
+		return result;
+	}
+
+	// 관심기업 스크랩하기
+	public int scrapCompany(Map<String, Object> InfoNo) throws Exception{
+		return sqlSession.insert("person.scrapCompany",InfoNo);
+	}
+	
+	// 관심기업 스크랩 삭제
+	public int deleteCompany(Map<String, Object> InfoNo) throws Exception{
+		return sqlSession.delete("person.deleteCompany",InfoNo);
 	}
 
 }

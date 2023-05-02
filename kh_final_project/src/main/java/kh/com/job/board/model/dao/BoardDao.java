@@ -119,27 +119,30 @@ public class BoardDao {
 		return sqlSession.selectOne("boards.viewDetail", boardNo);
 	}
 
-	public List<CompanyDto> companyInfoList(int boardNo) {
-		return sqlSession.selectList("boards.companyInfoList",boardNo);
+	public List<CompanyDto> companyInfoList(CompanyDto dto) {
+		return sqlSession.selectList("boards.companyInfoList",dto);
 	}
 
 	public CompanyDto companyInfoOne(int boardNo) {
 		return sqlSession.selectOne("boards.companyInfoOne",boardNo);
 	}
-
-	public List<CompanyDto> companyInfoList(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	//뉴스레터
+	public List<CompanyDto> newsLetterAll(CompanyDto dto) {
+		return sqlSession.selectList("boards.newsLetterAll",dto);
 	}
 
-	public List<CompanyDto> newsletterList(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public CompanyDto newsLetterOne(int boardNo) {
+		return sqlSession.selectOne("boards.newsLetterOne",boardNo);
+	}
+	
+	//회사소개
+	public int countInfo(CompanyDto dto) {
+		return sqlSession.selectOne("boards.countInfo",dto);
 	}
 
-	public CompanyDto newsletterOne(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public int countNewsletter(CompanyDto dto) {
+		return sqlSession.selectOne("boards.countNewsletter",dto);
 	}
 	
 

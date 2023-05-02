@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
@@ -86,6 +87,10 @@ public class BsRecruitDao {
 	
 	public List<AdCategoryDto> cateForSearch(String categoryType) {
 		return sqlSession.selectList("business.cateForSearch", categoryType);
+	}
+
+	public List<BsRecruitDetailDto> recentRecruit() {
+		return sqlSession.selectList("business.recentRecruit");
 	}
 
 

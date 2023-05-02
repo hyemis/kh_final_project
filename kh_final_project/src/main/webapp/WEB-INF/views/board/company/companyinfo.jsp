@@ -54,14 +54,77 @@
 
 
 </head>
+
+<style>
+
+.icon-container i.fas {
+  color: red;
+}
+
+</style>
+
+
+
 <body>
 	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-	<!-- page section -->
-	<section>
-		<div class="container-fluid bg-white p-5">이 영역에 작성하시면 됩니다.</div>
-	</section>
+<!-- page section -->
+<section>
+<div class="container-fluid bg-white p-5">
+ 기업 회사 소개 리스트
+<div class="row">
+	<c:forEach items="${info.getPage() }" var="info">
+	<div class="col p-3">
+		<div class="card">
+		  <div class="card-header" style="display: flex; align-items: center;">
+		  	<div>
+		  		<a>${info.userName }</a>
+		  	</div>
+   		 		<!-- 채용공고 스크랩 -->
+				<sec:authorize access="hasRole('ROLE_P')">
+				<div class="icon-container ml-auto" style="margin-left: 5px;">
+		  			<i class="far fa-heart" onclick="toggleHeart(this)"></i>
+				</div>
+				</sec:authorize> 
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">${info.boardTitle }</h5>
+		    <p class="card-text">${info.tag }</p>
+		    <a href="${pageContext.request.contextPath}/board/company/companyinfo/view?no=${info.boardNo }" class="btn btn-primary">이동</a> 
+		  </div>
+		</div>
+	</div>
+	</c:forEach>
+</div>
+
+
+	 	<!-- 페이지네이션  -->
+		 	<ul class = "pagination text-center justify-content-center">
+				<c:choose>
+					<c:when test="${info.prevPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">prev</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${list.prevPage }">prev</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="pNum" items="${info.pageList }">
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${pNum}">${pNum }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${info.nextPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${list.nextPage }">next</a></li>
+					</c:otherwise>
+				</c:choose>					
+			</ul>	
+
+</div>
+</section>
 
 
 	<!-- footer  -->
@@ -70,4 +133,11 @@
 	<!-- page script -->
 
 </body>
+
+<script>
+
+
+
+
+</script>
 </html>

@@ -98,15 +98,15 @@
 											 <th scope="col" class="center">회사명</th>
 										     <th scope="col" class="center">채용현황</th>										   </tr>
 										  </thead>
-										  <tbody class="table-group-divider">
-<%-- 			수정예정							  <c:forEach items="${resumelist }" var="resume">
-										    <tr>
-										      <td><a href="${pageContext.request.contextPath}/person/resume/read/${resume.resumeNo}">${resume.resumeTitle }</a></td>
-										      <td>${resume.resumeDate }</td>
-										      <td>${resume.portfFile }</td>
-										    </tr>
-										  </c:forEach> --%>
-										  </tbody>
+											<tbody class="table-group-divider">
+												<c:forEach items="${scraplist }" var="scrap">
+													<tr>
+														<td><input type="checkbox" name="scrapCheckBox"
+															value="${scrap.raNum }" /></td>
+														<td>${scrap.companyName }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
 										</table>
 										
 									</div>

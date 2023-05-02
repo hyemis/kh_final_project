@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
@@ -47,6 +48,8 @@ public interface BsRecruitService {
 	public int updateRecruit(BsRecruitDto dto);
 
 	public int deleteRecruit(BsRecruitDto dto);
+
+	public List<BsRecruitDetailDto> recentRecruit();
 
 
 }

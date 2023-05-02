@@ -20,6 +20,7 @@ import com.google.cloud.storage.StorageOptions;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.business.model.dao.BsAccountDao;
 import kh.com.job.business.model.dao.BsRecruitDao;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
@@ -164,6 +165,11 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	@Override
 	public int deleteRecruit(BsRecruitDto dto) {
 		return dao.deleteRecruit(dto);
+	}
+
+	@Override
+	public List<BsRecruitDetailDto> recentRecruit() {
+		return dao.recentRecruit();
 	}
 
 
