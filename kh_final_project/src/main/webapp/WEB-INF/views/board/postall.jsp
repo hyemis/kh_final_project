@@ -125,7 +125,7 @@
     </c:when>
     <c:otherwise>
       <li class="page-item">
-        <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${boardList.prevPage}${not empty bdto.categoryId ? '&cate=' + bdto.categoryId : ''}">prev</a>
+        <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${boardList.prevPage}&cate=${categoryId}">prev</a>
       </li>
     </c:otherwise>
   </c:choose>
@@ -144,7 +144,7 @@
     </c:when>
     <c:otherwise>
       <li class="page-item">
-        <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${boardList.nextPage}${not empty bdto.categoryId ? '&cate=' + bdto.categoryId : ''}">next</a>
+        <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${pNum}&cate=${categoryId }">next</a>
       </li>
     </c:otherwise>
   </c:choose>
