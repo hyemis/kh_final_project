@@ -251,24 +251,17 @@
 	<select id="recruitAll"
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
 		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
-		, CAREER_TYPE,
-		USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE,
-		RA_TITLE
-		, RA_CONTENT,
-		RA_EXTRA_DOCUMENT
-		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
+			, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE
+			, CLOSE_DATE, RA_TITLE, RA_CONTENT,RA_EXTRA_DOCUMENT
+			, CAREER, HOLIDAY_TYPE, RA_ADMISSION
 		FROM(
 		SELECT
 		ROWNUM AS NUM , A.*
 		FROM (
-		SELECT RA_NUM,
-		RECRUIT_TYPE,USER_ID,COMPANY_NAME
-		, CAREER_TYPE, USER_EDUCATION,
-		SALARY, REGIST_DATE, CLOSE_DATE,
-		RA_TITLE
-		, RA_CONTENT,
-		RA_EXTRA_DOCUMENT
-		, CAREER, HOLIDAY_TYPE, RA_ADMISSION
+		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME, CAREER_TYPE
+			, USER_EDUCATION, SALARY, REGIST_DATE, CLOSE_DATE
+			, RA_TITLE, RA_CONTENT, RA_EXTRA_DOCUMENT
+			, CAREER, HOLIDAY_TYPE, RA_ADMISSION
 		FROM
 		RECRUIT_REGIST
 		WHERE USER_ID = #{userId}
@@ -338,10 +331,8 @@
 		WHERE CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 		<if test="keyword != null and keyword != ''">
-			AND (r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
-			OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
-			OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
-			OR r.SALARY LIKE '%' || #{keyword} || '%'
+			AND (
+			r.SALARY LIKE '%' || #{keyword} || '%'
 			OR r.MIN_SALARY LIKE '%' || #{keyword} || '%'
 			OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
 			OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
@@ -350,6 +341,11 @@
 			OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
 			OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
 			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
+			AND (
+			r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
+			OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
+			OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
+			)
 		</if>
 	</select>
 
