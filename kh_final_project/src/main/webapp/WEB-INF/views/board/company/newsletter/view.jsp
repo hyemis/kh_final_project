@@ -61,6 +61,7 @@
 
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
+	
 
 	
 	<div class="container-xxl py-5">
@@ -73,7 +74,7 @@
 			<div class="col-lg-6 text-start text-lg-end wow slideInRight"
 				data-wow-delay="0.1s">
 				<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-					<li class="nav-item me-2"><a class="btn btn-outline-primary" data-bs-toggle="pill" href="#">목록으로</a></li>
+					<li class="nav-item me-2"><a class="btn btn-outline-primary" data-bs-toggle="pill" onclick=" history.go(-1)">목록으로</a></li>
 					<li class="nav-item me-2"><a class="btn btn-outline-primary" data-bs-toggle="pill" href="#">QnA</a></li>
 				</ul>
 			</div>
@@ -95,36 +96,15 @@
 				</div>
 		</div>		
 		<div class="m-5 text-center">
-		<c:if test="${not empty currentUserId and news.userId eq currentUserId}">
-		  <button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${news.boardNo}'">수정</button>
-		  <button type="button" class="btn btn-outline-primary delete">삭제</button>
-		</c:if>
+			<c:if test="${not empty currentUserId and news.userId eq currentUserId}">
+			  <button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${news.boardNo}'">수정</button>
+			  <button type="button" class="btn btn-outline-primary delete">삭제</button>
+			</c:if>
 		</div>
-		
-		
-		
-			
-			
-
-
-
-
-
-
-
-
-
-
-
-		
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 	<script>
-	var msg = "${msg}";
-	if(msg) {
-		alert(msg);
-	}
 	
 	$(document).ready(function() {
 	  $(".delete").on("click", function() {
@@ -132,7 +112,7 @@
 	      let userId = "${news.userId}";
 	      let boardNo = "${news.boardNo}";      	
 	      $.ajax({ 
-	        url: "${pageContext.request.contextPath}/business/aboutus/deleteNewsletter"
+	        url: "${pageContext.request.contextPath}/board/company/delete"
 	        , type: "post"
 	        , data:  {boardNo : boardNo, userId : userId}
 	        , success: function(result){
