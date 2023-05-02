@@ -21,16 +21,23 @@ public class PsDao {
 
 	// 회원 정보 읽어오기 
 	public PsUserDto selectOne(String userId) throws Exception {
-		PsUserDto user = sqlSession.selectOne("person.selectOne", userId);
-		
-		String dateString = user.getUserBirth();
-		if (dateString != null) {
-		    LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-		        user.setUserBirth(date.toString());
-		    }
-		    return user;
-		}
-	
+	    PsUserDto user = sqlSession.selectOne("person.selectOne", userId);
+
+	    String dateString = user.getUserBirth();
+	    if (dateString != null) {
+	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	        user.setUserBirth(date.toString());
+	    }
+
+	    dateString = user.getUserCreatedAt();
+	    if (dateString != null) {
+	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	        user.setUserCreatedAt(date.toString());
+	    }
+
+	    return user;
+	}
+
 		
 	
 	// 카카오 로그인 

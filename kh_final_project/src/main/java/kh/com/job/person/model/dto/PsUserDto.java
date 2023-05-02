@@ -47,8 +47,8 @@ ser11 |$2a$10$pLJeF.qJd2DaoYkgEzD2s.I13JUlypoYTtLHURW4P2xoojIoUoEsu|01099995555|
 	private String bsType;
 	private String bsLicense;
 	private String bsMainPhone;
-	private Timestamp userCreatedAt;
-	private Timestamp userLastLogin;
+	private String userCreatedAt;
+	private String userLastLogin;
 	private String userCount;
 	private String userAct;
 	private String userRole;

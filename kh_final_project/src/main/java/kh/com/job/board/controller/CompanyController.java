@@ -2,7 +2,9 @@
 package kh.com.job.board.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,8 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.board.model.dto.BoardDto;
@@ -21,6 +25,7 @@ import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.page.Paging;
+import kh.com.job.person.model.service.PsService;
 
 @Controller
 @RequestMapping("/board/company")
@@ -34,6 +39,9 @@ public class CompanyController {
 	
 	@Autowired
 	private BsAboutUsService baservice;
+	
+	@Autowired
+	private PsService pservice;
 
 	//회사소개 리스트
 	@GetMapping("/companyinfo")
@@ -68,6 +76,8 @@ public class CompanyController {
 
 		return mv;
 	}
+	
+//	
 	
 	//뉴스레터 리스트
 	@GetMapping("/newsletter")

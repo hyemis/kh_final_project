@@ -54,6 +54,17 @@
 
 
 </head>
+
+<style>
+
+.icon-container i.fas {
+  color: red;
+}
+
+</style>
+
+
+
 <body>
 	<!-- header  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -66,8 +77,16 @@
 	<c:forEach items="${info.getPage() }" var="info">
 	<div class="col p-3">
 		<div class="card">
-		  <div class="card-header">
-		   <a>${info.userName }</a>
+		  <div class="card-header" style="display: flex; align-items: center;">
+		  	<div>
+		  		<a>${info.userName }</a>
+		  	</div>
+   		 		<!-- 채용공고 스크랩 -->
+				<sec:authorize access="hasRole('ROLE_P')">
+				<div class="icon-container ml-auto" style="margin-left: 5px;">
+		  			<i class="far fa-heart" onclick="toggleHeart(this)"></i>
+				</div>
+				</sec:authorize> 
 		  </div>
 		  <div class="card-body">
 		    <h5 class="card-title">${info.boardTitle }</h5>
@@ -78,6 +97,8 @@
 	</div>
 	</c:forEach>
 </div>
+
+
 	 	<!-- 페이지네이션  -->
 		 	<ul class = "pagination text-center justify-content-center">
 				<c:choose>
@@ -112,4 +133,11 @@
 	<!-- page script -->
 
 </body>
+
+<script>
+
+
+
+
+</script>
 </html>
