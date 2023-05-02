@@ -220,7 +220,7 @@
 		</selectKey>
 	</update>
 	
-     <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
+     <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyDto">
 		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
 		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
 		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
@@ -229,7 +229,7 @@
 		WHERE BD.CATEGORY_ID = 'UBD06'
     </select>
     
-    <select id="companyInfoOne" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
+    <select id="companyInfoOne" resultType="kh.com.job.board.model.dto.CompanyDto">
 		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
 		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
 		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
