@@ -158,12 +158,13 @@ public class BoardController {
 //	    }
 	
 	@GetMapping("/postall")
-	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate
+	public ModelAndView postall(ModelAndView mv
+			, @RequestParam(required = false, name = "cate") String cate
 			, PagingBoardDto bdto)
 	        throws Exception {
 	
 
-	    if (cate == null) {
+	    if (cate == null || cate.isEmpty()) {
 	        // 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
 	        mv.addObject("searchResult", "게시글 전체 검색결과");
 	        mv.addObject("totalCount", service.getCountByPs(bdto));
