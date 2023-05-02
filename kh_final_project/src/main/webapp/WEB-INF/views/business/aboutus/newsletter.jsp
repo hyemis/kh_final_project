@@ -80,11 +80,11 @@
 					      <th scope="col" class="col-2">작성일</th>
 					    </tr>
 					  </thead>
-					  <c:forEach items="${news}" var="news">
+					  <c:forEach items="${news.getPage() }" var="news">
 					  <tbody>
 					    <tr>
 					      <th scope="row">${news.boardNo}</th>
-					      <td><a href="${pageContext.request.contextPath}/business/aboutus/newsletter/view?no=${news.boardNo}">${news.boardTitle }</a></td>
+					      <td><a href="${pageContext.request.contextPath}/board/company/newsletter/view?no=${news.boardNo}">${news.boardTitle }</a></td>
 					      <td>${news.updateDate }</td>
 					    </tr>
 					   </tbody>

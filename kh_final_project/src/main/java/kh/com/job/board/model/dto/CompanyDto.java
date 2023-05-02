@@ -34,6 +34,7 @@ public class CompanyDto {
 	private String tag;
 	private String salaryAvg;
 	private String employee;
+	private String link;
 	
 	private int startNum;
 	private int endNum;

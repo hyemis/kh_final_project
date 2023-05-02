@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.business.model.dto.BsAplicantListDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
-import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsUserDto;
+import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.common.page.Paging;
-import kh.com.job.common.page.PagingInfoDto;
 
 @Controller
 @RequestMapping("/business")
@@ -32,6 +30,9 @@ public class BsMainController {
 	
 	@Autowired
 	private BsApplicantService apservice;
+
+	@Autowired
+	private BoardService bdservice;
 	
 	//메인창
 	@GetMapping("/main")
@@ -90,11 +91,18 @@ public class BsMainController {
 	@GetMapping("/aboutus")
 	public ModelAndView aboutUs(ModelAndView mv, BoardDto dto, Principal principal) {
 		System.out.println("로그인한 아이디" + principal.getName());
+		//조회될 회원아이디
+		dto.setUserId(principal.getName()); 
+		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
+		if(dto.getPnum() < 1) {
+		dto.setPnum(1);
+		}
+		Paging list = auservice.newsLetterList(dto);
+		System.out.println(dto);
+		mv.addObject("news", list);		
 		
-		List<BoardDto> news = auservice.newsLetterList(principal.getName());
-		
-		mv.addObject("news", news);
 		mv.addObject("userinfo",acservice.viewAccount(principal.getName()));
+		mv.addObject("companyinfo",auservice.checkInfo(principal.getName()));
 		
 		return mv;
 	}

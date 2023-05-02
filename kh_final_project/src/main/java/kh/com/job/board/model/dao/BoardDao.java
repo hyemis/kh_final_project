@@ -58,6 +58,11 @@ public class BoardDao {
 		return sqlSession.update("boards.updatePost", dto);
 	}
 	
+	// 게시글 삭제
+	public int deletePost(BoardDto dto) {
+		return sqlSession.delete("boards.delete", dto);
+	}
+	
 	// 게시글 조회 수 증가 
 	public int updateRead(int boardNo) throws Exception {
 		return sqlSession.update("boards.updateRead", boardNo);
@@ -144,6 +149,16 @@ public class BoardDao {
 	public int countNewsletter(CompanyDto dto) {
 		return sqlSession.selectOne("boards.countNewsletter",dto);
 	}
+
+	public int updateNewsLetter(BoardDto dto) {
+		return sqlSession.update("boards.updateNewsLetter",dto);
+	}
+
+	public int updateCompanyInfo(BoardDto dto) {
+		return sqlSession.update("boards.updateCompanyInfo",dto);
+	}
+
+	
 	
 
 	

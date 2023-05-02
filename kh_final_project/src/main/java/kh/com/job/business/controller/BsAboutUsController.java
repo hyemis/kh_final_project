@@ -24,8 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.CompanyDto;
+import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsAboutUsService;
+import kh.com.job.common.page.Paging;
 
 @Controller
 @RequestMapping("/business/aboutus")
@@ -33,6 +36,9 @@ public class BsAboutUsController {
 
 	@Autowired
 	private BsAboutUsService service;
+
+	@Autowired
+	private BoardService bdservice;
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -49,28 +55,7 @@ public class BsAboutUsController {
 			return mv;
 		}
 		
-	
-	// 회사소개 보기
-	@GetMapping("/companyinfo")
-	public ModelAndView companyinfo(ModelAndView mv, BoardDto dto, Principal principal) {
-	    System.out.println(principal.getName());
-	    
-	    mv.addObject("info",service.viewCompanyInfo(principal.getName()));
-	    
-	    //tag값 분리
-	    String tag = dto.getTag();		
-	    if (tag != null && !tag.isEmpty()) { // tag 값이 null 또는 빈 문자열이 아닌 경우에만 처리
-	        String[] tags = tag.split(",");
-	        mv.addObject("tags", tags);
-	    }
-	    
-	    return mv;
-	}
 
-	
-
-	
-	
 	// 뉴스레터 작성
 	@PostMapping("/newsletterform")
 	public ModelAndView insertNewsletter(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
@@ -83,72 +68,24 @@ public class BsAboutUsController {
 	}
 	
 	
-	// 뉴스레터 페이지 불러오기
+	// 뉴스레터 리스트
 	@GetMapping("/newsletter")
 	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
-		List<BoardDto> list = service.newsLetterList(principal.getName());
-		
-		mv.addObject("news", list);
-		
-		return mv;
-	}
-	
-	// 뉴스레터 상세보기
-	@GetMapping("/newsletter/view")
-	public ModelAndView viewNewsletter(
-			ModelAndView mv
-			, @RequestParam(name = "no", required = false) int boardNo
-			, Principal principal
-			) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserId = auth.getName();
-		
-		BoardDto dto = service.newsLetterOne(boardNo);
-		mv.addObject("news", dto);
-		return mv;
-	}
-	
-	//뉴스레터 수정페이지
-	@GetMapping("/newsletter/update")
-	public ModelAndView updateNewsletter(
-			ModelAndView mv
-			, @RequestParam(name = "no", required = false) int boardNo
-			, Principal principal
-			) {
-		
-		BoardDto dto = service.newsLetterOne(boardNo);
-		mv.addObject("news", dto);
-		
-		return mv;
-	}
-	
-	//뉴스레터 수정
-	@PostMapping("/updateNewsletter")
-	public ModelAndView updateNewsletter(ModelAndView mv, String boardNo, BoardDto dto, Principal principal ) {
+		//조회될 회원아이디
 		dto.setUserId(principal.getName()); 
-		service.updateNewsLetter(dto);
-		mv.setViewName("redirect:/business/aboutus/newsletter/view?no=" + boardNo);
-		return mv;
-	}
-	
-	//뉴스레터 삭제
-	@PostMapping("/deleteNewsletter")
-	@ResponseBody
-	public int deleteNewsletter(BoardDto dto, Principal principal ){
-		dto.setUserId(principal.getName()); 
-		int result = -1;
-		if(principal.getName().equals(dto.getUserId())) {
-			result = service.deleteNewsLetter(dto);
-		}else {
-			result = -2;
+		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
+		if(dto.getPnum() < 1) {
+		dto.setPnum(1);
 		}
-		return result;
+		Paging list = service.newsLetterList(dto);
+		System.out.println(dto);
+						
+		mv.addObject("news", list);		
+		
+		return mv;
 	}
-
 	
-
-	
+		
 	
 	// Q&A 페이지 불러오기
 	@GetMapping("/qna")
