@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.job.business.model.dto.BsSearchDto;
-import kh.com.job.common.page.Criteria;
 import kh.com.job.person.model.dto.PsResumeDto;
 
 @Repository

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kh.com.job.business.model.dao.BsSearchDao;
 import kh.com.job.business.model.dto.BsSearchDto;
-import kh.com.job.common.page.Criteria;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
 
