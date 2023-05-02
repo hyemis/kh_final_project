@@ -132,9 +132,7 @@
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-	<!-- page script -->
 
-</body>
 
 <script>
 
@@ -210,4 +208,9 @@ $.ajax({
 
 
 </script>
+
+
+</body>
+
+
 </html>
