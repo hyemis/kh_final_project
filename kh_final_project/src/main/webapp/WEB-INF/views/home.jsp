@@ -113,8 +113,8 @@
 	                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${list.addressRoad == null ? list.addressJibun : list.addressRoad}</p>
 	                            </div>
 	                            <div class="d-flex border-top">
-	                                <small class="flex-fill text-center border-end py-2">담당자 연락처 : ${list.bsMainPhone}</small>
-	                                <small class="flex-fill text-center border-end py-2">담당자 이메일 : ${list.userEmail }</small>
+	                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-phone-alt text-primary me-3"></i>${list.bsMainPhone}</small>
+	                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-envelope text-primary me-3"></i>${list.userEmail }</small>
 	                            </div>
 	                        </div>
 	                    </div>
