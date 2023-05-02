@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.controller.BoardController;
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.board.model.dto.CompanyInfoDto;
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.common.page.PagingAplicantDto;
 import kh.com.job.common.page.PagingBoardDto;
@@ -119,12 +119,27 @@ public class BoardDao {
 		return sqlSession.selectOne("boards.viewDetail", boardNo);
 	}
 
-	public List<CompanyInfoDto> companyInfoList(int boardNo) {
+	public List<CompanyDto> companyInfoList(int boardNo) {
 		return sqlSession.selectList("boards.companyInfoList",boardNo);
 	}
 
-	public CompanyInfoDto companyInfoOne(int boardNo) {
+	public CompanyDto companyInfoOne(int boardNo) {
 		return sqlSession.selectOne("boards.companyInfoOne",boardNo);
+	}
+
+	public List<CompanyDto> companyInfoList(String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<CompanyDto> newsletterList(String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CompanyDto newsletterOne(int boardNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
