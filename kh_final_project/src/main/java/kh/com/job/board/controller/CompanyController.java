@@ -1,3 +1,4 @@
+
 package kh.com.job.board.controller;
 
 import java.security.Principal;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.board.model.dto.CompanyInfoDto;
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsAboutUsService;
@@ -42,13 +43,13 @@ public class CompanyController {
 
 	// 회사소개 상세보기
 	@GetMapping("/companyinfo/view")
-	public ModelAndView viewCompanyinfo(ModelAndView mv, CompanyInfoDto dto, Principal principal,
+	public ModelAndView viewCompanyinfo(ModelAndView mv, Principal principal,
 			@RequestParam(name = "no", required = false) int boardNo) {
 
-		CompanyInfoDto idto = service.companyInfoOne(boardNo);
-		mv.addObject("info", idto);
+		CompanyDto dto = service.companyInfoOne(boardNo);
+		mv.addObject("info", dto);
 
-		String userId = idto.getUserId();
+		String userId = dto.getUserId();
 		// 진행중인 공고리스트
 		List<BsRecruitDto> reCruitDto = brservice.recruitAdmission(userId);
 		mv.addObject("recruitList", reCruitDto);
@@ -60,7 +61,7 @@ public class CompanyController {
 	}
 	
 	//뉴스레터 리스트
-	@GetMapping("/companyinfo")
+	@GetMapping("/newsletter")
 	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
 //		List<BoardDto> list = service.newsletterList(principal.getName());
 
@@ -71,7 +72,7 @@ public class CompanyController {
 	
 	// 뉴스레터 상세보기
 		@GetMapping("/newsletter/view")
-		public ModelAndView viewNewsletter(ModelAndView mv) {
+		public ModelAndView newsletterOne(ModelAndView mv) {
 			return mv;
 		}
 

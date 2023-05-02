@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dao.BoardDao;
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.board.model.dto.CompanyInfoDto;
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
@@ -148,14 +148,26 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.delete(userId);
 	}
 
+
 	@Override
-	public List<CompanyInfoDto> companyInfoList(int boardNo) {
-		return dao.companyInfoList(boardNo);
+	public List<CompanyDto> companyInfoList(String categoryId) {
+		return dao.companyInfoList(categoryId);
 	}
 
 	@Override
-	public CompanyInfoDto companyInfoOne(int boardNo) {
+	public CompanyDto companyInfoOne(int boardNo) {
 		return dao.companyInfoOne(boardNo);
+	}
+
+
+	@Override
+	public List<CompanyDto> newsletterList(String categoryId) {
+		return dao.newsletterList(categoryId);
+	}
+
+	@Override
+	public CompanyDto newsletterOne(int boardNo) {
+		return dao.newsletterOne(boardNo);
 	}
 
 	

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.board.model.dto.CompanyInfoDto;
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.common.page.Paging;
@@ -68,9 +68,14 @@ public interface BoardService {
 	public BoardDto viewDetail(String boardNo);
 	
 	// 회사소개리스트
-	public List<CompanyInfoDto> companyInfoList(int boardNo);
+	public List<CompanyDto> companyInfoList(String categoryId);
 	// 회사소개 상세보기
-	public CompanyInfoDto companyInfoOne(int boardNo);
+	public CompanyDto companyInfoOne(int boardNo);
+	// 뉴스레터 리스트
+	public List<CompanyDto> newsletterList(String categoryId);
+	// 뉴스레터 상세보기
+	public CompanyDto newsletterOne(int boardNo);
+
 
 
 }

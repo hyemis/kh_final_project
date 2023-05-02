@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.board.model.dto.CompanyInfoDto;
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.board.model.dto.ReplyDto;
 import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsRecruitDto;

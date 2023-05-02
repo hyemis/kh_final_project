@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class CompanyInfoDto {
+public class CompanyDto {
 	
 	private String userId;
 	private String userName;
