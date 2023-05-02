@@ -343,7 +343,7 @@
 		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.CAREER) AS CAREER
 		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.HOLIDAY_TYPE) AS HOLIDAY_TYPE
 		            , (SELECT JC.CATEGORY_NAME FROM JA_CATEGORY JC WHERE JC.CATEGORY_ID = RR.EMP_TYPE_CODE) AS EMP_TYPE_CODE
-		            , RR.RA_ADMISSION
+		            , RR.RA_ADMISSION, RR.RA_TITLE
 				FROM USER_TABLE UT
 				JOIN RECRUIT_REGIST RR ON UT.USER_ID = RR.USER_ID
 		        where rr.close_date >= sysdate
@@ -351,7 +351,7 @@
 		        order by rr.close_date desc, rr.regist_date asc
 		    ) A 
 		)
-		where num between 1 and 3
+		where num between 1 and 6
 	
 	</select>
 	

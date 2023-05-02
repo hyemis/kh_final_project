@@ -121,15 +121,12 @@
 					</c:forEach>
 					<!-- end -->
 	                    <div class="col-12 text-center wow fadeInUp">
-	                        <a class="btn btn-primary py-3 px-5" href="">채용공고 더보기</a>
+	                        <a class="btn btn-primary py-3 px-5" href="${pageContext.request.contextPath}/person/recruit/info">채용공고 더보기</a>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
-	</div>
-	<div class="container-fluid p-5" style="background-color:primary; min-height: 300px;">
-		커뮤니티 
 	</div>
 	
 	</section>
