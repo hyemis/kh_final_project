@@ -315,8 +315,7 @@
 		SELECT *
 		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE = #{recruitType}
-		AND CLOSE_DATE
-		> SYSDATE
+		AND CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 		ORDER BY REGIST_DATE DESC
 	</select>
@@ -347,6 +346,7 @@
 			OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
 			OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
 			OR r.CAREER_TYPE LIKE '%' || #{keyword} || '%'
+			OR r.CAREER LIKE '%' || #{keyword} || '%'
 			OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
 			OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
 			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
