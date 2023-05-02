@@ -95,21 +95,31 @@
 										<table class="table table-hover">
 										  <thead>
 										    <tr>
+										     <th scope="col" class="center"></th>
 											 <th scope="col" class="center">회사명</th>
 										     <th scope="col" class="center">채용현황</th>										   </tr>
 										  </thead>
 											<tbody class="table-group-divider">
 												<c:forEach items="${scraplist }" var="scrap">
 													<tr>
-														<td><input type="checkbox" name="scrapCheckBox"
-															value="${scrap.raNum }" /></td>
-														<td>${scrap.companyName }</td>
+														<td style="text-align: center;"><input
+															type="checkbox" name="scrapCheckBox"
+															value="${scrap.companyName}" /></td>
+														<td style="text-align: center;">${scrap.companyName}</td>
+														<td style="text-align: center;"></td>
 													</tr>
+
 												</c:forEach>
 											</tbody>
 										</table>
 										
 									</div>
+
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+										<button class="btn btn-primary me-md-2" type="button"
+											id="deleteCompany" onclick="deleteCompany(); return false;">관심기업 삭제</button>
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -132,6 +142,45 @@
 	if(msg) {
 		alert(msg);
 	}
+	
+	
+	// 관심기업 삭제
+	function deleteCompany() {
+    // 체크된 companyName 값을 가져오기
+    var companyNameList = [];
+    $("input[name='scrapCheckBox']:checked").each(function() {
+    	companyNameList.push($(this).val());
+    });
+    
+    // 체크된 항목이 없는 경우
+    if (companyNameList.length == 0) {
+        alert("선택된 관심기업이 없습니다.");
+        return;
+    }
+
+    // 각각의 companyName을 전달하며 ajax 호출하기
+    for (var i = 0; i < companyNameList.length; i++) {
+        var companyName = companyNameList[i];
+
+        $.ajax({
+            type: 'POST',
+            url: '${pageContext.request.contextPath}/person/deleteCompany',
+            data: {companyName : companyName},
+            success: function() {
+                alert('관심기업 삭제에 성공했습니다.');
+                location.reload();
+            },
+            error: function(error) {
+                alert("관심기업 삭제에 실패하였습니다.");
+            }
+        });
+    }
+}
+	
+	
+	
+	
+	
 	</script>
 </body>
 </html>

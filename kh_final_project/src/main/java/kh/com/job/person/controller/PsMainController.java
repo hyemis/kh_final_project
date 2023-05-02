@@ -423,12 +423,12 @@ public class PsMainController {
 	
 	
 
-	// TODO : 관심기업정보 화면
+	// 관심기업정보 화면
 	@GetMapping("/scrapcompany")
 	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal) {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
-			List<PsScrapInfoDto> scrap = service.selectListScrap(principal.getName());
+			List<PsScrapInfoDto> scrap = service.selectListCom(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
@@ -442,6 +442,25 @@ public class PsMainController {
 		}
 		return mv;
 	}
+	
+	
+	// 관심기업 삭제
+	@PostMapping("deleteCompany")
+	@ResponseBody
+	public int deleteCompany(Principal principal, 
+							@RequestParam("companyName") String companyName) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("companyName", companyName);
+		InfoNo.put("userId", principal.getName());
+
+		result = service.deleteCompany(InfoNo);
+
+		return result;
+	}
+	
 
 	// 스크랩한 채용공고 화면
 	@GetMapping("/scrapjob")

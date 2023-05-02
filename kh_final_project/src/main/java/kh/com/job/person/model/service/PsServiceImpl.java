@@ -263,6 +263,11 @@ public class PsServiceImpl implements PsService {
 			return dao.deleteCompany(InfoNo);
 		}
 
+		@Override
+		public List<PsScrapInfoDto> selectListCom(String userId) throws Exception {
+			return dao.selectListCom(userId);
+		}
+
 
 
 
