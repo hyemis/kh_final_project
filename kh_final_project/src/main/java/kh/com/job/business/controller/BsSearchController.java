@@ -60,11 +60,12 @@ public class BsSearchController {
 	//검색결과
 	@PostMapping("/suggest")
 	@ResponseBody
-	public List<BsSearchDto> searchResume(
+	public Paging searchResume(
 	       @RequestParam(name = "jobType", required = false, defaultValue = "") String jobType,
 	       @RequestParam(name = "career", required = false, defaultValue = "") String career,
 	       @RequestParam(name = "education", required = false, defaultValue = "") String education,
-	       @RequestParam(name = "gender", required = false, defaultValue = "") String gender) {
+	       @RequestParam(name = "gender", required = false, defaultValue = "") String gender, 
+	 	   @RequestParam(name = "page", required = false, defaultValue = "1") String page) {
 
 	        BsSearchDto dto = new BsSearchDto();
 	        dto.setJobType(jobType);
@@ -72,7 +73,9 @@ public class BsSearchController {
 	        dto.setEducation(education);
 	        dto.setGender(gender);
 
-	        List<BsSearchDto> list = bsService.resumeList(dto);
+	        dto.setPnum(Integer.parseInt(page));
+	        
+	        Paging list = bsService.pagingResumeList(dto);
 	        
 	        return list;
 	    }

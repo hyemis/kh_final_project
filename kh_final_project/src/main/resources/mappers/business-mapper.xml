@@ -11,8 +11,7 @@
 
 	<!-- search -->
 	<!-- 인재찾기 이력서검색 -->
-	<select id="resumeList"
-		resultType="kh.com.job.board.model.dto.BsSearchDto">
+	<select id="resumeList" resultType="bsdto">
 		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,
 		UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
 		FROM USER_RESUME UR
@@ -57,41 +56,24 @@
 		)
 	</select>
 
-	<select id="pagingResumeList">
-		SELECT USER_NAME, USER_EMAIL, RESUME_TITLE, RESUME_NO, JOB_TYPE,
-		CAREER, GENDER, EDUCATION
-		FROM (
-		SELECT ROWNUM AS NUM , A.*
-		FROM (
-		SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE, UR.RESUME_NO,
-		    UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
-		        FROM USER_RESUME UR
-		        JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-		        WHERE RESUME_ACT = 'Y'
-		               
-		<if test="jobType != ''">
-			            AND JOB_TYPE = #{jobType}
-			           
-		</if>
-		           
-		<if test="career != ''">
-			            AND CAREER = #{career}
-			           
-		</if>
-		           
-		<if test="education != ''">
-			            AND EDUCATION = #{education}
-			           
-		</if>
-		           
-		<if test="gender != ''">
-			            AND GENDER = #{gender}
-			           
-		</if>
-		ORDER BY UR.RESUME_NO DESC
-		) A
-		)
-		WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	<select id="pagingResumeList" resultType="bsdto">
+	SELECT USER_NAME, USER_EMAIL, RESUME_TITLE, RESUME_NO, JOB_TYPE, CAREER, GENDER, EDUCATION
+	  FROM (SELECT ROWNUM AS NUM , A.* 
+			  FROM (SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
+			  		  FROM USER_RESUME UR
+			  	      JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+			  	     WHERE RESUME_ACT = 'Y' 
+					<if test="jobType != ''">AND JOB_TYPE = #{jobType} </if>
+					
+					<if test="career != ''">AND CAREER = #{career} </if>
+					
+					<if test="education != ''">AND EDUCATION = #{education} </if>
+					
+					<if test="gender != ''">AND GENDER = #{gender} </if>
+					ORDER BY UR.RESUME_NO DESC
+					) A
+			)
+		WHERE NUM BETWEEN #{startNum} AND #{endNum} 
 	</select>
 
 	<!-- 회원정보 수정하기 -->

@@ -15,6 +15,7 @@ public class BsSearchDto {
 	
 	private int startNum;
 	private int endNum;
+	private int pnum;
 	
 	private String jobType;
 	private String career;
@@ -22,6 +23,7 @@ public class BsSearchDto {
 	private String gender;
 	private String resumeAct;
 	private int resumeNo;
+	private String resumeTitle;
 	private String userId;
 	private String userName;
 	private String userEmail;

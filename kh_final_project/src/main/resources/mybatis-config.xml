@@ -60,8 +60,10 @@
 			alias="brdto" />
 	 	<typeAlias type="kh.com.job.business.model.dto.InterviewDto"
 			alias="indto" /> 
-		 <typeAlias type="kh.com.job.business.model.dto.BsAplicantDto"
+		<typeAlias type="kh.com.job.business.model.dto.BsAplicantDto"
 			alias="apdto" /> 	
+		<typeAlias type="kh.com.job.business.model.dto.BsSearchDto"
+			alias="bsdto" /> 	
 			
 			
 	

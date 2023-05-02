@@ -119,10 +119,10 @@
 			  <tbody id="result-body">
 			  </tbody>
 	   </table> 
-	
+	   <!-- 페이지네이션  -->
+	 	<ul class = "pagination text-center justify-content-center">
+		</ul>
 	</div>
-		
-		
 	</div>
 </section>
 
@@ -178,47 +178,78 @@
 
 	<!-- page script -->
 	<script>
-
+	let page = 1;
 	$(document).ready(function() {
-		  $('#btn-search').click(function() {
-		    var jobType = $('#jobType').val();
-		    var career = $('#career').val();
-		    var education = $('#education').val();
-		    var gender = $('#gender').val();
-
-		    $.ajax({
-		      url: '${pageContext.request.contextPath}/business/search/suggest',
-		      type: 'POST',
-		      data: {
-		        jobType: jobType,
-		        career: career,
-		        education: education,
-		        gender: gender
-		      },
-		      success: function(data) {
-		    	  if (data.length === 0) {
-		              $('#result-body').html('<tr><td colspan="4" class="text-center">이력서 정보가 없습니다</td></tr>');
-		          } else {
-		    	  var html = '';
-                  for (var i = 0; i < data.length; i++) {
-                      var resume = data[i];
-                      html += '<tr>';
-                      html += '<td class="text-center">' + resume.userName + '</td>';
-                      html += '<td class="text-center"><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=' + resume.resumeNo +'">' + resume.resumeTitle + '</a></td>';
-                      html += '<td class="text-center">' + resume.userEmail + '</td>';
-                      html += '<td class="text-center"><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>';
-                      html += '</tr>';
-                  }
-                  $('#result-body').html(html);
-		         }
-		      },
-		      error: function(xhr) {
-		        // Ajax 요청이 실패했을 때 실행할 코드
-		    	console.log('검색 실패');
-		      }
-		    });
-		  });
-		});
+		  $('#btn-search').click(getSearchResume);
+	});
+	function getSearchResume() {
+	    var jobType = $('#jobType').val();
+	    var career = $('#career').val();
+	    var education = $('#education').val();
+	    var gender = $('#gender').val();
+	    page = (!$(this).data("page")) ? 1 : $(this).data("page");
+	    $.ajax({
+	      url: '${pageContext.request.contextPath}/business/search/suggest',
+	      type: 'POST',
+	      data: {
+	        jobType: jobType,
+	        career: career,
+	        education: education,
+	        gender: gender,
+	        page: page
+	      },
+	      success: function(data) {
+	    	  console.log(data);
+	    	  displayResume(data);
+              displayPage(data);
+	      },
+	      error: function(xhr) {
+	        // Ajax 요청이 실패했을 때 실행할 코드
+	    	console.log('검색 실패');
+	      }
+	    });
+	}// getSearchResume
+	function displayResume(data){
+		if (data.page.length === 0) {
+            $('#result-body').html('<tr><td colspan="4" class="text-center">이력서 정보가 없습니다</td></tr>');
+        } else {
+ 	  	  var html = '';
+      	  for (var i = 0; i < data.page.length; i++) {
+            var resume = data.page[i];
+            html += '<tr>';
+            html += '<td class="text-center">' + resume.jobType + '</td>';
+            html += '<td class="text-center"><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=' + resume.resumeNo +'">' + resume.resumeTitle + '</a></td>';
+            html += '<td class="text-center">' + resume.userEmail + '</td>';
+            html += '<td class="text-center"><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>';
+            html += '</tr>';
+          }
+          $('#result-body').html(html);
+		}
+	}//displayResume
+	function displayPage(data){
+		var pageHtml = '';
+		if(data.prevPage == -1){
+			pageHtml+='<li class="page-item disabled"><a class="page-link">prev</a></li>';
+		}else{
+			pageHtml+='<li class="page-item"><a class="page-link" data-page="'+data.prevPage+'">prev</a></li>';
+		}
+		data.pageList.forEach(function(pNum){
+			console.log(pNum);
+			if(pNum==data.currentPage){
+			pageHtml+='<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/business/여기수정?page='+pNum+'">'+pNum+'</a></li>';
+			}else {
+			pageHtml+='<li class="page-item "><a class="page-link" data-page="'+pNum+'">'+pNum+'</a></li>';
+			}
+		});  // forEach
+		if(data.nextPage == -1){
+			pageHtml+='<li class="page-item disabled"><a class="page-link">next</a></li>';
+		}else{
+			pageHtml+='<li class="page-item"><a class="page-link"  data-page="'+data.nextPage+'">next</a></li>';
+		}
+		
+	 $('ul.pagination').html(pageHtml);
+	 $('.page-link').click(getSearchResume);
+	}// displayPage
 	</script>
 	
 </body>

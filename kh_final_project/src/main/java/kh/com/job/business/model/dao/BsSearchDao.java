@@ -27,13 +27,13 @@ public class BsSearchDao {
 		return sqlSession.selectList("business.resumeList", sdto);
 	}
 
-	public int resumeListCount() {
-		return sqlSession.selectOne("business.resumeListCount");
+	public Object pagingResumeList(BsSearchDto dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("business.pagingResumeList", dto);
 	}
 
-
-	public List<BsSearchDto> resumePagingList(Criteria cri) {
-		 return sqlSession.selectList("business.resumePagingList", cri);
+	public int resumeListCount(BsSearchDto dto) {
+		return sqlSession.selectOne("business.resumeListCount");
 	}
 
 }
