@@ -20,7 +20,10 @@ import kh.com.job.person.model.service.PsService;
 public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	@Resource(name="loginSer")
-	private LoginSuccService service;
+	private LoginSuccService lsservice;
+	
+	@Autowired
+	private PsService service;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -31,10 +34,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		String userid = authentication.getName();
 		
 		System.out.println("$$$$$$$$$$$$$");
+		System.out.println(lsservice);
 		System.out.println(service);
 		System.out.println("$$$$$$$$$$$$$");
 		
-		service.updateLoginRecord(userid);
+		lsservice.updateLoginRecord(userid);
 		
 		if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM"))
 				|| authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_A")) ) {
