@@ -117,8 +117,8 @@
 					</c:forEach>
 				</div>
 
-				<!-- 페이지네이션 -->
-				<ul class="pagination text-center justify-content-center">
+	<!-- 페이지네이션 -->
+<ul class="pagination text-center justify-content-center">
   <c:choose>
     <c:when test="${boardList.prevPage eq -1}">
       <li class="page-item disabled"><a class="page-link">prev</a></li>
@@ -131,8 +131,10 @@
   </c:choose>
 
   <c:forEach var="pNum" items="${boardList.pageList}">
+  
+  ${categoryId }
     <li class="page-item ${pNum eq pageNumber ? 'active' : '' }">
-      <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${pNum}${not empty bdto.categoryId ? '&cate=' + bdto.categoryId : ''}">${pNum}</a>
+      <a class="page-link" href="${pageContext.request.contextPath}/board/postall?pnum=${pNum}&cate=${categoryId }">${pNum}</a>
     </li>
   </c:forEach>
 
@@ -147,6 +149,7 @@
     </c:otherwise>
   </c:choose>
 </ul>
+
 
 			</div>
 		</div>

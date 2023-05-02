@@ -174,13 +174,16 @@ public class BoardController {
 //	    }
 	
 	@GetMapping("/postall")
-	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate, PagingBoardDto bdto)
+	public ModelAndView postall(ModelAndView mv, @RequestParam(required = false, name = "cate") String cate
+			, PagingBoardDto bdto)
 	        throws Exception {
+	
 
 	    if (cate == null) {
 	        // 카테고리 파라미터가 없는 경우, 전체 게시글을 가져옴
 	        mv.addObject("searchResult", "게시글 전체 검색결과");
 	        mv.addObject("totalCount", service.getCountByPs(bdto));
+	        bdto.setCategoryId(null); // categoryId를 null로 설정해야 전체 게시글 페이지에서 categoryId가 없는 URL이 생성됩니다.
 
 	        if (bdto.getPnum() < 1) {
 	            bdto.setPnum(1);
@@ -206,6 +209,9 @@ public class BoardController {
 	        preprocessBoardList(list.getPage(), bdto.getCategoryId());
 	        mv.addObject("boardList", list);
 	    }
+
+	    mv.addObject("categoryId", bdto.getCategoryId()); // categoryId를 JSP로 전달
+	    System.out.println("ctrl categoryId : " + bdto.getCategoryId());
 	    return mv;
 	}
 
