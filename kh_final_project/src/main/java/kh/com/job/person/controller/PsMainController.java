@@ -479,14 +479,16 @@ public class PsMainController {
 	
 	
 
-	// 마이페이지 - 관심기업정보 화면
+	// TODO : 관심기업정보 화면
 	@GetMapping("/scrapcompany")
 	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal) {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
+			List<PsScrapInfoDto> scrap = service.selectListScrap(principal.getName());
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
+				mv.addObject("scraplist", scrap);
 				mv.setViewName("person/scrapcompany");
 			} else {
 				mv.setViewName("redirect:/");
@@ -497,7 +499,7 @@ public class PsMainController {
 		return mv;
 	}
 
-	// 마이페이지 - 스크랩한 채용공고 화면
+	// 스크랩한 채용공고 화면
 	@GetMapping("/scrapjob")
 	public ModelAndView viewScrapJob(ModelAndView mv, Principal principal) {
 		try {

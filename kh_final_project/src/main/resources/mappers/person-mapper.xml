@@ -94,7 +94,7 @@
   	WHERE USER_ID = #{userId} AND RA_NUM = #{raNum}
 	</delete>
 	
-	<!-- 스크랩 조회 -->
+	<!-- 채용공고 스크랩 조회 -->
 	<select id="selectListScrap" resultType="scrapdto">
 	SELECT DISTINCT COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM
 	FROM SCRAP_INFO
@@ -105,8 +105,10 @@
 	
 	<!-- 기업스크랩 확인 -->  
 	<select id="checkComScrap" parameterType="map" resultType="_int">
- 	 SELECT COUNT(*) FROM SCRAP_INFO 
- 	 WHERE COMPANY_NAME = #{companyName} AND USER_ID = #{userId}
+	 SELECT COUNT(*) FROM SCRAP_INFO 
+	 WHERE COMPANY_NAME = #{companyName} 
+	 AND USER_ID = #{userId}
+	 AND INSERT_DATE IS NULL
 	</select>
 	
 	<!-- 기업 스크랩 기능 -->
@@ -121,6 +123,14 @@
   	SCRAP_INFO
   	WHERE USER_ID = #{userId} AND COMPANY_NAME = #{companyName}
 	</delete>
+	
+	<!-- 관심기업 스크랩 조회 -->
+	<select id="selectListCom" resultType="scrapdto">
+	SELECT DISTINCT COMPANY_NAME
+	FROM SCRAP_INFO
+	WHERE USER_ID = #{userId}
+	AND INSERT_DATE IS NULL
+	</select>
 		
 	
 	
