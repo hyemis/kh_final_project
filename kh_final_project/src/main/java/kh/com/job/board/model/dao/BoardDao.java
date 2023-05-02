@@ -119,24 +119,28 @@ public class BoardDao {
 		return sqlSession.selectOne("boards.viewDetail", boardNo);
 	}
 
-	public List<CompanyDto> companyInfoList(int boardNo) {
-		return sqlSession.selectList("boards.companyInfoList",boardNo);
+	public List<CompanyDto> companyInfoList(CompanyDto dto) {
+		return sqlSession.selectList("boards.companyInfoList",dto);
 	}
 
 	public CompanyDto companyInfoOne(int boardNo) {
 		return sqlSession.selectOne("boards.companyInfoOne",boardNo);
 	}
 
-	public List<CompanyDto> companyInfoList(String categoryId) {
-		return sqlSession.selectOne("boards.companyInfoList",categoryId);
-	}
-
-	public List<CompanyDto> newsletterAll(String categoryId) {
-		return sqlSession.selectOne("boards.newsletterAll",categoryId);
+	public List<CompanyDto> newsletterAll(CompanyDto dto) {
+		return sqlSession.selectOne("boards.newsletterAll",dto);
 	}
 
 	public CompanyDto newsletterOne(int boardNo) {
 		return sqlSession.selectOne("boards.newsletterOne",boardNo);
+	}
+
+	public int countInfo(CompanyDto dto) {
+		return sqlSession.selectOne("boards.countInfo",dto);
+	}
+
+	public int countNewsletter(CompanyDto dto) {
+		return sqlSession.selectOne("boards.countNewsletter",dto);
 	}
 	
 

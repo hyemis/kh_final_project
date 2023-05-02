@@ -217,7 +217,7 @@
       	  for (var i = 0; i < data.page.length; i++) {
             var resume = data.page[i];
             html += '<tr>';
-            html += '<td class="text-center">' + resume.jobType + '</td>';
+            html += '<td class="text-center">' + resume.userName + '</td>';
             html += '<td class="text-center"><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=' + resume.resumeNo +'">' + resume.resumeTitle + '</a></td>';
             html += '<td class="text-center">' + resume.userEmail + '</td>';
             html += '<td class="text-center"><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>';
@@ -236,7 +236,7 @@
 		data.pageList.forEach(function(pNum){
 			console.log(pNum);
 			if(pNum==data.currentPage){
-			pageHtml+='<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/business/여기수정?page='+pNum+'">'+pNum+'</a></li>';
+			pageHtml+='<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/business/search/suggest?page='+pNum+'">'+pNum+'</a></li>';
 			}else {
 			pageHtml+='<li class="page-item "><a class="page-link" data-page="'+pNum+'">'+pNum+'</a></li>';
 			}

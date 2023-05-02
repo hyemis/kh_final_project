@@ -11,6 +11,10 @@
 	<select id="getboardNo">
 		SELECT BOARD_NO FROM BOARD
 	</select>
+	<!--  게시글 삭제 -->
+	<delete id="delete">
+		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
+	</delete>
 	
 	<!-- 게시글 상세 -->
 	<select id="viewDetail">
@@ -220,13 +224,27 @@
 		</selectKey>
 	</update>
 	
+	<select id="countInfo" resultType="_int">
+		SELECT COUNT(BOARD_NO)
+		FROM BOARD
+		WHERE CATEGORY_ID = 'UBD06'
+		ORDER BY BOARD_NO DESC
+	</select>
+	
      <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyDto">
-		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
-		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
-		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
-		FROM BOARD BD
-		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
-		WHERE BD.CATEGORY_ID = 'UBD06'
+    	SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_READ, BOARD_LIKE, TAG, SALARY_AVG,
+    		   EMPLOYEE, BS_MAIN_PHONE, USER_NAME, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE
+    	  FROM (
+    	  		SELECT ROWNUM AS NUM , A.*
+    	  		  FROM ( SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
+								BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
+								UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
+						   FROM BOARD BD
+						   JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
+						  WHERE BD.CATEGORY_ID = 'UBD06'
+    	  		       ) A
+    	  		)	   
+    	  WHERE NUM BETWEEN #{startNum} AND #{endNum}
     </select>
     
     <select id="companyInfoOne" resultType="kh.com.job.board.model.dto.CompanyDto">
@@ -238,7 +256,6 @@
 		WHERE BD.CATEGORY_ID = 'UBD06' AND BD.BOARD_NO = #{boardNo}
     </select>
     
-
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
 		INSERT INTO
@@ -266,29 +283,42 @@
 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
 		WHERE BOARD_NO = #{boardNo} AND CATEGORY_ID = 'UBD05'
 	</select>
-
-	<select id="newsLetterAll" resultType="bdto">
-		SELECT *
+	
+	<select id="countNewsletter" resultType="_int">
+		SELECT COUNT(BOARD_NO)
 		FROM BOARD
 		WHERE CATEGORY_ID = 'UBD05'
 		ORDER BY BOARD_NO DESC
 	</select>
-	
-	<select id="newsLetterList" resultType="bdto">
-		SELECT *
-		FROM BOARD
-		WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UBD05'
-		ORDER BY BOARD_NO DESC
+
+	<select id="newsLetterAll" resultType="bdto">
+		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
+		  FROM ( 
+		  	    SELECT ROWNUM AS NUM , A.*
+			      FROM (
+			      		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
+						FROM BOARD
+						WHERE CATEGORY_ID = 'UBD05'
+						ORDER BY BOARD_NO DESC
+			           ) A
+		  	    )
+		  WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
 
-	<delete id="deleteNewsLetter">
-		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
-	</delete>
-
-
-
-
-
+	<select id="newsLetterList" resultType="bdto">
+		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
+		  FROM ( 
+		  	    SELECT ROWNUM AS NUM , A.*
+			      FROM (
+			      		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
+						FROM BOARD
+						WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UBD05'
+						ORDER BY BOARD_NO DESC
+			           ) A
+		  	    )
+		  WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	</select>
+	  
 	<!-- qna -->
 	<insert id="insertQnA">
 		INSERT INTO

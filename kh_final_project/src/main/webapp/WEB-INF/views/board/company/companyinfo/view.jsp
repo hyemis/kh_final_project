@@ -68,6 +68,7 @@
                 	<h1 class="mb-3">회사 소개</h1>
                 	<div><a class="btn btn-primary">${info.tag}</a></div>
                 	<div>대표번호  ${info.bsMainPhone}</div>
+                	<div class="m-5"> ${info.boardTitle} </div>
                 	<div class="m-5"> ${info.boardContent} </div>
                 </div>
             </div>

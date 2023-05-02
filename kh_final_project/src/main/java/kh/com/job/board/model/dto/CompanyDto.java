@@ -34,9 +34,7 @@ public class CompanyDto {
 	private String salaryAvg;
 	private String employee;
 	
-//	private String raNum;	
-//	private String registDate;
-//	private String closeDate;
-//	private String raTitle;
-
+	private int startNum;
+	private int endNum;
+	private int pnum;
 }

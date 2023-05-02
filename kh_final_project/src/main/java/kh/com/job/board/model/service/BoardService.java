@@ -68,11 +68,11 @@ public interface BoardService {
 	public BoardDto viewDetail(String boardNo);
 	
 	// 회사소개리스트
-	public List<CompanyDto> companyInfoList(String categoryId);
+	public Paging companyInfoList(CompanyDto dto);
 	// 회사소개 상세보기
 	public CompanyDto companyInfoOne(int boardNo);
 	// 뉴스레터 리스트
-	public List<CompanyDto> newsletterAll(String categoryId);
+	public Paging newsletterAll(CompanyDto dto);
 	// 뉴스레터 상세보기
 	public CompanyDto newsletterOne(int boardNo);
 
