@@ -128,18 +128,15 @@ public class BoardDao {
 	}
 
 	public List<CompanyDto> companyInfoList(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("boards.companyInfoList",categoryId);
 	}
 
-	public List<CompanyDto> newsletterList(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CompanyDto> newsletterAll(String categoryId) {
+		return sqlSession.selectOne("boards.newsletterAll",categoryId);
 	}
 
 	public CompanyDto newsletterOne(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("boards.newsletterOne",boardNo);
 	}
 	
 

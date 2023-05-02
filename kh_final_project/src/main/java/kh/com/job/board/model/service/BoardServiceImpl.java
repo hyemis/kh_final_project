@@ -161,8 +161,8 @@ public  class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public List<CompanyDto> newsletterList(String categoryId) {
-		return dao.newsletterList(categoryId);
+	public List<CompanyDto> newsletterAll(String categoryId) {
+		return dao.newsletterAll(categoryId);
 	}
 
 	@Override
