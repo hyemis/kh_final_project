@@ -77,9 +77,9 @@
 						<div class="nav-item dropdown">
 							<a href="${pageContext.request.contextPath}/business/applicant" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">MENU</a>
 							<div class="dropdown-menu rounded-0 m-0">
-								<a href="${pageContext.request.contextPath}/business/" class="dropdown-item">채용정보</a>
-								<a href="${pageContext.request.contextPath}/business/" class="dropdown-item">인재검색</a>
-								<a href="${pageContext.request.contextPath}/business/" class="dropdown-item">커뮤니티</a>
+								<a href="${pageContext.request.contextPath}/person/recruit/info" class="dropdown-item">채용정보</a>
+								<a href="${pageContext.request.contextPath}/board/company" class="dropdown-item">회사정보</a>
+								<a href="${pageContext.request.contextPath}/board/main" class="dropdown-item">커뮤니티</a>
 							</div>
 						</div>
 					</div>
