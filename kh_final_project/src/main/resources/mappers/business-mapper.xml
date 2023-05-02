@@ -331,8 +331,10 @@
 		WHERE CLOSE_DATE > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 		<if test="keyword != null and keyword != ''">
-			AND (
-			r.SALARY LIKE '%' || #{keyword} || '%'
+			AND (r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
+			OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
+			OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
+			OR r.SALARY LIKE '%' || #{keyword} || '%'
 			OR r.MIN_SALARY LIKE '%' || #{keyword} || '%'
 			OR r.MAX_SALARY LIKE '%' || #{keyword} || '%'
 			OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%'
@@ -341,11 +343,6 @@
 			OR r.CONDITION_TYPE LIKE '%' || #{keyword} || '%'
 			OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
 			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
-			AND (
-			r.COMPANY_NAME LIKE '%' || #{keyword} || '%'
-			OR r.RA_TITLE LIKE '%' || #{keyword} || '%'
-			OR r.RA_CONTENT LIKE '%' || #{keyword} || '%'
-			)
 		</if>
 	</select>
 
