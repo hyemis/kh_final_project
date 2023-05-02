@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>기업소개</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -60,39 +60,7 @@
 	<!-- page section -->
 <section>
 <div class="container-fluid bg-white p-5">
- 기업 회사 소개 리스트
-	<div class="card">
-	  <h5 class="card-header">Featured</h5>
-	  <div class="card-body">
-	    <h5 class="card-title">Special title treatment</h5>
-	    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	    <a href="#" class="btn btn-primary">Go somewhere</a>
-	  </div>
-	</div>
-	
-	 	<!-- 페이지네이션  -->
-		 	<ul class = "pagination text-center justify-content-center">
-				<c:choose>
-					<c:when test="${list.prevPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">prev</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/passview?pnum=${list.prevPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">prev</a></li>
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="pNum" items="${list.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/passview?pnum=${pNum}&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">${pNum }</a></li>
-				</c:forEach>
-				
-				<c:choose>
-					<c:when test="${list.nextPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">next</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/applicant/passview?pnum=${list.nextPage }&searchNum=${pdto.searchNum}&searchResult=${pdto.searchResult}">next</a></li>
-					</c:otherwise>
-				</c:choose>					
-			</ul>	
+
 </div>
 </section>
 

@@ -17,6 +17,7 @@ import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsRecruitService;
+import kh.com.job.common.page.Paging;
 
 @Controller
 @RequestMapping("/board/company")
@@ -33,11 +34,16 @@ public class CompanyController {
 
 	//회사소개 리스트
 	@GetMapping("/companyinfo")
-	public ModelAndView companyinfoList(ModelAndView mv, BoardDto dto, Principal principal) {
-//		List<BoardDto> list = service.companyinfoList(principal.getName());
-
-//		mv.addObject("companyinfo", list);
-
+	public ModelAndView companyinfoList(ModelAndView mv, CompanyDto dto) {
+		//페이징 할 때 pnum값 0일 때, 기본값 1로 설정
+		if(dto.getPnum() < 1) {
+		   dto.setPnum(1);
+		}
+		Paging list = service.companyInfoList(dto);
+		System.out.println(dto);
+		
+		mv.addObject("info", list);
+		
 		return mv;
 	}
 

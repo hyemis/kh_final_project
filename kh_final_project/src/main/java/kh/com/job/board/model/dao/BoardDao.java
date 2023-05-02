@@ -126,7 +126,8 @@ public class BoardDao {
 	public CompanyDto companyInfoOne(int boardNo) {
 		return sqlSession.selectOne("boards.companyInfoOne",boardNo);
 	}
-
+	
+	//뉴스레터
 	public List<CompanyDto> newsletterAll(CompanyDto dto) {
 		return sqlSession.selectOne("boards.newsletterAll",dto);
 	}
@@ -134,7 +135,8 @@ public class BoardDao {
 	public CompanyDto newsletterOne(int boardNo) {
 		return sqlSession.selectOne("boards.newsletterOne",boardNo);
 	}
-
+	
+	//회사소개
 	public int countInfo(CompanyDto dto) {
 		return sqlSession.selectOne("boards.countInfo",dto);
 	}
