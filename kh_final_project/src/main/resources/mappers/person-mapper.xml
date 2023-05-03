@@ -66,9 +66,9 @@
   <!-- 개인회원 update -->	
   <update id="update" parameterType="pdto">
   	update USER_TABLE set 
-  	  	USER_PW=#{userPw} ,
-  	USER_PHONE=#{userPhone} ,
-  	USER_EMAIL=#{userEmail} ,
+  	  	USER_PW=#{userPw},
+  	USER_PHONE=#{userPhone},
+  	USER_EMAIL=#{userEmail},
   	TERMS_PERIOD=#{termsPeriod}
   	where USER_ID = #{userId}
   </update>

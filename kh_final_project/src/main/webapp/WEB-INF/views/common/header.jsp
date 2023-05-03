@@ -20,7 +20,7 @@
 			<sec:authorize access="isAnonymous()">
 					<div class="navbar-nav ms-1 me-auto">
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/person/recruit/info">채용정보</a>
-						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/company">회사정보</a>
+						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/company/companyinfo">회사정보</a>
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
 					</div>
 			</sec:authorize>		
@@ -30,7 +30,7 @@
 					<!-- 좌측 메뉴 -->
 					<div class="navbar-nav ms-1 me-auto">
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/person/recruit/info">채용정보</a>
-						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/company">회사정보</a>
+						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/company/companyinfo">회사정보</a>
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
 					</div>
 					<!-- 우측메뉴 -->
