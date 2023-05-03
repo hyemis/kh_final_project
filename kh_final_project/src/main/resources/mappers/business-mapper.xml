@@ -236,7 +236,7 @@
 
 	<!-- 기업회원 등록한 전체 공고 리스트 -->
 	<select id="recruitAll"
-		resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		resultType="kh.com.job.business.model.dto.BsRecruitDto" >
 		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
 		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE
 		, CLOSE_DATE, RA_TITLE, RA_CONTENT,RA_EXTRA_DOCUMENT
@@ -316,6 +316,40 @@
 	</select>
 
 	<!-- 채용공고 검색 -->
+<<<<<<< HEAD
+	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
+	  SELECT *
+	  FROM RECRUIT_REGIST r
+	  WHERE CLOSE_DATE > SYSDATE
+	  AND RA_ADMISSION = 'Y'
+	<if test="keyword != null">
+	  AND (
+	    <foreach collection="keyword" item="k" separator="OR">
+	        <if test="k != null and k.trim().length() > 0">
+	        r.COMPANY_NAME LIKE CONCAT('%', #{k}, '%')
+	        OR r.RA_TITLE LIKE CONCAT('%', #{k}, '%')
+	        OR r.RA_CONTENT LIKE CONCAT('%', #{k}, '%')
+	      </if>
+	    </foreach>
+	  )
+	</if>
+	    <if test="checkedKeywords != null and checkedKeywords.length > 0">
+	      AND (
+	        <foreach collection="checkedKeywords" item="checkedKeyword" separator="OR">
+	          r.SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.MIN_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.MAX_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.USER_EDUCATION LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.CAREER_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.CAREER LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.CONDITION_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.EMP_TYPE_CODE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.HOLIDAY_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	        </foreach>
+	      )
+	    </if>
+	</select>
+=======
 	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
 		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
 		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
@@ -376,6 +410,7 @@
       )
     </if>
 </select>-->
+>>>>>>> c06bbd1a465f5a9a7a9f558f40ed8d64559ad1ee
 
 <!-- 	<select id="searchList"
 		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">

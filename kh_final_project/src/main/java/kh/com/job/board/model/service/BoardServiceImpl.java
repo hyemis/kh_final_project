@@ -96,6 +96,15 @@ public  class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public int insertReReply(ReplyDto dto) throws Exception{
+		return dao.insertReReply(dto);
+	}
+	
+	//TODO: 대댓글 조회 
+	
+	
+	
+	@Override
 	public BoardDto viewDetail(String boardNo) {
 		return dao.viewDetail(boardNo);
 	}
@@ -216,6 +225,8 @@ public  class BoardServiceImpl implements BoardService {
 	public CompanyDto newsLetterOne(int boardNo) {
 		return dao.newsLetterOne(boardNo);
 	}
+
+
 
 	@Override
 	public int updateNewsLetter(BoardDto dto) {

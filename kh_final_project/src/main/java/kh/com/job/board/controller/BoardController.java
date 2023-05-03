@@ -1,6 +1,7 @@
 package kh.com.job.board.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -177,7 +178,8 @@ public class BoardController {
 
 		// 댓글 목록
 		List<ReplyDto> reply = service.replyList(boardNo);
-
+		
+		
 		mv.addObject("detailBoard", detail);
 		mv.addObject("replyList", reply);
 		mv.setViewName("board/detail");
@@ -200,15 +202,12 @@ public class BoardController {
 	}
 
 	// 게시글 삭제
-	// TODO: 쿼리문 제약 조건 설정이 안되어서 추후에 다시 시도 예정
 	@PostMapping("/deletepost")
 	@ResponseBody
 	public Map<String, Object> deletePost(ModelAndView mv, int boardNo,  BoardDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
 
 		dto.setUserId(principal.getName());
 		int result = service.deletePost(dto);
-//		rttr.addFlashAttribute("msg", "게시글이 삭제되었습니다.");
-//		mv.setViewName("redirect:/person/postall");
 		Map<String, Object> response = new HashMap<>();
 		if (result > 0) {
 			response.put("result", "success");
@@ -268,8 +267,6 @@ public class BoardController {
 		return response;
 	}
 
-	//
-
 	// 댓글 수정
 	@PostMapping("/updatereply")
 	@ResponseBody
@@ -287,7 +284,27 @@ public class BoardController {
 		return response;
 	}
 	
-//	//커뮤니티 게시글 출력 
+	// 대댓글 작성 
+	@PostMapping("/insertrereply")
+	@ResponseBody
+	public Map<String, Object> inesrtReReply(ModelAndView mv, ReplyDto dto, Principal principal) throws Exception {
+
+		dto.setUserId(principal.getName());
+		int result = service.insertReReply(dto);
+		
+		
+
+		Map<String, Object> response = new HashMap<>();
+		if (result > 0) {
+			response.put("result", "success");
+		} else {
+			response.put("result", "fail");
+		}
+		return response;
+	}
+	
+	
+	//커뮤니티 게시글 출력 
 	private void preprocessBoardList(Object obj, String categoryId) {
 	    List<BoardDto> boardList = (List<BoardDto>) obj;
 	    

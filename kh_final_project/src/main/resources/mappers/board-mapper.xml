@@ -135,11 +135,18 @@
 	</selectKey>
 	</insert>
 	
-	<!-- 댓글 조회 -->
+	<!-- 모댓글 조회 -->
 	<select id="replyList" resultType="redto">
 	SELECT * FROM REPLY 
 	WHERE BOARD_NO = #{boardNo}
 	AND REPLY_LEVEL IN ('0','1')
+	ORDER BY REPLY_CREATE_DATE ASC
+	</select>
+	
+	<!-- 대댓글 조회 -->
+	<select id="reReplyList" resultType="redto">
+	SELECT * FROM REPLY 
+	WHERE BOARD_NO =  #{boardNo} AND REPLY_REQ =  #{reply_id}
 	ORDER BY REPLY_CREATE_DATE ASC
 	</select>
 	
@@ -159,6 +166,16 @@
     REPLY_CREATE_DATE = SYSDATE
 	WHERE REPLY_ID = #{replyId} AND USER_ID =  #{userId}
 	</update>
+	
+	<!-- 대댓글 등록 -->
+	<insert id="insertReReply">
+	INSERT INTO REPLY (REPLY_ID, BOARD_NO, USER_ID, REPLY_CONTENT, REPLY_CREATE_DATE, REPLY_LEVEL, REPLY_SEQ, REPLY_REQ)
+	VALUES (${replySeq}, #{boardNo}, #{userId}, #{replyContent}, SYSDATE, (SELECT MAX(REPLY_LEVEL)FROM reply WHERE REPLY_ID = #{replyId}) + 1, (SELECT MAX(REPLY_SEQ)  FROM reply WHERE REPLY_ID = #{replyId}) + 1, #{replyId})
+	<selectKey keyProperty="replySeq" resultType="_int" order="BEFORE">
+			SELECT MAX(REPLY_ID) +1 FROM REPLY
+	</selectKey>
+	</insert>
+	
 	
 	<!--  인기글 top 5 -->
 	<select id="topReadPost" resultType="bdto">

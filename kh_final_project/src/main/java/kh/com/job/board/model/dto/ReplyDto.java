@@ -28,6 +28,7 @@ public class ReplyDto {
 		private String replyCreateDate;
 		private int replyLevel;
 		private int replySeq;
+		private int replyReq;
 		
 		//시간 형태 변경
 		public void setReplyCreateDate(java.sql.Timestamp replyCreateDate) {
