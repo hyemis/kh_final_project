@@ -58,6 +58,7 @@
 		</if>
 		)
 	</select>
+	
 	<!-- 이력서 리스트/페이징 -->
 	<select id="pagingResumeList" resultType="bsdto">
 	SELECT USER_NAME, USER_EMAIL, RESUME_TITLE, RESUME_NO, JOB_TYPE, CAREER, GENDER, EDUCATION
@@ -77,7 +78,7 @@
 					) A
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum} 
-	</select> -->
+	</select>
 
 	<!-- 회원정보 수정하기 -->
 	<update id="updateAccount">
@@ -137,8 +138,7 @@
 		, #{salary},
 		#{minSalary}, #{maxSalary}
 		, #{registDate}, #{closeDate}, #{raTitle}
-		,
-		#{career}, #{holidayType}, #{empTypeCode})
+		, #{career}, #{holidayType}, #{empTypeCode})
 	</insert>
 
 	<!-- 직업 카테고리 항목 가져오기 -->
@@ -343,7 +343,7 @@
 		r.EMP_TYPE_CODE LIKE CONCAT('%', #{keyword}, '%') OR r.HOLIDAY_TYPE LIKE 
 		CONCAT('%', #{keyword}, '%') </foreach> ) </if> </select> -->
 <!-- 
->>>>>>> 77654e349c2834238406503457acd82ab46c7f40
+
 <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDto" parameterType="java.util.Map">
   SELECT *
   FROM RECRUIT_REGIST r
