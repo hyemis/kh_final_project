@@ -155,7 +155,7 @@ public class CompanyController {
 		//게시물 삭제
 		@PostMapping("/delete")
 		@ResponseBody
-		public int delete(BoardDto dto, Principal principal ){
+		public int delete(BoardDto dto, Principal principal ) throws Exception{
 			dto.setUserId(principal.getName()); 
 			int result = -1;
 			if(principal.getName().equals(dto.getUserId())) {

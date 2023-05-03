@@ -218,11 +218,6 @@ public  class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int deletePost(BoardDto dto) {
-		return dao.deletePost(dto);
-	}
-
-	@Override
 	public int updateNewsLetter(BoardDto dto) {
 		return dao.updateNewsLetter(dto);	
 	}
