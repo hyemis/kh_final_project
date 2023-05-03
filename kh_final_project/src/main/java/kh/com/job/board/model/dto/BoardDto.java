@@ -36,6 +36,7 @@ public class BoardDto {
 //	SALARY_AVG                       VARCHAR2(100) 
 //	EMPLOYEE                         VARCHAR2(100) 
 //	LINK                             VARCHAR2(100) 
+//	LINK_TITLE 						 VARCHAR2(100);
 	
 		private int boardNo;
 		private String userId;
@@ -53,6 +54,7 @@ public class BoardDto {
 		private String salaryAvg;
 		private String employee;
 		private String link;
+		private String linkTitle;
 		
 		//페이징처리
 		private int startNum; //시작페이지

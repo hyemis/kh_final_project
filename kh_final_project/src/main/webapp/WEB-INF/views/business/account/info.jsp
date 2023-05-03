@@ -42,9 +42,9 @@
 				<!-- profile area start -->
 				<div class="col-md-3 col-sm-4  border border-secondary">
 					<div class="team-item rounded overflow-hidden">
-					<div class="position-relative profileArea">
+					<div class="position-relative m-auto profileArea " style="width: 200px; height: 200px;">
 						<img id="userPicArea" class="img-fluid"
-							src="${bsinfo.userPic eq null? 'https://dummyimage.com/200x200/d6d6d6/000000&text=200x200' : bsinfo.userPic }" alt="" style="width: 200px; height: 200px;">
+							src="${bsinfo.userPic eq null? 'https://dummyimage.com/200x200/d6d6d6/000000&text=200x200' : bsinfo.userPic }" alt="" style="width: 100%; height: 100;">
 							
 						<div
 							class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">

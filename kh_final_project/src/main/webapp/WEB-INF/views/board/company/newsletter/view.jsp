@@ -137,7 +137,7 @@
 	
 	
 
-	<script>
+<!--  	<script>
 	function getArticleTitle(url) {
 		  fetch(url)
 		    .then(response => response.text())
@@ -152,7 +152,25 @@
 
 		getArticleTitle('https://news.kbs.co.kr/news/view.do?ncd=7663964');
 		
-	</script>
+	</script>-->
+	
+	<script>
+function getArticleTitle(url) {
+  fetch(url)
+    .then(response => response.text())
+    .then(data => {
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(data, 'text/html');
+      const title = htmlDoc.querySelector('title');
+      const linkTitle = title.textContent;
+      console.log(linkTitle);
+    })
+    .catch(error => console.error(error));
+}
+
+getArticleTitle('https://news.kbs.co.kr/news/view.do?ncd=7663964');
+</script>
+	
 
 	<!-- ckeditor5 -->
 	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>

@@ -91,6 +91,9 @@ public class CompanyController {
 				
 		CompanyDto dto = service.companyInfoOne(boardNo);
 		mv.addObject("info", dto);
+		
+
+
 					
 		return mv;
 	}	
