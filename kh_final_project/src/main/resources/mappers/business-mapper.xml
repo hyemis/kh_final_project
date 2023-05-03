@@ -404,7 +404,7 @@
 	
 	
 	<!-- 메인페이지 체용공고 최신 리스트 -->
-	<select id="recentRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
+<!-- 	<select id="recentRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
 		select *
 		from(
 		    select rownum as num, A.* 
@@ -427,8 +427,8 @@
 		    ) A 
 		)
 		where num between 1 and 6
-	
-	</select>
+	 -->
+<!-- 	</select> -->
 	
 
 

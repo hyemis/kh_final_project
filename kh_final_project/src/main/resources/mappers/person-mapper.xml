@@ -176,9 +176,9 @@
 	
 	<!-- 마지막 로그인 일시, 총 방문횟수 -->
 	<update id="updateLoginRecord" >
-  	update USER_TABLE set 
- 	  	USER_LAST_LOGIN = current_timestamp,
- 	  	USER_COUNT = USER_COUNT + 1
+	UPDATE USER_TABLE 
+	SET USER_LAST_LOGIN = current_timestamp, 
+	    USER_COUNT = NVL(USER_COUNT, 0) + 1 
  	where USER_ID = #{userId}
 	</update>
 
