@@ -29,8 +29,7 @@ public interface BoardService {
 	
 	// 게시글 삭제 
 	public int deletePost(BoardDto dto) throws Exception;
-	//게시글 삭제
-	public int deletePost(BoardDto dto); 
+	
 	
 	// 게시글 상세 조회 + 조회 수 증가
 	public BoardDto detailBoard(String readUser, int boardNo) throws Exception;
@@ -55,6 +54,12 @@ public interface BoardService {
 	
 	// 댓글 수정 
 	public int updateReply(ReplyDto dto) throws Exception;
+	
+	// 대댓글 등록 
+	public int insertReReply(ReplyDto dto) throws Exception;
+	
+	// 대댓글 조회 
+	public List<ReplyDto> reReplyList(int boardNo, int replyId) throws Exception;
 	
 	// 인기글
 	public  List<BoardDto> topReadPost() throws Exception;

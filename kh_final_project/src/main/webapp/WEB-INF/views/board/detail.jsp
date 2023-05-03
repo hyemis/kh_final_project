@@ -93,7 +93,7 @@
 				</div>
 				<hr>
 
-				<div class="viewReply">
+			 	<div class="viewReply">
 					<c:forEach items="${replyList}" var="reply">
 						<table class="reply-table">
 							<tr>
@@ -110,6 +110,8 @@
 										<sec:authorize access="isAuthenticated()">
 											<a class="ms-2" onclick="handleInsertReReply(this)"
 												data-reply-id="${reply.replyId}">답글</a>
+											 <input type="hidden" name="replyLevel" value="${reply.replyLevel}">
+ 											 <input type="hidden" name=replySeq value="${reply.replySeq}">
 										</sec:authorize>
 									</div>
 									<div class="text-muted small">
@@ -118,9 +120,16 @@
 									</div>
 								</td>
 						</table>
+						
+						
 						<hr>
 					</c:forEach>
-				</div>
+					
+				</div> 
+				
+
+    
+				
 				
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex pt-3">
@@ -347,27 +356,58 @@
 			});
 		}
 		
+		
 		// 답글 작성
-		function handleInsertReReply() {
-			
-			  const replyId = element.getAttribute('data-reply-id');
-			  const oldContent = '';
-			  const htmlVal = '<div class="m-3 mdeptList" style="min-height: 200px;">'
-			    + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
-			    + '<div class="d-flex justify-content-between">'
-			    + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
-			    + oldContent
-			    + '">'
-			    + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitUpdate()">수정</button>'
-			    + '</div>' + '</div>';
-			  const parent = element.parentNode.parentNode;
-			  const newDiv = document.createElement('div');
-			  newDiv.innerHTML = htmlVal;
-			  parent.insertBefore(newDiv, element.parentNode.nextSibling);
-			
-	
-			
+		function handleInsertReReply(element) {
+		  const replyId = element.dataset.replyId;
+		  const htmlVal = '<div class="m-3 mdeptList">'
+		      + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
+		      + '<input type="hidden" name="replyLevel" value="${reply.replyLevel}">'
+		      + '<input type="hidden" name="replySeq" value="${reply.replySeq}">'
+		      + '<div class="d-flex justify-content-between">'
+		      + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
+		      + '">'
+		      + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitReReply()">등록</button>'
+		      + '</div>' + '</div>';
+
+		  const parent = element.parentNode.parentNode;
+		  const newDiv = document.createElement('div');
+		  newDiv.innerHTML = htmlVal;
+		  parent.insertBefore(newDiv, element.parentNode.nextSibling);
 		}
+		
+		// 대댓글 등록 함수
+		function submitReReply() {
+		  const boardNo = ${detailBoard.boardNo};
+		  const replyId = document.querySelector("#replyId").value;
+		  const replyLevel = document.querySelector("input[name=replyLevel]").value;
+		  
+		  const replyContent = document.querySelector("#newContent").value;
+
+		  const params = {
+			boardNo: boardNo, 
+		    replyId: replyId,
+		    replyLevel: replyLevel,
+		    replyContent: replyContent
+		  };
+
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/board/insertrereply",
+				data : params,
+				success : function(response) {
+					if (response.result === 'success') {
+						location.reload();
+					} else {
+						alert('답글 등록에 실패했습니다.');
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("에러 발생 : " + error);
+				}
+			});
+		}
+		
 		
 	
 	</script>

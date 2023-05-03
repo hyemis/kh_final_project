@@ -77,7 +77,7 @@
 					) A
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum} 
-	</select> -->
+	</select>
 
 	<!-- 회원정보 수정하기 -->
 	<update id="updateAccount">
@@ -236,7 +236,7 @@
 
 	<!-- 기업회원 등록한 전체 공고 리스트 -->
 	<select id="recruitAll"
-		resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		resultType="kh.com.job.business.model.dto.BsRecruitDto" >
 		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
 		, CAREER_TYPE, USER_EDUCATION, SALARY, REGIST_DATE
 		, CLOSE_DATE, RA_TITLE, RA_CONTENT,RA_EXTRA_DOCUMENT
@@ -316,66 +316,38 @@
 	</select>
 
 	<!-- 채용공고 검색 -->
-	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
-		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
-		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
-		!= null and searchWords != ''"> AND (r.COMPANY_NAME LIKE '%' || #{keyword} 
-		|| '%' OR r.RA_TITLE LIKE '%' || #{keyword} || '%' OR r.RA_CONTENT LIKE '%' 
-		|| #{keyword} || '%' OR r.SALARY LIKE '%' || #{keyword} || '%' OR r.MIN_SALARY 
-		LIKE '%' || #{keyword} || '%' OR r.MAX_SALARY LIKE '%' || #{keyword} || '%' 
-		OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%' OR r.CAREER_TYPE LIKE '%' 
-		|| #{keyword} || '%' OR r.CAREER LIKE '%' || #{keyword} || '%' OR r.CONDITION_TYPE 
-		LIKE '%' || #{keyword} || '%' OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || 
-		'%' OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%') </if> </select> -->
-
-	<!-- 채용공고 검색 -->
-	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
-		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
-		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
-		!= null and searchWords != ''"> AND ( <foreach collection="searchWords.split(' 
-		')" item="keyword" separator=" AND "> r.COMPANY_NAME LIKE CONCAT('%', #{keyword}, 
-		'%') OR r.RA_TITLE LIKE CONCAT('%', #{keyword}, '%') OR r.RA_CONTENT LIKE 
-		CONCAT('%', #{keyword}, '%') OR r.SALARY LIKE CONCAT('%', #{keyword}, '%') 
-		OR r.MIN_SALARY LIKE CONCAT('%', #{keyword}, '%') OR r.MAX_SALARY LIKE CONCAT('%', 
-		#{keyword}, '%') OR r.USER_EDUCATION LIKE CONCAT('%', #{keyword}, '%') OR 
-		r.CAREER_TYPE LIKE CONCAT('%', #{keyword}, '%') OR r.CAREER LIKE CONCAT('%', 
-		#{keyword}, '%') OR r.CONDITION_TYPE LIKE CONCAT('%', #{keyword}, '%') OR 
-		r.EMP_TYPE_CODE LIKE CONCAT('%', #{keyword}, '%') OR r.HOLIDAY_TYPE LIKE 
-		CONCAT('%', #{keyword}, '%') </foreach> ) </if> </select> -->
-<!-- 
->>>>>>> 77654e349c2834238406503457acd82ab46c7f40
-<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDto" parameterType="java.util.Map">
-  SELECT *
-  FROM RECRUIT_REGIST r
-  WHERE CLOSE_DATE > SYSDATE
-  AND RA_ADMISSION = 'Y'
-<if test="keyword != null">
-  AND (
-    <foreach collection="keyword" item="k" separator="OR">
-        <if test="k != null and k.trim().length() > 0">
-        r.COMPANY_NAME LIKE CONCAT('%', #{k}, '%')
-        OR r.RA_TITLE LIKE CONCAT('%', #{k}, '%')
-        OR r.RA_CONTENT LIKE CONCAT('%', #{k}, '%')
-      </if>
-    </foreach>
-  )
-</if>
-    <if test="checkedKeywords != null and checkedKeywords.length > 0">
-      AND (
-        <foreach collection="checkedKeywords" item="checkedKeyword" separator="OR">
-          r.SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.MIN_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.MAX_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.USER_EDUCATION LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.CAREER_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.CAREER LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.CONDITION_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.EMP_TYPE_CODE LIKE CONCAT('%', #{checkedKeyword}, '%')
-          OR r.HOLIDAY_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
-        </foreach>
-      )
-    </if>
-</select>-->
+	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
+	  SELECT *
+	  FROM RECRUIT_REGIST r
+	  WHERE CLOSE_DATE > SYSDATE
+	  AND RA_ADMISSION = 'Y'
+	<if test="keyword != null">
+	  AND (
+	    <foreach collection="keyword" item="k" separator="OR">
+	        <if test="k != null and k.trim().length() > 0">
+	        r.COMPANY_NAME LIKE CONCAT('%', #{k}, '%')
+	        OR r.RA_TITLE LIKE CONCAT('%', #{k}, '%')
+	        OR r.RA_CONTENT LIKE CONCAT('%', #{k}, '%')
+	      </if>
+	    </foreach>
+	  )
+	</if>
+	    <if test="checkedKeywords != null and checkedKeywords.length > 0">
+	      AND (
+	        <foreach collection="checkedKeywords" item="checkedKeyword" separator="OR">
+	          r.SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.MIN_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.MAX_SALARY LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.USER_EDUCATION LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.CAREER_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.CAREER LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.CONDITION_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.EMP_TYPE_CODE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	          OR r.HOLIDAY_TYPE LIKE CONCAT('%', #{checkedKeyword}, '%')
+	        </foreach>
+	      )
+	    </if>
+	</select>
 
 <!-- 	<select id="searchList"
 		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">

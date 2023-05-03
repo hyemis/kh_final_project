@@ -61,10 +61,9 @@ public class BoardDao {
 	// 게시글 삭제 
 	public int deletePost(BoardDto dto) throws Exception{
 		return sqlSession.delete("boards.deletePost", dto);
-	// 게시글 삭제
-	public int deletePost(BoardDto dto) {
-		return sqlSession.delete("boards.delete", dto);
-	}
+		}
+	
+	
 	
 	// 게시글 조회 수 증가 
 	public int updateRead(int boardNo) throws Exception {
@@ -96,6 +95,16 @@ public class BoardDao {
 	// 댓글 수정 
 	public int updateReply(ReplyDto dto) throws Exception {
 		return sqlSession.update("boards.updateReply", dto);
+	}
+	
+	// 대댓글 등록
+	public int insertReReply(ReplyDto dto) throws Exception{
+		return sqlSession.insert("boards.insertReReply", dto);
+	}
+	
+	// 대댓글 조회 
+	public List<ReplyDto> reReplyList(int boardNo, int replyId) throws Exception {
+		return sqlSession.selectList("boards.reReplyList");
 	}
 	
 	// 인기글
