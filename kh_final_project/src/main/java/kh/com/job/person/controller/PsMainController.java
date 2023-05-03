@@ -428,19 +428,16 @@ public class PsMainController {
 
 	// 관심기업정보 화면
 	@GetMapping("/scrapcompany")
-	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal
-//										,@RequestParam(name = "no", required = false) int boardNo
-										) {
+	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal) {
+	
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
 			List<PsScrapInfoDto> scrap = service.selectListCom(principal.getName());
-//			CompanyDto dto = bservice.companyInfoOne(boardNo);
-
+			
 			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.addObject("scraplist", scrap);
 				
-//				mv.addObject("info", dto);
 				
 				mv.setViewName("person/scrapcompany");
 			} else {

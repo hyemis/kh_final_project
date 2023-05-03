@@ -112,10 +112,11 @@
 	
 	<!-- 기업 스크랩 기능 -->
   	<insert id="scrapCompany" parameterType="map">
-	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_ID, COMPANY_NAME)
+	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_ID, COMPANY_NAME, BOARD_NO)
 	VALUES (#{userId}, #{companyId},
-        (SELECT COMPANY_NAME FROM RECRUIT_REGIST WHERE USER_ID = #{companyId})
-       )
+	(SELECT COMPANY_NAME FROM RECRUIT_REGIST WHERE USER_ID = #{companyId}),
+	(SELECT BOARD_NO FROM BOARD WHERE USER_ID = #{companyId} AND CATEGORY_ID='UBD06')
+	)
 	</insert>
 	
 	<!-- 관심기업 삭제 기능 -->
@@ -128,7 +129,7 @@
 	
 	<!-- 관심기업 스크랩 조회 -->
 	<select id="selectListCom" resultType="scrapdto">
-	SELECT DISTINCT COMPANY_NAME, COMPANY_ID
+	SELECT DISTINCT COMPANY_NAME, COMPANY_ID, BOARD_NO
 	FROM SCRAP_INFO
 	WHERE USER_ID = #{userId}
 	AND INSERT_DATE IS NULL

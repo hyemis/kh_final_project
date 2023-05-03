@@ -87,7 +87,7 @@
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
 										<h1 class="mb-3">관심기업정보</h1>
-										<p>회사명을 클릭하면 회사소개 페이지로 이동합니다.</p>
+										<p>회사소개 페이지에서 현재 채용중인 공고를 확인하실 수 있습니다.</p>
 										<br>	
 										<br>
 										<br>
@@ -96,7 +96,7 @@
 										    <tr>
 										     <th scope="col" class="center"></th>
 											 <th scope="col" class="center">회사명</th>
-										     <th scope="col" class="center">채용현황</th>										   
+										     <th scope="col" class="center">회사소개 이동</th>										   
 										     </tr>
 										  </thead>
 											<tbody class="table-group-divider">
@@ -106,7 +106,9 @@
 															type="checkbox" name="scrapCheckBox"
 															value="${scrap.companyId}" /></td>
 														<td style="text-align: center;">${scrap.companyName}</td>
-														<td style="text-align: center;"> <a href="${pageContext.request.contextPath}/board/company/companyinfo/view?no=${info.boardNo }" class="btn btn-primary">이동</a> </td>
+														<td style="text-align: center;"> 
+														<a href="${pageContext.request.contextPath}/board/company/companyinfo/view?no=${scrap.boardNo }" 
+														class="btn btn-outline-dark">이동</a> </td> 
 													</tr>
 
 												</c:forEach>

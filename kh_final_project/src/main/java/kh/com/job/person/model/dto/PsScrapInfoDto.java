@@ -24,4 +24,5 @@ public class PsScrapInfoDto {
 	private int raNum;
 	private Timestamp insertDate;
 	private String companyId;
+	private int boardNo;
 }
