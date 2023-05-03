@@ -78,9 +78,7 @@ public class BoardController {
 
 		// 카테고리 코드 타입 ('UBD')가져오기
 		mv.addObject("UBDlist", service.getBoardCate());
-//		// 게시글 목록
-//		List<BoardDto> boardList = service.postList();
-//		mv.addObject("boardList", boardList);
+
 		return mv;
 	}
 
@@ -205,9 +203,12 @@ public class BoardController {
 	// TODO: 쿼리문 제약 조건 설정이 안되어서 추후에 다시 시도 예정
 	@PostMapping("/deletepost")
 	@ResponseBody
-	public Map<String, Object> deletePost(int boardNo, Principal principal) throws Exception {
+	public Map<String, Object> deletePost(ModelAndView mv, int boardNo,  BoardDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
 
-		int result = -1;
+		dto.setUserId(principal.getName());
+		int result = service.deletePost(dto);
+//		rttr.addFlashAttribute("msg", "게시글이 삭제되었습니다.");
+//		mv.setViewName("redirect:/person/postall");
 		Map<String, Object> response = new HashMap<>();
 		if (result > 0) {
 			response.put("result", "success");

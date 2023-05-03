@@ -58,6 +58,11 @@ public class BoardDao {
 		return sqlSession.update("boards.updatePost", dto);
 	}
 	
+	// 게시글 삭제 
+	public int deletePost(BoardDto dto) throws Exception{
+		return sqlSession.delete("boards.deletePost", dto);
+	}
+	
 	// 게시글 조회 수 증가 
 	public int updateRead(int boardNo) throws Exception {
 		return sqlSession.update("boards.updateRead", boardNo);

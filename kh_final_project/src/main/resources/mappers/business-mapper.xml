@@ -98,7 +98,10 @@
 		)
 		WHERE NUM BETWEEN #{startNum} AND
 		#{endNum}
-	<select id="pagingResumeList" resultType="bsdto">
+		</select>
+		
+		
+	<!-- <select id="pagingResumeList" resultType="bsdto">
 	SELECT USER_NAME, USER_EMAIL, RESUME_TITLE, RESUME_NO, JOB_TYPE, CAREER, GENDER, EDUCATION
 	  FROM (SELECT ROWNUM AS NUM , A.* 
 			  FROM (SELECT UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_TITLE,UR.RESUME_NO, UR.JOB_TYPE, UR.CAREER, UR.GENDER, UR.EDUCATION
@@ -116,7 +119,7 @@
 					) A
 			)
 		WHERE NUM BETWEEN #{startNum} AND #{endNum} 
-	</select>
+	</select> -->
 
 	<!-- 회원정보 수정하기 -->
 	<update id="updateAccount">
@@ -355,33 +358,6 @@
 	</select>
 
 	<!-- 채용공고 검색 -->
-	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
-		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
-		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
-		!= null and searchWords != ''"> AND (r.COMPANY_NAME LIKE '%' || #{keyword} 
-		|| '%' OR r.RA_TITLE LIKE '%' || #{keyword} || '%' OR r.RA_CONTENT LIKE '%' 
-		|| #{keyword} || '%' OR r.SALARY LIKE '%' || #{keyword} || '%' OR r.MIN_SALARY 
-		LIKE '%' || #{keyword} || '%' OR r.MAX_SALARY LIKE '%' || #{keyword} || '%' 
-		OR r.USER_EDUCATION LIKE '%' || #{keyword} || '%' OR r.CAREER_TYPE LIKE '%' 
-		|| #{keyword} || '%' OR r.CAREER LIKE '%' || #{keyword} || '%' OR r.CONDITION_TYPE 
-		LIKE '%' || #{keyword} || '%' OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || 
-		'%' OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%') </if> </select> -->
-
-	<!-- 채용공고 검색 -->
-	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
-		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
-		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
-		!= null and searchWords != ''"> AND ( <foreach collection="searchWords.split(' 
-		')" item="keyword" separator=" AND "> r.COMPANY_NAME LIKE CONCAT('%', #{keyword}, 
-		'%') OR r.RA_TITLE LIKE CONCAT('%', #{keyword}, '%') OR r.RA_CONTENT LIKE 
-		CONCAT('%', #{keyword}, '%') OR r.SALARY LIKE CONCAT('%', #{keyword}, '%') 
-		OR r.MIN_SALARY LIKE CONCAT('%', #{keyword}, '%') OR r.MAX_SALARY LIKE CONCAT('%', 
-		#{keyword}, '%') OR r.USER_EDUCATION LIKE CONCAT('%', #{keyword}, '%') OR 
-		r.CAREER_TYPE LIKE CONCAT('%', #{keyword}, '%') OR r.CAREER LIKE CONCAT('%', 
-		#{keyword}, '%') OR r.CONDITION_TYPE LIKE CONCAT('%', #{keyword}, '%') OR 
-		r.EMP_TYPE_CODE LIKE CONCAT('%', #{keyword}, '%') OR r.HOLIDAY_TYPE LIKE 
-		CONCAT('%', #{keyword}, '%') </foreach> ) </if> </select> -->
-
 <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDto" parameterType="java.util.Map">
   SELECT *
   FROM RECRUIT_REGIST r
@@ -415,7 +391,7 @@
     </if>
 </select>
 
-	<select id="searchList"
+<!-- 	<select id="searchList"
 		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
 		SELECT *
 		FROM RECRUIT_REGIST r
@@ -436,7 +412,7 @@
 			OR r.EMP_TYPE_CODE LIKE '%' || #{keyword} || '%'
 			OR r.HOLIDAY_TYPE LIKE '%' || #{keyword} || '%')
 		</if>
-	</select>
+	</select> -->
 	
 	<!-- 메인페이지 체용공고 최신 리스트 -->
 	<select id="recentRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">

@@ -107,6 +107,10 @@
 											<a class="ms-2" onclick="handleDeleteReply(this)"
 												data-reply-id="${reply.replyId}">삭제</a>
 										</sec:authorize>
+										<sec:authorize access="isAuthenticated()">
+											<a class="ms-2" onclick="handleInsertReReply(this)"
+												data-reply-id="${reply.replyId}">답글</a>
+										</sec:authorize>
 									</div>
 									<div class="text-muted small">
 										<span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에
@@ -117,6 +121,7 @@
 						<hr>
 					</c:forEach>
 				</div>
+				
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex pt-3">
 						<input type="text" style="width: 100%;"
@@ -175,9 +180,10 @@
 				data : {boardNo : boardNo},
 				success : function(response) {
 					if (response.result === 'success') {
-						location.reload();
+						alert('게시글이 삭제되었습니다.');
+						window.close();
 					} else {
-						alert('게시글 삭제에 실패했습니.');
+						alert('게시글 삭제에 실패했습니다.');
 					}
 				},
 				error : function(xhr, status, error) {
@@ -249,11 +255,7 @@
 		// 댓글 작성
 		function handleReply() {
 			const replyContent = $("input[type='text']").val();
-			const boardNo = $
-			{
-				detailBoard.boardNo
-			}
-			;
+			const boardNo = ${detailBoard.boardNo};
 
 			var params = {
 				replyContent : replyContent,
@@ -343,6 +345,28 @@
 					alert("에러 발생 : " + error);
 				}
 			});
+		}
+		
+		// 답글 작성
+		function handleInsertReReply() {
+			
+			  const replyId = element.getAttribute('data-reply-id');
+			  const oldContent = '';
+			  const htmlVal = '<div class="m-3 mdeptList" style="min-height: 200px;">'
+			    + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
+			    + '<div class="d-flex justify-content-between">'
+			    + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
+			    + oldContent
+			    + '">'
+			    + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitUpdate()">수정</button>'
+			    + '</div>' + '</div>';
+			  const parent = element.parentNode.parentNode;
+			  const newDiv = document.createElement('div');
+			  newDiv.innerHTML = htmlVal;
+			  parent.insertBefore(newDiv, element.parentNode.nextSibling);
+			
+	
+			
 		}
 		
 	

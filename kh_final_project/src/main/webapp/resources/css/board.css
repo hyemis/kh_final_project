@@ -55,13 +55,14 @@ img {
 
 .reply-table {
 	table-layout: fixed;
+	width: 100%;
 }
 
 .originReply {
 	max-width: 90%;
-	text-overflow: ellipsis;
-	white-space: normal;
-	display: inline-block;
+  	text-overflow: ellipsis;
+  	white-space: normal;
+  	display: inline-block;
 }
 
 .reply-cell {

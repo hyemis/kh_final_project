@@ -42,6 +42,11 @@ public  class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public int deletePost(BoardDto dto) throws Exception{
+		return dao.deletePost(dto);
+	}
+	
+	@Override
 	public BoardDto detailBoard(String readUser, int boardNo) throws Exception {
 		BoardDto result = dao.detailBoard(boardNo);
 		if(!result.getUserId().equals(readUser)) {

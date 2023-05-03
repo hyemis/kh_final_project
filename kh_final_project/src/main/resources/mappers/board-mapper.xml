@@ -11,10 +11,8 @@
 	<select id="getboardNo">
 		SELECT BOARD_NO FROM BOARD
 	</select>
-	<!--  게시글 삭제 -->
-	<delete id="delete">
-		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
-	</delete>
+	
+	
 	
 	<!-- 게시글 상세 -->
 	<select id="viewDetail">
@@ -88,6 +86,12 @@
     UPDATE_DATE = SYSDATE 
 	WHERE BOARD_NO = ${boardNo} AND USER_ID = #{userId}
     </update>
+    
+    <!--  게시글 삭제 -->
+	<delete id="deletePost">
+	DELETE BOARD 
+	WHERE BOARD_NO = #{boardNo} AND  USER_ID = #{userId}
+	</delete>
     
     <!-- 게시글 상세조회  -->
    	<select id="detailBoard" resultType="bdto">
@@ -248,7 +252,7 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
-     <select id="companyInfoList" resultType="bcdto">
+<!--      <select id="companyInfoList" resultType="bcdto">
     	SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_READ, BOARD_LIKE, TAG, SALARY_AVG,
     		   EMPLOYEE, BS_MAIN_PHONE, USER_NAME, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE
     	  FROM (
@@ -271,7 +275,7 @@
 		FROM BOARD BD
 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
 		WHERE BD.CATEGORY_ID = 'UBD06' AND BD.BOARD_NO = #{boardNo}
-    </select>
+    </select> -->
     
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
@@ -294,12 +298,12 @@
 		   AND USER_ID = #{userId}	
 	</update>
 	
-	<select id="newsLetterOne" resultType="bcdto" >
+<!-- 	<select id="newsLetterOne" resultType="bcdto" >
 		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, TAG, USER_NAME
 		FROM BOARD BD
 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
 		WHERE BOARD_NO = #{boardNo} AND CATEGORY_ID = 'UBD05'
-	</select>
+	</select> -->
 	
 	<select id="countNewsletter" resultType="_int">
 		SELECT COUNT(BOARD_NO)
@@ -308,7 +312,7 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 
-	<select id="newsLetterAll" resultType="bcdto">
+<!-- 	<select id="newsLetterAll" resultType="bcdto">
 		SELECT BOARD_NO, USER_ID, USER_NAME, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
 		  FROM ( 
 		  	    SELECT ROWNUM AS NUM , A.*
@@ -321,7 +325,7 @@
 			           ) A
 		  	    )
 		  WHERE NUM BETWEEN #{startNum} AND #{endNum}
-	</select>
+	</select> -->
 	<!-- TODO -->
 	<select id="newsLetterList" resultType="bdto">
 		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
