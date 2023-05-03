@@ -7,7 +7,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>JOB-A 회사 소개</title>
+
+
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -82,12 +84,14 @@
 		  		<a>${info.userName }</a>
 		  	</div>
 		  	
-   		 		<!-- 채용공고 스크랩 -->
+   		 		<!-- 관심기업으로 스크랩 -->
 				<sec:authorize access="hasRole('ROLE_P')">
-				<div class="icon-container ml-auto" style="margin-left: 5px;">
-		  			<i class="far fa-heart" onclick="toggleHeart(this)"></i>
-				</div>
-				</sec:authorize> 
+				    <div class="icon-container ml-auto" style="margin-left: 5px;">
+				        <i class="far fa-heart" onclick="toggleHeart(this)"></i>
+				        <input type="hidden" name="companyId" value="${info.userId}" />
+				    </div>
+				</sec:authorize>
+
 				
 		  </div>
 		  <div class="card-body">
@@ -129,14 +133,14 @@
 </section>
 
 
-	<!-- footer  -->
+	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
 
 <script>
 
-// 페이지 로드 시 실행되는 함수
+/* // 페이지 로드 시 실행되는 함수
 window.onload = function() {
     // companyName 값 가져오기
     var companyName = ${info.userName };
@@ -154,55 +158,51 @@ window.onload = function() {
             }
         }
     });
-}
+} */
 
 
 //하트 클릭 - 관심기업 스크랩 ajax
 function toggleHeart(icon) {
-const isFilled = icon.classList.contains('fas');
-
-var companyName = '${info.userName }';
-
-$.ajax({
-   type: 'POST',
-   url: '${pageContext.request.contextPath}/person/checkComScrap',
-   data: {companyName : companyName},
-   success: function(data) {
-     if (data == 0 ) {
-   	  //스크랩 정보 추가
-       $.ajax({
-           type: 'POST',
-           url: '${pageContext.request.contextPath}/person/scrapCompany',
-           data: {companyName : companyName},
-           success: function() {
-             icon.classList.remove('far');
-             icon.classList.add('fas');
-           },
-           error: function(error) {
-           	alert("관심기업 등록에 실패하였습니다.");
-           }
-         });
-     } else {   	  
-       // 관심기업 삭제
-       $.ajax({
-         type: 'POST',
-         url: '${pageContext.request.contextPath}/person/deleteCompany',
-         data: {companyName : companyName},
-         success: function() {
-           icon.classList.remove('fas');
-           icon.classList.add('far');
-         },
-         error: function(error) {
-      		alert("관심기업 삭제에 실패하였습니다.");
-         }
-       });
-
-     }
-   },
-   error: function(error) {
-     console.log(error);
-   }
- });
+  const companyId = icon.parentElement.querySelector('[name=companyId]').value;
+  $.ajax({
+    type: 'POST',
+    url: '${pageContext.request.contextPath}/person/checkComScrap',
+    data: {companyId: companyId},
+    success: function(data) {
+      if (data == 0) {
+        // 스크랩 정보 추가
+        $.ajax({
+          type: 'POST',
+          url: '${pageContext.request.contextPath}/person/scrapCompany',
+          data: {companyId: companyId},
+          success: function() {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+          },
+          error: function(error) {
+            alert("관심기업 등록에 실패하였습니다.");
+          }
+        });
+      } else {
+        // 관심기업 삭제
+        $.ajax({
+          type: 'POST',
+          url: '${pageContext.request.contextPath}/person/deleteCompany',
+          data: {companyId: companyId},
+          success: function() {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+          },
+          error: function(error) {
+            alert("관심기업 삭제에 실패하였습니다.");
+          }
+        });
+      }
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  });
 }
 
 

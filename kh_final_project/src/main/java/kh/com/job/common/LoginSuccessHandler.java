@@ -19,9 +19,7 @@ import kh.com.job.person.model.service.PsService;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	
-	@Resource(name="loginSer")
-	private LoginSuccService lsservice;
-	
+
 	@Autowired
 	private PsService service;
 	
@@ -32,13 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		session.setAttribute("userid", authentication.getName());
 		String userid = authentication.getName();
-		
-		System.out.println("$$$$$$$$$$$$$");
-		System.out.println(lsservice);
-		System.out.println(service);
-		System.out.println("$$$$$$$$$$$$$");
-		
-		lsservice.updateLoginRecord(userid);
+
 		
 		if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM"))
 				|| authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_A")) ) {
@@ -47,7 +39,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 			response.sendRedirect("business/main");
 		}else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_P"))) {
 			try {
-			//	service.updateLoginRecord(userid);
+				service.updateLoginRecord(userid);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

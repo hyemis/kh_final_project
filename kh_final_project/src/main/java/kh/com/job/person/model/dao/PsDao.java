@@ -23,19 +23,19 @@ public class PsDao {
 	public PsUserDto selectOne(String userId) throws Exception {
 	    PsUserDto user = sqlSession.selectOne("person.selectOne", userId);
 
-	    String dateString = user.getUserBirth();
-	    if (dateString != null) {
-	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-	        user.setUserBirth(date.toString());
-	    }
-
-	    dateString = user.getUserCreatedAt();
-	    if (dateString != null) {
-	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
-	        user.setUserCreatedAt(date.toString());
-	    }
+	    user.setUserBirth(parseDate(user.getUserBirth()));
+	    user.setUserCreatedAt(parseDate(user.getUserCreatedAt()));
+	    user.setUserLastLogin(parseDate(user.getUserLastLogin()));
 
 	    return user;
+	}
+
+	private String parseDate(String dateString) {
+	    if (dateString != null) {
+	        LocalDate date = LocalDate.parse(dateString.split(" ")[0]);
+	        return date.toString();
+	    }
+	    return null;
 	}
 
 		

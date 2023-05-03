@@ -69,15 +69,16 @@
 		<!-- 회사소개 -->
 
 		<form
-			action="${pageContext.request.contextPath }/business/aboutus/infoform"
+			action="${pageContext.request.contextPath }/board/company/updateCompanyinfo"
 			method="post" enctype="multipart/form-data">
+			<input type="hidden" name="boardNo" value="${info.boardNo }">
 			<div class="row ">
 				<div class="col-2 text-center font-monospace">
 					<h4>제목</h4>
 				</div>
 				<div class="col-10 ">
 					<input type="text" name="boardTitle" style="width: 30%;" value="${info.boardTitle }"
-						placeholder="제목을적어주세요">
+						>
 					<hr>
 				</div>
 			</div>
@@ -88,7 +89,7 @@
 				<div class="col-10 ">
 					<p>직원수를 숫자로 입력해주세요</p>
 					<input type="text" name="employee" style="width: 30%;" value="${info.employee }"
-						placeholder=" 예시)300"> 명
+						> 명
 					<hr>
 				</div>
 			</div>
@@ -99,7 +100,7 @@
 				<div class="col-10 ">
 					<p>회사의 평균 연봉을 입력해주세요</p>
 					<input type="text" name="salaryAvg" style="width: 30%;" value="${info.salaryAvg }"
-						placeholder=" 예시)3500"> 만원
+						placeholder="dd"> 만원
 					<hr>
 				</div>
 			</div>
@@ -271,7 +272,7 @@
     
     
     ClassicEditor
-    .create( document.querySelector ('#newsLetter'),{
+    .create( document.querySelector ('#infoContent'),{
     	language: "ko"
     	, extraPlugins: [MyCustomUploadAdapterPlugin]
 		, simpleUpload :{

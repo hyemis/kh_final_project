@@ -448,12 +448,12 @@ public class PsMainController {
 	@PostMapping("deleteCompany")
 	@ResponseBody
 	public int deleteCompany(Principal principal, 
-							@RequestParam("companyName") String companyName) throws Exception {
+							@RequestParam("companyId") String companyId) throws Exception {
 		
 		int result = -1;
 		
 		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("companyName", companyName);
+		InfoNo.put("companyId", companyId);
 		InfoNo.put("userId", principal.getName());
 
 		result = service.deleteCompany(InfoNo);
@@ -464,11 +464,11 @@ public class PsMainController {
 	// 관심기업 여부 확인
 	@PostMapping("/checkComScrap")
 	@ResponseBody
-	public int checkComScrap(@RequestParam("companyName") String companyName, Principal principal) throws Exception{
+	public int checkComScrap(@RequestParam("companyId") String companyId, Principal principal) throws Exception{
 		
 		
 		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("companyName", companyName);
+		InfoNo.put("companyId", companyId);
 		InfoNo.put("userId", principal.getName());
 
 		int result = service.checkScrap(InfoNo);
@@ -485,12 +485,12 @@ public class PsMainController {
 	// 관심기업 등록
 	@PostMapping("scrapCompany")
 	@ResponseBody
-	public int scrapJob(Principal principal, @RequestParam("companyName") String companyName) throws Exception {
+	public int scrapJob(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
 		
 		int result = -1;
 		
 		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("companyName", companyName);
+		InfoNo.put("companyId", companyId);
 		InfoNo.put("userId", principal.getName());
 
 		result = service.scrapJob(InfoNo);
