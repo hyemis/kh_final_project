@@ -8,10 +8,14 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -40,6 +44,7 @@ import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
+import kh.com.job.common.kakaologin.dto.UserKakaoDto;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsResumeDto;
@@ -85,7 +90,8 @@ public class PsMainController {
 
 	// 메인화면
 	@GetMapping("/main")
-	public ModelAndView viewmain(ModelAndView mv) {
+	public ModelAndView viewmain(ModelAndView mv, Principal principal) {
+		mv.addObject("userId", principal.getName());
 		return mv;
 	}
 
@@ -529,12 +535,15 @@ public class PsMainController {
 
 	// 1번 카카오톡에 사용자 코드 받기(jsp의 a태그 href에 경로 있음)
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code,
-			RedirectAttributes rttr) throws Throwable {
+	public ModelAndView kakaoLogin(ModelAndView mv, @RequestParam(value = "code", required = false) String code
+									 , HttpSession session
+									 , RedirectAttributes rttr) throws Throwable {
 
 		// 1번
 		System.out.println("code : " + code);
-
+		
+		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+		
 		// code Null 인 경우 실행하지 않음
 		if (code == null) {
 			return mv;
@@ -552,10 +561,21 @@ public class PsMainController {
 		// 사용자 이메일 정보 조회
 		String userEmail = (String) userInfo.get("email");
 		PsUserDto user = service.selectUserEmail(userEmail);
-
+		
+		System.out.println("### ####"+user.getUserRole());
+		
 		// 이메일 정보가 일치하는 사용자가 존재할 경우 로그인 처리
 		if (user != null && user.getUserEmail().equals(userEmail)) {
 			// 로그인
+			/*
+			roles.add(new SimpleGrantedAuthority(user.getUserRole()));
+			UserKakaoDto userinfo = new UserKakaoDto();
+			userinfo.setUsername(user.getUserId());
+		    Authentication auth = new UsernamePasswordAuthenticationToken(userinfo, null, roles);
+		    
+		    SecurityContextHolder.getContext().setAuthentication(auth);
+		    session.setAttribute("kakaoToken", access_Token);
+			 */
 			mv.setViewName("redirect:/");
 		} else {
 			// 이메일 정보가 일치하지 않는 경우 로그인 실패 처리
