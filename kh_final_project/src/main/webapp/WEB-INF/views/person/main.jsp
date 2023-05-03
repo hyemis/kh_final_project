@@ -61,7 +61,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.1s"
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/recruit/main">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/mypage">
 						<div class="rounded p-4">
 						<h5>회원정보관리</h5>
 						<p>회원정보수정<br>이용현황</p>
@@ -71,7 +71,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.2s"
 					style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/applicant">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/resume/list">
 						<div class="rounded p-4">
 						<h5>이력서 관리</h5>
 						<p>이력서생성 / 삭제 <br>이력서목록<br></p>
@@ -82,7 +82,7 @@
 				data-wow-delay="0.3s"
 				style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 				<a class="cat-item d-block bg-light text-center rounded p-3"
-					href="<%=request.getContextPath()%>/business/search/suggest">
+					 href="${pageContext.request.contextPath}/person/applylist">
 					<div class="rounded p-4">
 						<h5>입사지원현황</h5>
 						<p>
@@ -95,7 +95,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.4s"
 					style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/aboutus">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapjob">
 						<div class="rounded p-4">
 						<h5>스크랩한 채용공고</h5><br>
 						<p>스크랩한 공고목록</p>
@@ -105,7 +105,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.5s"
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/account/info">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/scrapcompany">
 						<div class="rounded p-4">
 						<h5>관심기업정보</h5><br>
 						<p>관심기업목록 </p>
