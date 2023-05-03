@@ -93,7 +93,7 @@ public class CompanyController {
 			
 	//회사소개 수정
 	@PostMapping("/updateCompanyinfo")
-	public ModelAndView updateCompanyinfo(ModelAndView mv, String boardNo, BoardDto dto, Principal principal ) {
+	public ModelAndView updateCompanyinfo(ModelAndView mv, int boardNo, BoardDto dto, Principal principal ) {
 		dto.setUserId(principal.getName()); 
 		service.updateCompanyInfo(dto);
 		mv.setViewName("redirect:/board/company/companyinfo/view?no=" + boardNo);
@@ -143,7 +143,7 @@ public class CompanyController {
 		
 		//뉴스레터 수정
 		@PostMapping("/updateNewsletter")
-		public ModelAndView updateNewsletter(ModelAndView mv, String boardNo, BoardDto dto, Principal principal ) {
+		public ModelAndView updateNewsletter(ModelAndView mv, int boardNo, BoardDto dto, Principal principal ) {
 			dto.setUserId(principal.getName()); 
 			service.updateNewsLetter(dto);
 			mv.setViewName("redirect:/board/company/newsletter/view?no=" + boardNo);

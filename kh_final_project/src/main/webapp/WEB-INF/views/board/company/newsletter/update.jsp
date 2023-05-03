@@ -43,7 +43,7 @@
 
 <div class="container-xxl py-5">
 <form
-			action="${pageContext.request.contextPath }/business/aboutus/updateNewsletter"
+			action="${pageContext.request.contextPath }/board/company/updateNewsletter"
 			method="post">
 			<input type="hidden" name="boardNo" value="${news.boardNo }">
 
@@ -63,7 +63,7 @@
 				</div>
 				<div class="col-10 ">
 					<input type="text" class="form-control" name="link"
-						value="${news.link }">
+						value="${news.link }" placeholder="관련링크를 입력해주세요">
 					<hr>
 				</div>
 			</div>
