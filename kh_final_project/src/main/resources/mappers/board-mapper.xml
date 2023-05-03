@@ -304,17 +304,13 @@
 		   AND USER_ID = #{userId}	
 	</update>
 	
-<<<<<<< HEAD
-<!-- 	<select id="newsLetterOne" resultType="bcdto" >
-		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, TAG, USER_NAME
-=======
-	<select id="newsLetterOne" resultType="bcdto" >
-		SELECT BD.BOARD_NO, BD.USER_ID, UT.USER_NAME, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.UPDATE_DATE, BD.BOARD_READ, BD.BOARD_LIKE, BD.TAG, BD.LINK
->>>>>>> 77654e349c2834238406503457acd82ab46c7f40
-		FROM BOARD BD
-		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
-		WHERE BOARD_NO = #{boardNo} AND CATEGORY_ID = 'UBD05'
-	</select> -->
+
+<!-- 	<select id="newsLetterOne" resultType="bcdto" > -->
+<!-- 		SELECT BD.BOARD_NO, BD.USER_ID, UT.USER_NAME, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.UPDATE_DATE, BD.BOARD_READ, BD.BOARD_LIKE, BD.TAG, BD.LINK -->
+<!-- 		FROM BOARD BD -->
+<!-- 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID -->
+<!-- 		WHERE BOARD_NO = #{boardNo} AND CATEGORY_ID = 'UBD05' -->
+<!-- 	</select>  -->
 	
 	<select id="countNewsletter" resultType="_int">
 		SELECT COUNT(BOARD_NO)
