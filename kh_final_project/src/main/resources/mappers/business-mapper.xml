@@ -316,7 +316,6 @@
 	</select>
 
 	<!-- 채용공고 검색 -->
-<<<<<<< HEAD
 	<select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
 	  SELECT *
 	  FROM RECRUIT_REGIST r
@@ -349,7 +348,6 @@
 	      )
 	    </if>
 	</select>
-=======
 	<!-- <select id="searchList" resultType="kh.com.job.business.model.dto.BsRecruitDetailDto"> 
 		SELECT * FROM RECRUIT_REGIST r JOIN USER_TABLE u ON r.user_id = u.user_id 
 		WHERE CLOSE_DATE > SYSDATE AND RA_ADMISSION IN ('Y') <if test="searchWords 
@@ -410,7 +408,6 @@
       )
     </if>
 </select>-->
->>>>>>> c06bbd1a465f5a9a7a9f558f40ed8d64559ad1ee
 
 <!-- 	<select id="searchList"
 		resultType="kh.com.job.business.model.dto.BsRecruitDetailDto">
