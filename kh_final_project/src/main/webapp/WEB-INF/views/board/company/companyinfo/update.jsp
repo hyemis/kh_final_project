@@ -38,6 +38,9 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
+	
+<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	rel="stylesheet">
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
