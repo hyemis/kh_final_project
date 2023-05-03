@@ -38,6 +38,27 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef072fe97e426b6ce05b6cb96feab5e&libraries=services"></script>	
  
  </head>
+ 
+ <style>
+ .icon-container {
+  width: 50px;
+  height: 50px; 
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.fa-heart {
+  font-size: 24px; 
+}
+
+.icon-container i.fas {
+  color: red;
+}
+ 
+ </style>
 
 <body>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -47,22 +68,28 @@
 
         
         <!-- 회사로고, 회사명, 태그 -->
-            <div class="container">
-                <div class="row">
-                	<div class="col-1">
-               			<div class="icon p-2 me-2">
-                        <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
-                    	</div>
-                    </div>
-                    <div class="col-11 ">
-                     <h1 class="mb-3 text-primary">${info.userName}</h1>
-                    </div>
-                </div>
-                
-               
+		<div class="container">
+		    <div class="row">
+		        <div class="col-1">
+		            <div class="icon p-2 me-2" style="float: left; margin-right: 10px;">
+		                <img class="img-fluid" src="${pageContext.request.contextPath}/resources/template/makaan/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+		            </div>
+		        </div>
+		        <div class="col-11" style="display: flex; align-items: center;">
+		            <h1 class="mb-3 text-primary" style="display: inline-block;">${info.userName}</h1>
+		            <!-- 관심기업으로 스크랩 -->
+		            <sec:authorize access="hasRole('ROLE_P')">
+		                <div class="icon-container" style="margin-left: auto; margin-right: 10px;">
+		                    <i class="far fa-heart" onclick="toggleHeart(this)"></i>
+		                    <input type="hidden" name="companyId" value="${info.userId}" />
+		                </div>
+		            </sec:authorize>
+		        </div>
+		    </div>
+		</div>
 
-                
-                <br> 
+
+		<br> 
                 
                 <!-- 회사소개  -->
 	         	<div class="text-start mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -287,6 +314,76 @@ $(document).ready(function() {
         position: new kakao.maps.LatLng(37.537187, 127.005476),
         map: map
     });
+    
+    
+    
+ // 페이지 로드 시 실행되는 함수
+    window.onload = function() {
+        // companyId 값 가져오기
+        const companyId = $("input[name='companyId']").val();
+        // AJAX를 이용해 스크랩 여부 확인
+        $.ajax({
+            type: 'POST',
+            url: '${pageContext.request.contextPath}/person/checkComScrap',
+            data: {companyId: companyId},
+            success: function(data) {
+                // 스크랩 여부에 따라 별 상태 변경
+                if(data == 1) {
+                    $(".icon-container i").removeClass("far").addClass("fas");
+                } else {
+                    $(".icon-container i").removeClass("fas").addClass("far");
+                }
+            }
+        });
+    }
+
+ 
+ 
+  //하트 클릭 - 관심기업 스크랩 ajax
+    function toggleHeart(icon) {
+      const companyId = icon.parentElement.querySelector('[name=companyId]').value;
+      $.ajax({
+        type: 'POST',
+        url: '${pageContext.request.contextPath}/person/checkComScrap',
+        data: {companyId: companyId},
+        success: function(data) {
+          if (data == 0) {
+            // 관심기업 추가
+            $.ajax({
+              type: 'POST',
+              url: '${pageContext.request.contextPath}/person/scrapCompany',
+              data: {companyId: companyId},
+              success: function() {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+              },
+              error: function(error) {
+                alert("관심기업 등록에 실패하였습니다.");
+              }
+            });
+          } else {
+            // 관심기업 삭제
+            $.ajax({
+              type: 'POST',
+              url: '${pageContext.request.contextPath}/person/deleteCompany',
+              data: {companyId: companyId},
+              success: function() {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+              },
+              error: function(error) {
+                alert("관심기업 삭제에 실패하였습니다.");
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    }
+ 
+ 
 </script>
 <!-- map end -->
         

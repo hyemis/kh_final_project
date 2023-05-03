@@ -115,7 +115,7 @@
 	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_ID, COMPANY_NAME)
 	VALUES (#{userId}, #{companyId},
         (SELECT COMPANY_NAME FROM RECRUIT_REGIST WHERE USER_ID = #{companyId})
-       );
+       )
 	</insert>
 	
 	<!-- 관심기업 삭제 기능 -->

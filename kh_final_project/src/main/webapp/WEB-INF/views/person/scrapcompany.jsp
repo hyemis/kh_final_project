@@ -96,7 +96,8 @@
 										    <tr>
 										     <th scope="col" class="center"></th>
 											 <th scope="col" class="center">회사명</th>
-										     <th scope="col" class="center">채용현황</th>										   </tr>
+										     <th scope="col" class="center">채용현황</th>										   
+										     </tr>
 										  </thead>
 											<tbody class="table-group-divider">
 												<c:forEach items="${scraplist }" var="scrap">
@@ -105,7 +106,7 @@
 															type="checkbox" name="scrapCheckBox"
 															value="${scrap.companyId}" /></td>
 														<td style="text-align: center;">${scrap.companyName}</td>
-														<td style="text-align: center;"></td>
+														<td style="text-align: center;"> <a href="${pageContext.request.contextPath}/board/company/companyinfo/view?no=${info.boardNo }" class="btn btn-primary">이동</a> </td>
 													</tr>
 
 												</c:forEach>

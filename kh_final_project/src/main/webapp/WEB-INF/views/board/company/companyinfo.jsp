@@ -140,25 +140,7 @@
 
 <script>
 
-/* // 페이지 로드 시 실행되는 함수
-window.onload = function() {
-    // companyName 값 가져오기
-    var companyName = ${info.userName };
-    // AJAX를 이용해 스크랩 여부 확인
-    $.ajax({
-        type: 'POST',
-        url: '${pageContext.request.contextPath}/person/checkComScrap',
-        data: {companyName: companyName},
-        success: function(data) {
-            // 스크랩 여부에 따라 하트 상태 변경
-            if(data == 1) {
-                $(".icon-container i").removeClass("far").addClass("fas");
-            } else {
-                $(".icon-container i").removeClass("fas").addClass("far");
-            }
-        }
-    });
-} */
+
 
 
 //하트 클릭 - 관심기업 스크랩 ajax
@@ -170,7 +152,7 @@ function toggleHeart(icon) {
     data: {companyId: companyId},
     success: function(data) {
       if (data == 0) {
-        // 스크랩 정보 추가
+        // 관심기업 추가
         $.ajax({
           type: 'POST',
           url: '${pageContext.request.contextPath}/person/scrapCompany',
@@ -204,6 +186,34 @@ function toggleHeart(icon) {
     }
   });
 }
+
+
+
+// 페이지 로드 시 실행되는 함수
+window.onload = function() {
+    // 모든 companyId 값 가져오기
+    const companyIds = $("input[name='companyId']");
+
+    // AJAX를 이용해 스크랩 여부 확인
+    for(let i=0; i<companyIds.length; i++) {
+        const companyId = companyIds[i].value;
+
+        $.ajax({
+            type: 'POST',
+            url: '${pageContext.request.contextPath}/person/checkComScrap',
+            data: {companyId: companyId},
+            success: function(data) {
+                // 스크랩 여부에 따라 별 상태 변경
+                if(data == 1) {
+                    $(".icon-container i").eq(i).removeClass("far").addClass("fas");
+                } else {
+                    $(".icon-container i").eq(i).removeClass("fas").addClass("far");
+                }
+            }
+        });
+    }
+}
+
 
 
 

@@ -2,9 +2,7 @@ package kh.com.job.person.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -35,6 +33,8 @@ import kh.com.job.admin.model.dto.AdCategoryDto;
 import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.admin.model.service.AdService;
+import kh.com.job.board.model.dto.CompanyDto;
+import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
@@ -69,6 +69,9 @@ public class PsMainController {
 	
 	@Autowired
 	private AdService adservice;
+	
+	@Autowired
+	private BoardService bservice;
 
 	@Autowired
 	@Qualifier("fileUtil")
@@ -425,14 +428,20 @@ public class PsMainController {
 
 	// 관심기업정보 화면
 	@GetMapping("/scrapcompany")
-	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal) {
+	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal
+//										,@RequestParam(name = "no", required = false) int boardNo
+										) {
 		try {
 			PsUserDto result = service.selectOne(principal.getName());
 			List<PsScrapInfoDto> scrap = service.selectListCom(principal.getName());
+//			CompanyDto dto = bservice.companyInfoOne(boardNo);
 
 			if (result != null) {
 				mv.addObject("userinfo", result);
 				mv.addObject("scraplist", scrap);
+				
+//				mv.addObject("info", dto);
+				
 				mv.setViewName("person/scrapcompany");
 			} else {
 				mv.setViewName("redirect:/");
@@ -471,7 +480,7 @@ public class PsMainController {
 		InfoNo.put("companyId", companyId);
 		InfoNo.put("userId", principal.getName());
 
-		int result = service.checkScrap(InfoNo);
+		int result = service.checkComScrap(InfoNo);
 		int data = 0;
 		if(result > 0) { //스크랩 돼있으면
 			data = 1; // 데이터=1
@@ -493,7 +502,7 @@ public class PsMainController {
 		InfoNo.put("companyId", companyId);
 		InfoNo.put("userId", principal.getName());
 
-		result = service.scrapJob(InfoNo);
+		result = service.scrapCompany(InfoNo);
 
 		return result;
 	}
