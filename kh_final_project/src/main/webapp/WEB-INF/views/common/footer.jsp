@@ -19,20 +19,24 @@
                         <a class="btn btn-link text-white-50" href="${pageContext.request.contextPath}/board/company">회사소개</a>
                         <a class="btn btn-link text-white-50" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">5조</h5>
+                    <div class="col-lg-4 col-md-6">
+                        <h5 class="text-white mb-4">5조 JOB-A</h5>
                         <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person1.png" alt="">
+                            <div class="col-3">
+                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person1.png" alt=""/>
+                                <p class="text-white text-center">이름</p>
                             </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person2.png" alt="">
+                            <div class="col-3">
+                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person2.png" alt=""/>
+                                <p class="text-white text-center">이름</p>
                             </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person3.png" alt="">
+                            <div class="col-3">
+                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person3.png" alt=""/>
+                                <p class="text-white text-center">이름</p>
                             </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person4.png" alt="">
+                            <div class="col-3">
+                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person4.png" alt=""/>
+                                <p class="text-white text-center">이름</p>
                             </div>
                         </div>
                     </div>
