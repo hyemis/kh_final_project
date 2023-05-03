@@ -209,18 +209,14 @@
 	</insert>
 
 	<update id="updateCompanyInfo">
-		UPDATE USER_TABLE SET
-			BOARD_NO = ${boardNo},
-			BOARD_CONTENT = #{boardContent},
-			UPDATE_DATE = CURRENT_TIMESTAMP,
-			TAG = #{tag},
-			SALARY_AVG = #{salaryAvg},
-			EMPLOYEE = #{employee}
-		WHERE USER_ID = #{userId}
-		<selectKey keyProperty="boardNo" resultType="_int"
-			order="BEFORE">
-			SELECT MAX(BOARD_NO) +1 FROM BOARD
-		</selectKey>
+		UPDATE BOARD 
+		   SET UPDATE_DATE = CURRENT_TIMESTAMP,
+			   BOARD_TITLE = #{boardTitle},
+			   BOARD_CONTENT = #{boardContent},
+			   TAG = #{tag},
+			   SALARY_AVG = #{salaryAvg},
+			   EMPLOYEE = #{employee}
+		 WHERE BOARD_NO = #{boardNo}
 	</update>
 	
 	<select id="checkInfo" resultType="bdto">
@@ -311,7 +307,7 @@
 		  	    )
 		  WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select> 
-	<!-- TODO -->
+
 	<select id="newsLetterList" resultType="bdto">
 		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
 		  FROM ( 
