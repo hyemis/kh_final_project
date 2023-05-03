@@ -238,6 +238,12 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.updateCompanyInfo(dto);
 	}
 
+	@Override
+	public List<ReplyDto> reReplyList(int boardNo, int replyId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

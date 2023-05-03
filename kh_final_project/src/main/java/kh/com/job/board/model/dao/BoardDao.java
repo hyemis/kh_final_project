@@ -64,7 +64,6 @@ public class BoardDao {
 		}
 	
 	
-	}
 	
 	// 게시글 조회 수 증가
 	public int updateRead(int boardNo) throws Exception {
