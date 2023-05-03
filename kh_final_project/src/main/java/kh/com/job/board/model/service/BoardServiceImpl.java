@@ -217,6 +217,21 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.newsLetterOne(boardNo);
 	}
 
+	@Override
+	public int deletePost(BoardDto dto) {
+		return dao.deletePost(dto);
+	}
+
+	@Override
+	public int updateNewsLetter(BoardDto dto) {
+		return dao.updateNewsLetter(dto);	
+	}
+
+	@Override
+	public int updateCompanyInfo(BoardDto dto) {
+		return dao.updateCompanyInfo(dto);
+	}
+
 
 
 

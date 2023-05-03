@@ -61,6 +61,9 @@ public class BoardDao {
 	// 게시글 삭제 
 	public int deletePost(BoardDto dto) throws Exception{
 		return sqlSession.delete("boards.deletePost", dto);
+	// 게시글 삭제
+	public int deletePost(BoardDto dto) {
+		return sqlSession.delete("boards.delete", dto);
 	}
 	
 	// 게시글 조회 수 증가 
@@ -149,6 +152,16 @@ public class BoardDao {
 	public int countNewsletter(CompanyDto dto) {
 		return sqlSession.selectOne("boards.countNewsletter",dto);
 	}
+
+	public int updateNewsLetter(BoardDto dto) {
+		return sqlSession.update("boards.updateNewsLetter",dto);
+	}
+
+	public int updateCompanyInfo(BoardDto dto) {
+		return sqlSession.update("boards.updateCompanyInfo",dto);
+	}
+
+	
 	
 
 	

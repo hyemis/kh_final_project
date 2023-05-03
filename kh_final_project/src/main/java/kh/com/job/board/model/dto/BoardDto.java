@@ -54,6 +54,12 @@ public class BoardDto {
 		private String employee;
 		private String link;
 		
+		//페이징처리
+		private int startNum; //시작페이지
+		private int endNum; //마지막페이지
+		private int pnum; //페이지넘버
+		
+		
 		//시간 형태 변경
 		public void setboardDate(java.sql.Timestamp boardDate) {
 			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm");

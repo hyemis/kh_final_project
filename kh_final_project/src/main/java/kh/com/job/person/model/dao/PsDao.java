@@ -148,5 +148,10 @@ public class PsDao {
 	public int deleteCompany(Map<String, Object> InfoNo) throws Exception{
 		return sqlSession.delete("person.deleteCompany",InfoNo);
 	}
+	
+	// 관심기업 조회
+	public List<PsScrapInfoDto> selectListCom(String userId) throws Exception {
+		return sqlSession.selectList("person.selectListCom", userId);
+	}
 
 }

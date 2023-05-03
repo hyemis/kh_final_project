@@ -44,6 +44,7 @@
 
 
 <div class="container-xxl py-5">
+
         
         <!-- 회사로고, 회사명, 태그 -->
             <div class="container">
@@ -65,10 +66,28 @@
                 
                 <!-- 회사소개  -->
 	         	<div class="text-start mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                	<h1 class="mb-3">회사 소개</h1>
+	         	  <div class="row g-0 gx-5 align-items-end">
+                    <div class="col-lg-6">
+                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                            <h1 class="mb-3">회사소개</h1>
+                        </div>
+                    </div>
+                    <c:if test="${not empty currentUserId and info.userId eq currentUserId}">
+                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                            <li class="nav-item me-2">
+			  					<button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${info.boardNo}'">수정</button>
+                            </li>
+                            <li class="nav-item me-0">
+			  					<button type="button" class="btn btn-outline-primary delete">삭제</button>
+                            </li>
+                        </ul>
+                    </div>
+					</c:if>
+                </div>
                 	<div><a class="btn btn-primary">${info.tag}</a></div>
                 	<div>대표번호  ${info.bsMainPhone}</div>
-                	<div class="m-5"> ${info.boardTitle} </div>
+                	<h3 class=""> ${info.boardTitle} </h3>
                 	<div class="m-5"> ${info.boardContent} </div>
                 </div>
             </div>
@@ -151,6 +170,35 @@
         <!-- newsletter End -->
 </div>       
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
+
+<script>
+$(document).ready(function() {
+	  $(".delete").on("click", function() {
+	    if (confirm("정말 삭제하시겠습니까?")) {
+	      let userId = "${news.userId}";
+	      let boardNo = "${news.boardNo}";      	
+	      $.ajax({ 
+	        url: "${pageContext.request.contextPath}/board/company/delete"
+	        , type: "post"
+	        , data:  {boardNo : boardNo, userId : userId}
+	        , success: function(result){
+	          if(result > 0){
+	            location.href="${pageContext.request.contextPath}/business/aboutus/newsletter";
+	            alert("삭제되었습니다")
+	          }else if(result == -2){
+	            alert("아이디 정보가 맞지 않습니다.");
+	          }else{
+	            alert("삭제에 실패 했습니다.");
+	          }
+	        }
+	        , error: function(e){
+	          alert(e +" : 오류")
+	        }
+	      });
+	    }
+	  });
+	});
+</script>
 
 <!-- ck에디터  -->
 <script type="text/javascript">

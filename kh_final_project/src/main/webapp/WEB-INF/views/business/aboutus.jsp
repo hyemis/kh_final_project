@@ -105,9 +105,10 @@
 					<div class="border border-secondary">
 						<h1>회사소개</h1>
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#companyinfo">등록 및 수정</button>
-						<a class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/companyinfo" role="button">회사소개 페이지로 이동</a>
+						<c:if test="${empty companyinfo }">
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyinfo">등록</button>
+						</c:if>
+						<a class="btn btn-primary" href="<%=request.getContextPath()%>/board/company/companyinfo/view?no=${companyinfo.boardNo }" role="button">보기 및 수정</a>
 					</div>
 					
 					
@@ -120,39 +121,14 @@
 							<button type="button" class="btn btn-primary"
 								data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
 						</div>
-						<!-- 뉴스레터 보기 
-						<div class="container">
-							<c:forEach items="${news}" var="news">
-								<div class="row">
-									<div class="col">
-										<div class="card">
-											<h5 class="card-header">${news.boardTitle }</h5>
-											<div class="card-body">
-												<div class="card-text">${news.boardContent }</div>
-												<a href="" class="btn btn-primary">게시글보기</a>
-											</div>
-										</div>
-									</div>
-									<div class="col">
-										<div class="card">
-											<h5 class="card-header">${news.boardTitle }</h5>
-											<div class="card-body">
-												<div class="card-text">${news.boardContent }</div>
-												<a href="" class="btn btn-primary">게시글보기</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</div> -->
+	
 					
 					
 					<!-- Q&A -->
 					<div class="border border-secondary">
-						<h1>Q&A</h1>
-						<button type="button" class="btn btn-light"
-							href="<%=request.getContextPath()%>/business/aboutus/qna">더보기</button>
+						<h1> Q&A </h1>
+						<a type="button" class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/qna">더보기</a>
+							
 						<!-- 숫자 인덱스	 -->
 						<div class="num-container row" id="num-container">
 							<div class="col num-item">

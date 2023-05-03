@@ -29,6 +29,8 @@ public interface BoardService {
 	
 	// 게시글 삭제 
 	public int deletePost(BoardDto dto) throws Exception;
+	//게시글 삭제
+	public int deletePost(BoardDto dto); 
 	
 	// 게시글 상세 조회 + 조회 수 증가
 	public BoardDto detailBoard(String readUser, int boardNo) throws Exception;
@@ -70,6 +72,7 @@ public interface BoardService {
 	public int delete(String userId) throws Exception;
 	public BoardDto viewDetail(String boardNo);
 	
+	
 	// 회사소개리스트
 	public Paging companyInfoList(CompanyDto dto);
 	// 회사소개 상세보기
@@ -78,7 +81,10 @@ public interface BoardService {
 	public Paging newsLetterAll(CompanyDto dto);
 	// 뉴스레터 상세보기
 	public CompanyDto newsLetterOne(int boardNo);
-
+	// 뉴스레터 수정
+	public int updateNewsLetter(BoardDto dto);
+	// 회사소개 수정
+	public int updateCompanyInfo(BoardDto dto);
 
 
 }

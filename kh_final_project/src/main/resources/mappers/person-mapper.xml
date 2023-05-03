@@ -99,6 +99,7 @@
 	SELECT DISTINCT COMPANY_NAME, RA_TITLE, CLOSE_DATE, RA_NUM
 	FROM SCRAP_INFO
 	WHERE USER_ID = #{userId}
+	AND INSERT_DATE IS NOT NULL
 	</select>
 
 	
@@ -122,6 +123,7 @@
   	DELETE FROM
   	SCRAP_INFO
   	WHERE USER_ID = #{userId} AND COMPANY_NAME = #{companyName}
+  	AND INSERT_DATE IS NULL
 	</delete>
 	
 	<!-- 관심기업 스크랩 조회 -->

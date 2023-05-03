@@ -31,6 +31,7 @@ public interface PsService {
 	public int checkComScrap(Map<String, Object> InfoNo) throws Exception;
 	public int scrapCompany(Map<String, Object> InfoNo) throws Exception;
 	public int deleteCompany(Map<String, Object> InfoNo) throws Exception;
+	public List<PsScrapInfoDto> selectListCom(String userId) throws Exception;
 	 
 	//입사지원
 	public int applyJob(BsAplicantDto dto) throws Exception;
