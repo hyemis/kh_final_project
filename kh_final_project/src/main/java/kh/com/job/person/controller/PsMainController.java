@@ -549,6 +549,7 @@ public class PsMainController {
 			return mv;
 		}
 		
+		//회원 권한을 위한 Authority지정
 		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 
 		// 2번
@@ -572,8 +573,11 @@ public class PsMainController {
 
 			roles.add(new SimpleGrantedAuthority(user.getUserRole()));
 			String username = user.getUserId();
+			//org.springframework.security.core.userdetails.User 으로 유저정보 저장
+			//이 클래스로 지정 해야 UsernamePasswordAuthenticationToken 생성 시에 principal 저장 가능
 			User userkakao = new User(username, "", roles);
 
+			//인증 토큰을 위한 Authentication 생성 
 		    Authentication auth = new UsernamePasswordAuthenticationToken(userkakao, null, roles);
 		    
 		    SecurityContextHolder.getContext().setAuthentication(auth);
