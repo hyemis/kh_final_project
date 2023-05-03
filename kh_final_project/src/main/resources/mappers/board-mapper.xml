@@ -29,29 +29,7 @@
 	<!-- 게시글 조회 순으로 조회 -->
 
 	
-	<select id="viewCompanyInfo" resultType="bdto">
-        SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,UPDATE_DATE,TAG,SALARY_AVG,EMPLOYEE
-        FROM BOARD
-        WHERE USER_ID = #{userId} AND CATEGORY_ID = 'UBD06'
-    </select>
-    
- <!--     <select id="companyInfoList" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
-		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
-		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
-		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
-		FROM BOARD BD
-		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
-		WHERE BD.CATEGORY_ID = 'UBD06'
-    </select>
-    
-    <select id="companyInfoOne" resultType="kh.com.job.board.model.dto.CompanyInfoDto">
-		SELECT BD.BOARD_NO, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.CATEGORY_ID, BD.BOARD_READ,
-		BD.BOARD_LIKE, BD.TAG, BD.SALARY_AVG, BD.EMPLOYEE, UT.BS_MAIN_PHONE,
-		UT.USER_ID, UT.USER_NAME, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN, UT.ADDRESS_DETAIL, UT.ADDRESS_POSTCODE
-		FROM BOARD BD
-		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
-		WHERE BD.CATEGORY_ID = 'UBD06' AND BD.BOARD_NO = #{boardNo}
-    </select> -->
+
     
     <!-- 커뮤니티 게시판 카테고리 -->
     <select id="getBoardCate" resultType="kh.com.job.admin.model.dto.AdCategoryDto" >
@@ -258,7 +236,7 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
-<!--      <select id="companyInfoList" resultType="bcdto">
+      <select id="companyInfoList" resultType="bcdto">
     	SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_READ, BOARD_LIKE, TAG, SALARY_AVG,
     		   EMPLOYEE, BS_MAIN_PHONE, USER_NAME, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE
     	  FROM (
@@ -281,7 +259,7 @@
 		FROM BOARD BD
 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID
 		WHERE BD.CATEGORY_ID = 'UBD06' AND BD.BOARD_NO = #{boardNo}
-    </select> -->
+    </select> 
     
 	<!-- 뉴스레터 -->
 	<insert id="insertNewsletter">
@@ -305,12 +283,12 @@
 	</update>
 	
 
-<!-- 	<select id="newsLetterOne" resultType="bcdto" > -->
-<!-- 		SELECT BD.BOARD_NO, BD.USER_ID, UT.USER_NAME, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.UPDATE_DATE, BD.BOARD_READ, BD.BOARD_LIKE, BD.TAG, BD.LINK -->
-<!-- 		FROM BOARD BD -->
-<!-- 		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID -->
-<!-- 		WHERE BOARD_NO = #{boardNo} AND CATEGORY_ID = 'UBD05' -->
-<!-- 	</select>  -->
+ 	<select id="newsLetterOne" resultType="bcdto" > -
+ 		SELECT BD.BOARD_NO, BD.USER_ID, UT.USER_NAME, BD.BOARD_TITLE, BD.BOARD_CONTENT, BD.UPDATE_DATE, BD.BOARD_READ, BD.BOARD_LIKE, BD.TAG, BD.LINK 
+		FROM BOARD BD 
+		JOIN USER_TABLE UT ON BD.USER_ID = UT.USER_ID 
+		WHERE BOARD_NO = #{boardNo} AND CATEGORY_ID = 'UBD05' 
+ 	</select>  
 	
 	<select id="countNewsletter" resultType="_int">
 		SELECT COUNT(BOARD_NO)
@@ -319,7 +297,7 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 
-<!-- 	<select id="newsLetterAll" resultType="bcdto">
+ 	<select id="newsLetterAll" resultType="bcdto">
 		SELECT BOARD_NO, USER_ID, USER_NAME, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
 		  FROM ( 
 		  	    SELECT ROWNUM AS NUM , A.*
@@ -332,7 +310,7 @@
 			           ) A
 		  	    )
 		  WHERE NUM BETWEEN #{startNum} AND #{endNum}
-	</select> -->
+	</select> 
 	<!-- TODO -->
 	<select id="newsLetterList" resultType="bdto">
 		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK
