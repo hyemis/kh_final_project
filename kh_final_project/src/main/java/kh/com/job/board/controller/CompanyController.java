@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.CompanyDto;
@@ -36,6 +39,9 @@ public class CompanyController {
 	
 	@Autowired
 	private BsRecruitService brservice;
+	
+	@Autowired
+	private BsAboutUsService auservice;
 	
 	@Autowired
 	private BsAboutUsService baservice;
@@ -162,5 +168,21 @@ public class CompanyController {
 				result = -2;
 			}
 			return result;
+		}
+		
+		//이미지업로드
+		@PostMapping("/imageUpload")
+		@ResponseBody
+		public String imageUpload(@RequestParam("upload") MultipartFile file
+				, Principal principal
+				){
+			Map<String, Object> map = new HashMap<>();
+			 
+			String url = auservice.uploadDocument(file, principal.getName());		
+
+			map.put("uploaded", 1);
+			map.put("url", url);
+
+			return new Gson().toJson(map);
 		}
 }

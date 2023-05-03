@@ -233,7 +233,7 @@
 	    }
 	    _initRequest() {
 	        const xhr = this.xhr = new XMLHttpRequest();
-	        xhr.open('POST', '../imageUpload', true);
+	        xhr.open('POST', '${pageContext.request.contextPath}/board/company/imageUpload', true);
 	        xhr.responseType = 'json';
 	        console.log(xhr);
 	        console.log(xhr.response);
