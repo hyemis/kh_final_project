@@ -87,8 +87,7 @@
 								<div class="row g-5 align-items-center">
 									<div class="mb-4">
 										<h1 class="mb-3">관심기업정보</h1>
-										<p>1. 관심기업 목록은 최대 500개까지 등록할 수 있습니다.<br>
-										2. 회사명을 클릭하면 회사소개 페이지로 이동합니다.</p>
+										<p>회사명을 클릭하면 회사소개 페이지로 이동합니다.</p>
 										<br>	
 										<br>
 										<br>
@@ -104,7 +103,7 @@
 													<tr>
 														<td style="text-align: center;"><input
 															type="checkbox" name="scrapCheckBox"
-															value="${scrap.companyName}" /></td>
+															value="${scrap.companyId}" /></td>
 														<td style="text-align: center;">${scrap.companyName}</td>
 														<td style="text-align: center;"></td>
 													</tr>
@@ -147,25 +146,25 @@
 	// 관심기업 삭제
 	function deleteCompany() {
     // 체크된 companyName 값을 가져오기
-    var companyNameList = [];
+    var companyIdList = [];
     $("input[name='scrapCheckBox']:checked").each(function() {
-    	companyNameList.push($(this).val());
+    	companyIdList.push($(this).val());
     });
     
     // 체크된 항목이 없는 경우
-    if (companyNameList.length == 0) {
+    if (companyIdList.length == 0) {
         alert("선택된 관심기업이 없습니다.");
         return;
     }
 
     // 각각의 companyName을 전달하며 ajax 호출하기
-    for (var i = 0; i < companyNameList.length; i++) {
-        var companyName = companyNameList[i];
+    for (var i = 0; i < companyIdList.length; i++) {
+        var companyId = companyIdList[i];
 
         $.ajax({
             type: 'POST',
             url: '${pageContext.request.contextPath}/person/deleteCompany',
-            data: {companyName : companyName},
+            data: {companyId : companyId},
             success: function() {
                 alert('관심기업 삭제에 성공했습니다.');
                 location.reload();

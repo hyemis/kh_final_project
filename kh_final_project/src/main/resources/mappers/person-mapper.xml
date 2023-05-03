@@ -107,28 +107,28 @@
 	<!-- 기업스크랩 확인 -->  
 	<select id="checkComScrap" parameterType="map" resultType="_int">
 	 SELECT COUNT(*) FROM SCRAP_INFO 
-	 WHERE COMPANY_NAME = #{companyName} 
-	 AND USER_ID = #{userId}
-	 AND INSERT_DATE IS NULL
+	 WHERE COMPANY_ID = #{companyId} AND USER_ID = #{userId}
 	</select>
 	
 	<!-- 기업 스크랩 기능 -->
   	<insert id="scrapCompany" parameterType="map">
-	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_NAME)
-	VALUES ( #{userId} , #{companyName})
+	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_ID, COMPANY_NAME)
+	VALUES (#{userId}, #{companyId},
+        (SELECT COMPANY_NAME FROM RECRUIT_REGIST WHERE USER_ID = #{companyId})
+       );
 	</insert>
 	
 	<!-- 관심기업 삭제 기능 -->
   	<delete id="deleteCompany" parameterType="map">
   	DELETE FROM
   	SCRAP_INFO
-  	WHERE USER_ID = #{userId} AND COMPANY_NAME = #{companyName}
+  	WHERE USER_ID = #{userId} AND COMPANY_ID = #{companyId}
   	AND INSERT_DATE IS NULL
 	</delete>
 	
 	<!-- 관심기업 스크랩 조회 -->
 	<select id="selectListCom" resultType="scrapdto">
-	SELECT DISTINCT COMPANY_NAME
+	SELECT DISTINCT COMPANY_NAME, COMPANY_ID
 	FROM SCRAP_INFO
 	WHERE USER_ID = #{userId}
 	AND INSERT_DATE IS NULL

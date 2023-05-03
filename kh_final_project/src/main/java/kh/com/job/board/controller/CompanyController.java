@@ -39,9 +39,7 @@ public class CompanyController {
 	
 	@Autowired
 	private BsAboutUsService baservice;
-	
-	@Autowired
-	private PsService pservice;
+
 
 	//회사소개 리스트
 	@GetMapping("/companyinfo")
