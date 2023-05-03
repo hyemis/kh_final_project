@@ -86,9 +86,11 @@
 					</c:if>
                 </div>
                 	<div><a class="btn btn-primary">${info.tag}</a></div>
+                	<div><a class="btn btn-primary">직원수${info.employee}</a></div>
+                	<div><a class="btn btn-primary">평균연봉${info.salaryAvg}</a></div>
                 	<div>대표번호  ${info.bsMainPhone}</div>
                 	<h3 class=""> ${info.boardTitle} </h3>
-                	<div class="m-5"> ${info.boardContent} </div>
+                	<div class="m-5" id="boardContent"> ${info.boardContent} </div>
                 </div>
             </div>
         <br>        
@@ -200,21 +202,23 @@ $(document).ready(function() {
 	});
 </script>
 
-<!-- ck에디터  -->
-<script type="text/javascript">
+<!-- ckeditor5 -->
+	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	
-    ClassicEditor
-    .create( document.querySelector( '#infoContent' ),{
+	ClassicEditor
+    .create( document.querySelector( '#boardContent' ),{
     	language: "ko"    
     	, config : {
     		height:'400px'
 	   		, width:'100%'
     	}, toolbar: []
+    }).then( newEditor => {
+		 editor = newEditor;
+    	editor.enableReadOnlyMode( '#boardContent' );
     })
     .catch( error => {
         console.error( error );
     });
-</script>
 
 <!-- map start -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
