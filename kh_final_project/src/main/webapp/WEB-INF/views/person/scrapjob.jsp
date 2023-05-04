@@ -114,7 +114,7 @@
 															href="${pageContext.request.contextPath}/person/viewrecruit/${scrap.raNum}">${scrap.raTitle }</a></td>
 														<td>${scrap.closeDate }</td>
 														<td>
-														<button type="button" class="btn btn-outline-dark apply-btn" data-bs-toggle="modal" data-bs-target="#apply">지원</button>
+														<button type="button" class="btn btn-outline-dark apply-btn" data-bs-target="#apply">지원</button>
 														</td>
 													</tr>
 												</c:forEach>
@@ -150,7 +150,7 @@
 														<hr>
 
 														<button type="button" data-bs-dismiss="modal"
-															class="btn btn-primary mx-auto d-block" type="submit"
+															class="btn btn-primary mx-auto d-block" 
 															id="applyJobBtn" data-raNum="${scrap.raNum}">입사지원하기</button>
 													</div>
 												</div>
@@ -220,11 +220,7 @@
     }
 }
 	
-	
-	// '지원' 버튼 클릭 이벤트 처리
-	const applyButtons = document.querySelectorAll('.apply-btn');
-	applyButtons.forEach(button => {
-	  button.addEventListener('click', function() {
+	function applyClickHandler() {
 	    // 마감일 정보 가져오기
 	    const row = this.closest('tr');
 	    const closeDate = row.querySelector('td:nth-child(4)').textContent;
@@ -236,20 +232,19 @@
 	    if (closeDateObj < today) {
 	      // 마감일이 지난 경우 알림창 띄우기
 	      alert('공고 마감일이 지났습니다.');
+	      return false;
 	    } else {
+	   	   // 입사지원 ajax
+	  	  var raNum = $(this).closest("tr").find("input[name=scrapCheckBox]").val(); // 해당 행의 raNum 값을 가져옴
+		  $("#applyJobBtn").data("raNum", raNum); // 모달 내부의 지원하기 버튼에 raNum 값을 저장함
 	      // 마감일이 지나지 않은 경우 모달창 띄우기
-	      $('.apply').modal('show');
+	      $('#apply').modal('show');
 	    }
-	  });
-	});
-
-
+	}
 	
-	 // 입사지원 ajax
-	 $(".apply-btn").click(function() {
-	  var raNum = $(this).closest("tr").find("input[name=scrapCheckBox]").val(); // 해당 행의 raNum 값을 가져옴
-	  $("#applyJobBtn").data("raNum", raNum); // 모달 내부의 지원하기 버튼에 raNum 값을 저장함
-	});
+	// '지원' 버튼 클릭 이벤트 처리
+	$('.apply-btn').on('click', applyClickHandler);
+
 	
 	$("#applyJobBtn").click(function() {
 	  var resumeNo = $("select[name=selectbox]").val(); // 선택된 이력서 번호
