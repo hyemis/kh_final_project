@@ -104,7 +104,7 @@
 		}
 	
 		 // a 태그에 클릭 이벤트 리스너 추가
-		 const kakaoLoginBtn = document.querySelector('#kakao-login-btn');
+		 const kakaoLoginBtn = document.querySelector('.kakao');
 		 kakaoLoginBtn.addEventListener('click', handleClick);
 	
 	
@@ -113,6 +113,7 @@
 		if(msg) {
 			alert(msg);
 		}
+		
 	</script>
 </body>
 </html>

@@ -228,6 +228,7 @@ public class PsMainController {
 				
 				 rttr.addFlashAttribute("msg", "가입하신 이메일 정보가 존재합니다. 정보 확인 후 다시 로그인 해주세요.");
 				 mv.setViewName("redirect:/person/login");
+				 
 			} else {
 				result = service.insert(dto);
 				
