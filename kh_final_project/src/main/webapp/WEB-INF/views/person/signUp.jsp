@@ -234,6 +234,11 @@
 	</script>
 
 	<script>
+	
+		var msg = "${msg}";
+		if(msg) {
+			alert(msg);
+		}
 			// id 중복확인
 			function fn_idChk() {
 				let userId = $("#psuserId").val();

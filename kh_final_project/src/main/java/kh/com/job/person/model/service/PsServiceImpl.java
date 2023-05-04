@@ -64,6 +64,11 @@ public class PsServiceImpl implements PsService {
 		return dao.idChk(userId);
 	}
 	
+	@Override
+	public int emailChk(String email) throws Exception {
+		return dao.emailChk(email);
+	}
+	
 	// 카카오 로그인 
 	@Override
 	public String getAccessToken(String authorize_code) throws Exception {

@@ -51,6 +51,10 @@ public class PsDao {
 		return result;
 	}
 	
+	public int emailChk(String email) throws Exception {
+		return sqlSession.selectOne("person.emailChk", email);
+	}
+	
 	public List<PsUserDto> selectList() throws Exception {
 		return sqlSession.selectList("person.selectList");
 	}

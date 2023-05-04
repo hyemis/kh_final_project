@@ -35,11 +35,7 @@ public interface BsRecruitService {
 	
 	public int lCatecountYAdmission();
 	
-//	public List<BsRecruitDto> searchList(String searchWords);
-	
-	public List<BsRecruitDto> searchList(Map<String, Object> searchParams);
-
-	
+	public List<BsRecruitDto> searchList(Map<String, Object> keywords);
 
 	public int changeAdmission(BsRecruitDto dto);
 

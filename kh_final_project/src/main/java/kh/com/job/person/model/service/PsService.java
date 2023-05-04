@@ -16,6 +16,7 @@ public interface PsService {
 	public int idChk(String userId) throws Exception;
 	public List<PsUserDto> selectList() throws Exception;
 	public int insert(PsUserDto dto) throws Exception;
+	public int emailChk(String email) throws Exception;
 	public int businessInsert(PsUserDto dto) throws Exception;
 	public int update(PsUserDto dto) throws Exception;
 	public int delete(String userId) throws Exception;

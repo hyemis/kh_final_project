@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -217,29 +218,31 @@ public class PsMainController {
 
 	// 회원가입 작성
 	@PostMapping("/signUp")
-	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr, HttpServletRequest request) {
+	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr, HttpServletRequest request)  throws Exception{
 
-		int result = -1;
-
-		try {
+			int result = -1;
 
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
-			result = service.insert(dto);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		if (result > 0) {
-			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
-			mv.setViewName("redirect:/");
+			
+			if(service.emailChk(dto.getUserEmail()) > 0 ) {
+				
+				 rttr.addFlashAttribute("msg", "가입하신 이메일 정보가 존재합니다. 정보 확인 후 다시 로그인 해주세요.");
+				 mv.setViewName("redirect:/person/login");
+			} else {
+				result = service.insert(dto);
+				
+				if (result > 0) {
+					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
+					mv.setViewName("redirect:/");
+					return mv;
+				} else {
+					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
+					mv.setViewName("redirect:/person/signUp");
+					return mv;
+				}
+				
+			}
 			return mv;
-		} else {
-			rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
-			mv.setViewName("redirect:/person/signUp");
-			return mv;
-		}
-
 	}
 
 	// 기업 회원가입
@@ -664,107 +667,21 @@ public class PsMainController {
 			return new Gson().toJson(llist);
 		}
 		
-//	// 검색
-//	@PostMapping("/search")
-//	@ResponseBody
-//	public List<BsRecruitDto> search(ModelAndView mv, @RequestParam("keyword") String keyword) {
-//		    String[] keywordArr = keyword.split(",");
-//		    List<BsRecruitDto> searchList = new ArrayList<>();
-//		    for (String key : keywordArr) {
-//		        if (!key.isEmpty() && !key.equals("")) {
-//		            List<BsRecruitDto> result = brservice.searchList(key);
-//		            searchList.addAll(result);
-//		        }
-//		    }
-//		    return searchList;
-//		}
-	
+	// 검색
 	@PostMapping("/search")
 	@ResponseBody
-	public List<BsRecruitDto> search(ModelAndView mv,
-	        @RequestParam(value = "keyword", required = false) String keyword,
-	        @RequestParam(value = "checkedKeywords[]", required = false) String[] checkedKeywords) {
+	public List<BsRecruitDto> search(
+			ModelAndView mv,
+	        @RequestBody Map<String, Object> keywords ) {
 		
-			if (checkedKeywords == null) {
-				checkedKeywords = new String[0];
-			}
-		
-			Map<String, Object> searchParams = new HashMap<>();
-		    searchParams.put("keyword", new String[] {keyword});
-		    searchParams.put("checkedKeywords", checkedKeywords);
-		    
-		    List<BsRecruitDto> result = brservice.searchList(searchParams);
-		    
-		    return result;
+		 if (keywords == null || (keywords.get("checkedKeywords") == null && keywords.get("keyword") == null)) {
+			  mv.setViewName("redirect:/"); // 리다이렉트할 URL 설정
+		      return new ArrayList<>(); // 빈 List 반환
+	     }
+	     System.out.println(keywords);
+	     List<BsRecruitDto> result = brservice.searchList(keywords);
+	     return result;
 	}
-	
-//	@PostMapping("/search")
-//	@ResponseBody
-//	public List<BsRecruitDto> search(ModelAndView mv,
-//	                                 @RequestParam(value = "keyword", required = false) String[] keyword,
-//	                                 @RequestParam(required = false) Map<String, String[]> checkedKeywords) {
-//	        
-//	    // 1. 검색어와 체크된 키워드가 없을 경우 전체 리스트를 조회
-//	    if (keyword == null && checkedKeywords == null) {
-//	        return brservice.searchList();
-//	    }
-//
-//	    // 2. 검색어 또는 체크된 키워드가 하나라도 존재할 경우 검색 수행
-//	    List<BsRecruitDto> searchList = new ArrayList<>();
-//	    if (checkedKeywords != null) {
-//	        for (String key : checkedKeywords.keySet()) {
-//	            for (String value : checkedKeywords.get(key)) {
-//	                if (!value.isEmpty() && !value.equals("")) {
-//	                    List<BsRecruitDto> result = brservice.searchList(value);
-//	                    searchList.addAll(result);
-//	                }
-//	            }
-//	        }
-//	    }
-//	    if (keyword != null) {
-//	        for (String key : keyword) {
-//	            if (!key.isEmpty() && !key.equals("")) {
-//	                List<BsRecruitDto> result = brservice.searchList(key);
-//	                searchList.addAll(result);
-//	            }
-//	        }
-//	    }
-//
-//	    // 2.1 검색어와 체크된 키워드가 모두 존재하는 경우, 결과를 교집합으로 변경
-//	    if (keyword != null && checkedKeywords != null) {
-//	        List<BsRecruitDto> keywordList = new ArrayList<>();
-//	        for (String key : keyword) {
-//	            if (!key.isEmpty() && !key.equals("")) {
-//	                List<BsRecruitDto> result = brservice.searchList(key);
-//	                keywordList.addAll(result);
-//	            }
-//	        }
-//	        List<BsRecruitDto> intersectionList = new ArrayList<>(searchList);
-//	        intersectionList.retainAll(keywordList);
-//	        searchList = intersectionList;
-//	    }
-//
-//	    // 2.2 검색 결과 중복 제거
-//	    Set<BsRecruitDto> searchSet = new LinkedHashSet<BsRecruitDto>(searchList);
-//	    searchList.clear();
-//	    searchList.addAll(searchSet);
-//
-//	    // 3. 검색어와 체크된 키워드가 둘 다 존재할 경우, 두 결과를 합쳐서 반환
-//	    if (keyword != null && checkedKeywords != null) {
-//	        List<BsRecruitDto> combinedList = new ArrayList<>(searchList);
-//	        for (String key : keyword) {
-//	            if (!key.isEmpty() && !key.equals("")) {
-//	                List<BsRecruitDto> result = brservice.searchList(key);
-//	                combinedList.addAll(result);
-//	            }
-//	        }
-//	        return combinedList;
-//	    }
-//
-//	    return searchList;
-//	}
-//	
-
 
 	// 구인공고 확인 화면
 	@GetMapping("/viewrecruit/{raNum}")
