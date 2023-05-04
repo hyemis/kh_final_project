@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.fdept, .mdept, .ldept {
+	border: 1px solid gray;
+	border-radius: 10px;
+	margin: 0;
+	height: 300px; /* 최소 높이 */
+	overflow-y: auto; /* 스크롤 생기도록 */
+}
+
+.recruit-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.recruit-table {
+	display: inline-block;
+	border: 1px solid #dcdcdc;
+	border-radius: 5px;
+	padding: 30px;
+	margin-right: 10px;
+}
+
+.recruit-table a {
+	text-decoration: underline;
+	color: black !important;
+}
+
+.recruit-table a span.bold {
+	display: inline;
+	font-weight: bold;
+}
+
+.d-grid {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: auto;
+}
+
+.ED, .CA, .SC, .ET, .HT {
+	display: flex;
+	flex-direction: row;
+}
+
+.checkbox {
+	padding: 0.5rem;
+}
+
+.count {
+	  font-size: larger;
+}
