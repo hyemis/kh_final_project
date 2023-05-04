@@ -50,10 +50,8 @@
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
 			 
-		        <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll()">
+		        <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll();">
 			        	<div class="m-4" style="text-align: center"><h3>회원정보수정</h3></div>
-			        	
-		
 				          
 				            <div class="mb-3">
 				            <label for="userName">이름 </label>
@@ -113,36 +111,38 @@
 
 	
 	<script>
-	
-	
-		function checkAll() {
-	        if (!checkPassword(updateForm.userPw.value, updateForm.userPw2.value)) {
-	            return false;
-	        } else if (!checkPhone(updateForm.userPhone.value)) {
-	            return false;
-	        } else if (!checkEmail(updateForm.userEmail.value)) {
-	            return false;
-	        } else if (!checkPeriod(updateForm.termsPeriod.value)) {
-	            return false; 
-	        return true;
-	  	  }
+
+	function checkAll() {
+		console.log("cc");
+        if (!checkPassword(updateForm.userPw.value, updateForm.userPw2.value)) {
+            return false;
+        } else if (!checkPhone(updateForm.userPhone.value)) {
+            return false;
+        } else if (!checkEmail(updateForm.userEmail.value)) {
+            return false;
+        } else if (!checkPeriod(updateForm.termsPeriod.value)) {
+            return false; 
 		}
+        return true;
+	}
 	
+	
+	// 공백 확인
+	function checkExistData(value, dataName) {
+		console.log("bb");
+        if (value == "") {
+            alert(dataName + " 입력해주세요!");
+            return false;
+        }
+        return true;
+    }
 		
 		
-		// 공백 확인
-		 function checkExistData(value, dataName) {
-		        if (value == "") {
-		            alert(dataName + " 입력해주세요!");
-		            return false;
-		        }
-		        return true;
-		    }
-		
-		
-		// 비밀번호1, 비밀번호2 체크 
-			function checkPassword(userPw, userPw2) {
-	     //비밀번호가 입력되었는지 확인하기
+	// 비밀번호1, 비밀번호2 체크 
+	function checkPassword(userPw, userPw2) {
+		console.log("aaaa");
+
+		//비밀번호가 입력되었는지 확인하기
 	     if (!checkExistData(userPw, "비밀번호를"))
 	         return false;
 	     //비밀번호 확인이 입력되었는지 확인하기
@@ -165,19 +165,14 @@
 	         return false;
 	     }
 		
-		
-		}
-		
-		
-		// alret
-		var msg = "${msg}";
-		if(msg) {
-			alert(msg);
-		}
-		
+		return true;
+	}
 	
-	
-	
+	// alret
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
 	
 	</script>
 </body>
