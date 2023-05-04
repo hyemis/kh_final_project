@@ -97,7 +97,7 @@
 											 <th scope="col" class="center">지원일</th>
 										     <th scope="col" class="center">회사명</th>
 										     <th scope="col" class="center">공고명</th>
-										     <th scope="col" class="center">열람상태</th>
+										     <th scope="col" class="center">지원취소</th>
 										   </tr>
 										  </thead>
 										  <tbody class="table-group-divider">
