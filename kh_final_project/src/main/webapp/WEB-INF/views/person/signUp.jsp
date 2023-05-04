@@ -414,10 +414,10 @@
 		
 		
 		// 사업자 번호 체크
-		function checkBsLicense() {
+		function checkBsLicense(bsLicense) {
         var text = document.getElementById("bsLicense");
-        if (!checkExistData(text.value, "생년월일을")) {
-            alert("생년월일을 입력해 주세요!");
+        if (!checkExistData(bsLicense.value, "사업자 번호를")) {
+            alert("사업자 번호를 입력해 주세요!");
             return false;
         } else
             return true;
@@ -425,9 +425,9 @@
 		
 		
 		// 회사 대표전화 체크 
-		function checkBsMainPhone() {
+		function checkBsMainPhone(bsMainPhone) {
         var text = document.getElementById("bsMainPhone");
-        if (!checkExistData(text.value, "대표번호를")) {
+        if (!checkExistData(bsMainPhone.value, "대표번호를")) {
             alert("대표번호를 입력해 주세요!");
             return false;
         } else
