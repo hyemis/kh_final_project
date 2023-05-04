@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -832,6 +833,22 @@ public class PsMainController {
 		return mv;
 	}
 
+	// 파일 업로드
+		@PostMapping("/fileupload")
+		public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,
+				Principal principal) throws Exception {
+
+			if (!file.isEmpty()) {
+				PsUserDto result = service.selectOne(principal.getName());
+				if (result != null) {
+					String url = rservice.upload(file, principal.getName());
+					mv.addObject("url", url);
+					mv.addObject("userinfo", result);
+				}
+			}
+			mv.setViewName("person/update");
+			return mv;
+		}
 	
 
 	
@@ -841,8 +858,7 @@ public class PsMainController {
 	@ExceptionHandler
 	public void exception(Exception e) {
 		e.printStackTrace();
-//		ModelAndView mv = new ModelAndView();
-//		return mv;
+
 	}
 
 }
