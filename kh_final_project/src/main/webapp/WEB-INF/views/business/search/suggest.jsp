@@ -128,7 +128,7 @@
 
 
 	<!-- Modal -->
-	<div class="modal fade" id="interview" data-bs-backdrop="static"
+	<div class="modal fade" id="interviewModal" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div
@@ -140,26 +140,45 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
+				<form action="<%=request.getContextPath()%>/business/search/suggestForm" method="post">
 				<div class="modal-body">
-
+						<input type="text" class="form-control" id="user_id" name="psUser" >
+						<input type="text" class="form-control" id="resume_no" name="resumeNo" >
 						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>면접대상자</h4>
+							</div>
+							<div class="col-10 was-validated">
+								<input type="text" class="form-control" id="user_name" >
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-2 text-center font-monospace">
+								<h4>제안 공고</h4>
+							</div>
+							<select class="col-10 form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()">
+									<c:forEach items="${recruit }" var="recruit">
+									<option value="${recruit.raNum }">${recruit.raTitle}</option>
+									</c:forEach>
+							</select>
+						</div>
+
+						<div class="pt-3 row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
 							<div class="col-10 was-validated">
-								<input type="text" class="form-control is-invalid"
-									name="boardTitle" placeholder="제목을 입력해주세요" required>
-								<hr>
+								<input type="text" class="form-control is-invalid" 
+									name="sgTitle" value="안녕하세요  ${info.userName }에서 면접제안드립니다." required>
 							</div>
 						</div>
-						<div class="row ">
+						<div class="pt-3 row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>내용</h4>
 							</div>
 							<div class="col-10 was-validated">
 								<input type="text" class="form-control is-invalid"
-									name="boardTitle" placeholder="내용을 입력해주세요" required>
-								<hr>
+									name="sgContent" placeholder="내용을 입력해주세요" required>
 							</div>
 						</div>
 
@@ -170,6 +189,7 @@
 							<button type="submit" class="btn btn-primary">등록</button>
 						</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -189,7 +209,7 @@
 	    var gender = $('#gender').val();
 	    page = (!$(this).data("page")) ? 1 : $(this).data("page");
 	    $.ajax({
-	      url: '${pageContext.request.contextPath}/business/search/suggest',
+	      url: '${pageContext.request.contextPath}/business/search/search',
 	      type: 'POST',
 	      data: {
 	        jobType: jobType,
@@ -220,10 +240,17 @@
             html += '<td class="text-center">' + resume.userName + '</td>';
             html += '<td class="text-center"><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=' + resume.resumeNo +'">' + resume.resumeTitle + '</a></td>';
             html += '<td class="text-center">' + resume.userEmail + '</td>';
-            html += '<td class="text-center"><a type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#interview">면접제안</a></td>';
+            html += '<td class="text-center"><a type="button" class="btn btn-light interview" data-bs-target="#interview" data-resumeno="'+resume.resumeNo+'" data-userid="'+resume.userId+'" data-username="'+resume.userName+'">면접제안</a></td>';
             html += '</tr>';
           }
           $('#result-body').html(html);
+          //면접제안 버튼을 누르면 실행할 함수
+          $(".btn.interview").on("click", function() {
+          	  $('.modal-body #user_id').val($(this).data("userid")); //user_id에  userId값 넣기
+          	  $('.modal-body #user_name').val($(this).data("username")); //username에  userName값 넣기
+          	  $('.modal-body #resume_no').val($(this).data("resumeno")); //resumeno에  resumeNo값 넣기
+        	  $("#interviewModal").modal("show"); 
+        	});
 		}
 	}//displayResume
 	function displayPage(data){
@@ -251,6 +278,8 @@
 	 $('.page-link').click(getSearchResume);
 	}// displayPage
 	</script>
+	
+
 	
 </body>
 </html>

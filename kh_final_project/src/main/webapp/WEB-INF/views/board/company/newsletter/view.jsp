@@ -86,15 +86,16 @@
 				<div class="text-center m-5" id="boardContent">${news.boardContent }</div>
 			</div>
 		</div>	
+		<c:if test="${not empty news.link}">
 		<div class="row ">
 				<div class="col-2 text-center font-monospace">
 					<h5>관련링크</h5>
 				</div>
 				<div class="col-10 ">
-					<a type="text" id="link" name="link" href="https://news.kbs.co.kr/news/view.do?ncd=7663964">
-					test 링크</a>
+					<a id="link" href="${news.link }">${not empty news.linkTitle ? news.linkTitle : '바로가기'}</a>
 				</div>
 		</div>		
+		</c:if>
 		<div class="m-5 text-center">
 			<c:if test="${not empty currentUserId and news.userId eq currentUserId}">
 			  <button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${news.boardNo}'">수정</button>
@@ -137,39 +138,7 @@
 	
 	
 
-<!--  	<script>
-	function getArticleTitle(url) {
-		  fetch(url)
-		    .then(response => response.text())
-		    .then(data => {
-		      const parser = new DOMParser();
-		      const htmlDoc = parser.parseFromString(data, 'text/html');
-		      const title = htmlDoc.querySelector('title');
-		      console.log(title.textContent);
-		    })
-		    .catch(error => console.error(error));
-		}
 
-		getArticleTitle('https://news.kbs.co.kr/news/view.do?ncd=7663964');
-		
-	</script>-->
-	
-	<script>
-function getArticleTitle(url) {
-  fetch(url)
-    .then(response => response.text())
-    .then(data => {
-      const parser = new DOMParser();
-      const htmlDoc = parser.parseFromString(data, 'text/html');
-      const title = htmlDoc.querySelector('title');
-      const linkTitle = title.textContent;
-      console.log(linkTitle);
-    })
-    .catch(error => console.error(error));
-}
-
-getArticleTitle('https://news.kbs.co.kr/news/view.do?ncd=7663964');
-</script>
 	
 
 	<!-- ckeditor5 -->

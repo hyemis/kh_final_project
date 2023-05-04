@@ -74,7 +74,8 @@
   	  	USER_PW=#{userPw},
   	USER_PHONE=#{userPhone},
   	USER_EMAIL=#{userEmail},
-  	TERMS_PERIOD=#{termsPeriod}
+  	TERMS_PERIOD=#{termsPeriod},
+  	TERMS_DATE=current_timestamp
   	where USER_ID = #{userId}
   </update>
 
