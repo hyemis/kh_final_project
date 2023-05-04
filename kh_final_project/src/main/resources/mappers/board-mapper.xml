@@ -290,7 +290,7 @@
 		   SET UPDATE_DATE = CURRENT_TIMESTAMP,
 			   BOARD_CONTENT = #{boardContent},
 			   BOARD_TITLE = #{boardTitle},
-			   LINK = #{link}
+			   LINK = #{link},
 			   LINK_TITLE = #{linkTitle}
 		 WHERE BOARD_NO = #{boardNo}
 		   AND USER_ID = #{userId}	
