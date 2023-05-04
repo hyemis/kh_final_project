@@ -499,48 +499,57 @@ $(function() {
 
 	// 스크랩 
 	function handleStarClick(event) {
-		  const raNum = event.target.closest('.star-icon').getAttribute('data-raNum');
-		  console.log(raNum);
+	  const clickedRaNum = event.target.closest('.star-icon').getAttribute('data-raNum');
+	  console.log(clickedRaNum);
+	
+	  // 모든 star-icon 요소를 반복하면서 각 요소의 data-raNum 속성값을 가져옵니다.
+	  document.querySelectorAll('.star-icon').forEach(function(el) {
+	    const raNum = el.getAttribute('data-raNum');
+	    // 클릭된 요소와 현재 반복중인 요소의 data-raNum 속성값이 같은 경우에만 색깔을 변경합니다.
+	    if (raNum === clickedRaNum) {
+	      $(el).find('span.fa-star').toggleClass("far fas").toggleClass("text-warning");
+	    }
+	  });
+	  
+	  // checkScrap를 호출하여 현재 스크랩 여부를 확인합니다.
+	  $.ajax({
+	    type: "POST",
+	    url: "${pageContext.request.contextPath}/person/checkScrap",
+	    data: { raNum: clickedRaNum },
+	    success: function (result) {
+	      
+	      // 스크랩 여부에 따라 deleteJob 또는 scrapJob을 호출합니다.
+	      if (result === 1) {
+	        $.ajax({
+	          type: "POST",
+	          url: "${pageContext.request.contextPath}/person/deleteJob",
+	          data: { raNum: clickedRaNum },
+	          success: function (result) {
+	          },
+	          error: function () {
+	            alert("스크랩 삭제에 실패하였습니다.");
+	          },
+	        });
+	      } else {
+	        $.ajax({
+	          type: "POST",
+	          url: "${pageContext.request.contextPath}/person/scrapJob",
+	          data: { raNum: clickedRaNum },
+	          success: function (result) {
+	            // do something
+	          },
+	          error: function () {
+	            alert("스크랩에 실패하였습니다.");
+	          },
+	        });
+	      }
+	    },
+	    error: function () {
+	      alert("스크랩 여부 확인에 실패하였습니다.");
+	    },
+	  });
+	}
 
-		  // checkScrap를 호출하여 현재 스크랩 여부를 확인합니다.
-		  $.ajax({
-		    type: "POST",
-		    url: "${pageContext.request.contextPath}/person/checkScrap",
-		    data: { raNum: raNum },
-		    success: function (result) {
-		      
-		      // 스크랩 여부에 따라 deleteJob 또는 scrapJob을 호출합니다.
-		      if (result === 1) {
-		        $.ajax({
-		          type: "POST",
-		          url: "${pageContext.request.contextPath}/person/deleteJob",
-		          data: { raNum: raNum },
-		          success: function (result) {
-		            $(event.target).toggleClass("far fas").toggleClass("text-warning");
-		          },
-		          error: function () {
-		            alert("스크랩 삭제에 실패하였습니다.");
-		          },
-		        });
-		      } else {
-		        $.ajax({
-		          type: "POST",
-		          url: "${pageContext.request.contextPath}/person/scrapJob",
-		          data: { raNum: raNum },
-		          success: function (result) {
-		            $(event.target).toggleClass("far fas").toggleClass("text-warning");
-		          },
-		          error: function () {
-		            alert("스크랩에 실패하였습니다.");
-		          },
-		        });
-		      }
-		    },
-		    error: function () {
-		      alert("스크랩 여부 확인에 실패하였습니다.");
-		    },
-		  });
-		}
 	
 	
 	// 초기화 버튼
@@ -550,6 +559,35 @@ $(function() {
 	});
 
 	
+	
+	// 페이지 실행 시 실행되는 함수
+	window.onload = function() {
+	  // 모든 star-icon 요소를 선택합니다.
+	  var starIcons = document.querySelectorAll('.star-icon');
+
+	  // 각 star-icon 요소를 순회하며 AJAX 호출을 전달합니다.
+	  starIcons.forEach(function(starIcon) {
+	    // data-raNum 속성 값을 가져옵니다.
+	    var raNum = starIcon.getAttribute('data-raNum');
+
+	    // AJAX를 이용해 스크랩 여부 확인
+	    $.ajax({
+	      type: 'POST',
+	      url: '${pageContext.request.contextPath}/person/checkScrap',
+	      data: {raNum: raNum},
+	      success: function(data) {
+	        // 스크랩 여부에 따라 별 상태 변경
+	        if(data == 1) {
+	          $(starIcon).find('span.fa-star').removeClass('far').addClass('fas').addClass('text-warning');
+	        } else {
+	          $(starIcon).find('span.fa-star').removeClass('fas').addClass('far').removeClass('text-warning');
+	        }
+	      }
+	    });
+	  });
+	};
+
+
 	
 	
 	</script>
