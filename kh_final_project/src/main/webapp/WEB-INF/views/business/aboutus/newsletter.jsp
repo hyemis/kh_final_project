@@ -133,8 +133,10 @@
 								<h4>관련링크</h4>
 							</div>
 							<div class="col-10 ">
-								<input type="text" class="form-control" id="link" name="link"
-									placeholder="링크를 입력해주세요">
+								<input type="url" class="form-control" name="link" id="link" oninput="fetchLinkTitle()" placeholder="링크를 입력하세요">
+								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle" style="display:none" readonly>
+								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 입력하세요"
+									   style="display:none">
 								<hr>
 							</div>
 						</div>
@@ -164,37 +166,31 @@
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
-	<!-- 링크 
-	<script>
-	const linkInput = $('#link');
-	const linkTitle = '';
-	
-	linkInput.addEventListener('change', () => {
-	  const url = linkInput.value;
-	  if (url.startsWith('http')) { // http 또는 https로 시작하는지 검사
-	    getArticleTitle(url).then(title => {
-	      linkTitle = title;
-	    }).catch(error => {
-	      console.error(error);
-	      alart("htttp 혹은 https로 시작되는 링크를 입력해 주세요")
-	    });
-	  }
-	});
-	
-	//뉴스제목을  linkTitle에 저장
-	function getArticleTitle(url) {
-	  return fetch(url)
-	    .then(response => response.text())
-	    .then(data => {
-	      const parser = new DOMParser();
-	      const htmlDoc = parser.parseFromString(data, 'text/html');
-	      const title = htmlDoc.querySelector('title').textContent;
-	      return title;
-	    })
-	    .catch(error => console.error(error));
-	}
-	</script>-->
+<script>	  
+	  function fetchLinkTitle() {
+		  const link = document.getElementById("link");
+		  const linkTitle = document.getElementById("linkTitle");
+		  const linkTitle2 = document.getElementById("linkTitle2");
 
+		// 입력된 URL에서 Title 추출
+		    fetch(link.value)
+		      .then(response => response.text())
+		      .then(html => {
+		        const parser = new DOMParser();
+		        const doc = parser.parseFromString(html, "text/html");
+		        const title = doc.querySelector("title").innerText;
+		        linkTitle.style.display = "block"; // 링크가 보이도록 함
+		        linkTitle.value = title;
+		      })
+		      .catch(error => {
+		        console.log(error);
+		        linkTitle2.focus();
+				linkTitle2.style.display = "block"; // 링크가 보이도록 함
+		        linkTitle2.value = null; //못 찾았을 때 넣어줄 값
+		      });
+		  }
+	</script>
+	
 	<!-- ckeditor5 -->
 	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	<script>

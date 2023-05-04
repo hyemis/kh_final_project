@@ -342,8 +342,10 @@
 								<h4>관련링크</h4>
 							</div>
 							<div class="col-10 ">
-								<input type="url" class="form-control" name="link" id="link" oninput="fetchLinkTitle()" placeholder="링크를 입력해주세요">
-								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle" readonly>
+								<input type="url" class="form-control" name="link" id="link" oninput="fetchLinkTitle()" placeholder="링크를 입력하세요">
+								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle" style="display:none" readonly>
+								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 입력하세요"
+									   style="display:none">
 								<hr>
 							</div>
 						</div>
@@ -363,7 +365,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" >등록</button>
+							<button type="submit" class="btn btn-primary" onclick>등록</button>
 						</div>
 					</form>
 				</div>
@@ -376,52 +378,29 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	
-<!--	  function fetchLinkTitle() {
-	    const link = document.getElementById("link");
-	    const linkTitle = document.getElementById("linkTitle");
-	
-	 // 입력된 URL에서 Title 추출
-	    fetch(link.value)
-	      .then(response => response.text())
-	      .then(html => {
-	        const parser = new DOMParser();
-	        const doc = parser.parseFromString(html, "text/html");
-	        let title = doc.querySelector('meta[property="og:title"]'); //og:title 값이 있다면 먼저 추출
-	        if (title) {
-	          title = title.getAttribute("content");
-	        } else {
-	          title = doc.querySelector("title").innerText; //없다면 title 추출
-	        }
-	        linkTitle.value = title;
-	      })
-	      .catch(error => {
-	        console.log(error);
-	        linkTitle.value = "바로가기"; //못 찾았을 때 넣어줄 값
-	      });
-	  } -->
+<script>	  
+	  function fetchLinkTitle() {
+		  const link = document.getElementById("link");
+		  const linkTitle = document.getElementById("linkTitle");
+		  const linkTitle2 = document.getElementById("linkTitle2");
 
-	
-	<script>
-	function fetchLinkTitle() {
-  const link = document.getElementById("link");
-  const linkTitle = document.getElementById("linkTitle");
-
-  // 입력된 URL에서 Title 추출
-  fetch(link.value, { mode: "no-cors" })
-    .then(response => response.text())
-    .then(html => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-      const ogTitle = doc.querySelector("meta[property='og:title']");
-      const title = ogTitle ? ogTitle.content : doc.querySelector("title").innerText;
-      linkTitle.value = title;
-    })
-    .catch(error => {
-      console.log(error);
-      linkTitle.value = "바로가기";
-    });
-}
-	
+		// 입력된 URL에서 Title 추출
+		    fetch(link.value)
+		      .then(response => response.text())
+		      .then(html => {
+		        const parser = new DOMParser();
+		        const doc = parser.parseFromString(html, "text/html");
+		        const title = doc.querySelector("title").innerText;
+		        linkTitle.style.display = "block"; // 링크가 보이도록 함
+		        linkTitle.value = title;
+		      })
+		      .catch(error => {
+		        console.log(error);
+		        linkTitle2.focus();
+				linkTitle2.style.display = "block"; // 링크가 보이도록 함
+		        linkTitle2.value = null; //못 찾았을 때 넣어줄 값
+		      });
+		  }
 	</script>
 	<!-- 숫자 카운트 애니메이션 -->
 	<script>
