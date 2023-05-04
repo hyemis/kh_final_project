@@ -93,44 +93,37 @@
 				</div>
 				<hr>
 
-			 	<div class="viewReply">
-					<c:forEach items="${replyList}" var="reply">
-						<table class="reply-table">
-							<tr>
-								<td class="pb-3 originReply reply-cell">${reply.replyContent}</td>
-								<td class="text-end">
-									<div class="d-flex justify-content-end align-items-center">
-										<sec:authorize
-											access="hasRole('ROLE_P') and #reply.userId == authentication.name">
-											<a class="" onclick="handleUpdateReply(this)"
-												data-reply-id="${reply.replyId}">수정</a>
-											<a class="ms-2" onclick="handleDeleteReply(this)"
-												data-reply-id="${reply.replyId}">삭제</a>
-										</sec:authorize>
-										<sec:authorize access="isAuthenticated()">
-											<a class="ms-2" onclick="handleInsertReReply(this)"
-												data-reply-id="${reply.replyId}">답글</a>
-											 <input type="hidden" name="replyLevel" value="${reply.replyLevel}">
- 											 <input type="hidden" name=replySeq value="${reply.replySeq}">
-										</sec:authorize>
-									</div>
-									<div class="text-muted small">
-										<span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에
-										작성
-									</div>
-								</td>
-						</table>
-						
-						
-						<hr>
-					</c:forEach>
-					
-				</div> 
-				
-
-    
-				
-				
+				<div class="viewReply">
+			    <c:forEach items="${replyList}" var="reply">
+			        <table class="reply-table ${reply.replyLevel eq 2 ? 'subReply-parent' : ''}">
+			            <c:choose>
+			                <c:when test="${reply.replyLevel ne 2}">
+			                    <td class="pb-3 originReply reply-cell">${reply.replyContent}</td>
+			                </c:when>
+			                <c:otherwise>
+			                    <td class="pb-3 subReply reply-cell">${reply.replyContent}</td>
+			                </c:otherwise>
+			            </c:choose>
+			            <td class="text-end">
+			                <div class="d-flex justify-content-end align-items-center">
+			                    <sec:authorize access="hasRole('ROLE_P') and #reply.userId == authentication.name">
+			                        <a class="" onclick="handleUpdateReply(this)" data-reply-id="${reply.replyId}">수정</a>
+			                        <a class="ms-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
+			                    </sec:authorize>
+			                    <sec:authorize access="isAuthenticated()">
+			                        <a class="ms-2" onclick="handleInsertReReply(this)" data-reply-id="${reply.replyId}">답글</a>
+			                        <input type="hidden" name="replyLevel" value="${reply.replyLevel}">
+			                        <input type="hidden" name="replySeq" value="${reply.replySeq}">
+			                    </sec:authorize>
+			                </div>
+			                <div class="text-muted small">
+			                    <span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에 작성
+			                </div>
+			            </td>
+			        </table>
+			        <hr>
+			    </c:forEach>
+			</div>
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex pt-3">
 						<input type="text" style="width: 100%;"

@@ -136,12 +136,18 @@
 	</insert>
 	
 	<!-- 모댓글 조회 -->
-	<select id="replyList" resultType="redto">
+<!-- 	<select id="replyList" resultType="redto">
 	SELECT * FROM REPLY 
 	WHERE BOARD_NO = #{boardNo}
 	AND REPLY_LEVEL IN ('0','1')
 	ORDER BY REPLY_CREATE_DATE ASC
+	</select> -->
+	<select id="replyList" resultType="redto">
+	SELECT * FROM REPLY 
+	WHERE BOARD_NO = #{boardNo}
+	ORDER BY board_no DESC, reply_req DESC, reply_seq ASC, reply_id ASC
 	</select>
+	
 	
 	<!-- 대댓글 조회 -->
 	<select id="reReplyList" resultType="redto">

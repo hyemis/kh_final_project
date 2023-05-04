@@ -296,9 +296,9 @@
 		            return false;
 		        } else if (!checkName2(signUpForm.userName.value)) {
 		            return false;
-		        } else if (!checkBirth(signUpForm.userBirth.value)) {
+		        } else if (!checkBsLicense(signUpForm.bsLicense.value)) {
 		            return false;
-		        } else if (!checkPhone(signUpForm.userPhone.value)) {
+		        } else if (!checkBsMainPhone(signUpForm.bsMainPhone.value)) {
 		            return false;
 		        } else if (!checkEmail(signUpForm.userEmail.value)) {
 		            return false;
@@ -411,6 +411,29 @@
         } else
             return true;
     	}
+		
+		
+		// 사업자 번호 체크
+		function checkBsLicense() {
+        var text = document.getElementById("bsLicense");
+        if (!checkExistData(text.value, "생년월일을")) {
+            alert("생년월일을 입력해 주세요!");
+            return false;
+        } else
+            return true;
+    	}
+		
+		
+		// 회사 대표전화 체크 
+		function checkBsMainPhone() {
+        var text = document.getElementById("bsMainPhone");
+        if (!checkExistData(text.value, "대표번호를")) {
+            alert("대표번호를 입력해 주세요!");
+            return false;
+        } else
+            return true;
+    	}
+		
 		
 		
 		// 이메일 확인 
