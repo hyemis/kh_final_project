@@ -63,8 +63,6 @@
 }
 
 </style>
-</style>
-
 
 </head>
 

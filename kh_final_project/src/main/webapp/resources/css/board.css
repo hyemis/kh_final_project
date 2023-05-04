@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-/* main */
-.s {
-	border: 1px solid gray;
-	border-radius: 5px;
-	padding: 30px;
-}
-
-.s1 {
-	padding: 30px;
-}
 
 /* post all  */
 .board-table {

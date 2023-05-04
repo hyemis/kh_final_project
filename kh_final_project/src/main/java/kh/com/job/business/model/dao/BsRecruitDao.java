@@ -61,8 +61,8 @@ public class BsRecruitDao {
 		return sqlSession.selectOne("business.lCatecountYAdmission");
 	}
 	
-	public List<BsRecruitDto> searchList(Map<String, Object> searchParams){
-		return sqlSession.selectList("business.searchList", searchParams);
+	public List<BsRecruitDto> searchList(Map<String, Object> keywords){
+		return sqlSession.selectList("business.searchList", keywords);
 	}
 
 	public int changeAdmission(BsRecruitDto dto) {

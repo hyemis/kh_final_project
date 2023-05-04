@@ -113,8 +113,8 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	
 	// 검색 
 	@Override
-	public List<BsRecruitDto> searchList(Map<String, Object> searchParams){
-		return  dao.searchList(searchParams);
+	public List<BsRecruitDto> searchList(Map<String, Object> keywords){
+		return  dao.searchList(keywords);
 	}
 	
 	// 카테고리 타입 별 채용조건

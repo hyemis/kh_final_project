@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>joba</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -38,6 +38,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
 
+
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
@@ -62,6 +63,13 @@
 
 .s1 {
 	padding: 30px;
+}
+
+.linkPost {
+	text-decoration: underline; 
+	font-weight: bold; 
+	font-size:0.9rem;
+	color: #333333;
 }
 </style>
 
@@ -92,7 +100,7 @@
 							<c:forEach var="board" items="${topReadPost}">
 								<tr>
 									<td>
-										<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank"> 
+										<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost"> 
 											${board.boardTitle}
 										</a>
 									</td>
@@ -124,7 +132,7 @@
 							<h5>취업준비방</h5>
 							<c:forEach var="board" items="${UBD01}">
 								<div>
-									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
 									</a>
 								</div>
 							</c:forEach>
@@ -134,7 +142,7 @@
 						<h5>신입방</h5>
 							<c:forEach var="board" items="${UBD02}">
 								<div>
-									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
 									</a>
 								</div>
 							</c:forEach>
@@ -145,7 +153,7 @@
 						<h5>면접방</h5>
 							<c:forEach var="board" items="${UBD03}">
 								<div>
-									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
 									</a>
 								</div>
 							</c:forEach>
@@ -154,7 +162,7 @@
 						<h5>질문게시판 </h5>
 							<c:forEach var="board" items="${UBD04}">
 								<div>
-									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank">${board.boardTitle}
+									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
 									</a>
 								</div>
 							</c:forEach>

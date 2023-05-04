@@ -206,7 +206,7 @@
 															전공계열</label>
 														<div class="col-sm-10">
 															<select class="form-select" name="highMajor">
-																<option value="0">전공계열</option>
+																<option value="">전공계열</option>
 																<option value="이과">이과</option>
 																<option value="문과">문과</option>
 																<option value="예체능">예체능</option>

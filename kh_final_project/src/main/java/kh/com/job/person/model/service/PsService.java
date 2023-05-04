@@ -16,6 +16,7 @@ public interface PsService {
 	public int idChk(String userId) throws Exception;
 	public List<PsUserDto> selectList() throws Exception;
 	public int insert(PsUserDto dto) throws Exception;
+	public int emailChk(String email) throws Exception;
 	public int businessInsert(PsUserDto dto) throws Exception;
 	public int update(PsUserDto dto) throws Exception;
 	public int delete(String userId) throws Exception;
@@ -32,6 +33,9 @@ public interface PsService {
 	public int scrapCompany(Map<String, Object> InfoNo) throws Exception;
 	public int deleteCompany(Map<String, Object> InfoNo) throws Exception;
 	public List<PsScrapInfoDto> selectListCom(String userId) throws Exception;
+	
+	// userPic
+	public int userPic(PsUserDto dto) throws Exception;
 	 
 	//입사지원
 	public int applyJob(BsAplicantDto dto) throws Exception;

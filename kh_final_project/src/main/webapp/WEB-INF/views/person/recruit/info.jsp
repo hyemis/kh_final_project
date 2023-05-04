@@ -439,14 +439,15 @@ $(function() {
 	        checkedKeywords[name] = [value]; // 해당 name으로 체크된 값이 없다면, 새로운 배열 생성
 	      }
 	    });
-	    
+	    var aaa = {
+		        keyword: searchKeyword,
+		        checkedKeywords: checkedKeywords
+		      };
 	    $.ajax({
 	      type : 'POST',
 	      url : "${pageContext.request.contextPath}/person/search",
-	      data: {
-	        keyword: searchKeyword,
-	        checkedKeywords: checkedKeywords
-	      },
+	      contentType:"application/json; charset=utf-8",
+	      data: JSON.stringify(aaa),
   success : function(result) {
 		if (!result || result.length === 0) {
 			let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
