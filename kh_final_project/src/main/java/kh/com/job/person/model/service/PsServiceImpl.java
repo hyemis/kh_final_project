@@ -272,6 +272,11 @@ public class PsServiceImpl implements PsService {
 		public List<PsScrapInfoDto> selectListCom(String userId) throws Exception {
 			return dao.selectListCom(userId);
 		}
+		
+		@Override
+		public int userPic(PsUserDto dto) throws Exception {
+			return dao.userPic(dto);
+		}
 
 
 

@@ -76,6 +76,11 @@ public class PsDao {
 		return sqlSession.update("person.update", dto);
 	}
 	
+	// 회원 사진
+	public int userPic(PsUserDto dto) throws Exception {
+		return sqlSession.update("person.userPic", dto);
+	}
+	
 	// 아이디 찾기
 	public PsUserDto findId(Map<String, Object> findId)  throws Exception {
 			return sqlSession.selectOne("person.findId", findId);

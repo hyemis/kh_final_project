@@ -219,7 +219,10 @@ public class PsMainController {
 
 	// 회원가입 작성
 	@PostMapping("/signUp")
-	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr, HttpServletRequest request)  throws Exception{
+	public ModelAndView dosignUp(ModelAndView mv
+			, PsUserDto dto
+			, RedirectAttributes rttr
+			, HttpServletRequest request)  throws Exception{
 
 			int result = -1;
 
@@ -332,12 +335,16 @@ public class PsMainController {
 
 	// 회원정보 업데이트
 	@PostMapping("/update")
-	public ModelAndView update(ModelAndView mv, PsUserDto dto, Principal principal, RedirectAttributes rttr)
+	public ModelAndView update(ModelAndView mv
+			, PsUserDto dto
+			, Principal principal
+			, RedirectAttributes rttr)
 			throws Exception {
 
 		if (principal.getName() != null) {
 			dto.setUserId(principal.getName());
 			dto.setUserPw(passwordEncoder.encode(dto.getUserPw())); // 패스워드 암호화
+		
 			service.update(dto);
 			mv.setViewName("redirect:/person/mypage");
 			rttr.addFlashAttribute("msg", "회원정보 수정에 성공했습니다.");
@@ -527,7 +534,6 @@ public class PsMainController {
 			List<PsResumeDto> resume = rservice.selectList(principal.getName());
 
 			if (result != null) {
-				mv.addObject("userinfo", result);
 				mv.addObject("scraplist", scrap);
 				mv.setViewName("person/scrapjob");
 				mv.addObject("resumelist", resume);
@@ -835,18 +841,22 @@ public class PsMainController {
 
 	// 파일 업로드
 		@PostMapping("/fileupload")
-		public ModelAndView fileupload(ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,
-				Principal principal) throws Exception {
+		public ModelAndView fileupload(PsUserDto dto, ModelAndView mv, @RequestParam(name = "report", required = false) MultipartFile file,
+				Principal principal, RedirectAttributes rttr) throws Exception {
 
 			if (!file.isEmpty()) {
-				PsUserDto result = service.selectOne(principal.getName());
-				if (result != null) {
-					String url = rservice.upload(file, principal.getName());
-					mv.addObject("url", url);
-					mv.addObject("userinfo", result);
-				}
+					String UserPic = rservice.upload(file, principal.getName());
+					dto.setUserPic(UserPic);
+					dto.setUserId(principal.getName());
+					int result = service.userPic(dto);
+					if(result > 0) {
+						rttr.addFlashAttribute("msg", "사진등록이 완료되었습니다.");
+					}
+					else {
+						rttr.addFlashAttribute("msg", "사진등록이 실패되었습니다.");
+					}
 			}
-			mv.setViewName("person/update");
+			 mv.setViewName("redirect:/person/update");
 			return mv;
 		}
 	

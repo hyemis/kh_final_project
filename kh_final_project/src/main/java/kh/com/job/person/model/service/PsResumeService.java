@@ -15,7 +15,6 @@ import kh.com.job.person.model.dto.PsUnivDto;
 
 public interface PsResumeService {
 
-	// TODO: userid 수정 - 사용할 때 수정하기
 	public PsResumeDto selectOne(String userId) throws Exception;
 
 	// 이력서 상세보기 - 이력서 정보

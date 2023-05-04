@@ -75,9 +75,17 @@
   	USER_PHONE=#{userPhone},
   	USER_EMAIL=#{userEmail},
   	TERMS_PERIOD=#{termsPeriod},
-  	TERMS_DATE=current_timestamp
+  	TERMS_DATE=current_timestamp,
+  	USER_PIC=#{userPic}
   	where USER_ID = #{userId}
   </update>
+  
+  <!--  개인회원 사진 update -->
+	<update id="userPic" parameterType="pdto">
+		update USER_TABLE set 
+		USER_PIC=#{userPic}
+		where USER_ID = #{userId}
+	</update>
 
 	<!-- 채용공고 스크랩여부 확인 -->  
 	<select id="checkScrap" parameterType="map" resultType="_int">
