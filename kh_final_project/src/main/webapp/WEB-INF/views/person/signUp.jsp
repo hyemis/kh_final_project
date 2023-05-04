@@ -391,10 +391,10 @@
         return true; //확인이 완료되었을 때
     	}
 		
-		// 생년월일 체크 
-		function checkBirth() {
+		// 생년월일 체크  확인필요
+		function checkBirth(userBirth) {
         var text = document.getElementById("userBirth");
-        if (!checkExistData(text.value, "생년월일을")) {
+        if (!checkExistData(userBirth, "생년월일을")) {
             alert("생년월일을 입력해 주세요!");
             return false;
         } else
@@ -402,10 +402,10 @@
     	}
 		
 		
-		// 휴대폰번호 체크 
-		function checkPhone() {
+		// 휴대폰번호 체크 확인필요 
+		function checkPhone(userPhone) {
         var text = document.getElementById("userPhone");
-        if (!checkExistData(text.value, "휴대폰번호를")) {
+        if (!checkExistData(userPhone, "휴대폰번호를")) {
             alert("휴대폰번호를 입력해 주세요!");
             return false;
         } else
@@ -413,10 +413,10 @@
     	}
 		
 		
-		// 사업자 번호 체크
+		// 사업자 번호 체크 확인필요
 		function checkBsLicense(bsLicense) {
         var text = document.getElementById("bsLicense");
-        if (!checkExistData(bsLicense.value, "사업자 번호를")) {
+        if (!checkExistData(bsLicense, "사업자 번호를")) {
             alert("사업자 번호를 입력해 주세요!");
             return false;
         } else
@@ -424,10 +424,10 @@
     	}
 		
 		
-		// 회사 대표전화 체크 
+		// 회사 대표전화 체크 확인필요 
 		function checkBsMainPhone(bsMainPhone) {
         var text = document.getElementById("bsMainPhone");
-        if (!checkExistData(bsMainPhone.value, "대표번호를")) {
+        if (!checkExistData(bsMainPhone, "대표번호를")) {
             alert("대표번호를 입력해 주세요!");
             return false;
         } else
@@ -452,7 +452,7 @@
         return true; //확인이 완료되었을 때
    		}
 		
-		// 주소 체크 
+		// 주소 체크  확인필요
 		function checkAdress() {
         var text = document.getElementById("userAdress");
         if (!checkExistData(text.value, "주소를")) {
