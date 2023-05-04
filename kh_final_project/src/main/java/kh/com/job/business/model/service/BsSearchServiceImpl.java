@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.business.model.dao.BsSearchDao;
+import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
+import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
 
@@ -47,6 +49,17 @@ public class BsSearchServiceImpl implements BsSearchService{
 		
 		return list;
 	}
+
+	@Override
+	public List<BsRecruitDto> getRecruit(String userId) {
+		return dao.getRecruit(userId);
+	}
+
+	@Override
+	public int suggest(BsSuggestDto dto) {
+		return dao.suggest(dto);
+	}
+
 	
 
 

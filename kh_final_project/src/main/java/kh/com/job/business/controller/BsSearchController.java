@@ -19,6 +19,8 @@ import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
+import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.business.model.service.BsSearchService;
@@ -41,10 +43,13 @@ public class BsSearchController {
 	
 	@Autowired
 	private BsSearchService bsService;
+	
+	@Autowired
+	private BsAccountService baService;
 
 	@GetMapping("/suggest")
-	public ModelAndView category(ModelAndView mv, BsSearchDto sdto) {
-		
+	public ModelAndView category(ModelAndView mv, BsSearchDto sdto, Principal principal) {
+	
 		//직종선택 :직업코드('JN')가져오기
 		mv.addObject("JNlist", brService.getCateList("JN"));
 		//경력선택
@@ -53,12 +58,16 @@ public class BsSearchController {
 		mv.addObject("EDlist", brService.getCateList("ED"));
 		//성별선택
 		mv.addObject("SElist", brService.getCateList("SE"));
+		//로그인한 계정 정보
+		mv.addObject("info",baService.viewAccount(principal.getName()));
+		//공고리스트
+		mv.addObject("recruit",bsService.getRecruit(principal.getName()));
 		
 		return mv;
 	}
 	
 	//검색결과
-	@PostMapping("/suggest")
+	@PostMapping("/search")
 	@ResponseBody
 	public Paging searchResume(
 	       @RequestParam(name = "jobType", required = false, defaultValue = "") String jobType,
@@ -79,8 +88,16 @@ public class BsSearchController {
 	        
 	        return list;
 	    }
-
-
+	
+	@PostMapping("/suggestForm")
+	public ModelAndView insertNewsletter(ModelAndView mv, BsSuggestDto dto, Principal principal, RedirectAttributes rttr)  {
+		dto.setBsUser(principal.getName()); 
+		bsService.suggest(dto);
+		mv.setViewName("redirect:/business/search/suggest");
+		rttr.addFlashAttribute("msg", "면접제안 완료");
+		System.out.println(dto);
+		return mv;
+	}
 	
 	
 
