@@ -46,12 +46,32 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<br>
 	<div class="container-sm">	
-		
 		<div class="grid gap-3 border border-primary">
 			 <div class="row justify-content-center">
+			 	<div class="d-flex justify-content-center">
+				    <div class="m-4" style="text-align: center">
+				        <h3>회원정보수정</h3>
+				    </div>
+				</div>
+
+				<div class="d-flex justify-content-center">
+				    <div class="col-6">
+				        <label for="userPic">회원 사진</label>
+				        <br>
+				        <img src="${PsUserDto.userPic ? PsUserDto.userPic : 'https://dummyimage.com/150x200/d6d6d6/000000&text=150x200'}" width="150" height="200">
+				        <form name="userPic" action="fileupload" method="post" enctype="multipart/form-data">
+						    <div class="d-flex justify-content-end">
+						    <input type="file" name="report" placeholder="첨부파일">
+						        <button class="btn btn-outline-dark" type="submit">사진 등록</button>
+						    </div>
+						</form> 
+				    </div>
+				</div>
+
 			 
-		        <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll();">
-			        	<div class="m-4" style="text-align: center"><h3>회원정보수정</h3></div>
+			 
+				 		 <form class="col-6" name=updateForm action="update" method="post" onsubmit="return checkAll();">
+			        	<!-- <div class="m-4" style="text-align: center"><h3>회원정보수정</h3></div> -->
 				          
 				            <div class="mb-3">
 				            <label for="userName">이름 </label>
@@ -99,14 +119,24 @@
 						
 						</div>
 				</form>
-				<form action="fileupload" method="post" enctype="multipart/form-data">
-					<input type="file" name="report" placeholder="첨부파일"><br>
-					<button class="btn btn-outline-dark m-2" type="submit">사진 등록</button>
-				</form>
-			       
-				    
-		    </div>
+				 
+	<%-- <div class="d-flex justify-content-center">
+  <div class="m-3">
+    <label for="userPic">회원 사진 등록</label>
+    <br>
+    <img src="${PsUserDto.userPic ? PsUserDto.userPic : 'https://dummyimage.com/150x200/d6d6d6/000000&text=150x200'}" width="150" height="200">
+    <form name="userPic" action="fileupload" method="post" enctype="multipart/form-data">
+      <input type="file" name="report" placeholder="첨부파일">
+      <button class="btn btn-outline-dark m-2" type="submit">사진 등록</button>
+    </form> 
+  </div>
+</div> --%>
+
+			        
 		</div>
+		
+		
+	</div>
 	</div>
 	
 	<!-- footer -->

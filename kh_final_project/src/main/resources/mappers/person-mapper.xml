@@ -53,8 +53,8 @@
   
   <!-- 개인회원 insert -->
   <insert id="insert" parameterType="pdto">
-  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE, USER_NAME, USER_CREATED_AT, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD, USER_PIC)
-	VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{addressRoad},#{addressJibun},#{addressDetail}, #{addressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default, #{userPic})
+  	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE, USER_NAME, USER_CREATED_AT, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
+	VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{addressRoad},#{addressJibun},#{addressDetail}, #{addressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default)
   </insert>
   
   <!-- 기업회원 insert -->

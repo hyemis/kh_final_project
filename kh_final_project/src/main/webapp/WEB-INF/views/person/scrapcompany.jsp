@@ -60,9 +60,12 @@
 					<div class="container border border-primary">
 						<div class="bg-light p-3">
 							<div class="bg-white rounded p-4 row" style="border: 1px dashed rgba(0, 185, 142, .3)">
-								<img class="object-fit-sm-contain border" src="https://dummyimage.com/150x200/d6d6d6/000000&text=150x200" alt="">
+								<img class="object-fit-sm-contain border" 
+								     src="<c:if test='${not empty userinfo.userPic}'>${userinfo.userPic}</c:if>
+								           <c:if test='${empty userinfo.userPic}'>https://dummyimage.com/150x200/d6d6d6/000000&text=150x200</c:if>"
+								            width="150"  height="200">	
 							</div>
-							<div class="">
+							<div>
 									<span>이름 : </span>
 									<span>${userinfo.userName }</span><br>
 									<span>전화번호 : </span>
