@@ -39,7 +39,7 @@
 	 	<typeAlias type="kh.com.job.business.model.dto.InterviewDto"	alias="indto" /> 
 		<typeAlias type="kh.com.job.business.model.dto.BsSearchDto"		alias="bsdto" /> 	
 		<typeAlias type="kh.com.job.business.model.dto.BsUserDto"		alias="budto" />
-			
+		<typeAlias type="kh.com.job.business.model.dto.BsSuggestDto"	alias="bgdto" />
 			
 	
 		

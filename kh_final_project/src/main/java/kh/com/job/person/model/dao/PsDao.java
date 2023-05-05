@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -162,5 +163,18 @@ public class PsDao {
 	public List<PsScrapInfoDto> selectListCom(String userId) throws Exception {
 		return sqlSession.selectList("person.selectListCom", userId);
 	}
+
+	public int countpsSuggest(BsSuggestDto dto) {
+		return sqlSession.selectOne("suggest.countpsSuggest", dto);
+	}
+
+	public List<BsSuggestDto> psSuggestList(BsSuggestDto dto) {
+		return sqlSession.selectList("suggest.psSuggestList",dto);
+	}
+
+	public int interviewAccept(BsSuggestDto dto) {
+		return sqlSession.insert("suggest.interviewAccept",dto);
+	}
+
 
 }

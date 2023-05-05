@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="suggest">
+  
+  	<!-- 면접제안 -->
+	<insert id="suggest">
+		INSERT INTO
+		SUGGEST (SG_NO, SG_TITLE, SG_CONTENT, BS_USER, PS_USER, RESUME_NO, RA_NUM, SEND_DATE)
+		VALUES (#{sgNo},#{sgTitle},#{sgContent},#{bsUser},#{psUser},#{resumeNo},#{raNum}, SYSDATE )	   
+		<selectKey keyProperty="sgNo" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(SG_NO) +1 FROM SUGGEST
+		</selectKey>
+	</insert>
+	
+	<!-- 공고리스트  -->
+	<select id="getRecruit" resultType="brdto">
+		SELECT RA_NUM,COMPANY_NAME,RA_TITLE
+		FROM RECRUIT_REGIST
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- bs/제안한리스트 /todo페이징해야함-->
+	<select id="bsSuggestList" resultType="bgdto">
+		SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SEND_DATE
+		FROM SUGGEST SG
+		JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		WHERE BS_USER = #{userId}
+	</select>
+	
+	<!-- ps/제안받은 리스트 카운트 -->
+	<select id="countpsSuggest" resultType="_int">
+		SELECT COUNT(*)
+		  FROM (
+				SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER
+				  FROM SUGGEST SG
+				  JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
+				 WHERE PS_USER = #{psUser}
+		  )
+	</select>
+	
+	<!-- ps/제안받은 리스트 -->
+	<select id="psSuggestList" resultType="bgdto">
+		SELECT *
+		  FROM (
+		  		SELECT ROWNUM AS NUM, A. *
+		  		 FROM (
+		  		 		SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER
+						FROM SUGGEST SG
+						JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
+						WHERE PS_USER = #{psUser}
+						ORDER BY SG_NO DESC
+		  		      ) A
+		 	   )
+		 WHERE NUM BETWEEN #{startNum} AND #{endNum}	   
+	</select>
+	
+	<!-- 면접수락 -->
+	<insert id="interviewAccept">
+	</insert>
+	
+	
+</mapper>

@@ -23,6 +23,7 @@ public class BsSuggestDto {
 	private String sgContent;
 	private String psUser;
 	private String bsUser;
+	private String userId;
 	private String sendDate;
 	
 	private String companyName;

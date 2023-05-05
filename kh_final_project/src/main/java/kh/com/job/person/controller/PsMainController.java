@@ -447,14 +447,18 @@ public class PsMainController {
 	// 면접제안 리스트
 	@GetMapping("/suggest")
 	public ModelAndView suggestPage(ModelAndView mv, Principal principal, BsSuggestDto dto) {
-//		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
-//				if(dto.getPnum() < 1) {
-//				dto.setPnum(1);
-//				}
-//				Paging list = service.psSuggestList(dto);
-//				System.out.println(dto);
-//								
-//				mv.addObject("suggest", list);		
+		//로그인한 id
+		System.out.println("----------------------- 로그인한 ID: " + principal.getName());
+		dto.setPsUser(principal.getName());
+		
+		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
+				if(dto.getPnum() < 1) {
+				dto.setPnum(1);
+				}
+				Paging list = service.psSuggestList(dto);
+				System.out.println(dto);
+								
+				mv.addObject("suggest", list);		
 				
 				return mv;
 	}

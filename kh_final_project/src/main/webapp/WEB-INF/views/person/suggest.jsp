@@ -70,7 +70,7 @@
 						<div class="row g-5 align-items-center">
 							<div class="mb-4">
 								<h1 class="mb-3">면접 제안</h1>
-								<p>기업으로부터 온 면접 제안 리스트 입니다. 수락시 바로 면접리스트에 올라갑니다.</p>
+								<p>기업으로부터 온 면접 제안 리스트 입니다. 수락시 서류전형 없이 바로 면접대상자가 됩니다.</p>
 								<table class="table">
 									<thead>
 										<tr>
@@ -81,10 +81,11 @@
 										</tr>
 									</thead>
 										<tbody>
-										<c:forEach items="${info.getPage() }" var="info">
+										<c:forEach items="${suggest.getPage() }" var="suggest">
 											<tr>
 												<td>${suggest.sendDate }</td>
-												<td>${suggest.sendDate }</td>
+												<td>${suggest.companyName }</td>
+												<td>${suggest.sgTitle }</td>
 												<td><a type="button">수락하기</a></td>
 											</tr>
 										</c:forEach>	
