@@ -45,9 +45,11 @@ import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
+import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
+import kh.com.job.common.page.Paging;
 import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsResumeDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
@@ -442,8 +444,20 @@ public class PsMainController {
 		return result;
 	}
 	
-	
-	
+	// 면접제안 리스트
+	@GetMapping("/suggest")
+	public ModelAndView suggestPage(ModelAndView mv, Principal principal, BsSuggestDto dto) {
+//		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
+//				if(dto.getPnum() < 1) {
+//				dto.setPnum(1);
+//				}
+//				Paging list = service.psSuggestList(dto);
+//				System.out.println(dto);
+//								
+//				mv.addObject("suggest", list);		
+				
+				return mv;
+	}
 	
 
 	// 관심기업정보 화면
