@@ -54,13 +54,12 @@
 			        	
 				          <div class="row">
 				          
-				            <div class="mb-3">
+				             <div class="mb-3">
 				              <label for="userId">아이디</label>
 				              <input type="text" class="form-control userId" name="userId" id="psuserId" placeholder="영문,숫자,'_' 사용가능" >
 				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
 				              <button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">아이디 중복 체크</button>
-				              
-				            </div>
+				            </div> 
 				            
 				            <div class="mb-3">
 				              <label for="userPw">비밀번호</label>

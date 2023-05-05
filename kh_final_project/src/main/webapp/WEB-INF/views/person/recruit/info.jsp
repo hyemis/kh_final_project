@@ -8,60 +8,30 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>채용 정보</title>
+<title>JOB-A_채용 정보</title>
 <!-- cs -->
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
-	rel="icon">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
-	rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
-	rel="stylesheet">
-
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-<link href="${pageContext.request.contextPath}/resources/css/person.css"
-	rel="stylesheet">
-	
-	<link
-	href="${pageContext.request.contextPath}/resources/css/info.css"
-	rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="${pageContext.request.contextPath}/resources/css/person.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/info.css" rel="stylesheet">
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/wow/wow.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/easing/easing.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
 </head>
 <body>
@@ -70,8 +40,13 @@
 
 	<!-- page section -->
 	<section>
-		<div class="container-fluid"
-			style="background-color: #f2f2f2; min-height: 300px;">
+	<div class="container-xxl py-5">
+		<div class="container-fluid bg-white p-5">
+			<h3>채용정보검색</h3>
+			<span>원하시는 채용 정보를 검색하세요. </span>
+		</div>
+		<!-- 검색 부분  -->
+		<div class="container-fluid" style="background-color: #f8f9fa; min-height: 300px;">
 			<div class="d-flex justify-content-center align-items-center">
 				<div class="fdept flex-grow-1" style="min-height: 300px;">
 					<div class="m-3 fdeptList" style="min-height: 300px;">
@@ -183,6 +158,7 @@
 		</div>
 
 
+		<!--  채용공고 부분 -->
 		<div class="container-fluid bg-white p-5 recruit-Container">
 			<c:forEach var="recruit" items="${recruitList}">
 				<table class="recruit-table">
@@ -208,7 +184,7 @@
 				</table>
 			</c:forEach>
 		</div>
-
+	</div>
 	</section>
 
 
@@ -218,10 +194,9 @@
 
 	<!-- page script -->
 	<script>
-	$('.fcateinfo')
-	.on(
-			'click',
-			function() {
+	
+	//1단계 카테고리 
+	$('.fcateinfo').on('click',function() {
 
 				let id = $(this).find('.categoryId').val();
 				let type = $(this).find('.categoryType').val();
@@ -258,19 +233,15 @@
 						});
 			});
 
-$(document)
-	.on(
-			'click',
-			'.mcateinfo',
-			function() {
+	//2단계 카테고리 
+	$(document).on('click','.mcateinfo',function() {
 
 				let id = $(this).find('.categoryId').val();
 				let type = $(this).closest('.mdeptList').find(
 						'.categoryType').val();
 
 				//3단계
-				$
-						.ajax({
+				$.ajax({
 							url : "${pageContext.request.contextPath}/person/listlcate",
 							type : "post",
 							data : {
@@ -300,14 +271,10 @@ $(document)
 
 			});
 
-$(document)
-	.on(
-			'click',
-			'.lcateinfo',
-			function() {
+	//3단계 카테고리 
+	$(document).on('click','.lcateinfo', function() {
 				var categoryId = $(this).find('.categoryId').val();
-				$
-						.ajax({
+				$.ajax({
 							type : 'POST',
 							url : "${pageContext.request.contextPath}/person/recruit/info",
 							data : {
@@ -358,143 +325,78 @@ $(document)
 			});
 
 
-/* //search 
-$(function() {
-$('.search-button').click(function() {
 
-	 
-	 var searchKeyword = $('#search').val(); // 검색창에 입력한 검색어를 가져옴
-	$('input[type="checkbox"]:checked').each(function() {
-	  searchKeyword += ',' + $(this).val(); // 체크박스에 체크된 값들을 가져와서 검색어에 더해줌
+	//search 
+	$(function() {
+	 $('.search-button').click(function() {
+		    var searchKeyword = $('#search').val(); // 검색창에 입력한 검색어를 가져옴
+		    
+		    var checkedKeywords = {};
+		    $('input[type="checkbox"]:checked').each(function() {
+		      var name = $(this).attr('name');
+		      var value = $(this).val();
+		      if (checkedKeywords[name]) {
+		        checkedKeywords[name].push(value); // 이미 해당 name으로 체크된 값이 있다면, 배열에 추가
+		      } else {
+		        checkedKeywords[name] = [value]; // 해당 name으로 체크된 값이 없다면, 새로운 배열 생성
+		      }
+		    });
+		    var aaa = {
+			        keyword: searchKeyword,
+			        checkedKeywords: checkedKeywords
+			      };
+		    $.ajax({
+		      type : 'POST',
+		      url : "${pageContext.request.contextPath}/person/search",
+		      contentType:"application/json; charset=utf-8",
+		      data: JSON.stringify(aaa),
+	  success : function(result) {
+			if (!result || result.length === 0) {
+				let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
+				$(".recruit-Container").html(
+						htmlVal);
+	
+				let totalCount = 0; // 검색 결과 총 개수
+				$('#total-count').text("0");
+			} else {
+				$('.recruit-Container').empty(); // 이전 결과 지우기
+	
+				// 새로운 내용 출력
+				let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
+				for (i = 0; i < result.length; i++) {
+				    recruitTable += '<table class="recruit-table">';
+				    recruitTable += '<tr>';
+				    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
+				    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+				    recruitTable += '</a></td></tr>';
+				    recruitTable += '<tr>';
+				    <sec:authorize access="isAuthenticated()">
+				      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+					  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+					  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+					  recruitTable += '</td>';
+				    </sec:authorize>
+				    <sec:authorize access="!isAuthenticated()">
+				        recruitTable += '<td>~' + result[i].closeDate + '</td>';
+				    </sec:authorize>
+				    recruitTable += '</tr></table>';
+				}
+				recruitTable += '</div>';
+				
+				
+				$('.recruit-Container').html(recruitTable);
+	
+				let totalCount = result.length; // 검색 결과 총 개수
+				$("#total-count").text(
+						totalCount); // 검색 결과 총 개수 출력
+			}
+		},
+		error : function() {
+			alert('채용 정보를 가져오는데 실패하였습니다.');
+		}
+			});
+		});
 	});
-	searchKeyword = searchKeyword.replace(/^,/, ''); // 첫번째 문자가 콤마인 경우 제거 
-
-
-
-$.ajax({
-  type : 'POST',
-  url : "${pageContext.request.contextPath}/person/search",
-  data: {keyword: searchKeyword},
-  success : function(result) {
-		if (!result || result.length === 0) {
-			let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
-			$(".recruit-Container").html(
-					htmlVal);
-
-			let totalCount = 0; // 검색 결과 총 개수
-			$('#total-count').text("0");
-		} else {
-			$('.recruit-Container').empty(); // 이전 결과 지우기
-
-			// 새로운 내용 출력
-			let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
-			for (i = 0; i < result.length; i++) {
-			    recruitTable += '<table class="recruit-table">';
-			    recruitTable += '<tr>';
-			    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
-			    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
-			    recruitTable += '</a></td></tr>';
-			    recruitTable += '<tr>';
-			    <sec:authorize access="isAuthenticated()">
-			      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
-				  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
-				  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
-				  recruitTable += '</td>';
-			    </sec:authorize>
-			    <sec:authorize access="!isAuthenticated()">
-			        recruitTable += '<td>~' + result[i].closeDate + '</td>';
-			    </sec:authorize>
-			    recruitTable += '</tr></table>';
-			}
-			recruitTable += '</div>';
-			
-			
-			$('.recruit-Container').html(recruitTable);
-
-			let totalCount = result.length; // 검색 결과 총 개수
-			$("#total-count").text(
-					totalCount); // 검색 결과 총 개수 출력
-		}
-	},
-	error : function() {
-		alert('채용 정보를 가져오는데 실패하였습니다.');
-	}
-});
-});
-});  */
-
-
-//search 
-$(function() {
- $('.search-button').click(function() {
-	    var searchKeyword = $('#search').val(); // 검색창에 입력한 검색어를 가져옴
-	    
-	    var checkedKeywords = {};
-	    $('input[type="checkbox"]:checked').each(function() {
-	      var name = $(this).attr('name');
-	      var value = $(this).val();
-	      if (checkedKeywords[name]) {
-	        checkedKeywords[name].push(value); // 이미 해당 name으로 체크된 값이 있다면, 배열에 추가
-	      } else {
-	        checkedKeywords[name] = [value]; // 해당 name으로 체크된 값이 없다면, 새로운 배열 생성
-	      }
-	    });
-	    var aaa = {
-		        keyword: searchKeyword,
-		        checkedKeywords: checkedKeywords
-		      };
-	    $.ajax({
-	      type : 'POST',
-	      url : "${pageContext.request.contextPath}/person/search",
-	      contentType:"application/json; charset=utf-8",
-	      data: JSON.stringify(aaa),
-  success : function(result) {
-		if (!result || result.length === 0) {
-			let htmlVal = '<p>현재 채용 중인 공고가 없습니다.</p>';
-			$(".recruit-Container").html(
-					htmlVal);
-
-			let totalCount = 0; // 검색 결과 총 개수
-			$('#total-count').text("0");
-		} else {
-			$('.recruit-Container').empty(); // 이전 결과 지우기
-
-			// 새로운 내용 출력
-			let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
-			for (i = 0; i < result.length; i++) {
-			    recruitTable += '<table class="recruit-table">';
-			    recruitTable += '<tr>';
-			    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
-			    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
-			    recruitTable += '</a></td></tr>';
-			    recruitTable += '<tr>';
-			    <sec:authorize access="isAuthenticated()">
-			      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
-				  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
-				  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
-				  recruitTable += '</td>';
-			    </sec:authorize>
-			    <sec:authorize access="!isAuthenticated()">
-			        recruitTable += '<td>~' + result[i].closeDate + '</td>';
-			    </sec:authorize>
-			    recruitTable += '</tr></table>';
-			}
-			recruitTable += '</div>';
-			
-			
-			$('.recruit-Container').html(recruitTable);
-
-			let totalCount = result.length; // 검색 결과 총 개수
-			$("#total-count").text(
-					totalCount); // 검색 결과 총 개수 출력
-		}
-	},
-	error : function() {
-		alert('채용 정보를 가져오는데 실패하였습니다.');
-	}
-});
-});
-});
 
 
 
@@ -503,23 +405,19 @@ $(function() {
 	  const clickedRaNum = event.target.closest('.star-icon').getAttribute('data-raNum');
 	  console.log(clickedRaNum);
 	
-	  // 모든 star-icon 요소를 반복하면서 각 요소의 data-raNum 속성값을 가져옵니다.
 	  document.querySelectorAll('.star-icon').forEach(function(el) {
 	    const raNum = el.getAttribute('data-raNum');
-	    // 클릭된 요소와 현재 반복중인 요소의 data-raNum 속성값이 같은 경우에만 색깔을 변경합니다.
 	    if (raNum === clickedRaNum) {
 	      $(el).find('span.fa-star').toggleClass("far fas").toggleClass("text-warning");
 	    }
 	  });
 	  
-	  // checkScrap를 호출하여 현재 스크랩 여부를 확인합니다.
 	  $.ajax({
 	    type: "POST",
 	    url: "${pageContext.request.contextPath}/person/checkScrap",
 	    data: { raNum: clickedRaNum },
 	    success: function (result) {
 	      
-	      // 스크랩 여부에 따라 deleteJob 또는 scrapJob을 호출합니다.
 	      if (result === 1) {
 	        $.ajax({
 	          type: "POST",
@@ -563,15 +461,10 @@ $(function() {
 	
 	// 페이지 실행 시 실행되는 함수
 	window.onload = function() {
-	  // 모든 star-icon 요소를 선택합니다.
 	  var starIcons = document.querySelectorAll('.star-icon');
-
-	  // 각 star-icon 요소를 순회하며 AJAX 호출을 전달합니다.
 	  starIcons.forEach(function(starIcon) {
-	    // data-raNum 속성 값을 가져옵니다.
-	    var raNum = starIcon.getAttribute('data-raNum');
+	  var raNum = starIcon.getAttribute('data-raNum');
 
-	    // AJAX를 이용해 스크랩 여부 확인
 	    $.ajax({
 	      type: 'POST',
 	      url: '${pageContext.request.contextPath}/person/checkScrap',
@@ -588,8 +481,6 @@ $(function() {
 	  });
 	};
 
-
-	
 	
 	</script>
 	

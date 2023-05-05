@@ -36,6 +36,22 @@
 	  font-size: 14px;
 	}
 	
+	.social-login-section {
+	  display: flex;
+	  align-items: center;
+	}
+
+	.line {
+	  flex-grow: 1;
+	  height: 1px;
+	  background-color: gray;
+	}
+
+	.text {
+	  margin: 0 10px;
+	}
+	
+	
 	</style>
 </head>
 <body>
@@ -67,21 +83,27 @@
 							        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
 						    	</font>
 							</c:if>
-					        <div class="d-grid">
+					        <div class="d-grid mb-2">
 							  <button class="btn btn-primary" type="submit">로그인</button>
 							</div>
+							
 							<div class="d-grid mb-2">
-							 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
-								    <img src="${pageContext.request.contextPath}/resources/kakao_login_medium_narrow.png">
-								    <div class="kakao_txt">카카오톡으로<br> 간편로그인 </div>
-							  </a>
-							</div>
-							<div class="d-grid">
 								<div class="row" id="links"> 
 									<a href="${pageContext.request.contextPath}/person/findid" class="col-4"><p>아이디 찾기</p></a>
 									<a href="${pageContext.request.contextPath}/person/findpw" class="col-4 text-center">비밀번호 찾기</a>
 									<a href="${pageContext.request.contextPath}/person/signUp" class="col-4 text-end">회원 가입</a>
 								</div>
+							</div>
+							
+							<div class="social-login-section">
+							  <div class="line"></div>
+							  <div class="text">소셜계정으로 간편 로그인</div>
+							  <div class="line"></div>
+							</div>
+							<div class="d-grid mb-5" style="display: flex; justify-content: center;">
+							  <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=77dfb2057fb10018f5dbf8b933cc96dd&redirect_uri=http://localhost:8090/job/person/login&response_type=code">
+								    <img src="${pageContext.request.contextPath}/resources/icons/kakao_login_medium_narrow.png">
+							  </a>
 							</div>
 				</form> 
     
