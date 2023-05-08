@@ -89,6 +89,17 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+    
+    <script type="text/javascript">
+	
+	$(document).ready(function() {
+		var msg = "${msg}";
+		if (msg) {
+			console.log(msg);
+			alert(msg);
+		}
+	});
+    </script>
 
 
 </body>

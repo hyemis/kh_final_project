@@ -42,17 +42,17 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
 		
-		<div class="grid gap-3 border border-primary">
+		<div class="grid gap-3 ">
 			 <div class="row justify-content-center">
-		        	<div class="col-6 border border-primary">
+		        	<div class="col-6 border m-3 bg-white">
 		        		<div class="row mt-5 m-3 text-center">
 			        	<h3>아이디 찾기</h3>
 			       		</div>
 			       		<hr>
 			       		
 			        	<div class="row" id="member">
-			        	<button class="col-6 btn btn-outline-dark" onclick="toggleForm('personal')">Personal Member</button>
-	  					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">Corporate Member</button>
+			        	<button class="col-6 btn btn-outline-dark" onclick="toggleForm('personal')">개인회원</button>
+	  					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">기업회원</button>
 			       		</div>
 			       		
 			       		<div class="row hidden" id="findType">
@@ -60,25 +60,29 @@
 	  					<button class="col-6 btn btn-link" onclick="toggleForm('phone')">Phone 로 찾기</button>
 			       		</div>
 			       		
-						<form id="personal-email-form" class="hidden m-5" method="post" action="">
+						<form id="personal-email-form" class="hidden m-5" method="post">
 						   <input class="form-control" type="text" id="personal-e-name" placeholder="이름">
 			      		   <input class="form-control" type="text" id="personal-e-birth" placeholder="생년월일(19990101)">
 			        	   <input class="form-control" type="text" id="personal-email" placeholder="이메일(job-a@joba.com)">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
 							  <button class="btn btn-outline-dark" type="button" onclick="findId();">가입한 Email로 아이디 찾기</button>
 							</div>
+							
 						</form>
 						
-						<form id="personal-phone-form" class="hidden m-5" method="post" action="">
+						<form id="personal-phone-form" class="hidden m-5" method="post" >
 						   <input class="form-control" type="text" id="personal-p-name" placeholder="이름">
 			      		   <input class="form-control" type="text" id="personal-p-birth" placeholder="생년월일(19990101)">
 			        	   <input class="form-control" type="text" id="personal-phone" placeholder="'-' 빼고 숫자만 입력">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
 							  <button class="btn btn-outline-dark" type="button" onclick="findId();">가입한 휴대폰으로 아이디 찾기</button>
 							</div>
+							<div class="my-5">
+								 <a href="${pageContext.request.contextPath}/board/main" class="col-4"><p>도움이 필요하시나요?</p></a>
+							</div>
 						</form>
 						 
-						 <form id="corporate-form" class="hidden m-5" method="post" action="">
+						 <form id="corporate-form" class="hidden m-5" method="post">
 						 	기업회원
 						    <label for="corporate-id">ID:</label>
 						    <input type="text" id="corporate-id" name="id"><br>
@@ -88,7 +92,9 @@
 							  <button class="btn btn-outline-dark" type="button" onclick="fn_findIdCorporate(); return false;">아이디 찾기</button>
 							</div>
 						 </form>
+		        
 		        	</div>
+		        	
 		        	
 				 </div>
 		        

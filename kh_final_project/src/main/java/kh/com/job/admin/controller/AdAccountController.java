@@ -98,7 +98,7 @@ public class AdAccountController {
 	}
 	
 	@PostMapping("/usercheck")
-	public ModelAndView userCheckForm(ModelAndView mv, String userPw) {
+	public ModelAndView userCheckForm(ModelAndView mv,RedirectAttributes rttr, String userPw) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -108,6 +108,7 @@ public class AdAccountController {
 		if(passwordEncoder.matches(userPw, adto.getUserPw())) {
 			mv.setViewName("redirect:/admin/account/update?userId="+auth.getName());
 		}else {
+			rttr.addFlashAttribute("msg", "계정 확인에 실패했습니다.");
 			mv.setViewName("redirect:/admin/main");
 		}
 		

@@ -132,7 +132,6 @@
 		        	alert("이메일 실패");
 		            return false;
 		        } 
-		        alert("성공 탄다");
 		        return true;
 		    }
 	
@@ -172,7 +171,6 @@
 	            Account.passwordcheck.value ="";
 	            return false;
 	        }
-	        alert("여길 타면 안되");
 	        return true; //확인이 완료되었을 때
    		} 
 		

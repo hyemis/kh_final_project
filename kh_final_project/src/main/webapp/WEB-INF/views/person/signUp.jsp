@@ -32,6 +32,7 @@
 	  .hidden {
 	    display: none;
 	  }
+	  
 	</style>
 </head>
 <body>
@@ -40,7 +41,7 @@
 	
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
-		<div class="grid gap-3 border border-primary">
+		<div class="grid gap-3 border bg-white p-3">
 			 <div class="row justify-content-center">
 			 <!-- toggle -->
 				<div class="row">
@@ -53,13 +54,17 @@
 			        	<div class="m-4"><h3>개인회원 회원가입</h3></div>
 			        	
 				          <div class="row">
-				          
-				             <div class="mb-3">
-				              <label for="userId">아이디</label>
-				              <input type="text" class="form-control userId" name="userId" id="psuserId" placeholder="영문,숫자,'_' 사용가능" >
-				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
-				              <button class="btn btn-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">아이디 중복 체크</button>
-				            </div> 
+				            
+				            <div class="row mb-3">
+							  <div class="col-10">
+							    <label for="userId">아이디</label>
+							    <input type="text" class="form-control userId" name="userId" id="psuserId" placeholder="영문,숫자,'_' 사용가능" >
+							    <div class="invalid-feedback">아이디를  입력해주세요.</div>
+							  </div>
+							  <div class="col-2 d-flex justify-content-end">
+							    <button class="btn btn-primary align-self-end" type="button" id="idChk" onclick="fn_idChk();" value="N">아이디 중복 체크</button>
+							  </div>
+							</div>
 				            
 				            <div class="mb-3">
 				              <label for="userPw">비밀번호</label>
@@ -134,14 +139,17 @@
 			        	
 				          <div class="row">
 				          
-				            <div class="mb-3">
-				              <label for="userId">아이디</label>
-				              <input type="text" class="form-control userId" name="userId" id="bsuserId" placeholder="영문,숫자,'_' 사용가능" >
-				              <div class="invalid-feedback">아이디를  입력해주세요.</div>
-				              <button class="btn btn-primary" type="button"  onclick="fn_idChk2();" value="N">아이디 중복 체크</button>
-				              
-				            </div>
-				            
+				           <div class="row mb-3">
+							  <div class="col-10">
+							    <label for="userId">아이디</label>
+							    <input type="text" class="form-control userId" name="userId" id="bsuserId" placeholder="영문,숫자,'_' 사용가능" >
+							    <div class="invalid-feedback">아이디를  입력해주세요.</div>
+							  </div>
+							  <div class="col-2 d-flex justify-content-end">
+							    <button class="btn btn-primary align-self-end" type="button" onclick="fn_idChk2();" value="N">아이디 중복 체크</button>
+							  </div>
+							</div>
+				          
 				            <div class="mb-3">
 				              <label for="userPw">비밀번호</label>
 				              <input type="password" class="form-control" name="userPw" placeholder="8~16자리/ 영문 대소문자, 숫자 조합" >
