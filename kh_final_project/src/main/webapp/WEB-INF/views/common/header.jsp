@@ -152,9 +152,9 @@
 			<div class="nav-item nav-link active ms-auto">
 				<sec:authorize access="isAnonymous()">
 					<div class="collapse navbar-collapse">
-						<a class="nav-link me-2 btn btn-primary"
+						<a class="nav-link me-2" 
 							href="${pageContext.request.contextPath}/person/signUp">signUp</a>
-						<a class="nav-link me-2 btn btn-primary"
+						<a class="nav-link me-2" 
 							href="${pageContext.request.contextPath}/person/login">login</a>
 					</div>
 				</sec:authorize>

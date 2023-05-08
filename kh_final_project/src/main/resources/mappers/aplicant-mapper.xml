@@ -59,7 +59,7 @@
 		join user_apply ua ON ba.ba_num = ua.ba_num
 		<trim prefix="where" prefixOverrides="AND|OR">
 			<if test="searchNum != null and searchNum neq ''">
-				ba.RA_NUM like '%'||#{searchNum}||'%'
+				ba.RA_NUM = #{searchNum}
 			</if>
 			<if test="searchResult != null and searchResult neq ''">
 				AND ba.result_type like '%'||#{searchResult}||'%'
@@ -80,7 +80,7 @@
 					join user_apply ua ON ba.ba_num = ua.ba_num
 			<trim prefix="where" prefixOverrides="AND|OR">
 				<if test="searchNum != null and searchNum neq ''">
-					ba.RA_NUM like '%'||#{searchNum}||'%'
+					ba.RA_NUM = #{searchNum}
 				</if>
 				<if test="searchResult != null and searchResult neq ''">
 					AND ba.result_type like '%'||#{searchResult}||'%'
@@ -234,7 +234,7 @@
 			join user_apply ua ON ba.ba_num = ua.ba_num
 		<trim prefix="where" prefixOverrides="AND|OR">
 			<if test="searchNum != null and searchNum neq ''">
-				ba.RA_NUM like '%'||#{searchNum}||'%'
+				ba.RA_NUM = #{searchNum}
 			</if>
 			<if test="searchResult != null and searchResult neq ''">
 				AND bap.pass_type like '%'||#{searchResult}||'%'
@@ -259,7 +259,7 @@
 					join user_apply ua ON ba.ba_num = ua.ba_num
 			<trim prefix="where" prefixOverrides="AND|OR">
 				<if test="searchNum != null and searchNum neq ''">
-					ba.RA_NUM like '%'||#{searchNum}||'%'
+					ba.RA_NUM = #{searchNum}
 				</if>
 				<if test="searchResult != null and searchResult neq ''">
 					AND bap.pass_type like '%'||#{searchResult}||'%'

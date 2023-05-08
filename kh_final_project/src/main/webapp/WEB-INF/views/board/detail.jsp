@@ -64,6 +64,12 @@
     padding-left: 60px;
   }
   
+  .originPost {
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 30px;
+}
+  
 
 </style>
 
@@ -78,7 +84,7 @@
 			<div class="container bg-white p-5">
 			
 				<!-- 게시글  -->
-				<div class="s originPost">
+				<div class="originPost">
 					<div class="d-flex justify-content-end align-items-center">
 						<sec:authorize access="hasRole('ROLE_P') and #detailBoard.userId == authentication.name">
 								<a class="pe-2" onclick="handleUpdatePost()">수정</a>
@@ -90,9 +96,11 @@
 						<div class="pe-3">${detailBoard.userId}</div>
 						<div>${detailBoard.updateDate}</div>
 						<div class="d-flex align-items-end ms-auto">
-							<div class="fas fa-eye pe-3">조회 ${detailBoard.boardRead}</div>
-							<div class="fas fa-heart" onclick="handleLike()">좋아요
-								${detailBoard.boardLike}</div>
+							<div class="fa-regular fa-bookmark pe-3">  조회 ${detailBoard.boardRead}</div>
+							<sec:authorize access="hasRole('ROLE_P') and #detailBoard.userId != authentication.name">
+								<div class="fa-regular fa-heart" onclick="handleLike()">  좋아요
+									${detailBoard.boardLike}</div>
+							</sec:authorize>
 						</div>
 					</div>
 					<div class="pt-5">${detailBoard.boardContent}</div>
@@ -106,12 +114,12 @@
 				        <table class="reply-table ${reply.replyLevel eq 2 ? 'subReply-parent' : ''}">
 				       	 <tr>
 					            <c:choose>
-					                <c:when test="${reply.replyLevel eq 1}">
+					                <c:when test="${reply.replyLevel eq 1 || reply.replySeq eq 0}">
 					                    <td class="pb-3 originReply reply-cell">${reply.replyContent}</td>
 					                </c:when>
 					                <c:otherwise>
 					                 	<td class="pb-3 subReply reply-cell">
-								            ${reply.replyContent}
+								           <i class="fa-solid fa-arrow-turn-up fa-rotate-90 pe-4"></i>${reply.replyContent}
 								        </td>
 					                </c:otherwise>
 					            </c:choose>
@@ -173,7 +181,7 @@
 					if (response.result === 'success') {
 						location.reload();
 					} else {
-						alert('좋아요를 누르는데 실패했습니다.');
+						alert('로그인 후 이용 가능합니다.');
 					}
 				},
 				error : function(xhr, status, error) {
@@ -362,25 +370,6 @@
 		
 		
 		// 답글 작성
-		/* function handleInsertReReply(element) {
-		  const replyId = element.dataset.replyId;
-		  const htmlVal = '<div class="m-3 mdeptList">'
-		      + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
-		      + '<input type="hidden" name="replyLevel" value="${reply.replyLevel}">'
-		      + '<input type="hidden" name="replySeq" value="${reply.replySeq}">'
-		      + '<div class="d-flex justify-content-between">'
-		      + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
-		      + '">'
-		      + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitReReply()">등록</button>'
-		      + '</div>' + '</div>';
-
-		  const parent = element.parentNode;
-		  const subReplyForm = parent.parentNode.querySelector('.subReplyForm');
-		  const newDiv = document.createElement('div');
-		  newDiv.innerHTML = htmlVal;
-		  subReplyForm.appendChild(newDiv);
-		}   */
-		
 		function handleInsertReReply(element) {
 			  const replyId = element.dataset.replyId;
 			  const htmlVal = '<div class="m-3 ReReplyList">'

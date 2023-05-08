@@ -100,10 +100,6 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.insertReReply(dto);
 	}
 	
-	//TODO: 대댓글 조회 
-	
-	
-	
 	@Override
 	public BoardDto viewDetail(String boardNo) {
 		return dao.viewDetail(boardNo);
@@ -227,7 +223,6 @@ public  class BoardServiceImpl implements BoardService {
 	}
 
 
-
 	@Override
 	public int updateNewsLetter(BoardDto dto) {
 		return dao.updateNewsLetter(dto);	
@@ -238,12 +233,7 @@ public  class BoardServiceImpl implements BoardService {
 		return dao.updateCompanyInfo(dto);
 	}
 
-	@Override
-	public List<ReplyDto> reReplyList(int boardNo, int replyId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 
 
 

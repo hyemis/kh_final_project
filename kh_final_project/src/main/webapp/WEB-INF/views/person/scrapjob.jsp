@@ -60,27 +60,29 @@
 					<div class="container border border-primary">
 						<div class="bg-light p-3">
 							<div class="bg-white rounded p-4 row" style="border: 1px dashed rgba(0, 185, 142, .3)">
-									<img class="object-fit-sm-contain border" 
-								     src="<c:if test='${not empty userinfo.userPic}'>${userinfo.userPic}</c:if>
-								           <c:if test='${empty userinfo.userPic}'>https://dummyimage.com/150x200/d6d6d6/000000&text=150x200</c:if>"
-								            width="150"  height="200">	
+								<img class="object-fit-sm-contain border" 
+									src="<c:if test='${not empty userinfo.userPic}'>${userinfo.userPic}</c:if>
+								         <c:if test='${empty userinfo.userPic}'>https://dummyimage.com/150x200/d6d6d6/000000&text=150x200</c:if>"
+								     width="150" 
+								     height="200">								
 							</div>
-							<div class="">
-									<span>이름 : </span>
-									<span>${userinfo.userName }</span><br>
-									<span>전화번호 : </span>
-									<span>${userinfo.userPhone }</span><br>
-									<span>생년월일 : </span>
-									<span>${userinfo.userBirth }</span><br>
-									<span>이메일 : </span>
-									<span>${userinfo.userEmail }</span><br>
+							<div>
+								<span style="font-size: 85%;">이름 : </span> 
+								<span style="font-size: 85%;">${userinfo.userName }</span><br> 
+								<span style="font-size: 85%;">전화번호 : </span> 
+								<span style="font-size: 85%;">${userinfo.userPhone }</span><br>
+								<span style="font-size: 85%;">생년월일 : </span> 
+								<span style="font-size: 85%;">${userinfo.userBirth }</span><br>
+								<span style="font-size: 80%;">이메일 : </span> 
+								<span style="font-size: 80%;">${userinfo.userEmail }</span><br>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			
 			<!-- 우측 조회 영역 -->
-
 			<div class="col-9">
 				<div class="container-xxl py-5">
 					<div class="container">
@@ -100,11 +102,11 @@
 										 <table class="table table-hover"> 
  											<thead>
 												<tr>
-													<th scope="col" class="center"></th>
-													<th scope="col" class="center">회사명</th>
-													<th scope="col" class="center">공고명</th>
-													<th scope="col" class="center">마감일</th>
-													<th scope="col" class="center">입사지원</th>
+													<th scope="col"></th>
+													<th scope="col">회사명</th>
+													<th scope="col">공고명</th>
+													<th scope="col">마감일</th>
+													<th scope="col">입사지원</th>
 												</tr>
 											</thead>
 											<tbody class="table-group-divider">
