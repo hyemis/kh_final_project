@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.com.job.HomeController;
 import kh.com.job.admin.model.dto.AdBannerDto;
 import kh.com.job.admin.model.service.AdService;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,6 +33,14 @@ public class AdMainController {
 	
 	@GetMapping("/main")
 	public ModelAndView main(ModelAndView mv) {
+		
+		//최신 공고 5개
+		List<BsRecruitDto > recentList = service.recentRecruit();
+		List<AdBannerDto> bList = service.bannerList();
+		
+		mv.addObject("recentList", recentList);
+		mv.addObject("bList", bList);
+		
 		return mv;
 	}
 	

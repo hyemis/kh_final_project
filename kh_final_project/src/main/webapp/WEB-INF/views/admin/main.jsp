@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,32 +51,58 @@
 </head>
 
 <body>
-    <div class="container-xxl bg-white p-0">
-     
-    	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
-		
-		 <div class="container-xl px-5">
-		 	<table class="table">
-		 		<thead>
-		 			<tr>
-		 				<th scope="col">1</th>
-		 				<th scope="col">2</th>
-		 				<th scope="col">3</th>
-		 			</tr>
-		 		</thead>
-		 		<tbody>
-		 			<tr>
-		 				<td>a</td>
-		 				<td>b</td>
-		 				<td>c</td>
-		 			</tr>
-		 			<tr>
-		 				<td>a1</td>
-		 				<td>b1</td>
-		 				<td>c1</td>
-		 			</tr>
-		 		</tbody>
-		 	</table>
+    <jsp:include page="/WEB-INF/views/common/adheader.jsp" />
+    
+    <div class="container-xxl bg-white p-0 ">
+		 <div class="container-xxl py-5 d-flex">
+		 	<div class="p-2 col-5 border border-primary">
+		 	<a href="${pageContext.request.contextPath}/admin/business/main"><h1>채용공고</h1></a>
+			 	<table class="table">
+			 		<thead>
+			 			<tr>
+			 				<th scope="col">번호</th>
+			 				<th scope="col">제목</th>
+			 				<th scope="col">작성자</th>
+			 			</tr>
+			 		</thead>
+			 		<tbody>
+			 			<c:forEach items="${recentList }" var="list">
+				 			<tr>
+				 				<td>${list.raNum }</td>
+				 				<td><a href="${pageContext.request.contextPath}/admin/business/view?id=${list.raNum }">${list.raTitle }</a></td>
+				 				<td>${list.userId }</td>
+				 			</tr>
+			 				
+			 			</c:forEach>
+
+			 		</tbody>
+			 	</table>
+		 	</div>
+		 	<div class="col-2">
+		 	</div>
+		 	
+		 	<div class="p-2 col-5 border border-dark">
+		 	<h1>배너</h1>
+			 	<table class="table">
+			 		<thead>
+			 			<tr>
+			 				<th scope="col">배너  사진</th>
+			 				<th scope="col">제목</th>
+			 			</tr>
+			 		</thead>
+			 		<tbody>
+						<c:forEach items="${bList }" var="list">
+			 				<tr>
+				 				<td>
+				 					<img alt="${list.bannerSub }" src="${list.bannerThum eq null? 'https://dummyimage.com/100x100/000000/ffffff.png&text=No+Image' : list.bannerThum}" style="width: 100px; height: 100px;">
+				 				</td>
+				 				<td><a href="${pageContext.request.contextPath}/admin/banner/detail?id=${list.bannerId}">${list.bannerSub }</a> </td>
+			 				</tr>
+			 			</c:forEach>
+			 		</tbody>
+			 	</table>
+		 	</div>
+		 	
 		 </div>
 
 		 
