@@ -174,7 +174,6 @@
 		
 	// 비밀번호1, 비밀번호2 체크 
 	function checkPassword(userPw, userPw2) {
-		console.log("aaaa");
 
 		//비밀번호가 입력되었는지 확인하기
 	     if (!checkExistData(userPw, "비밀번호를"))
