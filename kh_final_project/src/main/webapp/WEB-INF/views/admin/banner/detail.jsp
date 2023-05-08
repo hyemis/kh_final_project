@@ -120,13 +120,6 @@
     </div>
 	<script type="text/javascript">
 	
-	$(document).ready(function() {
-		var msg = "${msg}";
-		if (msg != null && msg !='') {
-			console.log(msg);
-		}
-	});
-	
 	
 		function updateCheck(){
 			if($('.bannerSub').val() == null || $('.bannerSub').val() == ''){
