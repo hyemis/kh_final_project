@@ -141,6 +141,12 @@
 					</div>
 				</div>
 			</sec:authorize>
+			<!-- 관리자 -->
+			<sec:authorize access="hasAnyRole('ROLE_A', 'ROLE_AM')">
+				<div class="collapse navbar-collapse">
+					<a href="${pageContext.request.contextPath}/admin/main" class="nav-item nav-link">어드민으로</a>
+				</div>
+			</sec:authorize>
 
 			<!-- 로그인 / 회원가입 / 로그아웃 -->
 			<div class="nav-item nav-link active ms-auto">
