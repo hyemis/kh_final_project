@@ -124,8 +124,6 @@ public class PsMainController {
 	    findId.put("userEmail", email);
 	    findId.put("userPhone", phone);
 
-	    System.out.println("map 저장 값 " + findId);
-	    
 	    PsUserDto userId = service.findId(findId);
 	    String findUserId = "";
 	    if (userId != null) {
@@ -552,6 +550,7 @@ public class PsMainController {
 			List<PsResumeDto> resume = rservice.selectList(principal.getName());
 
 			if (result != null) {
+				mv.addObject("userinfo", result);
 				mv.addObject("scraplist", scrap);
 				mv.setViewName("person/scrapjob");
 				mv.addObject("resumelist", resume);

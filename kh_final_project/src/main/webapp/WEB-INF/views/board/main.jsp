@@ -83,7 +83,7 @@
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
 				<div class="d-flex justify-content-between align-items-center p-4">
-					<h2 class="mb-0">커뮤니티</h2>
+					<h3 class="mb-0">커뮤니티</h3>
 					<div>
 						<sec:authorize access="isAuthenticated()">
 							<button class="btn btn-outline-dark" type="button"
@@ -115,7 +115,7 @@
 				<div style="padding-top: 100px;">
 				<div class="s1" style="padding-bottom: 2px;">
 					<div class="d-flex align-items-center p-2">
-						<h5>주제별 커뮤니티</h5>
+						<h4>주제별 커뮤니티</h4>
 					</div>
 					<div class="d-grid gap-2 d-md-block">
 						<a href="${pageContext.request.contextPath}/board/postall"
