@@ -54,5 +54,7 @@ public interface PsService {
 	public Paging psSuggestList(BsSuggestDto dto);
 	//면접수락
 	public int interviewAccept(BsSuggestDto dto);
+	public int updateAccept(BsSuggestDto dto);
+	
 	
 }

@@ -44,6 +44,7 @@
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search/suggest" role="button">인재추천</a>
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/applicant" role="button">지원자 관리 페이지</a>
 	</div><br>
+
 	<div class="table-responsive ">
 		<table class="table table-hover">
 			  <thead>
@@ -52,7 +53,6 @@
 			      <th scope="col">지원자명</th>
 			      <th scope="col">이력서</th>
 			      <th scope="col">수락여부</th>
-			      <th scope="col">면접일정보내기</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -62,6 +62,7 @@
 			      <td value="${suggest.psUser }">${suggest.userName }</td>
 			      <td value="${suggest.resumeNo }">${suggest.resumeTitle }</td>
 			      <td>${suggest.suggestAccept }</td>
+			    
 			    </tr>
 			   </c:forEach>	
 			   </tbody>
@@ -74,9 +75,9 @@
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-</div>	
 
 <!-- page script -->
+
 	
 </body>
 </html>

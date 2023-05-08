@@ -84,13 +84,15 @@
 									</thead>
 										<tbody>
 										<c:forEach items="${suggest.getPage() }" var="suggest">
+										<c:if test="${suggest.suggestAccept != 'Y'}">
 											<tr>
 												<td>${suggest.sendDate }</td>
 												<td>${suggest.companyName }</td>
 												<td>${suggest.sgTitle }</td>
 												<td><a type="button" class="btn btn-primary suggest"
-													   data-sgNo="${suggest.sgNo}" data-resumeNo="${suggest.resumeNo }" data-raNum="${suggest.raNum }" >수락하기</a></td>
+													   data-sgno="${suggest.sgNo}" data-resumeno="${suggest.resumeNo }" data-ranum="${suggest.raNum }" >수락하기</a></td>
 											</tr>
+										</c:if>	
 										</c:forEach>	
 										</tbody>
 								</table>
@@ -110,15 +112,12 @@
 	<!-- page script -->
 <script>
 $(document).ready(function() {
-	// '수락하기' 버튼 클릭 시 이벤트 핸들러 등록
 	$('.btn.suggest').click(function() {
-		var sgNo = $(this).data('sgNo');
-		var resumeNo = $(this).data('resumeNo');
-		var raNum = $(this).data('raNum');
+		var sgNo = $(this).data('sgno');
+		var resumeNo = $(this).data('resumeno');
+		var raNum = $(this).data('ranum');
 		
-		// 확인창 띄우기
 		if(confirm("정말 수락하시겠습니까?")) {
-			// AJAX 요청 보내기
 			$.ajax({
 				url: '${pageContext.request.contextPath}/person/interviewAccept',
 				method: 'post',
@@ -128,11 +127,10 @@ $(document).ready(function() {
 						},
 				success: function(response) {
 					console.log(response);
-					// 성공 시 처리
 					alert('지원해주셔서 감사합니다.\n기업담당자 확인 후 면접일정을 발송해드리겠습니다.');
+					window.location.href = "/job/person/applylist";
 				},
 				error: function(xhr, status, error) {
-					// 실패 시 처리
 					alert('오류가 발생하였습니다. 다시 시도해주세요.');
 				}
 			});

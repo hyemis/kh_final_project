@@ -312,6 +312,11 @@ public class PsServiceImpl implements PsService {
 			return dao.interviewAccept(dto);
 		}
 
+		@Override
+		public int updateAccept(BsSuggestDto dto) {
+			return dao.updateAccept(dto);
+		}
+
 
 
 

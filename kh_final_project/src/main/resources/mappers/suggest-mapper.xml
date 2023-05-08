@@ -26,7 +26,8 @@
 	<!-- bs/제안받은 리스트 카운트 -->
 	<select id="countbsSuggest" resultType="_int">
 		SELECT COUNT(*)
-		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM,  SG.SUGGEST_ACCEPT
+		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM,  
+		  				SG.SUGGEST_ACCEPT, SG.BA_NUM
 				 FROM SUGGEST SG
 				 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
 				 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
@@ -40,7 +41,7 @@
 		  FROM (
 		  		SELECT ROWNUM AS NUM, A. *
 		  		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, 
-		  		                SG.RA_NUM, SG.SUGGEST_ACCEPT
+		  		                SG.RA_NUM, SG.SUGGEST_ACCEPT, SG.BA_NUM
 						 FROM SUGGEST SG
 						 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
 						 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
@@ -55,7 +56,7 @@
 		SELECT COUNT(*)
 		  FROM (
 				SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER,
-					   SG.RESUME_NO, SG.RA_NUM
+					   SG.RESUME_NO, SG.RA_NUM, SG.SUGGEST_ACCEPT 
 				  FROM SUGGEST SG
 				  JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
 				 WHERE PS_USER = #{psUser}
@@ -69,10 +70,10 @@
 		  		SELECT ROWNUM AS NUM, A. *
 		  		 FROM (
 			  		 	SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER,
-							   SG.RESUME_NO, SG.RA_NUM
+							   SG.RESUME_NO, SG.RA_NUM, SG.SUGGEST_ACCEPT 
 						FROM SUGGEST SG
 						JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
-						WHERE PS_USER = #{psUser}
+						WHERE PS_USER = #{psUser} AND SUGGEST_ACCEPT != 'Y' 
 						ORDER BY SG_NO DESC
 		  		      ) A
 		  		)
@@ -81,24 +82,22 @@
 	</select>
 	
 	<!-- 면접수락 -->
-	<insert id="interviewAccept">
-		INSERT INTO
+	<insert id="interviewAccept" parameterType="bgdto">
+		INSERT ALL
+		INTO
 		BUSINESS_APPLICANT (BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
-			        VALUES (#{baNum}, #{psUser}, #{resumeNo}, 'A', #{raNum})
-
-		INSERT INTO 
+			        VALUES (ba_num, #{psUser}, #{resumeNo}, 'A', #{raNum})
+		
+		INTO 
 		USER_APPLY (USER_ID, BA_NUM, APPLY_DATE, RESUME_NO)
-			VALUES (#{psUser}, #{baNum}, current_timestamp, #{resumeNo})
-		
-		INSERT INTO
-		SUGGEST (BA_NUM, SUGGEST_ACCEPT)
-		 VALUES (#{baNum}, 'Y')
+			VALUES (#{psUser}, ba_num, current_timestamp, #{resumeNo})
 		 
-		<selectKey keyProperty="baNum" resultType="_int" order="BEFORE">
-			SELECT MAX(BA_NUM) +1 FROM BUSINESS_APPLICANT
-		</selectKey>
-		
+		SELECT MAX(BA_NUM)+1 ba_num  FROM BUSINESS_APPLICANT
 	</insert>
+	
+	<update id="updateAccept">
+		UPDATE SUGGEST SET BA_NUM = #{baNum} , SUGGEST_ACCEPT = 'Y' WHERE SG_NO = #{sgNo} 
+	</update>
 	
 	
 </mapper>

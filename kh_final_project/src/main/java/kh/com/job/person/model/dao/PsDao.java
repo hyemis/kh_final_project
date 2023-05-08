@@ -176,5 +176,9 @@ public class PsDao {
 		return sqlSession.insert("suggest.interviewAccept",dto);
 	}
 
+	public int updateAccept(BsSuggestDto dto) {
+		return sqlSession.update("suggest.updateAccept",dto);
+	}
+
 
 }

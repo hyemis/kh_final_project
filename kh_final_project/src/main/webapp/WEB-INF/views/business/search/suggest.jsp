@@ -62,7 +62,7 @@
 <section>
 	<div class="container-fluid bg-white p-5">
 	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
-	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">열람한 인재</a>
+	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">면접 제안 리스트</a>
 		
 		<!-- 검색창 -->
 		<div class="container-fluid row mt-3">
