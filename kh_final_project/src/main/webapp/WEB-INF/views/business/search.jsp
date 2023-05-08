@@ -48,23 +48,22 @@
 		<table class="table table-hover">
 			  <thead>
 			    <tr>
-			      <th scope="col">No.</th>
-			      <th scope="col">열람한 날짜</th>
-			      <th scope="col">직군</th>
-			      <th scope="col">이름</th>
+			      <th scope="col">제안 날짜</th>
+			      <th scope="col">지원자명</th>
 			      <th scope="col">이력서</th>
-			      <th scope="col">면접제의</th>
+			      <th scope="col">수락여부</th>
+			      <th scope="col">면접일정보내기</th>
 			    </tr>
 			  </thead>
 			  <tbody>
+			  <c:forEach items="${suggest.getPage() }" var="suggest">
 			    <tr>
-			      <th scope="row">1</th>
-			      <td>date</td>
-			      <td>ex</td>
-			      <td>ex</td>
-			      <td>ex</td>
-			      <td><input type="checkbox" value="Y"></td>
+			      <td>${suggest.sendDate }</td>
+			      <td value="${suggest.psUser }">${suggest.userName }</td>
+			      <td value="${suggest.resumeNo }">${suggest.resumeTitle }</td>
+			      <td>${suggest.suggestAccept }</td>
 			    </tr>
+			   </c:forEach>	
 			   </tbody>
 	   </table> 
 	

@@ -65,12 +65,14 @@
 		<div class="container-container-fluid p-5">
 			<div class="container">
 				<div class="bg-light rounded p-3">
+				<a class="btn btn-primary ms-auto" href="<%=request.getContextPath()%>/person/applylist">지원 현황</a>
 					<div class="bg-white rounded p-4"
 						style="border: 1px dashed rgba(0, 185, 142, .3)">
 						<div class="row g-5 align-items-center">
 							<div class="mb-4">
 								<h1 class="mb-3">면접 제안</h1>
 								<p>기업으로부터 온 면접 제안 리스트 입니다. 수락시 서류전형 없이 바로 면접대상자가 됩니다.</p>
+								
 								<table class="table">
 									<thead>
 										<tr>
@@ -86,7 +88,8 @@
 												<td>${suggest.sendDate }</td>
 												<td>${suggest.companyName }</td>
 												<td>${suggest.sgTitle }</td>
-												<td><a type="button">수락하기</a></td>
+												<td><a type="button" class="btn btn-primary suggest"
+													   data-sgNo="${suggest.sgNo}" data-resumeNo="${suggest.resumeNo }" data-raNum="${suggest.raNum }" >수락하기</a></td>
 											</tr>
 										</c:forEach>	
 										</tbody>
@@ -105,6 +108,44 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 	<!-- page script -->
+<script>
+$(document).ready(function() {
+	// '수락하기' 버튼 클릭 시 이벤트 핸들러 등록
+	$('.btn.suggest').click(function() {
+		var sgNo = $(this).data('sgNo');
+		var resumeNo = $(this).data('resumeNo');
+		var raNum = $(this).data('raNum');
+		
+		// 확인창 띄우기
+		if(confirm("정말 수락하시겠습니까?")) {
+			// AJAX 요청 보내기
+			$.ajax({
+				url: '${pageContext.request.contextPath}/person/interviewAccept',
+				method: 'post',
+				data: { sgNo: sgNo,
+						resumeNo: resumeNo,
+						raNum: raNum
+						},
+				success: function(response) {
+					console.log(response);
+					// 성공 시 처리
+					alert('지원해주셔서 감사합니다.\n기업담당자 확인 후 면접일정을 발송해드리겠습니다.');
+				},
+				error: function(xhr, status, error) {
+					// 실패 시 처리
+					alert('오류가 발생하였습니다. 다시 시도해주세요.');
+				}
+			});
+		}
+	});
+});
+</script>
+
+
+
+
+	
+	
 
 </body>
 </html>

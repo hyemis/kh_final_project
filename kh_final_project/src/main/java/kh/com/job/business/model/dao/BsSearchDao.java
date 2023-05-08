@@ -43,6 +43,14 @@ public class BsSearchDao {
 		return sqlSession.insert("suggest.suggest", dto);
 	}
 
+	public List<BsSuggestDto> bsSuggestList(BsSuggestDto dto) {
+		return sqlSession.selectList("suggest.bsSuggestList",dto);
+	}
+
+	public int countbsSuggest(BsSuggestDto dto) {
+		return sqlSession.selectOne("suggest.countbsSuggest",dto);
+	}
+
 
 
 }

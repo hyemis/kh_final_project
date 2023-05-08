@@ -15,25 +15,47 @@
 	
 	<!-- 공고리스트  -->
 	<select id="getRecruit" resultType="brdto">
-		SELECT RA_NUM,COMPANY_NAME,RA_TITLE
-		FROM RECRUIT_REGIST
-		WHERE USER_ID = #{userId}
+		SELECT COUNT(*)
+		FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM
+				FROM SUGGEST SG
+				JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+				JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				WHERE BS_USER = #{userId}
+			 )
+	</select>
+	<!-- bs/제안받은 리스트 카운트 -->
+	<select id="countbsSuggest" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM,  SG.SUGGEST_ACCEPT
+				 FROM SUGGEST SG
+				 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+				 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				 WHERE BS_USER = #{bsUser}
+			   )
 	</select>
 	
-	<!-- bs/제안한리스트 /todo페이징해야함-->
+	<!-- bs/제안한리스트 -->
 	<select id="bsSuggestList" resultType="bgdto">
-		SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SEND_DATE
-		FROM SUGGEST SG
-		JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
-		JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-		WHERE BS_USER = #{userId}
+		SELECT *
+		  FROM (
+		  		SELECT ROWNUM AS NUM, A. *
+		  		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, 
+		  		                SG.RA_NUM, SG.SUGGEST_ACCEPT
+						 FROM SUGGEST SG
+						 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+						 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+						 WHERE BS_USER = #{bsUser}
+		  		  	   ) A
+		 	   )
+		 WHERE NUM BETWEEN #{startNum} AND #{endNum}				
 	</select>
 	
 	<!-- ps/제안받은 리스트 카운트 -->
 	<select id="countpsSuggest" resultType="_int">
 		SELECT COUNT(*)
 		  FROM (
-				SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER
+				SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER,
+					   SG.RESUME_NO, SG.RA_NUM
 				  FROM SUGGEST SG
 				  JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
 				 WHERE PS_USER = #{psUser}
@@ -46,18 +68,36 @@
 		  FROM (
 		  		SELECT ROWNUM AS NUM, A. *
 		  		 FROM (
-		  		 		SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER
+			  		 	SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER,
+							   SG.RESUME_NO, SG.RA_NUM
 						FROM SUGGEST SG
 						JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
 						WHERE PS_USER = #{psUser}
 						ORDER BY SG_NO DESC
 		  		      ) A
-		 	   )
-		 WHERE NUM BETWEEN #{startNum} AND #{endNum}	   
+		  		)
+		 WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	   
 	</select>
 	
 	<!-- 면접수락 -->
 	<insert id="interviewAccept">
+		INSERT INTO
+		BUSINESS_APPLICANT (BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
+			        VALUES (#{baNum}, #{psUser}, #{resumeNo}, 'A', #{raNum})
+
+		INSERT INTO 
+		USER_APPLY (USER_ID, BA_NUM, APPLY_DATE, RESUME_NO)
+			VALUES (#{psUser}, #{baNum}, current_timestamp, #{resumeNo})
+		
+		INSERT INTO
+		SUGGEST (BA_NUM, SUGGEST_ACCEPT)
+		 VALUES (#{baNum}, 'Y')
+		 
+		<selectKey keyProperty="baNum" resultType="_int" order="BEFORE">
+			SELECT MAX(BA_NUM) +1 FROM BUSINESS_APPLICANT
+		</selectKey>
+		
 	</insert>
 	
 	

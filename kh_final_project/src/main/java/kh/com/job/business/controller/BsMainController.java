@@ -11,11 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
+import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
+import kh.com.job.business.model.service.BsSearchService;
 import kh.com.job.common.page.Paging;
 
 @Controller
@@ -33,6 +35,9 @@ public class BsMainController {
 
 	@Autowired
 	private BoardService bdservice;
+	
+	@Autowired
+	private BsSearchService bsService;
 	
 	//메인창
 	@GetMapping("/main")
@@ -81,9 +86,20 @@ public class BsMainController {
 	
 	//인재관리	
 	@GetMapping("/search")
-	public ModelAndView search(ModelAndView mv) {
+	public ModelAndView search(ModelAndView mv, Principal principal, BsSuggestDto dto) {
 		
-		return mv;
+		//로그인한 id로 조회
+				dto.setBsUser(principal.getName());
+						
+				//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
+								if(dto.getPnum() < 1) {
+								dto.setPnum(1);
+								}
+								Paging list = bsService.bsSuggestList(dto);
+								System.out.println(dto);
+												
+								mv.addObject("suggest", list);		
+				return mv;
 	}
 	
 		
