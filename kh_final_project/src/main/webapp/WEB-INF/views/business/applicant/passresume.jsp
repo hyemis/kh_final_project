@@ -44,7 +44,7 @@
 	<div class="container-fluid bg-white p-5">
 		<div>
 		<h3>결과 발표</h3>
-			<form action="passresume" method="post">
+			<form action="passresume" method="post" onsubmit="return passcheck()">
 				<input type="hidden" name="applicantResume" value="${resumeNo }" />
 				<input type="hidden" name="applicantNo" value="${baNum }" />
 				<input type="hidden" name="applicantId" value="${passUserId }" />
@@ -105,7 +105,31 @@
 </div>	
 
 <!-- page script -->
-		<!-- ckeditor5 이미지 업로드를 위한 업로드 어뎁터 추가  -->
+
+
+	<script type="text/javascript">
+	
+	function passcheck(){
+		let selectType = $(".passType").val();
+		let title = $(".resultTitle").val();
+		let content = $(".resultContent").val();
+		
+		if(selectType =="" || selectType == null){
+			alert("합격단계를 선택해주세요.");
+			return false;
+		}else if(title =="" || title == null){
+			alert("결과 발표 제목을 입력해주세요.");
+			return false;
+		}else if(content =="" || content == null){
+			alert("결과 발표 내용을 입력해주세요.");
+			return false;
+		}
+		return true;
+	}
+	
+	</script>
+
+	<!-- ckeditor5 이미지 업로드를 위한 업로드 어뎁터 추가  -->
 	<script type="text/javascript">
 	class UploadAdapter {
 	    constructor(loader) {
@@ -178,6 +202,10 @@
     .catch( error => {
         console.error( error );
     });
+    
+    
+    
+    
 	</script>
 </body>
 </html>
