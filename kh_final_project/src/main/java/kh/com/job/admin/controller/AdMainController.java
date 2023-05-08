@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.HomeController;
 import kh.com.job.admin.model.dto.AdBannerDto;
@@ -68,6 +69,7 @@ public class AdMainController {
 	public ModelAndView bannerUpdate(ModelAndView mv
 			,AdBannerDto dto, Principal principal
 			,@RequestParam(name = "thumImage", required = false) MultipartFile thumImage
+			,RedirectAttributes rttr
 			) {
 		
 		//이력서 사진 업로드
@@ -82,8 +84,9 @@ public class AdMainController {
 		if(result == 1) {
 			mv.setViewName("redirect:/admin/banner");
 		}else {
-			String msg = "수정안됬습니다.";
-			mv.addObject("msg", msg);
+			String msg = "배너 수정에 실패했습니다.";
+			rttr.addFlashAttribute("msg", msg);
+			mv.setViewName("redirect:/admin/banner");
 		}
 		
 		return mv;

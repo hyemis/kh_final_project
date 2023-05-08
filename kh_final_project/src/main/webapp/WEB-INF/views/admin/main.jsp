@@ -82,7 +82,7 @@
 		 	</div>
 		 	
 		 	<div class="p-2 col-5 border border-dark">
-		 	<h1>배너</h1>
+		 	<a href="${pageContext.request.contextPath}/admin/banner"><h1>배너</h1></a>
 			 	<table class="table">
 			 		<thead>
 			 			<tr>
@@ -115,6 +115,13 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+	<script type="text/javascript">
+	// 회원가입 성공, 실패 alret
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	</script>
 
 </body>
 
