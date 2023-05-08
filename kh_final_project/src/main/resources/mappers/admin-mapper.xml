@@ -223,4 +223,22 @@
 	    where banner_id = #{bannerId}
 	</update>
 	
+	
+	<select id="recentRecruit" resultType="kh.com.job.business.model.dto.BsRecruitDto">
+		SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+	                       , SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
+	                       , CAREER, HOLIDAY_TYPE, RA_ADMISSION
+		FROM(
+			SELECT ROWNUM AS NUM , A.*
+			FROM(
+			    SELECT RA_NUM, RECRUIT_TYPE,USER_ID,COMPANY_NAME
+			                       , SALARY, REGIST_DATE, CLOSE_DATE, RA_TITLE
+			                       , CAREER, HOLIDAY_TYPE, RA_ADMISSION
+			                    FROM RECRUIT_REGIST
+			    order by ra_num DESC
+			)A
+		)B
+		WHERE B.NUM <![CDATA[<=]]>5
+	</select>
+	
 </mapper>

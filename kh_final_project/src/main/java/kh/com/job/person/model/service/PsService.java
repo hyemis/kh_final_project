@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import kh.com.job.business.model.dto.BsAplicantDto;
+import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.common.page.Paging;
 import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
@@ -47,4 +49,12 @@ public interface PsService {
 	String getAccessToken(String authorize_code) throws Throwable;
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable;
 	public PsUserDto selectUserEmail(String userEmail) throws Throwable;
+	
+	//면접제안
+	public Paging psSuggestList(BsSuggestDto dto);
+	//면접수락
+	public int interviewAccept(BsSuggestDto dto);
+	public int updateAccept(BsSuggestDto dto);
+	
+	
 }

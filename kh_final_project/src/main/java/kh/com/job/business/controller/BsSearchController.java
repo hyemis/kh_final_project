@@ -46,6 +46,7 @@ public class BsSearchController {
 	
 	@Autowired
 	private BsAccountService baService;
+	
 
 	@GetMapping("/suggest")
 	public ModelAndView category(ModelAndView mv, BsSearchDto sdto, Principal principal) {

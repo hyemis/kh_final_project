@@ -14,5 +14,7 @@ public interface BsSearchService {
 	public Paging pagingResumeList(BsSearchDto dto); 
 	public List<BsRecruitDto> getRecruit(String userId);
 	public int suggest(BsSuggestDto dto);
+
+	public Paging bsSuggestList(BsSuggestDto dto);
 		
 }

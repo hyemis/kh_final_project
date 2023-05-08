@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.job.admin.model.dto.AdBannerDto;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
 
 @Repository
 public class AdDao {
@@ -24,6 +26,10 @@ public class AdDao {
 
 	public int bannerUpdate(AdBannerDto dto) {
 		return sqlsession.update("admin.bannerUpdate", dto);
+	}
+
+	public List<BsRecruitDto> recentRecruit() {
+		return sqlsession.selectList("admin.recentRecruit");
 	}
 
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="suggest">
+  
+  	<!-- 면접제안 -->
+	<insert id="suggest">
+		INSERT INTO
+		SUGGEST (SG_NO, SG_TITLE, SG_CONTENT, BS_USER, PS_USER, RESUME_NO, RA_NUM, SEND_DATE)
+		VALUES (#{sgNo},#{sgTitle},#{sgContent},#{bsUser},#{psUser},#{resumeNo},#{raNum}, SYSDATE )	   
+		<selectKey keyProperty="sgNo" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(SG_NO) +1 FROM SUGGEST
+		</selectKey>
+	</insert>
+	
+	<!-- 공고리스트  -->
+	<select id="getRecruit" resultType="brdto">
+		SELECT COUNT(*)
+		FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM
+				FROM SUGGEST SG
+				JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+				JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				WHERE BS_USER = #{userId}
+			 )
+	</select>
+	<!-- bs/제안받은 리스트 카운트 -->
+	<select id="countbsSuggest" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM,  
+		  				SG.SUGGEST_ACCEPT, SG.BA_NUM
+				 FROM SUGGEST SG
+				 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+				 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+				 WHERE BS_USER = #{bsUser}
+			   )
+	</select>
+	
+	<!-- bs/제안한리스트 -->
+	<select id="bsSuggestList" resultType="bgdto">
+		SELECT *
+		  FROM (
+		  		SELECT ROWNUM AS NUM, A. *
+		  		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, 
+		  		                SG.RA_NUM, SG.SUGGEST_ACCEPT, SG.BA_NUM
+						 FROM SUGGEST SG
+						 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+						 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+						 WHERE BS_USER = #{bsUser}
+		  		  	   ) A
+		 	   )
+		 WHERE NUM BETWEEN #{startNum} AND #{endNum}				
+	</select>
+	
+	<!-- ps/제안받은 리스트 카운트 -->
+	<select id="countpsSuggest" resultType="_int">
+		SELECT COUNT(*)
+		  FROM (
+				SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER,
+					   SG.RESUME_NO, SG.RA_NUM, SG.SUGGEST_ACCEPT 
+				  FROM SUGGEST SG
+				  JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
+				 WHERE PS_USER = #{psUser}
+		  )
+	</select>
+	
+	<!-- ps/제안받은 리스트 -->
+	<select id="psSuggestList" resultType="bgdto">
+		SELECT *
+		  FROM (
+		  		SELECT ROWNUM AS NUM, A. *
+		  		 FROM (
+			  		 	SELECT SG.SG_NO, SG.SG_TITLE, RG.COMPANY_NAME, SG.SEND_DATE, SG.PS_USER,
+							   SG.RESUME_NO, SG.RA_NUM, SG.SUGGEST_ACCEPT 
+						FROM SUGGEST SG
+						JOIN RECRUIT_REGIST RG ON SG.RA_NUM = RG.RA_NUM
+						WHERE PS_USER = #{psUser} AND SUGGEST_ACCEPT != 'Y' 
+						ORDER BY SG_NO DESC
+		  		      ) A
+		  		)
+		 WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	   
+	</select>
+	
+	<!-- 면접수락 -->
+	<insert id="interviewAccept" parameterType="bgdto">
+		INSERT ALL
+		INTO
+		BUSINESS_APPLICANT (BA_NUM, USER_ID, RESUME_NO, RESULT_TYPE, RA_NUM)
+			        VALUES (ba_num, #{psUser}, #{resumeNo}, 'A', #{raNum})
+		
+		INTO 
+		USER_APPLY (USER_ID, BA_NUM, APPLY_DATE, RESUME_NO)
+			VALUES (#{psUser}, ba_num, current_timestamp, #{resumeNo})
+		 
+		SELECT MAX(BA_NUM)+1 ba_num  FROM BUSINESS_APPLICANT
+	</insert>
+	
+	<update id="updateAccept">
+		UPDATE SUGGEST SET BA_NUM = #{baNum} , SUGGEST_ACCEPT = 'Y' WHERE SG_NO = #{sgNo} 
+	</update>
+	
+	
+</mapper>

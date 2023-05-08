@@ -36,11 +36,19 @@ public class BsSearchDao {
 	}
 
 	public List<BsRecruitDto> getRecruit(String userId) {
-		return sqlSession.selectList("business.getRecruit", userId);
+		return sqlSession.selectList("suggest.getRecruit", userId);
 	}
 
 	public int suggest(BsSuggestDto dto) {
-		return sqlSession.insert("business.suggest", dto);
+		return sqlSession.insert("suggest.suggest", dto);
+	}
+
+	public List<BsSuggestDto> bsSuggestList(BsSuggestDto dto) {
+		return sqlSession.selectList("suggest.bsSuggestList",dto);
+	}
+
+	public int countbsSuggest(BsSuggestDto dto) {
+		return sqlSession.selectOne("suggest.countbsSuggest",dto);
 	}
 
 
