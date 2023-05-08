@@ -154,7 +154,7 @@
 					location.href="/job/person/login";
 				}	else {
 					alert("입력하신 정보가 올바르지 않습니다. 회원가입 시 입력한 정보와 일치하는지 다시 확인해 주세요.");
-					location.href="/job/person/signUp";
+					location.href="/job/person/findpw";
 				}
 			}
 

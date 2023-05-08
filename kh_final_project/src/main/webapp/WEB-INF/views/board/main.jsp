@@ -88,7 +88,7 @@
 					    </h3>
 					</div>
 							
-					<div>
+					<div class="d-grid justify-content-md-end pb-4">
 						<sec:authorize access="isAuthenticated()">
 							<button class="btn btn-outline-dark" type="button"
 								onclick="writePost()">게시글 작성</button>

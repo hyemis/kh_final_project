@@ -105,7 +105,7 @@
 					</div>
 
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-						<button type="submit" class="btn btn-outline-dark btn-submit">게시글
+						<button type="submit" class="btn btn-outline-dark btn-submit" onclick="return checkAll()">게시글
 							등록</button>
 					</div>
 				</form>
@@ -119,6 +119,24 @@
 
 	<!-- page script -->
 	<script>
+		// 
+		   function checkExistData(value, dataName) {
+        if (value.trim() === "") {
+            alert(dataName + "을(를) 입력해주세요!");
+            return false;
+        }
+        return true;
+    }
+
+    function checkAll() {
+        if (!checkExistData(document.getElementById("boardTitle").value, "제목")) {
+            return false;
+        } else if (!checkExistData(document.getElementById("boardContent").value, "내용")) {
+            return false;
+        }
+        return true;
+    }
+	
 	
 		//CKEditor
 		class UploadAdapter {

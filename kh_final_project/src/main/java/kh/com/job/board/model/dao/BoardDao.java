@@ -102,11 +102,6 @@ public class BoardDao {
 		return sqlSession.insert("boards.insertReReply", dto);
 	}
 	
-	// 대댓글 조회 
-	public List<ReplyDto> reReplyList(int boardNo, int replyId) throws Exception {
-		return sqlSession.selectList("boards.reReplyList");
-	}
-	
 
 	// 인기글
 	public List<BoardDto> topReadPost() throws Exception {

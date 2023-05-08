@@ -58,9 +58,6 @@ public interface BoardService {
 	// 대댓글 등록 
 	public int insertReReply(ReplyDto dto) throws Exception;
 	
-	// 대댓글 조회 
-	public List<ReplyDto> reReplyList(int boardNo, int replyId) throws Exception;
-	
 	// 인기글
 	public  List<BoardDto> topReadPost() throws Exception;
 	

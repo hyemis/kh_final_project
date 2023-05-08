@@ -54,7 +54,6 @@
 			        	<div class="m-4"><h3>개인회원 회원가입</h3></div>
 			        	
 				          <div class="row">
-				            
 				            <div class="row mb-3">
 							  <div class="col-10">
 							    <label for="userId">아이디</label>
@@ -330,7 +329,8 @@
 		            return false;
 		        }
 		        return true;
-		    }
+		   }
+		
 		// 아이디 체크 
 		 function checkUserId(id) {
 		        //Id가 입력되었는지 확인하기
@@ -403,7 +403,7 @@
         return true; //확인이 완료되었을 때
     	}
 		
-		// 생년월일 체크  확인필요
+		// 생년월일 체크
 		function checkBirth(userBirth) {
         var text = document.getElementById("userBirth");
         if (!checkExistData(userBirth, "생년월일을")) {
@@ -464,7 +464,7 @@
         return true; //확인이 완료되었을 때
    		}
 		
-		// 주소 체크  확인필요
+		// 주소 체크 
 		function checkAdress() {
         var text = document.getElementById("userAdress");
         if (!checkExistData(text.value, "주소를")) {
