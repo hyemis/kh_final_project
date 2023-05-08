@@ -61,6 +61,8 @@ public class BoardController {
 		mv.addObject("UBD02", service.postListByCate("UBD02").stream().limit(5).collect(Collectors.toList()));
 		mv.addObject("UBD03", service.postListByCate("UBD03").stream().limit(5).collect(Collectors.toList()));
 		mv.addObject("UBD04", service.postListByCate("UBD04").stream().limit(5).collect(Collectors.toList()));
+		
+		mv.addObject("totalCount", service.getCountByPs(null));
 		return mv;
 	}
 
@@ -69,9 +71,6 @@ public class BoardController {
 	public ModelAndView qna(ModelAndView mv) {
 		return mv;
 	}
-
-	
-
 
 	// 게시글 작성
 	@GetMapping("/writepost")

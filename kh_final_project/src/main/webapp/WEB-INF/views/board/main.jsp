@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>joba</title>
+<title>커뮤니티</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -18,7 +18,7 @@
 	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
 	rel="stylesheet">
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
@@ -68,7 +68,6 @@
 .linkPost {
 	text-decoration: underline; 
 	font-weight: bold; 
-	font-size:0.9rem;
 	color: #333333;
 }
 </style>
@@ -82,8 +81,13 @@
 	<section>
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
-				<div class="d-flex justify-content-between align-items-center p-4">
-					<h3 class="mb-0">커뮤니티</h3>
+				<div>
+					<div class="row d-flex justify-content-between">
+					    <h3 class="col-11 mb-3">실시간 전체글 ${totalCount} 개
+					        <i class="moveCate fa-solid fa-angle-right" style="color: #505153; cursor:pointer;" onclick="movePostAll()"></i>
+					    </h3>
+					</div>
+							
 					<div>
 						<sec:authorize access="isAuthenticated()">
 							<button class="btn btn-outline-dark" type="button"
@@ -93,7 +97,8 @@
 				</div>
 
 				<div class="s justify-content-between align-items-center">
-					<h5>TOP5 인기글</h5>
+					<h5> <i class="fa-solid fa-fire" style="color: #ec3818;"></i>  인기글 TOP 5 </h5>
+					
 					
 						<div class="p-3">
 						<table class="board-table">
@@ -129,28 +134,37 @@
 				<div class="s1">
 					<div class="row">
 						<div class="col-sm-6 s">
-							<h5>취업준비방</h5>
+							<div class="row align-items-center">
+							  <h5 class="col-11 mb-3">취업준비방</h5>
+							  <i class="moveCate col-1 fa-solid fa-angle-right" style="color: #505153; cursor:pointer;" onclick="moveUBD01()" ></i>
+							</div>
 							<c:forEach var="board" items="${UBD01}">
 								<div>
 									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
 									</a>
 								</div>
 							</c:forEach>
-							
 						</div>
+						
 						<div class="col-sm-6 s">
-						<h5>신입방</h5>
+							<div class="row align-items-center">
+								<h5 class="col-11 mb-3">신입방</h5>
+								<i class="moveCate col-1 fa-solid fa-angle-right" style="color: #505153; cursor:pointer;" onclick="moveUBD02()" ></i>
+							</div>
 							<c:forEach var="board" items="${UBD02}">
-								<div>
-									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
-									</a>
-								</div>
+									<div>
+										<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
+										</a>
+									</div>
 							</c:forEach>
-						</div>
+							</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-6 s">
-						<h5>면접방</h5>
+							<div class="row align-items-center">
+									<h5 class="col-11 mb-3">면접방</h5>
+									<i class="moveCate col-1 fa-solid fa-angle-right" style="color: #505153; cursor:pointer;" onclick="moveUBD03()" ></i>
+							</div>
 							<c:forEach var="board" items="${UBD03}">
 								<div>
 									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
@@ -159,7 +173,10 @@
 							</c:forEach>
 							</div>
 						<div class="col-sm-6 s">
-						<h5>질문게시판 </h5>
+							<div class="row align-items-center">
+									<h5 class="col-11 mb-3">질문게시판</h5>
+									<i class="moveCate col-1 fa-solid fa-angle-right" style="color: #505153; cursor:pointer;" onclick="moveUBD04()" ></i>
+							</div>
 							<c:forEach var="board" items="${UBD04}">
 								<div>
 									<a href="${pageContext.request.contextPath}/board/detail/${board.boardNo}" target="_blank" class="linkPost">${board.boardTitle}
@@ -186,6 +203,28 @@
 		function writePost() {
 			location.href = "${pageContext.request.contextPath}/board/writepost";
 		}
+		
+		function movePostAll() {
+			location.href = "${pageContext.request.contextPath}/board/postall";
+		}
+		
+		
+		function moveUBD01() {
+			location.href = "${pageContext.request.contextPath}/board/postall?cate=UBD01";
+		}
+		
+		function moveUBD02() {
+			location.href = "${pageContext.request.contextPath}/board/postall?cate=UBD02";
+		}
+		
+		function moveUBD03() {
+			location.href = "${pageContext.request.contextPath}/board/postall?cate=UBD03";
+		}
+		
+		function moveUBD04() {
+			location.href = "${pageContext.request.contextPath}/board/postall?cate=UBD04";
+		}
+		
 	</script>
 </body>
 </html>

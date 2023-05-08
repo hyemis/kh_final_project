@@ -26,11 +26,6 @@
 		WHERE BD.BOARD_NO = #{boardNo}
 	</select>
     
-	<!-- 게시글 조회 순으로 조회 -->
-
-	
-
-    
     <!-- 커뮤니티 게시판 카테고리 -->
     <select id="getBoardCate" resultType="kh.com.job.admin.model.dto.AdCategoryDto" >
 	SELECT *
@@ -111,7 +106,6 @@
 	</select>
 	
 	
-	
 	<!-- 게시글 조회 수 증가 -->
 	<update id="updateRead">
 	UPDATE BOARD 
@@ -136,12 +130,6 @@
 	</insert>
 	
 	<!-- 모댓글 조회 -->
-<!-- 	<select id="replyList" resultType="redto">
-	SELECT * FROM REPLY 
-	WHERE BOARD_NO = #{boardNo}
-	AND REPLY_LEVEL IN ('0','1')
-	ORDER BY REPLY_CREATE_DATE ASC
-	</select> -->
 	<select id="replyList" resultType="redto">
 	SELECT * FROM REPLY 
 	WHERE BOARD_NO = #{boardNo}
@@ -181,7 +169,6 @@
 			SELECT MAX(REPLY_ID) +1 FROM REPLY
 	</selectKey>
 	</insert>
-	
 	
 	<!--  인기글 top 5 -->
 	<select id="topReadPost" resultType="bdto">

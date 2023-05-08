@@ -362,24 +362,6 @@
 		
 		
 		// 답글 작성
-		/* function handleInsertReReply(element) {
-		  const replyId = element.dataset.replyId;
-		  const htmlVal = '<div class="m-3 mdeptList">'
-		      + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
-		      + '<input type="hidden" name="replyLevel" value="${reply.replyLevel}">'
-		      + '<input type="hidden" name="replySeq" value="${reply.replySeq}">'
-		      + '<div class="d-flex justify-content-between">'
-		      + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
-		      + '">'
-		      + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitReReply()">등록</button>'
-		      + '</div>' + '</div>';
-
-		  const parent = element.parentNode;
-		  const subReplyForm = parent.parentNode.querySelector('.subReplyForm');
-		  const newDiv = document.createElement('div');
-		  newDiv.innerHTML = htmlVal;
-		  subReplyForm.appendChild(newDiv);
-		}   */
 		
 		function handleInsertReReply(element) {
 			  const replyId = element.dataset.replyId;

@@ -117,18 +117,6 @@
  	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> 
 	
 	<script type="text/javascript">
-		// a 태그 클릭 시 
-		 function handleClick(event) {
-   		 event.preventDefault(); // 기본 동작 중지
-   		 const url = event.target.href; // a 태그의 href 속성값 가져오기
-   		 window.location.href = url; // 새로운 URL로 페이지 이동
-  			
-		}
-	
-		 // a 태그에 클릭 이벤트 리스너 추가
-		 const kakaoLoginBtn = document.querySelector('.kakao');
-		 kakaoLoginBtn.addEventListener('click', handleClick);
-	
 	
 		// 카카오 로그인 실패 
 		var msg = "${msg}";

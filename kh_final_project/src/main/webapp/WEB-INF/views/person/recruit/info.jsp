@@ -51,7 +51,7 @@
 				<div class="fdept flex-grow-1" style="min-height: 300px;">
 					<div class="m-3 fdeptList" style="min-height: 300px;">
 						<c:forEach var="fList" items="${fdeptList}">
-							<div class="mx-2 fcateinfo">
+							<div class="mx-2 fcateinfo" style="cursor:pointer;">
 								<input type="hidden" class="categoryId" name="categoryId"
 									value="${fList.categoryId}"> <input type="hidden"
 									class="categoryName" name="categoryName"
@@ -59,7 +59,7 @@
 									class="categoryType" name="categoryType"
 									value="${fList.categoryType}"> <input type="hidden"
 									class="reqCategoryId" name="reqCategoryId"
-									value="${fList.categoryId}"> ${fList.categoryName}
+									value="${fList.categoryId}" > ${fList.categoryName}
 							</div>
 						</c:forEach>
 					</div>
@@ -212,7 +212,7 @@
 							},
 							dataType : "json",
 							success : function(result) {
-								let htmlVal = '<div class="m-3 mdeptList" style="min-height: 300px;">';
+								let htmlVal = '<div class="m-3 mdeptList" style="min-height: 300px; cursor:pointer;">';
 								htmlVal += '<input type="hidden" class="categoryType" name="categoryType" value="'+type+'">';
 								htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+reqid+'">';
 								for (i = 0; i < result.length; i++) {
@@ -250,7 +250,7 @@
 							dataType : "json",
 							success : function(result) {
 
-								let htmlVal = '<div class="m-3  ldeptList" style="min-height: 300px;">';
+								let htmlVal = '<div class="m-3  ldeptList" style="min-height: 300px; cursor:pointer;">';
 								htmlVal += '<input type="hidden" class="categoryType" name="categoryType" value="'+type+'">';
 								htmlVal += '<input type="hidden" class="reqCategoryId" name="reqCategoryId" value="'+id+'">';
 								for (i = 0; i < result.length; i++) {
