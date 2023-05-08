@@ -18,7 +18,7 @@
 	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
 	rel="stylesheet">
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
@@ -59,6 +59,13 @@
 <!-- ckeditor5 -->
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<style>
+ td.subReply {
+    padding-left: 60px;
+  }
+  
+
+</style>
 
 </head>
 <body>
@@ -69,8 +76,8 @@
 	<section>
 		<div class="container-xxl py-5">
 			<div class="container bg-white p-5">
-				
-
+			
+				<!-- 게시글  -->
 				<div class="s originPost">
 					<div class="d-flex justify-content-end align-items-center">
 						<sec:authorize access="hasRole('ROLE_P') and #detailBoard.userId == authentication.name">
@@ -93,37 +100,45 @@
 				</div>
 				<hr>
 
+				<!-- 댓글 -->
 				<div class="viewReply">
-			    <c:forEach items="${replyList}" var="reply">
-			        <table class="reply-table ${reply.replyLevel eq 2 ? 'subReply-parent' : ''}">
-			            <c:choose>
-			                <c:when test="${reply.replyLevel ne 2}">
-			                    <td class="pb-3 originReply reply-cell">${reply.replyContent}</td>
-			                </c:when>
-			                <c:otherwise>
-			                    <td class="pb-3 subReply reply-cell">${reply.replyContent}</td>
-			                </c:otherwise>
-			            </c:choose>
-			            <td class="text-end">
-			                <div class="d-flex justify-content-end align-items-center">
-			                    <sec:authorize access="hasRole('ROLE_P') and #reply.userId == authentication.name">
-			                        <a class="" onclick="handleUpdateReply(this)" data-reply-id="${reply.replyId}">수정</a>
-			                        <a class="ms-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
-			                    </sec:authorize>
-			                    <sec:authorize access="isAuthenticated()">
-			                        <a class="ms-2" onclick="handleInsertReReply(this)" data-reply-id="${reply.replyId}">답글</a>
-			                        <input type="hidden" name="replyLevel" value="${reply.replyLevel}">
-			                        <input type="hidden" name="replySeq" value="${reply.replySeq}">
-			                    </sec:authorize>
-			                </div>
-			                <div class="text-muted small">
-			                    <span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에 작성
-			                </div>
-			            </td>
-			        </table>
-			        <hr>
-			    </c:forEach>
-			</div>
+				    <c:forEach items="${replyList}" var="reply">
+				        <table class="reply-table ${reply.replyLevel eq 2 ? 'subReply-parent' : ''}">
+				       	 <tr>
+					            <c:choose>
+					                <c:when test="${reply.replyLevel eq 1}">
+					                    <td class="pb-3 originReply reply-cell">${reply.replyContent}</td>
+					                </c:when>
+					                <c:otherwise>
+					                 	<td class="pb-3 subReply reply-cell">
+								            ${reply.replyContent}
+								        </td>
+					                </c:otherwise>
+					            </c:choose>
+				            </tr>
+				            <tr>
+					            <td class="text-end">
+					                <div class="d-flex justify-content-end align-items-center">
+					                    <sec:authorize access="hasRole('ROLE_P') and #reply.userId == authentication.name">
+					                        <a class="" onclick="handleUpdateReply(this)" data-reply-id="${reply.replyId}">수정</a>
+					                        <a class="ms-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
+					                    </sec:authorize>
+					                    <sec:authorize access="isAuthenticated()">
+					                        <a class="ms-2" onclick="handleInsertReReply(this)" data-reply-id="${reply.replyId}">답글</a>
+					                        <input type="hidden" name="replyLevel" value="${reply.replyLevel}">
+					                        <input type="hidden" name="replySeq" value="${reply.replySeq}">
+					                    </sec:authorize>
+					                </div>
+					                <div class="text-muted small">
+					                    <span>${reply.userId}</span> 님이 <span>${reply.replyCreateDate}</span>에 작성
+					                </div>
+					            </td>
+				            <tr>
+				            
+				        </table>
+				        <hr>
+				    </c:forEach>
+				</div>
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex pt-3">
 						<input type="text" style="width: 100%;"
@@ -134,11 +149,7 @@
 						</div>
 					</div>
 				</sec:authorize>
-					
-				<div>
-
 			</div>
-		</div>
 		</div>
 	</section>
 
@@ -351,7 +362,7 @@
 		
 		
 		// 답글 작성
-		function handleInsertReReply(element) {
+		/* function handleInsertReReply(element) {
 		  const replyId = element.dataset.replyId;
 		  const htmlVal = '<div class="m-3 mdeptList">'
 		      + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
@@ -363,13 +374,38 @@
 		      + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitReReply()">등록</button>'
 		      + '</div>' + '</div>';
 
-		  const parent = element.parentNode.parentNode;
+		  const parent = element.parentNode;
+		  const subReplyForm = parent.parentNode.querySelector('.subReplyForm');
 		  const newDiv = document.createElement('div');
 		  newDiv.innerHTML = htmlVal;
-		  parent.insertBefore(newDiv, element.parentNode.nextSibling);
-		}
+		  subReplyForm.appendChild(newDiv);
+		}   */
 		
-		// 대댓글 등록 함수
+		function handleInsertReReply(element) {
+			  const replyId = element.dataset.replyId;
+			  const htmlVal = '<div class="m-3 ReReplyList">'
+			      + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
+			      + '<input type="hidden" name="replyLevel" value="${reply.replyLevel}">'
+			      + '<input type="hidden" name="replySeq" value="${reply.replySeq}">'
+			      + '<div class="d-flex justify-content-between">'
+			      + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
+			      + '">'
+			      + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitReReply()">등록</button>'
+			      + '</div>' + '</div>';
+
+			  const parent = element.parentNode;
+			  let subReplyForm = parent.parentNode.querySelector('.subReplyForm');
+			  if (!subReplyForm) {
+			    subReplyForm = document.createElement('div');
+			    subReplyForm.classList.add('subReplyForm');
+			    parent.parentNode.appendChild(subReplyForm);
+			  }
+			  const newDiv = document.createElement('div');
+			  newDiv.innerHTML = htmlVal;
+			  subReplyForm.appendChild(newDiv);
+			}
+		
+		// 답글 등록 
 		function submitReReply() {
 		  const boardNo = ${detailBoard.boardNo};
 		  const replyId = document.querySelector("#replyId").value;

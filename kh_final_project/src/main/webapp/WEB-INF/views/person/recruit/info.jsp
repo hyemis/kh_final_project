@@ -290,7 +290,7 @@
 									$('#total-count').text("0");
 								} else {
 									// 새로운 내용 출력
-									let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
+									let recruitTable = '<div class="container-fluid bg-white p-5 recruit-Container">';
 									for (i = 0; i < result.length; i++) {
 									    recruitTable += '<table class="recruit-table">';
 									    recruitTable += '<tr>';
@@ -362,7 +362,7 @@
 				$('.recruit-Container').empty(); // 이전 결과 지우기
 	
 				// 새로운 내용 출력
-				let recruitTable = '<div class="container-fluid bg-white p-5 recruit-container">';
+				let recruitTable = '<div class="container-fluid bg-white p-5 recruit-Container">';
 				for (i = 0; i < result.length; i++) {
 				    recruitTable += '<table class="recruit-table">';
 				    recruitTable += '<tr>';

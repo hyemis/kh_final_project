@@ -42,17 +42,17 @@
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm">	
 		
-		<div class="grid gap-3 border border-primary">
+		<div class="grid gap-3">
 			 <div class="row justify-content-center">
-		        	<div class="col-6 border border-primary">
+		        	<div class="col-6 border m-3 bg-white">
 		        		<div class="row mt-5 m-3 text-center">
 			        	<h3>비밀번호 찾기</h3>
 			       		</div>
 			       		<hr>
 			       		
 			        	<div class="row" id="member">
-			        	<button class="col-6 btn btn-outline-dark" onclick="toggleForm('personal')">Personal Member</button>
-	  					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">Corporate Member</button>
+			        	<button class="col-6 btn btn-outline-dark" onclick="toggleForm('personal')">개인회원</button>
+	  					<button class="col-6 btn btn-outline-dark" onclick="toggleForm('corporate')">기업회원</button>
 			       		</div>
 			       		
 			       		<div class="row hidden" id="findType">
