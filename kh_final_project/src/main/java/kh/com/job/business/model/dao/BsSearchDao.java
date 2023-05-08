@@ -27,7 +27,6 @@ public class BsSearchDao {
 	}
 
 	public Object pagingResumeList(BsSearchDto dto) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("business.pagingResumeList", dto);
 	}
 

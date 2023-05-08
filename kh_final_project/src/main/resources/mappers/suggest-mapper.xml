@@ -15,13 +15,9 @@
 	
 	<!-- 공고리스트  -->
 	<select id="getRecruit" resultType="brdto">
-		SELECT COUNT(*)
-		FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM
-				FROM SUGGEST SG
-				JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
-				JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
-				WHERE BS_USER = #{userId}
-			 )
+		SELECT RA_NUM, USER_ID, COMPANY_NAME, RA_TITLE 
+		  FROM RECRUIT_REGIST 
+         WHERE USER_ID = #{userId}
 	</select>
 	<!-- bs/제안받은 리스트 카운트 -->
 	<select id="countbsSuggest" resultType="_int">
