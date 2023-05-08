@@ -1,6 +1,7 @@
 package kh.com.job.person.model.dao;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -112,10 +113,28 @@ public class PsDao {
 		return sqlSession.delete("person.deleteJob",InfoNo);
 	}
 	
+	
 	// 스크랩한 공고 조회
 	public List<PsScrapInfoDto> selectListScrap(String userId) throws Exception {
-		return sqlSession.selectList("person.selectListScrap", userId);
+	    List<PsScrapInfoDto> scrapList = sqlSession.selectList("person.selectListScrap", userId);
+	    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    for (PsScrapInfoDto scrapInfo : scrapList) {
+	        String closedateStr = scrapInfo.getCloseDate();
+	        LocalDate closedate;
+	        if (closedateStr.length() == 8) { 
+	            closedateStr = "20" + closedateStr;
+	            closedate = LocalDate.parse(closedateStr, outputFormat);
+	        } else { 
+	            closedate = LocalDate.parse(closedateStr, inputFormat);
+	        }
+	        String formattedDate = closedate.format(outputFormat);
+	        scrapInfo.setCloseDate(formattedDate);
+	    }
+	    return scrapList;
 	}
+
+
 	
 	// 입사지원
 	public int applyJob(BsAplicantDto dto) throws Exception {
