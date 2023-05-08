@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.person.model.dto.PsApplyDto;
@@ -197,6 +198,14 @@ public class PsDao {
 
 	public int updateAccept(BsSuggestDto dto) {
 		return sqlSession.update("suggest.updateAccept",dto);
+	}
+
+	public BsSuggestDto viewSuggest(int sgNo) {
+		return sqlSession.selectOne("suggest.viewSuggest",sgNo);
+	}
+
+	public CompanyDto suggestCompanyInfo(String bsUser) {
+		return sqlSession.selectOne("suggest.suggestCompanyInfo",bsUser);
 	}
 
 

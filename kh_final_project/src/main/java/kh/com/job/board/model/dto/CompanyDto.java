@@ -18,11 +18,12 @@ public class CompanyDto {
 	
 	private String userId;
 	private String userName;
+	private String userEmail;
+	private String bsMainPhone;
 	private String addressRoad;
 	private String addressJibun;
 	private String addressDetail;
 	private String addressPostcode;
-	private String bsMainPhone;
 	
 	private int boardNo;
 	private String boardTitle;

@@ -142,8 +142,8 @@
 				</div>
 				<form action="<%=request.getContextPath()%>/business/search/suggestForm" method="post">
 				<div class="modal-body">
-						<input type="text" class="form-control" id="user_id" name="psUser" >
-						<input type="text" class="form-control" id="resume_no" name="resumeNo" >
+						<input type="text" class="form-control" id="user_id" name="psUser"  style="display: none;">
+						<input type="text" class="form-control" id="resume_no" name="resumeNo" style="display: none;">
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>면접대상자</h4>
@@ -152,15 +152,17 @@
 								<input type="text" class="form-control" id="user_name" >
 							</div>
 						</div>
-						<div class="row ">
+						<div class="pt-3 row">
 							<div class="col-2 text-center font-monospace">
 								<h4>제안 공고</h4>
 							</div>
-							<select class="col-10 form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()">
-									<c:forEach items="${recruit }" var="recruit">
-									<option value="${recruit.raNum }">${recruit.raTitle}</option>
-									</c:forEach>
-							</select>
+							<div class="col-10">
+								<select class="form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()">
+										<c:forEach items="${recruit }" var="recruit">
+										<option value="${recruit.raNum }">${recruit.raTitle}</option>
+										</c:forEach>
+								</select>
+							</div>
 						</div>
 
 						<div class="pt-3 row ">

@@ -32,6 +32,7 @@ public class InterviewDto {
 //	USER_NAME               VARCHAR2(50)  
 //	USER_ID                 VARCHAR2(50)  
 //	AP_NUM                  NUMBER 
+//	BS_USER
 	
 	private int caNum;
 	private String caTitle;
@@ -44,6 +45,7 @@ public class InterviewDto {
 	private String alramType;
 	private String userName;
 	private String userId;
+	private String bsUser;
 	private int apNum;
 	
 	
