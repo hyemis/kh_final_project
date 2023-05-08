@@ -17,6 +17,8 @@ import com.google.cloud.storage.StorageOptions;
 import kh.com.job.admin.model.dao.AdAccountDao;
 import kh.com.job.admin.model.dao.AdDao;
 import kh.com.job.admin.model.dto.AdBannerDto;
+import kh.com.job.business.model.dto.BsRecruitDetailDto;
+import kh.com.job.business.model.dto.BsRecruitDto;
 
 @Service
 public class AdServiceImpl implements AdService{
@@ -66,6 +68,11 @@ public class AdServiceImpl implements AdService{
 	@Override
 	public int bannerUpdate(AdBannerDto dto) {
 		return addao.bannerUpdate(dto);
+	}
+
+	@Override
+	public List<BsRecruitDto> recentRecruit() {
+		return addao.recentRecruit();
 	}
 
 
