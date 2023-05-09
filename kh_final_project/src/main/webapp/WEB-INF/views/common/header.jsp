@@ -113,9 +113,9 @@
 								class="nav-link dropdown-toggle" data-bs-toggle="dropdown">인재
 								관리</a>
 							<div class="dropdown-menu rounded-0 m-0">
-								<a href="${pageContext.request.contextPath}/business/"
+								<a href="${pageContext.request.contextPath}/business/search/suggest"
 									class="dropdown-item">맞춤형 인재 추천</a> <a
-									href="${pageContext.request.contextPath}/business/"
+									href="${pageContext.request.contextPath}/business/search"
 									class="dropdown-item">면접 제의</a>
 							</div>
 						</div>
@@ -126,7 +126,7 @@
 							<div class="dropdown-menu rounded-0 m-0">
 								<a href="${pageContext.request.contextPath}/business/"
 									class="dropdown-item">회사소개</a> <a
-									href="${pageContext.request.contextPath}/business/"
+									href="${pageContext.request.contextPath}/business/aboutus/newsletter"
 									class="dropdown-item">뉴스레터</a> <a
 									href="${pageContext.request.contextPath}/business/"
 									class="dropdown-item">Q&A</a>
