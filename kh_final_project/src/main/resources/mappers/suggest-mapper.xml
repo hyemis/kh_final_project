@@ -19,25 +19,27 @@
 		  FROM RECRUIT_REGIST 
          WHERE USER_ID = #{userId}
 	</select>
-	<!-- bs/제안받은 리스트 카운트 -->
+	
+	<!-- bs/제안한 리스트 카운트 -->
 	<select id="countbsSuggest" resultType="_int">
 		SELECT COUNT(*)
 		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, SG.RA_NUM,  
-		  				SG.SUGGEST_ACCEPT, SG.BA_NUM
+		  				SG.SUGGEST_ACCEPT, SG.BA_NUM, SG.PS_USER, SG.SEND_INTERVIEW
 				 FROM SUGGEST SG
 				 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
 				 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
 				 WHERE BS_USER = #{bsUser}
+				 ORDER BY SG_NO DESC
 			   )
 	</select>
 	
-	<!-- bs/제안한리스트 -->
+	<!-- bs/제안한 리스트 -->
 	<select id="bsSuggestList" resultType="bgdto">
 		SELECT *
 		  FROM (
 		  		SELECT ROWNUM AS NUM, A. *
 		  		  FROM ( SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, UR.RESUME_NO, UR.RESUME_TITLE, SG.SEND_DATE, 
-		  		                SG.RA_NUM, SG.SUGGEST_ACCEPT, SG.BA_NUM
+		  		                SG.RA_NUM, SG.SUGGEST_ACCEPT, SG.BA_NUM, SG.PS_USER, SG.SEND_INTERVIEW
 						 FROM SUGGEST SG
 						 JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
 						 JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
@@ -46,6 +48,31 @@
 		 	   )
 		 WHERE NUM BETWEEN #{startNum} AND #{endNum}				
 	</select>
+	
+	<!-- 인터뷰 대상조회 -->
+	<select id="interview" resultType="bgdto">
+		SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, SG.PS_USER, SG.BS_USER
+		  FROM SUGGEST SG
+		  JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
+		  JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
+		 WHERE SG_NO = #{sgNo}
+	</select>
+	
+	<!-- 면접일정등록 -->
+	<insert id="addInterview">
+		INSERT INTO 
+		INTERVIEW (CA_NUM,USER_NAME,USER_ID,BS_USER,CA_TITLE,DATE_START,DATE_END,INTERVIEW_TIME,LOCATION,MEMO)
+		VALUES (#{caNum},#{userName},#{userId},#{bsUser},#{caTitle},#{dateStart},#{dateStart},#{interviewTime},#{location},#{memo})
+		<selectKey keyProperty="caNum" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(CA_NUM) +1 FROM INTERVIEW
+		</selectKey>
+	</insert>
+	
+	<update id="updateSend">
+		UPDATE SUGGEST SET SEND_INTERVIEW = 'Y' WHERE SG_NO = #{sgNo} 
+	</update>
+	
 	
 	<!-- ps/제안받은 리스트 카운트 -->
 	<select id="countpsSuggest" resultType="_int">
@@ -77,6 +104,21 @@
 	   
 	</select>
 	
+	<!-- 면접 제의 상세보기 -->
+	<select id="viewSuggest" resultType="bgdto">
+		SELECT SG.SG_NO, SG.SG_TITLE, SG.SG_CONTENT, SG.BS_USER, SG.PS_USER, SG.RESUME_NO, SG.RA_NUM, SG.SEND_DATE, RR.RA_TITLE
+		  FROM SUGGEST SG
+		  JOIN RECRUIT_REGIST RR ON SG.RA_NUM = RR.RA_NUM
+		 WHERE SG_NO = #{sgNo}
+	</select>
+	
+	<select id="suggestCompanyInfo"  resultType="bcdto">
+		SELECT UT.USER_EMAIL,UT.BS_MAIN_PHONE, UT.ADDRESS_ROAD, UT.ADDRESS_JIBUN ,UT.ADDRESS_DETAIL ,UT.ADDRESS_POSTCODE, BD.BOARD_NO
+		  FROM USER_TABLE UT
+		  JOIN BOARD BD ON UT.USER_ID = BD.USER_ID
+		  WHERE BD.USER_ID = #{bsUser} AND BD.CATEGORY_ID = 'UBD06'
+	</select>
+	
 	<!-- 면접수락 -->
 	<insert id="interviewAccept" parameterType="bgdto">
 		INSERT ALL
@@ -88,12 +130,15 @@
 		USER_APPLY (USER_ID, BA_NUM, APPLY_DATE, RESUME_NO)
 			VALUES (#{psUser}, ba_num, current_timestamp, #{resumeNo})
 		 
+
 		SELECT MAX(BA_NUM)+1 ba_num  FROM BUSINESS_APPLICANT
 	</insert>
 	
 	<update id="updateAccept">
 		UPDATE SUGGEST SET BA_NUM = #{baNum} , SUGGEST_ACCEPT = 'Y' WHERE SG_NO = #{sgNo} 
 	</update>
+	
+	
 	
 	
 </mapper>

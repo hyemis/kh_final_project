@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.business.model.dto.InterviewDto;
 
 @Repository
 public class BsSearchDao {
@@ -48,6 +49,18 @@ public class BsSearchDao {
 
 	public int countbsSuggest(BsSuggestDto dto) {
 		return sqlSession.selectOne("suggest.countbsSuggest",dto);
+	}
+
+	public BsSuggestDto interview(int sgNo) {
+		return sqlSession.selectOne("suggest.interview",sgNo);
+	}
+
+	public int addInterview(InterviewDto dto) {
+		return sqlSession.insert("suggest.addInterview", dto);
+	}
+
+	public int updateSend(BsSuggestDto dto) {
+		return sqlSession.update("suggest.updateSend", dto);
 	}
 
 

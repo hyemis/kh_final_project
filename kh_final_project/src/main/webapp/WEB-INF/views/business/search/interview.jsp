@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>인재찾기</title>
+<title>지원자 결과 관리</title>
 <!-- cs -->
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,8 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
 	
+	<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css" rel="stylesheet">
+	
 <!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -27,6 +29,8 @@
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/waypoints/waypoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+	<!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
 	
@@ -37,58 +41,63 @@
 
 <!-- page section -->	
 <section>
-<div class="container-fluid p-5">
-	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
-	<h2>면접제의한 인재</h2>
-	<div class="text-end">
-	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search/suggest" role="button">인재추천</a>
-	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/applicant" role="button">지원자 관리 페이지</a>
-	</div><br>
-
-	<div class="table-responsive ">
-		<table class="table table-hover">
-			  <thead>
-			    <tr>
-			      <th scope="col">제안 날짜</th>
-			      <th scope="col">이름</th>
-			      <th scope="col">이력서</th>
-			      <th scope="col">면접등록</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  <c:forEach items="${suggest.getPage() }" var="suggest">
-			    <tr>
-			      <td>${suggest.sendDate }</td>
-			      <td><a value="${suggest.psUser }">${suggest.userName }</a></td>
-			      <td><a value="${suggest.resumeNo }" href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=${suggest.resumeNo}">${suggest.resumeTitle }</a></td>
-				  <td>
-				  <c:choose>
-				    <c:when test="${suggest.suggestAccept == 'Y'}">
-				      <a type="button" class="btn btn-primary" value="${suggest.suggestAccept}" href="${pageContext.request.contextPath}/business/search/interview?no=${suggest.sgNo }">면접등록</a>
-				    </c:when>
-				    <c:when test="${suggest.sendInterview == 'Y'}">
-				      <button class="btn btn-primary" value="${suggest.sendInterview} " disabled>등록완료</button>
-				    </c:when>
-				    <c:otherwise>
-				      <button class="btn btn-outline-success" disabled >수락대기</button>
-				    </c:otherwise>
-				  </c:choose>
-				  </td>
-			    </tr>
-			   </c:forEach>	
-			   </tbody>
-	   </table> 
-	
+	<div class="container-fluid bg-white p-5">
+		<h3>면접 메일 발송</h3>
+		해당 지원자에게 보낼 면접 일정 관련 내용을 작성해주세요. 
+		<form action="<%=request.getContextPath()%>/business/search/sendinterview" method="post">
+			<p name="userId" vlaue=" ${info.psUser }" style="display: none;">지원자 아이디 ${info.psUser }</p>
+			<p name="bsUser" vlaue="${info.bsUser }" style="display: none;" >회사 아이디    ${info.bsUser }</p>
+			<div class="row pt-2">
+				<div class="col-3 text-center">지원자명</div>
+				<div class="col-8">
+					<input type="text" class="form-control" name="userName" value="${info.userName }" readonly>
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">지원자 이메일</div>
+				<div class="col-8">
+					<input type="text" class="form-control" name="userEmail" value="${info.userEmail }" readonly>
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">면접 일정 제목</div>
+				<div class="col-8">
+					<input type="text" class="form-control" name="caTitle" >
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">면접 날짜</div>
+				<div class="col-8">
+					<input type="date" class="form-control" name="dateStart" >
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">면접 시간</div>
+				<div class="col-8">
+					<input type="time" class="form-control" name="interviewTime" >
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">면접 장소</div>
+				<div class="col-8">
+					<input type="text" class="form-control" name="location" >
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">메모</div>
+				<div class="col-8">
+					<input type="text" class="form-control" name="memo" >
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">보내기</button>
+		</form>
 	</div>
-</div>
 </section>
 
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-<!-- page script -->
 
-	
 </body>
 </html>

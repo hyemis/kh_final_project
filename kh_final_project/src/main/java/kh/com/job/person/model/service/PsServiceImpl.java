@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.common.page.Paging;
@@ -315,6 +316,16 @@ public class PsServiceImpl implements PsService {
 		@Override
 		public int updateAccept(BsSuggestDto dto) {
 			return dao.updateAccept(dto);
+		}
+
+		@Override
+		public BsSuggestDto viewSuggest(int sgNo) {
+			return dao.viewSuggest(sgNo);
+		}
+
+		@Override
+		public CompanyDto suggestCompanyInfo(String bsUser) {
+			return dao.suggestCompanyInfo(bsUser);
 		}
 
 

@@ -46,6 +46,8 @@ import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.business.model.dto.BsUserDto;
+import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
@@ -81,6 +83,9 @@ public class PsMainController {
 	
 	@Autowired
 	private BoardService bservice;
+	
+	@Autowired
+	private BsAccountService baservice;
 
 	@Autowired
 	@Qualifier("fileUtil")
@@ -395,7 +400,7 @@ public class PsMainController {
 		if (passwordEncoder.matches(userPw, pdto.getUserPw())) {
 			service.delete(userId);
 			SecurityContextHolder.clearContext();
-			mv.setViewName("redirect:/person/main");
+			mv.setViewName("redirect:/");
 
 		} else {
 			mv.setViewName("redirect:/person/deletepw");
@@ -445,8 +450,7 @@ public class PsMainController {
 	// 면접제안 리스트
 	@GetMapping("/suggest")
 	public ModelAndView suggestPage(ModelAndView mv, Principal principal, BsSuggestDto dto) {
-		//로그인한 id
-		System.out.println("----------------------- 로그인한 ID: " + principal.getName());
+		//로그인한 id로 조회
 		dto.setPsUser(principal.getName());
 		
 		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정
@@ -461,7 +465,41 @@ public class PsMainController {
 				return mv;
 	}
 	
-
+	//면접 제안 상세보기
+	@GetMapping("/suggest/view")
+	public ModelAndView viewSuggest (ModelAndView mv, Principal principal,
+									 @RequestParam(name = "no", required = false) int sgNo) {
+		
+		BsSuggestDto sdto = service.viewSuggest(sgNo);
+		mv.addObject("suggest", sdto);
+		System.out.println(sdto);
+		
+		CompanyDto cdto = service.suggestCompanyInfo(sdto.getBsUser());
+		mv.addObject("info", cdto);
+		System.out.println(cdto);
+		
+		return mv;
+	}
+	
+	
+	//면접제안 수락
+	@PostMapping("/interviewAccept")
+	@ResponseBody
+	public void interviewAccept( Principal principal,
+												@RequestParam(name = "sgNo") int sgNo,
+									            @RequestParam(name = "resumeNo") int resumeNo,
+									            @RequestParam(name = "raNum") int raNum) {
+             
+		BsSuggestDto dto = new BsSuggestDto();
+		dto.setSgNo(sgNo);
+		dto.setResumeNo(resumeNo);
+		dto.setRaNum(raNum);
+		dto.setPsUser(principal.getName());
+		
+		service.interviewAccept(dto);
+		service.updateAccept(dto);
+	}
+	
 	// 관심기업정보 화면
 	@GetMapping("/scrapcompany")
 	public ModelAndView viewScrapCompany(ModelAndView mv, Principal principal) {

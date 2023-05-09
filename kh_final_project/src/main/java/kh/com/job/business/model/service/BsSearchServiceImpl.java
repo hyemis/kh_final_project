@@ -9,6 +9,7 @@ import kh.com.job.business.model.dao.BsSearchDao;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
 
@@ -85,6 +86,21 @@ public class BsSearchServiceImpl implements BsSearchService{
 				//로 생성한다.
 				
 				return list;
+	}
+
+	@Override
+	public BsSuggestDto interview(int sgNo) {
+		return dao.interview(sgNo);
+	}
+
+	@Override
+	public int addInterview(InterviewDto dto) {
+		return dao.addInterview(dto);
+	}
+
+	@Override
+	public int updateSend(BsSuggestDto dto) {
+		return dao.updateSend(dto);
 	}
 
 	

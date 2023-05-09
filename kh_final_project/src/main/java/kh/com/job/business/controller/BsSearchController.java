@@ -15,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.board.model.dto.BoardDto;
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
@@ -47,7 +49,7 @@ public class BsSearchController {
 	@Autowired
 	private BsAccountService baService;
 	
-
+	//인재 찾기 페이지
 	@GetMapping("/suggest")
 	public ModelAndView category(ModelAndView mv, BsSearchDto sdto, Principal principal) {
 	
@@ -67,7 +69,7 @@ public class BsSearchController {
 		return mv;
 	}
 	
-	//검색결과
+	//인재검색 결과
 	@PostMapping("/search")
 	@ResponseBody
 	public Paging searchResume(
@@ -90,6 +92,7 @@ public class BsSearchController {
 	        return list;
 	    }
 	
+	//면접 제안
 	@PostMapping("/suggestForm")
 	public ModelAndView insertNewsletter(ModelAndView mv, BsSuggestDto dto, Principal principal, RedirectAttributes rttr)  {
 		dto.setBsUser(principal.getName()); 
@@ -100,9 +103,29 @@ public class BsSearchController {
 		return mv;
 	}
 	
+		
+	//면접 일정 등록페이지
+	@GetMapping("/interview")
+	public ModelAndView interview(ModelAndView mv,
+										@RequestParam(name = "no", required = false) int sgNo) {
+		
+		BsSuggestDto dto = bsService.interview(sgNo);
+		mv.addObject("info", dto);
+		
+		return mv;
+	}
 	
-
-
-
+	//면접 일정 등록
+	@PostMapping("/sendinterview")
+	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsSuggestDto sdto, Principal principal ) {
+		dto.setBsUser(principal.getName());
+		bsService.addInterview(dto);
+		System.out.println(dto);
+		bsService.updateSend(sdto);
+		System.out.println(sdto);
+		mv.setViewName("redirect:/business/search");
+		
+		return mv;
+	}
+	
 }
-

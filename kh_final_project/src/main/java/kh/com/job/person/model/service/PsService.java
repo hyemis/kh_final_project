@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.person.model.dto.PsApplyDto;
 import kh.com.job.person.model.dto.PsScrapInfoDto;
 import kh.com.job.person.model.dto.PsUserDto;
-import kh.com.job.temp.model.dto.TempDto;
 
 public interface PsService {
 	
@@ -55,6 +55,10 @@ public interface PsService {
 	//면접수락
 	public int interviewAccept(BsSuggestDto dto);
 	public int updateAccept(BsSuggestDto dto);
+	//면접제의 상세보기
+	public BsSuggestDto viewSuggest(int sgNo);
+	public CompanyDto suggestCompanyInfo(String bsUser);
+	
 	
 	
 }

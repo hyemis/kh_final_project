@@ -1,3 +1,4 @@
+
 package kh.com.job.business.model.dto;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ public class BsSuggestDto {
 	private int baNum;
 	private int resumeNo;
 	private String sgTitle;
+	private String raTitle;
 	private String sgContent;
 	private String psUser;
 	private String bsUser;
@@ -31,6 +33,7 @@ public class BsSuggestDto {
 	private String userEmail;
 	private String companyName;
 	private String resumeTitle;
+	private String sendInterview;
 	
 
 	//페이징처리
