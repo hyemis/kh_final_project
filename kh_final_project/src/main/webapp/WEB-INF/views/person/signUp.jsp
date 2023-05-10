@@ -461,9 +461,9 @@
    		}
 		
 		// 주소 체크 
-		function checkAdress() {
+		function checkAdress(userAddress) {
         var text = document.getElementById("userAdress");
-        if (!checkExistData(text.value, "주소를")) {
+        if (!checkExistData(userAddress, "주소를")) {
             return false;
         } else
             return true;
