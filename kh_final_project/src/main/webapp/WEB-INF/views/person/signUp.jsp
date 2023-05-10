@@ -473,12 +473,6 @@
     	}
 		
 		
-		// 회원가입 실패 alret
-		var msg = "${msg}";
-		if(msg) {
-			alert(msg);
-		}
-		
 	</script>
 	
 	<!-- map -->
