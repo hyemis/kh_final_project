@@ -564,7 +564,7 @@ public class PsMainController {
 	// 관심기업 등록
 	@PostMapping("scrapCompany")
 	@ResponseBody
-	public int scrapJob(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
+	public int scrapCompany(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
 		
 		int result = -1;
 		
