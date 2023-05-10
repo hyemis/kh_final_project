@@ -227,14 +227,48 @@
 		});
 		
 		// 경력 입력폼 추가
-		var forms = [ document.getElementsByName("certi")[0] ];
-
 		function addCerti() {
-			var originForm = forms[0];
-			var form = originForm.cloneNode(true);
-			originForm.parentNode.insertBefore(form, originForm.nextSibling);
-			forms.push(form);
-		}
+		  const container = document.getElementById("CertiFormContainer");
+		
+		  const form = document.createElement("form");
+		  form.name = "certi";
+		  form.action = "certi";
+		  form.method = "post";
+		  
+		  form.innerHTML = `
+			  <form name="certi" action="certi" method="post">
+				<div class="row mb-3">
+					<label for="certiName" class="col-sm-2 col-form-label">자격증명</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="certiName">
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="certiPub" class="col-sm-2 col-form-label">자격증발행처</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="certiPub">
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="certiDate" class="col-sm-2 col-form-label">자격증취득일자</label>
+					<div class="col-sm-10">
+						<input type="Date" class="form-control" name="certiDate">
+					</div>
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button type="submit" class="btn btn-primary" id="saveCerti">저장</button>
+					<button class="btn btn-primary delete-btn"
+						onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+				</div>
+				<hr>
+		
+			</form>
+			`;
+		
+		
+			container.appendChild(form);
+			}
+	
 		
 		// 입력폼 삭제
 		function removeForm(form) {

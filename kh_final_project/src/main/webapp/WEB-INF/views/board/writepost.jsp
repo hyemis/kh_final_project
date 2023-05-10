@@ -128,10 +128,18 @@
         return true;
     }
 
+   /*  function checkAll() {
+        if (!checkExistData(document.getElementById("boardTitle").value, "제목")) {
+            return false;
+        }
+    } */
+    
     function checkAll() {
         if (!checkExistData(document.getElementById("boardTitle").value, "제목")) {
             return false;
-        } else if (!checkExistData(document.getElementById("boardContent").value, "내용")) {
+        }
+        var boardContent = CKEDITOR.instances.boardContent.getData()
+        if (!checkExistData(boardContent, "내용")) {
             return false;
         }
         return true;

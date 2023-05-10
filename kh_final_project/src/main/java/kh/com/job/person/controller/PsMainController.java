@@ -100,9 +100,7 @@ public class PsMainController {
 	// 메인화면
 	@GetMapping("/main")
 	public ModelAndView viewmain(ModelAndView mv, Principal principal) {
-		System.out.println("&&&&&&&&&&&&&&&&&&&&");
-		System.out.println(principal);
-		System.out.println("&&&&&&&&&&&&&&&&&&&&");
+		
 		return mv;
 	}
 
@@ -631,10 +629,11 @@ public class PsMainController {
 		String userEmail = (String) userInfo.get("email");
 		PsUserDto user = service.selectUserEmail(userEmail);
 		
-		System.out.println("### ####"+user.getUserRole());
 		
 		// 이메일 정보가 일치하는 사용자가 존재할 경우 로그인 처리
 		if (user != null && user.getUserEmail().equals(userEmail)) {
+			
+			System.out.println("### ####"+user.getUserRole());
 			// 로그인
 
 			roles.add(new SimpleGrantedAuthority(user.getUserRole()));

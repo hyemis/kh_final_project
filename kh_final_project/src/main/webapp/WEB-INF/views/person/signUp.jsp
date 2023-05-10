@@ -97,7 +97,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" >
+				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.com" >
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				          
@@ -181,7 +181,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" >
+				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.com" >
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				          
@@ -407,7 +407,6 @@
 		function checkBirth(userBirth) {
         var text = document.getElementById("userBirth");
         if (!checkExistData(userBirth, "생년월일을")) {
-            alert("생년월일을 입력해 주세요!");
             return false;
         } else
             return true;
@@ -418,7 +417,6 @@
 		function checkPhone(userPhone) {
         var text = document.getElementById("userPhone");
         if (!checkExistData(userPhone, "휴대폰번호를")) {
-            alert("휴대폰번호를 입력해 주세요!");
             return false;
         } else
             return true;
@@ -429,7 +427,6 @@
 		function checkBsLicense(bsLicense) {
         var text = document.getElementById("bsLicense");
         if (!checkExistData(bsLicense, "사업자 번호를")) {
-            alert("사업자 번호를 입력해 주세요!");
             return false;
         } else
             return true;
@@ -440,7 +437,6 @@
 		function checkBsMainPhone(bsMainPhone) {
         var text = document.getElementById("bsMainPhone");
         if (!checkExistData(bsMainPhone, "대표번호를")) {
-            alert("대표번호를 입력해 주세요!");
             return false;
         } else
             return true;
@@ -465,10 +461,9 @@
    		}
 		
 		// 주소 체크 
-		function checkAdress() {
+		function checkAdress(userAddress) {
         var text = document.getElementById("userAdress");
-        if (!checkExistData(text.value, "주소를")) {
-            alert("주소를 입력해 주세요!");
+        if (!checkExistData(userAddress, "주소를")) {
             return false;
         } else
             return true;
