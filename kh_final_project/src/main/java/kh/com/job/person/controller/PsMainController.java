@@ -222,37 +222,38 @@ public class PsMainController {
 
 	// 회원가입 작성
 	@PostMapping("/signUp")
-	public ModelAndView dosignUp(ModelAndView mv
-			, PsUserDto dto
-			, RedirectAttributes rttr
-			, HttpServletRequest request)  throws Exception{
+	public ModelAndView dosignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
+	    int result = -1;
+	    dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
 
-			int result = -1;
+	    // 이메일 중복 확인
+	    int emailChk = service.emailChk(dto.getUserEmail());
+	    // 아이디 중복 확인
+	    int idChk = service.idChk(dto.getUserId());
 
-			dto.setUserPw(passwordEncoder.encode(dto.getUserPw()));
-			
-			if(service.emailChk(dto.getUserEmail()) > 0 ) {
-				
-				 rttr.addFlashAttribute("msg", "가입하신 이메일 정보가 존재합니다. 정보 확인 후 다시 로그인 해주세요.");
-				 mv.setViewName("redirect:/person/login");
-				 
-			} else {
-				result = service.insert(dto);
-				
-				if (result > 0) {
-					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
-					mv.setViewName("redirect:/");
-					return mv;
-				} else {
-					rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
-					mv.setViewName("redirect:/person/signUp");
-					return mv;
-				}
-				
-			}
-			return mv;
+	    if (emailChk > 0) {
+	        rttr.addFlashAttribute("msg", "가입하신 이메일 정보가 존재합니다. 정보 확인 후 다시 로그인 해주세요.");
+	        mv.setViewName("redirect:/person/login");
+	        return mv; 
+	    } else if (idChk > 0) {
+	        rttr.addFlashAttribute("msg", "가입하신 아이디 정보가 존재합니다. 정보 확인 후 다시 시도해주세요.");
+	        mv.setViewName("redirect:/person/signUp");
+	        return mv; 
+	    }
+
+	    result = service.insert(dto);
+
+	    if (result > 0) {
+	        rttr.addFlashAttribute("msg", "JOB-A 회원가입에 성공하였습니다.");
+	        mv.setViewName("redirect:/");
+	    } else {
+	        rttr.addFlashAttribute("msg", "JOB-A 회원가입에 실패하였습니다.");
+	        mv.setViewName("redirect:/person/signUp");
+	    }
+
+	    return mv;
 	}
-
+	
 	// 기업 회원가입
 	@PostMapping("/bsSignUp")
 	public ModelAndView doBsSignUp(ModelAndView mv, PsUserDto dto, RedirectAttributes rttr,
@@ -563,7 +564,7 @@ public class PsMainController {
 	// 관심기업 등록
 	@PostMapping("scrapCompany")
 	@ResponseBody
-	public int scrapJob(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
+	public int scrapCompany(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
 		
 		int result = -1;
 		

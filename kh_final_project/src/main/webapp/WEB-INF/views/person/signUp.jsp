@@ -241,10 +241,11 @@
 
 	<script>
 	
-		var msg = "${msg}";
-		if(msg) {
-			alert(msg);
-		}
+			var msg = "${msg}";
+			if(msg) {
+				alert(msg);
+			}
+			
 			// id 중복확인
 			function fn_idChk() {
 				let userId = $("#psuserId").val();
@@ -346,6 +347,8 @@
 		        }
 		        return true; //확인이 완료되었을 때
 		    }
+		
+		
 		// 비밀번호1, 비밀번호2 체크 
 		function checkPassword(id, userPw, userPw2) {
 	        //비밀번호가 입력되었는지 확인하기
@@ -469,12 +472,6 @@
             return true;
     	}
 		
-		
-		// 회원가입 실패 alret
-		var msg = "${msg}";
-		if(msg) {
-			alert(msg);
-		}
 		
 	</script>
 	

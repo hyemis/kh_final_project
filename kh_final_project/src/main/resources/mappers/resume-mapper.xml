@@ -108,14 +108,21 @@
 	</select>
 
 	<insert id="insert" parameterType="rdto">
-		INSERT INTO USER_RESUME
-		(RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID)
-		VALUES(#{resumeNo}, #{resumeTitle}, #{resumePhoto},sysdate, 
-		 <if test="portfFile != null">
-	      	#{portfFile},
-	    </if>
-		#{userId})
-	</insert>
+    INSERT INTO USER_RESUME (
+        RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE
+        <if test="portfFile != null">
+            , PORTF_FILE
+        </if>
+        , USER_ID
+    )
+    VALUES (
+        #{resumeNo}, #{resumeTitle}, #{resumePhoto}, sysdate
+        <if test="portfFile != null">
+            , #{portfFile}
+        </if>
+        , #{userId}
+    )
+</insert>
 
 
 	<delete id="delete" parameterType="_int">

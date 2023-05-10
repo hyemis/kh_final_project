@@ -120,7 +120,7 @@
 	<!-- page script -->
 	<script>
 		// 
-		   function checkExistData(value, dataName) {
+	 function checkExistData(value, dataName) {
         if (value.trim() === "") {
             alert(dataName + "을(를) 입력해주세요!");
             return false;
@@ -128,17 +128,13 @@
         return true;
     }
 
-   /*  function checkAll() {
-        if (!checkExistData(document.getElementById("boardTitle").value, "제목")) {
-            return false;
-        }
-    } */
     
     function checkAll() {
         if (!checkExistData(document.getElementById("boardTitle").value, "제목")) {
             return false;
         }
-        var boardContent = CKEDITOR.instances.boardContent.getData()
+        
+        var boardContent = editor.getData()
         if (!checkExistData(boardContent, "내용")) {
             return false;
         }
@@ -202,8 +198,30 @@
 		}
 		
 		
+		let editor; 
 	    ClassicEditor
-	    .create( document.querySelector( '#boardContent' ),{
+	        .create(document.querySelector( '#boardContent' ), {
+	          language: 'ko'
+	          , extraPlugins: [MyCustomUploadAdapterPlugin]
+	         , simpleUpload :{
+	            uploadUrl : 'imageUpload',
+	         }
+	          , config : {
+	             height:'400px'
+	               , width:'100%'
+	          }
+	        })
+	        .then( newEditor => {
+	          editor = newEditor;
+	        } )
+	        .catch( error => {
+	          console.error( error );
+	        } );
+
+		
+
+		
+	    /* ClassicEditor.create( document.querySelector( '#boardContent' ),{
 	    	language: "ko"
 	    	, extraPlugins: [MyCustomUploadAdapterPlugin]
 			, simpleUpload :{
@@ -217,7 +235,7 @@
 	    })
 	    .catch( error => {
 	        console.error( error );
-	    });
+	    }); */
 	    
 	    // 제목 글자 수 
 	    $(document).ready(function() {

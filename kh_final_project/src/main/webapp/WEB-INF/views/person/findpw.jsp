@@ -108,18 +108,22 @@
 	      var personalPhoneForm = document.getElementById('personal-phone-form');
 	      var corporateForm = document.getElementById('corporate-form');
 	      var findType = document.getElementById('findType');
+	      var corporateBtn = document.querySelector('#member button:nth-child(2)'); // 기업 회원 버튼 선택
 	      
 	         if (type === 'personal') {
 		    	  corporateForm.classList.add('hidden');
 		    	  findType.classList.remove('hidden');
+		    	  corporateBtn.style.display = 'none'; // 기업 회원 버튼 숨김
 	         } else if(type === 'email') {
 	    		 personalEmailForm.classList.remove('hidden');
 	    		 personalPhoneForm.classList.add('hidden');
 	    		 corporateForm.classList.add('hidden');
+	    		  corporateBtn.style.display = 'none'; // 기업 회원 버튼 숨김
 	    	 } else if (type === 'phone') {
 	    		 personalEmailForm.classList.add('hidden');
 	    		 personalPhoneForm.classList.remove('hidden');
 	    		 corporateForm.classList.add('hidden');
+	    		  corporateBtn.style.display = 'none'; // 기업 회원 버튼 숨김
 	    		 
 	    	} else if(type === 'corporate'){
 	    		personalEmailForm.classList.add('hidden');
