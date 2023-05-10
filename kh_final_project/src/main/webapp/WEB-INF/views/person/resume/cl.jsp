@@ -107,13 +107,15 @@
 								role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="uploadModalLabel">자기소개서 불러오기</h5>
+										<h5 class="modal-title" id="uploadModalLabel">자기소개서</h5>
 										<button type="button" class="btn-close"
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
 										<p>불러올 자기소개서를 체크하세요.</p>
-										<p>작성하신 자기소개서와 자기소개서 파일은 이력서에서 확인하실 수 있습니다.</p>
+										<p>이전에 작성하신 자기소개서와 자기소개서 파일을 불러와 수정합니다. 현재 이력서에 해당 자기소개서는 입력되지 않습니다.
+										</p>
+										
 										<div class="table-responsive">
 											<table class="table table-striped table-bordered">
 												<thead>

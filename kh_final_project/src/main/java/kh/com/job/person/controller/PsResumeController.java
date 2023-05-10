@@ -780,6 +780,7 @@ public class PsResumeController {
 		return result;
 	}
 
+	// 자소서 수정을 위한 페이지입니다. 
 	// 자소서 새창으로 불러오기
 	@GetMapping("detail/{clNo}")
 	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable Integer clNo) throws Exception {
@@ -873,7 +874,6 @@ public class PsResumeController {
 		
 		int result = -1;
 		
-		//TODO: 끼인테이블 delete
 		Map<String, Object> InfoNo = new HashMap<>();
 		InfoNo.put("clNo", clNo);
 		InfoNo.put("userId", principal.getName());
