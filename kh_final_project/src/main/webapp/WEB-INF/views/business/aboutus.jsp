@@ -138,7 +138,8 @@
 						<h1> Q&A </h1>
 						<a type="button" class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/qna">더보기</a>
 							
-						<!-- 숫자 인덱스	 -->
+						<!-- 숫자 인덱스 -->
+						<!-- 
 						<div class="num-container row" id="num-container">
 							<div class="col num-item">
 								<h4 class="in-title">게시글 수</h4>
@@ -153,7 +154,8 @@
 								<span class="nums" data-count="34">0</span><span id="num-unit">개</span><br>
 							</div>
 						</div>
-					</div>
+					</div> -->
+					
 				</div>
 			</div>
 		</div>
