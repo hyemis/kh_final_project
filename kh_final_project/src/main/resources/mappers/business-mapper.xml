@@ -187,7 +187,7 @@
 		WHERE USER_ID = #{userId}
 		AND
 		RA_ADMISSION IN ('P', 'Y')
-		AND CLOSE_DATE > SYSDATE
+		AND TO_DATE(CLOSE_DATE, 'yy-mm-dd') > SYSDATE
 	</select>
 
 	<!-- 공개된 채용 공고 리스트 -->
@@ -196,7 +196,7 @@
 		SELECT * FROM RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
 		AND
-		CLOSE_DATE > SYSDATE
+		TO_DATE(CLOSE_DATE, 'yy-mm-dd') > SYSDATE
 		ORDER BY REGIST_DATE DESC
 	</select>
 
@@ -205,7 +205,7 @@
 		SELECT COUNT(*) FROM
 		RECRUIT_REGIST
 		WHERE RA_ADMISSION IN ('Y')
-		AND CLOSE_DATE > SYSDATE
+		AND TO_DATE(CLOSE_DATE, 'yy-mm-dd') > SYSDATE
 	</select>
 
 	<!-- 게시글 공개 여부 버튼 -->
@@ -313,7 +313,7 @@
 		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE =
 		#{recruitType}
-		AND CLOSE_DATE > SYSDATE
+		AND TO_DATE(CLOSE_DATE, 'yy-mm-dd') > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 		ORDER
 		BY REGIST_DATE DESC
@@ -324,9 +324,7 @@
 		SELECT COUNT(*)
 		FROM RECRUIT_REGIST
 		WHERE RECRUIT_TYPE IN #{recruitType}
-		AND
-		CLOSE_DATE >
-		SYSDATE
+		AND TO_DATE(CLOSE_DATE, 'yy-mm-dd') > SYSDATE
 		AND RA_ADMISSION IN ('Y')
 	</select>
 
@@ -337,7 +335,7 @@
 		parameterType="java.util.Map">
 		SELECT *
 		FROM RECRUIT_REGIST r
-		WHERE CLOSE_DATE > SYSDATE
+		WHERE TO_DATE(CLOSE_DATE, 'yy-mm-dd') > SYSDATE
 		AND RA_ADMISSION = 'Y'
 		<if test="keyword != null and keyword != ''">
 		  AND (
