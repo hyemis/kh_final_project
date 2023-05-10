@@ -278,15 +278,72 @@ $(document).ready(function() {
 	});
 });
 
-// 경력 입력폼 추가
-var forms = [ document.getElementsByName("career")[0] ];
-// event click 새경력추가
+
+// 새 정보추가->경력 입력폼 추가
 function addCar() {
-	var originForm = forms[0];
-	var form = originForm.cloneNode(true);
-	originForm.parentNode.insertBefore(form, originForm.nextSibling);
-	forms.push(form);
-}
+  const container = document.getElementById("CarFormContainer");
+
+  const form = document.createElement("form");
+  form.name = "career";
+  form.action = "career";
+  form.method = "post";
+  
+  form.innerHTML = `
+	  <form name="career" action="career" method="post">
+		<div class="row mb-3">
+			<label for="carName" class="col-sm-2 col-form-label">회사명</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carName">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label for="carDate" class="col-sm-2 col-form-label">재직기간</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carDate"
+					placeholder="ex) 2020-01-01 ~ 2022-12-31">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carPosition" class="col-sm-2 col-form-label">직급/직책</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carPosition">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carDept" class="col-sm-2 col-form-label">근무부서</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carDept">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carResp" class="col-sm-2 col-form-label">담당업무</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="carResp">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="carSalary" class="col-sm-2 col-form-label">연봉</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" name="carSalary"
+					min="0" placeholder="단위 : 만원">
+			</div>
+		</div>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+			<button type="submit" class="btn btn-primary" id="saveCareer">저장</button>
+			<button class="btn btn-primary delete-btn"
+				onclick="removeForm(this.parentNode.parentNode)">삭제</button>
+		</div>
+		<hr>
+	</form>
+	`;
+
+
+	container.appendChild(form);
+	}
+	
+	
+	
 // event click 입력폼 삭제
 function removeForm(form) {
 	form.remove();
