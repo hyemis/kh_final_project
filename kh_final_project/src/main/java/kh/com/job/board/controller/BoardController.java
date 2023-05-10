@@ -313,11 +313,17 @@ public class BoardController {
 	        board.setUpdateDate(updateDate.substring(0, 16));
 	    }
 
-	    // boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
-	    boardList.forEach(board -> {
-	        String boardContent = board.getBoardContent().replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
-	        board.setBoardContent(boardContent.length() > 20 ? boardContent.substring(0, 20) : boardContent);
-	    });
+		 // boardContent에서 img 태그 제거 및 문자열 20자 이하로 자르기
+		    boardList.forEach(board -> {
+		        String boardContent = board.getBoardContent();
+		        if (boardContent != null) {
+		            boardContent = boardContent.replaceAll("<img[^>]*>", "").replaceAll("\\<.*?>", "");
+		            board.setBoardContent(boardContent.length() > 20 ? boardContent.substring(0, 20) : boardContent);
+		        } else {
+		            board.setBoardContent("");
+		        }
+		    });
+
 
 	    // categoryId 값이 null이 아닌 경우, 해당 카테고리에 속하지 않는 게시글은 리스트에서 제외
 	    if (categoryId != null) {
