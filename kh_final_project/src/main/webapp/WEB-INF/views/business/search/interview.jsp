@@ -45,10 +45,10 @@
 		<h3>면접 메일 발송</h3>
 		해당 지원자에게 보낼 면접 일정 관련 내용을 작성해주세요. 
 		<form action="<%=request.getContextPath()%>/business/search/sendinterview" method="post" id="sendInterview" class="was-validated" onsubmit="return checkForm();">
-			<input name="userId" value=" ${info.psUser }" >
-			<input name="baNum" value=" ${info.baNum }" >
-			<input name="sgNo" value=" ${info.sgNo }" >
-			<input name="bsUser" value="${info.bsUser }"  >
+			<input name="userId" value=" ${info.psUser }" style="display: none;" >
+			<input name="baNum" value=" ${info.baNum }" style="display: none;" >
+			<input name="sgNo" value=" ${info.sgNo }" style="display: none;">
+			<input name="bsUser" value="${info.bsUser }" style="display: none;" >
 			<div class="row pt-2">
 				<div class="col-3 text-center">지원자명</div>
 				<div class="col-8">
@@ -112,72 +112,32 @@
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-<script>
-function checkFrom() {
-	  // 빈칸 검사
-	  var caTitleInput = document.getElementById("caTitleInput").value;
-	  var dateStartInput = document.getElementById("dateStartInput").value;
-	  var interviewTimeInput = document.getElementById("interviewTimeInput").value;
-	  var locationInput = document.getElementById("locationInput").value;
-	  var outputTitle = document.getElementById("outputTitle").value;
-	  var output = document.getElementById("output").value;
 
-	  
-	  if (caTitleInput === "" ) {
-	    alert("면접 일정 제목 입력해주세요");
-	    return false;
-	  }
-	  if (dateStartInput === "" ) {
-	    alert("빈칸이 있습니다. 비밀번호를 입력해주세요");
-	    return false;
-	  }
-	  if (interviewTimeInput === "" ) {
-	    alert("빈칸이 있습니다. 비밀번호를 입력해주세요");
-	    return false;
-	  }
-	  if (locationInput === "" ) {
-	    alert("빈칸이 있습니다. 비밀번호를 입력해주세요");
-	    return false;
-	  }
-	  if (outputTitle === "" ) {
-	    alert("빈칸이 있습니다. 비밀번호를 입력해주세요");
-	    return false;
-	  }
-	  if (output === "" ) {
-	    alert("빈칸이 있습니다. 비밀번호를 입력해주세요");
-	    return false;
-	  }
+<script>
+var caTitleInput = document.getElementById('caTitleInput');
+var dateStartInput = document.getElementById('dateStartInput');
+var interviewTimeInput = document.getElementById('interviewTimeInput');
+var locationInput = document.getElementById('locationInput');
+var outputTitle = document.getElementById('outputTitle');
+var output = document.getElementById('output');
+
+function updateOutput() {
+  var interviewTimeValue = interviewTimeInput.value;
+  var caTitleValue = caTitleInput.value;
+  var dateStartValue = dateStartInput.value;
+  var locationValue = locationInput.value;
+  
+  outputTitle.value = '제목 ' + caTitleValue;
+  output.value = '귀사에 지원해 주셔서 감사합니다. 아래와 같이 면접일정을 안내드립니다.면접일: '+ dateStartValue + '면접 시간: ' + interviewTimeValue + '면접장소: ' + locationValue;		
 
 	
+}
 
-	  // 모든 검사를 통과한 경우, 폼 제출
-	  return true;
-	}
+interviewTimeInput.addEventListener('change', updateOutput);
+caTitleInput.addEventListener('change', updateOutput);
+dateStartInput.addEventListener('change', updateOutput);
+locationInput.addEventListener('change', updateOutput);
 
-</script>	
-<script>
-  const interviewTimeInput = document.getElementById('interviewTimeInput');
-  const caTitleInput = document.getElementById('caTitleInput');
-  const dateStartInput = document.getElementById('dateStartInput');
-  const locationInput = document.getElementById('locationInput');
-  const outputTitle = document.getElementById('outputTitle');
-  const output = document.getElementById('output');
-
-  function updateOutput() {
-    const interviewTimeValue = interviewTimeInput.value;
-    const caTitleValue = caTitleInput.value;
-    const dateStartValue = dateStartInput.value;
-    const locationValue = locationInput.value;
-    
-    outputTitle.value = `제목 ${caTitleValue}`
-    output.value = ` 귀사에 지원해 주셔서 감사합니다.\n 아래와 같이 면접일정을 안내드립니다.\n면접일: ${dateStartValue}\n면접 시간: ${interviewTimeValue}\n면접장소: ${locationValue}`;
-    				
-  }
-
-  interviewTimeInput.addEventListener('change', updateOutput);
-  caTitleInput.addEventListener('change', updateOutput);
-  dateStartInput.addEventListener('change', updateOutput);
-  locationInput.addEventListener('change', updateOutput);
 </script>
 
 <script>

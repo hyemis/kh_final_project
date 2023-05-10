@@ -176,8 +176,7 @@
 						
 						<!-- secede --><br>
 						<p class="text-end">
-						<button class="btn btn-primary" id="btnSecede" disabled="disabled" type="button"  
-						href="<%=request.getContextPath()%>/person/delete">기업회원 탈퇴</button> 
+						<button class="btn btn-primary" id="btnSecede" disabled="disabled" onclick="location.href='<%=request.getContextPath()%>/person/delete'">회원탈퇴 하러가기</button>
 						</p>
 
 						

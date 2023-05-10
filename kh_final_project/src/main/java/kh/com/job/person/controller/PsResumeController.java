@@ -1,12 +1,9 @@
 package kh.com.job.person.controller;
 
-import java.net.URL;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -88,7 +88,7 @@
 											<tr>
 												<td>${suggest.sendDate }</td>
 												<td>${suggest.companyName }</td>
-												<td>${suggest.sgTitle }</td>
+												<td><a href="${pageContext.request.contextPath}/person/suggest/view?no=${suggest.sgNo }">${suggest.sgTitle }</a></td>
 												<td><a type="button" class="btn btn-primary suggest"
 													   data-sgno="${suggest.sgNo}" data-resumeno="${suggest.resumeNo }" data-ranum="${suggest.raNum }" >수락하기</a></td>
 											</tr>

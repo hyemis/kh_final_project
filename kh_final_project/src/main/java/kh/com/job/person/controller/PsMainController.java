@@ -41,13 +41,10 @@ import kh.com.job.admin.model.service.AdBusinessService;
 import kh.com.job.admin.model.service.AdCategotyService;
 import kh.com.job.admin.model.service.AdService;
 import kh.com.job.board.model.dto.CompanyDto;
-import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
-import kh.com.job.business.model.dto.BsUserDto;
-import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.file.FileUtil;
 import kh.com.job.common.mail.MailUtil;
@@ -80,12 +77,6 @@ public class PsMainController {
 	
 	@Autowired
 	private AdService adservice;
-	
-	@Autowired
-	private BoardService bservice;
-	
-	@Autowired
-	private BsAccountService baservice;
 
 	@Autowired
 	@Qualifier("fileUtil")
@@ -564,7 +555,7 @@ public class PsMainController {
 	// 관심기업 등록
 	@PostMapping("scrapCompany")
 	@ResponseBody
-	public int scrapJob(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
+	public int scrapCompany(Principal principal, @RequestParam("companyId") String companyId) throws Exception {
 		
 		int result = -1;
 		

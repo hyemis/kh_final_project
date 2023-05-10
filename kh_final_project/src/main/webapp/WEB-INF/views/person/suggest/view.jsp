@@ -69,7 +69,7 @@
 		</div>
 		<div class="pt-5 text-center">
 			<a>공고 바로가기</a>
-			<a href="${pageContext.request.contextPath}/job/person/viewrecruit/${suggest.raNum }">${suggest.raTitle }</a>
+			<a href="${pageContext.request.contextPath}/person/viewrecruit/${suggest.raNum }">${suggest.raTitle }</a>
 		</div>
 		<hr>
 		<div class="row p-4">
@@ -80,7 +80,7 @@
 			</div>
 			<div class="col">
 				<h5>이 기업이 궁금하다면?</h5>
-				<a href="${pageContext.request.contextPath}job/board/company/companyinfo/view?no=${info.boardNo }">기업 회사소개 페이지로 이동</a>
+				<a href="${pageContext.request.contextPath}/board/company/companyinfo/view?no=${info.boardNo }">기업 회사소개 페이지로 이동</a>
 			</div>
 		
 		</div>
