@@ -873,7 +873,6 @@ public class PsResumeController {
 		
 		int result = -1;
 		
-		//TODO: 끼인테이블 delete
 		Map<String, Object> InfoNo = new HashMap<>();
 		InfoNo.put("clNo", clNo);
 		InfoNo.put("userId", principal.getName());
