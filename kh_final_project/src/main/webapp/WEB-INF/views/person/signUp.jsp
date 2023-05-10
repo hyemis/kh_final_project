@@ -97,7 +97,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" >
+				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.com" >
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				          
@@ -181,7 +181,7 @@
 				          
 				          <div class="mb-3">
 				            <label for="userEmail">이메일</label>
-				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.co.kr" >
+				            <input type="text" class="form-control" name="userEmail" placeholder="email@joba.com" >
 				            <div class="invalid-feedback">이메일을 입력해주세요.</div>
 				          </div>
 				          
