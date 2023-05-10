@@ -66,12 +66,12 @@
 			<h1 class="text-center">뉴스레터</h1>
 			<div>
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+				<button type="button" class="btn btn-primary " data-bs-toggle="modal"
 					data-bs-target="#newsletter">등록</button>
 			</div>
 
 			<!-- 목록 -->
-			<div class="table-responsive ">
+			<div class="pt-3 table-responsive ">
 				<table class="table table-hover">
 					  <thead>
 					    <tr>

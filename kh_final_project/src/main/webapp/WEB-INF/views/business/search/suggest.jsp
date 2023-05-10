@@ -61,9 +61,11 @@
 	<!-- page section -->
 <section>
 	<div class="container-fluid bg-white p-5">
+	<div class ="text-end">
+		<a>이 곳에서 조회 가능</a><br>
+		<a class="fw-bold text-primary" href="<%=request.getContextPath()%>/business/search" role="button">면접 제안 리스트 보기</a>
+	</div>
 	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
-	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search" role="button">면접 제안 리스트</a>
-		
 		<!-- 검색창 -->
 		<div class="container-fluid row mt-3">
 			<select class="col m-3 form-select" id="jobType" name="jobType">

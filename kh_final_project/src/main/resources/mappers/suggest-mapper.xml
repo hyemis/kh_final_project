@@ -51,7 +51,7 @@
 	
 	<!-- 인터뷰 대상조회 -->
 	<select id="interview" resultType="bgdto">
-		SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, SG.PS_USER, SG.BS_USER
+		SELECT SG.SG_NO, UT.USER_NAME, UT.USER_EMAIL, SG.PS_USER, SG.BS_USER, SG.BA_NUM
 		  FROM SUGGEST SG
 		  JOIN USER_RESUME UR ON SG.RESUME_NO = UR.RESUME_NO
 		  JOIN USER_TABLE UT ON UR.USER_ID = UT.USER_ID
@@ -72,6 +72,17 @@
 	<update id="updateSend">
 		UPDATE SUGGEST SET SEND_INTERVIEW = 'Y' WHERE SG_NO = #{sgNo} 
 	</update>
+	
+	<insert id="resultUpdate">
+		INSERT INTO
+		BUSINESS_APPLICANT_PASS (AP_NUM,USER_ID,USER_NAME,PASS_TYPE,RESULT_TITLE,RESULT_CONTENT)
+		VALUES (#{apNum},#{userId},#{userName},'PT02',#{resultTitle},#{resultContent})
+		WHERE BA_NUM = #{baNum}
+		<selectKey keyProperty="apNum" resultType="_int"
+			order="BEFORE">
+			SELECT MAX(AP_NUM) +1 FROM BUSINESS_APPLICANT_PASS
+		</selectKey>
+	</insert>
 	
 	
 	<!-- ps/제안받은 리스트 카운트 -->

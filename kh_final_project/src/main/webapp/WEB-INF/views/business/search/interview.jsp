@@ -44,9 +44,10 @@
 	<div class="container-fluid bg-white p-5">
 		<h3>면접 메일 발송</h3>
 		해당 지원자에게 보낼 면접 일정 관련 내용을 작성해주세요. 
-		<form action="<%=request.getContextPath()%>/business/search/sendinterview" method="post">
-			<p name="userId" vlaue=" ${info.psUser }" style="display: none;">지원자 아이디 ${info.psUser }</p>
-			<p name="bsUser" vlaue="${info.bsUser }" style="display: none;" >회사 아이디    ${info.bsUser }</p>
+		<form action="<%=request.getContextPath()%>/business/search/sendinterview" method="post" id="sendInterview">
+			<input name="userId" value=" ${info.psUser }" >
+			<input name="baNum" value=" ${info.baNum }" >
+			<input name="bsUser" value="${info.bsUser }"  >
 			<div class="row pt-2">
 				<div class="col-3 text-center">지원자명</div>
 				<div class="col-8">
@@ -62,31 +63,43 @@
 			<div class="row pt-2">
 				<div class="col-3 text-center">면접 일정 제목</div>
 				<div class="col-8">
-					<input type="text" class="form-control" name="caTitle" >
+					<input type="text" class="form-control" id="caTitleInput" name="caTitle" >
 				</div>
 			</div>
 			<div class="row pt-2">
 				<div class="col-3 text-center">면접 날짜</div>
 				<div class="col-8">
-					<input type="date" class="form-control" name="dateStart" >
+					<input type="date" class="form-control" id="dateStartInput" name="dateStart" >
 				</div>
 			</div>
 			<div class="row pt-2">
 				<div class="col-3 text-center">면접 시간</div>
 				<div class="col-8">
-					<input type="time" class="form-control" name="interviewTime" >
+					<input type="time" class="form-control" id="interviewTimeInput" name="interviewTime" >
 				</div>
 			</div>
 			<div class="row pt-2">
 				<div class="col-3 text-center">면접 장소</div>
 				<div class="col-8">
-					<input type="text" class="form-control" name="location" >
+					<input type="text" class="form-control" id="locationInput" name="location" >
 				</div>
 			</div>
 			<div class="row pt-2">
 				<div class="col-3 text-center">메모</div>
 				<div class="col-8">
-					<input type="text" class="form-control" name="memo" >
+					<input type="text" class="form-control" name="memo" style="height: ">
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-3 text-center">메일 제목 미리보기</div>
+				<div class="col-8">
+					<textarea id="outputTitle" name="resultTitle" style="width: 100%; "> </textarea>
+				</div>
+				<div class="col-3 text-center">메일 내용 미리보기</div>
+				<div class="col-8">
+					<textarea id="output" name="resultContent" style="height:300px; width: 100%; ">
+				
+					 </textarea>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">보내기</button>
@@ -97,6 +110,40 @@
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+<script>
+  const interviewTimeInput = document.getElementById('interviewTimeInput');
+  const caTitleInput = document.getElementById('caTitleInput');
+  const dateStartInput = document.getElementById('dateStartInput');
+  const locationInput = document.getElementById('locationInput');
+  const output = document.getElementById('output');
+  const outputTitle = document.getElementById('outputTitle');
+
+  function updateOutput() {
+    const interviewTimeValue = interviewTimeInput.value;
+    const caTitleValue = caTitleInput.value;
+    const dateStartValue = dateStartInput.value;
+    const locationValue = locationInput.value;
+    outputTitle.value = `제목 ${caTitleValue}`
+    output.value = ` 귀사에 지원해 주셔서 감사합니다.\n 아래와 같이 면접일정을 안내드립니다.\n면접일: ${dateStartValue}\n면접 시간: ${interviewTimeValue}\n면접장소: ${locationValue}`;
+    				
+  }
+
+  interviewTimeInput.addEventListener('change', updateOutput);
+  caTitleInput.addEventListener('change', updateOutput);
+  dateStartInput.addEventListener('change', updateOutput);
+  locationInput.addEventListener('change', updateOutput);
+</script>
+
+<script>
+  const sendInterview = document.getElementById('sendInterview');
+
+  sendInterview.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+    }
+  });
+</script>
 
 
 </body>

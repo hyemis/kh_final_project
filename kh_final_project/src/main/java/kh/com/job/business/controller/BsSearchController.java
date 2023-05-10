@@ -16,16 +16,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.board.model.dto.CompanyDto;
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
+import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.business.model.service.BsSearchService;
+import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingAplicantDto;
 import kh.com.job.person.model.dto.PsCareerDto;
@@ -48,6 +51,9 @@ public class BsSearchController {
 	
 	@Autowired
 	private BsAccountService baService;
+	
+	@Autowired
+	private BsApplicantService apservice;
 	
 	//인재 찾기 페이지
 	@GetMapping("/suggest")
@@ -117,14 +123,24 @@ public class BsSearchController {
 	
 	//면접 일정 등록
 	@PostMapping("/sendinterview")
-	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsSuggestDto sdto, Principal principal ) {
+	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsAnnounceDto adto,  BsSuggestDto sdto, Principal principal, Integer baNum ) {
 		dto.setBsUser(principal.getName());
 		bsService.addInterview(dto);
 		System.out.println(dto);
+		
 		bsService.updateSend(sdto);
 		System.out.println(sdto);
-		mv.setViewName("redirect:/business/search");
 		
+		BsUserDto bdto = baService.viewAccount(principal.getName());
+		int result = -1;
+		result = bsService.resultUpdate(adto);
+		if(result>0) {
+			int ccNum = 0;
+			String[] cc = new String[ccNum]; 
+			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
+		}
+
+		mv.setViewName("redirect:/business/search");
 		return mv;
 	}
 	

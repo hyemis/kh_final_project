@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
@@ -61,6 +62,10 @@ public class BsSearchDao {
 
 	public int updateSend(BsSuggestDto dto) {
 		return sqlSession.update("suggest.updateSend", dto);
+	}
+
+	public int resultUpdate(BsAnnounceDto dto) {
+		return sqlSession.insert("suggest.resultUpdate",dto);
 	}
 
 
