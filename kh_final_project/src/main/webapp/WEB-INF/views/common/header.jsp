@@ -24,6 +24,7 @@
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
 					</div>
 			</sec:authorize>		
+			
 			<!-- 개인 -->
 			<sec:authorize access="hasRole('ROLE_P')">
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -33,32 +34,33 @@
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/company/companyinfo">회사정보</a>
 						<a class="nav-link me-3" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
 					</div>
+					
 					<!-- 우측메뉴 -->
 					<div class="navbar-nav">
-
-
-						<a href="${pageContext.request.contextPath}/person/main"
-							class="nav-item nav-link active">Home</a>
-						<div>
-							<sec:authorize access="isAuthenticated()">
-								<sec:authentication property="principal.username" var="user_id" />
-								<a class="nav-item nav-link active"
-									href="${pageContext.request.contextPath}/person/mypage?userId=${user_id}"
-									id="user_id" style="text-decoration: none">${user_id }</a>
-							</sec:authorize>
-						</div>
+					<a href="${pageContext.request.contextPath}/person/main" class="nav-item nav-link">HOME</a> 
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.username" var="user_id" />
+						<a href="${pageContext.request.contextPath}/person/mypage?userId=${user_id}" class="nav-item nav-link active" id="user_id" style="color: black;">
+						${user_id }</a>
+					</sec:authorize>
+					
 						<div class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle m-1"
-								data-bs-toggle="dropdown">개인서비스</a>
-							<div class="dropdown-menu rounded-0 ">
-								<a href="${pageContext.request.contextPath}/person/main" class="dropdown-item">MY 홈</a> 
-								<a href="${pageContext.request.contextPath}/person/resume/list" class="dropdown-item">이력서 관리</a> 
-								<a href="${pageContext.request.contextPath}/person/applylist" class="dropdown-item">입사지원 현황</a> 
-								<a href="${pageContext.request.contextPath}/person/scrapjob" class="dropdown-item">스크랩한 채용공고</a> 
-								<a href="${pageContext.request.contextPath}/person/scrapcompany" class="dropdown-item">관심기업 정보</a>
+							<a href="${pageContext.request.contextPath}/business/recruit/main"
+								class="nav-link dropdown-toggle" data-bs-toggle="dropdown">개인서비스</a>
+							<div class="dropdown-menu rounded-0 m-0">
+								<a href="${pageContext.request.contextPath}/person/main"
+									class="dropdown-item">MY 홈</a> 
+								<a href="${pageContext.request.contextPath}/person/resume/list"
+									class="dropdown-item">이력서 관리</a> 
+								<a href="${pageContext.request.contextPath}/person/applylist"
+									class="dropdown-item">입사지원 현황</a>
+								<a href="${pageContext.request.contextPath}/person/scrapjob"
+									class="dropdown-item">스크랩한 채용공고</a>
+								<a href="${pageContext.request.contextPath}/person/scrapcompany"
+									class="dropdown-item">관심기업 정보</a>
 								<hr class="dropdown-divider">
 								<a href="${pageContext.request.contextPath}/person/mypage"
-									class="dropdown-item" class="dropdown-item">회원정보 관리</a>
+									class="dropdown-item">회원정보 관리</a>
 							</div>
 						</div>
 					</div>

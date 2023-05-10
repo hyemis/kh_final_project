@@ -89,7 +89,7 @@ public class BoardDao {
 
 	// 댓글 삭제
 	public int deleteReply(ReplyDto dto) throws Exception {
-		return sqlSession.update("boards.deleteReply", dto);
+		return sqlSession.delete("boards.deleteReply", dto);
 	}
 
 	// 댓글 수정

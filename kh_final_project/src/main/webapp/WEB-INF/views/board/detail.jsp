@@ -85,6 +85,7 @@
 			
 				<!-- 게시글  -->
 				<div class="originPost">
+					<h5><i class="fa-solid fa-bars pe-2"></i>${detailBoard.categoryId} </h5>
 					<div class="d-flex justify-content-end align-items-center">
 						<sec:authorize access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P') and #detailBoard.userId == authentication.name">
 								<a class="pe-2" onclick="handleUpdatePost()">수정</a>
@@ -128,13 +129,17 @@
 					            <td class="text-end">
 					                <div class="d-flex justify-content-end align-items-center">
 					                    <sec:authorize access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P') and #reply.userId == authentication.name">
-					                        <a class="" onclick="handleUpdateReply(this)" data-reply-id="${reply.replyId}">수정</a>
-					                        <a class="ms-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
+					                        <c:if test="${reply.replyLevel ne 0}">
+						                        <a class="" onclick="handleUpdateReply(this)" data-reply-id="${reply.replyId}">수정</a>
+						                       	<a class="ms-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
+					                        </c:if>
 					                    </sec:authorize>
 					                    <sec:authorize access="isAuthenticated()">
+					                      <c:if test="${reply.replyLevel ne 0 && reply.replyLevel eq 1}">
 					                        <a class="ms-2" onclick="handleInsertReReply(this)" data-reply-id="${reply.replyId}">답글</a>
 					                        <input type="hidden" name="replyLevel" value="${reply.replyLevel}">
 					                        <input type="hidden" name="replySeq" value="${reply.replySeq}">
+					                      </c:if>
 					                    </sec:authorize>
 					                </div>
 					                <div class="text-muted small">
@@ -215,8 +220,19 @@
 		}
 		
 		// 게시글 수정 
+		let updateForm = null; 
+		
 		function handleUpdatePost() {
+			
+		if (updateForm) {
+		   updateForm.remove();
+		   updateForm = null; 
+		   return;
+		}
+
         const boardNo = ${detailBoard.boardNo};
+        
+        
 
         // 게시글 수정 영역 생성
         const updateDiv = document.createElement("div");
@@ -235,6 +251,7 @@
             </div>
         `;
         document.querySelector(".originPost").appendChild(updateDiv);
+        updateForm = updateDiv; 
 
 	        // CKEditor 초기화
 	        ClassicEditor.create(document.querySelector("#editor"))
@@ -245,6 +262,7 @@
 	            console.error(error);
 	        });
 	    }
+		
 	
 	    function updatePost(boardNo) {
 	        const boardTitle = document.querySelector("#boardTitle").value;
@@ -325,22 +343,23 @@
 
 		// 댓글 수정 
 		function handleUpdateReply(element) {
-			const replyId = element.dataset.replyId;
-			const oldContent = element.closest(".reply-table").querySelector(
-					".originReply").innerText; // 기존 댓글 내용 가져오기
+		    const replyId = element.dataset.replyId;
+		    const replyTable = element.closest(".reply-table");
+		    const oldContent = replyTable.querySelector(".originReply, .subReply").innerText;
 
-			const htmlVal = '<div class="m-3 mdeptList" style="min-height: 200px;">'
-					+ '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
-					+ '<div class="d-flex justify-content-between">'
-					+ '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
-					+ oldContent
-					+ '">'
-					+ '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitUpdate()">수정</button>'
-					+ '</div>' + '</div>';
+		    const htmlVal = '<div class="m-3 mdeptList" style="min-height: 200px;">'
+		        + '<input type="hidden" id="replyId" name="replyId" value="' + replyId + '">'
+		        + '<div class="d-flex justify-content-between">'
+		        + '<input type="text" style="width: 100%;  height: 62px;" id="newContent" name="newContent" value="'
+		        + oldContent
+		        + '">'
+		        + '<button class="btn btn-outline-dark ms-2" type="button" onclick="submitUpdate()">수정</button>'
+		        + '</div>' + '</div>';
 
-			// 새로운 input 태그를 추가한 후 기존 댓글 대신에 보여주기
-			element.closest(".reply-table").innerHTML = htmlVal;
+		    // 새로운 input 태그를 추가한 후 기존 댓글 대신에 보여주기
+		    replyTable.innerHTML = htmlVal;
 		}
+
 
 		function submitUpdate() {
 			const replyId = document.getElementById("replyId").value;

@@ -178,6 +178,30 @@ public class BoardController {
 		// 댓글 목록
 		List<ReplyDto> reply = service.replyList(boardNo);
 		
+		// 카테고리 이름 변경
+		String category = "";
+		String categoryId = detail.getCategoryId();
+
+		if (categoryId != null) {
+		    switch (categoryId) {
+		        case "UBD01":
+		            category = "취업준비방";
+		            break;
+		        case "UBD02":
+		            category = "신입방";
+		            break;
+		        case "UBD03":
+		            category = "면접방";
+		            break;
+		        case "UBD04":
+		            category = "질문게시판";
+		            break;
+		    }
+		} else {
+		    category = "전체글";
+		}
+		
+		detail.setCategoryId(category);
 		
 		mv.addObject("detailBoard", detail);
 		mv.addObject("replyList", reply);
