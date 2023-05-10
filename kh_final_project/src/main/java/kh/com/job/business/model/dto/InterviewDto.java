@@ -35,6 +35,7 @@ public class InterviewDto {
 //	BS_USER
 	
 	private int caNum;
+	private int apNum;
 	private String caTitle;
 	private String dateStart;
 	private String dateEnd;
@@ -46,7 +47,7 @@ public class InterviewDto {
 	private String userName;
 	private String userId;
 	private String bsUser;
-	private int apNum;
+	private String UserEmail;
 	
 	
 }

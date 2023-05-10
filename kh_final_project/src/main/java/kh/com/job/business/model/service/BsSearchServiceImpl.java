@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.job.business.model.dao.BsSearchDao;
+import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
@@ -101,6 +102,11 @@ public class BsSearchServiceImpl implements BsSearchService{
 	@Override
 	public int updateSend(BsSuggestDto dto) {
 		return dao.updateSend(dto);
+	}
+
+	@Override
+	public int resultUpdate(BsAnnounceDto dto) {
+		return dao.resultUpdate(dto);
 	}
 
 	

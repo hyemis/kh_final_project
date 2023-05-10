@@ -18,6 +18,8 @@
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/business.css" rel="stylesheet">
+
 	
 <!-- js -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -48,7 +50,7 @@
 				<div class="mb-3">
 					<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal.username" var="user_id" />
-							<span class="fs-3 active" id="user_id">${user_id } 님 반갑습니다</span>
+							<span class="fs-3 active" id="user_id"><a class="text-primary">${user_id }</a> 님 반갑습니다</span>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
 							<span class="fs-3" id="user_id">반갑습니다.<br> 
@@ -56,7 +58,7 @@
 					</sec:authorize>
 				</div>
 				<br>
-				<p>공고 등록부터 합격자 발표까지 쉽고 빠르게,</br> 우리 기업을 위한 맞춤형 인재 찾기 까지 JOB-A가 함께 할게요</p>
+				<p>공고 등록부터 합격자 발표까지 쉽고 빠르게,</br> 우리 기업을 위한 맞춤형 인재 찾기 까지 <a class="text-primary">JOB-A</a>가 함께 할게요</p>
 			</div>
 			<!-- 상단 end -->
 			<!-- menu button start -->
@@ -84,7 +86,7 @@
 				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.3s"
 					style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/search/suggest">
+					<a class="cat-item d-block bg-light text-center rounded p-3" href="<%=request.getContextPath()%>/business/search">
 						<div class="rounded p-4">
 							<h5>인재 찾기</h5>
 							<p>맞춤형 인재 추천</br>면접 제의</p>

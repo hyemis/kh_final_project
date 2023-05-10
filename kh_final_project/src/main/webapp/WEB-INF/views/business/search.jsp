@@ -39,7 +39,7 @@
 <section>
 <div class="container-fluid p-5">
 	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
-	<h2>면접제의한 인재</h2>
+	<h2>면접제안 리스트</h2>
 	<div class="text-end">
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/search/suggest" role="button">인재추천</a>
 	<a class="btn btn-primary" href="<%=request.getContextPath()%>/business/applicant" role="button">지원자 관리 페이지</a>
@@ -64,10 +64,10 @@
 				  <td>
 				  <c:choose>
 				    <c:when test="${suggest.suggestAccept == 'Y'}">
-				      <a type="button" class="btn btn-primary" value="${suggest.suggestAccept}" href="${pageContext.request.contextPath}/business/search/interview?no=${suggest.sgNo }">면접등록</a>
+				      <a type="button" class="btn btn-primary " value="${suggest.suggestAccept}" href="${pageContext.request.contextPath}/business/search/interview?no=${suggest.sgNo }">면접등록</a>
 				    </c:when>
 				    <c:when test="${suggest.sendInterview == 'Y'}">
-				      <button class="btn btn-primary" value="${suggest.sendInterview} " disabled>등록완료</button>
+				      <button class="btn btn-primary " value="${suggest.sendInterview} " disabled>등록완료</button>
 				    </c:when>
 				    <c:otherwise>
 				      <button class="btn btn-outline-success" disabled >수락대기</button>

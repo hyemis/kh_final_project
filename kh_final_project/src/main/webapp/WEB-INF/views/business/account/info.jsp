@@ -136,42 +136,47 @@
 					<h4 class="text-center m-2 ">비밀번호 변경 및 탈퇴</h4>
 					<p class="text-center">비밀번호 확인 후 변경과 탈퇴가 가능합니다.</p>
 						<!-- password -->
-						<form class="m-5" name="pwForm" action="pwChk" method="post">
+						<form class="m-5" name="pwForm" action="pwChk" method="post" onsubmit="return checkPassword();">
 							 <div class="mb-3 row">
-							 	
 							    <label for="confirmPw"  class="col-sm-3 col-form-label">현재 비밀번호</label>
 							    <div class="col-sm-6">
 							      <input type="password" class="form-control" id="confirmPw" name="confirmPw">
 							    </div>
-							    <button class="col-sm-2 btn btn-primary" type="submit" onclick="checkPassword()">확인</button>
-							      <span class="id_input_re_1 text-center">비밀번호가 일치합니다</span>
-								  <span class="id_input_re_2 text-center">비밀번호가 일치하지 않습니다.</span>
+							    <button class="col-sm-2 btn btn-primary" type="submit" >확인</button>
+								  <span class="pw_input_re_1 text-center" >비밀번호가 일치합니다</span>
+								  <span class="pw_input_re_2 text-center" >비밀번호가 일치하지 않습니다.</span>
+								  <span class="pw_input_re_3 text-center" >비밀번호를 입력해주세요</span>
 							 </div>
 						</form>
-						<form name="newPwForm" action="updatePw" method="post">	
-							 <div class="mb-3 row">
-							    <label for="userPw" class="col-sm-3 col-form-label">새 비밀번호</label>
-							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="userPw" name="userPw">
+						<!-- update password -->
+						<form action="updatePw" method="post" id="newPwForm" name="newPwForm"  onsubmit="return newPassword();">	
+							 <div class="mb-3 row ">
+							    <label for="userPw" class="col-sm-3 col-form-label text-center">새 비밀번호</label>
+							    <div class="col-sm-8 ">
+							      <input type="password" class="form-control " id="newPw" name="userPw" disabled="disabled" >
+								  <span class="pwck_input_re_3 text-center" >비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다</span>
 							    </div>
 							 </div>
-							 <div class="mb-3 row">
-							    <label for="newPw2" class="col-sm-3 col-form-label">새 비밀번호 확인</label>
-							    <div class="col-sm-8">
-							      <input type="password" class="form-control" id="newPw2" name="newPw2">
+							 <div class="mb-3 row ">
+							    <label for="newPw2" class="col-sm-3 col-form-label text-center">새 비밀번호 확인</label>
+							    <div class="col-sm-8 ">
+							      <input type="password" class="form-control " id="newPw2" name="userPw" disabled="disabled" >
+							      <span class="pwck_input_re_1 text-center" >비밀번호가 일치합니다</span>
+								  <span class="pwck_input_re_2 text-center" >비밀번호가 일치하지 않습니다.</span>
 							    </div>
 							 </div>	<br>	
 							 <p class="text-center">
-							 <button class="btn btn-primary" id="btnChangePw" disabled="disabled" type="submit" onclick='btnActive()'>비밀번호 변경</button>
+							 <button class="btn btn-primary" id="btnChangePw" disabled="disabled" type="submit" >비밀번호 변경</button>
 							 <button class="btn btn-primary" type="reset">취소</button>
 							 </p>
-							 <p href="#" class="link-primary text-center">비밀번호를 잊으셨나요?</p>
 						</form>
+						<p class="text-center"><a href="${pageContext.request.contextPath }/person/findpw" class="link-primary">비밀번호를 잊으셨나요?</a></p>
+							 
 						
 						
 						<!-- secede --><br>
 						<p class="text-end">
-						<button class="btn btn-primary" id="btnSecede" disabled="disabled" type="button"  onclick='btnActive()'
+						<button class="btn btn-primary" id="btnSecede" disabled="disabled" type="button"  
 						href="<%=request.getContextPath()%>/person/delete">기업회원 탈퇴</button> 
 						</p>
 
@@ -324,35 +329,76 @@
 <!-- updatePassword -->
 
 <script>
-	// 비밀번호 확인시 공백 확인
+	//비밀번호 확인시 공백 확인
 	function checkPassword() {
-	    var checkPassword = $("#confirmPw").val().trim();
-	    
-	    if (checkPassword === "") {
-	        alert("비밀번호를 확인해주세요");
-	        return false; // submit 방지
-	    }
-	    
-	    return true; // submit 허용
-	}
-	//비밀번호일치시 버튼 활성화
-			$(document).ready(function() {
-				var msg = "${msg}";
-				if (msg === "비밀번호 일치") {
-					console.log(msg);
-					$("#btnChangePw").prop("disabled", false);
-					$("#btnSecede").prop("disabled", false);
-					$('.id_input_re_1').css("display","inline-block");
-					newPwForm.newPw.focus();
-					return true;
-				} else {
-					$('.id_input_re_2').css("display","inline-block");
-					pwForm.confirmPw.focus();
-					return false;
-				}
-			});
+		  var confirmPw = document.getElementById("confirmPw").value;
+		  if (confirmPw.trim() == "") {
+			$('.pw_input_re_3').css("display","inline-block"); 
+		    return false; // submit 방지
+		  }
+		  return true; // submit 허용
+		  console.log(confirmPw);
+		}
 	
-			<!-- 이미지 미리보기 -->	
+	function newPassword() {
+		  // 비밀번호 필드에서 값 가져오기
+		  var newPw = document.getElementById("newPw").value;
+		  var newPw2 = document.getElementById("newPw2").value;
+
+		  // 빈칸 검사
+		  if (newPw === "" || newPw2 === "") {
+		    alert("빈칸이 있습니다. 비밀번호를 입력해주세요");
+		    return false;
+		  }
+
+		  // 비밀번호 패턴 검사
+		  var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
+		  if (!pattern.test(newPw)) {
+		    alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다.");
+		    return false;
+		  }
+
+		  // 두 비밀번호 필드 값 비교
+		  if (newPw !== newPw2) {
+		    alert("비밀번호가 일치하지 않습니다.");
+		    return false;
+		  }
+
+		  // 모든 검사를 통과한 경우, 폼 제출
+		  return true;
+		}
+
+	
+	
+	//비밀번호 일치시, 버튼 활성화
+	$(document).ready(function() {
+		var chkpw = "${chkpw}";
+		if (chkpw === "비밀번호 일치") {
+			console.log(chkpw);
+			$('.pw_input_re_1').css("display","inline-block"); 
+			$("#newPw").prop("disabled", false).focus();
+			$("#newPw2").prop("disabled", false);  //.addClass("is-invalid")
+			$("#btnChangePw").prop("disabled", false);
+			$("#btnSecede").prop("disabled", false);
+			return true;
+		} else if (chkpw === "비밀번호 불일치") {
+		    console.log(chkpw);
+		    $("#confirmPw").focus();
+		    $('.pw_input_re_2').css("display","inline-block"); 
+		    return false;
+		} else {
+			return false;
+		}
+		
+
+	
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	
+	});
+	<!-- 이미지 미리보기 -->	
 			function setThumbnail(input) {
 				  if (input.files && input.files[0]) {
 				    var reader = new FileReader();

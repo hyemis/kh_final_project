@@ -87,15 +87,16 @@ public class BsAccountController {
 	
 	//회원비밀번호 확인
 	@PostMapping("/pwChk") 
-	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) throws Exception{
+	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		BsUserDto dto = service.viewAccount(auth.getName());
 				
 		if(passwordEncoder.matches(confirmPw, dto.getUserPw())) {
-			rttr.addFlashAttribute("msg", "비밀번호 일치");
+			rttr.addFlashAttribute("chkpw", "비밀번호 일치");
 			mv.setViewName("redirect:/business/account/info");
 		}else {
+			rttr.addFlashAttribute("chkpw", "비밀번호 불일치");
 			mv.setViewName("redirect:/business/account/info");
 		}
 			
@@ -113,7 +114,7 @@ public class BsAccountController {
 				dto.setUserId(principal.getName());
 				dto.setUserPw(passwordEncoder.encode(dto.getUserPw())); // 패스워드 암호화
 				service.updatePassword(dto);
-				mv.setViewName("redirect:/");
+				mv.setViewName("redirect:/business/account/info");
 				rttr.addFlashAttribute("msg", "비밀번호변경에 성공했습니다.");
 			}else {
 				mv.setViewName("redirect:/business/account/info");
