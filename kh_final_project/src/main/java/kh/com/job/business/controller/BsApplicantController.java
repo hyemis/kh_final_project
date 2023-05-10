@@ -1,7 +1,6 @@
 package kh.com.job.business.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,19 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.common.collect.Sets.SetView;
 import com.google.gson.Gson;
-
-import kh.com.job.admin.model.dto.AdCategoryDto;
-import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsAnnounceDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
 import kh.com.job.business.model.dto.BsAppInfoDto;
 import kh.com.job.business.model.dto.BsApplicantResumeDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
-import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
-import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.mail.MailUtil;
@@ -42,7 +34,6 @@ import kh.com.job.person.model.dto.PsClDto;
 import kh.com.job.person.model.dto.PsGschoolDto;
 import kh.com.job.person.model.dto.PsHschoolDto;
 import kh.com.job.person.model.dto.PsUnivDto;
-import kh.com.job.person.model.dto.PsUserDto;
 
 @Controller
 @RequestMapping("/business/applicant")
@@ -50,9 +41,6 @@ public class BsApplicantController {
 	
 	@Autowired
 	private BsApplicantService apservice;
-	
-	@Autowired
-	private BsAccountService acservice;
 	
 	@Autowired
 	private BsRecruitService rcservice;
