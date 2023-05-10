@@ -897,6 +897,8 @@ public class PsMainController {
 					int result = service.userPic(dto);
 					if(result > 0) {
 						rttr.addFlashAttribute("msg", "사진등록이 완료되었습니다.");
+						mv.setViewName("redirect:/person/mypage");
+						return mv;
 					}
 					else {
 						rttr.addFlashAttribute("msg", "사진등록이 실패되었습니다.");

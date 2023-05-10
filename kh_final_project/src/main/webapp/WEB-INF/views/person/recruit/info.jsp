@@ -43,7 +43,7 @@
 	<div class="container-xxl py-5">
 		<div class="container-fluid bg-white p-5">
 			<h3>채용정보검색</h3>
-			<span>원하시는 채용 정보를 검색하세요. </span>
+			<span>현재 채용 중인 공고를 검색하세요. </span>
 		</div>
 		<!-- 검색 부분  -->
 		<div class="container-fluid" style="background-color: #f8f9fa; min-height: 300px;">
@@ -144,7 +144,7 @@
 							<div class="row g-2">
 								<div class="col-md-12">
 									<input type="text" class="form-control border-1 py-3"
-										id="search" placeholder="찾으시는 회사명, 연봉 등 원하는 조건을 검색해보세요.">
+										id="search" placeholder="찾으시는 회사명, 연봉 등 원하는 조건을 검색해보세요. 검색어로 먼저 검색합니다.">
 								</div>
 							</div>
 						</div>
