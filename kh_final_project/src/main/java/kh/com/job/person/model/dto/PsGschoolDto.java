@@ -34,7 +34,7 @@ public class PsGschoolDto {
 	private String gradCategory;
 	private String gradDate;
 	private String gradMajor;
-	private double gradPoint;
+	private Double gradPoint;
 
 
 	}

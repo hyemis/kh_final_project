@@ -101,6 +101,7 @@ public class BsApplicantController {
 		if(pdto.getPnum() == 0) {
 			pdto.setPnum(1);
 		}
+		pdto.setUserId(principal.getName());
 		
 		Paging list = apservice.pageList(pdto);
 		
@@ -212,6 +213,8 @@ public class BsApplicantController {
 		if(pdto.getPnum() == 0) {
 			pdto.setPnum(1);
 		}
+		
+		pdto.setUserId(principal.getName());
 		
 		Paging list = apservice.passPageList(pdto);
 		//경력 카테고리

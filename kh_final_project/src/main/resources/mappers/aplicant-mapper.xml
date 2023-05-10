@@ -64,6 +64,9 @@
 			<if test="searchResult != null and searchResult neq ''">
 				AND ba.result_type like '%'||#{searchResult}||'%'
 			</if>
+			<if test="userId != null and userId neq ''">
+				AND rr.user_id = #{userId}
+			</if>
 		</trim>
 	</select>
 	
@@ -84,6 +87,9 @@
 				</if>
 				<if test="searchResult != null and searchResult neq ''">
 					AND ba.result_type like '%'||#{searchResult}||'%'
+				</if>
+				<if test="userId != null and userId neq ''">
+					AND rr.user_id = #{userId}
 				</if>
 			</trim>
 				ORDER BY ua.apply_date DESC
@@ -239,6 +245,9 @@
 			<if test="searchResult != null and searchResult neq ''">
 				AND bap.pass_type like '%'||#{searchResult}||'%'
 			</if>
+			<if test="userId != null and userId neq ''">
+				AND rr.user_id = #{userId}
+			</if>
 		</trim>
 	</select>
 	
@@ -263,6 +272,9 @@
 				</if>
 				<if test="searchResult != null and searchResult neq ''">
 					AND bap.pass_type like '%'||#{searchResult}||'%'
+				</if>
+				<if test="userId != null and userId neq ''">
+					AND rr.user_id = #{userId}
 				</if>
 			</trim>
 				ORDER BY ua.apply_date DESC
