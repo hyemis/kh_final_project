@@ -67,14 +67,14 @@
 								     height="200">								
 							</div>
 							<div>
-								<span style="font-size: 85%;">이름 : </span> 
-								<span style="font-size: 85%;">${userinfo.userName }</span><br> 
-								<span style="font-size: 85%;">전화번호 : </span> 
-								<span style="font-size: 85%;">${userinfo.userPhone }</span><br>
-								<span style="font-size: 85%;">생년월일 : </span> 
-								<span style="font-size: 85%;">${userinfo.userBirth }</span><br>
-								<span style="font-size: 80%;">이메일 : </span> 
-								<span style="font-size: 80%;">${userinfo.userEmail }</span><br>
+								<span style="font-size: 90%;">이름 : </span> <span
+									style="font-size: 90%;">${userinfo.userName }</span><br> <span
+									style="font-size: 90%;">전화번호 : </span> <span
+									style="font-size: 90%;">${userinfo.userPhone }</span><br>
+								<span style="font-size: 90%;">생년월일 : </span> <span
+									style="font-size: 90%;">${userinfo.userBirth }</span><br>
+								<span style="font-size: 80%;">이메일 : </span> <span
+									style="font-size: 80%;">${userinfo.userEmail }</span><br>
 							</div>
 						</div>
 					</div>

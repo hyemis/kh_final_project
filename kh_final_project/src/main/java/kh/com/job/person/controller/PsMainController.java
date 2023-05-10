@@ -400,7 +400,7 @@ public class PsMainController {
 		if (passwordEncoder.matches(userPw, pdto.getUserPw())) {
 			service.delete(userId);
 			SecurityContextHolder.clearContext();
-			mv.setViewName("redirect:/person/main");
+			mv.setViewName("redirect:/");
 
 		} else {
 			mv.setViewName("redirect:/person/deletepw");
