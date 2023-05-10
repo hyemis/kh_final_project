@@ -85,17 +85,6 @@
 		WHERE 
 		ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
 	</select>
-	
-	<!-- 이력서 상세보기 - 자기소개서 정보 -->
-<!--  	<select id="clSelectList" resultType="cldto">
-		SELECT
-		rc.CL_NO, rc.CL_FILE, rc.CL_GROWTH, rc.CL_MOTIVE, rc.CL_ADV, rc.CL_ASP 
-		FROM RESUME_CL rc
-		INNER JOIN RESUME_CL_INFO rci ON rc.CL_NO = rci.CL_NO
-		INNER JOIN USER_RESUME ur ON rci.RESUME_NO = ur.RESUME_NO
-		WHERE ur.USER_ID =#{userId} AND ur.RESUME_NO =#{resumeNo}
-	</select>  -->
-
 
  	<select id="clSelectOne" resultType="cldto">
 		SELECT
@@ -113,12 +102,6 @@
 		USER_ID=#{USER_ID} order by RESUME_DATE desc
 	</select>
 
-
-
-	<!-- <insert id="insert" parameterType="rdto"> INSERT INTO USER_RESUME (RESUME_NO, 
-		RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID) VALUES(USER_RESUME_SEQ.NEXTVAL, 
-		#{resumeTitle}, #{resumePhoto}, sysdate, #{portfFile}, #{userId}) </insert> -->
-
 	<select id="getResumeNextval" resultType="_int">
 		select
 		USER_RESUME_SEQ.NEXTVAL from dual
@@ -126,9 +109,14 @@
 
 	<insert id="insert" parameterType="rdto">
 		INSERT INTO USER_RESUME
-		(RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, USER_ID)
-		VALUES(#{resumeNo}, #{resumeTitle}, #{resumePhoto},sysdate, #{userId})
+		(RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, PORTF_FILE, USER_ID)
+		VALUES(#{resumeNo}, #{resumeTitle}, #{resumePhoto},sysdate, 
+		 <if test="portfFile != null">
+	      	#{portfFile},
+	    </if>
+		#{userId})
 	</insert>
+
 
 	<delete id="delete" parameterType="_int">
 		delete from USER_RESUME where

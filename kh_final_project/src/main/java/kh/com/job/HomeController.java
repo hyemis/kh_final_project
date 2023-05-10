@@ -35,7 +35,6 @@ public class HomeController {
 		mv.addObject("recruitList", recruitList);
 		
 		mv.setViewName("home");
-//		return "home";
 		return mv;
 	}
 	

@@ -86,7 +86,7 @@
 				<!-- 게시글  -->
 				<div class="originPost">
 					<div class="d-flex justify-content-end align-items-center">
-						<sec:authorize access="hasRole('ROLE_P') and #detailBoard.userId == authentication.name">
+						<sec:authorize access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P') and #detailBoard.userId == authentication.name">
 								<a class="pe-2" onclick="handleUpdatePost()">수정</a>
 								<a class="" onclick="handleDeletePost()">삭제</a>
 						</sec:authorize>
@@ -97,7 +97,7 @@
 						<div>${detailBoard.updateDate}</div>
 						<div class="d-flex align-items-end ms-auto">
 							<div class="fa-regular fa-bookmark pe-3">  조회 ${detailBoard.boardRead}</div>
-							<sec:authorize access="hasRole('ROLE_P') and #detailBoard.userId != authentication.name">
+							<sec:authorize access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P') and #detailBoard.userId != authentication.name">
 								<div class="fa-regular fa-heart" onclick="handleLike()">  좋아요
 									${detailBoard.boardLike}</div>
 							</sec:authorize>
@@ -127,7 +127,7 @@
 				            <tr>
 					            <td class="text-end">
 					                <div class="d-flex justify-content-end align-items-center">
-					                    <sec:authorize access="hasRole('ROLE_P') and #reply.userId == authentication.name">
+					                    <sec:authorize access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P') and #reply.userId == authentication.name">
 					                        <a class="" onclick="handleUpdateReply(this)" data-reply-id="${reply.replyId}">수정</a>
 					                        <a class="ms-2" onclick="handleDeleteReply(this)" data-reply-id="${reply.replyId}">삭제</a>
 					                    </sec:authorize>

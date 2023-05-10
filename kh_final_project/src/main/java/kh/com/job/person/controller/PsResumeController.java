@@ -105,8 +105,8 @@ public class PsResumeController {
 	// 이력서 작성
 	@PostMapping("/write")
 	@ResponseBody
-	public int writeResume(Principal principal, PsResumeDto dto,
-			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) {
+	public int writeResume(ModelAndView mv, Principal principal, PsResumeDto dto,
+			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) throws Exception {
 
 		dto.setUserId(principal.getName());
 
@@ -899,6 +899,5 @@ public class PsResumeController {
 		}
 	}
 
-	// 예외처리는 프로젝트 후반에 작성
 
 }
