@@ -141,9 +141,9 @@
 		USER_APPLY (USER_ID, BA_NUM, APPLY_DATE, RESUME_NO)
 			VALUES (#{psUser}, #{baNum}, current_timestamp, #{resumeNo})
 		 
-		SELECT * FROM DUAL;
+		SELECT * FROM DUAL
 		<selectKey keyProperty="baNum" resultType="_int" order="BEFORE">
-			SELECT MAX(BA_NUM) +1 FROM BUSINESS_APPLICANT
+			SELECT MAX(BA_NUM)+1 ba_num FROM BUSINESS_APPLICANT
 		</selectKey>
 	</insert>
 	

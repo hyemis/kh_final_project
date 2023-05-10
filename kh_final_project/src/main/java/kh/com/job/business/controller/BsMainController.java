@@ -19,10 +19,14 @@ import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsSearchService;
 import kh.com.job.common.page.Paging;
+import kh.com.job.person.model.service.PsService;
 
 @Controller
 @RequestMapping("/business")
 public class BsMainController {
+	
+	@Autowired
+	private PsService pservice;
 	
 	@Autowired
 	private BsAboutUsService auservice;
@@ -33,9 +37,6 @@ public class BsMainController {
 	@Autowired
 	private BsApplicantService apservice;
 
-	@Autowired
-	private BoardService bdservice;
-	
 	@Autowired
 	private BsSearchService bsService;
 	
@@ -124,15 +125,18 @@ public class BsMainController {
 	}
 	
 
-		
-		
-		
-	//test페이지 나중에 삭제	
-		@GetMapping("/test")
-		public ModelAndView test(ModelAndView mv) {
-					
-			return mv;
-		}
+	@GetMapping("/delete")
+	public ModelAndView viewDelete(ModelAndView mv, Principal principal) throws Exception {
+//		System.out.println("로그인정보: " + principal.getName());
+//
+//		if (principal.getName() != null) {
+//			mv.addObject("PsUserDto", pservice.selectOne(principal.getName()));
+//			mv.setViewName("business/delete");
+//		} else {
+//			mv.setViewName("redirect:/");
+//		}
+		return mv;
+	}
 		
 	
 }
