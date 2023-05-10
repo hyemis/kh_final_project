@@ -24,19 +24,19 @@
                         <div class="row g-2 pt-2">
                             <div class="col-3">
                                 <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person1.png" alt=""/>
-                                <p class="text-white text-center">이름</p>
+                                <p class="text-white text-center">최민건</p>
                             </div>
                             <div class="col-3">
                                 <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person2.png" alt=""/>
-                                <p class="text-white text-center">이름</p>
+                                <p class="text-white text-center">백한울</p>
                             </div>
                             <div class="col-3">
                                 <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person3.png" alt=""/>
-                                <p class="text-white text-center">이름</p>
+                                <p class="text-white text-center">전찬희</p>
                             </div>
                             <div class="col-3">
                                 <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person4.png" alt=""/>
-                                <p class="text-white text-center">이름</p>
+                                <p class="text-white text-center">조혜미</p>
                             </div>
                         </div>
                     </div>
