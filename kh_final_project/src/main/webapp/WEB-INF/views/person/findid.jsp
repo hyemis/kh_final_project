@@ -75,10 +75,7 @@
 			      		   <input class="form-control" type="text" id="personal-p-birth" placeholder="생년월일(19990101)">
 			        	   <input class="form-control" type="text" id="personal-phone" placeholder="'-' 빼고 숫자만 입력">
 			        	   <div class="d-grid gap-2 col-6 mx-auto m-2">
-							  <button class="btn btn-outline-dark" type="button" onclick="findId();">가입한 휴대폰으로 아이디 찾기</button>
-							</div>
-							<div class="my-5">
-								 <a href="${pageContext.request.contextPath}/board/main" class="col-4"><p>도움이 필요하시나요?</p></a>
+							  <button class="btn btn-outline-dark" type="button" onclick="findId();">가입한 Phone으로 아이디 찾기</button>
 							</div>
 						</form>
 						 
@@ -113,18 +110,22 @@
 	      var personalPhoneForm = document.getElementById('personal-phone-form');
 	      var corporateForm = document.getElementById('corporate-form');
 	      var findType = document.getElementById('findType');
+	      var corporateBtn = document.querySelector('#member button:nth-child(2)'); // 기업 회원 버튼 선택
 	      
 	         if (type === 'personal') {
 		    	  corporateForm.classList.add('hidden');
 		    	  findType.classList.remove('hidden');
+		    	  corporateBtn.style.display = 'none'; // 기업 회원 버튼 숨김
 	         } else if(type === 'email') {
 	    		 personalEmailForm.classList.remove('hidden');
 	    		 personalPhoneForm.classList.add('hidden');
 	    		 corporateForm.classList.add('hidden');
+	    		 corporateBtn.style.display = 'none'; // 기업 회원 버튼 숨김
 	    	 } else if (type === 'phone') {
 	    		 personalEmailForm.classList.add('hidden');
 	    		 personalPhoneForm.classList.remove('hidden');
 	    		 corporateForm.classList.add('hidden');
+	    		 corporateBtn.style.display = 'none'; // 기업 회원 버튼 숨김
 	    		 
 	    	} else if(type === 'corporate'){
 	    		personalEmailForm.classList.add('hidden');
