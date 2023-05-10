@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.business.model.dto.BsAplicantDto;
@@ -191,11 +192,14 @@ public class PsDao {
 	public List<BsSuggestDto> psSuggestList(BsSuggestDto dto) {
 		return sqlSession.selectList("suggest.psSuggestList",dto);
 	}
-
+	
+	@Transactional
 	public int interviewAccept(BsSuggestDto dto) {
-		return sqlSession.insert("suggest.interviewAccept",dto);
+		int result = sqlSession.insert("suggest.interviewAccept",dto);
+	    int result2 = updateAccept(dto);   //sqlSession.update("suggest.updateAccept",dto);
+	    return result;
 	}
-
+	   
 	public int updateAccept(BsSuggestDto dto) {
 		return sqlSession.update("suggest.updateAccept",dto);
 	}

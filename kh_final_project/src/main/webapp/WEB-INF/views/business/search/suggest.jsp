@@ -142,8 +142,8 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<form action="<%=request.getContextPath()%>/business/search/suggestForm" method="post">
-				<div class="modal-body">
+				<form action="<%=request.getContextPath()%>/business/search/suggestForm" method="post" class="was-validated">
+				<div class="modal-body" style="height: 500px; overflow-y: scroll;">
 						<input type="text" class="form-control" id="user_id" name="psUser"  style="display: none;">
 						<input type="text" class="form-control" id="resume_no" name="resumeNo" style="display: none;">
 						<div class="row ">
@@ -151,7 +151,7 @@
 								<h4>면접대상자</h4>
 							</div>
 							<div class="col-10 was-validated">
-								<input type="text" class="form-control" id="user_name" >
+								<input type="text" class="form-control" id="user_name" readonly>
 							</div>
 						</div>
 						<div class="pt-3 row">
@@ -159,11 +159,12 @@
 								<h4>제안 공고</h4>
 							</div>
 							<div class="col-10">
-								<select class="form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()">
+								<select class="form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()" required >
 										<c:forEach items="${recruit }" var="recruit">
 										<option value="${recruit.raNum }">${recruit.raTitle}</option>
 										</c:forEach>
 								</select>
+								<div class="invalid-feedback">면접 대상 공고를 선택해 주세요</div>
 							</div>
 						</div>
 
@@ -171,7 +172,7 @@
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
-							<div class="col-10 was-validated">
+							<div class="col-10 ">
 								<input type="text" class="form-control is-invalid" 
 									name="sgTitle" value="안녕하세요  ${info.userName }에서 면접제안드립니다." required>
 							</div>
@@ -180,8 +181,8 @@
 							<div class="col-2 text-center font-monospace">
 								<h4>내용</h4>
 							</div>
-							<div class="col-10 was-validated">
-								<input type="text" class="form-control is-invalid"
+							<div class="col-10 ">
+								<input type="text" class="form-control is-invalid" style="height: 300px;"
 									name="sgContent" placeholder="내용을 입력해주세요" required>
 							</div>
 						</div>
@@ -189,7 +190,6 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="reset" class="btn btn-light">초기화</button>	
 							<button type="submit" class="btn btn-primary">등록</button>
 						</div>
 				</div>
@@ -282,7 +282,6 @@
 	 $('.page-link').click(getSearchResume);
 	}// displayPage
 	</script>
-	
 
 	
 </body>

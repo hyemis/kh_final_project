@@ -61,7 +61,11 @@
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
-
+<style>
+.modal {
+  z-index: 9999; /* 모달창을 다른 요소들보다 더 위쪽에 나타나도록 설정 */
+}
+</style>
 </head>
 <body>
 	<!-- haeder  -->
@@ -106,9 +110,14 @@
 						<h1>회사소개</h1>
 						<!-- Button trigger modal -->
 						<c:if test="${empty companyinfo }">
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyinfo">등록</button>
+						<p><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyinfo">등록</button></p>
+						<p>미작성 상태입니다 회사소개를 작성해주세요</p>
+						
 						</c:if>
+						<c:if test="${not empty companyinfo }">
+						<p>등록된게시물 바로가기</p>
 						<a class="btn btn-primary" href="<%=request.getContextPath()%>/board/company/companyinfo/view?no=${companyinfo.boardNo }" role="button">보기 및 수정</a>
+						</c:if>
 					</div>
 					
 					
@@ -169,14 +178,14 @@
 				</div>
 				<div class="modal-body">
 					<form action="${pageContext.request.contextPath }/business/aboutus/infoform" method="post"
-						enctype="multipart/form-data">
+						enctype="multipart/form-data" class="was-validated">
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
 							<div class="col-10 ">
-								<input type="text" name="boardTitle"
-									style="width: 30%;" placeholder="제목을적어주세요" > 
+								<input type="text" name="boardTitle" class="form-control is-invalid"
+									style="width: 100%;" placeholder="제목을적어주세요" required> 
 								<hr>
 							</div>
 						</div>
@@ -185,9 +194,9 @@
 								<h4>직 원 수</h4>
 							</div>
 							<div class="col-10 ">
-								<p>직원수를 숫자로 입력해주세요</p>
-								<input type="text" name="employee"
-									style="width: 30%;" placeholder=" 예시)300"> 명
+								<p>직원수를 숫자로 입력해주세요
+								<input type="text" name="employee" class="form-control is-invalid"
+									style="width: 30%;" placeholder=" 예시)300" required> 명 </p>
 								<hr>
 							</div>
 						</div>
@@ -197,8 +206,8 @@
 							</div>
 							<div class="col-10 ">
 								<p>회사의 평균 연봉을 입력해주세요</p>
-								<input type="text"
-									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500"> 만원
+								<input type="text" class="form-control is-invalid"
+									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" required> 만원
 								<hr>
 							</div>
 						</div>
@@ -299,7 +308,7 @@
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
 							<button type="reset" class="btn btn-light">초기화</button>
-							<button type="submit" class="btn btn-primary">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-info">등록</button>
 						</div>
 					</form>
 				</div>
@@ -344,7 +353,7 @@
 							<div class="col-10 ">
 								<input type="url" class="form-control" name="link" id="link" oninput="fetchLinkTitle()" placeholder="링크를 입력하세요">
 								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle" style="display:none" readonly>
-								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 입력하세요"
+								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 변경하려면 입력하세요"
 									   style="display:none">
 								<hr>
 							</div>
@@ -354,18 +363,15 @@
 							<div class="col-2 text-center font-monospace">
 								<h4>내용작성</h4>
 							</div>
-							<div class="col-10 ">
-								<div class="mb-3">
-									<textarea id="newsLetter" name="boardContent"
+							<div class="col-10 was-validated">
+									<textarea id="newsLetter" name="boardContent" class="form-control is-invalid"
 										style="height: 300px;"></textarea>
-								</div>
-								<div class="text-end ">작성일자</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" onclick>등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-newsletter">등록</button>
 						</div>
 					</form>
 				</div>
@@ -377,7 +383,28 @@
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-	
+<script>
+	$(document).ready(function() {
+	  $('#btn-info').click(function() { 
+	    var infocontent = $('#infoContent').val(); 
+	    
+	    if ($.trim(infocontent) == '') {
+	      alert('내용을 입력해주세요.'); 
+	      return false;
+	    }
+	  });
+	  
+	  $('#btn-newsletter').click(function() {
+	    var newscontent = $('#newsLetter').val(); 
+	    
+	    if ($.trim(newscontent) == '') { 
+	      alert('내용을 입력해주세요.'); 
+	      return false; 
+	    }
+	  });
+	});
+
+</script>	
 <script>	  
 	  function fetchLinkTitle() {
 		  const link = document.getElementById("link");

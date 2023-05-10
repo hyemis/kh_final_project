@@ -100,10 +100,10 @@ public class BsSearchController {
 	
 	//면접 제안
 	@PostMapping("/suggestForm")
-	public ModelAndView insertNewsletter(ModelAndView mv, BsSuggestDto dto, Principal principal, RedirectAttributes rttr)  {
+	public ModelAndView suggestForm(ModelAndView mv, BsSuggestDto dto, Principal principal, RedirectAttributes rttr)  {
 		dto.setBsUser(principal.getName()); 
 		bsService.suggest(dto);
-		mv.setViewName("redirect:/business/search/suggest");
+		mv.setViewName("business/search/suggest");
 		rttr.addFlashAttribute("msg", "면접제안 완료");
 		System.out.println(dto);
 		return mv;
@@ -124,13 +124,14 @@ public class BsSearchController {
 	//면접 일정 등록
 	@PostMapping("/sendinterview")
 	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsAnnounceDto adto,  BsSuggestDto sdto, Principal principal, Integer baNum ) {
-		dto.setBsUser(principal.getName());
-		bsService.addInterview(dto);
-		System.out.println(dto);
-		
-		bsService.updateSend(sdto);
+		//면접일정등록
+//		dto.setBsUser(principal.getName());
+//		bsService.addInterview(dto); //ok
+//		System.out.println(dto);
+		//면접등록완료
+		bsService.updateSend(sdto); //sgno값 ㅓㅄ음
 		System.out.println(sdto);
-		
+		//메일발송
 		BsUserDto bdto = baService.viewAccount(principal.getName());
 		int result = -1;
 		result = bsService.resultUpdate(adto);

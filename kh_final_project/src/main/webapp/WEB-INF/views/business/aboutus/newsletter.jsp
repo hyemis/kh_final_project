@@ -154,7 +154,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-newsletter">등록</button>
 						</div>
 					</form>
 				</div>
@@ -165,7 +165,16 @@
 
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	
+<script>
+const newsLetterTextArea = document.getElementById("newsLetter");
+const btnNewsLetter = document.getElementById("btn-newsletter");
+
+btnNewsLetter.addEventListener("click", function() {
+  if (newsLetterTextArea.value === "") {
+    alert("내용을 입력해 주세요");
+  }
+});
+</script>		
 <script>	  
 	  function fetchLinkTitle() {
 		  const link = document.getElementById("link");
