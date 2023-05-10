@@ -128,7 +128,7 @@
   	<insert id="scrapCompany" parameterType="map">
 	INSERT INTO SCRAP_INFO(USER_ID, COMPANY_ID, COMPANY_NAME, BOARD_NO)
 	VALUES (#{userId}, #{companyId},
-	(SELECT COMPANY_NAME FROM RECRUIT_REGIST WHERE USER_ID = #{companyId}),
+	(SELECT USER_NAME FROM USER_TABLE WHERE USER_ID = #{companyId}),
 	(SELECT BOARD_NO FROM BOARD WHERE USER_ID = #{companyId} AND CATEGORY_ID='UBD06')
 	)
 	</insert>

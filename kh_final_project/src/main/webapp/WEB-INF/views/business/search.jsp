@@ -63,11 +63,11 @@
 			      <td><a value="${suggest.resumeNo }" href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=${suggest.resumeNo}">${suggest.resumeTitle }</a></td>
 				  <td>
 				  <c:choose>
+				    <c:when test="${suggest.sendInterview == 'Y'}">
+				      <button class="btn btn-outline-success " value="${suggest.sendInterview} " disabled>등록완료</button>
+				    </c:when>
 				    <c:when test="${suggest.suggestAccept == 'Y'}">
 				      <a type="button" class="btn btn-primary " value="${suggest.suggestAccept}" href="${pageContext.request.contextPath}/business/search/interview?no=${suggest.sgNo }">면접등록</a>
-				    </c:when>
-				    <c:when test="${suggest.sendInterview == 'Y'}">
-				      <button class="btn btn-primary " value="${suggest.sendInterview} " disabled>등록완료</button>
 				    </c:when>
 				    <c:otherwise>
 				      <button class="btn btn-outline-success" disabled >수락대기</button>

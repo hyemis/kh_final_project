@@ -22,6 +22,7 @@ public class BsSearchDto {
 	private String education;
 	private String gender;
 	private String resumeAct;
+	private String sendInterview;
 	private int resumeNo;
 	private String resumeTitle;
 	private String userId;

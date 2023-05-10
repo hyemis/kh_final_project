@@ -38,6 +38,8 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	rel="stylesheet">
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -105,8 +107,7 @@
 				</div>
 				<div class="col-10 ">
 					<div class="mb-3">
-						<textarea id="newsLetter" name="boardContent"
-							style="height: 300px;">${news.boardContent }</textarea>
+						<textarea id="newsLetter" name="boardContent">${news.boardContent }</textarea>
 					</div>
 				</div>
 			</div>

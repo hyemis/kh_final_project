@@ -38,7 +38,6 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
-	
 <link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
 	rel="stylesheet">
 
@@ -80,7 +79,7 @@
 					<h4>제목</h4>
 				</div>
 				<div class="col-10 ">
-					<input type="text" name="boardTitle" style="width: 30%;" value="${info.boardTitle }"
+					<input type="text" name="boardTitle" class="form-control" style="width: 30%;" value="${info.boardTitle }"
 						>
 					<hr>
 				</div>
@@ -91,7 +90,7 @@
 				</div>
 				<div class="col-10 ">
 					<p>직원수를 숫자로 입력해주세요</p>
-					<input type="text" name="employee" style="width: 30%;" value="${info.employee }"
+					<input type="text" name="employee" class="form-control" style="width: 30%;" value="${info.employee }"
 						> 명
 					<hr>
 				</div>
@@ -102,7 +101,7 @@
 				</div>
 				<div class="col-10 ">
 					<p>회사의 평균 연봉을 입력해주세요</p>
-					<input type="text" name="salaryAvg" style="width: 30%;" value="${info.salaryAvg }"
+					<input type="text" name="salaryAvg" class="form-control" style="width: 30%;" value="${info.salaryAvg }"
 						placeholder="dd"> 만원
 					<hr>
 				</div>
@@ -195,13 +194,12 @@
 				</div>
 				<div class="col-10 was-validated ">
 					<div class="mb-3">
-						<textarea id="infoContent" name="boardContent" value="${info.boardContent }"></textarea>
+						<textarea id="infoContent" name="boardContent">${info.boardContent }</textarea>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-light" data-bs-dismiss="modal">취소</button>
-				<button type="reset" class="btn btn-light">초기화</button>
 				<button type="submit" class="btn btn-primary">등록</button>
 			</div>
 		</form>
