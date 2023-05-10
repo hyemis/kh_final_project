@@ -27,12 +27,13 @@
 		<security:intercept-url pattern="/person/suggest" access="hasRole('ROLE_P')"/>
 		<security:intercept-url pattern="/person/resume/**" access="hasRole('ROLE_P')"/>
 		<security:intercept-url pattern="/person/mypage/**" access="hasRole('ROLE_P')"/>
+		
+		<security:intercept-url pattern="/board/writepost" access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P')"/>        
 				
         <security:intercept-url pattern="/business/newletter/**" access="permitAll"/>
 		<security:intercept-url pattern="/business/**" access="hasRole('ROLE_B')"/>
         <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_AM','ROLE_A')"/>
 		<security:intercept-url pattern="/person/**" access="permitAll"/>
-		<security:intercept-url pattern="/board/writepost" access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P')"/>        
         
         <security:form-login 
         	login-page="/person/login" 
