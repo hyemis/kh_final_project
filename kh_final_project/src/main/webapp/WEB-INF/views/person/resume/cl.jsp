@@ -96,7 +96,7 @@
 						<div class="col-auto">
 							<button type="button" class="btn btn-outline-dark m-2 btn-sm"
 								data-bs-toggle="modal" data-bs-target="#viewCl">저장된 정보
-								불러오기</button>
+							 수정하기</button>
 						</div>
 					</div>
 					<div>
@@ -112,7 +112,7 @@
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<p>불러올 자기소개서를 체크하세요.</p>
+										<p>수정할 자기소개서를 체크하세요.</p>
 										<p>이전에 작성하신 자기소개서와 자기소개서 파일을 불러와 수정합니다. 현재 이력서에 해당 자기소개서는 입력되지 않습니다.
 										</p>
 										

@@ -114,7 +114,7 @@
 						<div class="mb-4">
 							<h3 class="mb-3">기본 정보</h3>
 							<div class="row">
-								<div class="col-2 border border-dark-subtle">
+								<div class="col-2">
 
 
 									<!-- 모달 창 -->
@@ -160,15 +160,15 @@
 										data-bs-toggle="modal" data-bs-target="#uploadModal">사진
 										등록</button>
 								</div>
-								<div class="col-10 border border-dark-subtle">
+								<div class="col-10 p-4">
 									<input type="hidden" id="userId" placeholder="userId"
 										value="${userinfo.userId }" required> <span>이름
 										: </span> <span>${userinfo.userName }</span><br> <span>전화번호
 										: </span> <span>${userinfo.userPhone }</span><br> <span>생년월일
 										: </span> <span>${userinfo.userBirth }</span><br> <span>이메일
 										: </span> <span>${userinfo.userEmail }</span><br>
-									<%-- <span>주소 : </span>
-										<span>${userinfo.AdressRoad }, ${userinfo.AdressRoad }, ${userinfo.AdressJibun },  ${userinfo.AdressDetail }, ${userinfo.AdressPostcode }</span><br> --%>
+									 <span>주소 : </span>
+										<span>${userinfo.addressRoad },  ${userinfo.addressJibun },  ${userinfo.addressDetail }, ${userinfo.addressPostcode }</span><br> 
 								</div>
 
 							</div>
@@ -246,7 +246,17 @@
 				}
 			})
 		}
+		
+		// 제목 글자 수 
+		$(document).ready(function() {
+	    $('#resumeTitle').keyup(function() {
+	        if (this.value.length >= 20) {
+	            alert('제목은 20자 이내로 입력해주세요.');
+	        }
+	    });
+	});
 
+	
 	</script>
 
 </body>

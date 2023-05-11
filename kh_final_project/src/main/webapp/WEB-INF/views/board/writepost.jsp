@@ -119,7 +119,8 @@
 
 	<!-- page script -->
 	<script>
-		// 
+	
+	// 필수 입력 경고창
 	 function checkExistData(value, dataName) {
         if (value.trim() === "") {
             alert(dataName + "을(를) 입력해주세요!");
@@ -226,9 +227,8 @@
 	    	            for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
 	    	            return b
 	    	        })(this.value);
-	    	        if (byteLength > 100) {
-	    	            alert('제목은 50자 이내로 입력해주세요.');
-	    	            $(this).val('');
+	    	        if (this.value.length >= 20) {
+	    	            alert('제목은 20자 이내로 입력해주세요.');
 	    	        }
 	    	    });
 	    });
