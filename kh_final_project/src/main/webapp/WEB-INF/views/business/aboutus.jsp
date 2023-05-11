@@ -112,7 +112,7 @@
 						
 						</c:if>
 						<c:if test="${not empty companyinfo }">
-						<p>등록된게시물 바로가기</p>
+						<p>등록된 게시물 바로가기</p>
 						<a class="btn btn-primary" href="<%=request.getContextPath()%>/board/company/companyinfo/view?no=${companyinfo.boardNo }" role="button">보기 및 수정</a>
 						</c:if>
 					</div>
