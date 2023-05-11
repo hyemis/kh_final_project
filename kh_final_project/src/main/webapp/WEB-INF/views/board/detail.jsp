@@ -97,7 +97,7 @@
 						<div class="pe-3">${detailBoard.userId}</div>
 						<div>${detailBoard.updateDate}</div>
 						<div class="d-flex align-items-end ms-auto">
-							<div class="fa-regular fa-bookmark pe-3">  조회 ${detailBoard.boardRead}</div>
+							<%-- <div class="fa-regular fa-bookmark pe-3">  조회 ${detailBoard.boardRead}</div> --%>
 							<sec:authorize access="hasAnyRole('ROLE_AM','ROLE_A','ROLE_B','ROLE_P') and #detailBoard.userId != authentication.name">
 								<div class="fa-regular fa-heart" onclick="handleLike()">  좋아요
 									${detailBoard.boardLike}</div>
@@ -254,7 +254,25 @@
         updateForm = updateDiv; 
 
 	        // CKEditor 초기화
-	        ClassicEditor.create(document.querySelector("#editor"))
+	        ClassicEditor.create(document.querySelector("#editor"), {
+			  toolbar: {
+			    items: [
+			      'heading',
+			      '|',
+			      'bold',
+			      'italic',
+			      'link',
+			      'bulletedList',
+			      'numberedList',
+			      'blockQuote',
+			      'insertTable',
+			      'mediaEmbed',
+			      'undo',
+			      'redo'
+			    ]
+			  },
+			  language: 'ko'
+			})
 	        .then(editor => {
 	            window.editor = editor;
 	        })
