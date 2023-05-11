@@ -1,6 +1,5 @@
 package kh.com.job.person.model.dto;
 
-import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
