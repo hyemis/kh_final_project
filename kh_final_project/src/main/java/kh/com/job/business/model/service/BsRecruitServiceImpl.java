@@ -12,25 +12,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Bucket;
-import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
-import kh.com.job.business.model.dao.BsAccountDao;
 import kh.com.job.business.model.dao.BsRecruitDao;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
-import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
 
 @Service
 public class BsRecruitServiceImpl implements BsRecruitService{
 	
-	@Autowired
-	private BsAccountDao account;
 	
 	@Autowired
 	private BsRecruitDao dao;
