@@ -35,8 +35,10 @@ public class PsResumeController {
 
 	@Autowired
 	private PsResumeService rservice;
+	
 	@Autowired
 	private PsService pservice;
+	
 	@Autowired
 	private BsRecruitService bservice;
 
@@ -726,11 +728,6 @@ public class PsResumeController {
 		// 자기소개서 불러오기
 		List<PsClDto> clList = rservice.selectListCl(principal.getName());
 		for (PsClDto cl : clList) {
-//			cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
-//			cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
-//			cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
-//			cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
-			
 			 if (cl.getClGrowth() != null) {
 		            cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
 		     } else {
