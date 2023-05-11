@@ -18,7 +18,7 @@
 	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
 	rel="stylesheet">
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
@@ -96,10 +96,10 @@
                                         <td>
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <span class="fas fa-eye">
+                                                    <span class="fa-regular fa-bookmark pe-2">
                                                         ${board.boardRead}
                                                     </span>
-                                                    <span class="fas fa-heart">
+                                                    <span class="fa-regular fa-heart">
                                                         ${board.boardLike}
                                                     </span>
                                                 </div>

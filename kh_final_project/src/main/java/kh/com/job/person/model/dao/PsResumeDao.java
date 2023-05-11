@@ -122,7 +122,7 @@ public class PsResumeDao {
 		return sqlSession.insert("resume.insertGschool", dto);
 	}
 
-	// 이력서 - 대학교 삭제
+	// 이력서 - 대학원 삭제
 	public int deleteGrad(int gradEduNo) throws Exception {
 		return sqlSession.delete("resume.deleteGrad", gradEduNo);
 	}

@@ -449,16 +449,6 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/school");
 		return mv;
 	}
-
-	// 대학원 테이블 삭제
-	@PostMapping("deleteGrad")
-	@ResponseBody
-	public int deleteGrad(@RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
-
-		int result = -1;
-		result = rservice.deleteGrad(gradEduNo);
-		return result;
-	}
 	
 	// 대학원 테이블 수정
 	@PostMapping("updateGrad")
@@ -485,6 +475,16 @@ public class PsResumeController {
 		return result;
 	}
 	
+	// 대학원 테이블 삭제
+	@PostMapping("deleteGrad")
+	@ResponseBody
+	public int deleteGrad(@RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
+		
+		int result = -1;
+		result = rservice.deleteGrad(gradEduNo);
+		return result;
+	}
+	
 	// 대학원 불러올때 낀테이블 insert
 	@PostMapping("insertInfoGrad")
 	@ResponseBody
@@ -505,7 +505,6 @@ public class PsResumeController {
 	@PostMapping("deleteInfoGrad")
 	@ResponseBody
 	public int deleteInfoGrad(Principal principal, @RequestParam("gradEduNo") Integer gradEduNo) throws Exception {
-		System.out.println(gradEduNo);
 		int result = -1;
 
 		Map<String, Object> InfoNo = new HashMap<>();
@@ -516,8 +515,6 @@ public class PsResumeController {
 		return result;
 	}
 	
-	
-
 
 	// 경력사항 페이지
 	@GetMapping("career")
@@ -559,22 +556,30 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 경력 불러올때 낀테이블 insert
-	@PostMapping("insertInfoCareer")
+
+	// 경력 테이블 수정
+	@PostMapping("updateCareer")
 	@ResponseBody
-	public int insertInfoCareer(Principal principal, @RequestParam("carNo") Integer carNo) throws Exception {
-
+	public int updateCareer(@RequestParam("carNo") Integer carNo, @RequestParam("carNewName") String carName,
+			@RequestParam("carNewDate") String carDate, @RequestParam("carNewPosition") String carPosition,
+			@RequestParam("carNewDept") String carDept, @RequestParam("carNewResp") String carResp,
+			@RequestParam("carNewSalary") Integer carSalary) throws Exception {
+		
 		int result = -1;
-
-		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("carNo", carNo);
-		InfoNo.put("userId", principal.getName());
-
-		result = rservice.insertCareerInfo(InfoNo);
-
+		
+		Map<String, Object> updateCareer = new HashMap<>();
+		updateCareer.put("carNo", carNo);
+		updateCareer.put("carName", carName);
+		updateCareer.put("carDate", carDate);
+		updateCareer.put("carPosition", carPosition);
+		updateCareer.put("carDept", carDept);
+		updateCareer.put("carResp", carResp);
+		updateCareer.put("carSalary", carSalary);
+		
+		result = rservice.updateCareer(updateCareer);
 		return result;
 	}
-
+	
 	// 경력사항 삭제
 	@PostMapping("deleteCareer")
 	@ResponseBody
@@ -586,6 +591,22 @@ public class PsResumeController {
 		return result;
 	}
 
+	// 경력 불러올때 낀테이블 insert
+	@PostMapping("insertInfoCareer")
+	@ResponseBody
+	public int insertInfoCareer(Principal principal, @RequestParam("carNo") Integer carNo) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("carNo", carNo);
+		InfoNo.put("userId", principal.getName());
+		
+		result = rservice.insertCareerInfo(InfoNo);
+		
+		return result;
+	}
+	
 	// 경력 끼인 테이블 삭제
 	@PostMapping("deleteInfoCareer")
 	@ResponseBody
@@ -601,28 +622,6 @@ public class PsResumeController {
 		return result;
 	}
 
-	// 경력 테이블 수정
-	@PostMapping("updateCareer")
-	@ResponseBody
-	public int updateCareer(@RequestParam("carNo") Integer carNo, @RequestParam("carNewName") String carName,
-			@RequestParam("carNewDate") String carDate, @RequestParam("carNewPosition") String carPosition,
-			@RequestParam("carNewDept") String carDept, @RequestParam("carNewResp") String carResp,
-			@RequestParam("carNewSalary") Integer carSalary) throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> updateCareer = new HashMap<>();
-		updateCareer.put("carNo", carNo);
-		updateCareer.put("carName", carName);
-		updateCareer.put("carDate", carDate);
-		updateCareer.put("carPosition", carPosition);
-		updateCareer.put("carDept", carDept);
-		updateCareer.put("carResp", carResp);
-		updateCareer.put("carSalary", carSalary);
-
-		result = rservice.updateCareer(updateCareer);
-		return result;
-	}
 
 	// 자격증 페이지
 	@GetMapping("certi")
@@ -650,7 +649,6 @@ public class PsResumeController {
 				InfoNo.put("certiNo", certiNo);
 				InfoNo.put("userId", principal.getName());
 
-				// 낀테이블 insert
 				rservice.insertCertiInfo(InfoNo);
 				rttr.addFlashAttribute("msg", "자격증이 입력되었습니다.");
 			} else {
@@ -663,7 +661,36 @@ public class PsResumeController {
 		mv.setViewName("redirect:/person/resume/certi");
 		return mv;
 	}
+	
+	// 자격증 테이블 수정
+	@PostMapping("updateCerti")
+	@ResponseBody
+	public int updateCerti(@RequestParam("certiNo") Integer certiNo, @RequestParam("certiNewName") String certiName,
+			@RequestParam("certiNewPub") String certiPub, @RequestParam("certiNewDate") String certiDate)
+					throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> updateCerti = new HashMap<>();
+		updateCerti.put("certiNo", certiNo);
+		updateCerti.put("certiName", certiName);
+		updateCerti.put("certiPub", certiPub);
+		updateCerti.put("certiDate", certiDate);
+		
+		result = rservice.updateCerti(updateCerti);
+		return result;
+	}
 
+	// 자격증 테이블 삭제
+	@PostMapping("deleteCerti")
+	@ResponseBody
+	public int deleteCerti(@RequestParam("certiNo") Integer certiNo) throws Exception {
+		
+		int result = -1;
+		result = rservice.deleteCerti(certiNo);
+		return result;
+	}
+	
 	// 자격증 끼인 테이블 insert
 	@PostMapping("insertInfoCerti")
 	@ResponseBody
@@ -690,34 +717,7 @@ public class PsResumeController {
 		return result;
 	}
 
-	// 자격증 테이블 삭제
-	@PostMapping("deleteCerti")
-	@ResponseBody
-	public int deleteCerti(@RequestParam("certiNo") Integer certiNo) throws Exception {
 
-		int result = -1;
-		result = rservice.deleteCerti(certiNo);
-		return result;
-	}
-
-	// 자격증 테이블 수정
-	@PostMapping("updateCerti")
-	@ResponseBody
-	public int updateCerti(@RequestParam("certiNo") Integer certiNo, @RequestParam("certiNewName") String certiName,
-			@RequestParam("certiNewPub") String certiPub, @RequestParam("certiNewDate") String certiDate)
-			throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> updateCerti = new HashMap<>();
-		updateCerti.put("certiNo", certiNo);
-		updateCerti.put("certiName", certiName);
-		updateCerti.put("certiPub", certiPub);
-		updateCerti.put("certiDate", certiDate);
-
-		result = rservice.updateCerti(updateCerti);
-		return result;
-	}
 
 	// 자소서 페이지
 	@GetMapping("cl")
@@ -762,7 +762,6 @@ public class PsResumeController {
 		int result = -1;
 
 		try {
-			//TODO: insert 전에 있는 정보인지 확인하고 있으면 insert 안하고 없으면 insert 하도록 해야함 
 			result = rservice.insertCl(dto);
 			if (result > 0) {
 				int clNo = rservice.getMaxClNo();
@@ -782,8 +781,7 @@ public class PsResumeController {
 		return result;
 	}
 
-	// 자소서 수정을 위한 페이지입니다. 
-	// 자소서 새창으로 불러오기
+	// 자소서 새창 
 	@GetMapping("detail/{clNo}")
 	public ModelAndView viewReadCl(ModelAndView mv, Principal principal, @PathVariable Integer clNo) throws Exception {
 
@@ -794,7 +792,48 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 자소서 테이블 삭제
+	// 자소서 수정
+	@PostMapping("updateCl")
+	@ResponseBody
+	public int updateCl(@RequestParam("No") String clNumber, @RequestParam("growth") String clGrowth,
+			@RequestParam("motive") String clMotive, @RequestParam("adv") String clAdv,
+			@RequestParam("asp") String clAsp, @RequestParam(name = "updateClFile", required = false) MultipartFile clFile,
+			@RequestParam(name = "curPath", required = false, defaultValue = "") String curPath, Principal principal) throws Exception {
+		
+		int result = -1;
+		String portfUrl = null;
+		
+		// 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
+		if (clFile != null) {
+			
+			// 파일 업로드 처리
+			portfUrl = rservice.upload(clFile, principal.getName());
+			if (!curPath.equals("")) { 
+				// 기존 파일이 있으면 삭제
+				String fileName = curPath.substring(curPath.lastIndexOf("/") + 1);
+				rservice.delete(fileName, principal.getName());
+				
+			}
+		} else { // 파일 업로드를 하지 않은 경우 기존 파일 경로를 그대로 사용
+			if (!curPath.equals("")) {
+				portfUrl = curPath;
+			}
+		}
+		
+		int clNo = Integer.parseInt(clNumber);
+		Map<String, Object> updateCl = new HashMap<>();
+		updateCl.put("clNo", clNo);
+		updateCl.put("clFile", portfUrl);
+		updateCl.put("clGrowth", clGrowth);
+		updateCl.put("clMotive", clMotive);
+		updateCl.put("clAdv", clAdv);
+		updateCl.put("clAsp", clAsp);
+		
+		result = rservice.updateCl(updateCl);
+		return result;
+	}
+	
+	// 자소서 삭제
 	@PostMapping("deleteCl")
 	@ResponseBody
 	public int deleteCl(@RequestParam("clNo") Integer clNo) throws Exception {
@@ -804,46 +843,6 @@ public class PsResumeController {
 		return result;
 	}
 
-	// 자소서 테이블 수정
-	@PostMapping("updateCl")
-	@ResponseBody
-	public int updateCl(@RequestParam("No") String clNumber, @RequestParam("growth") String clGrowth,
-	        @RequestParam("motive") String clMotive, @RequestParam("adv") String clAdv,
-	        @RequestParam("asp") String clAsp, @RequestParam(name = "updateClFile", required = false) MultipartFile clFile,
-	        @RequestParam(name = "curPath", required = false, defaultValue = "") String curPath, Principal principal) throws Exception {
-
-	    int result = -1;
-	    String portfUrl = null;
-
-	    // 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
-	    if (clFile != null) {
-	    	
-	        // 파일 업로드 처리
-	        portfUrl = rservice.upload(clFile, principal.getName());
-	        if (!curPath.equals("")) { 
-	        	// 기존 파일이 있으면 삭제
-	        	 String fileName = curPath.substring(curPath.lastIndexOf("/") + 1);
-	        	 rservice.delete(fileName, principal.getName());
-	        	 
-	        }
-	    } else { // 파일 업로드를 하지 않은 경우 기존 파일 경로를 그대로 사용
-	        if (!curPath.equals("")) {
-	            portfUrl = curPath;
-	        }
-	    }
-
-	    int clNo = Integer.parseInt(clNumber);
-	    Map<String, Object> updateCl = new HashMap<>();
-	    updateCl.put("clNo", clNo);
-	    updateCl.put("clFile", portfUrl);
-	    updateCl.put("clGrowth", clGrowth);
-	    updateCl.put("clMotive", clMotive);
-	    updateCl.put("clAdv", clAdv);
-	    updateCl.put("clAsp", clAsp);
-
-	    result = rservice.updateCl(updateCl);
-	    return result;
-	}
 
 	// 자소서 끼인 테이블 insert
 	@PostMapping("insertInfoCl")

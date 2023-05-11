@@ -189,6 +189,19 @@
 										<a class="d-block h5 mb-2" href="">${recruit.raTitle }</a>
 										<p>지원날짜 ${recruit.registDate } ~ ${recruit.closeDate }</p>
 									</div>
+									
+									<sec:authorize access="hasRole('ROLE_P')">
+										<div class="d-flex border-top">
+										<small class="flex-fill text-center border-end py-2"><i
+											class="fa fa-ruler-combined text-primary me-2"></i> <a
+											href="/job/person/viewrecruit/${recruit.raNum }">공고보기</a></small>
+										<small class="flex-fill text-center border-end py-2"><i
+											class="fa fa-bed text-primary me-2"></i> <a
+											href="/job/person/viewrecruit/${recruit.raNum }">지원하기</a></small>
+									</div>
+									</sec:authorize>
+									
+									<sec:authorize access="hasRole('ROLE_B')">
 									<div class="d-flex border-top">
 										<small class="flex-fill text-center border-end py-2"><i
 											class="fa fa-ruler-combined text-primary me-2"></i> <a
@@ -197,6 +210,7 @@
 											class="fa fa-bed text-primary me-2"></i> <a
 											href="/job/business/recruit/view?id=${recruit.raNum }">지원하기</a></small>
 									</div>
+									</sec:authorize>
 								</div>
 							</div>
 						</c:forEach>

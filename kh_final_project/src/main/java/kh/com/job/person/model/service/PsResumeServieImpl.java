@@ -168,13 +168,14 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
-	public int insertCl(PsClDto dto) throws Exception {
-		return dao.insertCl(dto);
-	}
-	
-	@Override
 	public int insertCerti(PsCertiDto dto) throws Exception {
 		return dao.insertCerti(dto);
+	}
+	
+	
+	@Override
+	public int insertCl(PsClDto dto) throws Exception {
+		return dao.insertCl(dto);
 	}
 	
 	

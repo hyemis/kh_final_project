@@ -61,7 +61,7 @@
     	<jsp:include page="/WEB-INF/views/common/adheader.jsp" />
 		
 		 <div class="container-xl px-5">
-		 	<h3>계정 정보 수정을 위해서는 비밀번확인이 필요합니다.</h3>
+		 	<h3>계정 정보 수정을 위해서는 비밀번호 확인이 필요합니다.</h3>
 		 	<form action="usercheck" method="post">
 		 			<input type="hidden" class="form-control" id="userId" name="userId" value="${userId}" required>
 		 			<div class="mb-3">
