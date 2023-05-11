@@ -109,16 +109,16 @@
 
 	<insert id="insert" parameterType="rdto">
     INSERT INTO USER_RESUME (
-        RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, JOB_TYPE, GENDER, RESUME_ACT
+        RESUME_NO, RESUME_TITLE, RESUME_PHOTO, RESUME_DATE, JOB_TYPE, GENDER
         <if test="portfFile != null">
-            , PORTF_FILE
+            , PORTF_FILE, RESUME_ACT
         </if>
         , USER_ID
     )
     VALUES (
-        #{resumeNo}, #{resumeTitle}, #{resumePhoto}, sysdate, #{jobType}, #{gender}, #{resumeAct}
+        #{resumeNo}, #{resumeTitle}, #{resumePhoto}, sysdate, #{jobType}, #{gender}
         <if test="portfFile != null">
-            , #{portfFile}
+            , #{portfFile}, #{resumeAct}
         </if>
         , #{userId}
     )
