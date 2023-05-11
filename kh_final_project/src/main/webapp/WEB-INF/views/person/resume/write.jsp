@@ -78,11 +78,11 @@
 							<h3 class="mb-3">이력서</h3>
 							<div class="form-floating is-invalid">
 								<input type="text" class="form-control is-invalid"
-									id="resumeTitle" placeholder="resumeTitle" required> <label
-									for="resumeTitle">이력서 제목을 입력하세요.</label>
+									id="resumeTitle" placeholder="resumeTitle" required> 
+									<label for="resumeTitle" id="resumeTitleLabel">이력서 제목을 입력하세요.</label>
 							</div>
 							<div class="invalid-feedback mb-3">이력서 제목을 입력하세요.</div>
-							<div class="form-check ms-3">
+							<div class="form-check ms-3 pt-3">
 								희망직종 
 								<select class="form-select form-select-sm" id="jobType">
 									<option selected value="0">선택안함</option>
@@ -246,16 +246,22 @@
 				}
 			})
 		}
-		
-		// 제목 글자 수 
-		$(document).ready(function() {
-	    $('#resumeTitle').keyup(function() {
-	        if (this.value.length >= 20) {
-	            alert('제목은 20자 이내로 입력해주세요.');
-	        }
-	    });
-	});
 
+	// 이력서 글자 수 제한 
+	$(document).ready(function() {
+        $('#resumeTitle').keyup(function() {
+        	  var titleLength = $(this).val().length;
+        	  if (titleLength <= 20) {
+                  $(this).removeClass('is-invalid').addClass('is-valid');
+                  $('#resumeTitleLabel').hide();
+                  $('.invalid-feedback').hide();
+              } else {
+                  $(this).removeClass('is-valid').addClass('is-invalid');
+                  $('#resumeTitleLabel').show();
+                  $('.invalid-feedback').show();
+              }
+        });
+    });
 	
 	</script>
 
