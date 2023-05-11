@@ -22,6 +22,8 @@ import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.business.model.service.BsSearchService;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
+import kh.com.job.person.model.dto.PsResumeDto;
+import kh.com.job.person.model.service.PsResumeService;
 
 @Controller
 @RequestMapping("/business/search")
@@ -36,11 +38,16 @@ public class BsSearchController {
 	@Autowired
 	private BsAccountService baService;
 	
+	@Autowired
+	private PsResumeService rservice;
+	
 	
 	//인재 찾기 페이지
 	@GetMapping("/suggest")
-	public ModelAndView category(ModelAndView mv, BsSearchDto sdto, Principal principal) {
-	
+	public ModelAndView category(ModelAndView mv, BsSearchDto sdto, PsResumeDto rdto, Principal principal) {
+		
+		//검색을 위한 학력, 경력 업데이트 하기
+		rservice.updateResume(rdto);
 		//직종선택 :직업코드('JN')가져오기
 		mv.addObject("JNlist", brService.getCateList("JN"));
 		//경력선택

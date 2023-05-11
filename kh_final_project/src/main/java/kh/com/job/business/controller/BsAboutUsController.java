@@ -59,7 +59,7 @@ public class BsAboutUsController {
 	
 	// 뉴스레터 리스트
 	@GetMapping("/newsletter")
-	public ModelAndView newsletter(ModelAndView mv, BoardDto dto, Principal principal) {
+	public ModelAndView newsletterList(ModelAndView mv, BoardDto dto, Principal principal) {
 		//조회될 회원아이디
 		dto.setUserId(principal.getName()); 
 		//페이징시, 페이지값(pnum) 0일 때, 기본값 1로 설정

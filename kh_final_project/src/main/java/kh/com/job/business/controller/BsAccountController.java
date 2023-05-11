@@ -43,8 +43,9 @@ public class BsAccountController {
 	//회원정보 수정
 	@PostMapping("/info")
 	public ModelAndView update(ModelAndView mv, BsUserDto dto
-						, Principal principal, RedirectAttributes rttr
-						,@RequestParam(name = "userImage", required = false) MultipartFile userImage)  {
+							, Principal principal, RedirectAttributes rttr
+							,@RequestParam(name = "userImage", required = false) MultipartFile userImage)  {
+		
 		dto.setUserId(principal.getName()); 
 		
 		//이력서 사진 업로드

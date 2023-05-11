@@ -44,9 +44,9 @@ public class PsResumeController {
 
 	// 이력서 관리
 	@GetMapping("/list")
-	public ModelAndView doList(ModelAndView mv, Principal principal, PsResumeDto dto) {
+	public ModelAndView doList(ModelAndView mv, Principal principal) {
 		try {
-			rservice.updateResume(dto);
+			
 			PsUserDto result = pservice.selectOne(principal.getName());
 			List<PsResumeDto> resume = rservice.selectList(principal.getName());
 

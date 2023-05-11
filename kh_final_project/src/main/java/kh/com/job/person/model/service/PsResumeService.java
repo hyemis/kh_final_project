@@ -34,7 +34,9 @@ public interface PsResumeService {
 
 	// 이력서 수정
 	public int update(PsResumeDto dto) throws Exception;
-	public int updateResume(PsResumeDto dto) throws Exception;
+	
+	// 학력, 경력 카테고리 추가
+	public int updateResume(PsResumeDto dto) ;
 
 	// 이력서 삭제
 	public int delete(int resumeNo) throws Exception;

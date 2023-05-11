@@ -58,7 +58,7 @@ public class PsResumeServieImpl implements PsResumeService {
 	}
 	
 	@Override
-	public int updateResume(PsResumeDto dto) throws Exception {
+	public int updateResume(PsResumeDto dto)  {
 		return dao.updateResume(dto);
 	}
 

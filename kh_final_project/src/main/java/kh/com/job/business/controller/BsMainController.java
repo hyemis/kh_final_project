@@ -13,20 +13,16 @@ import kh.com.job.board.model.dto.BoardDto;
 import kh.com.job.business.model.dto.BsAplicantRecruitDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.business.model.dto.BsUserDto;
-import kh.com.job.board.model.service.BoardService;
 import kh.com.job.business.model.service.BsAboutUsService;
 import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsSearchService;
 import kh.com.job.common.page.Paging;
-import kh.com.job.person.model.service.PsService;
 
 @Controller
 @RequestMapping("/business")
 public class BsMainController {
 	
-	@Autowired
-	private PsService pservice;
 	
 	@Autowired
 	private BsAboutUsService auservice;

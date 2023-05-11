@@ -59,33 +59,16 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!-- page section -->
 <section>
-<div class="container-fluid bg-white p-5">
-<!-- //todo 캐러셀 -->
-<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="8000">
-      <img src="" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="2000">
-      <img src="" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<!-- 캐러셀 end-->
+<div class="container-fluid  p-5">
 <!-- 바로가기 버튼 -->
-<a type="button" href="${pageContext.request.contextPath}/board/company/companyinfo">기업소개</a>
-<a type="button" href="${pageContext.request.contextPath}/board/company/newsletter">기업뉴스레터</a>
+<div class="row">
+	<div class="col m-5 p-5 text-center bg-white" style="width: 50%;">
+	<a type="button" class="fs-1" href="${pageContext.request.contextPath}/board/company/companyinfo">기업소개</a>
+	</div>
+	<div class="col m-5 p-5 text-center bg-white" style="width: 50%;">
+	<a type="button" class="fs-1" href="${pageContext.request.contextPath}/board/company/newsletter">기업뉴스레터</a>
+	</div>
+</div>
 
 
 </div>
