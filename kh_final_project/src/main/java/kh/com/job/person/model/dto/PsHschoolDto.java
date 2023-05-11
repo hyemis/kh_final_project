@@ -1,10 +1,6 @@
 package kh.com.job.person.model.dto;
 
 
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;

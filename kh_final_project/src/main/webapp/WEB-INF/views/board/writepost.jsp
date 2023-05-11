@@ -142,8 +142,8 @@
     }
 	
 	
-		//CKEditor
-		class UploadAdapter {
+	//CKEditor
+	class UploadAdapter {
 		    constructor(loader) {
 		        this.loader = loader;
 		    }
@@ -218,24 +218,6 @@
 	          console.error( error );
 	        } );
 
-		
-
-		
-	    /* ClassicEditor.create( document.querySelector( '#boardContent' ),{
-	    	language: "ko"
-	    	, extraPlugins: [MyCustomUploadAdapterPlugin]
-			, simpleUpload :{
-				uploadUrl : 'imageUpload',
-			}
-	    	
-	    	, config : {
-	    		height:'400px'
-		   		, width:'100%'
-	    	}
-	    })
-	    .catch( error => {
-	        console.error( error );
-	    }); */
 	    
 	    // 제목 글자 수 
 	    $(document).ready(function() {

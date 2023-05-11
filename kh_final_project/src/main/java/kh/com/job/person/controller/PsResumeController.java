@@ -40,7 +40,7 @@ public class PsResumeController {
 	@Autowired
 	private BsRecruitService bservice;
 
-	// 이력서관리 페이지 열기
+	// 이력서 관리
 	@GetMapping("/list")
 	public ModelAndView doList(ModelAndView mv, Principal principal) {
 		try {
@@ -61,7 +61,7 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 이력서 작성 페이지 열기
+	// 이력서 작성 
 	@GetMapping("/write")
 	public ModelAndView doResume(ModelAndView mv, Principal principal) {
 		try {
@@ -81,6 +81,31 @@ public class PsResumeController {
 		
 		return mv;
 	}
+	
+	// 이력서 작성
+	@PostMapping("/write")
+	@ResponseBody
+	public int writeResume(ModelAndView mv, Principal principal, PsResumeDto dto,
+			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) throws Exception {
+		
+		dto.setUserId(principal.getName());
+		
+		if (uploadPortf != null && !uploadPortf.isEmpty()) {
+			String portfUrl = rservice.upload(uploadPortf, principal.getName());
+			dto.setPortfFile(portfUrl);
+		}
+		
+		int resumeNo = -1;
+		try {
+			
+			resumeNo = rservice.insert(dto);
+			return resumeNo;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resumeNo;
+	}
 
 	// 이력서 파일 업로드
 	@PostMapping("/fileupload")
@@ -99,30 +124,6 @@ public class PsResumeController {
 		return mv;
 	}
 
-	// 이력서 작성
-	@PostMapping("/write")
-	@ResponseBody
-	public int writeResume(ModelAndView mv, Principal principal, PsResumeDto dto,
-			@RequestParam(name = "uploadPortf", required = false) MultipartFile uploadPortf) throws Exception {
-
-		dto.setUserId(principal.getName());
-
-		if (uploadPortf != null && !uploadPortf.isEmpty()) {
-			String portfUrl = rservice.upload(uploadPortf, principal.getName());
-			dto.setPortfFile(portfUrl);
-		}
-
-		int resumeNo = -1;
-		try {
-
-			resumeNo = rservice.insert(dto);
-			return resumeNo;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return resumeNo;
-	}
 
 	// 이력서 삭제
 	@PostMapping("/delete")
@@ -263,21 +264,6 @@ public class PsResumeController {
 	}
 	
 
-	// 고등학교 불러올때 낀테이블 insert
-	@PostMapping("insertInfoHigh")
-	@ResponseBody
-	public int insertInfoHigh(Principal principal, @RequestParam("highEduNo") Integer highEduNo) throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> InfoNo = new HashMap<>();
-		InfoNo.put("highEduNo", highEduNo);
-		InfoNo.put("userId", principal.getName());
-
-		result = rservice.insertHighInfo(InfoNo);
-
-		return result;
-	}
 
 	// 고등학교 테이블 수정
 	@PostMapping("updateHigh")
@@ -307,6 +293,23 @@ public class PsResumeController {
 		result = rservice.deleteHigh(highEduNo);
 		return result;
 	}
+
+	// 고등학교 불러올때 낀테이블 insert
+	@PostMapping("insertInfoHigh")
+	@ResponseBody
+	public int insertInfoHigh(Principal principal, @RequestParam("highEduNo") Integer highEduNo) throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> InfoNo = new HashMap<>();
+		InfoNo.put("highEduNo", highEduNo);
+		InfoNo.put("userId", principal.getName());
+		
+		result = rservice.insertHighInfo(InfoNo);
+		
+		return result;
+	}
+	
 
 	// 고등학교 끼인 테이블 삭제
 	@PostMapping("deleteInfoHigh")
@@ -361,6 +364,30 @@ public class PsResumeController {
 		return result;
 	}
 
+	// 대학교 테이블 수정
+	@PostMapping("updateUni")
+	@ResponseBody
+	public int updateUni(@RequestParam("uniEduNo") Integer uniEduNo, @RequestParam("uniNewAct") String uniAct,
+			@RequestParam("uniNewCategory") String uniCategory, @RequestParam("uniNewName") String uniName,
+			@RequestParam("uniNewDate") String uniDate, @RequestParam("uniNewMajor") String uniMajor,
+			@RequestParam("uniNewPoint") Double uniPoint)
+					throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> updateUni = new HashMap<>();
+		updateUni.put("uniEduNo", uniEduNo);
+		updateUni.put("uniAct", uniAct);
+		updateUni.put("uniCategory", uniCategory);
+		updateUni.put("uniName", uniName);
+		updateUni.put("uniDate", uniDate);
+		updateUni.put("uniMajor", uniMajor);
+		updateUni.put("uniPoint", uniPoint);
+		
+		result = rservice.updateUni(updateUni);
+		return result;
+	}
+	
 	// 대학교 불러올때 낀테이블 insert
 	@PostMapping("insertInfoUni")
 	@ResponseBody
@@ -377,6 +404,7 @@ public class PsResumeController {
 		return result;
 	}
 
+	
 	// 대학교 끼인 테이블 삭제
 	@PostMapping("deleteInfoUni")
 	@ResponseBody
@@ -392,29 +420,6 @@ public class PsResumeController {
 		return result;
 	}
 	
-	// 대학교 테이블 수정
-	@PostMapping("updateUni")
-	@ResponseBody
-	public int updateUni(@RequestParam("uniEduNo") Integer uniEduNo, @RequestParam("uniNewAct") String uniAct,
-			@RequestParam("uniNewCategory") String uniCategory, @RequestParam("uniNewName") String uniName,
-			@RequestParam("uniNewDate") String uniDate, @RequestParam("uniNewMajor") String uniMajor,
-			@RequestParam("uniNewPoint") Double uniPoint)
-			throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> updateUni = new HashMap<>();
-		updateUni.put("uniEduNo", uniEduNo);
-		updateUni.put("uniAct", uniAct);
-		updateUni.put("uniCategory", uniCategory);
-		updateUni.put("uniName", uniName);
-		updateUni.put("uniDate", uniDate);
-		updateUni.put("uniMajor", uniMajor);
-		updateUni.put("uniPoint", uniPoint);
-		
-		result = rservice.updateUni(updateUni);
-		return result;
-	}
 	
 
 	// 대학원 입력
@@ -455,6 +460,31 @@ public class PsResumeController {
 		return result;
 	}
 	
+	// 대학원 테이블 수정
+	@PostMapping("updateGrad")
+	@ResponseBody
+	public int updateGrad(@RequestParam("gradEduNo") Integer gradEduNo, @RequestParam("gradNewAct") String gradAct,
+			@RequestParam("gradNewCategory") String gradCategory, @RequestParam("gradNewName") String gradName,
+			@RequestParam("gradNewDate") String gradDate, @RequestParam("gradNewMajor") String gradMajor,
+			@RequestParam("gradNewPoint") Double gradPoint)
+					throws Exception {
+		
+		int result = -1;
+		
+		Map<String, Object> updateGrad = new HashMap<>();
+		updateGrad.put("gradEduNo", gradEduNo);
+		updateGrad.put("gradAct", gradAct);
+		updateGrad.put("gradCategory", gradCategory);
+		updateGrad.put("gradName", gradName);
+		updateGrad.put("gradDate", gradDate);
+		updateGrad.put("gradMajor", gradMajor);
+		updateGrad.put("gradPoint", gradPoint);
+		
+		result = rservice.updateGrad(updateGrad);
+		
+		return result;
+	}
+	
 	// 대학원 불러올때 낀테이블 insert
 	@PostMapping("insertInfoGrad")
 	@ResponseBody
@@ -486,31 +516,6 @@ public class PsResumeController {
 		return result;
 	}
 	
-	
-	// 대학원 테이블 수정
-	@PostMapping("updateGrad")
-	@ResponseBody
-	public int updateGrad(@RequestParam("gradEduNo") Integer gradEduNo, @RequestParam("gradNewAct") String gradAct,
-			@RequestParam("gradNewCategory") String gradCategory, @RequestParam("gradNewName") String gradName,
-			@RequestParam("gradNewDate") String gradDate, @RequestParam("gradNewMajor") String gradMajor,
-			@RequestParam("gradNewPoint") Double gradPoint)
-					throws Exception {
-
-		int result = -1;
-
-		Map<String, Object> updateGrad = new HashMap<>();
-		updateGrad.put("gradEduNo", gradEduNo);
-		updateGrad.put("gradAct", gradAct);
-		updateGrad.put("gradCategory", gradCategory);
-		updateGrad.put("gradName", gradName);
-		updateGrad.put("gradDate", gradDate);
-		updateGrad.put("gradMajor", gradMajor);
-		updateGrad.put("gradPoint", gradPoint);
-		
-		result = rservice.updateGrad(updateGrad);
-		
-		return result;
-	}
 	
 
 

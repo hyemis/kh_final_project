@@ -74,7 +74,9 @@
 <!-- page section -->
 <section>
 <div class="container-fluid bg-white p-5">
- 기업 회사 소개 리스트
+		<div class="container-fluid bg-white p-5">
+			<h3>회사소개 리스트</h3>
+		</div>
 <div class="row">
 	<c:forEach items="${info.getPage() }" var="info">
 	<div class="col p-3">
