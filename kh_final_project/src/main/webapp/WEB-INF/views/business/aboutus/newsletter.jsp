@@ -53,8 +53,15 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+	<!-- ckeditor5 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+	
 
-
+<style>
+.modal {
+  z-index: 9999; /* 모달창을 다른 요소들보다 더 위쪽에 나타나도록 설정 */
+}
+</style>
 </head>
 <body>
 	<!-- header  -->
@@ -166,14 +173,8 @@
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 <script>
-const newsLetterTextArea = document.getElementById("newsLetter");
-const btnNewsLetter = document.getElementById("btn-newsletter");
 
-btnNewsLetter.addEventListener("click", function() {
-  if (newsLetterTextArea.value === "") {
-    alert("내용을 입력해 주세요");
-  }
-});
+
 </script>		
 <script>	  
 	  function fetchLinkTitle() {
@@ -270,6 +271,10 @@ btnNewsLetter.addEventListener("click", function() {
     .catch( error => {
         console.error( error );
     });
+    
+    editor.getData();
+    
+
 	</script>
 
 </body>
