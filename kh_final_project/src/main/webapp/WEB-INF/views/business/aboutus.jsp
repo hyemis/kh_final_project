@@ -342,7 +342,7 @@
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
-							<div class="col-10 was-validated">
+							<div class="col-10 ">
 								<input type="text" class="form-control is-invalid"
 									name="boardTitle" placeholder="제목을 입력해주세요" required>
 								<hr>
@@ -365,7 +365,7 @@
 							<div class="col-2 text-center font-monospace">
 								<h4>내용작성</h4>
 							</div>
-							<div class="col-10 was-validated">
+							<div class="col-10 ">
 									<textarea id="newsLetter" name="boardContent" class="form-control is-invalid"
 										style="height: 300px;"></textarea>
 							</div>
@@ -384,13 +384,13 @@
 
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
+  
 <script>
 	$(document).ready(function() {
 	  $('#btn-info').click(function() { 
 	    var infocontent = $('#infoContent').val(); 
 	    
-	    if ($.trim(infocontent) == '') {
+	    if (infoContent.value.trim() === '') {
 	      alert('내용을 입력해주세요.'); 
 	      return false;
 	    }
@@ -407,6 +407,7 @@
 	});
 
 </script>	
+ 
 <script>	  
 	  function fetchLinkTitle() {
 		  const link = document.getElementById("link");
@@ -544,6 +545,7 @@
     .catch( error => {
         console.error( error );
     });
+    
 	</script>
 </body>
 </html>

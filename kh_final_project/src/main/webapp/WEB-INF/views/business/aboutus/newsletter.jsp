@@ -53,8 +53,15 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
+	<!-- ckeditor5 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+	
 
-
+<style>
+.modal {
+  z-index: 9999; /* 모달창을 다른 요소들보다 더 위쪽에 나타나도록 설정 */
+}
+</style>
 </head>
 <body>
 	<!-- header  -->
@@ -115,15 +122,15 @@
 				</div>
 				<div class="modal-body">
 					<form
-						action="${pageContext.request.contextPath }/business/aboutus/newsletterform"
-						method="post">
+						action="${pageContext.request.contextPath }/business/aboutus/newsletterform" method="post" >
+						
 
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
-							<div class="col-10 was-validated">
-								<input type="text" class="form-control is-invalid"
+							<div class="col-10 ">
+								<input type="text" class="form-control "
 									name="boardTitle" placeholder="제목을 입력해주세요" required>
 								<hr>
 							</div>
@@ -146,15 +153,15 @@
 								<h4>내용작성</h4>
 							</div>
 							<div class="col-10 ">
-								<div class="mb-3" >
-									<textarea id="newsLetterContent" name="boardContent" style="height: 500px;"></textarea>
+								<div class="mb-3 ">
+									<textarea id="boardContent" name="boardContent" style="height: 500px;"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" id="btn-newsletter">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-newsletter" onclick="return checkAll()">등록</button>
 						</div>
 					</form>
 				</div>
@@ -166,16 +173,28 @@
 	<!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 <script>
-const newsLetterTextArea = document.getElementById("newsLetter");
-const btnNewsLetter = document.getElementById("btn-newsletter");
 
-btnNewsLetter.addEventListener("click", function() {
-  if (newsLetterTextArea.value === "") {
-    alert("내용을 입력해 주세요");
-  }
-});
+
 </script>		
-<script>	  
+<script>
+function checkAll() {
+    var boardContent = editor.getData();
+    if (!checkExistData(boardContent, "내용")) {
+        return false;
+    }
+
+    // 모든 필드가 유효한 경우 true를 반환합니다.
+    return true;
+}
+
+function checkExistData(value, dataName) {
+    if (value.trim() === "") {
+        alert(dataName + "을(를) 입력해주세요!");
+        return false;
+    }
+    return true;
+}
+
 	  function fetchLinkTitle() {
 		  const link = document.getElementById("link");
 		  const linkTitle = document.getElementById("linkTitle");
@@ -201,7 +220,6 @@ btnNewsLetter.addEventListener("click", function() {
 	</script>
 	
 	<!-- ckeditor5 -->
-	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	<script>
 	class UploadAdapter {
 	    constructor(loader) {
@@ -255,7 +273,7 @@ btnNewsLetter.addEventListener("click", function() {
     
     
     ClassicEditor
-    .create( document.querySelector ('#newsLetterContent'),{
+    .create( document.querySelector ('#boardContent'),{
     	language: "ko"
     	, extraPlugins: [MyCustomUploadAdapterPlugin]
 		, simpleUpload :{
@@ -270,6 +288,8 @@ btnNewsLetter.addEventListener("click", function() {
     .catch( error => {
         console.error( error );
     });
+    
+
 	</script>
 
 </body>

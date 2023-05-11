@@ -1,10 +1,6 @@
 package kh.com.job.business.controller;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,18 +8,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.service.BsAccountService;
-import kh.com.job.person.model.dto.PsUserDto;
 
 
 @Controller
@@ -37,33 +30,15 @@ public class BsAccountController {
 	@Autowired
 	private BsAccountService service;
 
-/*	기본형
-	@GetMapping("/url")
-	public ModelAndView 해당컨트롤러에서 사용할이름(ModelAndView mv) {
-		return mv;
-	}
-*/	
 	//회원정보 불러오기
 	@GetMapping("/info")
 	public ModelAndView viewinfo(ModelAndView mv, BsUserDto dto, Principal principal) {
 		//로그인한 아이디
 		System.out.println(principal.getName());
 		
-		//jsp에서 불러올 이름 :bsinfo , 불러올값 :service.viewAccount
 		mv.addObject("bsinfo",service.viewAccount(principal.getName()));
 		return mv;
 	}
-	
-	@GetMapping("/password")
-	public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal) {
-		//로그인한 아이디
-		System.out.println(principal.getName());
-		
-		//jsp에서 불러올 이름 :bsinfo , 불러올값 :service.viewAccount
-		mv.addObject("bsinfo",service.getUserPw(principal.getName()));
-		return mv;
-	}
-	
 	
 	//회원정보 수정
 	@PostMapping("/info")
@@ -103,8 +78,6 @@ public class BsAccountController {
 		return mv;
 		}
 	
-	
-	
 
 	// 비밀번호 업데이트
 		@PostMapping("/updatePw")
@@ -124,7 +97,6 @@ public class BsAccountController {
 			return mv;
 		}
 	
-	// 회원 프로필 이미지 수정처리
     
 	
 

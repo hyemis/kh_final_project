@@ -29,7 +29,6 @@ import kh.com.job.business.model.service.BsAccountService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
-import kh.com.job.person.model.dto.PsUserDto;
 
 @Controller
 @RequestMapping("/business/recruit")

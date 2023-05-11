@@ -68,7 +68,7 @@
 					</div>
 				</a>
 			</div>
-				<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
+			<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto "
 					data-wow-delay="0.2s"
 					style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
 					<a class="cat-item d-block bg-light text-center rounded p-3" href="${pageContext.request.contextPath}/person/resume/list">
