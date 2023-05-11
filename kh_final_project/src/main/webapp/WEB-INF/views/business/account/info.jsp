@@ -45,21 +45,11 @@
 					<div class="position-relative m-auto profileArea " style="width: 200px; height: 200px;">
 						<img id="userPicArea" class="img-fluid"
 							src="${bsinfo.userPic eq null? 'https://dummyimage.com/200x200/d6d6d6/000000&text=200x200' : bsinfo.userPic }" alt="" style="width: 100%; height: 100;">
-							
-						<div
-							class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-							<a class="btn btn-square mx-1" href=""><i
-								class="fab fa-facebook-f"></i></a> <a class="btn btn-square mx-1"
-								href=""><i class="fab fa-twitter"></i></a> <a
-								class="btn btn-square mx-1" href=""><i
-								class="fab fa-instagram"></i></a>
-						</div>
 					</div>
 					<div class="text-center p-4 mt-3">
 						<h5 class="fw-bold mb-0">${bsinfo.userName}</h5>
 						<small>${bsinfo.userEmail}</small>
 					</div>
-					
 				</div>
 				</div><!-- profile area end -->
 				<!-- info area start -->
