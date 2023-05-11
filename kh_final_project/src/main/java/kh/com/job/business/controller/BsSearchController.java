@@ -125,11 +125,11 @@ public class BsSearchController {
 	@PostMapping("/sendinterview")
 	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsAnnounceDto adto,  BsSuggestDto sdto, Principal principal, Integer baNum ) {
 		//면접일정등록
-//		dto.setBsUser(principal.getName());
-//		bsService.addInterview(dto); //ok
-//		System.out.println(dto);
+		dto.setBsUser(principal.getName());
+		bsService.addInterview(dto); 
+		System.out.println(dto);
 		//면접등록완료
-		bsService.updateSend(sdto); //sgno값 ㅓㅄ음
+		bsService.updateSend(sdto); 
 		System.out.println(sdto);
 		//메일발송
 		BsUserDto bdto = baService.viewAccount(principal.getName());
