@@ -664,19 +664,16 @@
 	</select>
 
 
-	<select id="selectListCl" resultType="cldto">
+ 	<select id="selectListCl" resultType="cldto">
 		SELECT
 		cl.CL_NO AS clNo,
 		cl.CL_FILE AS clFile,
 		cl.CL_GROWTH AS clGrowth,
-		cl.CL_MOTIVE AS
-		clMotive,
+		cl.CL_MOTIVE AS clMotive,
 		cl.CL_ADV AS clAdv,
 		cl.CL_ASP AS clAsp
 		FROM RESUME_CL cl
-		where
-		cl.CL_NO in (
-		select CL_NO
+		where cl.CL_NO in ( select CL_NO
 		from RESUME_CL_INFO i
 		INNER JOIN (select
 		resume_no,USER_ID from USER_RESUME WHERE USER_ID =
@@ -684,7 +681,6 @@
 		using(resume_no)
 		)
 		ORDER BY cl.CL_NO DESC
-
 	</select>
 
 	<update id="deleteClFile" parameterType="String">

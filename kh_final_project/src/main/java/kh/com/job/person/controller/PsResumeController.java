@@ -726,10 +726,33 @@ public class PsResumeController {
 		// 자기소개서 불러오기
 		List<PsClDto> clList = rservice.selectListCl(principal.getName());
 		for (PsClDto cl : clList) {
-			cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
-			cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
-			cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
-			cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
+//			cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
+//			cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
+//			cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
+//			cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
+			
+			 if (cl.getClGrowth() != null) {
+		            cl.setClGrowth(cl.getClGrowth().substring(0, Math.min(cl.getClGrowth().length(), 20)));
+		     } else {
+		            cl.setClGrowth("없음");
+		     }
+			
+			 if (cl.getClMotive() != null) {
+		            cl.setClMotive(cl.getClMotive().substring(0, Math.min(cl.getClMotive().length(), 20)));
+		     } else {
+		            cl.setClMotive("없음");
+		    }
+		    if (cl.getClAdv() != null) {
+		            cl.setClAdv(cl.getClAdv().substring(0, Math.min(cl.getClAdv().length(), 20)));
+		    } else {
+		            cl.setClAdv("없음");
+		    }
+		    if (cl.getClAsp() != null) {
+		            cl.setClAsp(cl.getClAsp().substring(0, Math.min(cl.getClAsp().length(), 20)));
+		    } else {
+		            cl.setClAsp("없음");
+		    }
+
 
 			if (cl.getClFile() != null) {
 				cl.setClFile("파일 존재");
@@ -803,7 +826,6 @@ public class PsResumeController {
 		int result = -1;
 		String portfUrl = null;
 		
-		// 클라이언트 측에서 파일을 업로드한 경우에만 업로드 수행
 		if (clFile != null) {
 			
 			// 파일 업로드 처리

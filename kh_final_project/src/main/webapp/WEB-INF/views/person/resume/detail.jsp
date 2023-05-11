@@ -261,7 +261,7 @@
 	
 	// 기존 파일 삭제 버튼 
 	$(document).on('click', '#deleteFile', function() {
-    var fileUrl =dd$('#ㅐ').val();
+    var fileUrl = $('#originPath').val();
     $.ajax({
         type: 'POST',
         url: '${pageContext.request.contextPath}/person/resume/deleteClFile',
@@ -272,10 +272,10 @@
   	        location.reload();
   	      } else {
   	        alert('기존에 작성했던 자기소개서 파일 삭제에 실패했습니다.');
-  	      }
-  	    }
-    });
-});
+	  	      }
+	  	    }
+    	});
+	});
 	
 	
 	// - 버튼
@@ -310,6 +310,9 @@
 			function clFileDown() {
 				 window.location.href = "${cl.clFile}";
 			}
+		
+		
+		
 			
 		</script>
 </body>
