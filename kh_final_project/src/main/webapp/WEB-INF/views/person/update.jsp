@@ -66,22 +66,20 @@
 				    </div>
 				</div>
 
-				<div class="d-flex justify-content-center pb-4">
-				    <div class="col-6 b">
-				        <label for="userPic" class="pb-2">회원 사진</label>
-				        <br>
-				        <img src="${PsUserDto.userPic ? PsUserDto.userPic : 'https://dummyimage.com/150x200/d6d6d6/000000&text=150x200'}" width="150" height="200">
-				        <form name="userPic" action="fileupload" method="post" enctype="multipart/form-data">
-						    <div class="d-flex justify-content-end">
-						    <input type="file" name="report" placeholder="첨부파일">
-						        <button class="btn btn-outline-dark" type="submit">사진 등록</button>
-						    </div>
-						</form> 
-				    </div>
-				</div>
+					<div class="d-flex justify-content-center pb-4">
+					    <div class="col-6 b">
+					        <label for="userPic" class="pb-2">회원 사진</label>
+					        <br>
+					        <img src="${PsUserDto.userPic ? PsUserDto.userPic : 'https://dummyimage.com/150x200/d6d6d6/000000&text=150x200'}" width="150" height="200">
+					        <form name="userPic" action="fileupload" method="post" enctype="multipart/form-data">
+							    <div class="d-flex justify-content-end">
+							    <input type="file" name="report" placeholder="첨부파일">
+							        <button class="btn btn-outline-dark" type="submit">사진 등록</button>
+							    </div>
+							</form> 
+					    </div>
+					</div>
 
-			 
-			 
 				 		 <form class="col-6 b mb-4" name=updateForm action="update" method="post" onsubmit="return checkAll();">
 				          
 				            <div class="mb-3">

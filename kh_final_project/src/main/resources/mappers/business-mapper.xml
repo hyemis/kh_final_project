@@ -193,10 +193,10 @@
 	<!-- 공개된 채용 공고 리스트 -->
 	<select id="recruitYAdmission"
 		resultType="kh.com.job.business.model.dto.BsRecruitDto">
-		SELECT * FROM RECRUIT_REGIST
-		WHERE RA_ADMISSION IN ('Y')
-		AND
-		CLOSE_DATE > SYSDATE
+		SELECT *
+ 		FROM RECRUIT_REGIST r
+	    WHERE CLOSE_DATE > SYSDATE
+	    AND RA_ADMISSION IN ('Y')
 		ORDER BY REGIST_DATE DESC
 	</select>
 
@@ -332,57 +332,112 @@
 
 
 	<!-- 채용공고 검색 -->
-	<select id="searchList"
-		resultType="kh.com.job.business.model.dto.BsRecruitDto"
-		parameterType="java.util.Map">
-		SELECT *
-		FROM RECRUIT_REGIST r
-		WHERE CLOSE_DATE > SYSDATE
-		AND RA_ADMISSION = 'Y'
-		<if test="keyword != null and keyword != ''">
-		  AND (
-		  <foreach collection="keyword.split(',')" item="k" separator="OR">
-		    <if test="k != null and k.trim().length() > 0">
-		      r.COMPANY_NAME LIKE '%' || #{k} || '%'
-		      OR r.RA_TITLE LIKE '%' || #{k} || '%'
-		      OR r.RA_CONTENT LIKE '%' || #{k} || '%'
-		    </if>
-		  </foreach>
-		  )
-		</if>
-		 <if test="checkedKeywords != null and checkedKeywords.userEducation != null">
+<select id="searchList"
+    resultType="kh.com.job.business.model.dto.BsRecruitDto"
+    parameterType="java.util.Map">
+    SELECT *
+    FROM RECRUIT_REGIST r
+    WHERE CLOSE_DATE > SYSDATE
+    AND RA_ADMISSION = 'Y'
+    <if test="keyword != null and keyword != ''">
+      AND (
+      <foreach collection="keyword.split(',')" item="k" separator=" OR ">
+        <if test="k != null and k.trim().length() > 0">
+          r.COMPANY_NAME LIKE '%' || #{k} || '%'
+          OR r.RA_TITLE LIKE '%' || #{k} || '%'
+          OR r.RA_CONTENT LIKE '%' || #{k} || '%'
+        </if>
+      </foreach>
+      )
+    </if>
+    <if test="checkedKeywords != null">
+      <if test="checkedKeywords.userEducation != null or checkedKeywords.career != null or checkedKeywords.conditionType != null or checkedKeywords.empTypeCode != null or checkedKeywords.holidayType != null">
         AND (
-        r.USER_EDUCATION IN 
-        <foreach item="userEducation" collection="checkedKeywords.userEducation" open="(" separator="," close=")">
-            #{userEducation}
-        </foreach>
-	    </if>
-	    <if test="checkedKeywords != null and checkedKeywords.career != null">
-	        OR r.CAREER IN 
-	        <foreach item="career" collection="checkedKeywords.career" open="(" separator="," close=")">
-	            #{career}
-	        </foreach>
-	    </if>
-	    <if test="checkedKeywords != null and checkedKeywords.conditionType != null">
-	        OR r.CONDITION_TYPE IN 
-	        <foreach item="conditionType" collection="checkedKeywords.conditionType" open="(" separator="," close=")">
-	            #{conditionType}
-	        </foreach>
-	    </if>
-	    <if test="checkedKeywords != null and checkedKeywords.empTypeCode != null">
-	        OR r.EMP_TYPE_CODE IN 
-	        <foreach item="empTypeCode" collection="checkedKeywords.empTypeCode" open="(" separator="," close=")">
-	            #{empTypeCode}
-	        </foreach>
-	    </if>
-	    <if test="checkedKeywords != null and checkedKeywords.holidayType != null">
-	        OR r.HOLIDAY_TYPE IN 
-	        <foreach item="holidayType" collection="checkedKeywords.holidayType" open="(" separator="," close=")">
-	            #{holidayType}
-	        </foreach>
-	    </if>
-	    )
-	</select>
+          <if test="checkedKeywords.userEducation != null">
+            r.USER_EDUCATION IN
+            <foreach item="userEducation" collection="checkedKeywords.userEducation" open="(" separator="," close=")">
+              #{userEducation}
+            </foreach>
+          </if>
+          <if test="checkedKeywords.career != null">
+            OR r.CAREER IN
+            <foreach item="career" collection="checkedKeywords.career" open="(" separator="," close=")">
+              #{career}
+            </foreach>
+          </if>
+          <if test="checkedKeywords.conditionType != null">
+            OR r.CONDITION_TYPE IN
+            <foreach item="conditionType" collection="checkedKeywords.conditionType" open="(" separator="," close=")">
+              #{conditionType}
+            </foreach>
+          </if>
+          <if test="checkedKeywords.empTypeCode != null">
+            OR r.EMP_TYPE_CODE IN
+            <foreach item="empTypeCode" collection="checkedKeywords.empTypeCode" open="(" separator="," close=")">
+              #{empTypeCode}
+            </foreach>
+          </if>
+          <if test="checkedKeywords.holidayType != null">
+            OR r.HOLIDAY_TYPE IN
+            <foreach item="holidayType" collection="checkedKeywords.holidayType" open="(" separator="," close=")">
+              #{holidayType}
+            </foreach>
+          </if>
+        )
+      </if>
+    </if>
+</select>
+
+	
+<!-- 	<select id="searchList"
+    resultType="kh.com.job.business.model.dto.BsRecruitDto"
+    parameterType="java.util.Map">
+    SELECT *
+    FROM RECRUIT_REGIST r
+    WHERE CLOSE_DATE > SYSDATE
+    AND RA_ADMISSION  'Y'
+    <if test="keyword != null and keyword != ''">
+      AND (
+      <foreach collection="keyword.split(',')" item="k" separator=" OR ">
+        <if test="k != null and k.trim().length() > 0">
+          r.COMPANY_NAME LIKE '%' || #{k} || '%'
+          OR r.RA_TITLE LIKE '%' || #{k} || '%'
+          OR r.RA_CONTENT LIKE '%' || #{k} || '%'
+        </if>
+      </foreach>
+      )
+    </if>
+    <if test="checkedKeywords != null and checkedKeywords.userEducation != null">
+      AND r.USER_EDUCATION IN 
+      <foreach item="userEducation" collection="checkedKeywords.userEducation" open="(" separator="," close=")">
+          #{userEducation}
+      </foreach>
+    </if>
+    <if test="checkedKeywords != null and checkedKeywords.career != null">
+      OR r.CAREER IN 
+      <foreach item="career" collection="checkedKeywords.career" open="(" separator="," close=")">
+          #{career}
+      </foreach>
+    </if>
+    <if test="checkedKeywords != null and checkedKeywords.conditionType != null">
+      OR r.CONDITION_TYPE IN 
+      <foreach item="conditionType" collection="checkedKeywords.conditionType" open="(" separator="," close=")">
+          #{conditionType}
+      </foreach>
+    </if>
+    <if test="checkedKeywords != null and checkedKeywords.empTypeCode != null">
+      OR r.EMP_TYPE_CODE IN 
+      <foreach item="empTypeCode" collection="checkedKeywords.empTypeCode" open="(" separator="," close=")">
+          #{empTypeCode}
+      </foreach>
+    </if>
+    <if test="checkedKeywords != null and checkedKeywords.holidayType != null">
+      OR r.HOLIDAY_TYPE IN 
+      <foreach item="holidayType" collection="checkedKeywords.holidayType" open="(" separator="," close=")">
+          #{holidayType}
+      </foreach>
+    </if>
+	</select> -->
 
 	<!-- 메인페이지 체용공고 최신 리스트 -->
 	<select id="recentRecruit"

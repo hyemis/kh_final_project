@@ -12,8 +12,6 @@
 		SELECT BOARD_NO FROM BOARD
 	</select>
 	
-	
-	
 	<!-- 게시글 상세 -->
 	<select id="viewDetail">
 		SELECT BD.BOARD_NO,BD.CATEGORY_ID,BD.BOARD_TITLE,BD.BOARD_CONTENT,BD.BOARD_DATE,BD.UPDATE_DATE,
@@ -131,20 +129,16 @@
 	
 	<!-- 댓글 조회 -->
 	<select id="replyList" resultType="redto">
-	SELECT * FROM REPLY 
+	SELECT *
+	FROM REPLY
 	WHERE BOARD_NO = #{boardNo}
-	ORDER BY reply_id, reply_seq, reply_create_date ASC
+	ORDER BY COALESCE(reply_req, reply_id), reply_level, reply_seq, reply_create_date ASC
 	</select>
 	
-	
 	<!-- 댓글 삭제  -->
-	<update id="deleteReply">
-	UPDATE REPLY
-	SET REPLY_CONTENT = '삭제된 댓글입니다.',
-    REPLY_CREATE_DATE = SYSDATE,
-    REPLY_LEVEL = '0'
-	WHERE REPLY_ID = #{replyId} AND USER_ID =  #{userId}
-	</update>
+	<delete id="deleteReply">
+	DELETE REPLY WHERE REPLY_ID= #{replyId} OR REPLY_REQ =  #{replyId} AND USER_ID = #{userId}
+	</delete>
 	
 	<!--  댓글 수정 -->
 	<update id="updateReply">
