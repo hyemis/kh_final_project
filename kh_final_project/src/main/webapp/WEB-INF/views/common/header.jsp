@@ -126,19 +126,14 @@
 								class="nav-link dropdown-toggle" data-bs-toggle="dropdown">내기업
 								관리</a>
 							<div class="dropdown-menu rounded-0 m-0">
-								<a href="${pageContext.request.contextPath}/business/"
-									class="dropdown-item">회사소개</a> <a
-									href="${pageContext.request.contextPath}/business/aboutus/newsletter"
-									class="dropdown-item">뉴스레터</a> <a
-									href="${pageContext.request.contextPath}/business/"
-									class="dropdown-item">Q&A</a>
+								<a href="${pageContext.request.contextPath}/business/aboutus" class="dropdown-item">회사소개</a>
+								<a href="${pageContext.request.contextPath}/business/aboutus/newsletter" class="dropdown-item">뉴스레터</a> 
 							</div>
 						</div>
 
-						<a href="${pageContext.request.contextPath}/business/account/info"
-							class="nav-item nav-link">내 계정</a> <a
-							href="${pageContext.request.contextPath}/business/main"
-							class="nav-item nav-link active">MAIN</a>
+						<a href="${pageContext.request.contextPath}/business/account/info" class="nav-item nav-link">내 계정</a>
+						<a href="${pageContext.request.contextPath}/business/main" class="nav-item nav-link active">MAIN</a>
+							
 
 					</div>
 				</div>

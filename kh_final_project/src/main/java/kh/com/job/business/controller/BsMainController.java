@@ -125,18 +125,7 @@ public class BsMainController {
 	}
 	
 
-	@GetMapping("/delete")
-	public ModelAndView viewDelete(ModelAndView mv, Principal principal) throws Exception {
-//		System.out.println("로그인정보: " + principal.getName());
-//
-//		if (principal.getName() != null) {
-//			mv.addObject("PsUserDto", pservice.selectOne(principal.getName()));
-//			mv.setViewName("business/delete");
-//		} else {
-//			mv.setViewName("redirect:/");
-//		}
-		return mv;
-	}
+
 		
 	
 }

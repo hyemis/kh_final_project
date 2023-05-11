@@ -13,9 +13,6 @@ public class BsAccountDao {
 	private SqlSession sqlSession;
 	
 	
-	public int insertAccount(BsUserDto dto) {
-		return sqlSession.insert("business.insertAccount", dto);
-	}
 	
 	//회원정보 수정하기
 	public int updateAccount(BsUserDto dto) {
@@ -27,25 +24,9 @@ public class BsAccountDao {
 		return sqlSession.update("business.updatePassword", dto);
 	}
 	
-	//회원 프로필 이미지 수정하기
-	public int updateUimage(BsUserDto dto) {
-		return sqlSession.update("business.updateUimage", dto);
-	}
-	
 	//회원정보 불러오기
 	public BsUserDto viewAccount(String userId) {
 		return sqlSession.selectOne("business.viewAccount", userId);
-	}
-	
-	//회원비밀번호 불러오기
-	public BsUserDto getUserPw(String userId) {
-		return sqlSession.selectOne("business.getUserPw", userId);
-	}
-	
-	//비밀번호 중복 체크 
-	public int pwChk(String userPw) throws Exception {
-		int result = sqlSession.selectOne("business.pwChk", userPw);
-		return result;
 	}
 	
 	
