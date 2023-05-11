@@ -39,8 +39,6 @@ public class AdAccountController {
 	@GetMapping("/create")
 	public ModelAndView create(ModelAndView mv){
 		
-		
-		
 		return mv;
 	}
 	
