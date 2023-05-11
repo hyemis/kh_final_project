@@ -77,7 +77,7 @@ public class PsResumeDao {
 	public int update(PsResumeDto dto) throws Exception {
 		return sqlSession.update("resume.update", dto);
 	}
-	
+	//학력,경력 업데이트
 	public int updateResume(PsResumeDto dto) {
 		return sqlSession.update("resume.updateResume", dto);
 	}
