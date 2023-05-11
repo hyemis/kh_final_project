@@ -195,7 +195,7 @@
 							<div class="col-10 ">
 								<p>직원수를 숫자로 입력해주세요
 								<input type="text" name="employee" class="form-control is-invalid"
-									style="width: 30%;" placeholder=" 예시)300" required> 명 </p>
+									style="width: 30%;" placeholder=" 예시)300" > 명 </p>
 								<hr>
 							</div>
 						</div>
@@ -206,7 +206,7 @@
 							<div class="col-10 ">
 								<p>회사의 평균 연봉을 입력해주세요</p>
 								<input type="text" class="form-control is-invalid"
-									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" required> 만원
+									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" > 만원
 								<hr>
 							</div>
 						</div>
@@ -307,7 +307,7 @@
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
 							<button type="reset" class="btn btn-light">초기화</button>
-							<button type="submit" class="btn btn-primary" id="btn-info" onclick="return checkAll();">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-info" onclick="return checkInfo();">등록</button>
 						</div>
 					</form>
 				</div>
@@ -367,7 +367,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" id="btn-newsletter" onclick="return checkAll();">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-newsletter" onclick="return checkNews();">등록</button>
 						</div>
 					</form>
 				</div>
@@ -380,8 +380,18 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   
 <script>
-	function checkAll() {
+	function checkInfo() {
 	    var boardContent = editor.getData();
+	    if (!checkExistData(boardContent, "내용")) {
+	        return false;
+	    }
+	
+	    // 모든 필드가 유효한 경우 true를 반환합니다.
+	    return true;
+	}
+	
+	function checkNews() {
+	    var boardContent = editor2.getData();
 	    if (!checkExistData(boardContent, "내용")) {
 	        return false;
 	    }
@@ -526,7 +536,7 @@
         console.error( error );
     });
     
-    let editor;
+   let editor2;
     ClassicEditor
     .create( document.querySelector ('#newsContent'),{
     	language: "ko"
@@ -541,7 +551,7 @@
     	}
     })
     .then( newEditor => {
-	          editor = newEditor;
+    		editor2 = newEditor;
 	        } )
     .catch( error => {
         console.error( error );
