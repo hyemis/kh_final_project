@@ -38,7 +38,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
 	rel="stylesheet">
 
 <!-- js -->
@@ -113,7 +113,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-light" onclick="goBack()">취소</button>
-				<button type="submit" class="btn btn-primary">수정</button>
+				<button type="submit" class="btn btn-primary" onclick="return checkAll();">수정</button>
 			</div>
 		</form>
 
@@ -121,6 +121,26 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 	<script>
+	function checkAll() {
+	    var boardContent = editor.getData();
+	    if (!checkExistData(boardContent, "내용")) {
+	        return false;
+	    }
+
+	    // 모든 필드가 유효한 경우 true를 반환합니다.
+	    return true;
+	}
+
+	function checkExistData(value, dataName) {
+	    if (value.trim() === "") {
+	        alert(dataName + "을(를) 입력해주세요!");
+	        return false;
+	    }
+	    return true;
+	}
+	
+	
+	
 	var msg = "${msg}";
 	if(msg) {
 		alert(msg);
@@ -209,7 +229,7 @@
 	
 	
     
-    
+	let editor;
     ClassicEditor
     .create( document.querySelector ('#newsLetter'),{
     	language: "ko"
@@ -223,6 +243,9 @@
 	   		, width:'100%'
     	}
     })
+    .then( newEditor => {
+	          editor = newEditor;
+	} )
     .catch( error => {
         console.error( error );
     });

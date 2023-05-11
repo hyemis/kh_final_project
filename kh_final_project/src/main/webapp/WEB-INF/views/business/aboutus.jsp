@@ -35,11 +35,10 @@
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
 	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/css/business.css"
-	rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/resources/css/business.css" rel="stylesheet">
+	
 <link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css" rel="stylesheet">
+	
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -56,10 +55,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
 
-
 <!-- ckeditor5 -->
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 <style>
 .modal {
@@ -115,7 +112,7 @@
 						
 						</c:if>
 						<c:if test="${not empty companyinfo }">
-						<p>등록된게시물 바로가기</p>
+						<p>등록된 게시물 바로가기</p>
 						<a class="btn btn-primary" href="<%=request.getContextPath()%>/board/company/companyinfo/view?no=${companyinfo.boardNo }" role="button">보기 및 수정</a>
 						</c:if>
 					</div>
@@ -198,7 +195,7 @@
 							<div class="col-10 ">
 								<p>직원수를 숫자로 입력해주세요
 								<input type="text" name="employee" class="form-control is-invalid"
-									style="width: 30%;" placeholder=" 예시)300" required> 명 </p>
+									style="width: 30%;" placeholder=" 예시)300" > 명 </p>
 								<hr>
 							</div>
 						</div>
@@ -209,7 +206,7 @@
 							<div class="col-10 ">
 								<p>회사의 평균 연봉을 입력해주세요</p>
 								<input type="text" class="form-control is-invalid"
-									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" required> 만원
+									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" > 만원
 								<hr>
 							</div>
 						</div>
@@ -300,9 +297,9 @@
 							<div class="col-2 text-center font-monospace">
 								<h4>소 개 글</h4>
 							</div>
-							<div class="col-10 was-validated ">
+							<div class="col-10  ">
 								<div class="mb-3">
-									<textarea id="infoContent" name="boardContent"></textarea>
+									<textarea id="infoContent" name="boardContent" ></textarea>
 								</div>
 							</div>
 						</div>
@@ -310,7 +307,7 @@
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
 							<button type="reset" class="btn btn-light">초기화</button>
-							<button type="submit" class="btn btn-primary" id="btn-info">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-info" onclick="return checkInfo();">등록</button>
 						</div>
 					</form>
 				</div>
@@ -335,45 +332,42 @@
 				</div>
 				<div class="modal-body">
 					<form
-						action="${pageContext.request.contextPath }/business/aboutus/newsletterform"
-						method="post">
-
+						action="${pageContext.request.contextPath }/business/aboutus/newsletterform" method="post" >
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
 							<div class="col-10 ">
-								<input type="text" class="form-control is-invalid"
+								<input type="text" class="form-control "
 									name="boardTitle" placeholder="제목을 입력해주세요" required>
-								<hr>
 							</div>
 						</div>
-						<div class="row ">
+						<div class="row pt-3">
 							<div class="col-2 text-center font-monospace">
 								<h4>관련링크</h4>
 							</div>
 							<div class="col-10 ">
 								<input type="url" class="form-control" name="link" id="link" oninput="fetchLinkTitle()" placeholder="링크를 입력하세요">
 								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle" style="display:none" readonly>
-								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 변경하려면 입력하세요"
+								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 입력하세요"
 									   style="display:none">
-								<hr>
 							</div>
 						</div>
 
-						<div class="row ">
+						<div class="row pt-3">
 							<div class="col-2 text-center font-monospace">
 								<h4>내용작성</h4>
 							</div>
 							<div class="col-10 ">
-									<textarea id="newsLetter" name="boardContent" class="form-control is-invalid"
-										style="height: 300px;"></textarea>
+								<div class="mb-3 ">
+									<textarea id="newsContent" name="boardContent" style="height: 500px;"></textarea>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" id="btn-newsletter">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-newsletter" onclick="return checkNews();">등록</button>
 						</div>
 					</form>
 				</div>
@@ -386,25 +380,33 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   
 <script>
-	$(document).ready(function() {
-	  $('#btn-info').click(function() { 
-	    var infocontent = $('#infoContent').val(); 
-	    
-	    if (infoContent.value.trim() === '') {
-	      alert('내용을 입력해주세요.'); 
-	      return false;
+	function checkInfo() {
+	    var boardContent = editor.getData();
+	    if (!checkExistData(boardContent, "내용")) {
+	        return false;
 	    }
-	  });
-	  
-	  $('#btn-newsletter').click(function() {
-	    var newscontent = $('#newsLetter').val(); 
-	    
-	    if ($.trim(newscontent) == '') { 
-	      alert('내용을 입력해주세요.'); 
-	      return false; 
+	
+	    // 모든 필드가 유효한 경우 true를 반환합니다.
+	    return true;
+	}
+	
+	function checkNews() {
+	    var boardContent = editor2.getData();
+	    if (!checkExistData(boardContent, "내용")) {
+	        return false;
 	    }
-	  });
-	});
+	
+	    // 모든 필드가 유효한 경우 true를 반환합니다.
+	    return true;
+	}
+	
+	function checkExistData(value, dataName) {
+	    if (value.trim() === "") {
+	        alert(dataName + "을(를) 입력해주세요!");
+	        return false;
+	    }
+	    return true;
+	}
 
 </script>	
  
@@ -511,9 +513,11 @@
 	    }
 	}
 	
-	
+
+    
+    let editor; 
     ClassicEditor
-    .create( document.querySelector( '#infoContent' ),{
+    .create( document.querySelector('#infoContent'),{
     	language: "ko"
     	, extraPlugins: [MyCustomUploadAdapterPlugin]
 		, simpleUpload :{
@@ -525,12 +529,16 @@
 	   		, width:'100%'
     	}
     })
+    .then( newEditor => {
+     editor = newEditor;
+	} )
     .catch( error => {
         console.error( error );
     });
     
+   let editor2;
     ClassicEditor
-    .create( document.querySelector( '#newsLetter' ),{
+    .create( document.querySelector ('#newsContent'),{
     	language: "ko"
     	, extraPlugins: [MyCustomUploadAdapterPlugin]
 		, simpleUpload :{
@@ -538,10 +546,13 @@
 		}
     	
     	, config : {
-    		height:'400px'
+    		height:'400px;'
 	   		, width:'100%'
     	}
     })
+    .then( newEditor => {
+    		editor2 = newEditor;
+	        } )
     .catch( error => {
         console.error( error );
     });

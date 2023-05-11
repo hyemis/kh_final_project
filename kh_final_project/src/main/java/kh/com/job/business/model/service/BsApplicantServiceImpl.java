@@ -181,13 +181,11 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 
 	@Override
 	public int failCount(String name) {
-		// TODO Auto-generated method stub
 		return dao.failCount(name);
 	}
 
 	@Override
 	public int proceedCount(String name) {
-		// TODO Auto-generated method stub
 		return dao.proceedCount(name);
 	}
 

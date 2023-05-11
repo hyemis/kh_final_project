@@ -38,6 +38,8 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/person.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css"
+	rel="stylesheet">	
 
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -53,7 +55,7 @@
 	src="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/owl.carousel.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/template/makaan/js/main.js"></script>
-	<!-- ckeditor5 -->
+<!-- ckeditor5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	
 
@@ -123,8 +125,6 @@
 				<div class="modal-body">
 					<form
 						action="${pageContext.request.contextPath }/business/aboutus/newsletterform" method="post" >
-						
-
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
@@ -132,10 +132,9 @@
 							<div class="col-10 ">
 								<input type="text" class="form-control "
 									name="boardTitle" placeholder="제목을 입력해주세요" required>
-								<hr>
 							</div>
 						</div>
-						<div class="row ">
+						<div class="row pt-3">
 							<div class="col-2 text-center font-monospace">
 								<h4>관련링크</h4>
 							</div>
@@ -144,24 +143,23 @@
 								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle" style="display:none" readonly>
 								<input type="text" class="mt-2 form-control" name="linkTitle" id="linkTitle2" placeholder="기사 제목을 입력하세요"
 									   style="display:none">
-								<hr>
 							</div>
 						</div>
 
-						<div class="row ">
+						<div class="row pt-3">
 							<div class="col-2 text-center font-monospace">
 								<h4>내용작성</h4>
 							</div>
 							<div class="col-10 ">
 								<div class="mb-3 ">
-									<textarea id="boardContent" name="boardContent" style="height: 500px;"></textarea>
+									<textarea id="newsContent" name="boardContent" style="height: 500px;"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-light"
 								data-bs-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" id="btn-newsletter" onclick="return checkAll()">등록</button>
+							<button type="submit" class="btn btn-primary" id="btn-newsletter" onclick="return checkAll();">등록</button>
 						</div>
 					</form>
 				</div>
@@ -271,9 +269,9 @@ function checkExistData(value, dataName) {
 	
 	
     
-    
+	let editor;
     ClassicEditor
-    .create( document.querySelector ('#boardContent'),{
+    .create( document.querySelector ('#newsContent'),{
     	language: "ko"
     	, extraPlugins: [MyCustomUploadAdapterPlugin]
 		, simpleUpload :{
@@ -285,6 +283,9 @@ function checkExistData(value, dataName) {
 	   		, width:'100%'
     	}
     })
+    .then( newEditor => {
+	          editor = newEditor;
+	        } )
     .catch( error => {
         console.error( error );
     });

@@ -1,12 +1,8 @@
 package kh.com.job.person.model.dto;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
