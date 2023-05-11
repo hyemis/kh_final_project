@@ -161,7 +161,6 @@ public class BsRecruitController {
 			, Principal principal
 			){
 		Map<String, Object> map = new HashMap<>();
-		 
 		String url = service.uploadDocument(file, principal.getName());		
 
 		map.put("uploaded", 1);

@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,15 +18,22 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
 import kh.com.job.admin.model.dto.AdCategoryDto;
+import kh.com.job.business.model.dao.BsAccountDao;
 import kh.com.job.business.model.dao.BsRecruitDao;
 import kh.com.job.business.model.dto.BsRecruitDetailDto;
 import kh.com.job.business.model.dto.BsRecruitDto;
+
+
 import kh.com.job.common.page.Paging;
 import kh.com.job.common.page.PagingInfoDto;
 
 @Service
 public class BsRecruitServiceImpl implements BsRecruitService{
 	
+	private static final Logger logger = LoggerFactory.getLogger(BsRecruitServiceImpl.class);
+	
+	@Autowired
+	private BsAccountDao account;
 	
 	@Autowired
 	private BsRecruitDao dao;
@@ -43,20 +52,36 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 	//구글클라우드 -채용공고 이력서 파일 파일 형식 업로드 기능 구분 	
 	@Override
 	public String uploadDocument(MultipartFile uploadReport, String userId) {
+		logger.info("^^^^^^^^^^^^^^1"+ projectId);
+		logger.info("^^^^^^^^^^^^^^1"+ bucketName);
 		//버켓 폴더 작업 추가해야됨
 		try {
+			logger.info("^^^^^^^^^^^^^2");
+			
 			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+			logger.info("^^^^^^^^^^^^^3"+storage);
 			String fileName = UUID.randomUUID().toString();
+			System.out.println("^^^^^^^^^^^^^4");
 			String extension = FilenameUtils.getExtension(uploadReport.getOriginalFilename());
+			System.out.println("^^^^^^^^^^^^^5");
 			
 			//경로에 해당하는 폴더 명이 없을 때 자동으로 구글클라우드 스토리지에서 생성해 줌
-			
+			System.out.println("#################");
 			String fullName = userId + "/"+ "document" + "/"+ fileName + "." + extension;
+			
+			logger.info("################6"+fullName);
+			
 			BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fullName).build();
+			logger.info("################7"+blobInfo);
+			logger.info("################7-1"+blobInfo.getMediaLink());
 			storage.create(blobInfo, uploadReport.getBytes());
+			
+			logger.info("################8"+fullName);
+			
 			return "https://storage.googleapis.com/" + bucketName + "/" + fullName;
 				
 			} catch (IOException e) {
+				logger.info("%%***********에러***********%%");
 				 throw new RuntimeException(e);
 			}
 		
@@ -77,7 +102,6 @@ public class BsRecruitServiceImpl implements BsRecruitService{
 
 	@Override
 	public List<BsRecruitDto> recruitAdmission(String userId) {
-		// TODO Auto-generated method stub
 		return  dao.recruitAdmission(userId);
 	}
 	

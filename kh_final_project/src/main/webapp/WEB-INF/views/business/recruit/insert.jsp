@@ -297,7 +297,7 @@
 				return false;
 			}else if(recruitContent.category2dept.value == 0){
 					alert("모집 분야를 선택해 주세요");
-					return false;					
+					return false;
 			}else if(recruitContent.career.value == 0){
 				alert("경력 조건을 선택해 주세요.");
 				return false;
@@ -387,7 +387,7 @@
 	
 	function MyCustomUploadAdapterPlugin(editor) {
 	    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-	        return new UploadAdapter(loader)
+	        return new UploadAdapter(loader);
 	    }
 	}
 	
@@ -396,10 +396,7 @@
     .create( document.querySelector( '#raContent' ),{
     	language: "ko"
     	, extraPlugins: [MyCustomUploadAdapterPlugin]
-		, simpleUpload :{
-			uploadUrl : 'imageUpload',
-		}
-    	
+		    	
     	, config : {
     		height:'400px'
 	   		, width:'100%'
