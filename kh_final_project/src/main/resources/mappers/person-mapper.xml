@@ -22,10 +22,10 @@
   </select>
   
    <!-- 아이디 찾기 -->
-    <select id="findId" parameterType="string" resultType="pdto">
+    <select id="findId" resultType="pdto">
   	select USER_ID 
   	from USER_TABLE 
-  	WHERE USER_NAME = #{userName} AND USER_BIRTH = #{userBirth}
+  	WHERE USER_NAME = #{userName} AND USER_BIRTH = to_date(#{userBirth}, 'yy-mm-dd')
 	  	<choose>
 	  		<when test="userEmail != null and userEmail != ''">
 	  			AND USER_EMAIL = #{userEmail}
@@ -37,10 +37,10 @@
   	</select>
   
  	<!-- 비밀번호 찾기 -->
- 	<select id="findPw" parameterType="string" resultType="pdto">
+ 	<select id="findPw" resultType="pdto">
 	  	select USER_ID, USER_EMAIL, USER_PHONE, TERMS_PERIOD
 	  	from USER_TABLE 
-	  	WHERE USER_ID =  #{userId} AND USER_NAME = #{userName} AND USER_BIRTH = #{userBirth}
+	  	WHERE USER_ID =  #{userId} AND USER_NAME = #{userName} AND USER_BIRTH = to_date(#{userBirth}, 'yy-mm-dd')
 		  	<choose>
 		  		<when test="userEmail != null and userEmail != ''">
 		  			AND USER_EMAIL = #{userEmail}
@@ -54,7 +54,7 @@
   <!-- 개인회원 insert -->
   <insert id="insert" parameterType="pdto">
   	INSERT INTO USER_TABLE (USER_ID, USER_PW, USER_PHONE, USER_BIRTH, USER_EMAIL, ADDRESS_ROAD, ADDRESS_JIBUN, ADDRESS_DETAIL, ADDRESS_POSTCODE, USER_NAME, USER_CREATED_AT, USER_ACT, USER_ROLE, TERMS_ACT, TERMS_DATE, TERMS_PERIOD)
-	VALUES ( #{userId}, #{userPw}, #{userPhone}, #{userBirth}, #{userEmail}, #{addressRoad},#{addressJibun},#{addressDetail}, #{addressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default)
+	VALUES ( #{userId}, #{userPw}, #{userPhone}, TO_DATE(#{userBirth},'yy-mm-dd'), #{userEmail}, #{addressRoad},#{addressJibun},#{addressDetail}, #{addressPostcode}, #{userName}, current_timestamp, 'true', 'ROLE_P', 'Y', current_timestamp, default)
   </insert>
   
   <!-- 기업회원 insert -->
@@ -88,7 +88,7 @@
 	</update>
 
 	<!-- 채용공고 스크랩여부 확인 -->  
-	<select id="checkScrap" parameterType="map" resultType="_int">
+	<select id="checkScrap" resultType="_int">
  	 SELECT COUNT(*) FROM SCRAP_INFO 
  	 WHERE RA_NUM = #{raNum} AND USER_ID = #{userId}
 	</select>

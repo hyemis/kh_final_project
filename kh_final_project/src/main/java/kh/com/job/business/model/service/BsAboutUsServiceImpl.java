@@ -34,25 +34,16 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	@Value("${gcs.bucketName}")
 	private String bucketName;
 	
-	//USER
 	@Override
 	public BsUserDto viewAccount(String userId) {
 		return dao.viewAccount(userId);
 	}
-	
 
-
-	//BOARD
 	@Override
 	@Transactional
 	public int insertNewsletter(BoardDto dto) {
 		return dao.insertNewsletter(dto);
 	}
-
-	
-	
-
-
 
 	@Override
 	public String uploadDocument(MultipartFile uploadReport, String userId) {
@@ -74,16 +65,11 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 		
 	}
 
-
 	//회사소개 
 	@Override
 	public int insertCompanyInfo(BoardDto dto) {
 		return dao.insertCompanyInfo(dto);
 	}
-
-
-
-
 
 	@Override
 	public Paging newsLetterList(BoardDto dto) {
@@ -112,27 +98,9 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 				return list;
 	}
 
-
-
 	@Override
 	public BoardDto checkInfo(String userId) {
 		return dao.checkInfo(userId);
 	}
 
-	
-
-	
-
-
-
-
-
-
-
-	
-
-	
-	
-	
-	
 }

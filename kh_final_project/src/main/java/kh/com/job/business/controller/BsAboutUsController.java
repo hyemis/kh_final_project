@@ -1,6 +1,5 @@
 package kh.com.job.business.controller;
 
-
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,11 +29,10 @@ public class BsAboutUsController {
 	@Autowired
 	private BsAboutUsService service;
 
-	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-
-
+ 
+	
 	// 회사소개작성
 		@PostMapping("/infoform")
 		public ModelAndView insertCompanyInfo(ModelAndView mv, BoardDto dto, Principal principal, RedirectAttributes rttr)  {
@@ -77,13 +75,13 @@ public class BsAboutUsController {
 	}
 	
 		
-	
+	/*
 	// Q&A 페이지 불러오기
 	@GetMapping("/qna")
 	public ModelAndView qna(ModelAndView mv) {
 		return mv;
 	}
-	
+	*/
 	
 	//이미지 업로드
 	@PostMapping("/imageUpload")
@@ -102,5 +100,4 @@ public class BsAboutUsController {
 	}
 
 
-//	
 }

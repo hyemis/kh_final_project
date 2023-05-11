@@ -59,7 +59,6 @@ public class BsAccountController {
 		return mv;
 	}
 	
-	
 	//회원비밀번호 확인
 	@PostMapping("/pwChk") 
 	public ModelAndView pwChk(String confirmPw, ModelAndView mv, RedirectAttributes rttr) {
@@ -77,11 +76,10 @@ public class BsAccountController {
 			
 		return mv;
 		}
-	
 
 	// 비밀번호 업데이트
 		@PostMapping("/updatePw")
-		public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr) throws Exception {
+		public ModelAndView updatePw(ModelAndView mv, BsUserDto dto, Principal principal, RedirectAttributes rttr) {
 
 			if(principal.getName()!= null) {
 				dto.setUserId(principal.getName());
@@ -96,13 +94,6 @@ public class BsAccountController {
 
 			return mv;
 		}
-	
-    
-	
-
-	
-	
-	
 	
 	
 }

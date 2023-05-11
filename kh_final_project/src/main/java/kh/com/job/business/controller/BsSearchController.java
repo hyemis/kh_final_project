@@ -1,8 +1,6 @@
 package kh.com.job.business.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,30 +12,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kh.com.job.board.model.dto.BoardDto;
-import kh.com.job.board.model.dto.CompanyDto;
 import kh.com.job.business.model.dto.BsAnnounceDto;
-import kh.com.job.business.model.dto.BsAplicantDto;
-import kh.com.job.business.model.dto.BsApplicantResumeDto;
-import kh.com.job.business.model.dto.BsRecruitDto;
 import kh.com.job.business.model.dto.BsSearchDto;
 import kh.com.job.business.model.dto.BsSuggestDto;
 import kh.com.job.business.model.dto.BsUserDto;
 import kh.com.job.business.model.dto.InterviewDto;
 import kh.com.job.business.model.service.BsAccountService;
-import kh.com.job.business.model.service.BsApplicantService;
 import kh.com.job.business.model.service.BsRecruitService;
 import kh.com.job.business.model.service.BsSearchService;
 import kh.com.job.common.mail.MailUtil;
 import kh.com.job.common.page.Paging;
-import kh.com.job.common.page.PagingAplicantDto;
-import kh.com.job.person.model.dto.PsCareerDto;
-import kh.com.job.person.model.dto.PsCertiDto;
-import kh.com.job.person.model.dto.PsClDto;
-import kh.com.job.person.model.dto.PsGschoolDto;
-import kh.com.job.person.model.dto.PsHschoolDto;
-import kh.com.job.person.model.dto.PsResumeDto;
-import kh.com.job.person.model.dto.PsUnivDto;
 
 @Controller
 @RequestMapping("/business/search")
@@ -52,8 +36,6 @@ public class BsSearchController {
 	@Autowired
 	private BsAccountService baService;
 	
-	@Autowired
-	private BsApplicantService apservice;
 	
 	//인재 찾기 페이지
 	@GetMapping("/suggest")

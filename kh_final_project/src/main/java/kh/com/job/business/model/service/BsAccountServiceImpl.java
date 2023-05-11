@@ -28,10 +28,7 @@ public class BsAccountServiceImpl implements BsAccountService{
 	@Value("${gcs.bucketName}")
 	private String bucketName;
 
-	@Override
-	public int insertAccount(BsUserDto dto) {
-		return dao.insertAccount(dto);
-	}
+
 
 	@Override
 	public int updateAccount(BsUserDto dto) {
@@ -44,26 +41,11 @@ public class BsAccountServiceImpl implements BsAccountService{
 	}
 
 	@Override
-	public int updateUimage(BsUserDto dto) {
-		return dao.updateUimage(dto);
-	}
-	
-	@Override
-	public int pwChk(String userPw) throws Exception {
-		return dao.pwChk(userPw);
-	}
-	
-	@Override
 	public BsUserDto viewAccount(String userId) {
 		return dao.viewAccount(userId);
 	}
 
-	@Override
-	public BsUserDto getUserPw(String userId) {
-		return dao.getUserPw(userId);
-	}
-
-	//구글클라우드 -채용공고 이력서 파일 파일 형식 업로드 기능 구분 	
+	//구글클라우드	
 	@Override
 	public String uploadUserPic(MultipartFile uploadReport, String userId) {
 		//버켓 폴더 작업 추가해야됨
