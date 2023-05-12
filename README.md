@@ -247,7 +247,7 @@
  <br>
  
  <div align="center">
- ![채용정보검색](https://github.com/NukNim/kh_final_project/assets/114970462/58c29866-454a-481d-b715-47338612b2e1)
+ 
  </div>
  
  </div>
