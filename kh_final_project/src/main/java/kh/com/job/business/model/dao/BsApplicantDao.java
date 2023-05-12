@@ -135,6 +135,14 @@ public class BsApplicantDao {
 		return sqlSession.update("applicant.resultUpdate", adto);
 	}
 
+	public int countInterviewList(InterviewDto dto) {
+		return sqlSession.selectOne("applicant.countInterviewList", dto);
+	}
+
+	public List<InterviewDto> interviewList(InterviewDto dto) {
+		return sqlSession.selectList("applicant.interviewList", dto);
+	}
+
 
 	
 

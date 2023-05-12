@@ -205,6 +205,24 @@ public class BsApplicantServiceImpl implements BsApplicantService {
 		return result;
 	}
 
+	@Override
+	public Paging interviewList(InterviewDto dto) {
+		int pageLimit = 10;
+		int listLimit = 5;
+		
+		int count = dao.countInterviewList(dto);
+
+		dto.setStartNum((dto.getPnum() -1)*pageLimit +1);
+		dto.setEndNum(dto.getPnum() * pageLimit);
+		
+		int mod = count % pageLimit ==0? 0 : 1;
+		int pageCount = count/pageLimit + mod;
+		
+		Paging list = new Paging(dao.interviewList(dto), dto.getPnum(), pageCount);
+		
+		return list;
+	}
+
 
 
 

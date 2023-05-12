@@ -58,9 +58,19 @@ public class BsApplicantController {
 	
 	//면접 일정관리  보기
 	@GetMapping("/interview")
-	public List<InterviewDto> calendar(Principal principal) {
+	public ModelAndView calendar(ModelAndView mv, Principal principal, InterviewDto dto) {
 		  List<InterviewDto> list = apservice.viewInterview(principal.getName());
-		  return list;
+		  
+		  dto.setBsUser(principal.getName());
+		  if(dto.getPnum() < 1) {
+				dto.setPnum(1);
+				}
+				Paging interviewlist = apservice.interviewList(dto);
+				System.out.println(dto);
+			
+		mv.addObject("list", list);		
+		mv.addObject("interview", interviewlist);		
+		  return mv;
 	}
 	// 캘린더 event get
 	@PostMapping("/interview")

@@ -39,19 +39,63 @@
 </head>
 <body>
 <!-- header  -->
-	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <!-- page section -->	
 <section>
 <div class="container-fluid bg-white p-5">
-<!--  test -->
-    
-    
+<!-- modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#interviewList">면접 목록 보기</button>
+
 <!-- 캘린더-->
 <div id='calendar'></div>  
-<!-- Modal -->
+</div>
+</section>
+
+<!-- interviewList Modal -->
+<div class="modal fade" id="interviewList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">일정보기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        		<table class="table table-hover">
+					  <thead>
+					    <tr>
+					      <th scope="col" class="col-2">일정명</th>
+					      <th scope="col" class="col-2">시작</th>
+					      <th scope="col" class="col-2">종료</th>
+					      <th scope="col" class="col-2">면접시간</th>
+					      <th scope="col" class="col-2">면접장소</th>
+					      <th scope="col" class="col-2">지원자명</th>
+					    </tr>
+					  </thead>
+					  <c:forEach items="${interview.getPage() }" var="interview">
+					  <tbody>
+					    <tr>
+					      <td>${interview.caTitle }</td>
+					      <td>${interview.dateStart }</td>
+					      <td>${interview.dateEnd }</td>
+					      <td>${interview.interviewTime }</td>
+					      <td>${interview.location }</td>
+					      <td><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=${interview.resumeNo}">${interview.userName }</a></td>
+					    </tr>
+					   </tbody>
+						</c:forEach>
+			   </table> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 일정 입력 Modal -->
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">일정추가</h5>
@@ -84,12 +128,6 @@
     </div>
   </div>
 </div>
-
-
-
-</div>
-</section>
-
 	
 <!-- footer  -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

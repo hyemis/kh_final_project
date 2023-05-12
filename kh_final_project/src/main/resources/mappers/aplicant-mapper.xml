@@ -51,6 +51,28 @@
 			SELECT MAX(CA_NUM) +1 FROM INTERVIEW
 		</selectKey>
 	</insert>
+	
+	<select id="countInterviewList" resultType="_int">
+	 	SELECT COUNT(*) 
+	 	  FROM ( SELECT CA_TITLE,DATE_START,DATE_END,INTERVIEW_TIME,LOCATION,INTERVIEWER,USER_NAME,RESUME_NO
+		  		   FROM INTERVIEW
+		 	  	  WHERE BS_USER = #{bsUser}
+	 	  		)
+	</select>
+	
+	<select id="interviewList" resultType="indto">
+		SELECT * 
+		  FROM (
+		  		SELECT ROWNUM AS NUM , A.*
+		  		  FROM ( 
+		  		  		SELECT CA_TITLE,DATE_START,DATE_END,INTERVIEW_TIME,LOCATION,INTERVIEWER,USER_NAME,RESUME_NO
+						  FROM INTERVIEW
+						 WHERE BS_USER = #{bsUser}
+						 ORDER BY DATE_START
+		  		  ) A
+		  		)
+		 WHERE NUM BETWEEN #{startNum} AND #{endNum}
+	</select>
 
 	<!-- 페이지 리스트 카운트 -->
 	<select id="pageListCount" resultType="_int">

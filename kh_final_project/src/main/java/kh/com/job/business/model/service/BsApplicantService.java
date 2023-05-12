@@ -67,6 +67,7 @@ public interface BsApplicantService {
 	//캘린더
 	public List<InterviewDto> viewInterview(String userId);
 	public int insertInterview(InterviewDto dto);
+	public Paging interviewList(InterviewDto dto);
 
 	
 	
