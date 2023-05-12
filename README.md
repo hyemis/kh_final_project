@@ -178,6 +178,9 @@
 <h3 align="center">채용공고 등록</h3>
 <p align="center"><img src="https://github.com/NukNim/kh_final_project/assets/114970601/f6200201-545b-4a06-9e93-6a28f8e2c70f"></p>
 <br>
+<h3 align="center">이력서 등록</h3>
+<p align="center"><img src="https://github.com/NukNim/kh_final_project/assets/114970601/96afdc5c-4ca4-42e8-aeae-1a32d1f86d75"></p>
+<br>
 
 ## 6. 클래스 다이어그램
 <details>
