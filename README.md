@@ -238,7 +238,7 @@
  </details>
  
  <details>
-<summary><h3>✅ 면접일정 보기 </h3></summary>
+<summary><h3>✅ 채용정보조회 </h3></summary>
 <div markdown="1"> 
  <div align="center">
 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
@@ -247,7 +247,7 @@
  <br>
  
  <div align="center">
-  내용입력
+ ![채용정보검색](https://github.com/NukNim/kh_final_project/assets/114970462/58c29866-454a-481d-b715-47338612b2e1)
  </div>
  
  </div>
