@@ -163,14 +163,21 @@
 			<c:forEach var="recruit" items="${recruitList}">
 				<table class="recruit-table">
 					<tr>
-						<td><a
-							href="${pageContext.request.contextPath}/person/viewrecruit/${recruit.raNum}"
-							target="_blank"> <span class="bold">${recruit.companyName}</span><br>
-								<br> ${recruit.raTitle}
-						</a></td>
+						<td>
+							<sec:authorize access="isAuthenticated()">
+								<a href="${pageContext.request.contextPath}/person/viewrecruit/${recruit.raNum}"target="_blank"> 
+								<span class="bold">${recruit.companyName}</span><br><br> ${recruit.raTitle}
+								</a>
+							</sec:authorize>
+							<sec:authorize access="!isAuthenticated()">
+								  <a href="${pageContext.request.contextPath}/person/viewrecruit/${recruit.raNum}"target="_blank" onclick="showLoginAlert()">
+						            <span class="bold">${recruit.companyName}</span><br><br> ${recruit.raTitle}
+						          </a>
+							</sec:authorize>
+						</td>
 					</tr>
 					<tr>
-						<sec:authorize access="isAuthenticated()">
+						<sec:authorize access="hasAnyRole('ROLE_P')">
 							<td class="star-icon" data-raNum="${recruit.raNum}"
 								onclick="handleStarClick(event)"><span class="far fa-star"
 								aria-hidden="true"></span> <span class="date">~${recruit.closeDate}</span>
@@ -480,6 +487,12 @@
 	    });
 	  });
 	};
+	
+	// 	
+	 function showLoginAlert() {
+	        alert("로그인 후 더 많은 서비스를 이용해보세요.");
+	        location.href = "${pageContext.request.contextPath}/person/login";
+	    }
 
 	
 	</script>
