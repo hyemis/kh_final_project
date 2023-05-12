@@ -19,11 +19,6 @@ public class BsSearchDao {
 	private SqlSession sqlSession;
 
 
-
-//	public Object resumePageList(BsSearchDto sdto) {
-//		return sqlSession.selectList("business.resumePageList", sdto);
-//	}
-
 	public List<BsSearchDto> resumeList(BsSearchDto sdto) {
 		return sqlSession.selectList("business.resumeList", sdto);
 	}

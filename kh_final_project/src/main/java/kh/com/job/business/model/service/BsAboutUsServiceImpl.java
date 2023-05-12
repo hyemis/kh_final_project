@@ -34,6 +34,7 @@ public class BsAboutUsServiceImpl implements BsAboutUsService{
 	@Value("${gcs.bucketName}")
 	private String bucketName;
 	
+	
 	@Override
 	public BsUserDto viewAccount(String userId) {
 		return dao.viewAccount(userId);

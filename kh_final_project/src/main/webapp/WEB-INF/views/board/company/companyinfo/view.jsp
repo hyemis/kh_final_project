@@ -166,21 +166,14 @@
 						<h1 class="mb-3">채용중인포지션</h1>
 					</div>
 				</div>
-				<div class="col-lg-6 text-start text-lg-end wow slideInRight"
-					data-wow-delay="0.1s">
-					<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-						<li class="nav-item me-2"><a class="btn btn-outline-primary"
-							data-bs-toggle="pill" href="#">더보기</a></li>
-						<li class="nav-item me-0"><a class="btn btn-outline-primary"
-							data-bs-toggle="pill" href="#">QnA</a></li>
-					</ul>
+				<div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
 				</div>
 			</div>
 			<div class="tab-content">
 				<div id="tab-1" class="tab-pane fade show p-0 active">
 					<div class="row g-4">
 						<!-- 채용공고 -->
-						<c:forEach items="${recruitList}" var="recruit">
+						<c:forEach items="${recruitList}" var="recruit" varStatus="status" begin="0" end="5">
 							<div class="col-lg-4 col-md-6 wow fadeInUp "
 								data-wow-delay="0.1s">
 								<div class="property-item rounded overflow-hidden bg-white">
@@ -206,9 +199,6 @@
 										<small class="flex-fill text-center border-end py-2"><i
 											class="fa fa-ruler-combined text-primary me-2"></i> <a
 											href="/job/business/recruit/view?id=${recruit.raNum }">공고보기</a></small>
-										<small class="flex-fill text-center border-end py-2"><i
-											class="fa fa-bed text-primary me-2"></i> <a
-											href="/job/business/recruit/view?id=${recruit.raNum }">지원하기</a></small>
 									</div>
 									</sec:authorize>
 								</div>
@@ -217,6 +207,7 @@
 					</div>
 				</div>
 			</div>
+				<a class="btn btn-outline-primary" id="more-recruit" onclick="changeForEach();">더보기</a>
 		</div>
 
 		<br>
@@ -240,6 +231,7 @@
 
 		</div>
 
+
 		<!-- newsletter Start -->
 		<div class="container">
 			<div class="pt-3 text-start mb-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -247,46 +239,62 @@
 			</div>
 			<div class="row g-4">
 				<c:forEach items="${news }" var="news">
-					<div class="card col-lg-3 col-md-6 wow fadeInUp"
-						data-wow-delay="0.1s">
-						<a
-							href="/job/business/aboutus/newsletter/view?no=${news.boardNo }">${news.boardTitle }</a>
+					<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto " data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+						<a class="cat-item d-block bg-light text-center rounded p-2" href="${pageContext.request.contextPath}/board/company/newsletter/view?no=${news.boardNo }">
+						<div class="rounded p-4">
+						<i class="bi bi-newspaper fs-1"></i>
+						<p class="fs-3">${news.boardTitle }</p> 
+						</div>
+						</a>
 					</div>
-
 				</c:forEach>
 			</div>
+			<div class="row g-4" id="moreRecruit"></div>
 		</div>
-		<!-- newsletter End -->
-	</div>
+		
+
+		
+
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-	<script>
-$(document).ready(function() {
-	  $(".delete").on("click", function() {
-	    if (confirm("정말 삭제하시겠습니까?")) {
-	      let userId = "${news.userId}";
-	      let boardNo = "${news.boardNo}";      	
-	      $.ajax({ 
-	        url: "${pageContext.request.contextPath}/board/company/delete"
-	        , type: "post"
-	        , data:  {boardNo : boardNo, userId : userId}
-	        , success: function(result){
-	          if(result > 0){
-	            location.href="${pageContext.request.contextPath}/business/aboutus";
-	            alert("삭제되었습니다")
-	          }else if(result == -2){
-	            alert("아이디 정보가 맞지 않습니다.");
-	          }else{
-	            alert("삭제에 실패 했습니다.");
-	          }
-	        }
-	        , error: function(e){
-	          alert(e +" : 오류")
-	        }
-	      });
-	    }
-	  });
-	});
+<script>
+let isExpanded = false; // 버튼이 눌렸는지 여부를 나타내는 변수
+
+function changeForEach() {
+  if (!isExpanded) {
+    // 동적으로 content 내용 추가
+    let html = '<c:forEach items="${recruitList}" var="recruit" varStatus="status" begin="6">';
+    html += '<div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s">';
+    html += '<div class="property-item rounded overflow-hidden bg-white">';
+    html += '<div class="p-4 pb-0">';
+    html += '<h5 class="text-primary mb-3">${recruit.companyName }</h5>';
+    html += '<a class="d-block h5 mb-2" href="">${recruit.raTitle }</a>';
+    html += '<a>지원날짜 ${recruit.registDate } ~ ${recruit.closeDate }</a>';
+    html += '</div>';
+    html += '<sec:authorize access="hasRole(\'ROLE_P\')">';
+    html += '<div class="d-flex border-top">';
+    html += '<small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i> <a href="/job/person/viewrecruit/${recruit.raNum }">공고보기</a></small>';
+    html += '<small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i> <a href="/job/person/viewrecruit/${recruit.raNum }">지원하기</a></small>';
+    html += '</div>';
+    html += '</sec:authorize>';
+    html += '<sec:authorize access="hasRole(\'ROLE_B\')">';
+    html += '<div class="d-flex border-top">';
+    html += '<small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i> <a href="/job/business/recruit/view?id=${recruit.raNum }">공고보기</a></small>';
+    html += '</div>';
+    html += '</sec:authorize>';
+    html += '</div>';
+    html += '</div>';
+    html += '</c:forEach>';
+    document.getElementById("moreRecruit").innerHTML = html;
+    isExpanded = true; // 변수 값을 변경하여 다음번 클릭 시 삭제되도록 합니다.
+    document.getElementById("more-recruit").innerText = "접기"; // 버튼 텍스트를 변경합니다.
+  } else {
+    // content 내용 삭제
+    document.getElementById("moreRecruit").innerHTML = "";
+    isExpanded = false; // 변수 값을 변경하여 다음번 클릭 시 추가되도록 합니다.
+    document.getElementById("more-recruit").innerText = "더보기"; // 버튼
+
+		
 </script>
 
 	<!-- ckeditor5 -->
@@ -342,7 +350,6 @@ $(document).ready(function() {
         position: new kakao.maps.LatLng(37.537187, 127.005476),
         map: map
     });
- <!-- map end-->   
     
     
  // 페이지 로드 시 실행되는 함수

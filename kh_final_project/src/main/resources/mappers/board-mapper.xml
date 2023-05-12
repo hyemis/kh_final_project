@@ -319,6 +319,13 @@
 		  	    )
 		  WHERE NUM BETWEEN #{startNum} AND #{endNum}
 	</select>
+	
+	<!--  -->
+	<select id="newsLetter" resultType="bcdto">
+		SELECT BOARD_NO, USER_ID, BOARD_TITLE, BOARD_CONTENT, UPDATE_DATE, BOARD_READ, BOARD_LIKE, LINK, LINK_TITLE 
+		  FROM BOARD
+		 WHERE USER_ID= #{userId} AND CATEGORY_ID = 'UBD05'
+	</select>
 	  
 	<!-- qna -->
 	<insert id="insertQnA">
