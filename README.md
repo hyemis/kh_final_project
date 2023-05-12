@@ -11,7 +11,9 @@
  
  
  ## 1️⃣ 팀 소개
- 
+ ![이미지](https://github.com/NukNim/kh_final_project/assets/114970601/c67f1ea7-a030-4090-af63-34945472c151)
+ <br>
+ <br>
  ## 2️⃣ 프로젝트 개요
  <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/267ea93d-cbbe-48e8-b16a-a6a088c07ee8"/>
  
@@ -42,7 +44,107 @@
 
 
 ## 5️⃣ 주요기능
+<div align="center">
+<img width="230" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/10918d26-170c-42b3-8037-89b7ca2997c3">
+</div>
 
+<details>
+<summary><h3>✅ 관리자 카테고리 관리 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 기업 채용공고 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 지원자 관리 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+<div align="center">
+<img width="230" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/3838da3c-9341-4328-be92-11a688e5a03b">
+</div>
+
+<details>
+<summary><h3>✅ OPEN API 연동 샘플데이터 추가 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 이력서 작성 및 입사지원 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 공고 & 기업 스크랩 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <div align="center">
+<img width="200" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/d5926a64-3877-4fd8-8a3f-3ee649ac046e">
+</div>
+
+<details>
+<summary><h3>✅ 인재찾기 및 면접제안 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 기업 게시글 작성 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 면접일정 보기 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ 
+  <div align="center">
+<img width="200" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/8312f9fe-aaa5-4d1d-9946-257ea2eed474">
+</div>
+
+<details>
+<summary><h3>✅ 회원가입 및 로그인 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 이력서 생성 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
+ <details>
+<summary><h3>✅ 면접일정 보기 </h3></summary>
+<div markdown="1"> 
+ 내용입력
+ </div>
+ </details>
+ 
 ## 6️⃣ Document
 ## 1. 개발일정
 <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/48072776-640d-4bbe-b968-3fb409f5bee3"/>  
@@ -55,7 +157,7 @@
 <br>
 
 ## 3. 화면설계서
-[화면설계서 전체보기](https://drive.google.com/drive/folders/1MLeY7fHSMp6WLYectykztz8zZV3519OS)
+[화면설계서 전체보기](https://drive.google.com/file/d/1a4bbvSW0Fl5gLfnMDt6l8ZmQv32qvjZr/view?usp=sharing)
 
 <br>
 
@@ -72,6 +174,12 @@
 <p align="center"><img src="https://github.com/NukNim/kh_final_project/assets/114970601/87a99bed-da59-43c4-aade-e638e91acf16"></p>
 <h3 align="center">카카오 로그인</h3>
 <p align="center"><img src="https://github.com/NukNim/kh_final_project/assets/114970601/05052ca8-b322-4797-b1f3-5cf179b8dcb6"></p>
+<br>
+<h3 align="center">채용공고 등록</h3>
+<p align="center"><img src="https://github.com/NukNim/kh_final_project/assets/114970601/f6200201-545b-4a06-9e93-6a28f8e2c70f"></p>
+<br>
+<h3 align="center">이력서 등록</h3>
+<p align="center"><img src="https://github.com/NukNim/kh_final_project/assets/114970601/96afdc5c-4ca4-42e8-aeae-1a32d1f86d75"></p>
 <br>
 
 ## 6. 클래스 다이어그램
@@ -123,12 +231,14 @@
 
 </div>
 </details>
+<br>
 
 ## 7. History
-[History 전체보기](https://docs.google.com/spreadsheets/d/1hU5bQROG7wYa3qBxsS_AOgnL1GLnBWjACK8rh-FXaBw/edit#gid=0)
+[History 전체보기](https://docs.google.com/spreadsheets/d/1cB94RR9iWxg4tUijVIwjBgCle971YG0dyTfw_vWl-iQ/edit#gid=0)
 <br>
 
 ## 8. 테스트 케이스
+[테스트케이스 전체보기](https://docs.google.com/spreadsheets/d/1TQ_Q0W1wnNszXugbbQc8--QzBXlqzesy/edit#gid=1257668180)
 <br>
 
 ## 7️⃣ 최종발표자료
