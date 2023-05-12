@@ -1,7 +1,19 @@
-# 파이널 프로젝트 : JOB-A 구인구직채용 사이트
+# 파이널 프로젝트 : JOB-A 구인구직 사이트:handshake:
 
-## 개요
- 기업들의 원하는 인재상을 파악하고 취업을 하려는 회원들이 원하는 기업 조건을 파악하여 관계를 주선해 보다 효율적으로 구인구직서비스를 제공하려고 합니다.
+## Contents:card_index_dividers:
+1. 팀 소개
+2. 프로젝트 개요
+3. 설계의 주안점
+4. 개발환경
+5. 주요기능
+6. Document
+7. 최종발표자료(Google Drive) 
+ 
+ 
+ ## 1️⃣ 팀 소개
+ 
+ ## 2️⃣ 프로젝트 개요
+ <img width="70%" src="https://github.com/NukNim/kh_final_project/assets/114970601/c4620004-5d9b-414f-a1c4-22db1e7d7d0f"/>
  
  ## 사용기술 및 개발환경
  
