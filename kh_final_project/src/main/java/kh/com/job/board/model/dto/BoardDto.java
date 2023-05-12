@@ -1,9 +1,6 @@
 package kh.com.job.board.model.dto;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 
@@ -20,24 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class BoardDto {
-//  DESC BOARD;
-//	BOARD_NO                NOT NULL NUMBER        
-//	USER_ID                 NOT NULL VARCHAR2(20)  
-//	CATEGORY_ID             NOT NULL VARCHAR2(20)  
-//	BOARD_TITLE             NOT NULL VARCHAR2(100) 
-//	BOARD_CONTENT                    CLOB          
-//	BOARD_DATE                       TIMESTAMP(6)  
-//	UPDATE_DATE                      TIMESTAMP(6)  
-//	BOARD_ORIGINAL_FILENAME          VARCHAR2(100) 
-//	BOARD_RENAME_FILENAME            VARCHAR2(100) 
-//	BOARD_READ                       NUMBER        
-//	BOARD_LIKE                       NUMBER        
-//	TAG                              VARCHAR2(200) 
-//	SALARY_AVG                       VARCHAR2(100) 
-//	EMPLOYEE                         VARCHAR2(100) 
-//	LINK                             VARCHAR2(100) 
-//	LINK_TITLE 						 VARCHAR2(100);
-	
+
 		private int boardNo;
 		private String userId;
 		private String userName;
@@ -46,8 +26,6 @@ public class BoardDto {
 		private String boardContent;
 		private String boardDate;
 		private String updateDate;
-		private String boardOriginalFilename;
-		private String boardRenameFilename;
 		private int boardRead;
 		private int boardLike;
 		private String tag;

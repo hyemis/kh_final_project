@@ -165,4 +165,8 @@ public class BoardDao {
 		return sqlSession.update("boards.updateCompanyInfo", dto);
 	}
 
+	public List<CompanyDto> newsLetterInfo(CompanyDto dto) {
+		return sqlSession.selectList("boards.newsLetterList", dto);	
+	}
+
 }

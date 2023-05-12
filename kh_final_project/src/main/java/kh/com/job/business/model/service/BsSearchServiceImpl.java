@@ -19,6 +19,7 @@ public class BsSearchServiceImpl implements BsSearchService{
 	
 	@Autowired
 	private BsSearchDao dao;
+	
 
 	@Override
 	public List<BsSearchDto> resumeList(BsSearchDto sdto) {

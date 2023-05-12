@@ -35,7 +35,6 @@ public class BsSuggestDto {
 	private String resumeTitle;
 	private String sendInterview;
 	
-
 	//페이징처리
 	private int startNum; 
 	private int endNum; 
