@@ -358,7 +358,7 @@
 	        if (!checkExistData(userPw2, "비밀번호 확인을"))
 	            return false;
 	 
-	        var password1RegExp = /^[a-zA-z0-9]{8,16}$/; //비밀번호 유효성 검사
+	        var password1RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/; //비밀번호 유효성 검사
 	        if (!password1RegExp.test(userPw)) {
 	            alert("비밀번호는 영문 대소문자와 숫자 8~16자리로 입력해야합니다!");
 	            signUpForm.userPw.value = "";

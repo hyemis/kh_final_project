@@ -743,10 +743,6 @@ public class PsMainController {
 									Principal principal) {
 		
 		try {
-			/*
-			 * Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			 * auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM")) ;
-			 */
 			PsUserDto result = null;
 			
 			if(principal != null) {				
