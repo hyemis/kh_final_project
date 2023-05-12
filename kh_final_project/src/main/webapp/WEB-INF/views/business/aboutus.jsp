@@ -177,12 +177,12 @@
 				</div>
 				<div class="modal-body">
 					<form action="${pageContext.request.contextPath }/business/aboutus/infoform" method="post"
-						enctype="multipart/form-data" class="was-validated">
+						enctype="multipart/form-data">
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
 							</div>
-							<div class="col-10 ">
+							<div class="col-10 was-validated">
 								<input type="text" name="boardTitle" class="form-control is-invalid"
 									style="width: 100%;" placeholder="제목을적어주세요" required> 
 								<hr>
@@ -194,7 +194,7 @@
 							</div>
 							<div class="col-10 ">
 								<p>직원수를 숫자로 입력해주세요
-								<input type="text" name="employee" class="form-control is-invalid"
+								<input type="text" name="employee" class="form-control "
 									style="width: 30%;" placeholder=" 예시)300" > 명 </p>
 								<hr>
 							</div>
@@ -205,7 +205,7 @@
 							</div>
 							<div class="col-10 ">
 								<p>회사의 평균 연봉을 입력해주세요</p>
-								<input type="text" class="form-control is-invalid"
+								<input type="text" class="form-control "
 									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" > 만원
 								<hr>
 							</div>

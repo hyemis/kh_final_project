@@ -110,43 +110,48 @@
 				</div>
 			</div>
 		</div>
-		<!-- 회사소개  -->
-		<div class="text-start mx-auto mt-3 m wow fadeInUp" 	data-wow-delay="0.1s">
-			<c:if test="${not empty currentUserId and info.userId eq currentUserId}">
-			<div class="row g-0 gx-5 align-items-end">
-				<div class="col-lg-6"></div>	
-				<div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-					<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-						<li class="nav-item me-2">
-							<button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${info.boardNo}'">수정</button>
-						</li>
-						<li class="nav-item me-0">
-							<button type="button" class="btn btn-outline-primary delete">삭제</button>
-						</li>
-					</ul>
-				</div>
-			</div>	
-			</c:if>
-			<div class="row g-0 gx-5 align-items-end">
-				<div class="col-lg-6 fs-4">
-					<p><i class="bi bi-telephone-fill text-primary me-3"></i><a class="text-primary me-3">대표전화</a><a>${info.bsMainPhone}</a></p>
-					<p><i class="bi bi-envelope-fill text-primary me-3"></i><a class="text-primary me-3">이메일</a><a>${info.userEmail}</a></p>
-					<br>
-				</div>
-				<div class="col-lg-6 fs-4">
-				<c:if test="${not empty info.tag }">
-					<p><i class="bi bi-tag-fill text-primary me-3"></i><a class="text-primary">${info.tag}</a></p>
-				</c:if>
-				<c:if test="${not empty info.employee }">
-					<p><i class="bi bi-person-fill text-primary me-3"></i><a class="text-primary me-3">직  원  수</a><a>${info.employee} 명</a></p>
-				</c:if>
-				<c:if test="${not empty info.salaryAvg }">
-					<p><i class="bi bi-wallet text-primary me-3"></i><a class="text-primary me-3">평균연봉</a><a>${info.salaryAvg} 만원</a></p>
-				</c:if>
-				</div>
+		<div class="m-4">
+			<div class="row fs-4">
+			<div class="col-4">
+				<p><i class="bi bi-telephone-fill text-primary me-3"></i><a class="text-primary me-3">대표전화</a><a>${info.bsMainPhone}</a></p>
 			</div>
-		</div>		
-		
+			<div class="col-6">
+				<p><i class="bi bi-envelope-fill text-primary me-3"></i><a class="text-primary me-3">이메일</a><a>${info.userEmail}</a></p>
+			</div>
+			</div>
+			<!-- 회사소개  -->
+			<div class="text-start mx-auto mt-3 m wow fadeInUp" 	data-wow-delay="0.1s">
+				<c:if test="${not empty currentUserId and info.userId eq currentUserId}">
+				<div class="row g-0 gx-5 align-items-end">
+					<div class="col-lg-6"></div>	
+					<div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+						<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+							<li class="nav-item me-2">
+								<button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${info.boardNo}'">수정</button>
+							</li>
+							<li class="nav-item me-0">
+							  <button type="button" class="btn btn-outline-primary delete">삭제</button>
+							</li>
+						</ul>
+					</div>
+				</div>	
+				</c:if>
+				<div class=" g-0 gx-5 align-items-end fs-4">
+					<c:if test="${not empty info.tag }">
+						<p><i class="bi bi-tag-fill text-primary me-3"></i><a class="text-primary">${info.tag}</a></p>
+					</c:if>
+					<c:if test="${not empty info.employee }">
+						<p><i class="bi bi-person-fill text-primary me-3"></i><a class="text-primary me-3">직  원  수</a><a>${info.employee} 명</a></p>
+					</c:if>
+					<c:if test="${not empty info.salaryAvg }">
+						<p><i class="bi bi-wallet text-primary me-3"></i><a class="text-primary me-3">평균연봉</a><a>${info.salaryAvg} 만원</a></p>
+					</c:if>
+				</div>
+			</div>		
+		</div>
+		<div class="fs-4 p-5">
+		${info.boardContent }
+		</div>
 
 					
 		
@@ -244,7 +249,34 @@
 </div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-
+<script>
+$(document).ready(function() {
+	  $(".delete").on("click", function() {
+	    if (confirm("정말 삭제하시겠습니까?")) {
+	      let userId = "${info.userId}";
+	      let boardNo = "${info.boardNo}";      	
+	      $.ajax({ 
+	        url: "${pageContext.request.contextPath}/board/company/delete"
+	        , type: "post"
+	        , data:  {boardNo : boardNo, userId : userId}
+	        , success: function(result){
+	          if(result > 0){
+	            location.href="${pageContext.request.contextPath}/business/aboutus/newsletter";
+	            alert("삭제되었습니다")
+	          }else if(result == -2){
+	            alert("아이디 정보가 맞지 않습니다.");
+	          }else{
+	            alert("삭제에 실패 했습니다.");
+	          }
+	        }
+	        , error: function(e){
+	          alert(e +" : 오류")
+	        }
+	      });
+	    }
+	  });
+	});
+</script>
 	<!-- ckeditor5 -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
