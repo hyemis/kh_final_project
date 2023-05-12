@@ -105,12 +105,13 @@
 <div markdown="1"> 
  <div align="center">
 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">워크넷 API로 채용공고 추가<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
-</div>
+
+ </div>
  
  <br>
  
  <div align="center">
-내용입력
+<img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/37353267-2b13-420e-998a-137f0e51f072">
  </div>
  
  </div>
