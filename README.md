@@ -50,12 +50,12 @@
 <br>
 
 ## 2. 요구사항정의서
-[요구사항정의서 전체보기](https://docs.google.com/spreadsheets/d/1ZwQjNBa_yiU-vb-vz2i-fItNsED2IWbJ/edit#gid=15147080)
+[요구사항정의서 전체보기](https://docs.google.com/spreadsheets/d/1ZSz9kat6E9u9owKFZAw9wt1C078Hlw0f/edit#gid=15147080)
 
 <br>
 
 ## 3. 화면설계서
-[화면설계서 전체보기]()
+[화면설계서 전체보기](https://drive.google.com/drive/folders/1MLeY7fHSMp6WLYectykztz8zZV3519OS)
 
 <br>
 
