@@ -13,7 +13,7 @@
  ## 1️⃣ 팀 소개
  
  ## 2️⃣ 프로젝트 개요
- <img width="70%" src="https://github.com/NukNim/kh_final_project/assets/114970601/c4620004-5d9b-414f-a1c4-22db1e7d7d0f"/>
+ <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/c4620004-5d9b-414f-a1c4-22db1e7d7d0f"/>
  
  ## 사용기술 및 개발환경
  
