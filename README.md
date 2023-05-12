@@ -215,7 +215,7 @@
  <br>
  
  <div align="center">
-  ![카카오로그인](https://github.com/NukNim/kh_final_project/assets/114970462/c8080b24-d357-4897-b0d6-5c6bda17c8ec)
+  <img src=" ![카카오로그인](https://github.com/NukNim/kh_final_project/assets/114970462/c8080b24-d357-4897-b0d6-5c6bda17c8ec)">
  </div>
  
  </div>
