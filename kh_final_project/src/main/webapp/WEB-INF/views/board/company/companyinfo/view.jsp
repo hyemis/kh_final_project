@@ -10,9 +10,7 @@
 
 <title>회사소개페이지</title>
 <!-- cs -->
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
-	rel="icon">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -87,10 +85,10 @@
 
 
 	<div class="container-xxl py-5">
-
-
+ 	<h1 class="text-center">회사소개</h1>
+ 	
 		<!-- 회사로고, 회사명, 태그 -->
-		<div class="container">
+		<div class="container mt-5">
 			<div class="row">
 				<div class="col-1">
 					<div class="icon p-2 me-2" style="float: left; margin-right: 10px;">
@@ -112,53 +110,47 @@
 				</div>
 			</div>
 		</div>
-
-
-		<br>
-
 		<!-- 회사소개  -->
-		<div class="text-start mx-auto mb-5 wow fadeInUp"
-			data-wow-delay="0.1s">
+		<div class="text-start mx-auto mt-3 m wow fadeInUp" 	data-wow-delay="0.1s">
+			<c:if test="${not empty currentUserId and info.userId eq currentUserId}">
 			<div class="row g-0 gx-5 align-items-end">
-				<div class="col-lg-6">
-					<div class="text-start mx-auto mb-5 wow slideInLeft"
-						data-wow-delay="0.1s">
-						<h1 class="mb-3">회사소개</h1>
-					</div>
+				<div class="col-lg-6"></div>	
+				<div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+					<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+						<li class="nav-item me-2">
+							<button type="button" class="btn btn-outline-primary" onclick="location.href='update?no=${info.boardNo}'">수정</button>
+						</li>
+						<li class="nav-item me-0">
+							<button type="button" class="btn btn-outline-primary delete">삭제</button>
+						</li>
+					</ul>
 				</div>
-				<c:if
-					test="${not empty currentUserId and info.userId eq currentUserId}">
-					<div class="col-lg-6 text-start text-lg-end wow slideInRight"
-						data-wow-delay="0.1s">
-						<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-							<li class="nav-item me-2">
-								<button type="button" class="btn btn-outline-primary"
-									onclick="location.href='update?no=${info.boardNo}'">수정</button>
-							</li>
-							<li class="nav-item me-0">
-								<button type="button" class="btn btn-outline-primary delete">삭제</button>
-							</li>
-						</ul>
-					</div>
-				</c:if>
+			</div>	
+			</c:if>
+			<div class="fs-4">
+			<c:if test="${not empty info.tag }">
+				<div>
+					<i class="bi bi-tag-fill text-primary me-3"></i><a class="text-primary">${info.tag}</a>
+				</div>
+			</c:if>
+			<c:if test="${not empty info.employee }">
+				<div>
+					<i class="bi bi-person-fill text-primary me-3"></i><a class="text-primary me-3">직  원  수</a><a>${info.employee} 명</a>
+				</div>
+			</c:if>
+			<c:if test="${not empty info.salaryAvg }">
+				<div>
+					<i class="bi bi-wallet text-primary me-3"></i><a class="text-primary me-3">평균연봉</a><a>${info.salaryAvg} 만원</a>
+				</div>
+			</c:if>
 			</div>
-			<div>
-				<a class="btn btn-primary">${info.tag}</a>
-			</div>
-			<div>
-				<a class="btn btn-primary">직원수${info.employee}</a>
-			</div>
-			<div>
-				<a class="btn btn-primary">평균연봉${info.salaryAvg}</a>
-			</div>
-			<div>대표번호 ${info.bsMainPhone}</div>
-			<h3 class="">${info.boardTitle}</h3>
-			<div class="m-5" id="boardContent">${info.boardContent}</div>
-		</div>
+		</div>		
+		
 
-		<br>
+					
+		
 		<!-- 채용중인 포지션 -->
-		<div class="container">
+		<div class="container mt-4">
 			<div class="row g-0 gx-5 align-items-end">
 				<div class="col-lg-6">
 					<div class="text-start mx-auto mb-5 wow slideInLeft"
@@ -207,13 +199,12 @@
 					</div>
 				</div>
 			</div>
-				<a class="btn btn-outline-primary" id="more-recruit" onclick="changeForEach();">더보기</a>
 		</div>
 
 		<br>
 
 		<!-- 오시는길 -->
-		<div class="container">
+		<div class="container mt-3">
 			<div class="col-12 row g-0 gx-5 align-items-end">
 				<div class="text-start mx-auto mb-5 wow fadeInleft"
 					data-wow-delay="0.1s">
@@ -231,17 +222,16 @@
 
 		</div>
 
-
 		<!-- newsletter Start -->
 		<div class="container">
-			<div class="pt-3 text-start mb-5 wow fadeInUp" data-wow-delay="0.1s">
-				<h1 class="mb-3">이 회사의 뉴스레터</h1>
+			<div class="pt-3 text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" >
+				<h1>이 회사의 뉴스레터</h1>
 			</div>
 			<div class="row g-4">
-				<c:forEach items="${news }" var="news">
+				<c:forEach items="${news.getPage() }" var="news" varStatus="status" begin="0" end="2">
 					<div class="col-lg-4 col-sm-6 wow fadeInUp mx-auto " data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 						<a class="cat-item d-block bg-light text-center rounded p-2" href="${pageContext.request.contextPath}/board/company/newsletter/view?no=${news.boardNo }">
-						<div class="rounded p-4">
+						<div class="rounded p-2">
 						<i class="bi bi-newspaper fs-1"></i>
 						<p class="fs-3">${news.boardTitle }</p> 
 						</div>
@@ -249,64 +239,14 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div class="row g-4" id="moreRecruit"></div>
 		</div>
-		
-
-		
-
+</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 
-<script>
-let isExpanded = false; // 버튼이 눌렸는지 여부를 나타내는 변수
-
-function changeForEach() {
-  if (!isExpanded) {
-    // 동적으로 content 내용 추가
-    let html = '<c:forEach items="${recruitList}" var="recruit" varStatus="status" begin="6">';
-    html += '<div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s">';
-    html += '<div class="property-item rounded overflow-hidden bg-white">';
-    html += '<div class="p-4 pb-0">';
-    html += '<h5 class="text-primary mb-3">${recruit.companyName }</h5>';
-    html += '<a class="d-block h5 mb-2" href="">${recruit.raTitle }</a>';
-    html += '<a>지원날짜 ${recruit.registDate } ~ ${recruit.closeDate }</a>';
-    html += '</div>';
-    html += '<sec:authorize access="hasRole(\'ROLE_P\')">';
-    html += '<div class="d-flex border-top">';
-    html += '<small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i> <a href="/job/person/viewrecruit/${recruit.raNum }">공고보기</a></small>';
-    html += '<small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i> <a href="/job/person/viewrecruit/${recruit.raNum }">지원하기</a></small>';
-    html += '</div>';
-    html += '</sec:authorize>';
-    html += '<sec:authorize access="hasRole(\'ROLE_B\')">';
-    html += '<div class="d-flex border-top">';
-    html += '<small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i> <a href="/job/business/recruit/view?id=${recruit.raNum }">공고보기</a></small>';
-    html += '</div>';
-    html += '</sec:authorize>';
-    html += '</div>';
-    html += '</div>';
-    html += '</c:forEach>';
-    document.getElementById("moreRecruit").innerHTML = html;
-    isExpanded = true; // 변수 값을 변경하여 다음번 클릭 시 삭제되도록 합니다.
-    document.getElementById("more-recruit").innerText = "접기"; // 버튼 텍스트를 변경합니다.
-  } else {
-    // content 내용 삭제
-    document.getElementById("moreRecruit").innerHTML = "";
-    isExpanded = false; // 변수 값을 변경하여 다음번 클릭 시 추가되도록 합니다.
-    document.getElementById("more-recruit").innerText = "더보기"; // 버튼
-
-		
-</script>
 
 	<!-- ckeditor5 -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-
-	ClassicEditor .create( document.querySelector( '#boardContent' ),{
-	language: "ko" , config : { height:'400px' , width:'100%' }, toolbar:
-	[] }).then( newEditor => { editor = newEditor;
-	editor.enableReadOnlyMode( '#boardContent' ); }) .catch( error => {
-	console.error( error ); });
-
 
 	<script>
 <!-- map -->

@@ -144,20 +144,6 @@
 	<!-- ckeditor5 -->
 	<script	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 	
-	ClassicEditor
-    .create( document.querySelector( '#boardContent' ),{
-    	language: "ko"    
-    	, config : {
-    		height:'400px'
-	   		, width:'100%'
-    	}, toolbar: []
-    }).then( newEditor => {
-		 editor = newEditor;
-    	editor.enableReadOnlyMode( '#boardContent' );
-    })
-    .catch( error => {
-        console.error( error );
-    });
 
 </body>
 </html>

@@ -79,7 +79,13 @@ public class CompanyController {
 		List<BsRecruitDto> reCruitDto = brservice.recruitAdmission(userId);
 		mv.addObject("recruitList", reCruitDto);
 
-//	6개만 보여주는 newsletter list 만들기
+		if(dto.getPnum() < 1) {
+			dto.setPnum(1);
+			}
+			
+		Paging list = service.newsLetterInfo(dto);
+		System.out.println(dto);
+		mv.addObject("news", list);
 
 		return mv;
 	}
