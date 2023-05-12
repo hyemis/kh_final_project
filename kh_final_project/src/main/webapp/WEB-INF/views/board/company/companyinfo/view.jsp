@@ -127,22 +127,23 @@
 				</div>
 			</div>	
 			</c:if>
-			<div class="fs-4">
-			<c:if test="${not empty info.tag }">
-				<div>
-					<i class="bi bi-tag-fill text-primary me-3"></i><a class="text-primary">${info.tag}</a>
+			<div class="row g-0 gx-5 align-items-end">
+				<div class="col-lg-6 fs-4">
+					<p><i class="bi bi-telephone-fill text-primary me-3"></i><a class="text-primary me-3">대표전화</a><a>${info.bsMainPhone}</a></p>
+					<p><i class="bi bi-envelope-fill text-primary me-3"></i><a class="text-primary me-3">이메일</a><a>${info.userEmail}</a></p>
+					<br>
 				</div>
-			</c:if>
-			<c:if test="${not empty info.employee }">
-				<div>
-					<i class="bi bi-person-fill text-primary me-3"></i><a class="text-primary me-3">직  원  수</a><a>${info.employee} 명</a>
+				<div class="col-lg-6 fs-4">
+				<c:if test="${not empty info.tag }">
+					<p><i class="bi bi-tag-fill text-primary me-3"></i><a class="text-primary">${info.tag}</a></p>
+				</c:if>
+				<c:if test="${not empty info.employee }">
+					<p><i class="bi bi-person-fill text-primary me-3"></i><a class="text-primary me-3">직  원  수</a><a>${info.employee} 명</a></p>
+				</c:if>
+				<c:if test="${not empty info.salaryAvg }">
+					<p><i class="bi bi-wallet text-primary me-3"></i><a class="text-primary me-3">평균연봉</a><a>${info.salaryAvg} 만원</a></p>
+				</c:if>
 				</div>
-			</c:if>
-			<c:if test="${not empty info.salaryAvg }">
-				<div>
-					<i class="bi bi-wallet text-primary me-3"></i><a class="text-primary me-3">평균연봉</a><a>${info.salaryAvg} 만원</a>
-				</div>
-			</c:if>
 			</div>
 		</div>		
 		
@@ -209,7 +210,7 @@
 				<div class="text-start mx-auto mb-5 wow fadeInleft"
 					data-wow-delay="0.1s">
 					<h1 class="mb-3">오시는길</h1>
-					<p>
+					<p class="fs-4">
 						<i class="fa fa-map-marker-alt text-primary me-2"></i>${info.addressRoad}${bsinfo.addressJibun}
 						${bsinfo.addressDetail}
 					</p>
@@ -277,7 +278,7 @@
             });
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">내 기업</div>'
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">기업 위치</div>'
             });
             infowindow.open(map, marker);
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
