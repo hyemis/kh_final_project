@@ -51,21 +51,48 @@
 <details>
 <summary><h3>✅ 관리자 카테고리 관리 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 기업 채용공고 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 지원자 관리 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
@@ -76,21 +103,48 @@
 <details>
 <summary><h3>✅ OPEN API 연동 샘플데이터 추가 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 이력서 작성 및 입사지원 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 공고 & 기업 스크랩 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
@@ -101,24 +155,50 @@
 <details>
 <summary><h3>✅ 인재찾기 및 면접제안 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 기업 게시글 작성 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 면접일정 보기 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
- 
  
   <div align="center">
 <img width="200" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/8312f9fe-aaa5-4d1d-9946-257ea2eed474">
@@ -127,21 +207,48 @@
 <details>
 <summary><h3>✅ 회원가입 및 로그인 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 이력서 생성 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
  <details>
 <summary><h3>✅ 면접일정 보기 </h3></summary>
 <div markdown="1"> 
- 내용입력
+ <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ 
+ <br>
+ 
+ <div align="center">
+  내용입력
+ </div>
+ 
  </div>
  </details>
  
