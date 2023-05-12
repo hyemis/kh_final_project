@@ -157,7 +157,7 @@
 <br>
 
 ## 3. 화면설계서
-[화면설계서 전체보기](https://drive.google.com/drive/folders/1MLeY7fHSMp6WLYectykztz8zZV3519OS)
+[화면설계서 전체보기](https://drive.google.com/file/d/1a4bbvSW0Fl5gLfnMDt6l8ZmQv32qvjZr/view?usp=sharing)
 
 <br>
 
