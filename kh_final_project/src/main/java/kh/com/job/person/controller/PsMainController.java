@@ -747,14 +747,17 @@ public class PsMainController {
 			 * Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			 * auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_AM")) ;
 			 */
+			PsUserDto result = null;
 			
-		PsUserDto result = service.selectOne(principal.getName());
-		List<PsResumeDto> resume = rservice.selectList(principal.getName());
-		// 공고 정보 출력
-		BsRecruitDetailDto redto = abs.viewDetail(raNum);	
+			if(principal != null) {				
+				result = service.selectOne(principal.getName());
+			}
 		
 		
 		if (result != null) {
+			List<PsResumeDto> resume = rservice.selectList(principal.getName());
+			// 공고 정보 출력
+			BsRecruitDetailDto redto = abs.viewDetail(raNum);	
 			mv.addObject("redto", redto);
 			mv.addObject("resumelist", resume);
 			mv.setViewName("person/viewrecruit");
