@@ -59,13 +59,13 @@
 <summary><h3>✅ 기업 채용공고 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 화면 예시 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
  
  <div align="center">
-  내용입력
+  <img width="90%" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114903799/c02f2a19-8282-4c99-a92b-6c430793f2df"> 
  </div>
  
  </div>
