@@ -75,13 +75,13 @@
 <summary><h3>✅ 지원자 관리 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 화면 예시 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
  
  <div align="center">
-  내용입력
+  <img width="100%" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114903799/6e579389-a08e-4377-9ded-6606a3ffa4f6">
  </div>
  
  </div>
