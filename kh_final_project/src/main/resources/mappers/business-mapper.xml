@@ -156,28 +156,24 @@
 
 	<!-- 채용공고 작성 -->
 	<insert id="insertRecruit">
-		insert INTO RECRUIT_REGIST
+		INSERT INTO RECRUIT_REGIST
 		(RA_NUM, COMPANY_NAME,
 		RECRUIT_TYPE,CONDITION_TYPE, USER_EDUCATION, USER_ID
-		, SALARY,
-		MIN_SALARY, MAX_SALARY
+		, SALARY, MIN_SALARY, MAX_SALARY
 		, REGIST_DATE, CLOSE_DATE
-		, CAREER, HOLIDAY_TYPE,
-		EMP_TYPE_CODE
+		, CAREER, HOLIDAY_TYPE, EMP_TYPE_CODE
 		, RA_TITLE, RA_CONTENT
-		, RA_EXTRA_DOCUMENT,RA_PROGRESS,
-		RA_ADMISSION)
-		VALUES(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName},
-		#{recruitType},
-		#{conditionType}, #{userEducation}, #{userId}
-		,
-		#{salary}, #{minSalary}, #{maxSalary}
+		, RA_EXTRA_DOCUMENT,RA_PROGRESS, RA_ADMISSION
+		)
+		VALUES
+		(RECRUIT_REGIST_SEQ.NEXTVAL, #{companyName}
+		, #{recruitType}, #{conditionType}, #{userEducation}, #{userId}
+		, #{salary}, #{minSalary}, #{maxSalary}
 		, #{registDate}, #{closeDate}
-		,
-		#{career}, #{holidayType}, #{empTypeCode}
+		, #{career}, #{holidayType}, #{empTypeCode}
 		, #{raTitle}, #{raContent}
-		,
-		#{raExtraDocument}, 'N', 'N')
+		, #{raExtraDocument}, 'N', 'N'
+		)
 	</insert>
 
 	<!-- 채용공고 등록 리스트 -->

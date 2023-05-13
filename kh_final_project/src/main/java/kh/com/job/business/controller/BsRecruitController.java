@@ -105,11 +105,7 @@ public class BsRecruitController {
 		if(conditionTypeList != null && !conditionTypeList.isEmpty()) {
 			//우대조건 컬럼 한개로 합치기
 			String conditionType = String.join(",", conditionTypeList);
-			dto.setConditionType(conditionType);
-			
-			//join으로 합친거 자르기위한 거
-//			String[] conditionType2 = conditionType.split(",");
-//			List<String> list = Arrays.asList(conditionType2);			
+			dto.setConditionType(conditionType);		
 		}
 		
 		//salary 최대값 최소값 null일 때 0으로  
@@ -136,7 +132,6 @@ public class BsRecruitController {
 		if(result == 1) {
 			mv.setViewName("redirect:/business/recruit/main");
 		}
-		//이거 오류 페이지 넘기는거 해야됨
 		mv.setViewName("redirect:/business/recruit/main");
 		return mv;
 	}
