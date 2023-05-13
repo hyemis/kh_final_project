@@ -94,9 +94,9 @@
 <details>
 <summary><h3>✅ OPEN API 연동 샘플데이터 추가 </h3></summary>
 <div markdown="1"> 
+ 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">워크넷 API로 채용공고 추가<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
-
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">워크넷 API로 채용공고 샘플데이터 추가<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
  </div>
  
  <br>
@@ -104,10 +104,27 @@
  <div align="center">
 <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/37353267-2b13-420e-998a-137f0e51f072">
  </div>
+  
+  - 워크넷 채용공고 API사용.
+  - OpenApiUtils 생성 후 제너릭 사용해 dto에 저장.
+ <br>
  
+ <div align="center">
+ <img width="65%" src="https://github.com/NukNim/kh_final_project/assets/114970601/01707431-33b1-4734-a429-1ac7b34e1bcd">
+   </div>
+ 
+  - API에서 지원하지 않는 출력값의 경우, NodeList 객체를 생성해 추출한 텍스트 콘텐츠를 리턴하도록 하였고 요소를 찾지 못한 경우에는 NULL을 리턴하도록 함.
+ <br>
+ 
+  <div align="center">
+  <img width="70%" src="https://github.com/NukNim/kh_final_project/assets/114970601/b81afc2c-1fe8-4b22-a062-0ca258c6fb27">
  </div>
- </details>
  
+ - 데이터가 XML형태로 들어와 XML파싱메소드를 이용해 데이터를 파싱.
+ <br>
+
+ </details>
+
  <details>
 <summary><h3>✅ 이력서 작성 및 입사지원 </h3></summary>
 <div markdown="1"> 
