@@ -8,7 +8,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>JOB-A_채용 정보</title>
+<title>JOB-A 채용 정보</title>
 <!-- cs -->
 <link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,8 +42,11 @@
 	<section>
 	<div class="container-xxl py-5">
 		<div class="container-fluid bg-white p-5">
-			<h3>채용정보검색</h3>
-			<span>현재 채용 중인 공고를 검색하세요. </span>
+			<div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+			    <h1>채용정보검색</h1>
+				<span>현재 채용 중인 공고를 검색하세요. </span>
+		    </div>
+			
 		</div>
 		<!-- 검색 부분  -->
 		<div class="container-fluid" style="background-color: #f8f9fa; min-height: 300px;">
@@ -299,22 +302,34 @@
 									// 새로운 내용 출력
 									let recruitTable = '<div class="container-fluid bg-white p-5 recruit-Container">';
 									for (i = 0; i < result.length; i++) {
-									    recruitTable += '<table class="recruit-table">';
-									    recruitTable += '<tr>';
-									    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
-									    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
-									    recruitTable += '</a></td></tr>';
-									    recruitTable += '<tr>';
-									    <sec:authorize access="isAuthenticated()">
-									     recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
-										 recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
-									 	 recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
-										 recruitTable += '</td>';
-									    </sec:authorize>
-									    <sec:authorize access="!isAuthenticated()">
-									        recruitTable += '<td>~' + result[i].closeDate + '</td>';
-									    </sec:authorize>
-									    recruitTable += '</tr></table>';
+										recruitTable += '<table class="recruit-table">';
+										recruitTable += '<tr>';
+										recruitTable += '<td>';
+										recruitTable += '<sec:authorize access="isAuthenticated()">';
+										recruitTable += '<a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
+										recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+										recruitTable += '</a>';
+										recruitTable += '</sec:authorize>';
+										recruitTable += '<sec:authorize access="!isAuthenticated()">';
+										recruitTable += '<a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank" onclick="showLoginAlert()">';
+										recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+										recruitTable += '</a>';
+										recruitTable += '</sec:authorize>';
+										recruitTable += '</td>';
+										recruitTable += '</tr>';
+										recruitTable += '<tr>';
+										recruitTable += '<sec:authorize access="hasAnyRole(\'ROLE_P\')">';
+										recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+										recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+										recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+										recruitTable += '</td>';
+										recruitTable += '</sec:authorize>';
+										recruitTable += '<sec:authorize access="!isAuthenticated()">';
+										recruitTable += '<td>~' + result[i].closeDate + '</td>';
+										recruitTable += '</sec:authorize>';
+										recruitTable += '</tr>';
+										recruitTable += '</table>';
+
 									}
 									recruitTable += '</div>';
 									$('.recruit-Container').html(
@@ -371,22 +386,34 @@
 				// 새로운 내용 출력
 				let recruitTable = '<div class="container-fluid bg-white p-5 recruit-Container">';
 				for (i = 0; i < result.length; i++) {
-				    recruitTable += '<table class="recruit-table">';
-				    recruitTable += '<tr>';
-				    recruitTable += '<td><a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
-				    recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
-				    recruitTable += '</a></td></tr>';
-				    recruitTable += '<tr>';
-				    <sec:authorize access="isAuthenticated()">
-				      recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
-					  recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
-					  recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
-					  recruitTable += '</td>';
-				    </sec:authorize>
-				    <sec:authorize access="!isAuthenticated()">
-				        recruitTable += '<td>~' + result[i].closeDate + '</td>';
-				    </sec:authorize>
-				    recruitTable += '</tr></table>';
+					recruitTable += '<table class="recruit-table">';
+					recruitTable += '<tr>';
+					recruitTable += '<td>';
+					recruitTable += '<sec:authorize access="isAuthenticated()">';
+					recruitTable += '<a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank">';
+					recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+					recruitTable += '</a>';
+					recruitTable += '</sec:authorize>';
+					recruitTable += '<sec:authorize access="!isAuthenticated()">';
+					recruitTable += '<a href="' + '${pageContext.request.contextPath}/person/viewrecruit/' + result[i].raNum + '" target="_blank" onclick="showLoginAlert()">';
+					recruitTable += '<span class="bold">' + result[i].companyName + '</span><br><br>' + result[i].raTitle;
+					recruitTable += '</a>';
+					recruitTable += '</sec:authorize>';
+					recruitTable += '</td>';
+					recruitTable += '</tr>';
+					recruitTable += '<tr>';
+					recruitTable += '<sec:authorize access="hasAnyRole(\'ROLE_P\')">';
+					recruitTable += '<td class="star-icon" data-raNum="' + result[i].raNum + '" onclick="handleStarClick(event)">';
+					recruitTable += '<span class="far fa-star" aria-hidden="true"></span>';
+					recruitTable += '<span class="date">~' + result[i].closeDate + '</span>';
+					recruitTable += '</td>';
+					recruitTable += '</sec:authorize>';
+					recruitTable += '<sec:authorize access="!isAuthenticated()">';
+					recruitTable += '<td>~' + result[i].closeDate + '</td>';
+					recruitTable += '</sec:authorize>';
+					recruitTable += '</tr>';
+					recruitTable += '</table>';
+
 				}
 				recruitTable += '</div>';
 				
@@ -488,7 +515,7 @@
 	  });
 	};
 	
-	// 	
+	// 비로그인 시 
 	 function showLoginAlert() {
 	        alert("로그인 후 더 많은 서비스를 이용해보세요.");
 	        location.href = "${pageContext.request.contextPath}/person/login";

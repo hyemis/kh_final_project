@@ -61,7 +61,7 @@
 	<section>
 	<!-- 영역 잡기 위해서 컨테이너 안에 내용 넣어주세요. -->
 	<div class="container-sm d-flex justify-content-center">	
-		<div class="grid gap-3 w-75 my-5 border border-primary ">
+		<div class="grid gap-3 w-75 my-5">
 			 <div class="row justify-content-center">
 			 
 		        <form class="col-6" name=singUpForm action="${pageContext.request.contextPath}/login" method="post">

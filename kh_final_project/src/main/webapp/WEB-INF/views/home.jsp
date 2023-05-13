@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>JOB-A home</title>
 <!-- cs -->
 <link
 	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
@@ -62,7 +62,7 @@
 
 	<!-- page section -->
 	<section>
-	<div class="container-fluid p-5" style="background-color: #f2f2f2; min-height: 300px;">
+	<div class="container-fluid p-5">
 		<div id="carouselCantent" class="carousel slide" data-bs-ride="carousel">
 		  <ol class="carousel-indicators">
 		    <li data-bs-target="#carouselCantent" data-bs-slide-to="0" class="active"></li>
@@ -73,7 +73,7 @@
 		  <c:forEach items="${bList }" var="list" varStatus="i">
 		  	<div class="carousel-item ${i.count ==1?'active':'' }">
 			  	<a href="${pageContext.request.contextPath}${list.bannerLink }">
-			      <img src="${list.bannerThum eq null? 'https://dummyimage.com/200x200/000000/ffffff.png&text=No+Image' : list.bannerThum}" class="d-block" alt="..." style="width: 600px; height: 400px;">
+			      <img src="${list.bannerThum eq null? 'https://dummyimage.com/200x200/000000/ffffff.png&text=No+Image' : list.bannerThum}" class="d-block" alt="..." style="width:600px; height: 400px;">
 			    </a>
 		    </div>
 		  </c:forEach>
