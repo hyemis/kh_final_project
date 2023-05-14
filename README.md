@@ -32,7 +32,7 @@
  ## 4️⃣ 사용기술 및 개발환경
  
 <div align="center">    
-<img width="90%" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114903799/e290e435-a11d-4fb5-8556-4906babfcb9b"> 
+<img width="80%" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114903799/e290e435-a11d-4fb5-8556-4906babfcb9b"> 
 </div>
 
 
@@ -161,17 +161,48 @@
 <summary><h3>✅ 이력서 작성 및 입사지원 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 이력서 작성 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
  
  <div align="center">
-  내용입력
+<img src="https://github.com/NukNim/kh_final_project/assets/114970601/42cc174c-4da3-4ba9-a36b-72704dd94541">
+ 이력서 - 학력사항 작성 화면
  </div>
+ <br>
+ <br> 
+ 
+ 
+  <div align="center">
+<img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/6c24b6de-dd8a-4837-9272-9c787ef4bd50">
+ </div>
+ <br>
+ 
+  ---
+ 
+  <div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970601/c6b01451-61df-4e7e-9b0e-5ef7d3f8cddc">
+ 저장된 정보 불러오기, 수정, 삭제 화면
+ </div>
+ <br>
+ <br> 
+ 
+ 
+  <div align="center">
+<img width="60%" src="https://github.com/NukNim/kh_final_project/assets/114970601/fe13d228-81b4-41d7-bd2a-e5b490dd44b9">
+ </div>
+ <br>
+ 
+  ---
+ 
+  <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 입사지원 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
  
  </div>
  </details>
+ 
  
  <details>
 <summary><h3>✅ 공고 & 기업 스크랩 </h3></summary>
