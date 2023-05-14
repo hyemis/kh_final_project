@@ -167,7 +167,6 @@
 </div>
  
  <br>
- <br>
  
  <div align="center">
 <img src="https://github.com/NukNim/kh_final_project/assets/114970601/42cc174c-4da3-4ba9-a36b-72704dd94541">
@@ -208,7 +207,7 @@
  
   <div align="center">
 <img src="https://github.com/NukNim/kh_final_project/assets/114970601/6fa8a1a2-b6b6-4306-bb77-bad83afe1011">
- <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/d243b23f-81c9-47b9-9442-4d49dbf13c1c"><br>
+ <img width="90%" src="https://github.com/NukNim/kh_final_project/assets/114970601/d243b23f-81c9-47b9-9442-4d49dbf13c1c"><br>
  입사지원 & 지원취소 화면
  </div>
 
@@ -217,11 +216,12 @@
  <br> 
  
  
-1. '지원하기' 버튼 클릭해 모달창에서 해당 공고에 지원할 이력서 선택 후 입사지원하기
+1. 채용공고에서 '지원하기' 버튼 클릭 후 모달창에서 해당 공고에 지원할 이력서 선택해 입사지원하기
 2. 한 채용공고에 입사지원은 한 번만 가능하도록 구현  
  2-1 다른 이력서여도 입사지원 불가능 -'이미 입사지원한 공고입니다' alert창 출력
-3. 기업이 이력서 확인 전이면 입사 취소 가능  
- 3-1 기업이 이미 열람한 이력서의 경우, '지원취소' 버튼 대신 '열람완료' 문구 출력
+3. <입사지원현황>에서 입사지원내역 확인  
+ 4. 기업이 이력서 확인 전이면 입사 취소 가능  
+ 4-1 기업이 이미 열람한 이력서의 경우, '지원취소' 버튼 대신 '열람완료' 문구 출력
 
  
  
@@ -231,24 +231,64 @@
  
  
  <details>
-<summary><h3>✅ 공고 & 기업 스크랩 </h3></summary>
+<summary><h3>✅ 채용공고 & 기업 스크랩 </h3></summary>
 <div markdown="1"> 
+ <br>
+ <br>
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 채용공고 스크랩 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
  
  <div align="center">
-  내용입력
+<img src="https://github.com/NukNim/kh_final_project/assets/114970601/4497c351-cf09-4fe7-ae19-3a634dca47ea">
+  채용공고 스크랩 화면
  </div>
+ <br>
+ <br>
+ <br>
+  <br>
+<div align="center">
+ <img src="https://github.com/NukNim/kh_final_project/assets/114970601/2028a2de-eb0d-485c-9d19-c07a83097bee">
+ </div>
+ <br>
+ 
+  ---
+ <br>
+  <div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 관심기업 스크랩 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+</div>
+ <br>
+ <br>
+ 
+   <div align="center">
+  <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/2197ebd7-3f98-4f3b-a7fe-eff0625769dd">
+  <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/ccff0dca-56f2-44f0-84a4-18dd488622bf">
+  </div>
+ 
+   <br>
+ 
+1. 페이지 실행 시, ajax 통해 해당 회사가 관심기업으로 스크랩 되어있는지 확인해 하트 모양 아이콘 상태 변경  
+2. 회사 정보 게시판 & 회사 소개페이지에서 하트 모양 아이콘 클릭해 관심기업으로 스크랩 
+3. 한 번 더 클립하여 관심기업 스크랩 취소
+4. <관심기업정보>에서 스크랩 정보 확인
+5. 회사소개 '이동' 버튼 클릭하여 회사소개 페이지로 이동
+6. 체크박스로 체크 후 '관심기업 삭제' 버튼 클릭해 DB에서 삭제
+ <br>
+<br>
+ 
+  ---
  
  </div>
  </details>
+
  
  <div align="center">
 <img width="200" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/d5926a64-3877-4fd8-8a3f-3ee649ac046e">
 </div>
+  
+
 
 <details>
 <summary><h3>✅ 인재찾기 및 면접제안 </h3></summary>
