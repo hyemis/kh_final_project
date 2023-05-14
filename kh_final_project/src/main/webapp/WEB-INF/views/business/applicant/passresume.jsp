@@ -120,9 +120,6 @@
 		}else if(title =="" || title == null){
 			alert("결과 발표 제목을 입력해주세요.");
 			return false;
-		}else if(content =="" || content == null){
-			alert("결과 발표 내용을 입력해주세요.");
-			return false;
 		}
 		return true;
 	}
