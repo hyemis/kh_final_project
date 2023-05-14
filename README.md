@@ -160,10 +160,13 @@
  <details>
 <summary><h3>✅ 이력서 작성 및 입사지원 </h3></summary>
 <div markdown="1"> 
+ <br>
+ <br>
  <div align="center">
 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 이력서 작성 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
+ <br>
  <br>
  
  <div align="center">
@@ -195,12 +198,35 @@
  <br>
  
   ---
- 
+ <br>
   <div align="center">
 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 입사지원 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
+ <br>
+ <br>
+ 
+  <div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970601/6fa8a1a2-b6b6-4306-bb77-bad83afe1011">
+ <img width="80%" src="https://github.com/NukNim/kh_final_project/assets/114970601/d243b23f-81c9-47b9-9442-4d49dbf13c1c"><br>
+ 입사지원 & 지원취소 화면
  </div>
+
+ 
+ <br>
+ <br> 
+ 
+ 
+1. '지원하기' 버튼 클릭해 모달창에서 해당 공고에 지원할 이력서 선택 후 입사지원하기
+2. 한 채용공고에 입사지원은 한 번만 가능하도록 구현  
+ 2-1 다른 이력서여도 입사지원 불가능 -'이미 입사지원한 공고입니다' alert창 출력
+3. 기업이 이력서 확인 전이면 입사 취소 가능  
+ 3-1 기업이 이미 열람한 이력서의 경우, '지원취소' 버튼 대신 '열람완료' 문구 출력
+
+ 
+ 
+ ---
+  </div>
  </details>
  
  
