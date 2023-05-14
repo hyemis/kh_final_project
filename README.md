@@ -190,7 +190,7 @@
  
  
   <div align="center">
-<img width="60%" src="https://github.com/NukNim/kh_final_project/assets/114970601/fe13d228-81b4-41d7-bd2a-e5b490dd44b9">
+<img width="60%" src="https://github.com/NukNim/kh_final_project/assets/114970601/908edd1e-dfa8-4733-a41f-23e4b065c4fc">
  </div>
  <br>
  
