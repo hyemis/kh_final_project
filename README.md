@@ -217,14 +217,69 @@
 <summary><h3>✅ 회원가입 및 로그인 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 회원가입 및 로그인 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
  
+<div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/4c32d584-a5b1-43c7-a865-65beb5b52285">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/d601bf4b-82d6-4245-8cfe-b8333f8aed14">
+</div>
+ 
+ <br>
+ <br>
+ <br>
+ 
  <div align="center">
-  <img src="https://github.com/NukNim/kh_final_project/assets/114970462/c8080b24-d357-4897-b0d6-5c6bda17c8ec.gif">
+ <img src="https://github.com/NukNim/kh_final_project/assets/114970462/0a804c77-d9e0-4a2c-86ee-15c317b73192">
+  회원가입 
  </div>
+ 
+<br> 
+<br> 
+<br>
+ 
+  1. 개인회원, 기업회원 선택 후 회원 가입 
+  2. 모든 회원 정보 기입 필수 
+  3. 아이디 정규 표현식 체크 , 아이디 중복 체크
+  4. 비밀번호 정규 표현식 체크, 비밀번호 / 비밀번호 확인 불일치 체크, 아이디 / 비밀번호 불일치 체크 
+  5. 이름, 이메일 정규 표현식 체크 
+  7. 회원가입 버튼 클릭 시 아이디, 이메일 중복된 데이터 여부 한번 더 체크 후 회원가입 
+
+ ---
+ 
+<br> 
+<br> 
+<br>
+ 
+<div align="center">
+ <img src="https://github.com/NukNim/kh_final_project/assets/114970462/040fd29f-2edc-495d-80de-70e742e80b14">
+</div>
+ 
+<br> 
+<br> 
+<br>
+ 
+<div align="center">
+ <img src="https://github.com/NukNim/kh_final_project/assets/114970462/6262f694-9033-4653-a11e-16f02f979a88">
+  카카오 로그인 
+ </div>
+ 
+<br> 
+<br> 
+<br>
+ 
+1. 카카오 인증 서버와의 통신을 통해 액세스 토큰 가져오기 
+2. 토큰을 사용하여 카카오톡 API 서버에 사용자 정보를 요청
+3. 사용자 정보와 데이터베이스 데이터 비교해 일치 시 권한 생성 후 로그인 , 불일치 시 로그인 화면 출력
+
+---
+ 
+<br> 
+<br> 
+<br>
+ 
  
  </div>
  </details>
@@ -232,31 +287,114 @@
  <details>
 <summary><h3>✅ 이력서 생성 </h3></summary>
 <div markdown="1"> 
- <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<div align="center">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 이력서 생성 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
  
+<div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/f05ca6ed-c33a-4bdd-995e-151ffa940a22">
+</div>
+ 
+<br> 
+<br> 
+<br>
+ 
  <div align="center">
-  내용입력
+ <img src="https://github.com/NukNim/kh_final_project/assets/114970462/64726f50-1f0f-4c52-8a4d-4c1d3cd2c660">
+  이력서 생성
  </div>
+ 
+<br> 
+<br> 
+<br>
+ 
+1. 현재 로그인한 회원 정보를 포함한 이력서 작성 페이지 출력  
+2. 이력서 사진 존재 시 Google Cloud Storage에 파일 업로드 후 이력서 작성 페이지에 재출력
+3. 이력서 제목 글자 수 제한, 필수 입력 / 입력 사항 선택 
+4. 포트폴리오 파일 존재 시 Google Cloud Storage 파일 업로드 
+5. 다음 버튼 클릭 시 이력서 생성 
+
+ ---
+ 
+<br> 
+<br> 
+<br>
+ 
+ 
+<div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/1dcbb31e-5eb7-41fa-bb7e-51c04b4a1f9f">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/6475d74c-253d-4cd0-ace0-66aab61cf7ec">
+</div>
+ 
+<br> 
+<br> 
+<br>
+ 
+<div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/558335bd-24a8-4182-8a1d-e0226eea40ec">
+  자격증 입력
+ </div>
+ 
+<br> 
+<br> 
+<br>
+ 
+1. 현재 이력서에 새 자격증 정보 입력 
+2. 새정보추가 버튼 클릭 후 추가된 입력 form 에 현재 이력서에 여러 개의 새 자격증 정보 입력 
+2. 저장된 정보 불러오기로 기존 자격증 선택한 순서대로 출력
+3. 기존 자격증 정보로 현재 이력서에 자격증 정보 추가 / 수정 / 삭제
+
+
+---
+ 
+<br> 
+<br> 
+<br>
  
  </div>
  </details>
  
  <details>
-<summary><h3>✅ 채용정보조회 </h3></summary>
+<summary><h3>✅ 채용정보검색 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 소제목입력 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">  채용정보검색 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
+<br>
+ 
+<div align="center">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/57b60a24-85ba-4117-bfa9-518ddf31c092">
+<img src="https://github.com/NukNim/kh_final_project/assets/114970462/5bdf1c70-bbfa-4dc3-84a1-7ad93d0fde39">
+</div>
+
+ <br>
+ <br>
  <br>
  
  <div align="center">
- 
+ <img src="https://github.com/NukNim/kh_final_project/assets/114970462/ec21ef55-811f-49be-8481-9a5cdb597c66">
+  채용 정보 검색
  </div>
+ 
+<br> 
+<br> 
+<br>
+ 
+1. 지역, 직종, 우대조건 카테고리 / 현재 채용 중인 채용 공고를 포함한 채용 정보 조회 페이지 출력
+2. 3단계 카테고리 선택 시 해당되는 채용 공고 출력 
+3. 체크박스로 선택된 조건으로 채용 공고 검색 
+4. 검색어로 채용 공고 검색
+5. 채용 공고 제목, 채용 회사 클릭 시 새 창으로 채용 공고 상세 페이지 출력 
+6. 별 아이콘 클릭 시 해당 채용 공고 스크랩, 다시 클릭 시 스크랩 취소
+
+ ---
+ 
+<br> 
+<br> 
+<br>
  
  </div>
  </details>
