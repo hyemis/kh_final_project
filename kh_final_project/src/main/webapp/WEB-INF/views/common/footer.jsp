@@ -6,7 +6,7 @@
         <div class="container-fluid bg-dark text-white-50 footer pt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-5 col-md-6">
                         <h5 class="text-white mb-4">KH 정보교육원 1관</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>1544-9970</p>
