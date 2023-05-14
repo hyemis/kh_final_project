@@ -120,6 +120,7 @@ public class PsResumeController {
 				String url = rservice.upload(file, principal.getName());
 				mv.addObject("url", url);
 				mv.addObject("userinfo", result);
+				mv.addObject("JNlist", bservice.getCateList("JN"));
 			}
 		}
 		mv.setViewName("person/resume/write");
