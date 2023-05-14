@@ -54,12 +54,15 @@
 	
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 		
-		<div class="container-xxl bg-white p-0">
+		<div class="container-xxl  p-0">
      
     	<!-- 현재 페이지 확인 -->
 		<c:set var="pageNumber" value="${empty pidto.pnum ? 1 : pidto.pnum }" />
 		
 		<div class="container-xl px-5">
+			<div class="container-xl  d-flex justify-content-end" >
+				<a href="main" class="btn btn-dark ">메인으로</a>
+			</div>
 			<h3 class="my-5"><a href="${pageContext.request.contextPath}/business/recruit/recruitAll?pnum=${pidto.pnum}&search=${pidto.search}">채용 공고 목록</a></h3>
 		 	
 		 	<form action="" method="get" class="row g-2 mb-4">
@@ -140,10 +143,7 @@
 				</c:choose>					
 			</ul>
 			
-			<!-- 위치 나중에 수정 -->
-			<div class="container-xl p-5 d-flex justify-content-end" >
-				<a href="main" class="btn btn-dark">메인으로</a>
-			</div>
+		
 			
 		 </div>
 

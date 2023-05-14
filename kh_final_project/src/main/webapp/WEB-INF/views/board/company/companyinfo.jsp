@@ -105,31 +105,38 @@
 	</div>
 	</c:forEach>
 </div>
-
-
-	 	<!-- 페이지네이션  -->
-		 	<ul class = "pagination text-center justify-content-center">
-				<c:choose>
-					<c:when test="${info.prevPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">prev</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${list.prevPage }">prev</a></li>
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="pNum" items="${info.pageList }">
-					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${pNum}">${pNum }</a></li>
-				</c:forEach>
-				
-				<c:choose>
-					<c:when test="${info.nextPage eq -1 }">
-						<li class="page-item disabled"><a class="page-link">next</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${list.nextPage }">next</a></li>
-					</c:otherwise>
-				</c:choose>					
-			</ul>	
+ <!-- 페이지네이션 -->
+<ul class="pagination text-center justify-content-center">
+	<c:choose>
+		<c:when test="${info.prevPage eq -1}">
+			<li class="page-item disabled">
+			<a class="page-link">prev</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+			<a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${info.prevPage }">prev</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="pNum" items="${info.pageList}">
+		<li class="page-item ${pNum eq pageNumber ? 'active' : '' }">
+		<a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${pNum}">${pNum }</a>
+		</li>
+	</c:forEach>
+	<c:choose>
+		<c:when test="${info.nextPage eq -1}">
+			<li class="page-item disabled">
+			<a class="page-link">next</a>
+			</li>
+		</c:when>
+		<c:otherwise>
+			<li class="page-item">
+			<a class="page-link" href="${pageContext.request.contextPath}/board/company/companyinfo?p=${info.nextPage }">next</a>
+			</li>
+		</c:otherwise>
+	</c:choose>
+</ul>
 
 </div>
 </section>

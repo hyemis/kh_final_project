@@ -120,7 +120,7 @@
 			</div>
 			</div>
 			<!-- 회사소개  -->
-			<div class="text-start mx-auto mt-3 m wow fadeInUp" 	data-wow-delay="0.1s">
+			<div class="text-start mx-auto mt-3 m wow fadeInUp" data-wow-delay="0.1s">
 				<c:if test="${not empty currentUserId and info.userId eq currentUserId}">
 				<div class="row g-0 gx-5 align-items-end">
 					<div class="col-lg-6"></div>	

@@ -82,7 +82,7 @@
 		<div class="row g-0 gx-5 align-items-end">
 			<div class="text-start mx-auto mb-5 wow slideInRight" data-wow-delay="0.1s">
 				<h1 class="text-center">${news.boardTitle}</h1>
-				<p class="text-end">작성일  : ${news.updateDate}</p>
+				<p class="text-end">작성일  : ${news.updateDate.substring(0, 10)}</p>
 				<div class="text-center m-5" id="boardContent">${news.boardContent }</div>
 			</div>
 		</div>	

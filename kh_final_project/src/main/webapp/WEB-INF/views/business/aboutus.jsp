@@ -9,35 +9,19 @@
 <meta charset="UTF-8">
 <title>home</title>
 <!-- cs -->
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico"
-	rel="icon">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/img/favicon.ico" rel="icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
-	rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/business.css" rel="stylesheet">
-	
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/animate/animate.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/template/makaan/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/business.css" rel="stylesheet">	
 <link href="${pageContext.request.contextPath}/resources/css/recruit.insert.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	
 
 <!-- js -->
@@ -70,67 +54,64 @@
 
 	<!-- page section -->
 	<section>
-		<div class="container-fluid  p-5">
-			<h1>회사소개</h1>
-
-			<div class="row">
-				<div class="col-md-3 col-sm-4  border border-secondary">
-					<div class="team-item rounded overflow-hidden">
-						<div class="position-relative">
-							<img class="img-fluid"
-								src="${pageContext.request.contextPath}/resources/template/makaan/img/team-1.jpg"
-								alt="">
-							<div
-								class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-								<a class="btn btn-square mx-1" href=""><i
-									class="fab fa-facebook-f"></i></a> <a class="btn btn-square mx-1"
-									href=""><i class="fab fa-twitter"></i></a> <a
-									class="btn btn-square mx-1" href=""><i
-									class="fab fa-instagram"></i></a>
-							</div>
-						</div>
-						<div class="text-center p-4 mt-3">
-							<h5 class="fw-bold mb-0">${userinfo.userName }</h5>
-							<small>${userinfo.userEmail }</small>
-						</div>
-						<div class="list-group">
-							<a href="#" class="list-group-item list-group-item-action">바로가기</a>
-							<a href="#" class="list-group-item list-group-item-action">바로가기</a>
-							<a href="#" class="list-group-item list-group-item-action">바로가기</a>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-8 col-sm-8 border border-secondary">
-					<!-- 회사소개 -->
-					<div class="border border-secondary">
-						<h1>회사소개</h1>
-						<!-- Button trigger modal -->
-						<c:if test="${empty companyinfo }">
-						<p><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyinfo">등록</button></p>
+	<div class="accordion m-5 p-2 " id="accordion">
+	  	<div class="accordion-item">
+		    <h2 class="accordion-header" id="">
+		      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+		        <a class="fw-bold fs-3">회사소개</a>
+		      </button>
+		    </h2>
+		    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+		    	<div class="accordion-body bg-white">
+		      		<c:if test="${empty companyinfo }">
 						<p>미작성 상태입니다 회사소개를 작성해주세요</p>
-						
-						</c:if>
-						<c:if test="${not empty companyinfo }">
-						<p>등록된 게시물 바로가기</p>
-						<a class="btn btn-primary" href="<%=request.getContextPath()%>/board/company/companyinfo/view?no=${companyinfo.boardNo }" role="button">보기 및 수정</a>
-						</c:if>
+						<p><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#companyinfo"><i class="bi bi-arrow-up-right-square"></i>&nbsp;&nbsp;작성하러가기</button></p>
+					</c:if>
+					<c:if test="${not empty companyinfo }">
+					<div class="text-end">
+						<a class="fs-5 btn btn-outline-primary" href="<%=request.getContextPath()%>/board/company/companyinfo/view?no=${companyinfo.boardNo }"><i class="bi bi-arrow-up-right-square" ></i>&nbsp;등록된 게시물 바로가기 </a>
 					</div>
-					
-					
-					<!-- 뉴스레터 -->
-					<div class="border border-secondary">
-						<h1>뉴스레터</h1>
-						<div>
-						<a class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/newsletter" role="button">더보기</a>
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary"
-								data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
+					</c:if>
+		      </div>
+		    </div>
+	  	</div>
+	    <div class="accordion-item">
+		    <h2 class="accordion-header" id="">
+		      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+		       	<a class="fw-bold fs-3">뉴스레터</a>
+		       
+		      </button>
+		    </h2>
+		    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+		      <div class="accordion-body bg-white">
+				  <div class="text-end">
+						<a class="btn btn-light fs-5" href="<%=request.getContextPath()%>/business/aboutus/newsletter" role="button">더보기</a>
+						<button type="button" class="btn btn-primary fs-5" data-bs-toggle="modal" data-bs-target="#newsletter">등록</button>
+						<div class="row m-2 justify-content-center">
+						<c:forEach items="${news.getPage() }" var="news" varStatus="status" begin="0" end="5">
+						    <div class="col-lg-3 col-md-6 text-center m-3 p-2 rounded-3 card">
+							    <i class="bi bi-envelope-heart fs-3 text-primary"></i>
+							  <hr>
+							    <h5 class="card-title text-primary fs-4">${news.boardTitle }</h5>
+							    <p>${news.updateDate.substring(0, 10) }</p>
+								<hr>
+							    <a class="fs-6" href="${pageContext.request.contextPath}/board/company/newsletter/view?no=${news.boardNo }" >상세보기 및 수정</a>
+							</div>
+					    </c:forEach>
 						</div>
+				  </div>
+		      </div>
+		    </div>
+  		</div>
+	</div>
+
+	
+	
+	
 	
 					
 					
-					<!-- Q&A -->
+					<!-- Q&A 
 					<div class="border border-secondary">
 						<h1> Q&A </h1>
 						<a type="button" class="btn btn-light" href="<%=request.getContextPath()%>/business/aboutus/qna">더보기</a>
@@ -153,9 +134,6 @@
 						</div>
 					</div> -->
 					
-				</div>
-			</div>
-		</div>
 	</section>
 
 
@@ -184,7 +162,7 @@
 							</div>
 							<div class="col-10 was-validated">
 								<input type="text" name="boardTitle" class="form-control is-invalid"
-									style="width: 100%;" placeholder="제목을적어주세요" required> 
+									 placeholder="제목을적어주세요" required> 
 								<hr>
 							</div>
 						</div>
@@ -193,9 +171,8 @@
 								<h4>직 원 수</h4>
 							</div>
 							<div class="col-10 ">
-								<p>직원수를 숫자로 입력해주세요
-								<input type="text" name="employee" class="form-control "
-									style="width: 30%;" placeholder=" 예시)300" > 명 </p>
+								<p>직원수를 숫자로 입력해주세요 (단위:명)
+								<input type="text" name="employee" class="form-control " placeholder=" 예시)300"> </p>
 								<hr>
 							</div>
 						</div>
@@ -204,9 +181,8 @@
 								<h4>평균연봉</h4>
 							</div>
 							<div class="col-10 ">
-								<p>회사의 평균 연봉을 입력해주세요</p>
-								<input type="text" class="form-control "
-									name="salaryAvg" style="width: 30%;" placeholder=" 예시)3500" > 만원
+								<p>회사의 평균 연봉을 입력해주세요 (단위:만원)
+								<input type="text" class="form-control " name="salaryAvg"  placeholder=" 예시)3500" ></p>
 								<hr>
 							</div>
 						</div>
@@ -280,7 +256,7 @@
 								<hr>
 							</div>
 						</div>
-					
+						<!--  
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>기업사진</h4>
@@ -292,7 +268,7 @@
 										등록해주세요</label>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>소 개 글</h4>

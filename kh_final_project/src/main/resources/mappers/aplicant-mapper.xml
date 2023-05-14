@@ -37,15 +37,15 @@
 	
 	<!-- 캘린더 -->	
 	<select id="viewInterview" resultType="indto">
-		SELECT CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID
+		SELECT CA_NUM,CA_TITLE,DATE_START,DATE_END,INTERVIEW_TIME,LOCATION,INTERVIEWER,MEMO,USER_NAME,RESUME_NO
 		FROM INTERVIEW
-		WHERE USER_ID = #{userId}
+		WHERE BS_USER = #{userId}
 	</select>
 
 	<insert id="insertInterview" parameterType="indto">
 	INSERT INTO
-	INTERVIEW (CA_NUM,CA_TITLE,DATE_START,DATE_END,LOCATION,INTERVIEWER,MEMO,USER_ID)
-	VALUES (#{caNum},#{caTitle},#{dateStart},#{dateEnd},#{location},#{interviewer},#{memo},#{userId})
+	INTERVIEW (CA_NUM,CA_TITLE,DATE_START,DATE_END,INTERVIEW_TIME,LOCATION,USER_NAME,MEMO,BS_USER)
+	VALUES (#{caNum},#{caTitle},#{dateStart},#{dateEnd},#{interviewTime},#{location},#{interviewer},#{memo},#{userId})
 		<selectKey keyProperty="caNum" resultType="_int"
 			order="BEFORE">
 			SELECT MAX(CA_NUM) +1 FROM INTERVIEW

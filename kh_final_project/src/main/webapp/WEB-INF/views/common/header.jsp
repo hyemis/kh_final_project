@@ -4,9 +4,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <header>
+<style>
+.category {
+  z-index: 150; /* 모달창을 다른 요소들보다 더 위쪽에 나타나도록 설정 */
+}
+</style>
 
 	<!-- Navbar Start -->
-	<div class="container-fluid nav-bar ">
+	<div class="container-fluid nav-bar category">
 		<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
 			<a href="${pageContext.request.contextPath}/"
 				class="navbar-brand d-flex align-items-center text-center">

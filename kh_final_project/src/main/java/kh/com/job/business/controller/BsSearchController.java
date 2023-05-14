@@ -93,7 +93,7 @@ public class BsSearchController {
 		dto.setBsUser(principal.getName()); 
 		bsService.suggest(dto);
 		mv.setViewName("business/search/suggest");
-		rttr.addFlashAttribute("msg", "면접제안 완료");
+		rttr.addFlashAttribute("msg", "지원자에게 면접제안을 보냈습니다. 리스트에서 확인해주세요");
 		System.out.println(dto);
 		return mv;
 	}

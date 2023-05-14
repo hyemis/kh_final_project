@@ -34,58 +34,50 @@
 </head>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-	<div class="container-xxl py-5">
-
-		<h1 class="text-center m-3">${bsinfo.userName}님 계정정보</h1>
+	<div class="container-xxl ">
+		<h1 class="text-center m-3">마이페이지</h1>
 		<div class="container-xxl py-5">
 			<div class="row">
 				<!-- profile area start -->
-				<div class="col-md-3 col-sm-4  border border-secondary">
-					<div class="team-item rounded overflow-hidden">
-					<div class="position-relative m-auto profileArea " style="width: 200px; height: 200px;">
-						<img id="userPicArea" class="img-fluid"
-							src="${bsinfo.userPic eq null? 'https://dummyimage.com/200x200/d6d6d6/000000&text=200x200' : bsinfo.userPic }" alt="" style="width: 100%; height: 100;">
+				<div class="col-md-3 col-sm-4 ">
+					<div class="team-item rounded overflow-hidden pt-5">
+						<div class="position-relative m-auto profileArea " style="width: 200px; height: 200px;">
+							<img id="userPicArea" class="img-fluid"
+								src="${bsinfo.userPic eq null? 'https://dummyimage.com/200x200/d6d6d6/000000&text=200x200' : bsinfo.userPic }" alt="" style="width: 100%; height: 100%;">
+						</div>
+						<div class="text-center p-4 mt-3">
+							<h5 class="fw-bold mb-0">${bsinfo.userName}</h5>
+							<small>${bsinfo.userEmail}</small>
+							<p><button class="btn btn-primary mt-5" onclick="location.href='<%=request.getContextPath()%>/business/aboutus'">회사소개작성</button></p>
+						</div>
 					</div>
-					<div class="text-center p-4 mt-3">
-						<h5 class="fw-bold mb-0">${bsinfo.userName}</h5>
-						<small>${bsinfo.userEmail}</small>
-					</div>
-				</div>
 				</div><!-- profile area end -->
 				<!-- info area start -->
-				<div class="col-md-8 col-sm-8 border border-secondary">
-					<!-- update -->
-					<div class="container border border-secondary" style="height: 1000px;">
-						<h4 class="text-center m-2 p-3">내정보</h4>
+				<div class="col-md-8 col-sm-8 ">
+					<div class="container" style="height: 850px;">
 						<div>
-							<form action="<%=request.getContextPath() %>/business/account/info" method="post" enctype="multipart/form-data">
+							<form action="<%=request.getContextPath() %>/business/account/info" method="post" enctype="multipart/form-data" class="text-center">
 							<div class="mb-3 row">
-							    <label for="userImage" class="col-sm-2 col-form-label btn btn-primary text-center">회사 사진</label>
-							    <div class="col-sm-8">
-							      <input type="file" accept="image/*" class="form-control userImage" id="userImage" name ="userImage" onchange="setThumbnail(this)" style="display:none">
-							    </div>
-							 </div>
-							<div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">이메일</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">이메일</label>
+							    <div class="col-sm-9">
 							      <input type="text" class="form-control" id="userEmail" name ="userEmail" value="${bsinfo.userEmail}">
 							    </div>
 							 </div>
 							<div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">사업자번호</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">사업자번호</label>
+							    <div class="col-sm-9">
 							      <input type="text" class="form-control" id="bsLicense" name ="bsLicense" value="${bsinfo.bsLicense}">
 							    </div>
 							 </div>
 							<div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">대표전화</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">대표전화</label>
+							    <div class="col-sm-9">
 							      <input type="text" class="form-control" id="bsMainPhone" name ="bsMainPhone" value="${bsinfo.bsMainPhone}">
 							    </div>
 							 </div>
-							<div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">주소</label>
-							    <div class="col-sm-6">
+							<div class="mb-1 row">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">주소</label>
+							    <div class="col-sm-7">
 									<input type="text" class="form-control" id="postcode" name="addressPostcode" value="${bsinfo.addressPostcode}">
 								</div>
 								<div class="col-sm-2">
@@ -93,36 +85,45 @@
 								</div>	
 							</div>		
 							<div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">도로명주소</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">도로명주소</label>
+							    <div class="col-sm-9">
 							      <input type="text" class="form-control" id="roadAddress" name ="addressRoad" value="${bsinfo.addressRoad}">
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">지번주소</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">지번주소</label>
+							    <div class="col-sm-9">
 							      <input type="text" class="form-control" id="jibunAddress" name ="addressJibun" value="${bsinfo.addressJibun}">
 							    </div>
 							 </div>
 							 <div class="mb-3 row">
-							    <label for="inputPassword" class="col-sm-2 col-form-label text-center">상세주소</label>
-							    <div class="col-sm-8">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">상세주소</label>
+							    <div class="col-sm-9">
 							      <input type="text" class="form-control" id="detailAddress" name ="addressDetail" value="${bsinfo.addressDetail}">
+	  							  <span id="guide" style="color:#999;display:none"></span>
+									<div id="map" class="col" style="width:580px;height:300px;margin-top:10px; "></div>
 							    </div>
 							 </div>
-							<span id="guide" style="color:#999;display:none"></span>
-									<div id="map" class="text-center" style="width:600px;height:300px;margin-top:10px; "></div>
-							<p class="text-center">
-								<br>
+							 <div class="mb-3 row">
+							    <label for="inputPassword" class="col-sm-3 col-form-label ">기업사진</label>
+							    <div class="col-sm-9">
+								  <input class="form-control" type="file" accept="image/*" id="userImage" name ="userImage" onchange="setThumbnail(this)">
+							    </div>
+							 </div>
+							<p class="text-center mt-5">
 								<button class="btn btn-primary" type="submit" value="수정하기">수정하기</button>
 								<button class="btn btn-primary" type="reset">취소</button>
 							</p>
 							</form>
+							</div>
 						</div>
-					</div><!-- update end -->
-					
+					</div><!-- info area end -->
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-sm-4">
+					</div>
 					<!-- password / secede -->
-					<div class="container border border-secondary " style="height: 550px;">
+					<div class="col-md-8 col-sm-8 " style="height: 550px;"><hr><br>
 					<h4 class="text-center m-2 ">비밀번호 변경 및 탈퇴</h4>
 					<p class="text-center">비밀번호 확인 후 변경과 탈퇴가 가능합니다.</p>
 						<!-- password -->
@@ -162,21 +163,17 @@
 						</form>
 						<p class="text-center"><a href="${pageContext.request.contextPath }/person/findpw" class="link-primary">비밀번호를 잊으셨나요?</a></p>
 							 
-						
-						
 						<!-- secede --><br>
 						<p class="text-end">
 						<button class="btn btn-primary" id="btnSecede" disabled="disabled" onclick="location.href='<%=request.getContextPath()%>/person/delete'">회원탈퇴 하러가기</button>
 						</p>
-
-						
 						
 					</div><!-- password / secede end -->
-					
-				</div><!-- info area end -->
+				
+				</div>
+				
+				
 			</div>
-		</div>
-
 	</div><!-- 전체컨테이너 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
@@ -402,17 +399,8 @@
 				        var size = 200;
 				        var width = img.width;
 				        var height = img.height;
-				        if (width > height) {
-				          if (width > size) {
-				            height *= size / width;
-				            width = size;
-				          }
-				        } else {
-				          if (height > size) {
-				            width *= size / height;
-				            height = size;
-				          }
-				        }
+
+
 				        canvas.width = size;
 				        canvas.height = size;
 				        context.drawImage(img, 0, 0, width, height, 0, 0, size, size);

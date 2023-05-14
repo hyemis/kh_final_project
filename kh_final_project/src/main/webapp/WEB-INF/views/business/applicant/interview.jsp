@@ -34,34 +34,41 @@
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-
+<style>
+.modal {
+  z-index: 9999; /* 모달창을 다른 요소들보다 더 위쪽에 나타나도록 설정 */
+}
+</style>
 	
 </head>
 <body>
 <!-- header  -->
-
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <!-- page section -->	
 <section>
-<div class="container-fluid bg-white p-5">
+<div class="container-fluid p-5">
 <!-- modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#interviewList">면접 목록 보기</button>
+<div class="mb-3 ">
+<a type="button" class="btn btn-primary fs-5 text-center" data-bs-toggle="modal" data-bs-target="#interviewList" style="width: 200px; height: 50px;"><i class="bi bi-card-list"></i>  면접 목록 보기</a>
+</div>
 
 <!-- 캘린더-->
-<div id='calendar'></div>  
+	<div class="mt-2 p-5 bg-white" id='calendar'></div>  
+
 </div>
 </section>
 
 <!-- interviewList Modal -->
 <div class="modal fade" id="interviewList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">일정보기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        		<table class="table table-hover">
-					  <thead>
+        	<table class="table table-hover">
+					 <thead>
 					    <tr>
 					      <th scope="col" class="col-2">일정명</th>
 					      <th scope="col" class="col-2">시작</th>
@@ -71,7 +78,7 @@
 					      <th scope="col" class="col-2">지원자명</th>
 					    </tr>
 					  </thead>
-					  <c:forEach items="${interview.getPage() }" var="interview">
+					<c:forEach items="${interview.getPage() }" var="interview">
 					  <tbody>
 					    <tr>
 					      <td>${interview.caTitle }</td>
@@ -82,12 +89,34 @@
 					      <td><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=${interview.resumeNo}">${interview.userName }</a></td>
 					    </tr>
 					   </tbody>
-						</c:forEach>
-			   </table> 
+					</c:forEach>
+			</table> 
+			<!-- 페이지네이션  -->
+		 	<ul class = "pagination text-center justify-content-center">
+				<c:choose>
+					<c:when test="${interview.prevPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">prev</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/interview?pnum=${interview.prevPage }">prev</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="pNum" items="${interview.pageList }">
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/applicant/interview?pnum=${pNum}">${pNum }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${interview.nextPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/applicant/interview?pnum=${interview.nextPage }">next</a></li>
+					</c:otherwise>
+				</c:choose>					
+			</ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -109,11 +138,15 @@
 	          </div>
 	          <div class="form-group">
 	            <label for="end-time">면접장소</label>
+	            <input type="time" class="form-control" id="interviewTime" placeholder="면접시간를 입력하세요">
+	          </div>
+	          <div class="form-group">
+	            <label for="end-time">면접장소</label>
 	            <input type="text" class="form-control" id="location" placeholder="면접장소를 입력하세요">
 	          </div>
 	          <div class="form-group">
-	            <label for="end-time">면접관</label>
-	            <input type="text" class="form-control" id="interviewer" placeholder="담당 면접관을 입력하세요">
+	            <label for="end-time">면접자 이름</label>
+	            <input type="text" class="form-control" id="interviewer" placeholder="면접자 이름을 입력하세요">
 	          </div>
 	          <div class="form-group">
 	            <label for="end-time">메모</label>
@@ -163,6 +196,7 @@
 	    	    var title = $('#title').val();
 	    	    var start = arg.startStr;
 	    	    var end = arg.endStr;
+	    	    var interviewTime = $('#interviewTime').val();
 	    	    var location = $('#location').val();
 	    	    var interviewer = $('#interviewer').val();
 	    	    var memo = $('#memo').val();
@@ -171,6 +205,7 @@
 	    	      caTitle: title,
 	    	      dateStart: start,
 	    	      dateEnd: end,
+	    	      interviewTime : interviewTime,
 	    	      location: location,
 	    	      interviewer: interviewer,
 	    	      memo: memo
@@ -217,8 +252,9 @@
 
 	      // 이벤트 클릭해서 삭제
 	      eventClick: function(arg) {
-	        if (confirm('Are you sure you want to delete this event?')) {
+	        if (confirm('면접일정을 삭제하시겠습니까?')) {
 	          arg.event.remove()
+	        	//$('#modal').modal('show'); /todo 모달창에 정보 출력
 	        }
 	      },
 	      editable: true,
@@ -243,7 +279,7 @@ function getEvents(){
       	  //events = result;
       	  for(var i=0; i<result.length;i++){
       		events.push({
-      		   title: result[i]['caTitle'],
+      		   title: result[i]['interviewTime'] + ' ' + result[i]['userName'],
       		   start: result[i]['dateStart'],
       		   end: result[i]['dateEnd']
       	   })

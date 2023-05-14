@@ -71,16 +71,14 @@
 
 	<!-- page section -->
 	<section>
-		<div class="container-fluid bg-white p-5">
-			<h1 class="text-center">뉴스레터</h1>
-			<div>
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary " data-bs-toggle="modal"
-					data-bs-target="#newsletter">등록</button>
-			</div>
+		<div class="container-fluid  p-5 ">
 
 			<!-- 목록 -->
-			<div class="pt-3 table-responsive ">
+			<div class="table-responsive bg-white m-2 p-5" style="height: 800px;  ">
+			<h1 class="text-center mb-5"><i class="bi bi-envelope"></i>&nbsp;뉴스레터&nbsp;<i class="bi bi-envelope"></i></h1>
+				<div class="text-end me-5">
+					<button type="button" class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#newsletter">작성하기</button><hr><br>
+				</div>
 				<table class="table table-hover">
 					  <thead>
 					    <tr>
@@ -94,17 +92,37 @@
 					    <tr>
 					      <th scope="row">${news.boardNo}</th>
 					      <td><a href="${pageContext.request.contextPath}/board/company/newsletter/view?no=${news.boardNo}">${news.boardTitle }</a></td>
-					      <td>${news.updateDate }</td>
+					      <td>${news.updateDate.substring(0, 10)  }</td>
 					    </tr>
-					   </tbody>
-						</c:forEach>
+					  </tbody>
+					  </c:forEach>
 			   </table> 
+			<!-- 페이지네이션  -->
+				<div class="mt-5">
+				 	<ul class = "pagination text-center justify-content-center ">
+						<c:choose>
+							<c:when test="${news.prevPage eq -1 }">
+								<li class="page-item disabled"><a class="page-link">prev</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/aboutus/newsletter?pnum=${news.prevPage }">prev</a></li>
+							</c:otherwise>
+						</c:choose>
+						<c:forEach var="pNum" items="${news.pageList }">
+							<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/aboutus/newsletter?pnum=${pNum}">${pNum }</a></li>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${news.nextPage eq -1 }">
+								<li class="page-item disabled"><a class="page-link">next</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/aboutus/newsletter?pnum=${news.nextPage }">next</a></li>
+							</c:otherwise>
+						</c:choose>					
+					</ul>			
+				</div>
 			</div>
-			
-			
-			
-			
-
 
 		</div>
 	</section>

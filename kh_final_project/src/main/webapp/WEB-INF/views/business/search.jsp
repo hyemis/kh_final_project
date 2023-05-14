@@ -58,7 +58,7 @@
 			  <tbody>
 			  <c:forEach items="${suggest.getPage() }" var="suggest">
 			    <tr>
-			      <td>${suggest.sendDate }</td>
+			      <td>${suggest.sendDate.substring(0, 10) }</td>
 			      <td><a value="${suggest.psUser }">${suggest.userName }</a></td>
 			      <td><a value="${suggest.resumeNo }" href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=${suggest.resumeNo}">${suggest.resumeTitle }</a></td>
 				  <td>
@@ -80,6 +80,29 @@
 	   </table> 
 	
 	</div>
+	<!-- 페이지네이션  -->
+		 	<ul class = "pagination text-center justify-content-center">
+				<c:choose>
+					<c:when test="${suggest.prevPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">prev</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/business/search?pnum=${suggest.prevPage }">prev</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="pNum" items="${suggest.pageList }">
+					<li class="page-item ${pNum eq pageNumber ? 'active' : '' }"><a class="page-link" href="${pageContext.request.contextPath}/business/search?pnum=${pNum}">${pNum }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${suggest.nextPage eq -1 }">
+						<li class="page-item disabled"><a class="page-link">next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/abusiness/search?pnum=${suggest.nextPage }">next</a></li>
+					</c:otherwise>
+				</c:choose>					
+			</ul>
 </div>
 </section>
 

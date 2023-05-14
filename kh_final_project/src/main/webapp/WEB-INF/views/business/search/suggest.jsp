@@ -60,12 +60,12 @@
 
 	<!-- page section -->
 <section>
-	<div class="container-fluid bg-white p-5">
-	<div class ="text-end">
-		<a>이 곳에서 조회 가능</a><br>
-		<a class="fw-bold text-primary" href="<%=request.getContextPath()%>/business/search" role="button">면접 제안 리스트 보기</a>
+	<div class="container-fluid  p-5">
+	<div class ="text-end me-5">
+		<a class="fs-6" style="color: grey;">제안한 목록을 보고싶다면?</a><br>
+		<a class="fw-bold  fs-4 text-primary" href="<%=request.getContextPath()%>/business/search" role="button">면접 제안 리스트 보기 &nbsp;<i class="bi bi-arrow-up-right-square"></i></a>
 	</div>
-	<h4>기업회원을 위한 맞춤형 인재 추천</h4>
+	<h4 class="ms-4"><i class="bi bi-eye-fill"></i>&nbsp; 기업회원을 위한 맞춤형 인재 추천</h4>
 		<!-- 검색창 -->
 		<div class="container-fluid row mt-3">
 			<select class="col m-3 form-select" id="jobType" name="jobType">
@@ -156,18 +156,23 @@
 						</div>
 						<div class="pt-3 row">
 							<div class="col-2 text-center font-monospace">
+							</div>
+							<div class="col-10">
+								<i class="bi bi-exclamation" style="color: red;"></i><a>면접대상 공고를 선택해주세요</a>
+							</div>
+						</div>
+						<div class="pt-1 row">
+							<div class="col-2 text-center font-monospace">
 								<h4>제안 공고</h4>
 							</div>
 							<div class="col-10">
-								<select class="form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()" required >
+								<select class="form-select" id="recruitSelect" name="raNum"  onchange="showSgTitle()"  >
 										<c:forEach items="${recruit }" var="recruit">
 										<option value="${recruit.raNum }">${recruit.raTitle}</option>
 										</c:forEach>
 								</select>
-								<div class="invalid-feedback">면접 대상 공고를 선택해 주세요</div>
 							</div>
 						</div>
-
 						<div class="pt-3 row ">
 							<div class="col-2 text-center font-monospace">
 								<h4>제목</h4>
@@ -244,7 +249,7 @@
             html += '<td class="text-center">' + resume.userName + '</td>';
             html += '<td class="text-center"><a href="${pageContext.request.contextPath}/business/applicant/resume?resumeNo=' + resume.resumeNo +'">' + resume.resumeTitle + '</a></td>';
             html += '<td class="text-center">' + resume.userEmail + '</td>';
-            html += '<td class="text-center"><a type="button" class="btn btn-light interview" data-bs-target="#interview" data-resumeno="'+resume.resumeNo+'" data-userid="'+resume.userId+'" data-username="'+resume.userName+'">면접제안</a></td>';
+            html += '<td class="text-center"><a type="button" class="btn btn-primary interview" data-bs-target="#interview" data-resumeno="'+resume.resumeNo+'" data-userid="'+resume.userId+'" data-username="'+resume.userName+'">면접제안</a></td>';
             html += '</tr>';
           }
           $('#result-body').html(html);
@@ -281,6 +286,12 @@
 	 $('ul.pagination').html(pageHtml);
 	 $('.page-link').click(getSearchResume);
 	}// displayPage
+	
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	
 	</script>
 
 	

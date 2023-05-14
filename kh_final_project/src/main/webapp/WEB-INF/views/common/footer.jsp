@@ -6,36 +6,35 @@
         <div class="container-fluid bg-dark text-white-50 footer pt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
-                    <div class="col-lg-5 col-md-6">
-                        <h5 class="text-white mb-4">KH 정보교육원 1관</h5>
+                    <div class="col-lg-4 col-md-6">
+                        <h5 class="text-white mb-4"></i>KH 정보교육원</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>서울특별시 강남구 테헤란로14길 6 남도빌딩</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>1544-9970</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="https://www.kh-academy.co.kr/">KH정보교육원</a></p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i><a style="color: lightgrey;" href="https://www.kh-academy.co.kr/">KH정보교육원</a></p>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="${pageContext.request.contextPath}">메인페이지</a>
-                        <a class="btn btn-link text-white-50" href="${pageContext.request.contextPath}/person/recruit/info">채용공고검색</a>
-                        <a class="btn btn-link text-white-50" href="${pageContext.request.contextPath}/board/company">회사소개</a>
-                        <a class="btn btn-link text-white-50" href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
+                        <h5 class="text-white mb-4"><i class="bi bi-share"></i> Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="https://project-job-a.notion.site/FINAL-PROJECT-5920859006324d8bacee3ccf977d6857">notion</a>
+                        <a class="btn btn-link text-white-50" href="https://github.com/NukNim/kh_final_project">git hub</a>
+                        <a class="btn btn-link text-white-50" href="https://drive.google.com/drive/folders/1MLeY7fHSMp6WLYectykztz8zZV3519OS">google drive</a>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <h5 class="text-white mb-4">5조 JOB-A</h5>
                         <div class="row g-2 pt-2">
                             <div class="col-3">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person1.png" alt=""/>
+                                <img class="img-fluid rounded bg-white p-1" src="${pageContext.request.contextPath}/resources/img/person_1.png" />
                                 <p class="text-white text-center">최민건</p>
                             </div>
                             <div class="col-3">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person2.png" alt=""/>
+                                <img class="img-fluid rounded bg-white p-1" src="${pageContext.request.contextPath}/resources/img/person_2.png" />
                                 <p class="text-white text-center">백한울</p>
                             </div>
                             <div class="col-3">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person3.png" alt=""/>
+                                <img class="img-fluid rounded bg-white p-1" src="${pageContext.request.contextPath}/resources/img/person_3.png" />
                                 <p class="text-white text-center">전찬희</p>
                             </div>
                             <div class="col-3">
-                                <img class="img-fluid rounded bg-light p-1" src="${pageContext.request.contextPath}/resources/img/person4.png" alt=""/>
+                                <img class="img-fluid rounded bg-white p-1" src="${pageContext.request.contextPath}/resources/img/person_4.png" />
                                 <p class="text-white text-center">조혜미</p>
                             </div>
                         </div>
