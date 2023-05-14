@@ -75,6 +75,22 @@
  <div align="center">
   <img width="90%" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114903799/c02f2a19-8282-4c99-a92b-6c430793f2df"> 
  </div>
+ <br>
+ <br>
+ 
+ 기업회원이 채용공고 등록 정보를 전부 입력하고 작성버튼을 클릭하게 되면 데이터베이스에 채용공고가 미승인 상태로 등록되게된다.
+ 
+ <br>
+ <br>
+ <div align="center">
+  <img width="90%" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114903799/ccf97cdc-d497-457b-b52c-f3c51b85810a"> 
+ </div>
+ <br>
+ <br>
+ 기업회원이 채용공고를 등록하게 되면 관리자가 미승인 상태인 채용공고를 확인하고 승인할지 반려할지를 선택할 수 있다. 
+ 반려되면 반려 메일이 발송되게 되고 승인된다면 기업회원이 채용공고 화면에서 해당 게시글을 게시할지 하지 않을 것에 관해 정할 수 있다.
+ <br>
+ <br>
  
  </div>
  </details>
