@@ -207,6 +207,12 @@
 
 	<!-- page script -->
 	<script>
+	
+	var msg = "${msg}";
+	if(msg) {
+		alert(msg);
+	}
+	
 	let page = 1;
 	$(document).ready(function() {
 		  $('#btn-search').click(getSearchResume);
@@ -287,10 +293,7 @@
 	 $('.page-link').click(getSearchResume);
 	}// displayPage
 	
-	var msg = "${msg}";
-	if(msg) {
-		alert(msg);
-	}
+	
 	
 	</script>
 

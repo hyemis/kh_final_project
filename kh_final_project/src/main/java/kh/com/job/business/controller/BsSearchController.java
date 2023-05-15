@@ -92,8 +92,8 @@ public class BsSearchController {
 	public ModelAndView suggestForm(ModelAndView mv, BsSuggestDto dto, Principal principal, RedirectAttributes rttr)  {
 		dto.setBsUser(principal.getName()); 
 		bsService.suggest(dto);
-		mv.setViewName("business/search/suggest");
 		rttr.addFlashAttribute("msg", "지원자에게 면접제안을 보냈습니다. 리스트에서 확인해주세요");
+		mv.setViewName("business/search/suggest");
 		System.out.println(dto);
 		return mv;
 	}
@@ -112,7 +112,7 @@ public class BsSearchController {
 	
 	//면접 일정 등록
 	@PostMapping("/sendinterview")
-	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsAnnounceDto adto,  BsSuggestDto sdto, Principal principal, Integer baNum ) {
+	public ModelAndView insertNewsletter(ModelAndView mv, InterviewDto dto, BsAnnounceDto adto,  BsSuggestDto sdto, Principal principal, Integer baNum, RedirectAttributes rttr ) {
 		//면접일정등록
 		dto.setBsUser(principal.getName());
 		bsService.addInterview(dto); 
@@ -129,7 +129,7 @@ public class BsSearchController {
 			String[] cc = new String[ccNum]; 
 			int successMail = MailUtil.mailSend(adto.getResultTitle(), bdto.getUserEmail(), adto.getResultContent(), adto.getUserEmail(), cc, ccNum);
 		}
-
+		rttr.addFlashAttribute("msg", "면접등록과 메일을 성공적으로 완료했습니다.");
 		mv.setViewName("redirect:/business/search");
 		return mv;
 	}
