@@ -625,4 +625,4 @@
 <br>
 
 ## 7️⃣ 최종발표자료
-[최종발표자료 NOTION으로 보기](https://project-job-a.notion.site/FINAL-PROJECT-5920859006324d8bacee3ccf977d6857)
+[최종발표자료 전체보기](https://project-job-a.notion.site/FINAL-PROJECT-5920859006324d8bacee3ccf977d6857)
