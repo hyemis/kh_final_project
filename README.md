@@ -346,7 +346,7 @@
 <summary><h3>✅ 회원가입 및 로그인 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 회원가입 및 로그인 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 화면 예시 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
@@ -417,7 +417,7 @@
 <summary><h3>✅ 이력서 생성 </h3></summary>
 <div markdown="1"> 
 <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 이력서 생성 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png"> 화면 예시 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
  <br>
@@ -489,7 +489,7 @@
 <summary><h3>✅ 채용정보검색 </h3></summary>
 <div markdown="1"> 
  <div align="center">
-<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">  채용정보검색 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
+<img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">  화면 예시 <img width="250" alt="image" src="https://media.discordapp.net/attachments/692994434526085184/1002954522253074472/a0c55ca0bfe82413.png">
 </div>
  
 <br>
@@ -625,3 +625,4 @@
 <br>
 
 ## 7️⃣ 최종발표자료
+[최종발표자료 전체보기](https://project-job-a.notion.site/FINAL-PROJECT-5920859006324d8bacee3ccf977d6857)

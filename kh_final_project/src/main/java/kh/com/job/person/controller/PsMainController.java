@@ -187,7 +187,7 @@ public class PsMainController {
 
 		// TODO: 찾은 이메일로 메일 발송
 		String title = "job-a 임시 비밀번호입니다.";
-		String from = "tkdtlrdl07@gmail.com";
+		String from = "tkdtlrdl99@gmail.com";
 		String text = "<h1>job-a 임시 비밀번호입니다.</h1><br>회원님의 임시 비밀번호는 " + newpassword
 				+ " 입니다. <br>해당 비밀번호로 로그인 후 회원정보 수정 페이지에서 새로운 비밀번호로 변경하세요.";
 		String to = dto.getUserEmail();
