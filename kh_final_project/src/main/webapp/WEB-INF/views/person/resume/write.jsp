@@ -86,19 +86,19 @@
 								<div class="pb-5">
 									희망직종 
 									<select class="form-select form-select-sm" id="jobType">
-										<option selected value="0">선택안함</option>
+										<option selected value="">선택안함</option>
 										<c:forEach items="${JNlist}" var="categoryJN">
 										<option value="${categoryJN.categoryId }">${categoryJN.categoryName}</option>
 										</c:forEach>
 									</select>
 									성별
 									<select class="form-select form-select-sm" id="gender">
-									  <option selected >선택안함</option>
+									  <option selected value="">선택안함</option>
 									  <option value="M">남자</option>
 									  <option value="W">여자</option>
 									</select>
 								</div>
-								<input class="form-check-input pt-3" type="checkbox" value="Y" id="resumeAct">
+								<input class="form-check-input pt-3" type="checkbox" value="Y" id="resumeAct" name="resumeAct">
 								<label class="form-check-label" for="flexCheckChecked"> 이력서 공개여부 </label>
 								
 							</div>
