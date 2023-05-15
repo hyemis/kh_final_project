@@ -104,7 +104,7 @@ public class AdBusinessController {
 		BsRecruitDetailDto redto = service.viewDetail(raNum);
 		
 		String title = "안녕하세요 JOB-A입니다. 등록하신 공고 확인해 주세요";
-		String from = "tkdtlrdl07@gmail.com";
+		String from = "tkdtlrdl99@gmail.com";
 		String text = "<h1>안녕하세요 JOB-A입니다. </h1>"
 				+ "<p>등록하신 공고 " +redto.getRaTitle() + "의 내용에</p>"
 				+ "<p>문제가 생겨 연락드립니다.</p>"
