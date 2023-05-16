@@ -342,7 +342,7 @@
 <img width="200" alt="image" src="https://github.com/NukNim/kh_final_project/assets/114970601/8312f9fe-aaa5-4d1d-9946-257ea2eed474">
 </div>
 
-<details>
+
 <summary><h3>✅ 회원가입 및 로그인 </h3></summary>
 <div markdown="1"> 
  <div align="center">
@@ -411,9 +411,9 @@
  
  
  </div>
- </details>
+
  
- <details>
+
 <summary><h3>✅ 이력서 생성 </h3></summary>
 <div markdown="1"> 
 <div align="center">
@@ -483,9 +483,9 @@
 <br>
  
  </div>
- </details>
+
  
- <details>
+
 <summary><h3>✅ 채용정보검색 </h3></summary>
 <div markdown="1"> 
  <div align="center">
@@ -525,8 +525,8 @@
 <br> 
 <br>
  
- </div>
- </details>
+</div>
+
  
 ## 6️⃣ Document
 ## 1. 개발일정
